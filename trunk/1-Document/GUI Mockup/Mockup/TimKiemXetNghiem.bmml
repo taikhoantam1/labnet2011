@@ -1,0 +1,48 @@
+<mockup version="1.0" skin="sketch" measuredW="692" measuredH="405" mockupW="661" mockupH="405">
+  <controls>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="204" y="0" w="405" h="48" measuredW="271" measuredH="37" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>28</size>
+        <text>Tim%20Kiem%20Xet%20Nghiem</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="116" y="45" w="156" h="-1" measuredW="79" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <state>disabled</state>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Label" x="284" y="45" w="81" h="21" measuredW="38" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nhom</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="31" y="48" w="77" h="21" measuredW="29" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ten</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::Button" x="544" y="41" w="104" h="34" measuredW="46" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tim</text>
+      </controlProperties>
+    </control>
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::TextInput" x="369" y="44" w="151" h="-1" measuredW="95" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <state>disabled</state>
+        <text>AutoComplete</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::DataGrid" x="31" y="95" w="661" h="252" measuredW="333" measuredH="55" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ten%20Xet%20Nghiem%2C%20Nhom%2C%20CSBT%2CDonVi%20%2CKich%20Hoat%0A%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="com.balsamiq.mockups::Button" x="142" y="371" w="104" h="34" measuredW="77" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cap%20Nhat</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

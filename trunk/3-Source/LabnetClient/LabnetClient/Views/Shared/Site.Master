@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server">
+            <%= Resources.GlobalStrings.LabnetClientTitle %>
+        </asp:ContentPlaceHolder>
+    </title>
+    <link href="../../Content/Style/reset.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/Style/Site.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/Style/LayoutTemplate.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../Content/Lib/FlexiGrid/flexigrid.css" />
+    <script type="text/javascript" src="../../Content/Lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../Content/Lib/Ajax/ajax.js"></script>
+    <script type="text/javascript" src="../../Content/Lib/Utility/ClientUtil.js"></script>
+    <script type="text/javascript" src="../../Content/Lib/FlexiGrid/flexigrid.js"></script>
+    <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <div class="Warpper">
+        <div class="Page">
+            <div class="Header">
+                <div class="Banner">
+                </div>
+            </div>
+            <div class="Content">
+                <div class="LeftMenu">
+                    <h3 class="MenuTitle">
+                        <%= Resources.GlobalStrings.Menu_MenuTitle %></h3>
+                    <ul>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_PatientInfo %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_CreateDoctor %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
+                        <li><a class="MenuItem ActionLink" href="/Partner/Edit/1">
+                            <%= Resources.GlobalStrings.Menu_CreateLabPartner %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_CreateTest %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
+                    </ul>
+                </div>
+                <div id="MainContent">
+                    <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

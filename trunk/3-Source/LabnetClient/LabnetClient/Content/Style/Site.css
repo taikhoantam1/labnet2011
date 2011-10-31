@@ -1,0 +1,276 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+body
+{
+    font-size: .75em;
+    font-family: Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+    background: url("../Images/HeaderBG.png") repeat-x;
+}
+
+a:link
+{
+    color: #034af3;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: #505abc;
+}
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+a:active
+{
+    color: #12eb87;
+}
+
+p, ul
+{
+    margin-bottom: 20px;
+    line-height: 1.6em;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+h2
+{
+    padding: 0 0 10px 0;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+
+.clear
+{
+    clear: both;
+}
+
+.floatLeft
+{
+    float: left;
+}
+
+.floatRight
+{
+    float: right;
+}
+
+.Warpper
+{
+    width: 1200px;
+    background: url("../Images/WrapperBG.png") no-repeat;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.Page
+{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.Header
+{
+    width: 100%;
+    height: 225px;
+    position: relative;
+}
+
+.Banner
+{
+    width: 770px;
+    height: 225px;
+    background: url("../Images/Banner.png") no-repeat;
+    left: 200px;
+    top: 100px;
+    position: absolute;
+}
+
+.Content
+{
+    width: 100%;
+    border-left: 1px solid #87CEDB;
+    border-right: 1px solid #87CEDB;
+}
+
+.LeftMenu
+{
+    width: 20%;
+    float: left;
+    height: 300px;
+}
+
+#MainContent
+{
+    width: 80%;
+    float: right;
+    margin-top: 90px;
+}
+.LeftMenu ul
+{
+    list-style: none;
+    padding-left: 10px;
+}
+
+.LeftMenu .MenuTitle
+{
+    color: #636363;
+    font-size: 25px;
+    font-weight: 400;
+    margin-bottom: 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.LeftMenu a.MenuItem
+{
+    background: url("../Images/iconArrow.png") no-repeat scroll 0 3px transparent;
+    text-decoration: none;
+    color: #87CEDB;
+    padding-left: 20px;
+    font-size: 14px;
+    margin-bottom: 5px;
+    line-height: 25px;
+}
+
+.LeftMenu a.MenuItem:hover
+{
+    color: red;
+}
+/********** Div table ************/
+
+.Row
+{
+    width:100%;
+    margin:10px 0;
+}
+
+.Column
+{
+    float:left;
+    margin:0 5px;
+}
+
+.LeftCol
+{
+   float: left;
+    width: 370px;
+}
+
+.RightCol
+{
+    
+   float: left;
+    margin-left: 50px;
+    width: 370px;
+}
+
+/********** Module Style *************/
+.Module
+{
+    margin-left:10px;
+    clear: both;
+}
+.ModuleTitle
+{
+    margin-bottom: 20px;
+}
+.Title
+{
+    font-size: 24px;
+    color: #87CEDB;
+}
+.lbTitle
+{
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: 110px;
+}
+/*********Validation Error**********/
+.infobox
+{
+    border: solid 1px #228ef1;
+    padding: 5px 8px 5px 8px;
+    text-align:left;
+    vertical-align:middle;
+    background-color:#F1E7D1;
+}
+
+.infoimage
+{
+   padding: 5px 15px 5px 15px;
+    background:#F1E7D1 url(../Images/icons/info-24x24.png) no-repeat;
+    background-position:left center;
+}
+
+.errorbox
+{
+    background-color: #F5C2A0;
+    border: 2px solid red;
+    margin: 10px;
+    padding: 5px 20px;
+    text-align: left;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.errorimage
+{
+    background: url("../Images/icons/err-16x16.png") no-repeat scroll left center #F5C2A0;
+    color: red;
+    display: inline-block;
+    height: 100%;
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+
+/*************************************************/
+/* VALIDATION ERROR*/
+
+.validation-summary-errors
+{
+    padding: 1.5em;
+    margin: .5em 0px .5em 0px;
+    background-color: #ffffdf;
+    border: 1px solid #df6b6b;
+    color: #dc3535;      
+}
+
+ validation-summary-errors ul {
+     margin: 0;
+     padding: 0;
+     margin-left: 80px;
+     list-style: square;
+}
