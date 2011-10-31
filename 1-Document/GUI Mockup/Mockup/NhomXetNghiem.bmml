@@ -1,0 +1,74 @@
+<mockup version="1.0" skin="sketch" measuredW="669" measuredH="503" mockupW="647" mockupH="503">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Button" x="123" y="471" w="125" h="32" measuredW="43" measuredH="27" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Luu</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="135" y="0" w="405" h="48" measuredW="194" measuredH="33" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Nhom%20Xet%20Nghiem</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="118" y="87" w="156" h="-1" measuredW="79" measuredH="27" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="22" y="89" w="77" h="21" measuredW="42" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Mo%20Ta</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Label" x="22" y="153" w="81" h="21" measuredW="73" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Xet%20Nghiem</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::TextInput" x="114" y="153" w="151" h="-1" measuredW="95" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>AutoComplete</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::Label" x="24" y="123" w="92" h="21" measuredW="60" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Kich%20Hoat</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::DataGrid" x="22" y="195" w="647" h="160" measuredW="198" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <hasHeader>true</hasHeader>
+        <hLines>true</hLines>
+        <rowHeight>29</rowHeight>
+        <selectedIndex>-1</selectedIndex>
+        <text>Ten%20Xet%20Nghiem%2C%20Nhom%2C%20Xoa</text>
+        <verticalScrollbar>true</verticalScrollbar>
+        <vLines>true</vLines>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Button" x="289" y="471" w="125" h="32" measuredW="94" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>In%20Phieu%20Hen</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Button" x="449" y="471" w="125" h="32" measuredW="75" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Nhap%20Moi</text>
+      </controlProperties>
+    </control>
+    <control controlID="39" controlTypeID="com.balsamiq.mockups::TextInput" x="118" y="45" w="145" h="-1" measuredW="79" measuredH="27" zOrder="10" locked="false" isInGroup="-1"/>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="22" y="47" w="77" h="21" measuredW="33" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ten%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::CheckBox" x="116" y="119" w="83" h="28" measuredW="26" measuredH="22" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="42" controlTypeID="com.balsamiq.mockups::Label" x="116" y="122" w="92" h="21" measuredW="13" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>x</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

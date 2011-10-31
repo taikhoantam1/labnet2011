@@ -1,0 +1,45 @@
+E:\Lacaquanxa\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+E:\Lacaquanxa\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+E:\Lacaquanxa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+E:\Lacaquanxa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+E:\Lacaquanxa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\New folder\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\New folder\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\New folder\3-Source\CMS_Project\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\New folder\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\New folder\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\09-SD Group Project\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\09-SD Group Project\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\09-SD Group Project\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\09-SD Group Project\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\09-SD Group Project\LaCaQuanXa\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\CMS_Project_MVC\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\CMS_Project_MVC\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\CMS_Project_MVC\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\CMS_Project_MVC\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\CMS_Project_MVC\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project_MVC\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project_MVC\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project_MVC\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project_MVC\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\Dropbox\09-SD Group Project\IESEMHUI\3-Source\CMS_Project_MVC\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\03-Work\09-SD Group Project\LabnetManager\3-Source\LabnetClient\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\03-Work\09-SD Group Project\LabnetManager\3-Source\LabnetClient\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\03-Work\09-SD Group Project\LabnetManager\3-Source\LabnetClient\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\03-Work\09-SD Group Project\LabnetManager\3-Source\LabnetClient\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\03-Work\09-SD Group Project\LabnetManager\3-Source\LabnetClient\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
