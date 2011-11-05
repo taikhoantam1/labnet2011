@@ -69,13 +69,13 @@ namespace DataRepository
             }
         }
 
-        public void InsertTest(Test test)
+        public void TestInsert(Test test)
         {
             myDb.Tests.AddObject(test);
             myDb.SaveChanges();
         }
 
-        public void UpdateTest(int id, Test test)
+        public void TestUpdate(int id, Test test)
         {
             Test currentTest = (from _test in myDb.Tests where _test.Id == id select _test).First();
             currentTest.Name = test.Name;
@@ -95,7 +95,7 @@ namespace DataRepository
             myDb.SaveChanges();
         }
 
-        public void DeleteTest(int testId)
+        public void TestDelete(int testId)
         {
             Test test = GetTest(testId);
             test.IsActive = false;
