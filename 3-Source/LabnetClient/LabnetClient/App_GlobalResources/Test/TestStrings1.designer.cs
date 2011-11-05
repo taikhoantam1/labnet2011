@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập chỉ số bé và chỉ số lớn.
+        /// </summary>
+        internal static string TestCreate_IndexError {
+            get {
+                return ResourceManager.GetString("TestCreate_IndexError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kích Hoạt.
         /// </summary>
         internal static string TestCreate_IsActive {
@@ -192,6 +201,15 @@ namespace Resources {
         internal static string TestEdit_Title {
             get {
                 return ResourceManager.GetString("TestEdit_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xét nghiệm này đã tồn tại..
+        /// </summary>
+        internal static string Test_Create_NameError {
+            get {
+                return ResourceManager.GetString("Test_Create_NameError", resourceCulture);
             }
         }
     }

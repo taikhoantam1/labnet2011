@@ -2,26 +2,42 @@
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-     $(function () {
-         $("input#Test_TestSectionName").autocomplete({
-             source: function (request, response) {
-                 $.ajax({
-                     url: "/Test/FindTestSectionNames", type: "POST", dataType: "json",
-                     data: { searchText: request.term },
-                     success: function (data) {
-                         response($.map(data, function (item) {
-                             return { value: item.Name, id: item.Id }
-                         }))
-                     }
-                 })
-             },
-             select: function (event, ui) {
-                 $("input#Test_TestSectionId").val(ui.item.id);
-             }
-         });
-         $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: 'false', wEmpty: 'empty' });
-     });
+    $(function () {
+        $("input#Test_TestSectionName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Test/FindTestSectionNames", type: "POST", dataType: "json",
+                    data: { searchText: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { value: item.Name, id: item.Id }
+                        }))
+                    }
+                })
+            },
+            select: function (event, ui) {
+                $("input#Test_TestSectionId").val(ui.item.id);
+            }
+        });
+        $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: false, wEmpty: 'empty' });
+        $("#TestCostView").blur(function () {
+            var cost = $("#TestCostView").val();
+            cost = cost.replace(",", "");
+            $("#Test_Cost").val(cost);
+        });
+        $("#LowIndexView").blur(function () {
+            var cost = $("#LowIndexView").val();
+            cost = cost.replace(",", "");
+            $("#Test_LowIndex").val(cost);
+        });
+        $("#HighIndexView").blur(function () {
+            var cost = $("#HighIndexView").val();
+            cost = cost.replace(",", "");
+            $("#Test_HighIndex").val(cost);
+        });
+    });
   </script>
+<%=Html.ValidationSummary() %>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
 <% Html.BeginForm("Create", "Test");%>
@@ -31,6 +47,7 @@
 <% Html.BeginForm("Edit", "Test"); %>
 <%} %>
 <%= Html.HiddenFor(m=>m.Test.Id) %>
+
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
@@ -87,7 +104,8 @@
                             <%=Resources.TestStrings.TestCreate_LowIndex%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.LowIndex, new { Class = "textInput2 autoNumeric" })%>
+                        <input type="text" class = "textInput2 autoNumeric" id="LowIndexView" />
+                        <%=Html.HiddenFor(m => m.Test.LowIndex)%>
                     </div>
 
                     <div class="Column">
@@ -95,7 +113,8 @@
                             <%=Resources.TestStrings.TestCreate_HighIndex%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.HighIndex, new { Class = "textInput2 autoNumeric" })%>
+                        <input type="text" class = "textInput2 autoNumeric" id="HighIndexView" />
+                        <%=Html.HiddenFor(m => m.Test.HighIndex)%>
                     </div>
                     <div class="clear">
                     </div>
@@ -152,7 +171,8 @@
                             <%=Resources.TestStrings.TestCreate_Cost%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.Cost, new { Class = "textInput autoNumeric" })%>
+                        <input type="text" class = "textInput autoNumeric" id="TestCostView" />
+                        <%=Html.HiddenFor(m => m.Test.Cost)%>
                     </div>
                     <div class="clear">
                     </div>

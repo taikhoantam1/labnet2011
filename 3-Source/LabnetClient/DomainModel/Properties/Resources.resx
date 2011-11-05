@@ -126,4 +126,10 @@
   <data name="VMPartner_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên</value>
   </data>
+  <data name="VMTest_NameRequired" xml:space="preserve">
+    <value>Vui lòng nhập tên XN</value>
+  </data>
+  <data name="VMTest_TestSectionNameRequired" xml:space="preserve">
+    <value>Vui lòng nhập nhóm XN</value>
+  </data>
 </root>
