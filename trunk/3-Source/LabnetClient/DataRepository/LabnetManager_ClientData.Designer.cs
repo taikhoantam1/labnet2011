@@ -5611,19 +5611,19 @@ namespace DataRepository
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
+        /// <param name="range">Initial value of the Range property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="sortOrder">Initial value of the SortOrder property.</param>
         /// <param name="testSectionId">Initial value of the TestSectionId property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
         /// <param name="cost">Initial value of the Cost property.</param>
         /// <param name="isBold">Initial value of the IsBold property.</param>
-        public static Test CreateTest(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Int32 createdBy, global::System.Int32 sortOrder, global::System.Int32 testSectionId, global::System.Boolean isActive, global::System.Decimal cost, global::System.Boolean isBold)
+        public static Test CreateTest(global::System.Int32 id, global::System.String name, global::System.String range, global::System.Int32 createdBy, global::System.Int32 sortOrder, global::System.Int32 testSectionId, global::System.Boolean isActive, global::System.Decimal cost, global::System.Boolean isBold)
         {
             Test test = new Test();
             test.Id = id;
             test.Name = name;
-            test.Description = description;
+            test.Range = range;
             test.CreatedBy = createdBy;
             test.SortOrder = sortOrder;
             test.TestSectionId = testSectionId;
@@ -5690,7 +5690,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Description
         {
@@ -5702,7 +5702,7 @@ namespace DataRepository
             {
                 OnDescriptionChanging(value);
                 ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false);
+                _Description = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Description");
                 OnDescriptionChanged();
             }
@@ -5786,7 +5786,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Range
         {
@@ -5798,7 +5798,7 @@ namespace DataRepository
             {
                 OnRangeChanging(value);
                 ReportPropertyChanging("Range");
-                _Range = StructuralObject.SetValidValue(value, true);
+                _Range = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("Range");
                 OnRangeChanged();
             }
