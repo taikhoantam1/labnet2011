@@ -42,6 +42,11 @@ namespace LabnetClient
             Mapper.CreateMap<Partner, VMPartner>();
 
             Mapper.CreateMap<VMPartner,Partner>();
+
+            Mapper.CreateMap<Test, VMTest>()
+                .ForMember("TestSectionName",p=>p.Ignore());
+
+            Mapper.CreateMap<VMTest, Test>();
         }
     }
 }

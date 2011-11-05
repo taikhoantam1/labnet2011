@@ -126,6 +126,9 @@
   <data name="TestCreate_HighIndex" xml:space="preserve">
     <value>Chỉ số lớn</value>
   </data>
+  <data name="TestCreate_IndexError" xml:space="preserve">
+    <value>Vui lòng nhập chỉ số bé và chỉ số lớn</value>
+  </data>
   <data name="TestCreate_IsActive" xml:space="preserve">
     <value>Kích Hoạt</value>
   </data>
@@ -161,5 +164,8 @@
   </data>
   <data name="TestEdit_Title" xml:space="preserve">
     <value>Cập Nhật Xét Nghiệm</value>
+  </data>
+  <data name="Test_Create_NameError" xml:space="preserve">
+    <value>Xét nghiệm này đã tồn tại.</value>
   </data>
 </root>

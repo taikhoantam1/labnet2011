@@ -35,6 +35,7 @@ namespace DataRepository
         void TestUpdate(int id, Test test);
         void TestDelete(int testId);
         List<Test> GetTestByTestSectionId(int testSectionId);
+        bool IsValidTest(string testName);
         #endregion
 
         #region Panel

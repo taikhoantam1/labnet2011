@@ -109,6 +109,17 @@ namespace DataRepository
             List<Test> lstTests = (from _test in myDb.Tests where (_test.IsActive == true && _test.TestSectionId == testSectionId) select _test).ToList();
             return lstTests;
         }
+
+        public bool IsValidTest(string testName)
+        {
+            bool isValid = true;
+            Test testWithSameName = myDb.Tests.SingleOrDefault(u => u.Name.ToUpper() == testName.ToUpper());
+            if (testWithSameName != null)
+            {
+                isValid = false;
+            }
+            return isValid;
+        }
         #endregion Test
 
         #region Panel

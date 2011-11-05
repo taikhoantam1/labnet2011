@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using LabnetClient.Models;
 using LabnetClient.Constant;
 using DataRepository;
+using DomainModel;
+using AutoMapper;
 
 namespace LabnetClient.Controllers
 {
@@ -58,16 +60,25 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Create(TestViewModel model)
         {
-            try
+            if ((model.Test.LowIndex == null && model.Test.HighIndex != null)
+                || (model.Test.LowIndex != null && model.Test.HighIndex == null))
             {
-                // TODO: Add insert logic here
+                ModelState.AddModelError("Low and High are not valid", Resources.TestStrings.TestCreate_IndexError);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (!Repository.IsValidTest(model.Test.Name))
             {
-                return View();
+                ModelState.AddModelError("Test name already exists", Resources.TestStrings.Test_Create_NameError);
             }
+
+            if (!ModelState.IsValid)
+            {
+                return View("Create", model);
+            }
+
+            Test test = Mapper.Map<VMTest, Test>(model.Test);
+            Repository.TestInsert(test);
+            return RedirectToAction("Index");
         }
         
         //

@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using DomainModel.Properties;
 
 namespace DomainModel
 {
     public class VMTest
     {
+        public VMTest()
+        {
+            LastUpdated = DateTime.Now;
+        }
         /// <summary>
         /// Sets or gets test's name
         /// </summary>
+        /// 
+        [Required(ErrorMessageResourceName = "VMTest_NameRequired", ErrorMessageResourceType = typeof(Resources))]
         public string Name { get; set; }
 
         /// <summary>
@@ -20,12 +28,12 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets low index of test
         /// </summary>
-        public float? LowIndex { get; set; }
+        public double? LowIndex { get; set; }
 
         /// <summary>
         /// Sets or gets high index of test
         /// </summary>
-        public float? HighIndex { get; set; }
+        public double? HighIndex { get; set; }
 
         /// <summary>
         /// Sets or gets test's unit
@@ -80,6 +88,7 @@ namespace DomainModel
         /// <summary>
         /// Gets or sets Department Name that test belongs to
         /// </summary>
+        [Required(ErrorMessageResourceName = "VMTest_TestSectionNameRequired", ErrorMessageResourceType = typeof(Resources))]
         public string TestSectionName { get; set; }
 
         /// <summary>
