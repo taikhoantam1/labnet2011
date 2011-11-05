@@ -50,5 +50,16 @@ namespace LabnetClient.Models
         /// Gets or sets data of control if IsAjaxLoading is false
         /// </summary>
         public string JsonData { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SelectedValue { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SelectedText { get; set; }
     }
 }

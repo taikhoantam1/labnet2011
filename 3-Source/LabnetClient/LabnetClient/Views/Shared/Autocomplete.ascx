@@ -18,6 +18,8 @@
             },
             select: function (event, ui) {
                 $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val(ui.item.id);
+                 $("#<%= Model.AutoCompleteId %>_SelectedValue").val(ui.item.id);
+                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
             },
             delay:0,
             selectFirst: true,
@@ -34,6 +36,8 @@
                     // remove invalid value, as it didn't match anything
                     $( this ).val( "" );
                     $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val("");
+                    $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
+                    $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
                     return false;
                 }
             }
@@ -54,6 +58,9 @@
                     },
             select: function (event, ui) {
                 $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val(ui.item.id);
+
+                 $("#<%= Model.AutoCompleteId %>_SelectedValue").val(ui.item.id);
+                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
             },
             delay:0,
             selectFirst: true,
@@ -71,6 +78,8 @@
                     // remove invalid value, as it didn't match anything
                     $( this ).val( "" );
                     $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val("");
+                    $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
+                    $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
                     return false;
                 }
                    
@@ -80,6 +89,9 @@
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
-    <input type="text" class="autoCompleteText <%= Model.CustomeCss %>" />
-    <input type="hidden" class="autoCompleteValue <%= Model.CustomeCss %>" name="<%=Model.BindingName%>" />
+    <input type="text" class="autoCompleteText <%= Model.CustomeCss %>" value="<%= Model.SelectedText %>" />
+    <input type="hidden" class="autoCompleteValue <%= Model.CustomeCss %>" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
+
+    <input type="hidden" class="autoCompleteValue <%= Model.CustomeCss %>" id="<%= Model.AutoCompleteId %>_SelectedValue" value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
+    <input type="hidden" class="autoCompleteValue <%= Model.CustomeCss %>" id="<%= Model.AutoCompleteId %>_SelectedText" value="<%= Model.SelectedText %>" name="Autocomplete.SelectedText" />
 </div>
