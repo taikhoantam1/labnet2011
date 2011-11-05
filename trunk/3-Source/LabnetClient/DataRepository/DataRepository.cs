@@ -91,6 +91,7 @@ namespace DataRepository
             currentTest.IsActive = test.IsActive;
             currentTest.LastUpdated = test.LastUpdated;
             currentTest.Cost = test.Cost;
+            currentTest.IsBold = test.IsBold;
 
             myDb.SaveChanges();
         }

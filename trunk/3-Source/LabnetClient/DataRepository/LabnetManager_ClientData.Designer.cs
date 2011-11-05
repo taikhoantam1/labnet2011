@@ -5617,7 +5617,8 @@ namespace DataRepository
         /// <param name="testSectionId">Initial value of the TestSectionId property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
         /// <param name="cost">Initial value of the Cost property.</param>
-        public static Test CreateTest(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Int32 createdBy, global::System.Int32 sortOrder, global::System.Int32 testSectionId, global::System.Boolean isActive, global::System.Decimal cost)
+        /// <param name="isBold">Initial value of the IsBold property.</param>
+        public static Test CreateTest(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Int32 createdBy, global::System.Int32 sortOrder, global::System.Int32 testSectionId, global::System.Boolean isActive, global::System.Decimal cost, global::System.Boolean isBold)
         {
             Test test = new Test();
             test.Id = id;
@@ -5628,6 +5629,7 @@ namespace DataRepository
             test.TestSectionId = testSectionId;
             test.IsActive = isActive;
             test.Cost = cost;
+            test.IsBold = isBold;
             return test;
         }
 
@@ -5996,6 +5998,30 @@ namespace DataRepository
         private global::System.Decimal _Cost;
         partial void OnCostChanging(global::System.Decimal value);
         partial void OnCostChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsBold
+        {
+            get
+            {
+                return _IsBold;
+            }
+            set
+            {
+                OnIsBoldChanging(value);
+                ReportPropertyChanging("IsBold");
+                _IsBold = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsBold");
+                OnIsBoldChanged();
+            }
+        }
+        private global::System.Boolean _IsBold;
+        partial void OnIsBoldChanging(global::System.Boolean value);
+        partial void OnIsBoldChanged();
 
         #endregion
     
