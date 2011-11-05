@@ -39,7 +39,7 @@
                             <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
                         <li><a class="MenuItem ActionLink" href="/Partner/Edit/1">
                             <%= Resources.GlobalStrings.Menu_CreateLabPartner %></a></li>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/Test/Create/">
                             <%= Resources.GlobalStrings.Menu_CreateTest %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
