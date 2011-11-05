@@ -347,11 +347,11 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="LowIndex" Type="float" />
           <Property Name="HighIndex" Type="float" />
           <Property Name="Unit" Type="nvarchar" MaxLength="50" />
-          <Property Name="Range" Type="nvarchar" MaxLength="100" />
+          <Property Name="Range" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="DepartmentId" Type="int" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="SortOrder" Type="int" Nullable="false" />
@@ -762,7 +762,7 @@
             <End Role="Test" EntitySet="Tests" />
             <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
             <PropertyRef Name="Id" />
@@ -1248,11 +1248,11 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="Double" Name="LowIndex" Nullable="true" />
+          <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="LowIndex" />
           <Property Type="Double" Name="HighIndex" />
           <Property Type="String" Name="Unit" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Range" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Range" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="DepartmentId" />
           <Property Type="Int32" Name="CreatedBy" Nullable="false" />
           <Property Type="Int32" Name="SortOrder" Nullable="false" />
@@ -1341,7 +1341,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
