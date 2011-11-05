@@ -71,5 +71,10 @@ namespace DomainModel
         /// Sets or gets cost of test
         /// </summary>
         public decimal Cost { get; set; }
+
+        /// <summary>
+        /// Sets or gets IsBold
+        /// </summary>
+        public bool IsBold { get; set; }
     }
 }

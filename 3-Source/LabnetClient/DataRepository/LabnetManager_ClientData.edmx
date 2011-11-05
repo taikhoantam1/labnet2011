@@ -61,10 +61,6 @@
             <End Role="Test" EntitySet="Test" />
             <End Role="PanelItem" EntitySet="PanelItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_Partner_Partner" Association="LabManager_ClientModel.Store.FK_Partner_Partner">
-            <End Role="Partner" EntitySet="Partner" />
-            <End Role="Partner1" EntitySet="Partner" />
-          </AssociationSet>
           <AssociationSet Name="FK_PartnerCost_Partner" Association="LabManager_ClientModel.Store.FK_PartnerCost_Partner">
             <End Role="Partner" EntitySet="Partner" />
             <End Role="PartnerCost" EntitySet="PartnerCost" />
@@ -364,6 +360,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="Cost" Type="decimal" Nullable="false" />
+          <Property Name="IsBold" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TestCommission">
           <Key>
@@ -494,18 +491,6 @@
             </Principal>
             <Dependent Role="PanelItem">
               <PropertyRef Name="TestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Partner_Partner">
-          <End Role="Partner" Type="LabManager_ClientModel.Store.Partner" Multiplicity="1" />
-          <End Role="Partner1" Type="LabManager_ClientModel.Store.Partner" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Partner">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Partner1">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1019,6 +1004,7 @@
           <NavigationProperty Name="TestSection" Relationship="LabManager_ClientModel.FK_Test_TestSection" FromRole="Test" ToRole="TestSection" />
           <NavigationProperty Name="TestCommissions" Relationship="LabManager_ClientModel.FK_TestCommission_Test" FromRole="Test" ToRole="TestCommission" />
           <NavigationProperty Name="TestResults" Relationship="LabManager_ClientModel.FK_TestResult_Test" FromRole="Test" ToRole="TestResult" />
+          <Property Type="Boolean" Name="IsBold" Nullable="false" />
         </EntityType>
         <EntityType Name="TestCommission">
           <Key>
@@ -1502,7 +1488,8 @@
             <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Tests"><EntityTypeMapping TypeName="LabManager_ClientModel.Test"><MappingFragment StoreEntitySet="Test">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IsBold" ColumnName="IsBold" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Description" ColumnName="Description" />
             <ScalarProperty Name="LowIndex" ColumnName="LowIndex" />
