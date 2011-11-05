@@ -136,6 +136,7 @@
       <DependentUpon>Uploader.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\PartnerViewModel.cs" />
     <Compile Include="Models\TestViewModel.cs" />
@@ -193,8 +194,10 @@
     <Content Include="Content\Lib\jquery-ui-1.8.16\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\jquery-ui-1.8.16.min.js" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\jquery.ui.autocomplete.selectFirst.js" />
     <Content Include="Content\Lib\jquery\jquery-1.6.2.min.js" />
     <Content Include="Content\Lib\AutoNumeric\autoNumeric-1.7.1.js" />
+    <Content Include="Content\Scripts\jqueryExtend.js" />
     <Content Include="Content\Scripts\Event.js" />
     <Content Include="Content\Scripts\Script.js" />
     <Content Include="Content\Style\LayoutTemplate.css" />
@@ -589,6 +592,7 @@
     <Content Include="LibDLL\AutoMapper.dll" />
     <Content Include="LibDLL\log4net.dll" />
     <Content Include="Views\Partner\Details.ascx" />
+    <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Test\Create.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

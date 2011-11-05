@@ -266,12 +266,11 @@ namespace DataRepository
         #region TestSection
 
 
-        public List<SearchTestSection_Result> GetTestSectionByName(string name)
+        public object GetTestSectionByName(string name)
         {
             name = name.ToUpper();
             List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name).ToList();
-
-            return lstTestSection;
+            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
         }
         #endregion
     }

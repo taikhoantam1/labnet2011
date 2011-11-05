@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Web.Script.Serialization;
 
 namespace LibraryFuntion
 {
@@ -82,6 +83,12 @@ namespace LibraryFuntion
                 }
             }
             return source;
+        }
+
+        public static string ToJSON(this object obj)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            return serializer.Serialize(obj);
         }
     }
 }
