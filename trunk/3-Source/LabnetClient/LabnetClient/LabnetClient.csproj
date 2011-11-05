@@ -177,6 +177,7 @@
     <Content Include="Content\Images\icons\warning-32x32.png" />
     <Content Include="Content\Images\icons\warning-48x48.png" />
     <Content Include="Content\Images\WrapperBG.png" />
+    <Content Include="Content\Lib\AutoNumeric\autoNumeric-1.7.1.js" />
     <Content Include="Content\Scripts\Event.js" />
     <Content Include="Content\Scripts\Script.js" />
     <Content Include="Content\Style\LayoutTemplate.css" />
