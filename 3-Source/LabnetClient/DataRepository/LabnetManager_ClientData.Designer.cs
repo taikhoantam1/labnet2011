@@ -19,7 +19,6 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_PatientItem", "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.PatientItem), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Department), "LabPatientManagement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabPatientManagement), true)]
@@ -29,16 +28,17 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Project", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Project), "LabPatientManagement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabPatientManagement), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_LabPatientManagement", "LabPatientManagement", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabPatientManagement), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Panel", "Panel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Panel), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Source", "Source", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Source), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_TypeOfSample", "TypeOfSample", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.TypeOfSample), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_ResultDictionary", "ResultDictionary", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.ResultDictionary), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Patient", "Patient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Patient), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Partner), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Patient", "Patient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Patient), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Partner), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
 
 #endregion
 
@@ -349,22 +349,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Test> Tests
-        {
-            get
-            {
-                if ((_Tests == null))
-                {
-                    _Tests = base.CreateObjectSet<Test>("Tests");
-                }
-                return _Tests;
-            }
-        }
-        private ObjectSet<Test> _Tests;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<TestCommission> TestCommissions
         {
             get
@@ -457,6 +441,22 @@ namespace DataRepository
             }
         }
         private ObjectSet<Partner> _Partners;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Test> Tests
+        {
+            get
+            {
+                if ((_Tests == null))
+                {
+                    _Tests = base.CreateObjectSet<Test>("Tests");
+                }
+                return _Tests;
+            }
+        }
+        private ObjectSet<Test> _Tests;
 
         #endregion
         #region AddTo Methods
@@ -590,14 +590,6 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Tests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTests(Test test)
-        {
-            base.AddObject("Tests", test);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the TestCommissions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToTestCommissions(TestCommission testCommission)
@@ -643,6 +635,14 @@ namespace DataRepository
         public void AddToPartners(Partner partner)
         {
             base.AddObject("Partners", partner);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Tests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTests(Test test)
+        {
+            base.AddObject("Tests", test);
         }
 
         #endregion
@@ -902,6 +902,28 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test")]
         public Test Test
         {
@@ -930,28 +952,6 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("LabManager_ClientModel.FK_Analysis_Test", "Test", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Result")]
-        public EntityCollection<Result> Results
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result", value);
                 }
             }
         }
@@ -3264,44 +3264,6 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test")]
-        public Test Test
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Test> TestReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PartnerCost_Partner", "Partner")]
         public Partner Partner
         {
@@ -3330,6 +3292,44 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Partner>("LabManager_ClientModel.FK_PartnerCost_Partner", "Partner", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test")]
+        public Test Test
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Test> TestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("LabManager_ClientModel.FK_PartnerCost_Test", "Test", value);
                 }
             }
         }
