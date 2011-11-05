@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using LabnetClient.Models;
 using LabnetClient.Constant;
+using DataRepository;
 
 namespace LabnetClient.Controllers
 {
-    public class TestController : Controller
+    public class TestController : BaseController
     {
         //
         // GET: /Test/
@@ -25,6 +26,19 @@ namespace LabnetClient.Controllers
         {
             return View();
         }
+       
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult FindTestSectionNames(string searchText)
+        {
+            List<TestSection> lstResult = Repository.GetTestSectionByName(searchText);
+
+            return Json(lstResult);
+        }
 
         //
         // GET: /Test/Create
@@ -33,6 +47,8 @@ namespace LabnetClient.Controllers
         {
             TestViewModel model = new TestViewModel();
             model.ViewMode = ViewMode.Create;
+            model.Test.IsActive = true;
+
             return View("Create", model);
         } 
 

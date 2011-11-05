@@ -60,5 +60,9 @@ namespace DataRepository
         void UpdateDoctor(int id, Doctor doctor);
         void DeleteDoctor(int doctorId);
         #endregion
+
+        #region TestSection
+        List<TestSection> GetTestSectionByName(string name);
+        #endregion
     }
 }

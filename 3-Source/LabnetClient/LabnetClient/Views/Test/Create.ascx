@@ -1,6 +1,38 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.TestViewModel>" %>
+<link href="../../Content/Lib/jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
-<%Html.BeginForm(); %>
+<script type="text/javascript" src="../../Content/Lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../../Content/Lib/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript">
+
+     $(function () {
+         $("input#Test_TestSectionName").autocomplete({
+             source: function (request, response) {
+                 $.ajax({
+                     url: "/Test/FindTestSectionNames", type: "POST", dataType: "json",
+                     data: { searchText: request.term },
+                     success: function (data) {
+                         response($.map(data, function (item) {
+                             return { value: item.Name, id: item.Id }
+                         }))
+                     }
+                 })
+             },
+             select: function (event, ui) {
+                 $("input#Test_TestSectionId").val(ui.item.id);
+             }
+         });
+     });
+  </script>
+<%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+  {%>
+<% Html.BeginForm("Create", "Test");%>
+<%}
+  else
+  { %>
+<% Html.BeginForm("Edit", "Test"); %>
+<%} %>
+<%= Html.HiddenFor(m=>m.Test.Id) %>
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
@@ -34,7 +66,8 @@
                             <%=Resources.TestStrings.TestCreate_TestSection%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.TestSectionId, new { Class = "textInput220" })%>
+                        <%=Html.TextBoxFor(m => m.Test.TestSectionName, new { id="Test_TestSectionName", Class = "textInput220" })%>
+                        <%=Html.HiddenFor(m => m.Test.TestSectionId) %>
                     </div>
                     <div class="clear">
                     </div>
@@ -99,7 +132,7 @@
                             <%=Resources.TestStrings.TestCreate_IsBold%></label>
                     </div>
                     <div class="Column">
-                        <input type="checkbox" checked="checked" />
+                        <%=Html.CheckBoxFor(m => m.Test.IsBold) %>
                     </div>
                     <div class="clear">
                     </div>
