@@ -75,6 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\AppHelper.cs" />
+    <Compile Include="App_GlobalResources\Test\TestStrings.designer.cs" />
+    <Compile Include="App_GlobalResources\Test\TestStrings1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Constant\GeneralEnum.cs" />
     <Compile Include="App_GlobalResources\GlobalStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -640,6 +646,10 @@
     <Content Include="App_GlobalResources\Partner\PartnerStrings.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>PartnerStrings.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Test\TestStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>TestStrings1.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
