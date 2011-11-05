@@ -11,7 +11,7 @@ namespace LabnetClient.Models
         public VMTest Test { get; set; }
         public TestViewModel()
         {
-            Test = new VMTest(); 
+            Test = new VMTest();  
         }
     }
 }
