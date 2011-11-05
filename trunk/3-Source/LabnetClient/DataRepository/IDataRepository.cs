@@ -63,7 +63,7 @@ namespace DataRepository
         #endregion
 
         #region TestSection
-        List<TestSection> GetTestSectionByName(string name);
+        List<SearchTestSection_Result> GetTestSectionByName(string name);
         #endregion
     }
 }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
-
+using LibraryFuntion;
+using System.Data.Objects.SqlClient;
 namespace DataRepository
 {
     public class Repository : IDataRepository
@@ -106,7 +107,9 @@ namespace DataRepository
 
         public List<Test> GetTestByTestSectionId(int testSectionId)
         {
-            List<Test> lstTests = (from _test in myDb.Tests where (_test.IsActive == true && _test.TestSectionId == testSectionId) select _test).ToList();
+            List<Test> lstTests = (from _test in myDb.Tests 
+                                   where (_test.IsActive == true && _test.TestSectionId == testSectionId) 
+                                   select _test).ToList();
             return lstTests;
         }
 
@@ -261,9 +264,12 @@ namespace DataRepository
         #endregion
 
         #region TestSection
-        public List<TestSection> GetTestSectionByName(string name)
+
+
+        public List<SearchTestSection_Result> GetTestSectionByName(string name)
         {
-            List<TestSection> lstTestSection = (from _testSection in myDb.TestSections where (_testSection.Name.ToUpper().StartsWith(name.ToUpper())) select _testSection).ToList();
+            name = name.ToUpper();
+            List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name).ToList();
 
             return lstTestSection;
         }

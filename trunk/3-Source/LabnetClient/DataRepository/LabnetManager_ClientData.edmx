@@ -650,6 +650,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="strInput" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SearchTestSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+          <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -762,6 +768,9 @@
             <End Role="Test" EntitySet="Tests" />
             <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
+          <FunctionImport Name="SearchTestSection" ReturnType="Collection(LabManager_ClientModel.SearchTestSection_Result)">
+            <Parameter Name="FilterText" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -1341,6 +1350,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SearchTestSection_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1574,6 +1588,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchTestSection" FunctionName="LabManager_ClientModel.Store.sp_SearchTestSection">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchTestSection_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1618,8 +1641,8 @@
         <AssociationConnector Association="LabManager_ClientModel.FK_Analysis_PatientItem" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="22.751152846153843" />
           <ConnectorPoint PointX="4.875" PointY="22.376152846153843" />
-          <ConnectorPoint PointX="4.875" PointY="9.7208968098958337" />
-          <ConnectorPoint PointX="5.25" PointY="9.7208968098958337" />
+          <ConnectorPoint PointX="4.875" PointY="9.752148809895834" />
+          <ConnectorPoint PointX="5.25" PointY="9.752148809895834" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_Result_Analysis" ManuallyRouted="false">
           <ConnectorPoint PointX="6.7499999999999982" PointY="11.191793619791666" />
@@ -1642,11 +1665,11 @@
           <ConnectorPoint PointX="1.875" PointY="17" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestCommission_Doctor" ManuallyRouted="false">
-          <ConnectorPoint PointX="3.78125" PointY="16.75" />
-          <ConnectorPoint PointX="3.78125" PointY="13.778595377604166" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="13.778595377604166" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="13.778595377604166" />
-          <ConnectorPoint PointX="5.25" PointY="13.778595377604166" />
+          <ConnectorPoint PointX="3.6015625" PointY="16.75" />
+          <ConnectorPoint PointX="3.6015625" PointY="14.113870472005207" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="14.113870472005207" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="14.113870472005207" />
+          <ConnectorPoint PointX="5.25" PointY="14.113870472005207" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_PatientType" ManuallyRouted="false">
           <ConnectorPoint PointX="2.5937505" PointY="27.5" />
@@ -1703,14 +1726,14 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.Partner" Width="1.5" PointX="0.75" PointY="1" Height="3.7109993489583246" />
         <AssociationConnector Association="LabManager_ClientModel.FK_PartnerCost_Partner" >
-          <ConnectorPoint PointX="2.25" PointY="3.5595914713541692" />
-          <ConnectorPoint PointX="5.59375" PointY="3.5595914713541692" />
+          <ConnectorPoint PointX="2.25" PointY="3.4588932291666694" />
+          <ConnectorPoint PointX="5.59375" PointY="3.4588932291666694" />
           <ConnectorPoint PointX="5.59375" PointY="4.375" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="LabManager_ClientModel.Test" Width="1.5" PointX="3" PointY="7.125" Height="5.2494108072916674" />
+        <EntityTypeShape EntityType="LabManager_ClientModel.Test" Width="1.5" PointX="3" PointY="7.125" Height="5.2494108072916656" IsExpanded="true" />
         <AssociationConnector Association="LabManager_ClientModel.FK_Analysis_Test" >
-          <ConnectorPoint PointX="4.5" PointY="8.9229484049479169" />
-          <ConnectorPoint PointX="5.25" PointY="8.9229484049479169" />
+          <ConnectorPoint PointX="4.5" PointY="8.9385744049479179" />
+          <ConnectorPoint PointX="5.25" PointY="8.9385744049479179" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PanelItem_Test" >
           <ConnectorPoint PointX="4.5" PointY="11.936951497395832" />
@@ -1722,31 +1745,31 @@
           <ConnectorPoint PointX="9" PointY="11.1244921875" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PartnerCost_Test" >
-          <ConnectorPoint PointX="3.75" PointY="7.125" />
-          <ConnectorPoint PointX="3.75" PointY="5.74974609375" />
-          <ConnectorPoint PointX="4.0729186666666672" PointY="5.7497460937499989" />
-          <ConnectorPoint PointX="4.2395853333333333" PointY="5.74974609375" />
-          <ConnectorPoint PointX="5.25" PointY="5.74974609375" />
+          <ConnectorPoint PointX="3.7187475" PointY="7.125" />
+          <ConnectorPoint PointX="3.7187475" PointY="6.29221497173569" />
+          <ConnectorPoint PointX="4.0572924166666668" PointY="6.2922149717356888" />
+          <ConnectorPoint PointX="4.2239590833333329" PointY="6.29221497173569" />
+          <ConnectorPoint PointX="5.25" PointY="6.29221497173569" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_Test_TestSection" >
-          <ConnectorPoint PointX="2.25" PointY="9.7401432291666659" />
-          <ConnectorPoint PointX="3" PointY="9.7401432291666659" />
+          <ConnectorPoint PointX="2.25" PointY="9.7401432291666641" />
+          <ConnectorPoint PointX="3" PointY="9.7401432291666641" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestCommission_Test" >
-          <ConnectorPoint PointX="4.140625" PointY="12.374410807291667" />
-          <ConnectorPoint PointX="4.140625" PointY="13.108045188802089" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="13.108045188802089" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="13.108045188802089" />
-          <ConnectorPoint PointX="5.25" PointY="13.108045188802089" />
+          <ConnectorPoint PointX="4.05078125" PointY="12.374410807291666" />
+          <ConnectorPoint PointX="4.05078125" PointY="13.27568273600261" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="13.27568273600261" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="13.27568273600261" />
+          <ConnectorPoint PointX="5.25" PointY="13.27568273600261" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestResult_Test" >
-          <ConnectorPoint PointX="4.156252" PointY="7.125" />
-          <ConnectorPoint PointX="4.156252" PointY="4.125" />
+          <ConnectorPoint PointX="4.14062575" PointY="7.125" />
+          <ConnectorPoint PointX="4.14062575" PointY="4.125" />
           <ConnectorPoint PointX="5.510416666666667" PointY="4.1249999999999991" />
           <ConnectorPoint PointX="5.677083333333333" PointY="4.125" />
           <ConnectorPoint PointX="7.875" PointY="4.125" />
-          <ConnectorPoint PointX="7.875" PointY="5.7401432291666659" />
-          <ConnectorPoint PointX="8.25" PointY="5.7401432291666659" />
+          <ConnectorPoint PointX="7.875" PointY="5.7401432291666694" />
+          <ConnectorPoint PointX="8.25" PointY="5.7401432291666694" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

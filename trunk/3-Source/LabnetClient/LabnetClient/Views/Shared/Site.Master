@@ -10,11 +10,11 @@
     </title>
     <link href="../../Content/Style/reset.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/Style/Site.css" rel="stylesheet" type="text/css" />
-    <link href="../../Content/Lib/jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Content/Lib/jquery-ui-1.8.16/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
     <link href="../../Content/Style/LayoutTemplate.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../Content/Lib/FlexiGrid/flexigrid.css" />
-    <script type="text/javascript" src="../../Content/Lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="../../Content/Lib/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../../Content/Lib/jquery/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery-ui-1.8.16.min.js"></script>
     <script type="text/javascript" src="../../Content/Lib/Ajax/ajax.js"></script>
     <script type="text/javascript" src="../../Content/Lib/Utility/ClientUtil.js"></script>
     <script type="text/javascript" src="../../Content/Lib/FlexiGrid/flexigrid.js"></script>

@@ -646,6 +646,28 @@ namespace DataRepository
         }
 
         #endregion
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="filterText">No Metadata Documentation available.</param>
+        public ObjectResult<SearchTestSection_Result> SearchTestSection(global::System.String filterText)
+        {
+            ObjectParameter filterTextParameter;
+            if (filterText != null)
+            {
+                filterTextParameter = new ObjectParameter("FilterText", filterText);
+            }
+            else
+            {
+                filterTextParameter = new ObjectParameter("FilterText", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<SearchTestSection_Result>("SearchTestSection", filterTextParameter);
+        }
+
+        #endregion
     }
     
 
@@ -6914,6 +6936,112 @@ namespace DataRepository
                 }
             }
         }
+
+        #endregion
+    }
+
+    #endregion
+    #region ComplexTypes
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="LabManager_ClientModel", Name="SearchTestSection_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class SearchTestSection_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SearchTestSection_Result object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="isActive">Initial value of the IsActive property.</param>
+        public static SearchTestSection_Result CreateSearchTestSection_Result(global::System.Int32 id, global::System.String name, global::System.Boolean isActive)
+        {
+            SearchTestSection_Result searchTestSection_Result = new SearchTestSection_Result();
+            searchTestSection_Result.Id = id;
+            searchTestSection_Result.Name = name;
+            searchTestSection_Result.IsActive = isActive;
+            return searchTestSection_Result;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                OnIdChanging(value);
+                ReportPropertyChanging("Id");
+                _Id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Id");
+                OnIdChanged();
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActive
+        {
+            get
+            {
+                return _IsActive;
+            }
+            set
+            {
+                OnIsActiveChanging(value);
+                ReportPropertyChanging("IsActive");
+                _IsActive = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActive");
+                OnIsActiveChanged();
+            }
+        }
+        private global::System.Boolean _IsActive;
+        partial void OnIsActiveChanging(global::System.Boolean value);
+        partial void OnIsActiveChanged();
 
         #endregion
     }

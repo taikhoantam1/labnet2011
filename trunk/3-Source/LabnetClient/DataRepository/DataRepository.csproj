@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRepository.cs" />
+    <Compile Include="EntityExtentionMethod.cs" />
     <Compile Include="IDataRepository.cs" />
     <Compile Include="LabnetManager_ClientData.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -61,6 +63,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>LabnetManager_ClientData.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibraryFuntion\LibraryFuntion.csproj">
+      <Project>{F60FF808-E570-4188-B7CB-B7B1412A4B7D}</Project>
+      <Name>LibraryFuntion</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
