@@ -8,6 +8,7 @@ using LabnetClient.Constant;
 using DataRepository;
 using DomainModel;
 using AutoMapper;
+using LibraryFuntion;
 
 namespace LabnetClient.Controllers
 {
@@ -37,8 +38,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public JsonResult FindTestSectionNames(string searchText)
         {
-            List<SearchTestSection_Result> lstResult = Repository.GetTestSectionByName(searchText);
-            var result = lstResult.Select(p => new {Name=p.Name,Id=p.Id  });
+            var result =Repository.GetTestSectionByName(searchText);
             return Json(result);
         }
 
@@ -49,8 +49,7 @@ namespace LabnetClient.Controllers
         {
             TestViewModel model = new TestViewModel();
             model.ViewMode = ViewMode.Create;
-            model.Test.IsActive = true;
-
+            model.Autocomplete.JsonData = Repository.GetTestSectionByName("").ToJson();
             return View("Create", model);
         } 
 

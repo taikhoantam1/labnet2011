@@ -12,6 +12,7 @@ namespace DomainModel
         public VMTest()
         {
             LastUpdated = DateTime.Now;
+            IsActive = true;
         }
         /// <summary>
         /// Sets or gets test's name
