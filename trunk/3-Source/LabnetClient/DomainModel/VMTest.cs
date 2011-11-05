@@ -76,5 +76,15 @@ namespace DomainModel
         /// Sets or gets IsBold
         /// </summary>
         public bool IsBold { get; set; }
+
+        /// <summary>
+        /// Gets or sets Department Name that test belongs to
+        /// </summary>
+        public string TestSectionName { get; set; }
+
+        /// <summary>
+        /// Gets or sets Test Id
+        /// </summary>
+        public int Id { get; set; }
     }
 }

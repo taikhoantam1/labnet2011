@@ -248,5 +248,14 @@ namespace DataRepository
             myDb.SaveChanges();
         }
         #endregion
+
+        #region TestSection
+        public List<TestSection> GetTestSectionByName(string name)
+        {
+            List<TestSection> lstTestSection = (from _testSection in myDb.TestSections where (_testSection.Name.ToUpper().Contains(name.ToUpper())) select _testSection).ToList();
+
+            return lstTestSection;
+        }
+        #endregion
     }
 }
