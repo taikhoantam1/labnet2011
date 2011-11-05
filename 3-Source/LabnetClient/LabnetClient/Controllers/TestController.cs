@@ -37,7 +37,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public JsonResult FindTestSectionNames(string searchText)
         {
-            List<TestSection> lstResult = Repository.GetTestSectionByName(searchText);
+            List<SearchTestSection_Result> lstResult = Repository.GetTestSectionByName(searchText);
             var result = lstResult.Select(p => new {Name=p.Name,Id=p.Id  });
             return Json(result);
         }

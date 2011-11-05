@@ -18,25 +18,41 @@
             select: function (event, ui) {
                 $("input#Test_TestSectionId").val(ui.item.id);
             }
+            //,selectFirst: true
+        }).live('keydown', function (e) {
+            var keyCode = e.keyCode || e.which;
+
+            //if TAB or RETURN is pressed and the text in the textbox does not match a suggestion, set the value of the textbox to the text of the first suggestion
+            if ((keyCode == 9)) {
+                $("input#Test_TestSectionName").val($(".ui-autocomplete li:visible:first a").text());
+              //  alert($(".ui-autocomplete li:visible:first a").text());
+            }
+        }).live('blur', function (e) {
+            
+                $("input#Test_TestSectionName").val($(".ui-autocomplete li:visible:first a").text());
         });
+
         $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: false, wEmpty: 'empty' });
+
         $("#TestCostView").blur(function () {
             var cost = $("#TestCostView").val();
             cost = cost.replace(",", "");
             $("#Test_Cost").val(cost);
         });
+
         $("#LowIndexView").blur(function () {
             var cost = $("#LowIndexView").val();
             cost = cost.replace(",", "");
             $("#Test_LowIndex").val(cost);
         });
+
         $("#HighIndexView").blur(function () {
             var cost = $("#HighIndexView").val();
             cost = cost.replace(",", "");
             $("#Test_HighIndex").val(cost);
         });
     });
-  </script>
+</script>
 <%=Html.ValidationSummary() %>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
@@ -47,17 +63,16 @@
 <% Html.BeginForm("Edit", "Test"); %>
 <%} %>
 <%= Html.HiddenFor(m=>m.Test.Id) %>
-
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
             <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
               {%>
-                    <%=Resources.TestStrings.TestCreate_Title %>
+            <%=Resources.TestStrings.TestCreate_Title %>
             <%}
               else
               { %>
-                     <%=Resources.TestStrings.TestEdit_Title%>
+            <%=Resources.TestStrings.TestEdit_Title%>
             <%} %>
         </h3>
     </div>
@@ -104,16 +119,15 @@
                             <%=Resources.TestStrings.TestCreate_LowIndex%></label>
                     </div>
                     <div class="Column">
-                        <input type="text" class = "textInput2 autoNumeric" id="LowIndexView" />
+                        <input type="text" class="textInput2 autoNumeric" id="LowIndexView" />
                         <%=Html.HiddenFor(m => m.Test.LowIndex)%>
                     </div>
-
                     <div class="Column">
                         <label class="lbTitle">
                             <%=Resources.TestStrings.TestCreate_HighIndex%></label>
                     </div>
                     <div class="Column">
-                        <input type="text" class = "textInput2 autoNumeric" id="HighIndexView" />
+                        <input type="text" class="textInput2 autoNumeric" id="HighIndexView" />
                         <%=Html.HiddenFor(m => m.Test.HighIndex)%>
                     </div>
                     <div class="clear">
@@ -165,13 +179,13 @@
                     <div class="clear">
                     </div>
                 </div>
-                 <div class="Row">
+                <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
                             <%=Resources.TestStrings.TestCreate_Cost%></label>
                     </div>
                     <div class="Column">
-                        <input type="text" class = "textInput autoNumeric" id="TestCostView" />
+                        <input type="text" class="textInput autoNumeric" id="TestCostView" />
                         <%=Html.HiddenFor(m => m.Test.Cost)%>
                     </div>
                     <div class="clear">
@@ -190,12 +204,10 @@
                 </div>
             </div>
         </div>
-        
-        <div align="center"> 
-            <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>"/>
+        <div align="center">
+            <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" />
             <input type="submit" value="<%=Resources.TestStrings.TestCreate_New%>" />
         </div>
     </div>
 </div>
-
 <% Html.EndForm(); %>
