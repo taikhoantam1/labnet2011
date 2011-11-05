@@ -31,9 +31,9 @@ namespace DataRepository
 
         #region Test
         Test GetTest(int testId);
-        void InsertTest(Test test);
-        void UpdateTest(int id, Test test);
-        void DeleteTest(int testId);
+        void TestInsert(Test test);
+        void TestUpdate(int id, Test test);
+        void TestDelete(int testId);
         List<Test> GetTestByTestSectionId(int testSectionId);
         #endregion
 
