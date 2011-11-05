@@ -3,6 +3,7 @@
 <script type="text/javascript">
 
     $(function () {
+        var justSelectValue = true;
         $("input#Test_TestSectionName").autocomplete({
             source: function (request, response) {
                 $.ajax({
@@ -17,20 +18,24 @@
             },
             select: function (event, ui) {
                 $("input#Test_TestSectionId").val(ui.item.id);
+                justSelectValue = true;
             }
             //,selectFirst: true
-        }).live('keydown', function (e) {
-            var keyCode = e.keyCode || e.which;
-
-            //if TAB or RETURN is pressed and the text in the textbox does not match a suggestion, set the value of the textbox to the text of the first suggestion
-            if ((keyCode == 9)) {
-                $("input#Test_TestSectionName").val($(".ui-autocomplete li:visible:first a").text());
-              //  alert($(".ui-autocomplete li:visible:first a").text());
-            }
-        }).live('blur', function (e) {
-            
-                $("input#Test_TestSectionName").val($(".ui-autocomplete li:visible:first a").text());
         });
+        //        .live('keydown', function (e) {
+        //            var keyCode = e.keyCode || e.which;
+        //            //if TAB or RETURN is pressed and the text in the textbox does not match a suggestion, set the value of the textbox to the text of the first suggestion
+        //            //alert(justSelectValue);
+        //            if ((keyCode == 9) && !justSelectValue) {
+        //                $("input#Test_TestSectionName").val($(".ui-autocomplete li:visible:first a").text());
+        //                //  alert($(".ui-autocomplete li:visible:first a").text());
+        //            }
+        //            else {
+        //                justSelectValue = false;
+        //            }
+        //        }).live('blur', function (e) {
+        //            $("input#Test_TestSectionName").val($(".ui-autocomplete li:visible:first a").text());
+        //        });
 
         $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: false, wEmpty: 'empty' });
 
