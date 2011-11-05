@@ -33,19 +33,19 @@
                 if ( !valid ) {
                     // remove invalid value, as it didn't match anything
                     $( this ).val( "" );
+                    $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val("");
                     return false;
                 }
             }
         });
     <%}%>
     <%else {%>
-        $.data($("#<%= Model.AutoCompleteId %>"),'<%=Model.JsonData %>');
-        var availableTags =<%=Model.JsonData %>;
+        var autoCompleteData =<%=Model.JsonData %>;
         $("#<%= Model.AutoCompleteId %> .autoCompleteText").autocomplete({
             source: function (req, responseFn) {
                             var re = $.ui.autocomplete.escapeRegex($.fn.nomalizeString(req.term));
                             var matcher = new RegExp( "^" + re, "i" );
-                            var a = $.map( availableTags, function(item,index){
+                            var a = $.map( autoCompleteData, function(item,index){
                                var label=$.fn.nomalizeString(item.Label);
                                 if(matcher.test(label))
                                     return { label: item.Label, id: item.Value }
@@ -70,6 +70,7 @@
                 if ( !valid ) {
                     // remove invalid value, as it didn't match anything
                     $( this ).val( "" );
+                    $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val("");
                     return false;
                 }
                    
