@@ -1,8 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.TestViewModel>" %>
-<link href="../../Content/Lib/jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
-<script type="text/javascript" src="../../Content/Lib/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="../../Content/Lib/jquery/jquery-ui.min.js"></script>
 <script type="text/javascript">
 
      $(function () {
@@ -22,6 +19,7 @@
                  $("input#Test_TestSectionId").val(ui.item.id);
              }
          });
+         $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: 'false', wEmpty: 'empty' });
      });
   </script>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
@@ -89,7 +87,7 @@
                             <%=Resources.TestStrings.TestCreate_LowIndex%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.LowIndex, new { Class = "textInput2" })%>
+                        <%=Html.TextBoxFor(m => m.Test.LowIndex, new { Class = "textInput2 autoNumeric" })%>
                     </div>
 
                     <div class="Column">
@@ -97,7 +95,7 @@
                             <%=Resources.TestStrings.TestCreate_HighIndex%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.HighIndex, new { Class = "textInput2" })%>
+                        <%=Html.TextBoxFor(m => m.Test.HighIndex, new { Class = "textInput2 autoNumeric" })%>
                     </div>
                     <div class="clear">
                     </div>
@@ -154,7 +152,7 @@
                             <%=Resources.TestStrings.TestCreate_Cost%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.Cost, new { Class = "textInput number" })%>
+                        <%=Html.TextBoxFor(m => m.Test.Cost, new { Class = "textInput autoNumeric" })%>
                     </div>
                     <div class="clear">
                     </div>

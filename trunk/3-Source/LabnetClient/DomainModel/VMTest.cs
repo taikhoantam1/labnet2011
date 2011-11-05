@@ -20,12 +20,12 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets low index of test
         /// </summary>
-        public float LowIndex { get; set; }
+        public float? LowIndex { get; set; }
 
         /// <summary>
         /// Sets or gets high index of test
         /// </summary>
-        public float HighIndex { get; set; }
+        public float? HighIndex { get; set; }
 
         /// <summary>
         /// Sets or gets test's unit
