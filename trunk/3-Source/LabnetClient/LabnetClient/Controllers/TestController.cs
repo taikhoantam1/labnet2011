@@ -36,8 +36,8 @@ namespace LabnetClient.Controllers
         public JsonResult FindTestSectionNames(string searchText)
         {
             List<TestSection> lstResult = Repository.GetTestSectionByName(searchText);
-
-            return Json(lstResult);
+            var result = lstResult.Select(p => new {Name=p.Name,Id=p.Id  });
+            return Json(result);
         }
 
         //
@@ -56,7 +56,7 @@ namespace LabnetClient.Controllers
         // POST: /Test/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(TestViewModel model)
         {
             try
             {
