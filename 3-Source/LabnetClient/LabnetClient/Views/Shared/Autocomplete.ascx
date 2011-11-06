@@ -8,7 +8,11 @@
                     url: "<%=Model.ActionLink %>", 
                     type: "POST", 
                     dataType: "json",
-                    data: { searchText: request.term },
+                    data: { 
+                            searchText: request.term ,
+                            searchType:"word"
+                            //searchType:"contains"
+                        },
                     success: function (data) {
                         response($.map(data, function (item) {
                                 return { label: item.Label, id: item.Value }
@@ -48,7 +52,8 @@
         $("#<%= Model.AutoCompleteId %> .autoCompleteText").autocomplete({
             source: function (req, responseFn) {
                             var re = $.ui.autocomplete.escapeRegex($.fn.nomalizeString(req.term));
-                            var matcher = new RegExp( "^" + re, "i" );
+                           // var matcher = new RegExp( "[*]?" + re, "i" ); // Search contains
+                            var matcher = new RegExp( "^" + re, "i" );//Search by word
                             var a = $.map( autoCompleteData, function(item,index){
                                var label=$.fn.nomalizeString(item.Label);
                                 if(matcher.test(label))

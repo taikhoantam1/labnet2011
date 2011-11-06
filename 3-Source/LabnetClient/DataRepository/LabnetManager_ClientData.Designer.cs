@@ -652,7 +652,8 @@ namespace DataRepository
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="filterText">No Metadata Documentation available.</param>
-        public ObjectResult<SearchTestSection_Result> SearchTestSection(global::System.String filterText)
+        /// <param name="searchType">No Metadata Documentation available.</param>
+        public ObjectResult<SearchTestSection_Result> SearchTestSection(global::System.String filterText, global::System.String searchType)
         {
             ObjectParameter filterTextParameter;
             if (filterText != null)
@@ -664,7 +665,17 @@ namespace DataRepository
                 filterTextParameter = new ObjectParameter("FilterText", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction<SearchTestSection_Result>("SearchTestSection", filterTextParameter);
+            ObjectParameter searchTypeParameter;
+            if (searchType != null)
+            {
+                searchTypeParameter = new ObjectParameter("SearchType", searchType);
+            }
+            else
+            {
+                searchTypeParameter = new ObjectParameter("SearchType", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<SearchTestSection_Result>("SearchTestSection", filterTextParameter, searchTypeParameter);
         }
 
         #endregion
@@ -1733,6 +1744,30 @@ namespace DataRepository
         private Nullable<global::System.Double> _Commission;
         partial void OnCommissionChanging(Nullable<global::System.Double> value);
         partial void OnCommissionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BankAccountNumber
+        {
+            get
+            {
+                return _BankAccountNumber;
+            }
+            set
+            {
+                OnBankAccountNumberChanging(value);
+                ReportPropertyChanging("BankAccountNumber");
+                _BankAccountNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BankAccountNumber");
+                OnBankAccountNumberChanged();
+            }
+        }
+        private global::System.String _BankAccountNumber;
+        partial void OnBankAccountNumberChanging(global::System.String value);
+        partial void OnBankAccountNumberChanged();
 
         #endregion
     
@@ -1782,7 +1817,8 @@ namespace DataRepository
         /// <param name="receivedDate">Initial value of the ReceivedDate property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="status">Initial value of the Status property.</param>
-        public static LabPatientManagement CreateLabPatientManagement(global::System.Int32 id, global::System.Int32 patientId, global::System.String testIdentifierNumber, global::System.DateTime receivedDate, global::System.Int32 createdBy, global::System.Int32 status)
+        /// <param name="orderNumber">Initial value of the OrderNumber property.</param>
+        public static LabPatientManagement CreateLabPatientManagement(global::System.Int32 id, global::System.Int32 patientId, global::System.String testIdentifierNumber, global::System.DateTime receivedDate, global::System.Int32 createdBy, global::System.Int32 status, global::System.Int32 orderNumber)
         {
             LabPatientManagement labPatientManagement = new LabPatientManagement();
             labPatientManagement.Id = id;
@@ -1791,6 +1827,7 @@ namespace DataRepository
             labPatientManagement.ReceivedDate = receivedDate;
             labPatientManagement.CreatedBy = createdBy;
             labPatientManagement.Status = status;
+            labPatientManagement.OrderNumber = orderNumber;
             return labPatientManagement;
         }
 
@@ -2087,6 +2124,30 @@ namespace DataRepository
         private global::System.Int32 _Status;
         partial void OnStatusChanging(global::System.Int32 value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrderNumber
+        {
+            get
+            {
+                return _OrderNumber;
+            }
+            set
+            {
+                OnOrderNumberChanging(value);
+                ReportPropertyChanging("OrderNumber");
+                _OrderNumber = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrderNumber");
+                OnOrderNumberChanged();
+            }
+        }
+        private global::System.Int32 _OrderNumber;
+        partial void OnOrderNumberChanging(global::System.Int32 value);
+        partial void OnOrderNumberChanged();
 
         #endregion
     
@@ -3041,6 +3102,30 @@ namespace DataRepository
         private global::System.String _Note;
         partial void OnNoteChanging(global::System.String value);
         partial void OnNoteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BankAccountNumber
+        {
+            get
+            {
+                return _BankAccountNumber;
+            }
+            set
+            {
+                OnBankAccountNumberChanging(value);
+                ReportPropertyChanging("BankAccountNumber");
+                _BankAccountNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BankAccountNumber");
+                OnBankAccountNumberChanged();
+            }
+        }
+        private global::System.String _BankAccountNumber;
+        partial void OnBankAccountNumberChanging(global::System.String value);
+        partial void OnBankAccountNumberChanged();
 
         #endregion
     

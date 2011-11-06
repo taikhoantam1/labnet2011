@@ -16,5 +16,5 @@ jQuery.fn.nomalizeString = function (str) {
         var re = new RegExp(pattern.Regex, "g");
         str = str.replace(re, pattern.Value);
     }
-    return str;
+    return str.toUpperCase();
 }

@@ -63,7 +63,7 @@ namespace DataRepository
         #endregion
 
         #region TestSection
-        object GetTestSectionByName(string name);
+        object GetTestSectionByName(string name,string searchType);
         #endregion
     }
 }

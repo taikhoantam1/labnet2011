@@ -45,10 +45,6 @@
             <End Role="PatientType" EntitySet="PatientType" />
             <End Role="LabPatientManagement" EntitySet="LabPatientManagement" />
           </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_Payment" Association="LabManager_ClientModel.Store.FK_LabPatientManagement_Payment">
-            <End Role="PaymentType" EntitySet="PaymentType" />
-            <End Role="LabPatientManagement" EntitySet="LabPatientManagement" />
-          </AssociationSet>
           <AssociationSet Name="FK_LabPatientManagement_Project" Association="LabManager_ClientModel.Store.FK_LabPatientManagement_Project">
             <End Role="Project" EntitySet="Project" />
             <End Role="LabPatientManagement" EntitySet="LabPatientManagement" />
@@ -165,6 +161,7 @@
           <Property Name="Other" Type="nvarchar" MaxLength="100" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
           <Property Name="Commission" Type="float" />
+          <Property Name="BankAccountNumber" Type="char" MaxLength="50" />
         </EntityType>
         <EntityType Name="LabPatientManagement">
           <Key>
@@ -172,7 +169,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="PatientId" Type="int" Nullable="false" />
-          <Property Name="TestIdentifierNumber" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TestIdentifierNumber" Type="nvarchar" Nullable="false" MaxLength="7" />
           <Property Name="Diagnosis" Type="nvarchar" MaxLength="500" />
           <Property Name="ReceivedDate" Type="datetime" Nullable="false" />
           <Property Name="EnteredDate" Type="datetime" />
@@ -182,6 +179,7 @@
           <Property Name="ProjectId" Type="int" />
           <Property Name="DepartmentId" Type="int" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Panel">
           <Key>
@@ -220,6 +218,7 @@
           <Property Name="Logo" Type="nvarchar" MaxLength="200" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="500" />
+          <Property Name="BankAccountNumber" Type="char" MaxLength="50" />
         </EntityType>
         <EntityType Name="PartnerCost">
           <Key>
@@ -446,18 +445,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LabPatientManagement_Payment">
-          <End Role="PaymentType" Type="LabManager_ClientModel.Store.PaymentType" Multiplicity="0..1" />
-          <End Role="LabPatientManagement" Type="LabManager_ClientModel.Store.LabPatientManagement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaymentType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabPatientManagement">
-              <PropertyRef Name="PaymentTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_LabPatientManagement_Project">
           <End Role="Project" Type="LabManager_ClientModel.Store.Project" Multiplicity="0..1" />
           <End Role="LabPatientManagement" Type="LabManager_ClientModel.Store.LabPatientManagement" Multiplicity="*" />
@@ -655,6 +642,7 @@
         </Function>
         <Function Name="sp_SearchTestSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
+          <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -769,7 +757,8 @@
             <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
           <FunctionImport Name="SearchTestSection" ReturnType="Collection(LabManager_ClientModel.SearchTestSection_Result)">
-            <Parameter Name="FilterText" Mode="In" Type="String" />
+          <Parameter Name="FilterText" Mode="In" Type="String" />
+            <Parameter Name="SearchType" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Analysis">
@@ -829,6 +818,7 @@
           <Property Name="LastUpdated" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="TestCommissions" Relationship="LabManager_ClientModel.FK_TestCommission_Doctor" FromRole="Doctor" ToRole="TestCommission" />
           <Property Type="Double" Name="Commission" />
+          <Property Type="String" Name="BankAccountNumber" MaxLength="50" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="LabPatientManagement">
           <Key>
@@ -851,6 +841,7 @@
           <NavigationProperty Name="PaymentType" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Payment" FromRole="LabPatientManagement" ToRole="PaymentType" />
           <NavigationProperty Name="Project" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Project" FromRole="LabPatientManagement" ToRole="Project" />
           <NavigationProperty Name="PatientItems" Relationship="LabManager_ClientModel.FK_PatientItem_LabPatientManagement" FromRole="LabPatientManagement" ToRole="PatientItem" />
+          <Property Type="Int32" Name="OrderNumber" Nullable="false" />
         </EntityType>
         <EntityType Name="Panel">
           <Key>
@@ -1238,6 +1229,7 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="String" Name="Note" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PartnerCosts" Relationship="LabManager_ClientModel.FK_PartnerCost_Partner" FromRole="Partner" ToRole="PartnerCost" />
+          <Property Type="String" Name="BankAccountNumber" MaxLength="50" FixedLength="true" Unicode="false" />
         </EntityType>
         <Association Name="FK_PartnerCost_Partner">
           <End Type="LabManager_ClientModel.Partner" Role="Partner" Multiplicity="1" />
@@ -1384,7 +1376,8 @@
             <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Doctors"><EntityTypeMapping TypeName="LabManager_ClientModel.Doctor"><MappingFragment StoreEntitySet="Doctor">
-            <ScalarProperty Name="Commission" ColumnName="Commission" />
+            <ScalarProperty Name="BankAccountNumber" ColumnName="BankAccountNumber" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="ShortName" ColumnName="ShortName" />
@@ -1402,7 +1395,8 @@
             <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="LabPatientManagements"><EntityTypeMapping TypeName="LabManager_ClientModel.LabPatientManagement"><MappingFragment StoreEntitySet="LabPatientManagement">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="PatientId" ColumnName="PatientId" />
             <ScalarProperty Name="TestIdentifierNumber" ColumnName="TestIdentifierNumber" />
             <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
@@ -1552,6 +1546,7 @@
           <EntitySetMapping Name="Partners">
             <EntityTypeMapping TypeName="LabManager_ClientModel.Partner">
               <MappingFragment StoreEntitySet="Partner">
+                <ScalarProperty Name="BankAccountNumber" ColumnName="BankAccountNumber" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Logo" ColumnName="Logo" />

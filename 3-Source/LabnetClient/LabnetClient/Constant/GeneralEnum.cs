@@ -11,4 +11,9 @@ namespace LabnetClient.Constant
         Edit=2,
         Detail=3,
     }
+    public enum SearchTypeEnum
+    {
+        Contains,
+        Word,
+    }
 }
