@@ -73,7 +73,7 @@
         </th>
         <th class="textSearch125" align="center"></th>
     </tr>
-    <%foreach (var test in ViewData.Model.TestSearch.ObjSearchResult)
+    <%foreach (DomainModel.TestSearchObject test in ViewData.Model.TestSearch.ObjSearchResult)
       { %>
          <tr valign="middle">
             <th class="textSearch150" align="center">
