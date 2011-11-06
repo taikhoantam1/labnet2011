@@ -123,6 +123,21 @@ namespace DataRepository
             }
             return isValid;
         }
+
+        public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName)
+        {
+            List<SearchTest_Result> lstTestSearch= new List<SearchTest_Result>();
+            if(!string.IsNullOrEmpty(testSectionName) && string.IsNullOrEmpty(panelName))
+            {
+                lstTestSearch = myDb.SearchTest(testName.ToUpper(), testSectionName.ToUpper(), "").ToList();
+            }
+            if (string.IsNullOrEmpty(testSectionName) && string.IsNullOrEmpty(panelName))
+            {
+                lstTestSearch = myDb.SearchTest(testName.ToUpper(), "", "").ToList();
+            }
+
+            return lstTestSearch;
+        }
         #endregion Test
 
         #region Panel
@@ -271,6 +286,13 @@ namespace DataRepository
             name = name.ToUpper();
             List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name,searchType.ToUpper()).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
+        }
+
+        public TestSection GetTestSection(int testSectionId)
+        {
+            TestSection testSection = (from _testSection in myDb.TestSections where _testSection.Id == testSectionId select _testSection).First();
+            myDb.SaveChanges();
+            return testSection;
         }
         #endregion
     }

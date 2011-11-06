@@ -139,6 +139,7 @@
     <Compile Include="Models\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\PartnerViewModel.cs" />
+    <Compile Include="Models\TestSearctViewModel.cs" />
     <Compile Include="Models\TestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -594,6 +595,8 @@
     <Content Include="Views\Partner\Details.ascx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Test\Create.ascx" />
+    <Content Include="Views\Test\Edit.aspx" />
+    <Content Include="Views\Test\Search.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

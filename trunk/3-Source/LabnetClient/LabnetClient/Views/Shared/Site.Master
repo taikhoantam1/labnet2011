@@ -51,7 +51,7 @@
                             <%= Resources.GlobalStrings.Menu_CreateTest %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/Test/Search/">
                             <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>

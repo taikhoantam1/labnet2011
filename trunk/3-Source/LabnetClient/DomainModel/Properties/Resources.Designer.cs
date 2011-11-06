@@ -104,5 +104,14 @@ namespace DomainModel.Properties {
                 return ResourceManager.GetString("VMTest_TestSectionNameRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập tên XN.
+        /// </summary>
+        internal static string VMTestSearch_NameRequired {
+            get {
+                return ResourceManager.GetString("VMTestSearch_NameRequired", resourceCulture);
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.TestViewModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<LabnetClient.Models.TestViewModel>" %>
+
+<asp:Content ID="Content4" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
 
@@ -24,32 +26,21 @@
             $("#Test_HighIndex").val(cost);
         });
 
-        $('#reloadPage').click(function () {
-            //alert('Handler for .click() called.');
-            var allInputs = $(":input");
-            for (var i = 0; i < allInputs.length; i++) {
+        var lowIndex = $("#Test_LowIndex").val();
+        lowIndex = lowIndex.replace(",", ".");
+        $("#LowIndexView").val(lowIndex);
 
-                if (allInputs[i].id == "Test_IsActive" || allInputs[i].id == "save" 
-                    || allInputs[i].id == "reloadPage" || allInputs[i].id == "Test_SortOrder") {
-                    //do nothing
-                }
-                else {
-                    //alert(allInputs[i].value);
-                    allInputs[i].value = "";
-                }
-            }
-        });
+        var highIndex = $("#Test_HighIndex").val();
+        highIndex = highIndex.replace(",", ".");
+        $("#HighIndexView").val(highIndex);
+
+        var testCost = $("#Test_Cost").val();
+        testCost = testCost.replace(",", ".");
+        $("#TestCostView").val(testCost);
     });
 </script>
 <%=Html.ValidationSummary() %>
-<%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
-  {%>
-<% Html.BeginForm("Create", "Test");%>
-<%}
-  else
-  { %>
 <% Html.BeginForm("Edit", "Test"); %>
-<%} %>
 <%= Html.HiddenFor(m=>m.Test.Id) %>
 <div class="Module">
     <div class="ModuleTitle">
@@ -107,7 +98,7 @@
                     </div>
                     <div class="Column">
                         <input type="text" class="textInput2 autoNumeric" id="LowIndexView" />
-                        <%=Html.HiddenFor(m => m.Test.LowIndex)%>
+                         <%=Html.HiddenFor(m => m.Test.LowIndex)%>
                     </div>
                     <div class="Column">
                         <label class="lbTitle">
@@ -115,7 +106,7 @@
                     </div>
                     <div class="Column">
                         <input type="text" class="textInput2 autoNumeric" id="HighIndexView" />
-                        <%=Html.HiddenFor(m => m.Test.HighIndex)%>
+                         <%=Html.HiddenFor(m => m.Test.HighIndex)%>
                     </div>
                     <div class="clear">
                     </div>
@@ -173,7 +164,7 @@
                     </div>
                     <div class="Column">
                         <input type="text" class="textInput autoNumeric" id="TestCostView" />
-                        <%=Html.HiddenFor(m => m.Test.Cost)%>
+                         <%=Html.HiddenFor(m => m.Test.Cost)%>
                     </div>
                     <div class="clear">
                     </div>
@@ -192,9 +183,25 @@
             </div>
         </div>
         <div align="center">
-            <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" id="save" />
-            <input type="button" value="<%=Resources.TestStrings.TestCreate_New%>" id="reloadPage" />
+            <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" />
         </div>
     </div>
 </div>
 <% Html.EndForm(); %>
+
+<script type="text/javascript">
+    $(function () {
+        var lowIndexHidden = $("#Test_LowIndex").val();
+        lowIndexHidden = lowIndexHidden.replace(',', '.');
+        $("#Test_LowIndex").val(lowIndexHidden);
+
+        var highIndexHidden = $("#Test_HighIndex").val();
+        highIndexHidden = highIndexHidden.replace(',', '.');
+        $("#Test_HighIndex").val(highIndexHidden);
+
+        var costHidden = $("#Test_Cost").val();
+        costHidden = costHidden.replace(',', '.');
+        $("#Test_Cost").val(costHidden);
+    });
+</script>
+</asp:Content>
