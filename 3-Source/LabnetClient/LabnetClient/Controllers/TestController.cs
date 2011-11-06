@@ -168,6 +168,7 @@ namespace LabnetClient.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.TestSearch.ObjSearchResult = new List<TestSearchObject>();
                 return View("Search", model);
             }
 
