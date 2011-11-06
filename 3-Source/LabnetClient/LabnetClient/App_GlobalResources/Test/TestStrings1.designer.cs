@@ -205,6 +205,78 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cập nhật.
+        /// </summary>
+        internal static string TestSearch_Edit {
+            get {
+                return ResourceManager.GetString("TestSearch_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Panel.
+        /// </summary>
+        internal static string TestSearch_PanelName {
+            get {
+                return ResourceManager.GetString("TestSearch_PanelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm.
+        /// </summary>
+        internal static string TestSearch_Search {
+            get {
+                return ResourceManager.GetString("TestSearch_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên XN.
+        /// </summary>
+        internal static string TestSearch_TestName {
+            get {
+                return ResourceManager.GetString("TestSearch_TestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSBT.
+        /// </summary>
+        internal static string TestSearch_TestRange {
+            get {
+                return ResourceManager.GetString("TestSearch_TestRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm XN.
+        /// </summary>
+        internal static string TestSearch_TestSectionName {
+            get {
+                return ResourceManager.GetString("TestSearch_TestSectionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đơn vị.
+        /// </summary>
+        internal static string TestSearch_TestUnit {
+            get {
+                return ResourceManager.GetString("TestSearch_TestUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm Xét Nghiệm.
+        /// </summary>
+        internal static string TestSearch_Title {
+            get {
+                return ResourceManager.GetString("TestSearch_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xét nghiệm này đã tồn tại..
         /// </summary>
         internal static string Test_Create_NameError {

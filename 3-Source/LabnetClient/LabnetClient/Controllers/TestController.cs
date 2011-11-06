@@ -80,7 +80,8 @@ namespace LabnetClient.Controllers
 
             Test test = Mapper.Map<VMTest, Test>(model.Test);
             Repository.TestInsert(test);
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Create", "Test");
         }
         
         //
@@ -88,25 +89,42 @@ namespace LabnetClient.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            TestViewModel model = new TestViewModel();
+            Test test = Repository.GetTest(id);
+            TestSection testSection = test.TestSection;
+            model.Test = Mapper.Map<Test, VMTest>(test);
+            model.ViewMode = ViewMode.Edit;
+            model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.Autocomplete.SelectedText = testSection.Name;
+            model.Autocomplete.SelectedValue = testSection.Id.ToString();
+
+            return View("Edit", model);
         }
 
         //
         // POST: /Test/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(TestViewModel model)
         {
-            try
+            if ((model.Test.LowIndex == null && model.Test.HighIndex != null)
+                || (model.Test.LowIndex != null && model.Test.HighIndex == null))
             {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
+                ModelState.AddModelError("Low and High are not valid", Resources.TestStrings.TestCreate_IndexError);
             }
-            catch
+
+            if (!ModelState.IsValid)
             {
-                return View();
+                model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson(); ;
+                return View("Create", model);
             }
+
+            Test test = Mapper.Map<VMTest, Test>(model.Test);
+            Repository.TestUpdate(model.Test.Id, test);
+
+            TestSearctViewModel modelSearch = new TestSearctViewModel();
+            modelSearch.TestSearch.TestName = model.Test.Name;
+            return RedirectToAction("Search", "Test");
         }
 
         //
@@ -133,6 +151,42 @@ namespace LabnetClient.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Search()
+        {
+            TestSearctViewModel model = new TestSearctViewModel();
+            model.TestSearch.ObjSearchResult = new List<TestSearchObject>();
+            return View("Search", model);
+        }
+
+        //
+        // POST: /Test/Search
+
+        [HttpPost]
+        public ActionResult Search(TestSearctViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Search", model);
+            }
+
+            List<SearchTest_Result> lstResult = Repository.TestSearch(model.TestSearch.TestName, model.TestSearch.TestSectionName, model.TestSearch.PanelName);
+            model.TestSearch.ObjSearchResult = new List<TestSearchObject>();
+            
+            foreach (SearchTest_Result item in lstResult)
+            {
+                TestSearchObject obj = new TestSearchObject();
+                obj.TestId = item.Id;
+                obj.TestName = item.TestName;
+                obj.TestSectionName = item.TestSectionName;
+                obj.TestRange = item.Range;
+                obj.TestUnit = item.Unit;
+                model.TestSearch.ObjSearchResult.Add(obj);
+            }
+
+            return View("Search", model);
+            //return RedirectToAction("Index");
         }
     }
 }

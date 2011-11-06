@@ -36,6 +36,7 @@ namespace DataRepository
         void TestDelete(int testId);
         List<Test> GetTestByTestSectionId(int testSectionId);
         bool IsValidTest(string testName);
+        List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName);
         #endregion
 
         #region Panel
@@ -64,6 +65,7 @@ namespace DataRepository
 
         #region TestSection
         object GetTestSectionByName(string name,string searchType);
+        TestSection GetTestSection(int testSectionId);
         #endregion
     }
 }

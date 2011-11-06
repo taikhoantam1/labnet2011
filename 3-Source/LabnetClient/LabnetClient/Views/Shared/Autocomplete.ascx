@@ -94,7 +94,7 @@
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
-    <input type="text" class="autoCompleteText <%= Model.CustomeCss %>" value="<%= Model.SelectedText %>" />
+    <input type="text" class="autoCompleteText <%= Model.CustomeCss %> textInput220" value="<%= Model.SelectedText %>" />
     <input type="hidden" class="autoCompleteValue <%= Model.CustomeCss %>" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
 
     <input type="hidden" class="autoCompleteValue <%= Model.CustomeCss %>" id="<%= Model.AutoCompleteId %>_SelectedValue" value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
