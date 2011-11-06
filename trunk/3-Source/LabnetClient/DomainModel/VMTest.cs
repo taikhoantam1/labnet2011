@@ -64,6 +64,7 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets test section id that test belongs
         /// </summary>
+        [Required(ErrorMessageResourceName = "VMTest_TestSectionNameRequired", ErrorMessageResourceType = typeof(Resources))]
         public int TestSectionId { get; set; }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace DomainModel
         /// <summary>
         /// Gets or sets Department Name that test belongs to
         /// </summary>
-        [Required(ErrorMessageResourceName = "VMTest_TestSectionNameRequired", ErrorMessageResourceType = typeof(Resources))]
+       
         public string TestSectionName { get; set; }
 
         /// <summary>

@@ -52,7 +52,7 @@ namespace LabnetClient.Models
         public string JsonData { get; set; }
 
         /// <summary>
-        /// 
+        /// Gets or sets selected value 
         /// </summary>
         public string SelectedValue { get; set; }
 

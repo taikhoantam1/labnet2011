@@ -3,25 +3,6 @@
 <script type="text/javascript">
 
     $(function () {
-        //        var justSelectValue = true;
-        //        $("input#Test_TestSectionName").autocomplete({
-        //            source: function (request, response) {
-        //                $.ajax({
-        //                    url: "/Test/FindTestSectionNames", type: "POST", dataType: "json",
-        //                    data: { searchText: request.term },
-        //                    success: function (data) {
-        //                        response($.map(data, function (item) {
-        //                            return { value: item.Name, id: item.Id }
-        //                        }))
-        //                    }
-        //                })
-        //            },
-        //            select: function (event, ui) {
-        //                $("input#Test_TestSectionId").val(ui.item.id);
-        //                justSelectValue = true;
-        //            }
-        //            //,selectFirst: true
-        //        });
 
         $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: false, wEmpty: 'empty' });
 
@@ -87,8 +68,6 @@
                             <%=Resources.TestStrings.TestCreate_TestSection%></label>
                     </div>
                     <div class="Column">
-                       <%-- <%=Html.TextBoxFor(m => m.Test.TestSectionName, new { id="Test_TestSectionName", Class = "textInput220" })%>
-                        <%=Html.HiddenFor(m => m.Test.TestSectionId) %>--%>
                         <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
                     </div>
                     <div class="clear">

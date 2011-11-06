@@ -36,9 +36,9 @@ namespace LabnetClient.Controllers
         /// <param name="searchText"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult FindTestSectionNames(string searchText)
+        public JsonResult FindTestSectionNames(string searchText,string searchType)
         {
-            var result =Repository.GetTestSectionByName(searchText);
+            var result = Repository.GetTestSectionByName(searchText, searchType);
             return Json(result);
         }
 
@@ -49,7 +49,9 @@ namespace LabnetClient.Controllers
         {
             TestViewModel model = new TestViewModel();
             model.ViewMode = ViewMode.Create;
-            model.Autocomplete.JsonData = Repository.GetTestSectionByName("").ToJson();
+            model.Autocomplete.JsonData = Repository.GetTestSectionByName("",SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            //model.Autocomplete.IsAjaxLoading = true;
+            //model.Autocomplete.ActionLink = "/Test/FindTestSectionNames";
             return View("Create", model);
         } 
 
@@ -72,7 +74,7 @@ namespace LabnetClient.Controllers
 
             if (!ModelState.IsValid)
             {
-                model.Autocomplete.JsonData = Repository.GetTestSectionByName("").ToJson(); ;
+                model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson(); ;
                 return View("Create", model);
             }
 
