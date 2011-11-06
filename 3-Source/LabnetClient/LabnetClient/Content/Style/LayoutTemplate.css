@@ -156,7 +156,9 @@
     background-color:Silver;
     vertical-align:middle;
     font-weight:bold;
-    color:Blue;    
+    color:Blue;
+    border:1px;
+    border-style:solid;
 }
 
 .textSearch125
@@ -166,5 +168,7 @@
     background-color:Silver;
     vertical-align:middle;
     font-weight:bold;
-    color:Blue;    
+    color:Blue;
+    border:1px;
+    border-style:solid;
 }

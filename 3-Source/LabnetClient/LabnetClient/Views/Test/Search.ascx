@@ -53,8 +53,9 @@
         </div>
     </div>
 </div>
-<table border="1" width="765px" style="border-color:Black">
-    <tr valign="middle" style="border-color:Black; height:20px; border:1">
+<div>
+<table width="765px">
+    <tr valign="middle">
         <th class="textSearch150" align="center">
             <%=Resources.TestStrings.TestSearch_TestName %>
         </th>
@@ -74,7 +75,7 @@
     </tr>
     <%foreach (var test in ViewData.Model.TestSearch.ObjSearchResult)
       { %>
-         <tr valign="middle" style="border-color:Black; height:20px">
+         <tr valign="middle">
             <th class="textSearch150" align="center">
                 <%=test.TestName %>
             </th>
@@ -96,4 +97,5 @@
          </tr>   
     <%} %>
 </table>
+</div>
 <% Html.EndForm(); %>
