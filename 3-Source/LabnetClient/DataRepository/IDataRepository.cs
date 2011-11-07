@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DomainModel;
 
 namespace DataRepository
 {
@@ -27,6 +28,13 @@ namespace DataRepository
         /// <param name="id"></param>
         /// <param name="partner"></param>
         void PartnerUpdate(int id, Partner partner);
+
+        /// <summary>
+        /// Gets list test of partner
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<VMTestListItem> GetPartnerTest(int id);
         #endregion
 
         #region Test

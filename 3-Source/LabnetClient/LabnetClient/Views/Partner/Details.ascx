@@ -1,34 +1,61 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PartnerViewModel>" %>
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        function ListArticleCommand(com, grid) {   
-         
-        }
+    function CheckAllowAddTest()
+    {
+        //Todo: Kiểm tra 
+        //1:Không chọn test mà nhấn thêm
+        //2:Chọn test đã tồn tại trong list
+        //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
+    }
+    $(document).ready(function () {
+        var index =<%=Model.PartnerTestList.Count %>;
+        BindCheckBoxDeleteTest();
         $("#autocompleteSelectTest .autoCompleteText").blur(function(){
-          
              $("#txtCost").val($("#autocompleteSelectTest .autoCompleteTag").val());
+         
+         });
+
+        $("#btnAddTest").click(function () {
+            alert("add");
+            var newTr = $("#tblPartnerCostHiden tr").clone();
+            var testName=$("#autocompleteSelectTest .autoCompleteText").val();
+            var cost=$("#autocompleteSelectTest .autoCompleteTag").val();
+            var testId=$("#autocompleteSelectTest .autoCompleteValue").val();
+
+            $(newTr).find(".TestNameField").html(testName);
+            $(newTr).find(".TestCostField").html(cost);
+
+            $(newTr).find(".TestName").val(testName).attr("name","PartnerTestList["+index+"].TestName");
+            $(newTr).find(".TestId").val(testId).attr("name","PartnerTestList["+index+"].TesstId");
+            $(newTr).find(".Cost").val(cost).attr("name","PartnerTestList["+index+"].Cost");
+            $(newTr).find(".IsDelete").attr("name","PartnerTestList["+index+"].IsDelete");
+            
+
+            $("#tblPartnerCost").append(newTr);
+            BindCheckBoxDeleteTest();
+            index++;
+
         });
+        function BindCheckBoxDeleteTest()
+        {
+        
+            $(".btnDelTest").unbind("click").click(function(){
+                var trParent=$(this).parents("tr.trPartnerCost");
+                if($(this).is(":checked"))
+                {
+                   $(trParent).find(".IsDelete").val("True");
+                }
+                else
+                {
+                    $(trParent).find(".IsDelete").val("False");
+                }
+            });
+        }
     })
-
-     var index = 1;
-     $("#btnAddTest").click(function () {
-         var newTr = $("#tblPartnerCostHiden tr").clone();
-         var fieldA = index;
-         var fieldB = index;
-         var fieldC = index;
-         var fieldD = index;
-         $(newTr).find(".TestNameField").html(fieldA);
-         $(newTr).find(".TestCostField").html(fieldB);
-         $(newTr).find(".btnDelTest").val("Xóa");
-         $(newTr).find(".btnDelTest").click(function () {
-             alert($(this).val());
-         })
-         $("#tblPartnerCost").append(newTr);
-         index++;
-
-     });
+    
 </script>
+
 <% string display = ViewData.ModelState.IsValid ? "none" : "block"; %>
 <div class="errorbox" id="validationSummary" style="display: <%=display%>">
     <span class='errorimage'><span class='errorhead'>Looks like we have a small problem...</span></span>
@@ -194,13 +221,31 @@
                         
                     </th>
                 </tr>
+                <% for(int i=0;i< Model.PartnerTestList.Count;i++)
+                   { %>
+                        <tr class="trPartnerCost">
+                            <td><label class="TestNameField"><%= Model.PartnerTestList[i].TestName %></label>
+                                <%= Html.HiddenFor(p => p.PartnerTestList[i].TestName, new  {@class="TestName" })%>
+                                <%= Html.HiddenFor(p => p.PartnerTestList[i].TesstId, new { @class = "TestId" })%>
+                                <%= Html.HiddenFor(p => p.PartnerTestList[i].Cost, new { @class = "Cost" })%>
+                                <%= Html.HiddenFor(p => p.PartnerTestList[i].IsDelete, new { @class = "IsDelete" })%>
+                            </td>
+                            <td><label class="TestCostField"> <%= Model.PartnerTestList[i].Cost %></label></td>
+                            <td><input type="checkbox" class="btnDelTest" value="Xóa"/></td>
+                        </tr>
+                <%} %>
             </table>
         <div>
-            <table class="hiden" id="tblPartnerCostHiden">
-                <tr>
-                    <td><label class="TestNameField"></label></td>
+            <table class="hide" id="tblPartnerCostHiden">
+                <tr class="trPartnerCost">
+                    <td><label class="TestNameField"></label>
+                        <input type="hidden" class="TestName"/>
+                        <input type="hidden" class="TestId"/>
+                        <input type="hidden" class="Cost"/>
+                        <input type="hidden" class="IsDelete" value="False"/>
+                    </td>
                     <td><label class="TestCostField"></label></td>
-                    <td><input type="button" class="btnDelTest" value="Xóa"/> </td>
+                    <td><input type="checkbox" class="btnDelTest" value="Xóa"/> </td>
                 </tr>
             </table>
         </div>

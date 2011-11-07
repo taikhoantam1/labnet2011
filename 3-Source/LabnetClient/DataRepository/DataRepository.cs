@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using LibraryFuntion;
 using System.Data.Objects.SqlClient;
+using DomainModel;
 namespace DataRepository
 {
     public class Repository : IDataRepository
@@ -29,17 +30,7 @@ namespace DataRepository
         {
             return "";
         }
-        public void PartnerInsert(Partner partner)
-        {
-            myDb.Partners.AddObject(partner);
-            myDb.SaveChanges();
-        }
-        public Partner GetPartnerById(int id)
-        {
-            Partner partner = myDb.Partners.Where(p => p.Id == id).FirstOrDefault();
-            return partner;
-        }
-
+        #region Partner
         public void PartnerUpdate(int id, Partner updateVaule)
         {
 
@@ -56,6 +47,34 @@ namespace DataRepository
 
         }
 
+        public void PartnerInsert(Partner partner)
+        {
+            myDb.Partners.AddObject(partner);
+            myDb.SaveChanges();
+        }
+        public Partner GetPartnerById(int id)
+        {
+            Partner partner = myDb.Partners.Where(p => p.Id == id).FirstOrDefault();
+            return partner;
+        }
+        /// <summary>
+        /// Gets list test of partner
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<VMTestListItem> GetPartnerTest(int id)
+        {
+            Partner partner = GetPartnerById(id);
+            List<VMTestListItem> listTest = partner.PartnerCosts.Select(p => new VMTestListItem
+            {
+                TestName = p.Test.Name,
+                TesstId = p.TestId,
+                Cost = p.Cost
+            }).ToList();
+
+            return listTest;
+        }
+        #endregion
         #region Test
         public Test GetTest(int testId)
         {
@@ -144,7 +163,7 @@ namespace DataRepository
         {
             List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType.ToUpper()).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
-        }
+		}
         #endregion Test
 
         #region Panel
@@ -292,7 +311,7 @@ namespace DataRepository
         {
             name = name.ToUpper();
             List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType.ToUpper()).ToList();
-            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id});
+            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
         }
 
         public TestSection GetTestSection(int testSectionId)

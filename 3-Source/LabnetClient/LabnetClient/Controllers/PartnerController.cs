@@ -81,6 +81,7 @@ namespace LabnetClient.Controllers
             model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
 
             model.Partner = Mapper.Map<Partner, VMPartner>(Repository.GetPartnerById(id));
+            model.PartnerTestList = Repository.GetPartnerTest(id);
             return View("Details", model);
         }
 
@@ -91,7 +92,9 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int id, PartnerViewModel model)
         {
             // TODO: Add update logic here
-            Repository.PartnerUpdate(id, Mapper.Map<VMPartner, Partner>(model.Partner));
+            model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
+            //Repository.PartnerUpdate(id, Mapper.Map<VMPartner, Partner>(model.Partner));
+
             return RedirectToAction("Create");
 
         }
