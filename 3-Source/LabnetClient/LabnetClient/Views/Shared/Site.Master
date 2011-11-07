@@ -11,7 +11,7 @@
     
     <link href="../../Content/Style/reset.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/Style/Site.css" rel="stylesheet" type="text/css" />
-    <link href="../../Content/Lib/jquery-ui-1.8.16/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Content/Lib/jquery-ui-1.8.16/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
     <link href="../../Content/Style/LayoutTemplate.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../Content/Lib/FlexiGrid/flexigrid.css" />
 
