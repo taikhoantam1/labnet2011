@@ -143,7 +143,7 @@ namespace DataRepository
         public object GetTestByName(string name, string searchType)
         {
             List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType.ToUpper()).ToList();
-            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Cost = p.Cost });
+            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
         }
         #endregion Test
 
