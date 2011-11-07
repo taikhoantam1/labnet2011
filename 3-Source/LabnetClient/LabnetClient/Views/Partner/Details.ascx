@@ -5,39 +5,29 @@
         function ListArticleCommand(com, grid) {   
          
         }
-    
-        $("#ListTest").flexigrid
-			        (
-			            {
-			                url: <% Response.Write("'/Ajax/GetListTest?PartnerId=1'"); %>,
-			                dataType: 'json',
-			                colModel: [
-                            { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_TestName %>', name: 'TestName', width: 200, sortable: true, align: 'center', hide: false },
-                            { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_Price %>', name: 'TestPrice', width: 200, sortable: true, align: 'center', hide: false },
-                            { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_Delete %>', name: '', width: 100, sortable: true, align: 'center', hide: false },
-                            
-                            ],
-			                sortname: "TestName",
-			                sortorder: "desc",
-			                usepager: true,
-			                title: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_Title %>',
-			                useRp: true,
-			                rp: 10,
-			                showTableToggleBtn: true,
-			                width:600,
-			                height:300,
-			                singleSelect: true
-			            }
-			        );
-
-                     $('b.top').click
-	                    (
-		                    function() {
-		                        $(this).parent().toggleClass('fh');
-		                    }
-	                    );
+        $("#autocompleteSelectTest .autoCompleteText").blur(function(){
+          
+             $("#txtCost").val($("#autocompleteSelectTest .autoCompleteTag").val());
+        });
     })
-   
+
+     var index = 1;
+     $("#btnAddTest").click(function () {
+         var newTr = $("#tblPartnerCostHiden tr").clone();
+         var fieldA = index;
+         var fieldB = index;
+         var fieldC = index;
+         var fieldD = index;
+         $(newTr).find(".TestNameField").html(fieldA);
+         $(newTr).find(".TestCostField").html(fieldB);
+         $(newTr).find(".btnDelTest").val("Xóa");
+         $(newTr).find(".btnDelTest").click(function () {
+             alert($(this).val());
+         })
+         $("#tblPartnerCost").append(newTr);
+         index++;
+
+     });
 </script>
 <% string display = ViewData.ModelState.IsValid ? "none" : "block"; %>
 <div class="errorbox" id="validationSummary" style="display: <%=display%>">
@@ -168,17 +158,19 @@
                         <%=Resources.PartnerStrings.PartnerInsert_Test %></label>
                 </div>
                 <div class="Column">
+                    <div id="autocompleteSelectTest">
                         <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                    </div>
                 </div>
-                <div class="Column MarginL15">
-                    <label class="lbTitle Width120">
+                <div class="Column MarginL65">
+                    <label class="lbTitle">
                         <%=Resources.PartnerStrings.PartnerInsert_TestPrice%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.Partner.PartnerCostDetails[0].Cost)%>
+                    <input type="text" id="txtCost" class="textInput130 number" />
                 </div>
                 <div class="Colum">
-                    <input type="button" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add%>" />
+                    <input type="button" id="btnAddTest" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add%>" />
                 </div>
                 <div class="clear">
                 </div>
@@ -187,6 +179,30 @@
                 <table id="ListTest">
                 </table>
             </div>
+        </div>
+        <div>
+        </div>
+            <table id="tblPartnerCost" width="765px">
+                <tr>
+                    <th class="textSearch150" align="center">
+                        <%=Resources.PartnerStrings.PartnerInsert_GridColumn_TestName%>
+                    </th>
+                    <th class="textSearch150" align="center">
+                        <%=Resources.PartnerStrings.PartnerInsert_GridColumn_Price%>
+                    </th>
+                    <th class="textSearch150" align="center">
+                        
+                    </th>
+                </tr>
+            </table>
+        <div>
+            <table class="hiden" id="tblPartnerCostHiden">
+                <tr>
+                    <td><label class="TestNameField"></label></td>
+                    <td><label class="TestCostField"></label></td>
+                    <td><input type="button" class="btnDelTest" value="Xóa"/> </td>
+                </tr>
+            </table>
         </div>
         <div>
             <input type="submit" value="save" />

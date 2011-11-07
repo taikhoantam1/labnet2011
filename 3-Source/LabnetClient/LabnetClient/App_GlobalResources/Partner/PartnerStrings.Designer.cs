@@ -214,7 +214,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Giá Xét Nghiệm.
+        ///   Looks up a localized string similar to Giá XN.
         /// </summary>
         internal static string PartnerInsert_TestPrice {
             get {
