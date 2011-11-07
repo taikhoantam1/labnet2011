@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="VMPartner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VMTestListItem.cs" />
     <Compile Include="VMTestSearch.cs" />
     <Compile Include="VMTestSection.cs" />
   </ItemGroup>

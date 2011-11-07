@@ -65,6 +65,10 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj">
+      <Project>{B8530BFC-F505-49AD-B594-4F55457D2407}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LibraryFuntion\LibraryFuntion.csproj">
       <Project>{F60FF808-E570-4188-B7CB-B7B1412A4B7D}</Project>
       <Name>LibraryFuntion</Name>
