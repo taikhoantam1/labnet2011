@@ -20,7 +20,7 @@ namespace DataRepository
         /// <param name="id">partner id</param>
         /// <returns></returns>
         Partner GetPartnerById(int id);
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -37,6 +37,7 @@ namespace DataRepository
         List<Test> GetTestByTestSectionId(int testSectionId);
         bool IsValidTest(string testName);
         List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName);
+        object GetTestByName(string name, string searchType);
         #endregion
 
         #region Panel
@@ -64,7 +65,7 @@ namespace DataRepository
         #endregion
 
         #region TestSection
-        object GetTestSectionByName(string name,string searchType);
+        object GetTestSectionByName(string name, string searchType);
         TestSection GetTestSection(int testSectionId);
         #endregion
     }

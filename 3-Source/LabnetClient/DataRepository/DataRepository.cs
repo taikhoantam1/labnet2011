@@ -11,7 +11,7 @@ namespace DataRepository
     {
         private LabManager_ClientEntities myDb;
         public LabManager_ClientEntities Context { get { return myDb; } }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,7 +32,7 @@ namespace DataRepository
         public void PartnerInsert(Partner partner)
         {
             myDb.Partners.AddObject(partner);
-            myDb.SaveChanges();   
+            myDb.SaveChanges();
         }
         public Partner GetPartnerById(int id)
         {
@@ -40,9 +40,10 @@ namespace DataRepository
             return partner;
         }
 
-        public void PartnerUpdate(int id, Partner updateVaule) {
-            
-            Partner oldPartner=GetPartnerById( id);
+        public void PartnerUpdate(int id, Partner updateVaule)
+        {
+
+            Partner oldPartner = GetPartnerById(id);
             oldPartner.Address = updateVaule.Address;
             oldPartner.Email = updateVaule.Address;
             oldPartner.IsActive = updateVaule.IsActive;
@@ -107,8 +108,8 @@ namespace DataRepository
 
         public List<Test> GetTestByTestSectionId(int testSectionId)
         {
-            List<Test> lstTests = (from _test in myDb.Tests 
-                                   where (_test.IsActive == true && _test.TestSectionId == testSectionId) 
+            List<Test> lstTests = (from _test in myDb.Tests
+                                   where (_test.IsActive == true && _test.TestSectionId == testSectionId)
                                    select _test).ToList();
             return lstTests;
         }
@@ -126,8 +127,8 @@ namespace DataRepository
 
         public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName)
         {
-            List<SearchTest_Result> lstTestSearch= new List<SearchTest_Result>();
-            if(!string.IsNullOrEmpty(testSectionName) && string.IsNullOrEmpty(panelName))
+            List<SearchTest_Result> lstTestSearch = new List<SearchTest_Result>();
+            if (!string.IsNullOrEmpty(testSectionName) && string.IsNullOrEmpty(panelName))
             {
                 lstTestSearch = myDb.SearchTest(testName.ToUpper(), testSectionName.ToUpper(), "").ToList();
             }
@@ -137,6 +138,12 @@ namespace DataRepository
             }
 
             return lstTestSearch;
+        }
+
+        public object GetTestByName(string name, string searchType)
+        {
+            List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType.ToUpper()).ToList();
+            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Cost = p.Cost });
         }
         #endregion Test
 
@@ -273,7 +280,7 @@ namespace DataRepository
         {
             Doctor doctor = GetDoctor(doctorId);
             doctor.IsActive = false;
-           
+
             myDb.SaveChanges();
         }
         #endregion
@@ -281,10 +288,10 @@ namespace DataRepository
         #region TestSection
 
 
-        public object GetTestSectionByName(string name,string searchType)
+        public object GetTestSectionByName(string name, string searchType)
         {
             name = name.ToUpper();
-            List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name,searchType.ToUpper()).ToList();
+            List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType.ToUpper()).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
         }
 

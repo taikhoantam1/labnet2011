@@ -9,6 +9,7 @@ using LabnetClient.Models;
 using AutoMapper;
 using LabnetClient.App_Code;
 using LabnetClient.Constant;
+using LibraryFuntion;
 
 namespace LabnetClient.Controllers
 {
@@ -22,15 +23,26 @@ namespace LabnetClient.Controllers
             return View();
         }
 
-    
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult FindTestNames(string searchText, string searchType)
+        {
+            var result = Repository.GetTestByName(searchText, searchType);
+            return Json(result);
+        }
+
         // GET: /Partner/Create
 
         public ActionResult Create()
         {
             PartnerViewModel model = new PartnerViewModel();
             model.ViewMode = ViewMode.Create;
-            return View("Details",model);
-        } 
+            return View("Details", model);
+        }
 
         //
         // POST: /Partner/Create
@@ -57,14 +69,17 @@ namespace LabnetClient.Controllers
                 return View();
             }
         }
-        
+
         //
         // GET: /Partner/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
             PartnerViewModel model = new PartnerViewModel();
+            model.Partner.PartnerCostDetails = new List<VMPartnerCost>();
             model.ViewMode = ViewMode.Edit;
+            model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+
             model.Partner = Mapper.Map<Partner, VMPartner>(Repository.GetPartnerById(id));
             return View("Details", model);
         }
@@ -76,14 +91,14 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int id, PartnerViewModel model)
         {
             // TODO: Add update logic here
-            Repository.PartnerUpdate(id,Mapper.Map<VMPartner, Partner>(model.Partner));
+            Repository.PartnerUpdate(id, Mapper.Map<VMPartner, Partner>(model.Partner));
             return RedirectToAction("Create");
-           
+
         }
 
         //
         // GET: /Partner/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             return View();
@@ -98,7 +113,7 @@ namespace LabnetClient.Controllers
             try
             {
                 // TODO: Add delete logic here
- 
+
                 return RedirectToAction("Index");
             }
             catch

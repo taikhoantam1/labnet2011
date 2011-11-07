@@ -12,7 +12,7 @@
 			                url: <% Response.Write("'/Ajax/GetListTest?PartnerId=1'"); %>,
 			                dataType: 'json',
 			                colModel: [
-                            { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_TestName %>', name: 'TestName', width: 400, sortable: true, align: 'center', hide: false },
+                            { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_TestName %>', name: 'TestName', width: 200, sortable: true, align: 'center', hide: false },
                             { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_Price %>', name: 'TestPrice', width: 200, sortable: true, align: 'center', hide: false },
                             { display: '<%=Resources.PartnerStrings.PartnerInsert_GridColumn_Delete %>', name: '', width: 100, sortable: true, align: 'center', hide: false },
                             
@@ -36,7 +36,6 @@
 		                        $(this).parent().toggleClass('fh');
 		                    }
 	                    );
-
     })
    
 </script>
@@ -169,14 +168,14 @@
                         <%=Resources.PartnerStrings.PartnerInsert_Test %></label>
                 </div>
                 <div class="Column">
-                    <input type="text" class="textInput" id="txtTest" />
+                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
                 </div>
                 <div class="Column MarginL15">
                     <label class="lbTitle Width120">
                         <%=Resources.PartnerStrings.PartnerInsert_TestPrice%></label>
                 </div>
                 <div class="Column">
-                    <input type="text" class="textInput50" id="txtTestPrice" />
+                    <%=Html.TextBoxFor(m => m.Partner.PartnerCostDetails[0].Cost)%>
                 </div>
                 <div class="Colum">
                     <input type="button" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add%>" />
