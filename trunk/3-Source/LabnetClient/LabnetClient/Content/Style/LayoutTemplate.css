@@ -99,6 +99,11 @@
     margin-left:20px;
 }
 
+.MarginL65
+{
+    margin-left:65px;
+}
+
 .MarginT5
 {
     margin-top:5px;
@@ -171,4 +176,10 @@
     color:Blue;
     border:1px;
     border-style:solid;
+}
+
+.textInput130
+{
+    width:130px;
+    padding:3px;
 }
