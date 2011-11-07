@@ -61,5 +61,10 @@ namespace LabnetClient.Models
         /// 
         /// </summary>
         public string SelectedText { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string SelectedTag { get; set; }
     }
 }

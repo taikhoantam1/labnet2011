@@ -292,7 +292,7 @@ namespace DataRepository
         {
             name = name.ToUpper();
             List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType.ToUpper()).ToList();
-            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
+            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id});
         }
 
         public TestSection GetTestSection(int testSectionId)
