@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhập mới.
+        /// </summary>
+        internal static string PartnerInsert_New {
+            get {
+                return ResourceManager.GetString("PartnerInsert_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ghi Chú.
         /// </summary>
         internal static string PartnerInsert_Note {
@@ -192,6 +201,15 @@ namespace Resources {
         internal static string PartnerInsert_Owner {
             get {
                 return ResourceManager.GetString("PartnerInsert_Owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng chọn xét nghiệm cho Lab.
+        /// </summary>
+        internal static string PartnerInsert_PartnerCostError {
+            get {
+                return ResourceManager.GetString("PartnerInsert_PartnerCostError", resourceCulture);
             }
         }
         

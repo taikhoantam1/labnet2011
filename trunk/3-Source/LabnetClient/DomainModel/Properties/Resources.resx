@@ -121,7 +121,7 @@
     <value>Vui lòng nhập địa chỉ</value>
   </data>
   <data name="VMPartner_EmailRequired" xml:space="preserve">
-    <value>Vui lòng nhập số điện thoại</value>
+    <value>Vui lòng nhập email</value>
   </data>
   <data name="VMPartner_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên</value>

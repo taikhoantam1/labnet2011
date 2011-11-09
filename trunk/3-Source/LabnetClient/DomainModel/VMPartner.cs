@@ -63,6 +63,6 @@ namespace DomainModel
         /// </summary>
         public int id { get; set; }
 
-        public List<VMPartnerCost> PartnerCostDetails { get; set; }
+        //public List<VMPartnerCost> PartnerCostDetails { get; set; }
     }
 }

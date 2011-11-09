@@ -1,41 +1,91 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PartnerViewModel>" %>
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
+
     function CheckAllowAddTest()
     {
         //Todo: Kiểm tra 
         //1:Không chọn test mà nhấn thêm
         //2:Chọn test đã tồn tại trong list
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
+        $('#btnAddTest').attr('disabled', true);
+
+        $("#autocompleteSelectTest .autoCompleteText").blur(function(){
+            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var cost = $("#txtCost").val();
+            //alert(testName);
+            if(testName != "" && cost != ""){
+                $('#btnAddTest').attr('disabled', false);
+            }
+            else{
+                $('#btnAddTest').attr('disabled', true);
+            }
+           
+            var allInputs = $(".TestName");
+
+            for (var i = 0; i < allInputs.length; i++) {
+                var testTable = allInputs[i].value;
+                if(testName == testTable){
+                    $('#btnAddTest').attr('disabled', true);
+                }
+            }
+         });
+
+         $("#txtCost").keyup(function(){
+            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var cost = $("#txtCost").val();
+            //alert(cost);
+            if(testName != "" && cost != ""){
+                $('#btnAddTest').attr('disabled', false);
+            }
+            else{
+                $('#btnAddTest').attr('disabled', true);
+            }
+
+            var allInputs = $(".TestName");
+
+            for (var i = 0; i < allInputs.length; i++) {
+                var testTable = allInputs[i].value;
+                if(testName == testTable){
+                    $('#btnAddTest').attr('disabled', true);
+                }
+            }
+         });
     }
     $(document).ready(function () {
+        CheckAllowAddTest();
         var index =<%=Model.PartnerTestList.Count %>;
         BindCheckBoxDeleteTest();
         $("#autocompleteSelectTest .autoCompleteText").blur(function(){
              $("#txtCost").val($("#autocompleteSelectTest .autoCompleteTag").val());
-         
+            
          });
 
         $("#btnAddTest").click(function () {
-            alert("add");
+            //alert("add");
             var newTr = $("#tblPartnerCostHiden tr").clone();
             var testName=$("#autocompleteSelectTest .autoCompleteText").val();
             var cost=$("#autocompleteSelectTest .autoCompleteTag").val();
             var testId=$("#autocompleteSelectTest .autoCompleteValue").val();
+            var costEnter = $("#txtCost").val();
 
             $(newTr).find(".TestNameField").html(testName);
-            $(newTr).find(".TestCostField").html(cost);
+            $(newTr).find(".TestCostField").html(costEnter);
 
             $(newTr).find(".TestName").val(testName).attr("name","PartnerTestList["+index+"].TestName");
             $(newTr).find(".TestId").val(testId).attr("name","PartnerTestList["+index+"].TesstId");
-            $(newTr).find(".Cost").val(cost).attr("name","PartnerTestList["+index+"].Cost");
+            $(newTr).find(".Cost").val(costEnter).attr("name","PartnerTestList["+index+"].Cost");
             $(newTr).find(".IsDelete").attr("name","PartnerTestList["+index+"].IsDelete");
             
 
             $("#tblPartnerCost").append(newTr);
             BindCheckBoxDeleteTest();
             index++;
-
+            $("#autocompleteSelectTest .autoCompleteText").val("");
+            $("#autocompleteSelectTest .autoCompleteValue").val(null);
+            $("#autocompleteSelectTest .autoCompleteTag").val(null);
+            $("#txtCost").val("");
+            $('#btnAddTest').attr('disabled', true);
         });
         function BindCheckBoxDeleteTest()
         {
@@ -52,7 +102,25 @@
                 }
             });
         }
-    })
+
+        $('#reloadPage').click(function () {
+            //alert('Handler for .click() called.');
+            var allInputs = $(":input");
+            for (var i = 0; i < allInputs.length; i++) {
+
+                if (allInputs[i].id == "Partner_IsActive" || allInputs[i].id == "save" 
+                    || allInputs[i].id == "reloadPage" || allInputs[i].id == "btnAddTest") {
+                    //do nothing
+                }
+                else {
+                    //alert(allInputs[i].value);
+                    allInputs[i].value = "";
+                }
+            }
+
+            $('.trPartnerCost').remove();
+        });
+    });
     
 </script>
 
@@ -218,39 +286,40 @@
                         <%=Resources.PartnerStrings.PartnerInsert_GridColumn_Price%>
                     </th>
                     <th class="textSearch150" align="center">
-                        
+                        Xóa
                     </th>
                 </tr>
                 <% for(int i=0;i< Model.PartnerTestList.Count;i++)
                    { %>
                         <tr class="trPartnerCost">
-                            <td><label class="TestNameField"><%= Model.PartnerTestList[i].TestName %></label>
+                            <td class="textSearch150" align="center"><label class="TestNameField"><%= Model.PartnerTestList[i].TestName %></label>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].TestName, new  {@class="TestName" })%>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].TesstId, new { @class = "TestId" })%>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].Cost, new { @class = "Cost" })%>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].IsDelete, new { @class = "IsDelete" })%>
                             </td>
-                            <td><label class="TestCostField"> <%= Model.PartnerTestList[i].Cost %></label></td>
-                            <td><input type="checkbox" class="btnDelTest" value="Xóa"/></td>
+                            <td class="textSearch150" align="center"><label class="TestCostField"> <%= Model.PartnerTestList[i].Cost %></label></td>
+                            <td class="textSearch150" align="center"><input type="checkbox" class="btnDelTest" value="Xóa"/></td>
                         </tr>
                 <%} %>
             </table>
         <div>
             <table class="hide" id="tblPartnerCostHiden">
                 <tr class="trPartnerCost">
-                    <td><label class="TestNameField"></label>
+                    <td class="textSearch150" align="center"><label class="TestNameField"></label>
                         <input type="hidden" class="TestName"/>
                         <input type="hidden" class="TestId"/>
                         <input type="hidden" class="Cost"/>
                         <input type="hidden" class="IsDelete" value="False"/>
                     </td>
-                    <td><label class="TestCostField"></label></td>
-                    <td><input type="checkbox" class="btnDelTest" value="Xóa"/> </td>
+                    <td class="textSearch150" align="center"><label class="TestCostField"></label></td>
+                    <td class="textSearch150" align="center"><input type="checkbox" class="btnDelTest" value="Xóa"/> </td>
                 </tr>
             </table>
         </div>
-        <div>
-            <input type="submit" value="save" />
+        <div align="center">
+            <input type="submit" value="<%=Resources.PartnerStrings.PartnerInsert_Button_Save%>" id="save"/>
+            
         </div>
     </div>
 </div>

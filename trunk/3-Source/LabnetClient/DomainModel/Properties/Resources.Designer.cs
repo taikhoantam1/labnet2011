@@ -70,7 +70,7 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vui lòng nhập số điện thoại.
+        ///   Looks up a localized string similar to Vui lòng nhập email.
         /// </summary>
         internal static string VMPartner_EmailRequired {
             get {
