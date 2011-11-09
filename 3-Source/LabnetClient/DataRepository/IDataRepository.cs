@@ -37,6 +37,17 @@ namespace DataRepository
         List<VMTestListItem> GetPartnerTest(int id);
         #endregion
 
+        #region PartnerCost
+        PartnerCost GetPartnerCost(int partnerCostId);
+        void PartnerCostInsert(PartnerCost partnerCost);
+        void PartnerCostUpdate(int id, PartnerCost partnerCost);
+        void PartnerCostDelete(int id);
+        void PartnerCostDeleteByPartnerId(int id);
+        List<PartnerCost> GetPartnerCostByPartnerId(int id);
+        PartnerCost GetPartnerCostByTestId(int testId);
+        bool IsPartnerCostExist(int testId);
+        #endregion
+
         #region Test
         Test GetTest(int testId);
         void TestInsert(Test test);

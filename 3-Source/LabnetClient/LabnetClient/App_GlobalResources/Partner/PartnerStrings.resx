@@ -156,11 +156,17 @@
   <data name="PartnerInsert_Name" xml:space="preserve">
     <value>Tên Lab</value>
   </data>
+  <data name="PartnerInsert_New" xml:space="preserve">
+    <value>Nhập mới</value>
+  </data>
   <data name="PartnerInsert_Note" xml:space="preserve">
     <value>Ghi Chú</value>
   </data>
   <data name="PartnerInsert_Owner" xml:space="preserve">
     <value>Quản Lý Lab</value>
+  </data>
+  <data name="PartnerInsert_PartnerCostError" xml:space="preserve">
+    <value>Vui lòng chọn xét nghiệm cho Lab</value>
   </data>
   <data name="PartnerInsert_Phone" xml:space="preserve">
     <value>Số Điện Thoại</value>

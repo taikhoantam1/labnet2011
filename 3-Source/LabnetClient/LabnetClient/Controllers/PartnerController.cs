@@ -40,7 +40,10 @@ namespace LabnetClient.Controllers
         public ActionResult Create()
         {
             PartnerViewModel model = new PartnerViewModel();
+            model.PartnerTestList = new List<VMTestListItem>();
+            model.Partner.IsActive = true;
             model.ViewMode = ViewMode.Create;
+            model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Details", model);
         }
 
@@ -50,24 +53,39 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Create(PartnerViewModel model)
         {
-            try
+            if (model.PartnerTestList == null)
             {
-                // TODO: Add insert logic here
-                if (!ModelState.IsValid)
-                {
-                    return PartialView("Details", model);
-                }
-                else
-                {
-                    Partner partner = Mapper.Map<VMPartner, Partner>(model.Partner);
-                    Repository.PartnerInsert(partner);
-                }
-                return PartialView("Details", model);
+                ModelState.AddModelError("Partner Cost not null", Resources.PartnerStrings.PartnerInsert_PartnerCostError);
             }
-            catch
+            if (!ModelState.IsValid)
             {
-                return View();
+                if (model.PartnerTestList == null)
+                {
+                    model.PartnerTestList = new List<VMTestListItem>();
+                }
+                return View("Details", model);
             }
+            else
+            {
+                Partner partner = Mapper.Map<VMPartner, Partner>(model.Partner);
+                Repository.PartnerInsert(partner);
+
+                foreach (VMTestListItem item in model.PartnerTestList)
+                {
+                    if (item.IsDelete == false)
+                    {
+                        PartnerCost cost = new PartnerCost();
+                        cost.Cost = item.Cost;
+                        cost.TestId = item.TesstId;
+                        cost.PartnerId = partner.Id;
+                        cost.IsActive = true;
+                        cost.LastUpdated = DateTime.Now;
+                        Repository.PartnerCostInsert(cost);
+                    }
+                }
+            }
+            return View("Details", model);
+            
         }
 
         //
@@ -76,7 +94,7 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int id)
         {
             PartnerViewModel model = new PartnerViewModel();
-            model.Partner.PartnerCostDetails = new List<VMPartnerCost>();
+            //model.Partner.PartnerCostDetails = new List<VMPartnerCost>();
             model.ViewMode = ViewMode.Edit;
             model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
 
@@ -91,11 +109,38 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Edit(int id, PartnerViewModel model)
         {
-            // TODO: Add update logic here
-            model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
-            //Repository.PartnerUpdate(id, Mapper.Map<VMPartner, Partner>(model.Partner));
+            //model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
+            Repository.PartnerUpdate(id, Mapper.Map<VMPartner, Partner>(model.Partner));
 
-            return RedirectToAction("Create");
+            foreach (VMTestListItem item in model.PartnerTestList)
+            {
+                bool isExist = Repository.IsPartnerCostExist(item.TesstId);
+                if (isExist)
+                {
+                    PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TesstId);
+                    partnerCost.Cost = item.Cost;
+                    if (item.IsDelete == true)
+                    {
+                        partnerCost.IsActive = false;
+                    }
+                    Repository.PartnerCostUpdate(partnerCost.Id, partnerCost);
+                }
+                else
+                {
+                    if (item.IsDelete == false)
+                    {
+                        PartnerCost partnerCost = new PartnerCost();
+                        partnerCost.TestId = item.TesstId;
+                        partnerCost.PartnerId = id;
+                        partnerCost.IsActive = true;
+                        partnerCost.Cost = item.Cost;
+                        partnerCost.LastUpdated = DateTime.Now;
+                        Repository.PartnerCostInsert(partnerCost);
+                    }
+                }
+            }
+            model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
+            return View("Details", model);
 
         }
 

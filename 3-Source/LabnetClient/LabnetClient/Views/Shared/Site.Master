@@ -45,7 +45,7 @@
                             <%= Resources.GlobalStrings.Menu_CreateDoctor %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
-                        <li><a class="MenuItem ActionLink" href="/Partner/Edit/1">
+                        <li><a class="MenuItem ActionLink" href="/Partner/Create/">
                             <%= Resources.GlobalStrings.Menu_CreateLabPartner %></a></li>
                         <li><a class="MenuItem ActionLink" href="/Test/Create/">
                             <%= Resources.GlobalStrings.Menu_CreateTest %></a></li>
@@ -57,6 +57,8 @@
                             <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
+                        <li><a class="MenuItem ActionLink" href="#">
+                            <%= Resources.GlobalStrings.Menu_SearchPartnerCost %></a></li>
                     </ul>
                 </div>
                 <div id="MainContent">

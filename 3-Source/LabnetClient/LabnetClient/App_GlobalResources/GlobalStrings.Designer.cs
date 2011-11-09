@@ -124,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tìm Lab.
+        /// </summary>
+        internal static string Menu_SearchPartnerCost {
+            get {
+                return ResourceManager.GetString("Menu_SearchPartnerCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tìm Kiếm Bệnh Nhân.
         /// </summary>
         internal static string Menu_SearchPatients {

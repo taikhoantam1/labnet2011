@@ -65,7 +65,7 @@ namespace DataRepository
         public List<VMTestListItem> GetPartnerTest(int id)
         {
             Partner partner = GetPartnerById(id);
-            List<VMTestListItem> listTest = partner.PartnerCosts.Select(p => new VMTestListItem
+            List<VMTestListItem> listTest = partner.PartnerCosts.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
                 TestName = p.Test.Name,
                 TesstId = p.TestId,
@@ -75,6 +75,81 @@ namespace DataRepository
             return listTest;
         }
         #endregion
+
+        #region PartnerCost
+        public PartnerCost GetPartnerCost(int partnerCostId)
+        {
+            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.Id == partnerCostId select _partnerCost).First();
+            myDb.SaveChanges();
+            return partnerCost;
+        }
+
+        public void PartnerCostInsert(PartnerCost partnerCost)
+        {
+            myDb.PartnerCosts.AddObject(partnerCost);
+            myDb.SaveChanges();
+        }
+
+        public void PartnerCostUpdate(int id, PartnerCost partnerCost)
+        {
+            PartnerCost currentPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.Id == id select _partnerCost).First();
+            currentPartnerCost.TestId = partnerCost.TestId;
+            currentPartnerCost.PartnerId = partnerCost.PartnerId;
+            currentPartnerCost.PartnerId = partnerCost.PartnerId;
+            currentPartnerCost.Cost = partnerCost.Cost;
+            currentPartnerCost.Description = partnerCost.Description;
+            currentPartnerCost.IsActive = partnerCost.IsActive;
+            currentPartnerCost.LastUpdated = partnerCost.LastUpdated;
+
+            myDb.SaveChanges();
+        }
+
+        public void PartnerCostDelete(int id)
+        {
+            PartnerCost partnerCost = GetPartnerCost(id);
+            partnerCost.IsActive = false;
+
+            myDb.SaveChanges();
+        }
+
+        public void PartnerCostDeleteByPartnerId(int id)
+        {
+            List<PartnerCost> lstPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.PartnerId == id select _partnerCost).ToList();
+            foreach (PartnerCost p in lstPartnerCost)
+            {
+                p.IsActive = false;
+            }
+            myDb.SaveChanges();
+        }
+
+        public List<PartnerCost> GetPartnerCostByPartnerId(int id)
+        {
+            List<PartnerCost> lstPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.PartnerId == id select _partnerCost).ToList();
+
+            return lstPartnerCost;
+        }
+
+        public PartnerCost GetPartnerCostByTestId(int testId)
+        {
+            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.TestId == testId select _partnerCost).First();
+            return partnerCost;
+        }
+
+        public bool IsPartnerCostExist(int testId)
+        {
+            bool isExist = false;
+            PartnerCost partnerCost = new PartnerCost();
+            partnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.TestId == testId && _partnerCost.IsActive == true
+                                                                                select _partnerCost).FirstOrDefault();
+            if (partnerCost != null)
+            {
+                isExist = true;
+            }
+
+            return isExist;
+        }
+        #endregion
+
         #region Test
         public Test GetTest(int testId)
         {
