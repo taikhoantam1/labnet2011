@@ -61,6 +61,24 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập tên Panel.
+        /// </summary>
+        internal static string VMPanel_NameRequired {
+            get {
+                return ResourceManager.GetString("VMPanel_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập tên Panel.
+        /// </summary>
+        internal static string VMPanelSearch_NameRequired {
+            get {
+                return ResourceManager.GetString("VMPanelSearch_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập địa chỉ.
         /// </summary>
         internal static string VMPartner_AddressRequired {

@@ -43,7 +43,7 @@
                             <%= Resources.GlobalStrings.Menu_PatientInfo %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_CreateDoctor %></a></li>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/Panel/Create/">
                             <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
                         <li><a class="MenuItem ActionLink" href="/Partner/Create/">
                             <%= Resources.GlobalStrings.Menu_CreateLabPartner %></a></li>
@@ -55,7 +55,7 @@
                             <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/Panel/Search/">
                             <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_SearchPartnerCost %></a></li>

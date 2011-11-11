@@ -47,6 +47,10 @@ namespace LabnetClient
                 .ForMember("TestSectionName",p=>p.Ignore());
 
             Mapper.CreateMap<VMTest, Test>();
+
+            Mapper.CreateMap<Panel, VMPanel>();
+
+            Mapper.CreateMap<VMPanel, Panel>();
         }
     }
 }

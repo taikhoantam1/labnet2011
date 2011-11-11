@@ -57,21 +57,24 @@ namespace DataRepository
         bool IsValidTest(string testName);
         List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName);
         object GetTestByName(string name, string searchType);
+        object GetTestByNameForPanel(string name, string searchType);
         #endregion
 
         #region Panel
         Panel GetPanel(int panelId);
-        void InsertPanel(Panel panel);
-        void UpdatePanel(int id, Panel panel);
-        void DeletePanel(int panelId);
+        void PanelInsert(Panel panel);
+        void PanelUpdate(int id, Panel panel);
+        void PanelDelete(int panelId);
         List<Panel> GetAllPanel();
+        bool IsValidPanel(string name);
+        List<Panel> GetPanelByName(string name);
         #endregion
 
         #region PanelItem
         PanelItem GetPanelItem(int panelItemId);
-        void InsertPanelItem(PanelItem panelItem);
-        void UpdatePanelItem(int id, PanelItem panelItem);
-        void DeletePanelItem(int panelItemId);
+        void PanelItemInsert(PanelItem panelItem);
+        void PanelItemUpdate(int id, PanelItem panelItem);
+        void PanelItemDelete(int panelItemId);
         List<PanelItem> GetPanelItemByPanelId(int panelId);
         List<PanelItem> GetPanelItemByTestId(int testId);
         #endregion

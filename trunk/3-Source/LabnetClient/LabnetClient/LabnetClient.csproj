@@ -75,6 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\AppHelper.cs" />
+    <Compile Include="App_GlobalResources\Panel\PanelStrings.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PanelStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Test\TestStrings1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -99,6 +104,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\ShareController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -138,6 +144,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\PanelSearchViewModel.cs" />
+    <Compile Include="Models\PanelViewModel.cs" />
     <Compile Include="Models\PartnerViewModel.cs" />
     <Compile Include="Models\TestSearctViewModel.cs" />
     <Compile Include="Models\TestViewModel.cs" />
@@ -616,6 +624,8 @@
     <Content Include="Content\Lib\Utility\Validator.js" />
     <Content Include="LibDLL\AutoMapper.dll" />
     <Content Include="LibDLL\log4net.dll" />
+    <Content Include="Views\Panel\Create.ascx" />
+    <Content Include="Views\Panel\Search.ascx" />
     <Content Include="Views\Partner\Details.ascx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Test\Create.ascx" />
@@ -696,6 +706,10 @@
     <Content Include="App_GlobalResources\Test\TestStrings.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>TestStrings1.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\Panel\PanelStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>PanelStrings.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

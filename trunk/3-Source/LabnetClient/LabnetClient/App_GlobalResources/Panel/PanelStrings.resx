@@ -117,28 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="VMPanelSearch_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên Panel</value>
+  <data name="PanelCreate_NameError" xml:space="preserve">
+    <value>Tên panel này đã tồn tại.</value>
   </data>
-  <data name="VMPanel_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên Panel</value>
+  <data name="PanelInsert_ButtonAdd" xml:space="preserve">
+    <value>Thêm XN</value>
   </data>
-  <data name="VMPartner_AddressRequired" xml:space="preserve">
-    <value>Vui lòng nhập địa chỉ</value>
+  <data name="PanelInsert_ButtonNew" xml:space="preserve">
+    <value>Thêm mới</value>
   </data>
-  <data name="VMPartner_EmailRequired" xml:space="preserve">
-    <value>Vui lòng nhập email</value>
+  <data name="PanelInsert_ButtonSave" xml:space="preserve">
+    <value>Lưu</value>
   </data>
-  <data name="VMPartner_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên</value>
+  <data name="PanelInsert_Description" xml:space="preserve">
+    <value>Mô tả</value>
   </data>
-  <data name="VMTestSearch_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên XN</value>
+  <data name="PanelInsert_GridRemove" xml:space="preserve">
+    <value>Xóa</value>
   </data>
-  <data name="VMTest_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên XN</value>
+  <data name="PanelInsert_GridTestName" xml:space="preserve">
+    <value>Tên Xét Nghiệm</value>
   </data>
-  <data name="VMTest_TestSectionNameRequired" xml:space="preserve">
-    <value>Vui lòng nhập nhóm XN</value>
+  <data name="PanelInsert_GridTestSection" xml:space="preserve">
+    <value>Nhóm</value>
+  </data>
+  <data name="PanelInsert_IsActive" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
+  <data name="PanelInsert_Name" xml:space="preserve">
+    <value>Tên Panel</value>
+  </data>
+  <data name="PanelInsert_TestName" xml:space="preserve">
+    <value>Xét nghiệm</value>
+  </data>
+  <data name="PanelInsert_Title" xml:space="preserve">
+    <value>Tạo Panel</value>
+  </data>
+  <data name="PanelSearch_GridPanelName" xml:space="preserve">
+    <value>Tên Panel</value>
+  </data>
+  <data name="PanelSearch_GridUpdateLink" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="PanelSearch_Name" xml:space="preserve">
+    <value>Tên Panel</value>
+  </data>
+  <data name="PanelSearch_Search" xml:space="preserve">
+    <value>Tìm</value>
+  </data>
+  <data name="PanelSearch_Title" xml:space="preserve">
+    <value>Tìm Panel</value>
+  </data>
+  <data name="PanelUpdate_Title" xml:space="preserve">
+    <value>Cập nhật Panel</value>
   </data>
 </root>
