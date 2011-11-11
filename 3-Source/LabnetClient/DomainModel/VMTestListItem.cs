@@ -15,5 +15,6 @@ namespace DomainModel
         public int TesstId { get; set; }
         public decimal Cost { get; set; }
         public bool IsDelete { get; set; }
+        public string TestSectionName { get; set; }
     }
 }

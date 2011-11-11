@@ -239,6 +239,12 @@ namespace DataRepository
             List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType.ToUpper()).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
 		}
+
+        public object GetTestByNameForPanel(string name, string searchType)
+        {
+            List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType.ToUpper()).ToList();
+            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName });
+        }
         #endregion Test
 
         #region Panel
@@ -256,13 +262,13 @@ namespace DataRepository
             }
         }
 
-        public void InsertPanel(Panel panel)
+        public void PanelInsert(Panel panel)
         {
             myDb.Panels.AddObject(panel);
             myDb.SaveChanges();
         }
 
-        public void UpdatePanel(int id, Panel panel)
+        public void PanelUpdate(int id, Panel panel)
         {
             Panel currentPanel = (from _panel in myDb.Panels where _panel.Id == id select _panel).First();
 
@@ -272,7 +278,7 @@ namespace DataRepository
             currentPanel.LastUpdated = panel.LastUpdated;
         }
 
-        public void DeletePanel(int panelId)
+        public void PanelDelete(int panelId)
         {
             Panel panel = GetPanel(panelId);
             panel.IsActive = false;
@@ -284,6 +290,17 @@ namespace DataRepository
         {
             List<Panel> lstPanels = (from _panel in myDb.Panels where _panel.IsActive == true select _panel).ToList();
             return lstPanels;
+        }
+
+        public bool IsValidPanel(string name)
+        {
+            bool isValid = true;
+            Panel panel = myDb.Panels.SingleOrDefault(u => u.Name.ToUpper() == name.ToUpper());
+            if (panel != null)
+            {
+                isValid = false;
+            }
+            return isValid;
         }
         #endregion Panel
 
@@ -303,13 +320,13 @@ namespace DataRepository
             }
         }
 
-        public void InsertPanelItem(PanelItem panelItem)
+        public void PanelItemInsert(PanelItem panelItem)
         {
             myDb.PanelItems.AddObject(panelItem);
             myDb.SaveChanges();
         }
 
-        public void UpdatePanelItem(int id, PanelItem panelItem)
+        public void PanelItemUpdate(int id, PanelItem panelItem)
         {
             PanelItem currentPanelItem = (from _panelItem in myDb.PanelItems where _panelItem.Id == id select _panelItem).First();
 
@@ -321,7 +338,7 @@ namespace DataRepository
             currentPanelItem.LastUpdated = panelItem.LastUpdated;
         }
 
-        public void DeletePanelItem(int panelItemId)
+        public void PanelItemDelete(int panelItemId)
         {
             PanelItem panelItem = GetPanelItem(panelItemId);
             panelItem.IsActive = false;
@@ -341,6 +358,12 @@ namespace DataRepository
             List<PanelItem> lstPanelItems = (from _panelItem in myDb.PanelItems where _panelItem.TestId == testId select _panelItem).ToList();
 
             return lstPanelItems;
+        }
+
+        public List<Panel> GetPanelByName(string name)
+        {
+            List<Panel> lstPanel = (from _panel in myDb.Panels where _panel.Name.ToUpper().Contains(name.ToUpper()) select _panel).ToList();
+            return lstPanel;
         }
         #endregion PanelItem
 
