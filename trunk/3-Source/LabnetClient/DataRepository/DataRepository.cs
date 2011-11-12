@@ -383,22 +383,33 @@ namespace DataRepository
             }
         }
 
-        public void InsertDoctor(Doctor doctor)
+        public void DoctorInsert(Doctor doctor)
         {
             myDb.Doctors.AddObject(doctor);
             myDb.SaveChanges();
         }
 
-        public void UpdateDoctor(int id, Doctor doctor)
+        public void DoctorUpdate(int id, Doctor doctor)
         {
         }
 
-        public void DeleteDoctor(int doctorId)
+        public void DoctorDelete(int doctorId)
         {
             Doctor doctor = GetDoctor(doctorId);
             doctor.IsActive = false;
 
             myDb.SaveChanges();
+        }
+
+        public bool IsValidDoctor(string name)
+        {
+            bool isValid = true;
+            Doctor doctor = myDb.Doctors.SingleOrDefault(u => u.Name.ToUpper() == name.ToUpper());
+            if (doctor != null)
+            {
+                isValid = false;
+            }
+            return isValid;
         }
         #endregion
 

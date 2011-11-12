@@ -61,6 +61,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập tên Bác sĩ.
+        /// </summary>
+        internal static string VMDoctor_NameRequired {
+            get {
+                return ResourceManager.GetString("VMDoctor_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên Panel.
         /// </summary>
         internal static string VMPanel_NameRequired {

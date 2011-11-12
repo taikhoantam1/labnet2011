@@ -81,9 +81,10 @@ namespace DataRepository
 
         #region Doctor
         Doctor GetDoctor(int doctorId);
-        void InsertDoctor(Doctor doctor);
-        void UpdateDoctor(int id, Doctor doctor);
-        void DeleteDoctor(int doctorId);
+        void DoctorInsert(Doctor doctor);
+        void DoctorUpdate(int id, Doctor doctor);
+        void DoctorDelete(int doctorId);
+        bool IsValidDoctor(string name);
         #endregion
 
         #region TestSection
