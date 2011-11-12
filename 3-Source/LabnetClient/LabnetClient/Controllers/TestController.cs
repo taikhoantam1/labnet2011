@@ -74,7 +74,7 @@ namespace LabnetClient.Controllers
 
             if (!ModelState.IsValid)
             {
-                model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson(); ;
+                model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
                 return View("Create", model);
             }
 

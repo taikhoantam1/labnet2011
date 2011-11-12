@@ -75,6 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\AppHelper.cs" />
+    <Compile Include="App_GlobalResources\Doctor\DoctorStrings.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DoctorStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Panel\PanelStrings.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +108,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
@@ -144,6 +150,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\PanelSearchViewModel.cs" />
     <Compile Include="Models\PanelViewModel.cs" />
     <Compile Include="Models\PartnerViewModel.cs" />
@@ -624,6 +631,7 @@
     <Content Include="Content\Lib\Utility\Validator.js" />
     <Content Include="LibDLL\AutoMapper.dll" />
     <Content Include="LibDLL\log4net.dll" />
+    <Content Include="Views\Doctor\Create.ascx" />
     <Content Include="Views\Panel\Create.ascx" />
     <Content Include="Views\Panel\Search.ascx" />
     <Content Include="Views\Partner\Details.ascx" />
@@ -695,6 +703,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\Doctor\DoctorStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>DoctorStrings.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="App_GlobalResources\GlobalStrings.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>GlobalStrings.Designer.cs</LastGenOutput>

@@ -51,6 +51,10 @@ namespace LabnetClient
             Mapper.CreateMap<Panel, VMPanel>();
 
             Mapper.CreateMap<VMPanel, Panel>();
+
+            Mapper.CreateMap<Doctor, VMDoctor>();
+
+            Mapper.CreateMap<VMDoctor, Doctor>();
         }
     }
 }
