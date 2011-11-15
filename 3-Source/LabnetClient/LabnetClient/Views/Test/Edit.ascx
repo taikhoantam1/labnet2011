@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<LabnetClient.Models.TestViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.TestViewModel>" %>
 
-<asp:Content ID="Content4" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
+
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
 
@@ -204,4 +204,3 @@
         $("#Test_Cost").val(costHidden);
     });
 </script>
-</asp:Content>

@@ -98,7 +98,7 @@ namespace LabnetClient.Controllers
             model.Autocomplete.SelectedText = testSection.Name;
             model.Autocomplete.SelectedValue = testSection.Id.ToString();
 
-            return View("Edit", model);
+            return PartialView("Edit", model);
         }
 
         //

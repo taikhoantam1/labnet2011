@@ -640,20 +640,20 @@
         <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="strInput" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TestName" Type="nvarchar" Mode="In" />
           <Parameter Name="TestSectionName" Type="nvarchar" Mode="In" />
           <Parameter Name="PanelName" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTestByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTestByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTestByNameForPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTestByNameForPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTestSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTestSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
