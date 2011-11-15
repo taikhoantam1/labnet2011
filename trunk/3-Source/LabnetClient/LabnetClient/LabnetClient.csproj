@@ -150,6 +150,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\DataTableModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\PanelSearchViewModel.cs" />
     <Compile Include="Models\PanelViewModel.cs" />
@@ -631,13 +632,15 @@
     <Content Include="Content\Lib\Utility\Validator.js" />
     <Content Include="LibDLL\AutoMapper.dll" />
     <Content Include="LibDLL\log4net.dll" />
+    <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
     <Content Include="Views\Doctor\Create.ascx" />
     <Content Include="Views\Panel\Create.ascx" />
     <Content Include="Views\Panel\Search.ascx" />
     <Content Include="Views\Partner\Details.ascx" />
+    <Content Include="Views\Partner\Index.ascx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Test\Create.ascx" />
-    <Content Include="Views\Test\Edit.aspx" />
+    <Content Include="Views\Test\Edit.ascx" />
     <Content Include="Views\Test\Search.ascx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

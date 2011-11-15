@@ -10,7 +10,7 @@ namespace LabnetClient.Models
 
         public AutocompleteModel()
         {
-            IsAjaxLoading = false;
+            UseAjaxLoading = false;
             AutoCompleteId = String.Format("autoComplete_{0}", DateTime.Now.Ticks);
         }
 
@@ -39,7 +39,7 @@ namespace LabnetClient.Models
         /// Gets or sets the value indicate wherever control dynamic loading (ajax loading)
         /// by default this vaule is false
         /// </summary>
-        public bool IsAjaxLoading { get; set; }
+        public bool UseAjaxLoading { get; set; }
 
         /// <summary>
         /// Gets or sets custome css class for this control

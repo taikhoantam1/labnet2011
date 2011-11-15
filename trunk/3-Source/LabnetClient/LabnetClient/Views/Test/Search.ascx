@@ -92,7 +92,7 @@
                 <%=test.TestUnit %>
             </th>
              <th class="textSearch125" align="center">
-                    <%= Html.ActionLink("Cập nhật", "Edit/" + test.TestId, "Test")%>
+                    <%= Html.ActionLink("Cập nhật", "Edit", "Test", new { Id = test.TestId }, new { Class = "ActionLink" })%>
             </th>
          </tr>   
     <%} %>

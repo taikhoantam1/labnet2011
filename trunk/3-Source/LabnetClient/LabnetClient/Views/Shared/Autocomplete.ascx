@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.AutocompleteModel>" %>
 <script type="text/javascript">
     $(document).ready(function () {
-    <%if(Model.IsAjaxLoading){ %>
+    <%if(Model.UseAjaxLoading){ %>
         $("#<%= Model.AutoCompleteId %> .autoCompleteText").autocomplete({
             source: function (request, response) {
                 $.ajax({
@@ -21,7 +21,7 @@
                 })
             },
             select: function (event, ui) {
-                $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val(ui.item.id);
+                $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val(ui.item.id);
                 $("#<%= Model.AutoCompleteId %>_SelectedValue").val(ui.item.id);
                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
                 $("#<%= Model.AutoCompleteId %>_SelectedTag").val(ui.item.tag);
@@ -40,7 +40,7 @@
                 if ( !valid ) {
                     // remove invalid value, as it didn't match anything
                     $( this ).val( "" );
-                    $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val("");
+                    $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
@@ -64,7 +64,7 @@
                             responseFn( a );
                     },
             select: function (event, ui) {
-                $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val(ui.item.id);
+                $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val(ui.item.id);
                 $("#<%= Model.AutoCompleteId %>_SelectedValue").val(ui.item.id);
                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
                 $("#<%= Model.AutoCompleteId %>_SelectedTag").val(ui.item.tag);
@@ -84,9 +84,8 @@
                 if ( !valid ) {
                     // remove invalid value, as it didn't match anything
                     $( this ).val( "" );
-                    $("#<%= Model.AutoCompleteId %> .autoCompleteValue").val("");
+                    $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
-                    $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
                     return false;
