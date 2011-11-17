@@ -63,6 +63,7 @@ namespace LabnetClient.Controllers
                 {
                     model.PartnerTestList = new List<VMTestListItem>();
                 }
+                model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
                 return View("Details", model);
             }
             else
@@ -84,7 +85,7 @@ namespace LabnetClient.Controllers
                     }
                 }
             }
-            return View("Details", model);
+            return RedirectToAction("Create");
             
         }
 
