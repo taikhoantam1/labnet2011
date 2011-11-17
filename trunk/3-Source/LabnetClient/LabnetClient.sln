@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryFuntion", "LibraryFu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModel", "DomainModel\DomainModel.csproj", "{B8530BFC-F505-49AD-B594-4F55457D2407}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database Script", "Database Script\Database Script.csproj", "{D7BFA5B7-3D62-43E8-99B2-24ECEC83E04D}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -39,6 +41,10 @@ Global
 		{B8530BFC-F505-49AD-B594-4F55457D2407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8530BFC-F505-49AD-B594-4F55457D2407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8530BFC-F505-49AD-B594-4F55457D2407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BFA5B7-3D62-43E8-99B2-24ECEC83E04D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BFA5B7-3D62-43E8-99B2-24ECEC83E04D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BFA5B7-3D62-43E8-99B2-24ECEC83E04D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BFA5B7-3D62-43E8-99B2-24ECEC83E04D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
