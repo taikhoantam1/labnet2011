@@ -35,7 +35,11 @@ namespace DataRepository
         /// <param name="id"></param>
         /// <returns></returns>
         List<VMTestListItem> GetPartnerTest(int id);
-        
+
+
+        List<Partner> GetPartnerByName(string name);
+
+        bool IsValidPartner(string name);
         #endregion
 
         #region PartnerCost
@@ -45,8 +49,8 @@ namespace DataRepository
         void PartnerCostDelete(int id);
         void PartnerCostDeleteByPartnerId(int id);
         List<PartnerCost> GetPartnerCostByPartnerId(int id);
-        PartnerCost GetPartnerCostByTestId(int testId);
-        bool IsPartnerCostExist(int testId);
+        PartnerCost GetPartnerCostByTestId(int testId, int partnerId);
+        bool IsPartnerCostExist(int testId, int partnerId);
         #endregion
 
         #region Test

@@ -138,6 +138,9 @@
   <data name="Menu_PatientInfo" xml:space="preserve">
     <value>Thông Tin Bệnh Nhân</value>
   </data>
+  <data name="Menu_SearchDoctor" xml:space="preserve">
+    <value>Tìm Bác Sĩ</value>
+  </data>
   <data name="Menu_SearchPartnerCost" xml:space="preserve">
     <value>Tìm Lab</value>
   </data>

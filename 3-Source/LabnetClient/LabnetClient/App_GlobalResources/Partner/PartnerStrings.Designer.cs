@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tìm.
+        /// </summary>
+        internal static string PanelSearch_Search {
+            get {
+                return ResourceManager.GetString("PanelSearch_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cập Nhật Lab Gửi Mẫu.
         /// </summary>
         internal static string PartnerEdit_Title {
@@ -178,6 +187,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tên Lab đã tồn tại.
+        /// </summary>
+        internal static string PartnerInsert_NameError {
+            get {
+                return ResourceManager.GetString("PartnerInsert_NameError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nhập mới.
         /// </summary>
         internal static string PartnerInsert_New {
@@ -246,6 +264,24 @@ namespace Resources {
         internal static string PartnerInsert_Title {
             get {
                 return ResourceManager.GetString("PartnerInsert_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Lab.
+        /// </summary>
+        internal static string PartnerSearch_GridPartnerName {
+            get {
+                return ResourceManager.GetString("PartnerSearch_GridPartnerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Lab.
+        /// </summary>
+        internal static string PartnerSearch_Name {
+            get {
+                return ResourceManager.GetString("PartnerSearch_Name", resourceCulture);
             }
         }
     }

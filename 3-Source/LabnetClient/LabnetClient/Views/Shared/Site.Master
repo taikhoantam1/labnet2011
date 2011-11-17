@@ -58,8 +58,10 @@
                             <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
                         <li><a class="MenuItem ActionLink" href="/Panel/Search/">
                             <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/Partner/Search/">
                             <%= Resources.GlobalStrings.Menu_SearchPartnerCost %></a></li>
+                        <li><a class="MenuItem ActionLink" href="">
+                            <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
                     </ul>
                 </div>
                 <div id="MainContent">
