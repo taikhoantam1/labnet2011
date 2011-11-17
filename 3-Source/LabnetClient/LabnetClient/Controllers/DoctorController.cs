@@ -60,7 +60,7 @@ namespace LabnetClient.Controllers
             model = new DoctorViewModel();
             model.Doctor.IsActive = true;
 
-            return View("Create", model);
+            return RedirectToAction("Create");
             
         }
         

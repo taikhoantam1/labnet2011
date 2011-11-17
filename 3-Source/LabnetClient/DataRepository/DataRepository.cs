@@ -276,6 +276,8 @@ namespace DataRepository
             currentPanel.Description = panel.Description;
             currentPanel.IsActive = panel.IsActive;
             currentPanel.LastUpdated = panel.LastUpdated;
+
+            myDb.SaveChanges();
         }
 
         public void PanelDelete(int panelId)
@@ -336,6 +338,8 @@ namespace DataRepository
             currentPanelItem.SortOrder = panelItem.SortOrder;
             currentPanelItem.IsActive = panelItem.IsActive;
             currentPanelItem.LastUpdated = panelItem.LastUpdated;
+
+            myDb.SaveChanges();
         }
 
         public void PanelItemDelete(int panelItemId)
@@ -364,6 +368,43 @@ namespace DataRepository
         {
             List<Panel> lstPanel = (from _panel in myDb.Panels where _panel.Name.ToUpper().Contains(name.ToUpper()) select _panel).ToList();
             return lstPanel;
+        }
+
+        public PanelItem GetPanelItemByTestIdAndPanelId(int testId, int panelId)
+        {
+            PanelItem panelItem = (from _item in myDb.PanelItems 
+                                   where _item.PanelId == panelId && _item.TestId == testId && _item.IsActive == true 
+                                   select _item).FirstOrDefault();
+
+            return panelItem;
+        }
+
+        public bool IsPanelItemExist(int testId)
+        {
+            bool isExist = false;
+            PanelItem item = new PanelItem();
+            item = (from _panelItem in myDb.PanelItems
+                    where _panelItem.TestId == testId && _panelItem.IsActive == true
+                    select _panelItem).FirstOrDefault();
+            if (item != null)
+            {
+                isExist = true;
+            }
+
+            return isExist;
+        }
+
+        public List<VMTestListItem> GetPanelTest(int id)
+        {
+            Panel panel = GetPanel(id);
+            List<VMTestListItem> listTest = panel.PanelItems.Where(p => p.IsActive == true).Select(p => new VMTestListItem
+            {
+                TestName = p.Test.Name,
+                TesstId = p.TestId,
+                TestSectionName = p.Test.TestSection.Name
+            }).ToList();
+
+            return listTest;
         }
         #endregion PanelItem
 

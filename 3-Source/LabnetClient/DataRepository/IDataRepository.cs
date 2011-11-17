@@ -35,6 +35,7 @@ namespace DataRepository
         /// <param name="id"></param>
         /// <returns></returns>
         List<VMTestListItem> GetPartnerTest(int id);
+        
         #endregion
 
         #region PartnerCost
@@ -77,6 +78,9 @@ namespace DataRepository
         void PanelItemDelete(int panelItemId);
         List<PanelItem> GetPanelItemByPanelId(int panelId);
         List<PanelItem> GetPanelItemByTestId(int testId);
+        PanelItem GetPanelItemByTestIdAndPanelId(int testId, int panelId);
+        bool IsPanelItemExist(int testId);
+        List<VMTestListItem> GetPanelTest(int id);
         #endregion
 
         #region Doctor

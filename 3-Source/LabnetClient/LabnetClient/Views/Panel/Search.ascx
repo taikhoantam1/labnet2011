@@ -43,7 +43,7 @@
                 <%=panel.PanelName %>
             </th>             
              <th class="textSearch125" align="center">
-                    <%= Html.ActionLink("Cập nhật", "Create", "Panel", new { Id = panel.Id }, new { Class = "ActionLink" })%>
+                    <%= Html.ActionLink("Cập nhật", "Edit", "Panel", new { Id = panel.Id }, new { Class = "ActionLink" })%>
             </th>
          </tr>   
     <%} %>
