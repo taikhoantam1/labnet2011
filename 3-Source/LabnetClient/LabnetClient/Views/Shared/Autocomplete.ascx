@@ -48,6 +48,12 @@
                 }
             }
         });
+//        $("#<%= Model.AutoCompleteId %> .autoCompleteText").change(function(){
+//                $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
+//                $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
+//                $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
+//                $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
+//        });
     <%}%>
     <%else {%>
         var autoCompleteData =<%=Model.JsonData %>;
@@ -72,7 +78,6 @@
             delay:0,
             selectFirst: true,
             change: function(event, ui) {
-                    
                 var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( $(this).val() ) + "$", "i" ),
                 valid = false;
                 $("ul.ui-autocomplete li.ui-menu-item a.ui-corner-all").each(function() {
@@ -94,6 +99,11 @@
             }
         });
     <%} %>
+    
+        $(".autoCompleteText").change(function(){
+                alert("Change");
+        });
+          alert("Change");
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">

@@ -101,11 +101,7 @@
     });
     
 </script>
-<% string display = ViewData.ModelState.IsValid ? "none" : "block"; %>
-<div class="errorbox" id="validationSummary" style="display: <%=display%>">
-    <span class='errorimage'><span class='errorhead'>Looks like we have a small problem...</span></span>
     <%= Html.ValidationSummary() %>
-</div>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
 <% Html.BeginForm("Create", "Panel");%>
