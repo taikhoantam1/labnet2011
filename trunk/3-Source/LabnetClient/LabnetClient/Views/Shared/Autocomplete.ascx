@@ -100,10 +100,6 @@
         });
     <%} %>
     
-        $(".autoCompleteText").change(function(){
-                alert("Change");
-        });
-          alert("Change");
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
