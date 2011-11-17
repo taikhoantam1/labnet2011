@@ -16,9 +16,9 @@ BEGIN
 		INNER JOIN TestSection ts on t.TestSectionId = ts.Id
 		INNER JOIN PanelItem pitem on pitem.TestId = t.Id
 		INNER JOIN Panel p on pitem.PanelId = p.Id
-		WHERE UPPER(t.Name) like '%' + @TestName + '%'
+		WHERE UPPER(t.Name) like '%' + UPPER(@TestName) + '%'
 			AND t.IsActive = 1
-			AND UPPER(ts.Name) LIKE CASE WHEN @TestSectionName IS NOT NULL THEN '%' + @TestSectionName + '%' ELSE '%%' END
+			AND UPPER(ts.Name) LIKE CASE WHEN @TestSectionName IS NOT NULL THEN '%' + UPPER(@TestSectionName) + '%' ELSE '%%' END
 		ORDER BY t.SortOrder
 	END
 END
