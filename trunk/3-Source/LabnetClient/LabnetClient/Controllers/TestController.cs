@@ -81,7 +81,7 @@ namespace LabnetClient.Controllers
             Test test = Mapper.Map<VMTest, Test>(model.Test);
             Repository.TestInsert(test);
 
-            return RedirectToAction("Create", "Test");
+            return RedirectToAction("Create");
         }
         
         //
