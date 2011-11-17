@@ -154,6 +154,7 @@
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\PanelSearchViewModel.cs" />
     <Compile Include="Models\PanelViewModel.cs" />
+    <Compile Include="Models\PartnerSearchViewModel.cs" />
     <Compile Include="Models\PartnerViewModel.cs" />
     <Compile Include="Models\TestSearctViewModel.cs" />
     <Compile Include="Models\TestViewModel.cs" />
@@ -638,6 +639,7 @@
     <Content Include="Views\Panel\Search.ascx" />
     <Content Include="Views\Partner\Details.ascx" />
     <Content Include="Views\Partner\Index.ascx" />
+    <Content Include="Views\Partner\Search.ascx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Test\Create.ascx" />
     <Content Include="Views\Test\Edit.ascx" />

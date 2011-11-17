@@ -45,6 +45,7 @@
     <Compile Include="VMPanel.cs" />
     <Compile Include="VMPanelSearch.cs" />
     <Compile Include="VMPartnerCost.cs" />
+    <Compile Include="VMPartnerSearch.cs" />
     <Compile Include="VMTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

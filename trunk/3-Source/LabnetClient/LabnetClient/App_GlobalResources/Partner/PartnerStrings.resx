@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PanelSearch_Search" xml:space="preserve">
+    <value>Tìm</value>
+  </data>
   <data name="PartnerEdit_Title" xml:space="preserve">
     <value>Cập Nhật Lab Gửi Mẫu</value>
   </data>
@@ -156,6 +159,9 @@
   <data name="PartnerInsert_Name" xml:space="preserve">
     <value>Tên Lab</value>
   </data>
+  <data name="PartnerInsert_NameError" xml:space="preserve">
+    <value>Tên Lab đã tồn tại</value>
+  </data>
   <data name="PartnerInsert_New" xml:space="preserve">
     <value>Nhập mới</value>
   </data>
@@ -179,5 +185,11 @@
   </data>
   <data name="PartnerInsert_Title" xml:space="preserve">
     <value>Thêm Lab Gởi Mẫu</value>
+  </data>
+  <data name="PartnerSearch_GridPartnerName" xml:space="preserve">
+    <value>Tên Lab</value>
+  </data>
+  <data name="PartnerSearch_Name" xml:space="preserve">
+    <value>Tên Lab</value>
   </data>
 </root>

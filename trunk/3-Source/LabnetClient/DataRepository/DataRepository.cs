@@ -74,6 +74,23 @@ namespace DataRepository
 
             return listTest;
         }
+
+        public List<Partner> GetPartnerByName(string name)
+        {
+            List<Partner> lstPartner = (from _partner in myDb.Partners where _partner.Name.ToUpper().Contains(name.ToUpper()) select _partner).ToList();
+            return lstPartner;
+        }
+
+        public bool IsValidPartner(string name)
+        {
+            bool isValid = true;
+            Partner partner = myDb.Partners.SingleOrDefault(u => u.Name.ToUpper() == name.ToUpper());
+            if (partner != null)
+            {
+                isValid = false;
+            }
+            return isValid;
+        }
         #endregion
 
         #region PartnerCost
@@ -94,7 +111,6 @@ namespace DataRepository
         {
             PartnerCost currentPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.Id == id select _partnerCost).First();
             currentPartnerCost.TestId = partnerCost.TestId;
-            currentPartnerCost.PartnerId = partnerCost.PartnerId;
             currentPartnerCost.PartnerId = partnerCost.PartnerId;
             currentPartnerCost.Cost = partnerCost.Cost;
             currentPartnerCost.Description = partnerCost.Description;
@@ -129,17 +145,20 @@ namespace DataRepository
             return lstPartnerCost;
         }
 
-        public PartnerCost GetPartnerCostByTestId(int testId)
+        public PartnerCost GetPartnerCostByTestId(int testId, int partnerId)
         {
-            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.TestId == testId select _partnerCost).First();
+            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts 
+                                       where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true 
+                                       select _partnerCost).First();
             return partnerCost;
         }
 
-        public bool IsPartnerCostExist(int testId)
+        public bool IsPartnerCostExist(int testId, int partnerId)
         {
             bool isExist = false;
             PartnerCost partnerCost = new PartnerCost();
-            partnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.TestId == testId && _partnerCost.IsActive == true
+            partnerCost = (from _partnerCost in myDb.PartnerCosts
+                           where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true
                                                                                 select _partnerCost).FirstOrDefault();
             if (partnerCost != null)
             {

@@ -57,6 +57,12 @@ namespace LabnetClient.Controllers
             {
                 ModelState.AddModelError("Partner Cost not null", Resources.PartnerStrings.PartnerInsert_PartnerCostError);
             }
+
+            if (!Repository.IsValidPartner(model.Partner.Name))
+            {
+                ModelState.AddModelError("Partner name already exists", Resources.PartnerStrings.PartnerInsert_NameError);
+            }
+
             if (!ModelState.IsValid)
             {
                 if (model.PartnerTestList == null)
@@ -115,10 +121,10 @@ namespace LabnetClient.Controllers
 
             foreach (VMTestListItem item in model.PartnerTestList)
             {
-                bool isExist = Repository.IsPartnerCostExist(item.TesstId);
+                bool isExist = Repository.IsPartnerCostExist(item.TesstId, id);
                 if (isExist)
                 {
-                    PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TesstId);
+                    PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TesstId, id);
                     partnerCost.Cost = item.Cost;
                     if (item.IsDelete == true)
                     {
@@ -141,10 +147,33 @@ namespace LabnetClient.Controllers
                 }
             }
             model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
-            return View("Details", model);
+            return RedirectToAction("Create");
 
         }
 
+        public ActionResult Search()
+        {
+            PartnerSearchViewModel model = new PartnerSearchViewModel();
+            model.PartnerSearch.ListSearchResult = new List<PartnerSearchObject>();
+            return View("Search", model);
+        }
+
+
+        [HttpPost]
+        public ActionResult Search(PartnerSearchViewModel model)
+        {
+            List<Partner> lstPartner = Repository.GetPartnerByName(model.PartnerSearch.Name);
+            model.PartnerSearch.ListSearchResult = new List<PartnerSearchObject>();
+            foreach (Partner partner in lstPartner)
+            {
+                PartnerSearchObject obj = new PartnerSearchObject();
+                obj.Id = partner.Id;
+                obj.PartnerName = partner.Name;
+
+                model.PartnerSearch.ListSearchResult.Add(obj);
+            }
+            return View("Search", model);
+        }
         //
         // GET: /Partner/Delete/5
 
