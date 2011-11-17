@@ -98,7 +98,7 @@ namespace LabnetClient.Controllers
             model.Autocomplete.SelectedText = testSection.Name;
             model.Autocomplete.SelectedValue = testSection.Id.ToString();
 
-            return PartialView("Edit", model);
+            return PartialView("Create", model);
         }
 
         //
@@ -183,6 +183,7 @@ namespace LabnetClient.Controllers
                 obj.TestSectionName = item.TestSectionName;
                 obj.TestRange = item.Range;
                 obj.TestUnit = item.Unit;
+                obj.PanelName = item.PanelName;
                 model.TestSearch.ObjSearchResult.Add(obj);
             }
 

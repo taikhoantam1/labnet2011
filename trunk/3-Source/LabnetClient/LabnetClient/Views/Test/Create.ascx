@@ -39,6 +39,18 @@
                 }
             }
         });
+
+        var lowIndex = $("#Test_LowIndex").val();
+        lowIndex = lowIndex.replace(",", ".");
+        $("#LowIndexView").val(lowIndex);
+
+        var highIndex = $("#Test_HighIndex").val();
+        highIndex = highIndex.replace(",", ".");
+        $("#HighIndexView").val(highIndex);
+
+        var testCost = $("#Test_Cost").val();
+        testCost = testCost.replace(",", ".");
+        $("#TestCostView").val(testCost);
     });
 </script>
 <%=Html.ValidationSummary() %>
@@ -198,3 +210,19 @@
     </div>
 </div>
 <% Html.EndForm(); %>
+
+<script type="text/javascript">
+    $(function () {
+        var lowIndexHidden = $("#Test_LowIndex").val();
+        lowIndexHidden = lowIndexHidden.replace(',', '.');
+        $("#Test_LowIndex").val(lowIndexHidden);
+
+        var highIndexHidden = $("#Test_HighIndex").val();
+        highIndexHidden = highIndexHidden.replace(',', '.');
+        $("#Test_HighIndex").val(highIndexHidden);
+
+        var costHidden = $("#Test_Cost").val();
+        costHidden = costHidden.replace(',', '.');
+        $("#Test_Cost").val(costHidden);
+    });
+</script>

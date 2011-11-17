@@ -56,7 +56,11 @@ namespace LabnetClient.Controllers
 
             Doctor doctor = Mapper.Map<VMDoctor, Doctor>(model.Doctor);
             Repository.DoctorInsert(doctor);
-            return View();
+
+            model = new DoctorViewModel();
+            model.Doctor.IsActive = true;
+
+            return View("Create", model);
             
         }
         

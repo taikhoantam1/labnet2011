@@ -83,7 +83,7 @@
                 <%=test.TestSectionName %>
             </th>
              <th class="textSearch125" align="center">
-                
+                <%=test.PanelName %>
             </th>
              <th class="textSearch125" align="center">
                 <%=test.TestRange %>
