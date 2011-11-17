@@ -45,15 +45,52 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="FKs\" />
     <Folder Include="FNs\" />
-    <Folder Include="Table\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FKs\Analysis.fk.sql" />
+    <Content Include="FKs\Analyte.fk.sql" />
+    <Content Include="FKs\Department.fk.sql" />
+    <Content Include="FKs\Doctor.fk.sql" />
+    <Content Include="FKs\LabPatientManagement.fk.sql" />
+    <Content Include="FKs\Panel.fk.sql" />
+    <Content Include="FKs\PanelItem.fk.sql" />
+    <Content Include="FKs\Partner.fk.sql" />
+    <Content Include="FKs\PartnerCost.fk.sql" />
+    <Content Include="FKs\PatientItem.fk.sql" />
+    <Content Include="FKs\PatientType.fk.sql" />
+    <Content Include="FKs\PaymentType.sql" />
+    <Content Include="FKs\Result.fk.sql" />
+    <Content Include="FKs\Test.fk.sql" />
+    <Content Include="FKs\TestCommission.fk.sql" />
+    <Content Include="FKs\TestResult.fk.sql" />
     <Content Include="SPs\sp_SearchTest.sp.sql" />
     <Content Include="SPs\sp_SearchTestByName.sp.sql" />
     <Content Include="SPs\sp_SearchTestByNameForPanel.sp.sql" />
     <Content Include="SPs\sp_SearchTestSection.sp.sql" />
+    <Content Include="Table\Analysis.table.sql" />
+    <Content Include="Table\Analyte.table.sql" />
+    <Content Include="Table\Department.table.sql" />
+    <Content Include="Table\Doctor.table.sql" />
+    <Content Include="Table\LabPatientManagement.table.sql" />
+    <Content Include="Table\Panel.table.sql" />
+    <Content Include="Table\PanelItem.table.sql" />
+    <Content Include="Table\Partner.table.sql" />
+    <Content Include="Table\PartnerCost.table.sql" />
+    <Content Include="Table\Patient.table.sql" />
+    <Content Include="Table\PatientItem.table.sql" />
+    <Content Include="Table\PatientType.table.sql" />
+    <Content Include="Table\PaymentType.table.sql" />
+    <Content Include="Table\Project.table.sql" />
+    <Content Include="Table\Result.table.sql" />
+    <Content Include="Table\ResultDictionary.table.sql" />
+    <Content Include="Table\Source.table.sql" />
+    <Content Include="Table\Staff.table.sql" />
+    <Content Include="Table\Test.table.sql" />
+    <Content Include="Table\TestCommission.table.sql" />
+    <Content Include="Table\TestResult.table.sql" />
+    <Content Include="Table\TestSection.table.sql" />
+    <Content Include="Table\TypeOfSample.table.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
