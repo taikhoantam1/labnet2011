@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PartnerSearchViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.DoctorSearchViewModel>" %>
 
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <%=Html.ValidationSummary() %>
@@ -6,7 +6,7 @@
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-            <%=Resources.PartnerStrings.PartnerSearch_Title%>
+            <%=Resources.DoctorStrings.DoctorSearch_Title%>
         </h3>
     </div>
     <div class="ModuleContent">
@@ -14,13 +14,13 @@
             <div class="Row clear">
                 <div class="Column">
                     <label class="lbTitle">
-                        <%=Resources.PartnerStrings.PartnerSearch_Name%></label>
+                        <%=Resources.DoctorStrings.DoctorSearch_Name%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.PartnerSearch.Name, new { Class = "textInput" })%> 
+                    <%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%> 
                 </div>
                 <div class="Colum">
-                    <input type="submit" value="<%=Resources.PartnerStrings.PanelSearch_Search%>" />
+                    <input type="submit" value="<%=Resources.DoctorStrings.DoctorSearch_ButtonSearch%>" />
                 </div>
                 <div class="clear">
                 </div>
@@ -32,18 +32,18 @@
 <table width="765px">
     <tr valign="middle">
         <th class="textSearch150" align="center">
-            <%=Resources.PartnerStrings.PartnerSearch_GridPartnerName%>
+            <%=Resources.DoctorStrings.DoctorSearch_GridDoctorName%>
         </th>
         <th class="textSearch125" align="center"></th>
     </tr>
-    <%foreach (DomainModel.PartnerSearchObject partner in ViewData.Model.PartnerSearch.ListSearchResult)
+    <%foreach (DomainModel.DoctorSearchObject doctor in ViewData.Model.DoctorSearch.ListSearchResult)
       { %>
          <tr valign="middle">
             <th class="textSearch150" align="center">
-                <%=partner.PartnerName%>
+                <%=doctor.DoctorName%>
             </th>             
              <th class="textSearch125" align="center">
-                    <%= Html.ActionLink("Cập nhật", "Edit", "Partner", new { Id = partner.Id }, new { Class = "ActionLink" })%>
+                    <%= Html.ActionLink("Cập nhật", "Edit", "Doctor", new { Id = doctor.Id }, new { Class = "ActionLink" })%>
             </th>
          </tr>   
     <%} %>

@@ -7,12 +7,28 @@
     <%= Html.ValidationSummary() %>
 </div>
 
+<%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+  {%>
 <% Html.BeginForm("Create", "Doctor");%>
+<%}
+  else
+  { %>
+<% Html.BeginForm("Edit", "Doctor"); %>
+<%} %>
+<%= Html.HiddenFor(m=>m.Doctor.Id) %>
 
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-            <%=Resources.DoctorStrings.DoctorInsert_Title %>
+            <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+              {%>
+                    <%=Resources.DoctorStrings.DoctorInsert_Title %>
+            <%}
+              else
+              { %>
+                     <%=Resources.DoctorStrings.DoctorEdit_Title%>
+            <%} %>
+            
         </h3>
     </div>
     <div class="ModuleContent">
@@ -112,7 +128,6 @@
         </div>
         <div align="center">
             <input type="submit" value="<%=Resources.DoctorStrings.DoctorInsert_ButtonSave%>" id="save"/>
-            <input type="button" value="<%=Resources.DoctorStrings.DoctorInsert_ButtonNew%>" id="Submit1"/>
         </div>
     </div>
 </div>

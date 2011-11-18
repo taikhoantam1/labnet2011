@@ -451,6 +451,17 @@ namespace DataRepository
 
         public void DoctorUpdate(int id, Doctor doctor)
         {
+            Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == id select _doctor).First();
+            currentDoctor.Name = doctor.Name;
+            currentDoctor.Address = doctor.Address;
+            currentDoctor.Phone = doctor.Phone;
+            currentDoctor.IsActive = doctor.IsActive;
+            currentDoctor.Email = doctor.Email;
+            currentDoctor.Commission = doctor.Commission;
+            currentDoctor.BankAccountNumber = doctor.BankAccountNumber;
+            currentDoctor.Other = doctor.Other;
+
+            myDb.SaveChanges();
         }
 
         public void DoctorDelete(int doctorId)
@@ -470,6 +481,12 @@ namespace DataRepository
                 isValid = false;
             }
             return isValid;
+        }
+
+        public List<Doctor> GetDoctorByName(string name)
+        {
+            List<Doctor> lstDoctor = (from _doctor in myDb.Doctors where _doctor.Name.ToUpper().Contains(name.ToUpper()) select _doctor).ToList();
+            return lstDoctor;
         }
         #endregion
 

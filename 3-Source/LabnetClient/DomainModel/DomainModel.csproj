@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="VMDoctor.cs" />
+    <Compile Include="VMDoctorSearch.cs" />
     <Compile Include="VMPanel.cs" />
     <Compile Include="VMPanelSearch.cs" />
     <Compile Include="VMPartnerCost.cs" />

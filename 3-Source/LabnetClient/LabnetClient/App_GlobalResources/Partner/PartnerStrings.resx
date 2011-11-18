@@ -192,4 +192,7 @@
   <data name="PartnerSearch_Name" xml:space="preserve">
     <value>Tên Lab</value>
   </data>
+  <data name="PartnerSearch_Title" xml:space="preserve">
+    <value>Tìm Lab Gửi Mẫu</value>
+  </data>
 </root>
