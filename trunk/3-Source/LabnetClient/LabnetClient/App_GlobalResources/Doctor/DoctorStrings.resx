@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DoctorEdit_Title" xml:space="preserve">
+    <value>Cập nhật Bác Sĩ</value>
+  </data>
   <data name="DoctorInsert_Address" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
@@ -155,5 +158,17 @@
   </data>
   <data name="DoctorInsert_Title" xml:space="preserve">
     <value>Thêm Bác Sĩ</value>
+  </data>
+  <data name="DoctorSearch_ButtonSearch" xml:space="preserve">
+    <value>Tìm</value>
+  </data>
+  <data name="DoctorSearch_GridDoctorName" xml:space="preserve">
+    <value>Tên BS</value>
+  </data>
+  <data name="DoctorSearch_Name" xml:space="preserve">
+    <value>Tên Bác Sĩ</value>
+  </data>
+  <data name="DoctorSearch_Title" xml:space="preserve">
+    <value>Tìm Bác Sĩ</value>
   </data>
 </root>

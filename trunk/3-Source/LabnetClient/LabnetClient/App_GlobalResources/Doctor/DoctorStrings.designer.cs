@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cập nhật Bác Sĩ.
+        /// </summary>
+        internal static string DoctorEdit_Title {
+            get {
+                return ResourceManager.GetString("DoctorEdit_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Địa chỉ.
         /// </summary>
         internal static string DoctorInsert_Address {
@@ -174,6 +183,42 @@ namespace Resources {
         internal static string DoctorInsert_Title {
             get {
                 return ResourceManager.GetString("DoctorInsert_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm.
+        /// </summary>
+        internal static string DoctorSearch_ButtonSearch {
+            get {
+                return ResourceManager.GetString("DoctorSearch_ButtonSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên BS.
+        /// </summary>
+        internal static string DoctorSearch_GridDoctorName {
+            get {
+                return ResourceManager.GetString("DoctorSearch_GridDoctorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Bác Sĩ.
+        /// </summary>
+        internal static string DoctorSearch_Name {
+            get {
+                return ResourceManager.GetString("DoctorSearch_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm Bác Sĩ.
+        /// </summary>
+        internal static string DoctorSearch_Title {
+            get {
+                return ResourceManager.GetString("DoctorSearch_Title", resourceCulture);
             }
         }
     }

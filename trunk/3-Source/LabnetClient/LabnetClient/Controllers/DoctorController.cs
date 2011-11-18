@@ -7,6 +7,7 @@ using LabnetClient.Models;
 using DataRepository;
 using AutoMapper;
 using DomainModel;
+using LabnetClient.Constant;
 
 namespace LabnetClient.Controllers
 {
@@ -69,25 +70,48 @@ namespace LabnetClient.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            DoctorViewModel model = new DoctorViewModel();
+
+            model.Doctor = Mapper.Map<Doctor, VMDoctor>(Repository.GetDoctor(id));
+            model.ViewMode = ViewMode.Edit;
+
+            return View("Create", model);
         }
 
         //
         // POST: /Doctor/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, DoctorViewModel model)
         {
-            try
+            Repository.DoctorUpdate(id, Mapper.Map<VMDoctor, Doctor>(model.Doctor));
+
+            return RedirectToAction("Create");
+            
+        }
+
+        public ActionResult Search()
+        {
+            DoctorSearchViewModel model = new DoctorSearchViewModel();
+            model.DoctorSearch.ListSearchResult = new List<DoctorSearchObject>();
+            return View("Search", model);
+        }
+
+
+        [HttpPost]
+        public ActionResult Search(DoctorSearchViewModel model)
+        {
+            List<Doctor> lstDoctor = Repository.GetDoctorByName(model.DoctorSearch.Name);
+            model.DoctorSearch.ListSearchResult = new List<DoctorSearchObject>();
+            foreach (Doctor doctor in lstDoctor)
             {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
+                DoctorSearchObject obj = new DoctorSearchObject();
+                obj.Id = doctor.Id;
+                obj.DoctorName = doctor.Name;
+
+                model.DoctorSearch.ListSearchResult.Add(obj);
             }
-            catch
-            {
-                return View();
-            }
+            return View("Search", model);
         }
 
         //

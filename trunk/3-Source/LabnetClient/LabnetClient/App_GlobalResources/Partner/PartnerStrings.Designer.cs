@@ -284,5 +284,14 @@ namespace Resources {
                 return ResourceManager.GetString("PartnerSearch_Name", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm Lab Gửi Mẫu.
+        /// </summary>
+        internal static string PartnerSearch_Title {
+            get {
+                return ResourceManager.GetString("PartnerSearch_Title", resourceCulture);
+            }
+        }
     }
 }

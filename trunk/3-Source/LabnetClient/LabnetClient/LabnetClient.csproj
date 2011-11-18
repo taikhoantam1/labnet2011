@@ -151,6 +151,7 @@
     <Compile Include="Models\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DataTableModel.cs" />
+    <Compile Include="Models\DoctorSearchViewModel.cs" />
     <Compile Include="Models\DoctorViewModel.cs" />
     <Compile Include="Models\PanelSearchViewModel.cs" />
     <Compile Include="Models\PanelViewModel.cs" />
@@ -635,6 +636,7 @@
     <Content Include="LibDLL\log4net.dll" />
     <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
     <Content Include="Views\Doctor\Create.ascx" />
+    <Content Include="Views\Doctor\Search.ascx" />
     <Content Include="Views\Panel\Create.ascx" />
     <Content Include="Views\Panel\Search.ascx" />
     <Content Include="Views\Partner\Details.ascx" />

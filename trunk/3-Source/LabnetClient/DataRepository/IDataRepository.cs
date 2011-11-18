@@ -93,6 +93,7 @@ namespace DataRepository
         void DoctorUpdate(int id, Doctor doctor);
         void DoctorDelete(int doctorId);
         bool IsValidDoctor(string name);
+        List<Doctor> GetDoctorByName(string name);
         #endregion
 
         #region TestSection
