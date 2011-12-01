@@ -79,6 +79,24 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhóm XN.
+        /// </summary>
+        internal static string VMPanel_Section {
+            get {
+                return ResourceManager.GetString("VMPanel_Section", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Xét Nghiệm.
+        /// </summary>
+        internal static string VMPanel_TestName {
+            get {
+                return ResourceManager.GetString("VMPanel_TestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên Panel.
         /// </summary>
         internal static string VMPanelSearch_NameRequired {

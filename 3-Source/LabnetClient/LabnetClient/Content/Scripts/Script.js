@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    $(document).ajaxStart($.blockUI()).ajaxStop($.unblockUI());
-
     $("a.ActionLink").unbind("click").click(function (event) {
         event.preventDefault();
         var href = $(this).attr("href");

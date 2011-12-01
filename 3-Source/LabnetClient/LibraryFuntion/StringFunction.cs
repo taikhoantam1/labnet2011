@@ -85,10 +85,5 @@ namespace LibraryFuntion
             return source;
         }
 
-        public static string ToJSON(this object obj)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            return serializer.Serialize(obj);
-        }
     }
 }

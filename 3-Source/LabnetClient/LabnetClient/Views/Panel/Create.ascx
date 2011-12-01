@@ -210,6 +210,7 @@
                         </tr>
                 <%} %>
             </table>
+            <% Html.RenderPartial("DataTable", Model.JQGrid); %>
         <div>
             <table class="hide" id="tblPanelItemHiden">
                 <tr class="trPanelItemDetail">
