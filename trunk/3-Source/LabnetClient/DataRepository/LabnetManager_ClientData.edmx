@@ -640,20 +640,20 @@
         <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="strInput" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TestName" Type="nvarchar" Mode="In" />
           <Parameter Name="TestSectionName" Type="nvarchar" Mode="In" />
           <Parameter Name="PanelName" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTestByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTestByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTestByNameForPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTestByNameForPanel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="sp_SearchTestSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager">
+        <Function Name="sp_SearchTestSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
@@ -741,10 +741,6 @@
             <Parameter Name="SearchType" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="PartnerCosts" EntityType="LabManager_ClientModel.PartnerCost" />
-          <FunctionImport Name="SearchTestByNameForPanel" ReturnType="Collection(LabManager_ClientModel.SearchTestByNameForPanel_Result)">
-            <Parameter Name="FilterText" Mode="In" Type="String" />
-            <Parameter Name="SearchType" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Partners" EntityType="LabManager_ClientModel.Partner" />
           <AssociationSet Name="FK_PartnerCost_Partner" Association="LabManager_ClientModel.FK_PartnerCost_Partner">
             <End Role="Partner" EntitySet="Partners" />
@@ -786,6 +782,10 @@
             <End Role="Doctor" EntitySet="Doctors" />
             <End Role="TestCommission" EntitySet="TestCommissions" />
           </AssociationSet>
+          <FunctionImport Name="SearchTestByNameForPanel" ReturnType="Collection(LabManager_ClientModel.SearchTestByNameForPanel_Result)">
+            <Parameter Name="FilterText" Mode="In" Type="String" />
+            <Parameter Name="SearchType" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -1185,11 +1185,6 @@
           <NavigationProperty Name="Partner" Relationship="LabManager_ClientModel.FK_PartnerCost_Partner" FromRole="PartnerCost" ToRole="Partner" />
           <NavigationProperty Name="Test" Relationship="LabManager_ClientModel.FK_PartnerCost_Test" FromRole="PartnerCost" ToRole="Test" />
         </EntityType>
-        <ComplexType Name="SearchTestByNameForPanel_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <EntityType Name="Partner">
           <Key>
             <PropertyRef Name="Id" />
@@ -1391,6 +1386,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SearchTestByNameForPanel_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
