@@ -30,7 +30,6 @@ namespace LibraryFuntion
     
 
            return serializer.Serialize( obj );
-
         }
 
      }
