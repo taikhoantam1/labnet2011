@@ -123,6 +123,12 @@
   <data name="VMPanelSearch_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Panel</value>
   </data>
+  <data name="VMPanel_Cost" xml:space="preserve">
+    <value>Giá</value>
+  </data>
+  <data name="VMPanel_IsDelete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
   <data name="VMPanel_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Panel</value>
   </data>

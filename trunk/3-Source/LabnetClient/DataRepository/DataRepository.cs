@@ -420,7 +420,9 @@ namespace DataRepository
             {
                 TestName = p.Test.Name,
                 TesstId = p.TestId,
-                TestSectionName = p.Test.TestSection.Name
+                TestSectionName = p.Test.TestSection.Name,
+                IsDelete=!p.IsActive,
+                Cost=p.Test.Cost,
             }).ToList();
 
             return listTest;

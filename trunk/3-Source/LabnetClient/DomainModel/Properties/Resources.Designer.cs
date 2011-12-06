@@ -70,6 +70,24 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Giá.
+        /// </summary>
+        internal static string VMPanel_Cost {
+            get {
+                return ResourceManager.GetString("VMPanel_Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xóa.
+        /// </summary>
+        internal static string VMPanel_IsDelete {
+            get {
+                return ResourceManager.GetString("VMPanel_IsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên Panel.
         /// </summary>
         internal static string VMPanel_NameRequired {

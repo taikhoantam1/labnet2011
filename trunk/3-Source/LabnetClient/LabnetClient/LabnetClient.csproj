@@ -112,6 +112,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\ShareController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="CustomAttribute\LocalizedDisplayNameAttribute.cs" />
@@ -148,22 +149,22 @@
       <DependentUpon>Uploader.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AutocompleteModel.cs" />
+    <Compile Include="Models\Control\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\DataTableModel.cs" />
-    <Compile Include="Models\DoctorSearchViewModel.cs" />
-    <Compile Include="Models\DoctorViewModel.cs" />
-    <Compile Include="Models\JQGridModel\JQColumn.cs" />
-    <Compile Include="Models\JQGridModel\JQColumnAttribute.cs" />
-    <Compile Include="Models\JQGridModel\JQConstant.cs" />
-    <Compile Include="Models\JQGridModel\JQGrid.cs" />
-    <Compile Include="Models\JQGridModel\JQResponseDataModel.cs" />
-    <Compile Include="Models\PanelSearchViewModel.cs" />
-    <Compile Include="Models\PanelViewModel.cs" />
-    <Compile Include="Models\PartnerSearchViewModel.cs" />
-    <Compile Include="Models\PartnerViewModel.cs" />
-    <Compile Include="Models\TestSearctViewModel.cs" />
-    <Compile Include="Models\TestViewModel.cs" />
+    <Compile Include="Models\Doctor\DoctorSearchViewModel.cs" />
+    <Compile Include="Models\Doctor\DoctorViewModel.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQColumn.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQColumnAttribute.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQConstant.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQGrid.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQResponseDataModel.cs" />
+    <Compile Include="Models\Panel\PanelSearchViewModel.cs" />
+    <Compile Include="Models\Panel\PanelViewModel.cs" />
+    <Compile Include="Models\Partner\PartnerSearchViewModel.cs" />
+    <Compile Include="Models\Partner\PartnerViewModel.cs" />
+    <Compile Include="Models\Patient\PatientViewModel.cs" />
+    <Compile Include="Models\Test\TestSearctViewModel.cs" />
+    <Compile Include="Models\Test\TestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -728,6 +729,8 @@
     <Content Include="Views\Partner\CtrlSearch.ascx" />
     <Content Include="Views\Partner\Details.aspx" />
     <Content Include="Views\Partner\Search.aspx" />
+    <Content Include="Views\Patient\Create.aspx" />
+    <Content Include="Views\Patient\CtrlCreate.ascx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
     <Content Include="Views\Test\Edit.aspx" />

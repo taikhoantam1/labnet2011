@@ -12,7 +12,16 @@ namespace LabnetClient.Models
         {
             Panel = new VMPanel();
             Autocomplete = new AutocompleteModel("Panel.TestName");
-            JQGrid=new JQGridModel(typeof(VMTestListItem),"");
+            JQGrid = new JQGridModel(typeof(VMTestListItem), "", "");
+            PanelTestList = new List<VMTestListItem>();
+        }
+
+        public PanelViewModel(VMPanel panel,List<VMTestListItem> panelTestList)
+        {
+            Panel = panel;
+            Autocomplete = new AutocompleteModel("Panel.TestName");
+            PanelTestList = panelTestList;
+            JQGrid = new JQGridModel(typeof(VMTestListItem), panelTestList, "");
         }
 
         public VMPanel Panel { get; set; }
