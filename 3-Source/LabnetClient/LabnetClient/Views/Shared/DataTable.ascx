@@ -82,7 +82,7 @@
         
         jQuery("#list").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
         
-        <%if(Model.HaveLocalData){ %>
+        <%if(Model.UseLocalData){ %>
             for(var i=0;i<=mydata.length;i++)
 	            jQuery("#list").jqGrid('addRowData',i+1,mydata[i]);
         <% }%>

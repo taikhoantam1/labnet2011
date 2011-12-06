@@ -98,12 +98,10 @@ namespace LabnetClient.Controllers
  
         public ActionResult Edit(int id)
         {
-            PanelViewModel model = new PanelViewModel();
-            model.PanelTestList = new List<VMTestListItem>();
-            model.Panel = Mapper.Map<Panel, VMPanel>(Repository.GetPanel(id));
-            model.PanelTestList = Repository.GetPanelTest(id);
+            List<VMTestListItem> testList= Repository.GetPanelTest(id);
+            VMPanel panel= Mapper.Map<Panel, VMPanel>(Repository.GetPanel(id));
+            PanelViewModel model = new PanelViewModel(panel,testList);
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
-            model.JQGrid.DataSource = model.PanelTestList;
             model.ViewMode = ViewMode.Edit;
 
             return View("Create", model);
