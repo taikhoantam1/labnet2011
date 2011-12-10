@@ -9,7 +9,7 @@ namespace LabnetClient.Models
         {
             Patient = new VMPatient();
             LabManagement = new LabPatientManagement();
-            Grid = new JQGridModel(typeof(VMTestListItem), "", "");
+            Grid = new JQGridModel(typeof(VMTestListItem),true, "", "");
         }
 
         /// <summary>

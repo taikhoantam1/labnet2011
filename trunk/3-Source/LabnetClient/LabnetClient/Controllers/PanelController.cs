@@ -19,7 +19,8 @@ namespace LabnetClient.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            PanelSearchViewModel model = new PanelSearchViewModel(null);
+            return View("Search", model);
         }
 
         //
@@ -73,7 +74,7 @@ namespace LabnetClient.Controllers
                 {
                     PanelItem panelItem = new PanelItem();
                     panelItem.PanelId = panel.Id;
-                    panelItem.TestId = item.TesstId;
+                    panelItem.TestId = item.TestId;
                     panelItem.TestName = item.TestName;
                     panelItem.IsActive = true;
                     panelItem.LastUpdated = DateTime.Now;
@@ -81,16 +82,7 @@ namespace LabnetClient.Controllers
                     Repository.PanelItemInsert(panelItem);
                 }
             }
-
-            //model = new PanelViewModel();
-            //model.Panel = new VMPanel();
-            
-            //model.Panel.Name = null;
-            //model.Panel.Description = null;
-            //model.Panel.IsActive = true;
-            //model.PanelTestList = new List<VMTestListItem>();
-            //model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
         
         //
@@ -98,13 +90,14 @@ namespace LabnetClient.Controllers
  
         public ActionResult Edit(int id)
         {
+            Session[SessionProperties.SessionPanelEditId] = id;
             List<VMTestListItem> testList= Repository.GetPanelTest(id);
             VMPanel panel= Mapper.Map<Panel, VMPanel>(Repository.GetPanel(id));
             PanelViewModel model = new PanelViewModel(panel,testList);
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             model.ViewMode = ViewMode.Edit;
 
-            return View("Create", model);
+            return View("Create",model);
         }
 
         //
@@ -114,39 +107,41 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int id, PanelViewModel model)
         {
             Repository.PanelUpdate(id, Mapper.Map<VMPanel, Panel>(model.Panel));
+            return RedirectToAction("Index");
 
-            foreach (VMTestListItem item in model.PanelTestList)
+        }
+        
+        [HttpPost]
+        public string SavePanelTest(List<VMTestListItem> Rows)
+        {
+            int id =(int) Session[SessionProperties.SessionPanelEditId];
+            foreach (VMTestListItem item in Rows)
             {
-                bool isExist = Repository.IsPanelItemExist(item.TesstId);
-                if (isExist)
-                {
-                    PanelItem panelItem = Repository.GetPanelItemByTestIdAndPanelId(item.TesstId, id);
-                    
-                    if (item.IsDelete == true)
-                    {
-                        panelItem.IsActive = false;
-                    }
-                    Repository.PanelItemUpdate(panelItem.Id, panelItem);
-                }
-                else
-                {
-                    if (item.IsDelete == false)
-                    {
-                        PanelItem panelItem = new PanelItem();
-                        panelItem.TestId = item.TesstId;
-                        panelItem.TestName = item.TestName;
-                        panelItem.PanelId = id;
-                        panelItem.IsActive = true;
-                        panelItem.LastUpdated = DateTime.Now;
+                    PanelItem panelItem = Repository.GetPanelItemByTestIdAndPanelId(item.TestId, id);
 
-                        Repository.PanelItemInsert(panelItem);
+                    if (panelItem != null)
+                    {
+                        if (item.IsDelete == true)
+                        {
+                            panelItem.IsActive = false;
+                        }
+                        Repository.PanelItemUpdate(panelItem.Id, panelItem);
                     }
-                }
+                    else
+                    {
+                        if (item.IsDelete == false)
+                        {
+                            panelItem = new PanelItem();
+                            panelItem.TestId = item.TestId;
+                            panelItem.TestName = item.TestName;
+                            panelItem.PanelId = id;
+                            panelItem.IsActive = true;
+                            panelItem.LastUpdated = DateTime.Now;
+                            Repository.PanelItemInsert(panelItem);
+                        }
+                    }
             }
-            model.PanelTestList = model.PanelTestList.Where(p => p.IsDelete == false).ToList();
-
-            return RedirectToAction("Create");
-            
+            return "success";
         }
 
         //
@@ -175,34 +170,13 @@ namespace LabnetClient.Controllers
             }
         }
 
-        public ActionResult Search()
-        {
-            PanelSearchViewModel model = new PanelSearchViewModel();
-            model.PanelSearch.ListSearchResult = new List<PanelSearchObject>();
-            return View("Search", model);
-        }
 
         [HttpPost]
-        public ActionResult Search(PanelSearchViewModel model)
+        public ActionResult Search(string filterText)
         {
-            if (!ModelState.IsValid)
-            {
-                model.PanelSearch.ListSearchResult = new List<PanelSearchObject>();
-                return View("Search", model);
-            }
-
-            List<Panel> lstPanel = Repository.GetPanelByName(model.PanelSearch.Name);
-            model.PanelSearch.ListSearchResult = new List<PanelSearchObject>();
-            foreach (Panel panel in lstPanel)
-            {
-                PanelSearchObject obj = new PanelSearchObject();
-                obj.Id = panel.Id;
-                obj.PanelName = panel.Name;
-
-                model.PanelSearch.ListSearchResult.Add(obj);
-            }
-
-            return View("Search", model);
+            List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanelByName(filterText));
+            JQGridModel model = new JQGridModel(typeof(VMPanel),false,lstPanel,"");
+            return View("DataTable", model);
         }
     }
 }

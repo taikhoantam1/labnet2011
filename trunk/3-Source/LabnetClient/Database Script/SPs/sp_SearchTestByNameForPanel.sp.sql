@@ -10,13 +10,13 @@ as
 Begin
 	if(@SearchType ='WORD')
 	begin
-		select t.Id, t.Name, ts.Name AS TestSectionName
+		select t.Id, t.Name, ts.Name AS TestSectionName,t.Cost
 		from Test t INNER JOIN TestSection ts on t.TestSectionId = ts.Id
 		where(@FilterText is null or dbo.fuChuyenCoDauThanhKhongDau(t.Name) like @FilterText+'%')
 	end
 	else
 	begin
-		select t.Id, t.Name, ts.Name AS TestSectionName
+		select t.Id, t.Name, ts.Name AS TestSectionName,t.Cost
 		from Test t INNER JOIN TestSection ts on t.TestSectionId = ts.Id
 		where(@FilterText is null or dbo.fuChuyenCoDauThanhKhongDau(t.Name) like '%'+@FilterText+'%')
 	end

@@ -83,7 +83,7 @@ namespace LabnetClient.Controllers
                     {
                         PartnerCost cost = new PartnerCost();
                         cost.Cost = item.Cost;
-                        cost.TestId = item.TesstId;
+                        cost.TestId = item.TestId;
                         cost.PartnerId = partner.Id;
                         cost.IsActive = true;
                         cost.LastUpdated = DateTime.Now;
@@ -121,10 +121,10 @@ namespace LabnetClient.Controllers
 
             foreach (VMTestListItem item in model.PartnerTestList)
             {
-                bool isExist = Repository.IsPartnerCostExist(item.TesstId, id);
+                bool isExist = Repository.IsPartnerCostExist(item.TestId, id);
                 if (isExist)
                 {
-                    PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TesstId, id);
+                    PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TestId, id);
                     partnerCost.Cost = item.Cost;
                     if (item.IsDelete == true)
                     {
@@ -137,7 +137,7 @@ namespace LabnetClient.Controllers
                     if (item.IsDelete == false)
                     {
                         PartnerCost partnerCost = new PartnerCost();
-                        partnerCost.TestId = item.TesstId;
+                        partnerCost.TestId = item.TestId;
                         partnerCost.PartnerId = id;
                         partnerCost.IsActive = true;
                         partnerCost.Cost = item.Cost;

@@ -12,9 +12,7 @@
 
         $("#autocompleteSelectTest .autoCompleteText").blur(function(){
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
-            var cost = $("#txtCost").val();
-            //alert(testName);
-            if(testName != "" && cost != ""){
+            if(testName != ""){
                 $('#btnAddTest').attr('disabled', false);
             }
             else{
@@ -32,71 +30,34 @@
          });
     }
     $(document).ready(function () {
-        
+
         CheckAllowAddTest();
-        var index =<%=Model.PanelTestList.Count %>;
-        BindCheckBoxDeleteTest();
-        $("#autocompleteSelectTest .autoCompleteText").blur(function(){
-             $("#txtCost").val($("#autocompleteSelectTest .autoCompleteTag").val());
-            
-         });
 
         $("#btnAddTest").click(function () {
-            //alert("add");
-            var newTr = $("#tblPanelItemHiden tr").clone();
-            var testName=$("#autocompleteSelectTest .autoCompleteText").val();
-            var testSection=$("#autocompleteSelectTest .autoCompleteTag").val();
-            var testId=$("#autocompleteSelectTest .autoCompleteValue").val();
 
-            $(newTr).find(".TestNameField").html(testName);
-            $(newTr).find(".TestSectionField").html(testSection);
+            var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
+            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testSection = tags[0];
+            var cost = tags[1];
+            var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
+            var dataObject = new Object();
+            dataObject.TestName = testName;
+            dataObject.TestSectionName = testSection;
+            dataObject.Cost = cost;
+            dataObject.TestId = testId;
+            var array = $("#list").jqGrid().getRowData();
+            jQuery("#list").jqGrid('addRowData', array.length, dataObject);
 
-            $(newTr).find(".TestName").val(testName).attr("name","PanelTestList["+index+"].TestName");
-            $(newTr).find(".TestId").val(testId).attr("name","PanelTestList["+index+"].TesstId");
-            $(newTr).find(".TestSectionName").val(testSection).attr("name","PanelTestList["+index+"].TestSectionName");
-            $(newTr).find(".IsDelete").attr("name","PanelTestList["+index+"].IsDelete");
-            
-
-            $("#tblPanelItem").append(newTr);
-            BindCheckBoxDeleteTest();
-            index++;
             $("#autocompleteSelectTest .autoCompleteText").val("");
             $("#autocompleteSelectTest .autoCompleteValue").val(null);
             $("#autocompleteSelectTest .autoCompleteTag").val(null);
             $('#btnAddTest').attr('disabled', true);
         });
-        function BindCheckBoxDeleteTest()
-        {
-        
-            $(".btnDelTest").unbind("click").click(function(){
-                var trParent=$(this).parents("tr.trPanelItemDetail");
-                if($(this).is(":checked"))
-                {
-                   $(trParent).find(".IsDelete").val("True");
-                }
-                else
-                {
-                    $(trParent).find(".IsDelete").val("False");
-                }
-            });
-        }
 
-        $('#reloadPage').click(function () {
-            //alert('Handler for .click() called.');
-            var allInputs = $(":input");
-            for (var i = 0; i < allInputs.length; i++) {
-
-                if (allInputs[i].id == "Partner_IsActive" || allInputs[i].id == "save" 
-                    || allInputs[i].id == "reloadPage" || allInputs[i].id == "btnAddTest") {
-                    //do nothing
-                }
-                else {
-                    //alert(allInputs[i].value);
-                    allInputs[i].value = "";
-                }
-            }
-
-            $('.trPartnerCost').remove();
+        $("#btnSavePanel").click(function (event) {
+            event.preventDefault();
+            $("#DataTableSaveButton").click();
+            $("form").submit();
         });
     });
     
@@ -164,6 +125,8 @@
                 </div>
             </div>
         </div>
+
+<% Html.EndForm(); %>
         <div class="ContentBottom">
             <div class="Row clear">
                 <div class="Column">
@@ -183,52 +146,12 @@
             </div>
         </div>
         <div>
-        </div>
-            <table id="tblPanelItem" width="765px">
-                <tr>
-                    <th class="textSearch150" align="center">
-                        <%=Resources.PanelStrings.PanelInsert_GridTestName%>
-                    </th>
-                    <th class="textSearch150" align="center">
-                        <%=Resources.PanelStrings.PanelInsert_GridTestSection%>
-                    </th>
-                    <th class="textSearch150" align="center">
-                        <%=Resources.PanelStrings.PanelInsert_GridRemove%>
-                    </th>
-                </tr>
-                <% for(int i=0;i< Model.PanelTestList.Count;i++)
-                   { %>
-                        <tr class="trPanelItemDetail">
-                            <td class="textSearch150" align="center"><label class="TestNameField"><%= Model.PanelTestList[i].TestName%></label>
-                                <%= Html.HiddenFor(p => p.PanelTestList[i].TestName, new { @class = "TestName" })%>
-                                <%= Html.HiddenFor(p => p.PanelTestList[i].TesstId, new { @class = "TestId" })%>
-                                <%= Html.HiddenFor(p => p.PanelTestList[i].TestSectionName, new { @class = "TestSectionName" })%>
-                                <%= Html.HiddenFor(p => p.PanelTestList[i].IsDelete, new { @class = "IsDelete" })%>
-                            </td>
-                            <td class="textSearch150" align="center"><label class="TestSectionField"> <%= Model.PanelTestList[i].TestSectionName%></label></td>
-                            <td class="textSearch150" align="center"><input type="checkbox" class="btnDelTest" value="Xóa"/></td>
-                        </tr>
-                <%} %>
-            </table>
             <% Html.RenderPartial("DataTable", Model.JQGrid); %>
-        <div>
-            <table class="hide" id="tblPanelItemHiden">
-                <tr class="trPanelItemDetail">
-                    <td class="textSearch150" align="center"><label class="TestNameField"></label>
-                        <input type="hidden" class="TestName"/>
-                        <input type="hidden" class="TestId"/>
-                        <input type="hidden" class="TestSectionName"/>
-                        <input type="hidden" class="IsDelete" value="False"/>
-                    </td>
-                    <td class="textSearch150" align="center"><label class="TestSectionField"></label></td>
-                    <td class="textSearch150" align="center"><input type="checkbox" class="btnDelTest" value="Xóa"/> </td>
-                </tr>
-            </table>
         </div>
         <div align="center">
-            <input type="submit" value="<%=Resources.PartnerStrings.PartnerInsert_Button_Save%>" id="save"/>
-            
+
+            <input type="button" value="<%=Resources.PanelStrings.PanelInsert_ButtonSave%>" id="btnSavePanel"/>
+            <input type="button" value="<%=Resources.PanelStrings.PanelInsert_ButtonCanel%>" id="btnCanvel" />
         </div>
     </div>
 </div>
-<% Html.EndForm(); %>

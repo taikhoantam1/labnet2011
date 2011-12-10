@@ -280,3 +280,17 @@ h5, h6
 {
     display:none;
 }
+
+.editLink
+{
+    background: url('Icon/Edit.gif') 0px 5px no-repeat;
+    padding:8px;
+    margin:5px;
+}
+
+.deleteLink
+{   
+    background-image: url('Icon/iconDelete.gif')0px 5px no-repeat;
+    margin:5px;
+    padding:8px;
+}

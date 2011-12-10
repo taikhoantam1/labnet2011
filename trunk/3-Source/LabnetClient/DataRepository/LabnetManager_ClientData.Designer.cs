@@ -39,6 +39,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Doctor", "Doctor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Doctor), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Partner), "LabPatientManagement", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabPatientManagement), true)]
 
 #endregion
 
@@ -2249,6 +2250,30 @@ namespace DataRepository
         private global::System.Int32 _OrderNumber;
         partial void OnOrderNumberChanging(global::System.Int32 value);
         partial void OnOrderNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PartnerId
+        {
+            get
+            {
+                return _PartnerId;
+            }
+            set
+            {
+                OnPartnerIdChanging(value);
+                ReportPropertyChanging("PartnerId");
+                _PartnerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PartnerId");
+                OnPartnerIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PartnerId;
+        partial void OnPartnerIdChanging(Nullable<global::System.Int32> value);
+        partial void OnPartnerIdChanged();
 
         #endregion
     
@@ -2424,6 +2449,44 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PatientItem>("LabManager_ClientModel.FK_PatientItem_LabPatientManagement", "PatientItem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "Partner")]
+        public Partner Partner
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partner>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "Partner").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partner>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "Partner").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Partner> PartnerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partner>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "Partner");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Partner>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "Partner", value);
                 }
             }
         }
@@ -3246,6 +3309,28 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PartnerCost>("LabManager_ClientModel.FK_PartnerCost_Partner", "PartnerCost", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "LabPatientManagement")]
+        public EntityCollection<LabPatientManagement> LabPatientManagements
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LabPatientManagement>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "LabPatientManagement");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LabPatientManagement>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "LabPatientManagement", value);
                 }
             }
         }
@@ -7423,12 +7508,14 @@ namespace DataRepository
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="testSectionName">Initial value of the TestSectionName property.</param>
-        public static SearchTestByNameForPanel_Result CreateSearchTestByNameForPanel_Result(global::System.Int32 id, global::System.String name, global::System.String testSectionName)
+        /// <param name="cost">Initial value of the Cost property.</param>
+        public static SearchTestByNameForPanel_Result CreateSearchTestByNameForPanel_Result(global::System.Int32 id, global::System.String name, global::System.String testSectionName, global::System.Decimal cost)
         {
             SearchTestByNameForPanel_Result searchTestByNameForPanel_Result = new SearchTestByNameForPanel_Result();
             searchTestByNameForPanel_Result.Id = id;
             searchTestByNameForPanel_Result.Name = name;
             searchTestByNameForPanel_Result.TestSectionName = testSectionName;
+            searchTestByNameForPanel_Result.Cost = cost;
             return searchTestByNameForPanel_Result;
         }
 
@@ -7506,6 +7593,30 @@ namespace DataRepository
         private global::System.String _TestSectionName;
         partial void OnTestSectionNameChanging(global::System.String value);
         partial void OnTestSectionNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Cost
+        {
+            get
+            {
+                return _Cost;
+            }
+            set
+            {
+                OnCostChanging(value);
+                ReportPropertyChanging("Cost");
+                _Cost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cost");
+                OnCostChanged();
+            }
+        }
+        private global::System.Decimal _Cost;
+        partial void OnCostChanging(global::System.Decimal value);
+        partial void OnCostChanged();
 
         #endregion
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LabnetClient.Models
+namespace DomainModel.JQGrid
 {
     public class JQGridColumn
     {
@@ -25,5 +25,7 @@ namespace LabnetClient.Models
         public bool Sortable { get; set; }
 
         public int Width { get; set; }
+
+        public string Formatter { get; set; }
     }
 }

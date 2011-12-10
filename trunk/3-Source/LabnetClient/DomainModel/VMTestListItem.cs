@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DomainModel.Properties;
+using DomainModel.JQGrid;
 
 namespace DomainModel
 {
@@ -14,19 +15,20 @@ namespace DomainModel
 
         }
 
-        [JQColumnAttribute( "VMPanel_TestName", true, false, true, EditTypeEnum.Text)]
+        [JQColumnAttribute("VMPanel_TestName", true, false,false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestName { get; set; }
 
-        //[JQColumnAttribute("TesstId", true, false, true, EditTypeEnum.Text)]
-        public int TesstId { get; set; }
+        [JQColumnAttribute("VMPanel_TestId", true, true, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public int TestId { get; set; }
 
-        [JQColumnAttribute("VMPanel_Cost", true, false, true, EditTypeEnum.Text)]
+        [JQColumnAttribute("VMPanel_Cost", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public decimal Cost { get; set; }
 
-        [JQColumnAttribute("VMPanel_Section", true, false, true, EditTypeEnum.Text)]
+        [JQColumnAttribute("VMPanel_Section", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestSectionName { get; set; }
 
-        [JQColumnAttribute("VMPanel_IsDelete", true, false, true, EditTypeEnum.Checkbox)]
+        [JQColumnAttribute("VMPanel_IsDelete", true, false, true, EditTypeEnum.Checkbox, FormatterEnum.Checkbox)]
         public bool IsDelete { get; set; }
+
     }
 }

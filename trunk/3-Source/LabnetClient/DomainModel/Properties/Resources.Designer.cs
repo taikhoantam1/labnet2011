@@ -79,6 +79,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mô Tả.
+        /// </summary>
+        internal static string VMPanel_Description {
+            get {
+                return ResourceManager.GetString("VMPanel_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xóa.
         /// </summary>
         internal static string VMPanel_IsDelete {
@@ -93,6 +102,15 @@ namespace DomainModel.Properties {
         internal static string VMPanel_NameRequired {
             get {
                 return ResourceManager.GetString("VMPanel_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Panel.
+        /// </summary>
+        internal static string VMPanel_PanelName {
+            get {
+                return ResourceManager.GetString("VMPanel_PanelName", resourceCulture);
             }
         }
         

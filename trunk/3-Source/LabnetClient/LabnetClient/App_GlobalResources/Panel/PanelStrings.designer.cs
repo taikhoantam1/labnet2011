@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hủy.
+        /// </summary>
+        internal static string PanelInsert_ButtonCanel {
+            get {
+                return ResourceManager.GetString("PanelInsert_ButtonCanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm mới.
         /// </summary>
         internal static string PanelInsert_ButtonNew {

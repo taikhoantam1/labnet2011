@@ -48,7 +48,8 @@ namespace LabnetClient
 
             Mapper.CreateMap<VMTest, Test>();
 
-            Mapper.CreateMap<Panel, VMPanel>();
+            Mapper.CreateMap<Panel, VMPanel>()
+                .ForMember("PanelEditLink", p => p.Ignore());
 
             Mapper.CreateMap<VMPanel, Panel>();
 
