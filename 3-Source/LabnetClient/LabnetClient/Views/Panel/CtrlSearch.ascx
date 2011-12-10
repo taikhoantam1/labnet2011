@@ -1,8 +1,4 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PanelSearchViewModel>" %>
-
-<script src="/Content/Scripts/Script.js" type="text/javascript"></script>
-<%=Html.ValidationSummary() %>
-<% Html.BeginForm();%>
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
@@ -17,36 +13,34 @@
                         <%=Resources.PanelStrings.PanelSearch_Name%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.PanelSearch.Name, new { Class = "textInput" })%> 
+                    <%=Html.TextBoxFor(m => m.PanelName, new { Class = "textInput filterText" })%>
                 </div>
                 <div class="Colum">
-                    <input type="submit" value="<%=Resources.PanelStrings.PanelSearch_Search%>" />
+                    <input type="button" value="<%=Resources.PanelStrings.PanelSearch_Search%>" id="btnSearchFilter"/>
                 </div>
                 <div class="clear">
                 </div>
             </div>
+            <div class="Row ResultTable">
+              
+            </div>
         </div>
     </div>
-</div>
 <div>
-<table width="765px">
-    <tr valign="middle">
-        <th class="textSearch150" align="center">
-            <%=Resources.PanelStrings.PanelSearch_GridPanelName%>
-        </th>
-        <th class="textSearch125" align="center"></th>
-    </tr>
-    <%foreach (DomainModel.PanelSearchObject panel in ViewData.Model.PanelSearch.ListSearchResult)
-      { %>
-         <tr valign="middle">
-            <th class="textSearch150" align="center">
-                <%=panel.PanelName %>
-            </th>             
-             <th class="textSearch125" align="center">
-                    <%= Html.ActionLink("Cập nhật", "Edit", "Panel", new { Id = panel.Id }, new { Class = "ActionLink" })%>
-            </th>
-         </tr>   
-    <%} %>
-</table>
-</div>
-<% Html.EndForm(); %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSearchFilter").click(function () {
+            var filterText=$(".filterText").val();
+            $.ajax({
+                url: "/Panel/Search",
+                type:"POST",
+                data: {
+                    filterText: filterText
+                },
+                success:function(data){
+                    $(".ResultTable").html(data);
+                }
+            });
+        });
+    });
+</script>

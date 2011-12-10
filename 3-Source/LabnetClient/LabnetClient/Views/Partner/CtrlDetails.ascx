@@ -73,7 +73,7 @@
             $(newTr).find(".TestCostField").html(costEnter);
 
             $(newTr).find(".TestName").val(testName).attr("name","PartnerTestList["+index+"].TestName");
-            $(newTr).find(".TestId").val(testId).attr("name","PartnerTestList["+index+"].TesstId");
+            $(newTr).find(".TestId").val(testId).attr("name","PartnerTestList["+index+"].TestId");
             $(newTr).find(".Cost").val(costEnter).attr("name","PartnerTestList["+index+"].Cost");
             $(newTr).find(".IsDelete").attr("name","PartnerTestList["+index+"].IsDelete");
             
@@ -290,7 +290,7 @@
                         <tr class="trPartnerCost">
                             <td class="textSearch150" align="center"><label class="TestNameField"><%= Model.PartnerTestList[i].TestName %></label>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].TestName, new  {@class="TestName" })%>
-                                <%= Html.HiddenFor(p => p.PartnerTestList[i].TesstId, new { @class = "TestId" })%>
+                                <%= Html.HiddenFor(p => p.PartnerTestList[i].TestId, new { @class = "TestId" })%>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].Cost, new { @class = "Cost" })%>
                                 <%= Html.HiddenFor(p => p.PartnerTestList[i].IsDelete, new { @class = "IsDelete" })%>
                             </td>

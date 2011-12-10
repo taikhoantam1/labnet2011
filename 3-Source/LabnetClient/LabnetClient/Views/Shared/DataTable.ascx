@@ -5,6 +5,9 @@
 <link href="/Content/Lib/jqGrid/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
 <script src="/Content/Lib/jquery-ui-1.8.16/jquery-ui-1.8.16.min.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/i18n/grid.locale-en.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery.jgrid.no_legacy_api = false;
+</script>
 <script src="/Content/Lib/jqGrid/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/jqModal.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/jqDnR.js" type="text/javascript"></script>
@@ -37,7 +40,8 @@
             colNames:[ <%=string.Join(",",Model.Columns.Select(p=>"'"+p.DisplayName+"'"))%>], //['Inv No', 'Date', 'Amount', 'Tax', 'Total', 'Notes'],
             colModel: [<%=Model.ColModelScript %>],
             cellsubmit: 'clientArray',
-            cellEdit     : true,
+            loadonce: true,
+            cellEdit     : <%=Model.AllowEdit?"true":"false" %>,
             beforeEditCell : function(rowid, cellname, value, iRow, iCol)
             {
                     
@@ -45,9 +49,9 @@
                 selRowIndex = iRow;
                 selRowId=rowid;
             },
-            onCellSelect:function(rowid,iCol, cellcontent,e)
+            afterEditCell : function(rowid, cellname, value, iRow, iCol)
             {
-                $("#"+$($("#list").jqGrid("getCell",rowid,iCol)).attr("id")).select();
+                $("#list tr:eq("+iRow+") td:eq("+iCol+") input").select();
             },
             page:1,//Set the initial number of page when we make the request.This parameter is passed to the url for use by the server routine retrieving the data
             pager: $("#pager"),
@@ -80,6 +84,14 @@
                 {}
         );
         
+        function editlink( cellvalue, options, rowObject ){
+	        return "<a class='editLink' href='"+cellvalue+"' title='Cập Nhật'></a>";
+        }
+        
+        function deletelink( cellvalue, options, rowObject ){
+	        return "<a class='deleteLink' href='"+cellvalue+"' title='Xóa'></a>";
+        }
+
         jQuery("#list").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
         
         <%if(Model.UseLocalData){ %>
@@ -87,15 +99,17 @@
 	            jQuery("#list").jqGrid('addRowData',i+1,mydata[i]);
         <% }%>
 
-        $("#edit").click(function(){
+        $("#DataTableSaveButton").click(function(){
             var array=$("#list").jqGrid().getRowData();
             var obj=new Object();
             obj.Rows=array;
             $("#text").html( $.postify(obj));
+            var  test =$.postify(obj)
             $.ajax({
-                url:"/Home/SaveTable",
+                url:"<%= Model.PostBackUrl %>",
                 data: $.postify(obj),
                 type:"POST",
+                async:false,
                 success:function(data){
                     alert(data);
                 }
@@ -105,6 +119,8 @@
     });  
 
 </script>
+
+<input type=button class="hide"  id="DataTableSaveButton"/>
 <table id="list" class="scroll">
 </table>
 <div id="pager" class="scroll" style="text-align: center;">

@@ -8,11 +8,13 @@ namespace LabnetClient.Models
 {
     public class PanelSearchViewModel : BaseModel
     {
-        public VMPanelSearch PanelSearch { get; set; }
+        public string PanelName { get; set; }
 
-        public PanelSearchViewModel()
+        public JQGridModel JQGrid { get; set; }
+
+        public PanelSearchViewModel(List<VMPanel> panels)
         {
-            PanelSearch = new VMPanelSearch();
+            JQGrid = new JQGridModel(typeof(VMPanel), false, panels, "");
         }
     }
 }

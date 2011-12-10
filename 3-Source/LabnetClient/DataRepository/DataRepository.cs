@@ -68,7 +68,7 @@ namespace DataRepository
             List<VMTestListItem> listTest = partner.PartnerCosts.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
                 TestName = p.Test.Name,
-                TesstId = p.TestId,
+                TestId = p.TestId,
                 Cost = p.Cost
             }).ToList();
 
@@ -262,7 +262,7 @@ namespace DataRepository
         public object GetTestByNameForPanel(string name, string searchType)
         {
             List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType.ToUpper()).ToList();
-            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName });
+            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName+","+p.Cost });
         }
         #endregion Test
 
@@ -385,14 +385,14 @@ namespace DataRepository
 
         public List<Panel> GetPanelByName(string name)
         {
-            List<Panel> lstPanel = (from _panel in myDb.Panels where _panel.Name.ToUpper().Contains(name.ToUpper()) select _panel).ToList();
+            List<Panel> lstPanel = (from _panel in myDb.Panels where string.IsNullOrEmpty(name)|| _panel.Name.ToUpper().Contains(name.ToUpper()) select _panel).ToList();
             return lstPanel;
         }
 
         public PanelItem GetPanelItemByTestIdAndPanelId(int testId, int panelId)
         {
             PanelItem panelItem = (from _item in myDb.PanelItems 
-                                   where _item.PanelId == panelId && _item.TestId == testId && _item.IsActive == true 
+                                   where _item.PanelId == panelId && _item.TestId == testId
                                    select _item).FirstOrDefault();
 
             return panelItem;
@@ -419,12 +419,11 @@ namespace DataRepository
             List<VMTestListItem> listTest = panel.PanelItems.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
                 TestName = p.Test.Name,
-                TesstId = p.TestId,
+                TestId = p.TestId,
                 TestSectionName = p.Test.TestSection.Name,
                 IsDelete=!p.IsActive,
                 Cost=p.Test.Cost,
             }).ToList();
-
             return listTest;
         }
         #endregion PanelItem

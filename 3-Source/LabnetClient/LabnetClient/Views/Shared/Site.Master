@@ -56,7 +56,7 @@
                             <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
                         <li><a class="MenuItem ActionLink" href="#">
                             <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
-                        <li><a class="MenuItem ActionLink" href="/Panel/Search/">
+                        <li><a class="MenuItem ActionLink" href="/Panel">
                             <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
                         <li><a class="MenuItem ActionLink" href="/Partner/Search/">
                             <%= Resources.GlobalStrings.Menu_SearchPartnerCost %></a></li>

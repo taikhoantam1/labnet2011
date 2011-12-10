@@ -41,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JQColumnAttribute.cs" />
+    <Compile Include="JQGrid\JQColumn.cs" />
+    <Compile Include="JQGrid\JQColumnAttribute.cs" />
+    <Compile Include="JQGrid\JQConstant.cs" />
     <Compile Include="LabPatientManagement.cs" />
     <Compile Include="VMDoctor.cs" />
     <Compile Include="VMDoctorSearch.cs" />
     <Compile Include="VMPanel.cs" />
-    <Compile Include="VMPanelSearch.cs" />
     <Compile Include="VMPartnerCost.cs" />
     <Compile Include="VMPartnerSearch.cs" />
     <Compile Include="VMPatient.cs" />

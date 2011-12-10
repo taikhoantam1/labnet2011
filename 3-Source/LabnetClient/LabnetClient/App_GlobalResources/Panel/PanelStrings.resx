@@ -123,6 +123,9 @@
   <data name="PanelInsert_ButtonAdd" xml:space="preserve">
     <value>Thêm XN</value>
   </data>
+  <data name="PanelInsert_ButtonCanel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
   <data name="PanelInsert_ButtonNew" xml:space="preserve">
     <value>Thêm mới</value>
   </data>
