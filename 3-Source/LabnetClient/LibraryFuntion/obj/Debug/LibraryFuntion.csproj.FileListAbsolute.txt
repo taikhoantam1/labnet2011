@@ -48,3 +48,8 @@ E:\LabNetProject\Phase 1.0\Source\LabnetClient\LibraryFuntion\bin\Debug\LibraryF
 E:\LabNetProject\Phase 1.0\Source\LabnetClient\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
 E:\LabNetProject\Phase 1.0\Source\LabnetClient\LibraryFuntion\obj\Debug\LibraryFuntion.exe
 E:\LabNetProject\Phase 1.0\Source\LabnetClient\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
+D:\03-Work\09-SD Group Project\labnet2011\3-Source\LabnetClient\LibraryFuntion\bin\Debug\LibraryFuntion.exe
+D:\03-Work\09-SD Group Project\labnet2011\3-Source\LabnetClient\LibraryFuntion\bin\Debug\LibraryFuntion.pdb
+D:\03-Work\09-SD Group Project\labnet2011\3-Source\LabnetClient\LibraryFuntion\obj\Debug\ResolveAssemblyReference.cache
+D:\03-Work\09-SD Group Project\labnet2011\3-Source\LabnetClient\LibraryFuntion\obj\Debug\LibraryFuntion.exe
+D:\03-Work\09-SD Group Project\labnet2011\3-Source\LabnetClient\LibraryFuntion\obj\Debug\LibraryFuntion.pdb
