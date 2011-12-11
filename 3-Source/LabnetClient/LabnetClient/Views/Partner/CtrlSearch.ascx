@@ -17,10 +17,10 @@
                         <%=Resources.PartnerStrings.PartnerSearch_Name%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.PartnerSearch.Name, new { Class = "textInput" })%> 
+                    <%=Html.TextBoxFor(m => m.PartnerName, new { Class = "textInput" })%> 
                 </div>
                 <div class="Colum">
-                    <input type="submit" value="<%=Resources.PartnerStrings.PanelSearch_Search%>" />
+                    <input type="button" id="btnSubmit" value="<%=Resources.PartnerStrings.PanelSearch_Search%>" />
                 </div>
                 <div class="clear">
                 </div>
@@ -28,7 +28,8 @@
         </div>
     </div>
 </div>
-<div>
+<% Html.EndForm(); %>
+<div id="SearchResult"><%--
 <table width="765px">
     <tr valign="middle">
         <th class="textSearch150" align="center">
@@ -47,6 +48,20 @@
             </th>
          </tr>   
     <%} %>
-</table>
+</table>--%>
 </div>
-<% Html.EndForm(); %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            var data = $("form").serialize();
+            $.ajax({
+                url: "/Partner/SearchPartner",
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    $("#SearchResult").html(data);
+                }
+            });
+        });
+    });
+</script>

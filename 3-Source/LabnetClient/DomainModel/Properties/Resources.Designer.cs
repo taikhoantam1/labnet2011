@@ -169,6 +169,42 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Địa Chỉ.
+        /// </summary>
+        internal static string VMPartnerSearch_Address {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string VMPartnerSearch_Email {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Lab.
+        /// </summary>
+        internal static string VMPartnerSearch_PartnerName {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_PartnerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Điện Thoại.
+        /// </summary>
+        internal static string VMPartnerSearch_Phone {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên XN.
         /// </summary>
         internal static string VMTest_NameRequired {
@@ -192,6 +228,42 @@ namespace DomainModel.Properties {
         internal static string VMTestSearch_NameRequired {
             get {
                 return ResourceManager.GetString("VMTestSearch_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên XN.
+        /// </summary>
+        internal static string VMTestSearch_TestName {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSBT.
+        /// </summary>
+        internal static string VMTestSearch_TestRange {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm XN.
+        /// </summary>
+        internal static string VMTestSearch_TestSectionName {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestSectionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đơn vị.
+        /// </summary>
+        internal static string VMTestSearch_TestUnit {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestUnit", resourceCulture);
             }
         }
     }

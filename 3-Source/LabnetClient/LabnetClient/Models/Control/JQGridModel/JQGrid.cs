@@ -44,10 +44,14 @@ namespace LabnetClient.Models
             PostBackUrl = postBackUrl;
             DataSource = dataSource;
             AllowEdit = allowEdit;
-            UseLocalData = true;
 
             if (DataSource != null)
+            {
                 JsonDataArray = DataSource.ToJson();
+                UseLocalData = true;
+            }
+            else
+                UseLocalData = false;
             Columns = new List<JQGridColumn>();
             PopularGridInfo();
             PopularGridScript();

@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.JQGridModel>" %>
-
 <link rel="stylesheet" type="text/css" media="screen" href="/Content/Style/redmond/jquery-ui-1.8.16.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="/Content/Style/ui.jqgrid.css" />
 <link href="/Content/Lib/jqGrid/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
@@ -12,9 +11,15 @@
 <script src="/Content/Lib/jqGrid/jqModal.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/jqDnR.js" type="text/javascript"></script>
 <script src="/Content/Lib/postify.js" type="text/javascript"></script>
-
 <script type="text/javascript">
           
+    function DataTableGetDataSource()
+    {
+        var array=$("#list").jqGrid().getRowData();
+        var obj=new Object();
+        obj.Rows=array;
+        return $.postify(obj);
+    }
     jQuery(document).ready(function () {
         var selICol; //index Col of selected cell
         var selRowIndex; //index Row of selected cell
@@ -22,8 +27,13 @@
         var mydata = <%=Model.JsonDataArray %> 
 
         jQuery("#list").jqGrid({
+        <%if(!string.IsNullOrEmpty(Model.RequestUrl)){ %> 
             url: '<%=Model.RequestUrl %>',
             datatype: 'json',
+        <%}else{ %> 
+            
+            datatype: "local",
+        <%} %>           
             jsonReader: {
                 root: "rows",
                 page: "CurrentPage",
@@ -40,7 +50,10 @@
             colNames:[ <%=string.Join(",",Model.Columns.Select(p=>"'"+p.DisplayName+"'"))%>], //['Inv No', 'Date', 'Amount', 'Tax', 'Total', 'Notes'],
             colModel: [<%=Model.ColModelScript %>],
             cellsubmit: 'clientArray',
+           
+        <%if(string.IsNullOrEmpty(Model.RequestUrl)){ %> 
             loadonce: true,
+        <%} %>  
             cellEdit     : <%=Model.AllowEdit?"true":"false" %>,
             beforeEditCell : function(rowid, cellname, value, iRow, iCol)
             {
@@ -99,28 +112,28 @@
 	            jQuery("#list").jqGrid('addRowData',i+1,mydata[i]);
         <% }%>
 
+
         $("#DataTableSaveButton").click(function(){
             var array=$("#list").jqGrid().getRowData();
             var obj=new Object();
             obj.Rows=array;
-            $("#text").html( $.postify(obj));
-            var  test =$.postify(obj)
             $.ajax({
                 url:"<%= Model.PostBackUrl %>",
                 data: $.postify(obj),
                 type:"POST",
                 async:false,
                 success:function(data){
-                    alert(data);
+                    if(data.trim().indexOf("success")==-1)
+                        alert(data);
                 }
             });
         });
+
             
     });  
 
 </script>
-
-<input type=button class="hide"  id="DataTableSaveButton"/>
+<input type="button" class="hide" id="DataTableSaveButton" />
 <table id="list" class="scroll">
 </table>
 <div id="pager" class="scroll" style="text-align: center;">

@@ -144,6 +144,18 @@
   <data name="VMPanel_TestName" xml:space="preserve">
     <value>Tên Xét Nghiệm</value>
   </data>
+  <data name="VMPartnerSearch_Address" xml:space="preserve">
+    <value>Địa Chỉ</value>
+  </data>
+  <data name="VMPartnerSearch_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="VMPartnerSearch_PartnerName" xml:space="preserve">
+    <value>Tên Lab</value>
+  </data>
+  <data name="VMPartnerSearch_Phone" xml:space="preserve">
+    <value>Điện Thoại</value>
+  </data>
   <data name="VMPartner_AddressRequired" xml:space="preserve">
     <value>Vui lòng nhập địa chỉ</value>
   </data>
@@ -155,6 +167,18 @@
   </data>
   <data name="VMTestSearch_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên XN</value>
+  </data>
+  <data name="VMTestSearch_TestName" xml:space="preserve">
+    <value>Tên XN</value>
+  </data>
+  <data name="VMTestSearch_TestRange" xml:space="preserve">
+    <value>CSBT</value>
+  </data>
+  <data name="VMTestSearch_TestSectionName" xml:space="preserve">
+    <value>Nhóm XN</value>
+  </data>
+  <data name="VMTestSearch_TestUnit" xml:space="preserve">
+    <value>Đơn vị</value>
   </data>
   <data name="VMTest_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên XN</value>

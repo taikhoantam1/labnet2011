@@ -43,7 +43,8 @@
                     $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
-                    $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
+                    $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");	
+                     $("#<%= Model.AutoCompleteId %> .autoCompleteText").data( "autocomplete" ).term = "";
                     return false;
                 }
             }
@@ -92,7 +93,8 @@
                     $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
                     $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
-                    $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
+                    $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");	
+                     $("#<%= Model.AutoCompleteId %> .autoCompleteText").data( "autocomplete" ).term = "";
                     return false;
                 }
                    

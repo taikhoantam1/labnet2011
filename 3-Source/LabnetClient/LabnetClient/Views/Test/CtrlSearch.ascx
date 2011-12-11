@@ -48,13 +48,14 @@
                 </div>
             </div>
             <div align="center" class="Row clear">
-                <input type="submit" value="<%=Resources.TestStrings.TestSearch_Search%>" />
+                <input type="button" id="btnSubmit" value="<%=Resources.TestStrings.TestSearch_Search%>" />
             </div> 
         </div>
     </div>
 </div>
-<div>
-<table width="765px">
+<% Html.EndForm(); %>
+<div  id="SearchResult">
+<%--<table width="765px">
     <tr valign="middle">
         <th class="textSearch150" align="center">
             <%=Resources.TestStrings.TestSearch_TestName %>
@@ -83,9 +84,6 @@
                 <%=test.TestSectionName %>
             </th>
              <th class="textSearch125" align="center">
-                <%=test.PanelName %>
-            </th>
-             <th class="textSearch125" align="center">
                 <%=test.TestRange %>
             </th>
              <th class="textSearch125" align="center">
@@ -96,6 +94,20 @@
             </th>
          </tr>   
     <%} %>
-</table>
+</table>--%>
 </div>
-<% Html.EndForm(); %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            var data = $("form").serialize();
+            $.ajax({
+                url: "/Test/SearchTest",
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    $("#SearchResult").html(data);
+                }
+            });
+        });
+    });
+</script>

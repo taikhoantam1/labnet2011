@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using DomainModel.Properties;
+using DomainModel.JQGrid;
 
 namespace DomainModel
 {
@@ -12,7 +13,6 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets test name
         /// </summary>
-        [Required(ErrorMessageResourceName = "VMTestSearch_NameRequired", ErrorMessageResourceType = typeof(Resources))]
         public string TestName { get; set; }
 
         /// <summary>
@@ -38,23 +38,35 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets Test Name
         /// </summary>
+        [JQColumnAttribute("VMTestSearch_TestName", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestName { get; set; }
-
-        /// <summary>
-        /// Sets or gets Panel name
-        /// </summary>
-        public string PanelName { get; set; }
 
         /// <summary>
         /// Sets or gets Test range
         /// </summary>
+        [JQColumnAttribute("VMTestSearch_TestRange", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestRange { get; set; }
 
         /// <summary>
         /// Sets or gets Test unit
         /// </summary>
+        [JQColumnAttribute("VMTestSearch_TestUnit", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestUnit { get; set; }
 
+        [JQColumnAttribute("VMTestSearch_TestSectionName", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestSectionName { get; set; }
+
+        /// <summary>
+        /// Link edit panel use in search panel
+        /// </summary>
+        [JQColumnAttribute("", true, false, false, EditTypeEnum.Link, FormatterEnum.EditLink)]
+        public string SearchEditLink
+        {
+            get
+            {
+                return "/Test/Edit/" + TestId;
+            }
+        }
+
     }
 }

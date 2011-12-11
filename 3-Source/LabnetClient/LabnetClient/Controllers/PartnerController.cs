@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DomainModel;
-using DataRepository;
 using LabnetClient.Models;
-using AutoMapper;
-using LabnetClient.App_Code;
+using DomainModel;
 using LabnetClient.Constant;
 using LibraryFuntion;
+using DataRepository;
+using AutoMapper;
+
 
 namespace LabnetClient.Controllers
 {
@@ -39,23 +39,25 @@ namespace LabnetClient.Controllers
 
         public ActionResult Create()
         {
-            PartnerViewModel model = new PartnerViewModel();
-            model.PartnerTestList = new List<VMTestListItem>();
-            model.Partner.IsActive = true;
+            PartnerViewModel model = new PartnerViewModel(new VMPartner(),new List<VMTestListItem>());
             model.ViewMode = ViewMode.Create;
-            model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Details", model);
         }
 
         //
         // POST: /Partner/Create
-
         [HttpPost]
         public ActionResult Create(PartnerViewModel model)
         {
-            if (model.PartnerTestList == null)
+            List<VMTestListItem> Rows = null;
+            if (Session[SessionProperties.SessionPartnerTestList] != null)
             {
-                ModelState.AddModelError("Partner Cost not null", Resources.PartnerStrings.PartnerInsert_PartnerCostError);
+                Rows = (List<VMTestListItem>)Session[SessionProperties.SessionPartnerTestList];
+            }
+            else
+            {
+                Rows = new List<VMTestListItem>();
             }
 
             if (!Repository.IsValidPartner(model.Partner.Name))
@@ -65,19 +67,17 @@ namespace LabnetClient.Controllers
 
             if (!ModelState.IsValid)
             {
-                if (model.PartnerTestList == null)
-                {
-                    model.PartnerTestList = new List<VMTestListItem>();
-                }
-                model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+                model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+                model.JQGrid = new JQGridModel(typeof(VMTestListItem), true, Rows, "/Partner/SavePartnerTest");
                 return View("Details", model);
             }
             else
             {
+                
                 Partner partner = Mapper.Map<VMPartner, Partner>(model.Partner);
                 Repository.PartnerInsert(partner);
 
-                foreach (VMTestListItem item in model.PartnerTestList)
+                foreach (VMTestListItem item in Rows)
                 {
                     if (item.IsDelete == false)
                     {
@@ -91,8 +91,17 @@ namespace LabnetClient.Controllers
                     }
                 }
             }
-            return RedirectToAction("Create");
+            return RedirectToAction("Search");
             
+        }
+        
+
+        [HttpPost]
+        public string SavePartnerTest(List<VMTestListItem> Rows)
+        {
+            Session[SessionProperties.SessionPartnerTestList] = Rows;
+          
+            return "success";
         }
 
         //
@@ -100,13 +109,12 @@ namespace LabnetClient.Controllers
 
         public ActionResult Edit(int id)
         {
-            PartnerViewModel model = new PartnerViewModel();
-            //model.Partner.PartnerCostDetails = new List<VMPartnerCost>();
+            VMPartner partner = Mapper.Map<Partner, VMPartner>(Repository.GetPartnerById(id));
+            List<VMTestListItem> partnerTestList = Repository.GetPartnerTest(id);
+            PartnerViewModel model = new PartnerViewModel(partner,partnerTestList);
             model.ViewMode = ViewMode.Edit;
-            model.Autocomplete.JsonData = Repository.GetTestByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
 
-            model.Partner = Mapper.Map<Partner, VMPartner>(Repository.GetPartnerById(id));
-            model.PartnerTestList = Repository.GetPartnerTest(id);
             return View("Details", model);
         }
 
@@ -118,61 +126,66 @@ namespace LabnetClient.Controllers
         {
             //model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
             Repository.PartnerUpdate(id, Mapper.Map<VMPartner, Partner>(model.Partner));
-
-            foreach (VMTestListItem item in model.PartnerTestList)
+            if (Session[SessionProperties.SessionPartnerTestList] != null)
             {
-                bool isExist = Repository.IsPartnerCostExist(item.TestId, id);
-                if (isExist)
+                List<VMTestListItem> Rows = (List<VMTestListItem>)Session[SessionProperties.SessionPartnerTestList];
+                foreach (VMTestListItem item in Rows)
                 {
-                    PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TestId, id);
-                    partnerCost.Cost = item.Cost;
-                    if (item.IsDelete == true)
+                    bool isExist = Repository.IsPartnerCostExist(item.TestId, id);
+                    if (isExist)
                     {
-                        partnerCost.IsActive = false;
-                    }
-                    Repository.PartnerCostUpdate(partnerCost.Id, partnerCost);
-                }
-                else
-                {
-                    if (item.IsDelete == false)
-                    {
-                        PartnerCost partnerCost = new PartnerCost();
-                        partnerCost.TestId = item.TestId;
-                        partnerCost.PartnerId = id;
-                        partnerCost.IsActive = true;
+                        PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TestId, id);
                         partnerCost.Cost = item.Cost;
-                        partnerCost.LastUpdated = DateTime.Now;
-                        Repository.PartnerCostInsert(partnerCost);
+                        if (item.IsDelete == true)
+                        {
+                            partnerCost.IsActive = false;
+                        }
+                        Repository.PartnerCostUpdate(partnerCost.Id, partnerCost);
+                    }
+                    else
+                    {
+                        if (item.IsDelete == false)
+                        {
+                            PartnerCost partnerCost = new PartnerCost();
+                            partnerCost.TestId = item.TestId;
+                            partnerCost.PartnerId = id;
+                            partnerCost.IsActive = true;
+                            partnerCost.Cost = item.Cost;
+                            partnerCost.LastUpdated = DateTime.Now;
+                            Repository.PartnerCostInsert(partnerCost);
+                        }
                     }
                 }
             }
-            model.PartnerTestList = model.PartnerTestList.Where(p => p.IsDelete == false).ToList();
-            return RedirectToAction("Create");
+            return RedirectToAction("Search");
 
         }
+
 
         public ActionResult Search()
         {
             PartnerSearchViewModel model = new PartnerSearchViewModel();
-            model.PartnerSearch.ListSearchResult = new List<PartnerSearchObject>();
             return View("Search", model);
         }
 
 
         [HttpPost]
-        public ActionResult Search(PartnerSearchViewModel model)
+        public ActionResult SearchPartner(PartnerSearchViewModel model)
         {
-            List<Partner> lstPartner = Repository.GetPartnerByName(model.PartnerSearch.Name);
-            model.PartnerSearch.ListSearchResult = new List<PartnerSearchObject>();
+            List<Partner> lstPartner = Repository.GetPartnerByName(model.PartnerName);
+            List<VMPartnerSearch> ListSearchResult = new List<VMPartnerSearch>();
             foreach (Partner partner in lstPartner)
             {
-                PartnerSearchObject obj = new PartnerSearchObject();
+                VMPartnerSearch obj = new VMPartnerSearch();
                 obj.Id = partner.Id;
                 obj.PartnerName = partner.Name;
-
-                model.PartnerSearch.ListSearchResult.Add(obj);
+                obj.Phone = partner.Phone;
+                obj.Email = partner.Email;
+                obj.Address = partner.Address;
+                ListSearchResult.Add(obj);
             }
-            return View("Search", model);
+            JQGridModel grid = new JQGridModel(typeof(VMPartnerSearch), false, ListSearchResult, "");
+            return View("DataTable", grid);
         }
         //
         // GET: /Partner/Delete/5

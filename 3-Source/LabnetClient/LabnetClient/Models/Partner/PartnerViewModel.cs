@@ -6,9 +6,12 @@ namespace LabnetClient.Models
     public class PartnerViewModel : BaseModel
     {
         public PartnerViewModel()
+        {}
+        public PartnerViewModel(VMPartner partner , List<VMTestListItem> partnerTestList)
         {
-            Partner = new VMPartner();
+            Partner = partner;
             Autocomplete = new AutocompleteModel("Partner.TestName");
+            JQGrid = new JQGridModel(typeof(VMTestListItem), true, partnerTestList, "/Partner/SavePartnerTest");
         }
 
         /// <summary>
@@ -20,10 +23,13 @@ namespace LabnetClient.Models
         /// Autocomplete model
         /// </summary>
         public AutocompleteModel Autocomplete { get; set; }
-
+        
         /// <summary>
-        /// Gets or sets list test assigned to partner
+        /// 
         /// </summary>
-        public List<VMTestListItem> PartnerTestList { get; set; }
+        public JQGridModel JQGrid { get; set; }
+
+
+
     }
 }

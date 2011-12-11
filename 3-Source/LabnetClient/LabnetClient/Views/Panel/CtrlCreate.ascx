@@ -56,6 +56,7 @@
 
         $("#btnSavePanel").click(function (event) {
             event.preventDefault();
+            var data = DataTableGetDataSource();
             $("#DataTableSaveButton").click();
             $("form").submit();
         });

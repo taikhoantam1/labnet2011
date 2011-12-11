@@ -9,11 +9,11 @@ namespace DomainModel.JQGrid
 {
     public class JQColumnAttribute:Attribute
     {
-        public JQColumnAttribute(string displayName, bool sortable, bool visible, bool editable, EditTypeEnum editType, FormatterEnum formatter)
+        public JQColumnAttribute(string displayName, bool sortable, bool hidden, bool editable, EditTypeEnum editType, FormatterEnum formatter)
         {
             DisplayName = GetDisplayName(displayName);
             Sortable = sortable;
-            Hidden = visible;
+            Hidden = hidden;
             Editable = editable;
             Width=80;
             EditType = editType;
