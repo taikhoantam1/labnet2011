@@ -7227,15 +7227,13 @@ namespace DataRepository
         /// <param name="testName">Initial value of the TestName property.</param>
         /// <param name="testSectionName">Initial value of the TestSectionName property.</param>
         /// <param name="range">Initial value of the Range property.</param>
-        /// <param name="panelName">Initial value of the PanelName property.</param>
-        public static SearchTest_Result CreateSearchTest_Result(global::System.Int32 id, global::System.String testName, global::System.String testSectionName, global::System.String range, global::System.String panelName)
+        public static SearchTest_Result CreateSearchTest_Result(global::System.Int32 id, global::System.String testName, global::System.String testSectionName, global::System.String range)
         {
             SearchTest_Result searchTest_Result = new SearchTest_Result();
             searchTest_Result.Id = id;
             searchTest_Result.TestName = testName;
             searchTest_Result.TestSectionName = testSectionName;
             searchTest_Result.Range = range;
-            searchTest_Result.PanelName = panelName;
             return searchTest_Result;
         }
 
@@ -7361,30 +7359,6 @@ namespace DataRepository
         private global::System.String _Unit;
         partial void OnUnitChanging(global::System.String value);
         partial void OnUnitChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PanelName
-        {
-            get
-            {
-                return _PanelName;
-            }
-            set
-            {
-                OnPanelNameChanging(value);
-                ReportPropertyChanging("PanelName");
-                _PanelName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PanelName");
-                OnPanelNameChanged();
-            }
-        }
-        private global::System.String _PanelName;
-        partial void OnPanelNameChanging(global::System.String value);
-        partial void OnPanelNameChanged();
 
         #endregion
     }

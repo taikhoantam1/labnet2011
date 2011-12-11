@@ -69,7 +69,9 @@ namespace DataRepository
             {
                 TestName = p.Test.Name,
                 TestId = p.TestId,
-                Cost = p.Cost
+                Cost = p.Cost,
+                TestSectionName=p.Test.TestSection.Name,
+                IsDelete=false,
             }).ToList();
 
             return listTest;
@@ -77,14 +79,14 @@ namespace DataRepository
 
         public List<Partner> GetPartnerByName(string name)
         {
-            List<Partner> lstPartner = (from _partner in myDb.Partners where _partner.Name.ToUpper().Contains(name.ToUpper()) select _partner).ToList();
+            List<Partner> lstPartner = (from _partner in myDb.Partners where string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper()) select _partner).ToList();
             return lstPartner;
         }
 
         public bool IsValidPartner(string name)
         {
             bool isValid = true;
-            Partner partner = myDb.Partners.SingleOrDefault(u => u.Name.ToUpper() == name.ToUpper());
+            Partner partner = myDb.Partners.SingleOrDefault(u => u.Name == name);
             if (partner != null)
             {
                 isValid = false;
@@ -230,7 +232,7 @@ namespace DataRepository
         public bool IsValidTest(string testName)
         {
             bool isValid = true;
-            Test testWithSameName = myDb.Tests.SingleOrDefault(u => u.Name.ToUpper() == testName.ToUpper());
+            Test testWithSameName = myDb.Tests.SingleOrDefault(u => u.Name == testName);
             if (testWithSameName != null)
             {
                 isValid = false;
@@ -241,27 +243,19 @@ namespace DataRepository
         public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName)
         {
             List<SearchTest_Result> lstTestSearch = new List<SearchTest_Result>();
-            if (!string.IsNullOrEmpty(testSectionName) && string.IsNullOrEmpty(panelName))
-            {
-                lstTestSearch = myDb.SearchTest(testName.ToUpper(), testSectionName.ToUpper(), "").ToList();
-            }
-            if (string.IsNullOrEmpty(testSectionName) && string.IsNullOrEmpty(panelName))
-            {
-                lstTestSearch = myDb.SearchTest(testName.ToUpper(), "", "").ToList();
-            }
-
+            lstTestSearch = myDb.SearchTest(testName, testSectionName,panelName).ToList();
             return lstTestSearch;
         }
 
         public object GetTestByName(string name, string searchType)
         {
-            List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType.ToUpper()).ToList();
+            List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
 		}
 
         public object GetTestByNameForPanel(string name, string searchType)
         {
-            List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType.ToUpper()).ToList();
+            List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName+","+p.Cost });
         }
         #endregion Test
@@ -316,7 +310,7 @@ namespace DataRepository
         public bool IsValidPanel(string name)
         {
             bool isValid = true;
-            Panel panel = myDb.Panels.SingleOrDefault(u => u.Name.ToUpper() == name.ToUpper());
+            Panel panel = myDb.Panels.SingleOrDefault(u => u.Name == name);
             if (panel != null)
             {
                 isValid = false;
@@ -385,7 +379,7 @@ namespace DataRepository
 
         public List<Panel> GetPanelByName(string name)
         {
-            List<Panel> lstPanel = (from _panel in myDb.Panels where string.IsNullOrEmpty(name)|| _panel.Name.ToUpper().Contains(name.ToUpper()) select _panel).ToList();
+            List<Panel> lstPanel = (from _panel in myDb.Panels where string.IsNullOrEmpty(name)|| _panel.Name.Contains(name) select _panel).ToList();
             return lstPanel;
         }
 
@@ -476,7 +470,7 @@ namespace DataRepository
         public bool IsValidDoctor(string name)
         {
             bool isValid = true;
-            Doctor doctor = myDb.Doctors.SingleOrDefault(u => u.Name.ToUpper() == name.ToUpper());
+            Doctor doctor = myDb.Doctors.SingleOrDefault(u => u.Name == name);
             if (doctor != null)
             {
                 isValid = false;
@@ -486,7 +480,7 @@ namespace DataRepository
 
         public List<Doctor> GetDoctorByName(string name)
         {
-            List<Doctor> lstDoctor = (from _doctor in myDb.Doctors where _doctor.Name.ToUpper().Contains(name.ToUpper()) select _doctor).ToList();
+            List<Doctor> lstDoctor = (from _doctor in myDb.Doctors where _doctor.Name.Contains(name) select _doctor).ToList();
             return lstDoctor;
         }
         #endregion
@@ -496,8 +490,8 @@ namespace DataRepository
 
         public object GetTestSectionByName(string name, string searchType)
         {
-            name = name.ToUpper();
-            List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType.ToUpper()).ToList();
+            name = name;
+            List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
         }
 

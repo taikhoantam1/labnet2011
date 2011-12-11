@@ -2,43 +2,36 @@
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-    function CheckAllowAddTest()
-    {
+    $(document).ready(function () {
         //Todo: Kiểm tra 
         //1:Không chọn test mà nhấn thêm
         //2:Chọn test đã tồn tại trong list
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
         $('#btnAddTest').attr('disabled', true);
 
-        $("#autocompleteSelectTest .autoCompleteText").blur(function(){
+        $("#autocompleteSelectTest .autoCompleteText").blur(function () {
+            var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
+            $("#txtCost").val(tags[1]);
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
-            var cost = $("#txtCost").val();
-            //alert(testName);
-            if(testName != "" && cost != ""){
-                $('#btnAddTest').attr('disabled', false);
-            }
-            else{
-                $('#btnAddTest').attr('disabled', true);
-            }
-           
+
             var allInputs = $(".TestName");
 
             for (var i = 0; i < allInputs.length; i++) {
                 var testTable = allInputs[i].value;
-                if(testName == testTable){
+                if (testName == testTable) {
                     $('#btnAddTest').attr('disabled', true);
                 }
             }
-         });
+        });
 
-         $("#txtCost").keyup(function(){
+        $("#txtCost").keyup(function () {
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
             var cost = $("#txtCost").val();
             //alert(cost);
-            if(testName != "" && cost != ""){
+            if (testName != "" && cost != "") {
                 $('#btnAddTest').attr('disabled', false);
             }
-            else{
+            else {
                 $('#btnAddTest').attr('disabled', true);
             }
 
@@ -46,79 +39,42 @@
 
             for (var i = 0; i < allInputs.length; i++) {
                 var testTable = allInputs[i].value;
-                if(testName == testTable){
+                if (testName == testTable) {
                     $('#btnAddTest').attr('disabled', true);
                 }
             }
-         });
-    }
-    $(document).ready(function () {
-        CheckAllowAddTest();
-        var index =<%=Model.PartnerTestList.Count %>;
-        BindCheckBoxDeleteTest();
-        $("#autocompleteSelectTest .autoCompleteText").blur(function(){
-             $("#txtCost").val($("#autocompleteSelectTest .autoCompleteTag").val());
-            
-         });
+        });
+  
+  
 
         $("#btnAddTest").click(function () {
             //alert("add");
-            var newTr = $("#tblPartnerCostHiden tr").clone();
-            var testName=$("#autocompleteSelectTest .autoCompleteText").val();
-            var cost=$("#autocompleteSelectTest .autoCompleteTag").val();
-            var testId=$("#autocompleteSelectTest .autoCompleteValue").val();
-            var costEnter = $("#txtCost").val();
+            var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
+            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testSection = tags[0];
+            var cost = tags[1];
+            var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
 
-            $(newTr).find(".TestNameField").html(testName);
-            $(newTr).find(".TestCostField").html(costEnter);
+            var dataObject = new Object();
+            dataObject.TestName = testName;
+            dataObject.TestSectionName = testSection;
+            dataObject.Cost = cost;
+            dataObject.TestId = testId;
+            var array = $("#list").jqGrid().getRowData();
+            jQuery("#list").jqGrid('addRowData', array.length, dataObject);
 
-            $(newTr).find(".TestName").val(testName).attr("name","PartnerTestList["+index+"].TestName");
-            $(newTr).find(".TestId").val(testId).attr("name","PartnerTestList["+index+"].TestId");
-            $(newTr).find(".Cost").val(costEnter).attr("name","PartnerTestList["+index+"].Cost");
-            $(newTr).find(".IsDelete").attr("name","PartnerTestList["+index+"].IsDelete");
-            
-
-            $("#tblPartnerCost").append(newTr);
-            BindCheckBoxDeleteTest();
-            index++;
             $("#autocompleteSelectTest .autoCompleteText").val("");
             $("#autocompleteSelectTest .autoCompleteValue").val(null);
             $("#autocompleteSelectTest .autoCompleteTag").val(null);
             $("#txtCost").val("");
             $('#btnAddTest').attr('disabled', true);
         });
-        function BindCheckBoxDeleteTest()
-        {
-        
-            $(".btnDelTest").unbind("click").click(function(){
-                var trParent=$(this).parents("tr.trPartnerCost");
-                if($(this).is(":checked"))
-                {
-                   $(trParent).find(".IsDelete").val("True");
-                }
-                else
-                {
-                    $(trParent).find(".IsDelete").val("False");
-                }
-            });
-        }
 
-        $('#reloadPage').click(function () {
-            //alert('Handler for .click() called.');
-            var allInputs = $(":input");
-            for (var i = 0; i < allInputs.length; i++) {
-
-                if (allInputs[i].id == "Partner_IsActive" || allInputs[i].id == "save" 
-                    || allInputs[i].id == "reloadPage" || allInputs[i].id == "btnAddTest") {
-                    //do nothing
-                }
-                else {
-                    //alert(allInputs[i].value);
-                    allInputs[i].value = "";
-                }
-            }
-
-            $('.trPartnerCost').remove();
+        $("#btnSavePanel").click(function (event) {
+            event.preventDefault();
+            var data = DataTableGetDataSource();
+            $("#DataTableSaveButton").click();
+            $("form").submit();
         });
     });
     
@@ -270,10 +226,12 @@
                 <table id="ListTest">
                 </table>
             </div>
+            <% Html.EndForm(); %>
         </div>
         <div>
+            <%Html.RenderPartial("DataTable", Model.JQGrid); %>
         </div>
-            <table id="tblPartnerCost" width="765px">
+            <%--<table id="tblPartnerCost" width="765px">
                 <tr>
                     <th class="textSearch150" align="center">
                         <%=Resources.PartnerStrings.PartnerInsert_GridColumn_TestName%>
@@ -298,25 +256,10 @@
                             <td class="textSearch150" align="center"><input type="checkbox" class="btnDelTest" value="Xóa"/></td>
                         </tr>
                 <%} %>
-            </table>
-        <div>
-            <table class="hide" id="tblPartnerCostHiden">
-                <tr class="trPartnerCost">
-                    <td class="textSearch150" align="center"><label class="TestNameField"></label>
-                        <input type="hidden" class="TestName"/>
-                        <input type="hidden" class="TestId"/>
-                        <input type="hidden" class="Cost"/>
-                        <input type="hidden" class="IsDelete" value="False"/>
-                    </td>
-                    <td class="textSearch150" align="center"><label class="TestCostField"></label></td>
-                    <td class="textSearch150" align="center"><input type="checkbox" class="btnDelTest" value="Xóa"/> </td>
-                </tr>
-            </table>
-        </div>
+            </table>--%>
         <div align="center">
-            <input type="submit" value="<%=Resources.PartnerStrings.PartnerInsert_Button_Save%>" id="save"/>
+            <input type="button" value="<%=Resources.PartnerStrings.PartnerInsert_Button_Save%>" id="btnSavePanel"/>
             
         </div>
     </div>
 </div>
-<% Html.EndForm(); %>

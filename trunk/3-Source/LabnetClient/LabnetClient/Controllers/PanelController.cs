@@ -36,9 +36,7 @@ namespace LabnetClient.Controllers
 
         public ActionResult Create()
         {
-            PanelViewModel model = new PanelViewModel();
-            model.PanelTestList = new List<VMTestListItem>();
-            model.Panel.IsActive = true;
+            PanelViewModel model = new PanelViewModel(new VMPanel(),null);
             model.ViewMode = ViewMode.Create;
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Create", model);
@@ -68,18 +66,22 @@ namespace LabnetClient.Controllers
             Panel panel = Mapper.Map<VMPanel, Panel>(model.Panel);
             Repository.PanelInsert(panel);
 
-            foreach (VMTestListItem item in model.PanelTestList)
+            if (Session[SessionProperties.SessionPanelTestList] != null)
             {
-                if (item.IsDelete == false)
+                List<VMTestListItem> Rows = (List<VMTestListItem>)Session[SessionProperties.SessionPanelTestList];
+                foreach (VMTestListItem item in Rows)
                 {
-                    PanelItem panelItem = new PanelItem();
-                    panelItem.PanelId = panel.Id;
-                    panelItem.TestId = item.TestId;
-                    panelItem.TestName = item.TestName;
-                    panelItem.IsActive = true;
-                    panelItem.LastUpdated = DateTime.Now;
-
-                    Repository.PanelItemInsert(panelItem);
+                    PanelItem panelItem = Repository.GetPanelItemByTestIdAndPanelId(item.TestId, panel.Id);
+                    if (item.IsDelete == false)
+                    {
+                        panelItem = new PanelItem();
+                        panelItem.TestId = item.TestId;
+                        panelItem.TestName = item.TestName;
+                        panelItem.PanelId = panel.Id;
+                        panelItem.IsActive = true;
+                        panelItem.LastUpdated = DateTime.Now;
+                        Repository.PanelItemInsert(panelItem);
+                    }
                 }
             }
             return RedirectToAction("Index");
@@ -90,7 +92,7 @@ namespace LabnetClient.Controllers
  
         public ActionResult Edit(int id)
         {
-            Session[SessionProperties.SessionPanelEditId] = id;
+            Session[SessionProperties.SessionPanelTestList] = id;
             List<VMTestListItem> testList= Repository.GetPanelTest(id);
             VMPanel panel= Mapper.Map<Panel, VMPanel>(Repository.GetPanel(id));
             PanelViewModel model = new PanelViewModel(panel,testList);
@@ -107,16 +109,11 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int id, PanelViewModel model)
         {
             Repository.PanelUpdate(id, Mapper.Map<VMPanel, Panel>(model.Panel));
-            return RedirectToAction("Index");
-
-        }
-        
-        [HttpPost]
-        public string SavePanelTest(List<VMTestListItem> Rows)
-        {
-            int id =(int) Session[SessionProperties.SessionPanelEditId];
-            foreach (VMTestListItem item in Rows)
+            if (Session[SessionProperties.SessionPanelTestList] != null)
             {
+                List<VMTestListItem> Rows = (List<VMTestListItem>)Session[SessionProperties.SessionPanelTestList];
+                foreach (VMTestListItem item in Rows)
+                {
                     PanelItem panelItem = Repository.GetPanelItemByTestIdAndPanelId(item.TestId, id);
 
                     if (panelItem != null)
@@ -140,7 +137,16 @@ namespace LabnetClient.Controllers
                             Repository.PanelItemInsert(panelItem);
                         }
                     }
+                }
             }
+            return RedirectToAction("Index");
+
+        }
+        
+        [HttpPost]
+        public string SavePanelTest(List<VMTestListItem> Rows)
+        {
+            Session[SessionProperties.SessionPanelTestList] = Rows;
             return "success";
         }
 

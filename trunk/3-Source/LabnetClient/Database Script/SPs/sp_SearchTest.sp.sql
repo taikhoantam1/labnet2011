@@ -11,15 +11,17 @@ CREATE PROCEDURE [dbo].[sp_SearchTest]
 AS
 BEGIN
 	BEGIN
-		SELECT t.Id, t.Name as TestName, ts.Name as TestSectionName, t.Range, t.Unit, p.Name as PanelName
+		SELECT distinct t.Id, t.Name as TestName, ts.Name as TestSectionName, t.Range, t.Unit
 		FROM Test t
 		INNER JOIN TestSection ts on t.TestSectionId = ts.Id
 		INNER JOIN PanelItem pitem on pitem.TestId = t.Id
 		INNER JOIN Panel p on pitem.PanelId = p.Id
-		WHERE UPPER(t.Name) like '%' + UPPER(@TestName) + '%'
-			AND t.IsActive = 1
-			AND UPPER(ts.Name) LIKE CASE WHEN @TestSectionName IS NOT NULL THEN '%' + UPPER(@TestSectionName) + '%' ELSE '%%' END
-		ORDER BY t.SortOrder
+		WHERE 
+			(@TestName is null or	UPPER(t.Name) like '%' + UPPER(@TestName) + '%')
+			AND (t.IsActive = 1)
+			AND (@TestSectionName is null or UPPER(ts.Name) like '%' + UPPER(@TestSectionName) + '%')
+			AND (@PanelName is null or  UPPER(p.Name) like UPPER(@PanelName))
+		
 	END
 END
 

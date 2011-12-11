@@ -1187,7 +1187,6 @@
           <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Range" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="PanelName" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="SearchTestByName_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1689,7 +1688,6 @@
                 <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
                 <ScalarProperty Name="Range" ColumnName="Range" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="PanelName" ColumnName="PanelName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

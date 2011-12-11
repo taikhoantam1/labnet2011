@@ -8,11 +8,11 @@ namespace LabnetClient.Models
 {
     public class PartnerSearchViewModel : BaseModel
     {
-        public VMPartnerSearch PartnerSearch { get; set; }
+        public string PartnerName { get; set; }
 
         public PartnerSearchViewModel()
         {
-            PartnerSearch = new VMPartnerSearch();
+            
         }
     }
 }

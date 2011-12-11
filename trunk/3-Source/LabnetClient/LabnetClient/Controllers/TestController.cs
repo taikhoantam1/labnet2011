@@ -164,17 +164,12 @@ namespace LabnetClient.Controllers
         // POST: /Test/Search
 
         [HttpPost]
-        public ActionResult Search(TestSearctViewModel model)
+        public ActionResult SearchTest(TestSearctViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                model.TestSearch.ObjSearchResult = new List<TestSearchObject>();
-                return View("Search", model);
-            }
+           
 
             List<SearchTest_Result> lstResult = Repository.TestSearch(model.TestSearch.TestName, model.TestSearch.TestSectionName, model.TestSearch.PanelName);
-            model.TestSearch.ObjSearchResult = new List<TestSearchObject>();
-            
+            List<TestSearchObject> ObjSearchResult = new List<TestSearchObject>();
             foreach (SearchTest_Result item in lstResult)
             {
                 TestSearchObject obj = new TestSearchObject();
@@ -183,11 +178,10 @@ namespace LabnetClient.Controllers
                 obj.TestSectionName = item.TestSectionName;
                 obj.TestRange = item.Range;
                 obj.TestUnit = item.Unit;
-                obj.PanelName = item.PanelName;
-                model.TestSearch.ObjSearchResult.Add(obj);
+                ObjSearchResult.Add(obj);
             }
-
-            return View("Search", model);
+            JQGridModel grid = new JQGridModel(typeof(TestSearchObject), false, ObjSearchResult, "");
+            return View("DataTable",grid);
             //return RedirectToAction("Index");
         }
     }

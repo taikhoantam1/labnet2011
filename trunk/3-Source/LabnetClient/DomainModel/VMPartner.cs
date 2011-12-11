@@ -9,6 +9,11 @@ namespace DomainModel
 {
     public class VMPartner
     {
+
+        public VMPartner()
+        {
+            IsActive = true;
+        }
         /// <summary>
         /// Sets or gets name of lab partner
         /// </summary>
