@@ -11,7 +11,7 @@ using LabnetClient.Constant;
 
 namespace LabnetClient.Controllers
 {
-    public class DoctorController : BaseController
+    public class BacSiController : BaseController
     {
         //
         // GET: /Doctor/

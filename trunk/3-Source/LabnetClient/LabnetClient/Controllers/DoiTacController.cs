@@ -13,7 +13,7 @@ using AutoMapper;
 
 namespace LabnetClient.Controllers
 {
-    public class PartnerController : BaseController
+    public class DoiTacController : BaseController
     {
         //
         // GET: /Partner/

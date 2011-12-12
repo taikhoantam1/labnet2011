@@ -149,15 +149,14 @@
       <DependentUpon>PartnerStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Constant\SessionProperties.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\BacSiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
-    <Compile Include="Controllers\PartnerController.cs" />
-    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\DoiTacController.cs" />
+    <Compile Include="Controllers\BenhNhanController.cs" />
     <Compile Include="Controllers\ShareController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\XetNghiemController.cs" />
     <Compile Include="CustomAttribute\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="CustomAttribute\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,7 +190,6 @@
     <Compile Include="Content\Lib\FileManager\Uploader.aspx.designer.cs">
       <DependentUpon>Uploader.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Control\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Doctor\DoctorSearchViewModel.cs" />
@@ -764,28 +762,29 @@
     <Content Include="LibDLL\AutoMapper.dll" />
     <Content Include="LibDLL\log4net.dll" />
     <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
-    <Content Include="Views\Doctor\Create.aspx" />
-    <Content Include="Views\Doctor\CtrlCreate.ascx" />
-    <Content Include="Views\Doctor\CtrlSearch.ascx" />
-    <Content Include="Views\Doctor\Search.aspx" />
+    <Content Include="Views\BacSi\Create.aspx" />
+    <Content Include="Views\BacSi\CtrlCreate.ascx" />
+    <Content Include="Views\BacSi\CtrlSearch.ascx" />
+    <Content Include="Views\BacSi\Search.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Panel\CtrlCreate.ascx" />
     <Content Include="Views\Panel\Create.aspx" />
     <Content Include="Views\Panel\CtrlSearch.ascx" />
     <Content Include="Views\Panel\Search.aspx" />
-    <Content Include="Views\Partner\CtrlDetails.ascx" />
-    <Content Include="Views\Partner\CtrlSearch.ascx" />
-    <Content Include="Views\Partner\Details.aspx" />
-    <Content Include="Views\Partner\Search.aspx" />
-    <Content Include="Views\Patient\Create.aspx" />
-    <Content Include="Views\Patient\CtrlCreate.ascx" />
+    <Content Include="Views\DoiTac\CtrlDetails.ascx" />
+    <Content Include="Views\DoiTac\CtrlSearch.ascx" />
+    <Content Include="Views\DoiTac\Details.aspx" />
+    <Content Include="Views\DoiTac\Search.aspx" />
+    <Content Include="Views\BenhNhan\Create.aspx" />
+    <Content Include="Views\BenhNhan\CtrlCreate.ascx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
-    <Content Include="Views\Test\Edit.aspx" />
-    <Content Include="Views\Test\CtrlCreate.ascx" />
-    <Content Include="Views\Test\Create.aspx" />
-    <Content Include="Views\Test\CtrlEdit.ascx" />
-    <Content Include="Views\Test\CtrlSearch.ascx" />
-    <Content Include="Views\Test\Search.aspx" />
+    <Content Include="Views\XetNghiem\Create.aspx" />
+    <Content Include="Views\XetNghiem\CtrlCreate.ascx" />
+    <Content Include="Views\XetNghiem\CtrlEdit.ascx" />
+    <Content Include="Views\XetNghiem\CtrlSearch.ascx" />
+    <Content Include="Views\XetNghiem\Edit.aspx" />
+    <Content Include="Views\XetNghiem\Search.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -808,12 +807,6 @@
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
-    <Content Include="Views\Account\ChangePassword.aspx" />
-    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
-    <Content Include="Views\Account\LogOn.aspx" />
-    <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
