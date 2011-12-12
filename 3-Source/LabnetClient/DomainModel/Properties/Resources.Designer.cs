@@ -70,6 +70,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tên Bác Sĩ.
+        /// </summary>
+        internal static string VMDoctorSearch_DoctorName {
+            get {
+                return ResourceManager.GetString("VMDoctorSearch_DoctorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá.
         /// </summary>
         internal static string VMPanel_Cost {

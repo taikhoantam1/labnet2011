@@ -20,7 +20,7 @@
                     <%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%> 
                 </div>
                 <div class="Colum">
-                    <input type="submit" value="<%=Resources.DoctorStrings.DoctorSearch_ButtonSearch%>" />
+                    <input type="button" value="<%=Resources.DoctorStrings.DoctorSearch_ButtonSearch%>" id="btnSearchFilter"/>
                 </div>
                 <div class="clear">
                 </div>
@@ -28,8 +28,8 @@
         </div>
     </div>
 </div>
-<div>
-<table width="765px">
+<% Html.EndForm(); %>
+<div id="SearchResult"><%--
     <tr valign="middle">
         <th class="textSearch150" align="center">
             <%=Resources.DoctorStrings.DoctorSearch_GridDoctorName%>
@@ -47,6 +47,20 @@
             </th>
          </tr>   
     <%} %>
-</table>
+</table>--%>
 </div>
-<% Html.EndForm(); %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSearchFilter").click(function () {
+            var data = $("form").serialize();
+            $.ajax({
+                url: "/BacSi/SearchDoctor",
+                data: data,
+                type: "POST",
+                success: function (data) {
+                    $("#SearchResult").html(data);
+                }
+            });
+        });
+    });
+</script>

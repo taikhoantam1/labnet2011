@@ -30,7 +30,7 @@ namespace DomainModel
         {
             get
             {
-                return "/Partner/Edit/" + Id;
+                return "/DoiTac/Edit/" + Id;
             }
         }
     }
