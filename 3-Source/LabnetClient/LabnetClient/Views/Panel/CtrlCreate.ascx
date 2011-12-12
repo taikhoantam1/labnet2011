@@ -9,7 +9,7 @@
         //2:Chọn test đã tồn tại trong list
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
         $('#btnAddTest').attr('disabled', true);
-
+        
         $("#autocompleteSelectTest .autoCompleteText").blur(function(){
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
             if(testName != ""){
@@ -27,7 +27,7 @@
                     $('#btnAddTest').attr('disabled', true);
                 }
             }
-         });
+        });
     }
     $(document).ready(function () {
 
@@ -56,7 +56,6 @@
 
         $("#btnSavePanel").click(function (event) {
             event.preventDefault();
-            var data = DataTableGetDataSource();
             $("#DataTableSaveButton").click();
             $("form").submit();
         });
