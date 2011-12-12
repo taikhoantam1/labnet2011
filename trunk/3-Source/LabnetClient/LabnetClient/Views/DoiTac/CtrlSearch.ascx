@@ -55,7 +55,7 @@
         $("#btnSubmit").click(function () {
             var data = $("form").serialize();
             $.ajax({
-                url: "/Partner/SearchPartner",
+                url: "/DoiTac/SearchPartner",
                 data: data,
                 type: "POST",
                 success: function (data) {

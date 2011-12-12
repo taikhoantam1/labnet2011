@@ -64,6 +64,14 @@ namespace LabnetClient.Controllers
             return RedirectToAction("Create");
             
         }
+
+        [HttpPost]
+        public string SaveDoctor(List<VMTestListItem> Rows)
+        {
+            Session[SessionProperties.SessionDoctorList] = Rows;
+
+            return "success";
+        }
         
         //
         // GET: /Doctor/Edit/5
@@ -111,9 +119,27 @@ namespace LabnetClient.Controllers
 
                 model.DoctorSearch.ListSearchResult.Add(obj);
             }
-            return View("Search", model);
+
+            JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, model.DoctorSearch.ListSearchResult, "");
+            return View("DataTable", grid);
+            //return View("Search", model);
         }
 
+        [HttpPost]
+        public ActionResult SearchDoctor(DoctorSearchViewModel model)
+        {
+            List<Doctor> lstDoctor = Repository.GetDoctorByName(model.DoctorSearch.Name);
+            List<DoctorSearchObject> ListSearchResult = new List<DoctorSearchObject>();
+            foreach (Doctor doctor in lstDoctor)
+            {
+                DoctorSearchObject obj = new DoctorSearchObject();
+                obj.Id = doctor.Id;
+                obj.DoctorName = doctor.Name;
+                ListSearchResult.Add(obj);
+            }
+            JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, ListSearchResult, "");
+            return View("DataTable", grid);
+        }
         //
         // GET: /Doctor/Delete/5
  
