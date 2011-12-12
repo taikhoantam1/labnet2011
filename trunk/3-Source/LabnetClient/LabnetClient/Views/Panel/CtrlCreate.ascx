@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PanelViewModel>" %>
 <script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
+ 
 
     function CheckAllowAddTest()
     {
@@ -9,22 +10,55 @@
         //2:Chọn test đã tồn tại trong list
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
         $('#btnAddTest').attr('disabled', true);
-        
-        $("#autocompleteSelectTest .autoCompleteText").blur(function(){
+
+        $("#autocompleteSelectTest .autoCompleteText").blur(function () {
+
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
-            if(testName != ""){
+            var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
+            if (testName != "") {
                 $('#btnAddTest').attr('disabled', false);
             }
-            else{
+            else {
                 $('#btnAddTest').attr('disabled', true);
             }
-           
-            var allInputs = $(".TestName");
+
+            if (testId == "") {
+                $('#btnAddTest').attr('disabled', true);
+            }
+
+            var allInputs = DataTableGetArrayDataSource();
 
             for (var i = 0; i < allInputs.length; i++) {
-                var testTable = allInputs[i].value;
-                if(testName == testTable){
+                var testTable = allInputs[i].TestName;
+                if (testName == testTable) {
                     $('#btnAddTest').attr('disabled', true);
+                    alert("Xét nghiệm " + testName + " đã tồn tại");
+                }
+            }
+        });
+
+        $("#autocompleteSelectTest .autoCompleteText").keypress(function () {
+            $('#btnAddTest').attr('disabled', false);
+        });
+
+        $("#autocompleteSelectTest .autoCompleteText").keyup(function () {
+            if (event.keyCode == '13') {
+                var isExist = false;
+                var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+                var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
+                var allInputs = DataTableGetArrayDataSource();
+                for (var i = 0; i < allInputs.length; i++) {
+                    var testTable = allInputs[i].TestName;
+                    if (testTable == testName) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (isExist == false && testId != "") {
+                    $("#btnAddTest").click();
+                }
+                if (isExist == true && testId != "") {
+                    alert("Xét nghiệm " + testName + " đã tồn tại");
                 }
             }
         });
@@ -59,6 +93,7 @@
             $("#DataTableSaveButton").click();
             $("form").submit();
         });
+
     });
     
 </script>
@@ -155,3 +190,9 @@
         </div>
     </div>
 </div>
+<script>
+
+    function AutocompleteChange() {
+        alert("autocomplete blur");
+    }
+</script>

@@ -122,6 +122,10 @@ namespace LabnetClient.Controllers
                         {
                             panelItem.IsActive = false;
                         }
+                        else
+                        {
+                            panelItem.IsActive = true;
+                        }
                         Repository.PanelItemUpdate(panelItem.Id, panelItem);
                     }
                     else

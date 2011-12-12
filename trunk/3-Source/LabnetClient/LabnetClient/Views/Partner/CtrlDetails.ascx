@@ -13,14 +13,19 @@
             $("#txtCost").val(tags[1]);
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
 
-            var allInputs = $(".TestName");
+            var allInputs = DataTableGetArrayDataSource();
 
             for (var i = 0; i < allInputs.length; i++) {
-                var testTable = allInputs[i].value;
+                var testTable = allInputs[i].TestName;
                 if (testName == testTable) {
                     $('#btnAddTest').attr('disabled', true);
+                    alert("Xét nghiệm " + testName + " đã tồn tại");
                 }
             }
+        });
+
+        $("#autocompleteSelectTest .autoCompleteText").keypress(function () {
+            $('#btnAddTest').attr('disabled', false);
         });
 
         $("#txtCost").keyup(function () {
@@ -34,17 +39,17 @@
                 $('#btnAddTest').attr('disabled', true);
             }
 
-            var allInputs = $(".TestName");
+            var allInputs = DataTableGetArrayDataSource();
 
             for (var i = 0; i < allInputs.length; i++) {
-                var testTable = allInputs[i].value;
+                var testTable = allInputs[i].TestName;
                 if (testName == testTable) {
                     $('#btnAddTest').attr('disabled', true);
                 }
             }
         });
-  
-  
+
+
 
         $("#btnAddTest").click(function () {
             //alert("add");
@@ -52,12 +57,13 @@
             var testName = $("#autocompleteSelectTest .autoCompleteText").val();
             var testSection = tags[0];
             var cost = tags[1];
+            var costEnter = $("#txtCost").val();
             var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
 
             var dataObject = new Object();
             dataObject.TestName = testName;
             dataObject.TestSectionName = testSection;
-            dataObject.Cost = cost;
+            dataObject.Cost = costEnter;
             dataObject.TestId = testId;
             var array = $("#list").jqGrid().getRowData();
             jQuery("#list").jqGrid('addRowData', array.length, dataObject);
@@ -88,7 +94,7 @@
   { %>
 <% Html.BeginForm("Edit", "Partner"); %>
 <%} %>
-<%= Html.HiddenFor(m=>m.Partner.id) %>
+<%= Html.HiddenFor(m=>m.Partner.Id) %>
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
