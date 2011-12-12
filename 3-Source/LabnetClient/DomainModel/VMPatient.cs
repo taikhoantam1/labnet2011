@@ -20,5 +20,11 @@ namespace DomainModel
         public string Age { get; set; }
 
         public int Status { get; set; }
+
+        public string IndentifierNumber { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Email { get; set; }
     }
 }

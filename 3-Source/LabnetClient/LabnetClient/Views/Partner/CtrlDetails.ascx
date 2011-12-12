@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PartnerViewModel>" %>
-<script src="/Content/Scripts/Script.js" type="text/javascript"></script>
 <script type="text/javascript">
 
     $(document).ready(function () {

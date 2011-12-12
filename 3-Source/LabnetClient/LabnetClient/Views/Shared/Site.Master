@@ -40,7 +40,7 @@
                     <h3 class="MenuTitle">
                         <%= Resources.GlobalStrings.Menu_MenuTitle %></h3>
                     <ul>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/Patient/Create">
                             <%= Resources.GlobalStrings.Menu_PatientInfo %></a></li>
                         <li><a class="MenuItem ActionLink" href="/Doctor/Create/">
                             <%= Resources.GlobalStrings.Menu_CreateDoctor %></a></li>
