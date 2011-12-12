@@ -71,7 +71,7 @@ namespace DataRepository
                 TestId = p.TestId,
                 Cost = p.Cost,
                 TestSectionName=p.Test.TestSection.Name,
-                IsDelete=false,
+                IsEnable=true,
             }).ToList();
 
             return listTest;
@@ -419,7 +419,7 @@ namespace DataRepository
                 TestName = p.Test.Name,
                 TestId = p.TestId,
                 TestSectionName = p.Test.TestSection.Name,
-                IsDelete=!p.IsActive,
+                IsEnable=p.IsActive,
                 Cost=p.Test.Cost,
             }).ToList();
             return listTest;

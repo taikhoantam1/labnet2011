@@ -11,7 +11,7 @@ namespace DomainModel
     {
         public VMTestListItem()
         {
-            IsDelete = true;
+            IsEnable = true;
 
         }
 
@@ -27,8 +27,8 @@ namespace DomainModel
         [JQColumnAttribute("VMPanel_Section", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestSectionName { get; set; }
 
-        [JQColumnAttribute("VMPanel_IsDelete", true, false, true, EditTypeEnum.Checkbox, FormatterEnum.Checkbox)]
-        public bool IsDelete { get; set; }
+        [JQColumnAttribute("VMPanel_IsEnable", true, false, true, EditTypeEnum.Checkbox, FormatterEnum.Checkbox)]
+        public bool IsEnable { get; set; }
 
     }
 }

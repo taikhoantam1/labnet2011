@@ -72,7 +72,7 @@ namespace LabnetClient.Controllers
                 foreach (VMTestListItem item in Rows)
                 {
                     PanelItem panelItem = Repository.GetPanelItemByTestIdAndPanelId(item.TestId, panel.Id);
-                    if (item.IsDelete == false)
+                    if (item.IsEnable )
                     {
                         panelItem = new PanelItem();
                         panelItem.TestId = item.TestId;
@@ -118,7 +118,7 @@ namespace LabnetClient.Controllers
 
                     if (panelItem != null)
                     {
-                        if (item.IsDelete == true)
+                        if (item.IsEnable == false)
                         {
                             panelItem.IsActive = false;
                         }
@@ -130,7 +130,7 @@ namespace LabnetClient.Controllers
                     }
                     else
                     {
-                        if (item.IsDelete == false)
+                        if (item.IsEnable)
                         {
                             panelItem = new PanelItem();
                             panelItem.TestId = item.TestId;
