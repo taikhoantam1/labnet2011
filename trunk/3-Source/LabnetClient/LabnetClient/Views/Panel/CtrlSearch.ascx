@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-<div>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSearchFilter").click(function () {

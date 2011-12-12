@@ -291,7 +291,7 @@ h5, h6
 
 .deleteLink
 {   
-    background-image: url('Icon/iconDelete.gif')0px 5px no-repeat;
+    background: url('Icon/iconDelete.gif') 0px 5px no-repeat;
     margin:5px;
     padding:8px;
 }

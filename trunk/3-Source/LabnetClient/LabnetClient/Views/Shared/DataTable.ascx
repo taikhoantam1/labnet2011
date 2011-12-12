@@ -20,6 +20,13 @@
         obj.Rows=array;
         return $.postify(obj);
     }
+
+    function DataTableGetArrayDataSource()
+    {
+        var array=$("#list").jqGrid().getRowData();
+        return array;
+    }
+
     jQuery(document).ready(function () {
         var selICol; //index Col of selected cell
         var selRowIndex; //index Row of selected cell
@@ -128,7 +135,6 @@
                 }
             });
         });
-
             
     });  
 
