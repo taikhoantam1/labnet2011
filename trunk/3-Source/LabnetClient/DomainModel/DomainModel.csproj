@@ -44,13 +44,14 @@
     <Compile Include="JQGrid\JQColumn.cs" />
     <Compile Include="JQGrid\JQColumnAttribute.cs" />
     <Compile Include="JQGrid\JQConstant.cs" />
-    <Compile Include="LabPatientManagement.cs" />
+    <Compile Include="VMLabPatientManagement.cs" />
     <Compile Include="VMDoctor.cs" />
     <Compile Include="VMDoctorSearch.cs" />
     <Compile Include="VMPanel.cs" />
     <Compile Include="VMPartnerCost.cs" />
     <Compile Include="VMPartnerSearch.cs" />
     <Compile Include="VMPatient.cs" />
+    <Compile Include="VMPatientTest.cs" />
     <Compile Include="VMTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

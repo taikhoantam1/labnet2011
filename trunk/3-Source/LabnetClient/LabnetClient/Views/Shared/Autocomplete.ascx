@@ -105,7 +105,7 @@
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
-    <input type="text" class="autoCompleteText <%= Model.CustomeCss %> textInput220" value="<%= Model.SelectedText %>" />
+    <input type="text" class="autoCompleteText <%= Model.CustomeCss %> textInput" value="<%= Model.SelectedText %>" />
     <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
 
     <input type="hidden" class="autoCompleteTag" id="<%= Model.AutoCompleteId %>_SelectedTag" value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />

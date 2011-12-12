@@ -40,6 +40,8 @@ namespace DataRepository
         List<Partner> GetPartnerByName(string name);
 
         bool IsValidPartner(string name);
+
+        List<Partner> GetPartners();
         #endregion
 
         #region PartnerCost
@@ -100,5 +102,6 @@ namespace DataRepository
         object GetTestSectionByName(string name, string searchType);
         TestSection GetTestSection(int testSectionId);
         #endregion
+
     }
 }

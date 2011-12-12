@@ -66,7 +66,7 @@ namespace DomainModel
         /// <summary>
         /// Partner id
         /// </summary>
-        public int id { get; set; }
+        public int Id { get; set; }
 
         //public List<VMPartnerCost> PartnerCostDetails { get; set; }
     }

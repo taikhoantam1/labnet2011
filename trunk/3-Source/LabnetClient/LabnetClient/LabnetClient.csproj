@@ -127,6 +127,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PanelStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Patient\PatientStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Test\TestStrings1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -403,7 +408,6 @@
     <Content Include="Content\Style\redmond\images\ui-icons_f9bd01_256x240.png" />
     <Content Include="Content\Style\redmond\images\ui-icons_fcd113_256x240.png" />
     <Content Include="Content\Style\redmond\jquery-ui-1.8.16.custom.css" />
-    <Content Include="Content\Style\reset.css" />
     <Content Include="Content\Style\ui.jqgrid.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Lib\Ajax\ajax.js" />
@@ -873,6 +877,10 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>GlobalStrings.en-US.designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="App_GlobalResources\Patient\PatientStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>PatientStrings.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

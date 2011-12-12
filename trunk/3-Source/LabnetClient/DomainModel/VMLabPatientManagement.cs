@@ -5,13 +5,13 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class LabPatientManagement
+    public class VMLabPatientManagement
     {
         public int Id { get; set; }
 
         public int PatientId { get; set; }
 
-        public int? Partner { get; set; }
+        public int? PartnerId { get; set; }
 
         public DateTime ReceivedDate { get; set; }
 
@@ -20,5 +20,8 @@ namespace DomainModel
         public int Status { get; set; }
 
         public int OrderNumber { get; set; }
+
+        public string Diagnosis { get; set; }
+
     }
 }
