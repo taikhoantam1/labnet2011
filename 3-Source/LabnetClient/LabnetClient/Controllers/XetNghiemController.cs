@@ -5,38 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using LabnetClient.Models;
 using LabnetClient.Constant;
-using DataRepository;
 using DomainModel;
+using DataRepository;
 using AutoMapper;
 using LibraryFuntion;
 
 namespace LabnetClient.Controllers
 {
-    public class TestController : BaseController
+    public class XetNghiemController : BaseController
     {
-        //
-        // GET: /Test/
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Test/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-       
         /// <summary>
         /// 
         /// </summary>
         /// <param name="searchText"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult FindTestSectionNames(string searchText,string searchType)
+        public JsonResult FindTestSectionNames(string searchText, string searchType)
         {
             var result = Repository.GetTestSectionByName(searchText, searchType);
             return Json(result);
@@ -49,11 +34,9 @@ namespace LabnetClient.Controllers
         {
             TestViewModel model = new TestViewModel();
             model.ViewMode = ViewMode.Create;
-            model.Autocomplete.JsonData = Repository.GetTestSectionByName("",SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
-            //model.Autocomplete.IsAjaxLoading = true;
-            //model.Autocomplete.ActionLink = "/Test/FindTestSectionNames";
+            model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Create", model);
-        } 
+        }
 
         //
         // POST: /Test/Create
@@ -83,10 +66,10 @@ namespace LabnetClient.Controllers
 
             return RedirectToAction("Create");
         }
-        
+
         //
         // GET: /Test/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
             TestViewModel model = new TestViewModel();
@@ -129,7 +112,7 @@ namespace LabnetClient.Controllers
 
         //
         // GET: /Test/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             return View();
@@ -144,7 +127,7 @@ namespace LabnetClient.Controllers
             try
             {
                 // TODO: Add delete logic here
- 
+
                 return RedirectToAction("Index");
             }
             catch
@@ -166,7 +149,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult SearchTest(TestSearctViewModel model)
         {
-           
+
 
             List<SearchTest_Result> lstResult = Repository.TestSearch(model.TestSearch.TestName, model.TestSearch.TestSectionName, model.TestSearch.PanelName);
             List<TestSearchObject> ObjSearchResult = new List<TestSearchObject>();
@@ -181,8 +164,9 @@ namespace LabnetClient.Controllers
                 ObjSearchResult.Add(obj);
             }
             JQGridModel grid = new JQGridModel(typeof(TestSearchObject), false, ObjSearchResult, "");
-            return View("DataTable",grid);
+            return View("DataTable", grid);
             //return RedirectToAction("Index");
         }
+         
     }
 }

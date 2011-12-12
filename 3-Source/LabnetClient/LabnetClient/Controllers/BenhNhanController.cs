@@ -10,7 +10,7 @@ using AutoMapper;
 
 namespace LabnetClient.Controllers
 {
-    public class PatientController : BaseController
+    public class BenhNhanController : BaseController
     {
         public ActionResult Create()
         {
