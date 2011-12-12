@@ -79,7 +79,7 @@ namespace LabnetClient.Controllers
 
                 foreach (VMTestListItem item in Rows)
                 {
-                    if (item.IsDelete == false)
+                    if (item.IsEnable )
                     {
                         PartnerCost cost = new PartnerCost();
                         cost.Cost = item.Cost;
@@ -136,7 +136,7 @@ namespace LabnetClient.Controllers
                     {
                         PartnerCost partnerCost = Repository.GetPartnerCostByTestId(item.TestId, id);
                         partnerCost.Cost = item.Cost;
-                        if (item.IsDelete == true)
+                        if (item.IsEnable== false)
                         {
                             partnerCost.IsActive = false;
                         }
@@ -144,7 +144,7 @@ namespace LabnetClient.Controllers
                     }
                     else
                     {
-                        if (item.IsDelete == false)
+                        if (item.IsEnable)
                         {
                             PartnerCost partnerCost = new PartnerCost();
                             partnerCost.TestId = item.TestId;

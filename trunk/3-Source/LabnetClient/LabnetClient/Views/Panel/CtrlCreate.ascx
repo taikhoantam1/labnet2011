@@ -79,6 +79,7 @@
             dataObject.TestSectionName = testSection;
             dataObject.Cost = cost;
             dataObject.TestId = testId;
+            dataObject.IsEnable = true;
             var array = $("#list").jqGrid().getRowData();
             jQuery("#list").jqGrid('addRowData', array.length, dataObject);
 

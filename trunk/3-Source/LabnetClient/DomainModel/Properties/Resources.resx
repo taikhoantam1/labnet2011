@@ -132,6 +132,9 @@
   <data name="VMPanel_IsDelete" xml:space="preserve">
     <value>Xóa</value>
   </data>
+  <data name="VMPanel_IsEnable" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
   <data name="VMPanel_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Panel</value>
   </data>
