@@ -70,8 +70,8 @@ namespace DataRepository
                 TestName = p.Test.Name,
                 TestId = p.TestId,
                 Cost = p.Cost,
-                TestSectionName=p.Test.TestSection.Name,
-                IsEnable=true,
+                TestSectionName = p.Test.TestSection.Name,
+                IsEnable = true,
             }).ToList();
 
             return listTest;
@@ -153,8 +153,8 @@ namespace DataRepository
 
         public PartnerCost GetPartnerCostByTestId(int testId, int partnerId)
         {
-            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts 
-                                       where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true 
+            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts
+                                       where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true
                                        select _partnerCost).First();
             return partnerCost;
         }
@@ -165,7 +165,7 @@ namespace DataRepository
             PartnerCost partnerCost = new PartnerCost();
             partnerCost = (from _partnerCost in myDb.PartnerCosts
                            where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true
-                                                                                select _partnerCost).FirstOrDefault();
+                           select _partnerCost).FirstOrDefault();
             if (partnerCost != null)
             {
                 isExist = true;
@@ -247,7 +247,7 @@ namespace DataRepository
         public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName)
         {
             List<SearchTest_Result> lstTestSearch = new List<SearchTest_Result>();
-            lstTestSearch = myDb.SearchTest(testName, testSectionName,panelName).ToList();
+            lstTestSearch = myDb.SearchTest(testName, testSectionName, panelName).ToList();
             return lstTestSearch;
         }
 
@@ -255,12 +255,12 @@ namespace DataRepository
         {
             List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
-		}
+        }
 
         public object GetTestByNameForPanel(string name, string searchType)
         {
             List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType).ToList();
-            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName+","+p.Cost });
+            return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName + "," + p.Cost });
         }
         #endregion Test
 
@@ -383,13 +383,13 @@ namespace DataRepository
 
         public List<Panel> GetPanelByName(string name)
         {
-            List<Panel> lstPanel = (from _panel in myDb.Panels where string.IsNullOrEmpty(name)|| _panel.Name.Contains(name) select _panel).ToList();
+            List<Panel> lstPanel = (from _panel in myDb.Panels where string.IsNullOrEmpty(name) || _panel.Name.Contains(name) select _panel).ToList();
             return lstPanel;
         }
 
         public PanelItem GetPanelItemByTestIdAndPanelId(int testId, int panelId)
         {
-            PanelItem panelItem = (from _item in myDb.PanelItems 
+            PanelItem panelItem = (from _item in myDb.PanelItems
                                    where _item.PanelId == panelId && _item.TestId == testId
                                    select _item).FirstOrDefault();
 
@@ -419,10 +419,14 @@ namespace DataRepository
                 TestName = p.Test.Name,
                 TestId = p.TestId,
                 TestSectionName = p.Test.TestSection.Name,
-                IsEnable=p.IsActive,
-                Cost=p.Test.Cost,
+                IsEnable = p.IsActive,
+                Cost = p.Test.Cost,
             }).ToList();
             return listTest;
+        }
+        public List<Panel> GetPanels()
+        {
+            return (from _panel in myDb.Panels where _panel.IsActive select _panel).ToList();
         }
         #endregion PanelItem
 
@@ -494,7 +498,6 @@ namespace DataRepository
 
         public object GetTestSectionByName(string name, string searchType)
         {
-            name = name;
             List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
         }
@@ -506,5 +509,150 @@ namespace DataRepository
             return testSection;
         }
         #endregion
+        #region Patient
+        public string GetPatientNumber()
+        {
+            return myDb.GeneratePatientNumber(5).FirstOrDefault();
+        }
+        public int PatientInsert(Patient patient)
+        {
+            myDb.Patients.AddObject(patient);
+            myDb.SaveChanges();
+            return patient.Id;
+        }
+
+        public int PatientItemInsert(PatientItem patientItem)
+        {
+            myDb.PatientItems.AddObject(patientItem);
+            myDb.SaveChanges();
+            return patientItem.Id;
+        }
+
+        public List<PatientsGets_Result> GetPatients(int? PatientId, string FirstName, string Phone, string Email, string IndentifierNumber, string Address, int? PartnerId, int? OrderNumber, DateTime? ReceivedDate)
+        {
+            List<PatientsGets_Result> listPatient = myDb.PatientsGets(PatientId, FirstName, Phone, Email, IndentifierNumber, Address, PartnerId, OrderNumber, ReceivedDate).ToList();
+            return listPatient;
+        }
+
+        public Patient GetPatientNumber(int Id)
+        {
+            Patient patient = myDb.Patients.Where(p => p.Id == Id).FirstOrDefault();
+            return patient;
+        }
+        #endregion
+        #region Analysis
+        public void AnalysisInsert(Analysis analysis)
+        {
+            myDb.Analyses.AddObject(analysis);
+            myDb.SaveChanges();
+        }
+
+        #endregion
+
+        #region LabExamination
+        public string GetExaminationNumber()
+        {
+            return myDb.GenerateLabExaminationNumber(7).FirstOrDefault();
+        }
+        public int LabExaminationInsert(LabExamination labExamination)
+        {
+            myDb.LabExaminations.AddObject(labExamination);
+            myDb.SaveChanges();
+            return labExamination.Id;
+
+        }
+        public int GetLabExaminationOrderNumber()
+        {
+            DateTime today = DateTime.Now.Date;
+            List<LabExamination> listLabExToday = myDb.LabExaminations.Where(p => p.ReceivedDate >= today).ToList();
+            if (listLabExToday.Count == 0)
+                return 1;
+            return myDb.LabExaminations.Where(p => p.ReceivedDate >= today).Max(p => p.OrderNumber) + 1;
+
+        }
+        #endregion
+
+        public VMLabExamination GetLabExamination(int Id)
+        {
+            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.PatientId == Id)
+                                                                .Select(p => new VMLabExamination
+                                                                {
+                                                                    CreatedBy = p.CreatedBy,
+                                                                    Diagnosis = p.Diagnosis,
+                                                                    Id = p.Id,
+                                                                    OrderNumber = p.OrderNumber,
+                                                                    PartnerId = p.PatientId,
+                                                                    PatientId = p.PatientId,
+                                                                    ReceivedDate = p.ReceivedDate,
+                                                                    Status = p.Status
+                                                                }).FirstOrDefault();
+            return labExamination;
+        }
+
+        public List<VMPatientTest> GetPatientTests(int Id, DateTime ReceivedDate, int OrderNumber)
+        {
+            Patient patient = GetPatient(Id, ReceivedDate, OrderNumber);
+
+            List<VMPatientTest> listTest = new List<VMPatientTest>();
+            foreach (var patientItem in patient.PatientItems)
+            {
+                foreach (var analysis in patientItem.Analyses)
+                {
+                    VMPatientTest patientTest = new VMPatientTest
+                      {
+                          TestName = analysis.Test.Name,
+                          TestId = analysis.Test.Id,
+                          Section = analysis.Test.TestSection.Name,
+                          IsEnable = analysis.Test.IsActive,
+                          Cost = analysis.Test.Cost,
+                      };
+                    listTest.Add(patientTest);
+                }
+            }
+            return listTest;
+        }
+
+        public Patient GetPatient(int Id, DateTime receivedDate, int orderNumber)
+        {
+            
+            Patient patient = (from _patient in myDb.Patients
+                               join
+                                   _labExamination in myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
+                               where _patient.Id == Id && _labExamination.OrderNumber == orderNumber && _labExamination.ReceivedDate == receivedDate
+                               select _patient).FirstOrDefault();
+            return patient;
+        }
+        public void LabExaminationUpdate(int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination)
+        {
+            LabExamination labExamOld = myDb.LabExaminations.Where(p=>p.ReceivedDate==receivedDate && p.OrderNumber==orderNumber && p.PatientId ==patientId).FirstOrDefault();
+            labExamOld.CreatedBy = labExamination.CreatedBy;
+            labExamOld.PartnerId = labExamination.PartnerId;
+            labExamination.Diagnosis = labExamination.Diagnosis;
+            labExamination.Status = labExamination.Status;
+            myDb.SaveChanges();
+        }
+        public void PatientUpdate(int patientId, Patient patient)
+        {
+            
+            Patient patientOld = (from _patient in myDb.Patients
+                               where patient.Id == patientId
+                               select _patient).FirstOrDefault();
+            patientOld.Address = patient.Address;
+            patientOld.BirthDate = patient.BirthDate;
+            patientOld.Gender = patient.Gender;
+            patientOld.FirstName = patient.FirstName;
+            patientOld.Age = patient.BirthDate;
+            patientOld.Email = patient.Email;
+            myDb.SaveChanges();
+        }
+        public void PatientItemUpdate(int patientId, PatientItem patientItem)
+        {
+        }
+
+        public List<VMPatientTest> GetPatientTests(int Id)
+        {
+            return new List<VMPatientTest>();
+        }
+
     }
 }

@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vui lòng chọn xét nghiệm.
+        /// </summary>
+        internal static string PatientCreate_TestRequired {
+            get {
+                return ResourceManager.GetString("PatientCreate_TestRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chẩn Đoán.
         /// </summary>
         internal static string PatientDiagnosis {
@@ -156,6 +165,15 @@ namespace Resources {
         internal static string PatientInsert_Partner {
             get {
                 return ResourceManager.GetString("PatientInsert_Partner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày Nhận.
+        /// </summary>
+        internal static string PatientInsert_ReceivedDate {
+            get {
+                return ResourceManager.GetString("PatientInsert_ReceivedDate", resourceCulture);
             }
         }
         

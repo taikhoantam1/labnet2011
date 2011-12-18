@@ -56,6 +56,19 @@ namespace LabnetClient
             Mapper.CreateMap<Doctor, VMDoctor>();
 
             Mapper.CreateMap<VMDoctor, Doctor>();
+
+            Mapper.CreateMap<Patient, VMPatient>()
+            .ForMember("PatientEditLink", p => p.Ignore());
+
+            Mapper.CreateMap<PatientsGets_Result, VMPatient>()
+            .ForMember("PatientEditLink", p => p.Ignore())
+            .ForMember("PatientNumber", p => p.Ignore())
+            .ForMember("Gender", p => p.Ignore())
+            .ForMember("Status", p => p.Ignore())
+            .ForMember("IndentifierNumber", p => p.Ignore())
+            .ForMember("Email", p => p.Ignore())
+            .ForMember("BirthDate", p => p.Ignore())
+            .ForMember(dest=>dest.LabExamination, p => p.MapFrom(m => new VMLabExamination{ReceivedDate= m.ReceivedDate, OrderNumber=m.OrderNumber})); 
         }
     }
 }

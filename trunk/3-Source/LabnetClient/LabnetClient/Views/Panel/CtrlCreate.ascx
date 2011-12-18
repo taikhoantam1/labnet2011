@@ -98,7 +98,7 @@
     });
     
 </script>
-    <%= Html.ValidationSummary() %>
+<%= Html.ValidationSummary() %>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
 <% Html.BeginForm("Create", "Panel");%>
@@ -191,9 +191,3 @@
         </div>
     </div>
 </div>
-<script>
-
-    function AutocompleteChange() {
-        alert("autocomplete blur");
-    }
-</script>

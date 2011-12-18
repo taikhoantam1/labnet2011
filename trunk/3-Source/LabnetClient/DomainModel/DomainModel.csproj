@@ -44,7 +44,7 @@
     <Compile Include="JQGrid\JQColumn.cs" />
     <Compile Include="JQGrid\JQColumnAttribute.cs" />
     <Compile Include="JQGrid\JQConstant.cs" />
-    <Compile Include="VMLabPatientManagement.cs" />
+    <Compile Include="VMLabExamination.cs" />
     <Compile Include="VMDoctor.cs" />
     <Compile Include="VMDoctorSearch.cs" />
     <Compile Include="VMPanel.cs" />

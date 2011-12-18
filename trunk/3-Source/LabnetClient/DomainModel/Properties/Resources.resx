@@ -174,6 +174,42 @@
   <data name="VMPartner_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên</value>
   </data>
+  <data name="VMPatientTest_Cost" xml:space="preserve">
+    <value>Giá</value>
+  </data>
+  <data name="VMPatientTest_IsEnable" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
+  <data name="VMPatientTest_Panel" xml:space="preserve">
+    <value>Panel XN</value>
+  </data>
+  <data name="VMPatientTest_Section" xml:space="preserve">
+    <value>Nhóm XN</value>
+  </data>
+  <data name="VMPatientTest_TestName" xml:space="preserve">
+    <value>Tên XN</value>
+  </data>
+  <data name="VMPatient_Address" xml:space="preserve">
+    <value>Địa Chỉ</value>
+  </data>
+  <data name="VMPatient_Address_RequireMessage" xml:space="preserve">
+    <value>Vui lòng nhập địa chỉ</value>
+  </data>
+  <data name="VMPatient_Age" xml:space="preserve">
+    <value>Tuổi</value>
+  </data>
+  <data name="VMPatient_Birthday_RequireMessage" xml:space="preserve">
+    <value>Vui lòng nhập ngày sinh</value>
+  </data>
+  <data name="VMPatient_Name" xml:space="preserve">
+    <value>Họ Tên</value>
+  </data>
+  <data name="VMPatient_Name_RequireMessage" xml:space="preserve">
+    <value>Vui lòng nhập họ tên</value>
+  </data>
+  <data name="VMPatient_Phone" xml:space="preserve">
+    <value>Số Điện Thoại</value>
+  </data>
   <data name="VMTestSearch_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên XN</value>
   </data>

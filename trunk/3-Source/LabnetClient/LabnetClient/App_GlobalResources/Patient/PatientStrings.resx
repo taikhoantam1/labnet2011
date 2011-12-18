@@ -123,6 +123,9 @@
   <data name="PatientBirthday" xml:space="preserve">
     <value>Ngày sinh</value>
   </data>
+  <data name="PatientCreate_TestRequired" xml:space="preserve">
+    <value>Vui lòng chọn xét nghiệm</value>
+  </data>
   <data name="PatientDiagnosis" xml:space="preserve">
     <value>Chẩn Đoán</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="PatientInsert_Partner" xml:space="preserve">
     <value>Nơi gửi mẫu</value>
+  </data>
+  <data name="PatientInsert_ReceivedDate" xml:space="preserve">
+    <value>Ngày Nhận</value>
   </data>
   <data name="PatientInsert_Title" xml:space="preserve">
     <value>Thêm thông tin bệnh nhân</value>

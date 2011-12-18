@@ -5,21 +5,25 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class VMLabPatientManagement
+    public class VMLabExamination
     {
+        public VMLabExamination()
+        {
+            ReceivedDate = DateTime.Now.Date;
+        }
         public int Id { get; set; }
 
         public int PatientId { get; set; }
 
         public int? PartnerId { get; set; }
 
-        public DateTime ReceivedDate { get; set; }
+        public DateTime? ReceivedDate { get; set; }
 
         public int CreatedBy { get; set; }
 
         public int Status { get; set; }
 
-        public int OrderNumber { get; set; }
+        public int? OrderNumber { get; set; }
 
         public string Diagnosis { get; set; }
 

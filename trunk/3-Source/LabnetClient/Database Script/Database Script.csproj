@@ -64,6 +64,9 @@
     <Content Include="FKs\Test.fk.sql" />
     <Content Include="FKs\TestCommission.fk.sql" />
     <Content Include="FKs\TestResult.fk.sql" />
+    <Content Include="SPs\sp_GenerateLabExaminationNumber.sql" />
+    <Content Include="SPs\sp_GeneratePatientNumber.sql" />
+    <Content Include="SPs\sp_PatientGet.sp.sql" />
     <Content Include="SPs\sp_SearchTest.sp.sql" />
     <Content Include="SPs\sp_SearchTestByName.sp.sql" />
     <Content Include="SPs\sp_SearchTestByNameForPanel.sp.sql" />

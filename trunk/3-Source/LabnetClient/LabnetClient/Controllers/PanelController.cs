@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using LabnetClient.Models;
+using AutoMapper;
+using DataRepository;
 using DomainModel;
 using LabnetClient.Constant;
+using LabnetClient.Models;
 using LibraryFuntion;
-using DataRepository;
-using AutoMapper;
 
 namespace LabnetClient.Controllers
 {
