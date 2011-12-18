@@ -232,6 +232,114 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Địa Chỉ.
+        /// </summary>
+        internal static string VMPatient_Address {
+            get {
+                return ResourceManager.GetString("VMPatient_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập địa chỉ.
+        /// </summary>
+        internal static string VMPatient_Address_RequireMessage {
+            get {
+                return ResourceManager.GetString("VMPatient_Address_RequireMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuổi.
+        /// </summary>
+        internal static string VMPatient_Age {
+            get {
+                return ResourceManager.GetString("VMPatient_Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập ngày sinh.
+        /// </summary>
+        internal static string VMPatient_Birthday_RequireMessage {
+            get {
+                return ResourceManager.GetString("VMPatient_Birthday_RequireMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Họ Tên.
+        /// </summary>
+        internal static string VMPatient_Name {
+            get {
+                return ResourceManager.GetString("VMPatient_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập họ tên.
+        /// </summary>
+        internal static string VMPatient_Name_RequireMessage {
+            get {
+                return ResourceManager.GetString("VMPatient_Name_RequireMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số Điện Thoại.
+        /// </summary>
+        internal static string VMPatient_Phone {
+            get {
+                return ResourceManager.GetString("VMPatient_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giá.
+        /// </summary>
+        internal static string VMPatientTest_Cost {
+            get {
+                return ResourceManager.GetString("VMPatientTest_Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string VMPatientTest_IsEnable {
+            get {
+                return ResourceManager.GetString("VMPatientTest_IsEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Panel XN.
+        /// </summary>
+        internal static string VMPatientTest_Panel {
+            get {
+                return ResourceManager.GetString("VMPatientTest_Panel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm XN.
+        /// </summary>
+        internal static string VMPatientTest_Section {
+            get {
+                return ResourceManager.GetString("VMPatientTest_Section", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên XN.
+        /// </summary>
+        internal static string VMPatientTest_TestName {
+            get {
+                return ResourceManager.GetString("VMPatientTest_TestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên XN.
         /// </summary>
         internal static string VMTest_NameRequired {

@@ -19,10 +19,18 @@ namespace LabnetClient.Models
             BindingName = bindingName;
         }
 
+        public AutocompleteModel(string bindingName,string getDataUrl)
+            
+        {
+            BindingName = bindingName;
+            GetDataUrl = getDataUrl;
+            AutoCompleteId = String.Format("autoComplete_{0}", DateTime.Now.Ticks);
+            UseAjaxLoading = true;
+        }
         /// <summary>
         /// Gets or sets value of link to get data for control
         /// </summary>
-        public string ActionLink { get; set; }
+        public string GetDataUrl { get; set; }
 
         /// <summary>
         /// Gets or sets value of name control value field 

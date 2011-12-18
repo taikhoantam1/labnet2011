@@ -16,4 +16,16 @@ namespace LabnetClient.Constant
         Contains,
         Word,
     }
+
+    public enum AnalysisStatusEnum
+    {
+        New=  1,// Mới (Default)
+        HaveResult=2,// Đã có kết quả
+        Approved=3//Đã xác minh
+
+    }
+    public enum LabExaminationStatusEnum
+    {
+        New=1
+    }
 }

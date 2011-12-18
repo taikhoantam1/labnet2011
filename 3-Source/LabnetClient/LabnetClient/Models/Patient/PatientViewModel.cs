@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using LabnetClient.Constant;
 using System.Web.Mvc;
+using LibraryFuntion;
+using System.Linq;
+using DataRepository;
 
 namespace LabnetClient.Models
 {
     public class PatientViewModel : BaseModel
     {
-        public PatientViewModel(VMPatient patient, VMLabPatientManagement labManagement,List<VMPatientTest> patientTest,List<VMPartner> listPartner)
+        public PatientViewModel()
+        { 
+        }
+        public PatientViewModel(VMPatient patient, VMLabExamination labExamination, List<VMPatientTest> patientTest, List<VMPartner> listPartner, List<VMPanel> lstPanel)
         {
+            Repository Repository = new DataRepository.Repository();
             Patient =patient;
-            LabManagement = new VMLabPatientManagement();
-            JQGrid = new JQGridModel(typeof(VMTestListItem), true, patientTest, "");
+            LabExamination = labExamination;
+            LabExamination.OrderNumber = Repository.GetLabExaminationOrderNumber();
+
+            JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "SavePatientTest");
+            
             Autocomplete = new AutocompleteModel();
+            Autocomplete.JsonData = lstPanel.Select(p => new { Label = p.Name, Value = p.Id}).ToJson();
+            Autocomplete.UseAjaxLoading = false;
+
             VMPartner partner = new VMPartner();
             partner.Id = -1;
             partner.Name = "N/A";
@@ -28,7 +41,7 @@ namespace LabnetClient.Models
         /// <summary>
         /// Autocomplete model
         /// </summary>
-        public VMLabPatientManagement LabManagement { get; set; }
+        public VMLabExamination LabExamination { get; set; }
 
         /// <summary>
         /// Gets or sets list test assigned to partner

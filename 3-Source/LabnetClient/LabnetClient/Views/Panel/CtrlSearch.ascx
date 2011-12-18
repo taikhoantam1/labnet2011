@@ -30,14 +30,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSearchFilter").click(function () {
-            var filterText=$(".filterText").val();
+            var filterText = $(".filterText").val();
             $.ajax({
                 url: "/Panel/Search",
-                type:"POST",
+                type: "POST",
                 data: {
                     filterText: filterText
                 },
-                success:function(data){
+                success: function (data) {
                     $(".ResultTable").html(data);
                 }
             });

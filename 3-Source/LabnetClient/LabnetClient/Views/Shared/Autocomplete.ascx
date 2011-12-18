@@ -1,11 +1,14 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.AutocompleteModel>" %>
 <script type="text/javascript">
+    function AutocompleSelect(id,label,tag)
+    {
+    }
     $(document).ready(function () {
     <%if(Model.UseAjaxLoading){ %>
-        $("#<%= Model.AutoCompleteId %> .autoCompleteText").autocomplete({
+        $("#<%= Model.AutoCompleteId %> .autoComplete").autocomplete({
             source: function (request, response) {
                 $.ajax({
-                    url: "<%=Model.ActionLink %>", 
+                    url: "<%=Model.GetDataUrl %>", 
                     type: "POST", 
                     dataType: "json",
                     data: { 
@@ -47,18 +50,13 @@
                      $("#<%= Model.AutoCompleteId %> .autoCompleteText").data( "autocomplete" ).term = "";
                     return false;
                 }
+                AutocompleChange(ui.item.id,ui.item.label,ui.item.tag);
             }
         });
-//        $("#<%= Model.AutoCompleteId %> .autoCompleteText").change(function(){
-//                $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
-//                $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
-//                $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
-//                $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
-//        });
     <%}%>
     <%else {%>
         var autoCompleteData =<%=Model.JsonData %>;
-        $("#<%= Model.AutoCompleteId %> .autoCompleteText").autocomplete({
+        $("#<%= Model.AutoCompleteId %> .autoComplete").autocomplete({
             source: function (req, responseFn) {
                             var re = $.ui.autocomplete.escapeRegex($.fn.nomalizeString(req.term));
                            // var matcher = new RegExp( "[*]?" + re, "i" ); // Search contains
@@ -75,6 +73,7 @@
                 $("#<%= Model.AutoCompleteId %>_SelectedValue").val(ui.item.id);
                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
                 $("#<%= Model.AutoCompleteId %>_SelectedTag").val(ui.item.tag);
+                AutocompleSelect(ui.item.id,ui.item.label,ui.item.tag);
             },
             delay:0,
             selectFirst: true,
@@ -105,7 +104,7 @@
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
-    <input type="text" class="autoCompleteText <%= Model.CustomeCss %> textInput" value="<%= Model.SelectedText %>" />
+    <input type="text" class="autoComplete <%= Model.CustomeCss %> textInput" value="<%= Model.SelectedText %>" />
     <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
 
     <input type="hidden" class="autoCompleteTag" id="<%= Model.AutoCompleteId %>_SelectedTag" value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />

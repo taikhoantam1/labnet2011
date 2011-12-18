@@ -75,6 +75,7 @@ namespace DataRepository
         List<Panel> GetAllPanel();
         bool IsValidPanel(string name);
         List<Panel> GetPanelByName(string name);
+        List<Panel> GetPanels();
         #endregion
 
         #region PanelItem
@@ -103,5 +104,27 @@ namespace DataRepository
         TestSection GetTestSection(int testSectionId);
         #endregion
 
+        #region Patient
+            string GetPatientNumber();
+            int PatientInsert(Patient patient);
+            int PatientItemInsert(PatientItem patient);
+            List<PatientsGets_Result> GetPatients(int? PatientId, string FirstName, string Phone, string Email, string IndentifierNumber, string Address, int? PartnerId, int? OrderNumber, DateTime? ReceivedDate);
+            Patient GetPatient(int Id, DateTime receivedDate,int orderNumber);
+            Patient GetPatientNumber(int Id);
+            List<VMPatientTest> GetPatientTests(int Id, DateTime receivedDate, int orderNumber);
+            void PatientUpdate(int patientId, Patient patient);
+            void PatientItemUpdate(int patientId, PatientItem patientItem);
+        #endregion
+        #region Analysis
+            void AnalysisInsert(Analysis analysis);
+        #endregion
+
+        #region LabExamination
+            string GetExaminationNumber();
+            int LabExaminationInsert(LabExamination labExamination);
+            int GetLabExaminationOrderNumber();
+            VMLabExamination GetLabExamination(int Id);
+            void LabExaminationUpdate(int patientId,DateTime receivedDate, int orderNumber, LabExamination labExamination);
+        #endregion
     }
 }
