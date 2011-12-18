@@ -9,11 +9,11 @@
 
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
-<% Html.BeginForm("Create", "Doctor");%>
+<% Html.BeginForm("Create", "BacSi");%>
 <%}
   else
   { %>
-<% Html.BeginForm("Edit", "Doctor"); %>
+<% Html.BeginForm("Edit", "BacSi"); %>
 <%} %>
 <%= Html.HiddenFor(m=>m.Doctor.Id) %>
 

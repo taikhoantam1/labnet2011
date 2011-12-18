@@ -64,7 +64,7 @@ namespace DomainModel
         {
             get
             {
-                return "/Test/Edit/" + TestId;
+                return "/XetNghiem/Edit/" + TestId;
             }
         }
 
