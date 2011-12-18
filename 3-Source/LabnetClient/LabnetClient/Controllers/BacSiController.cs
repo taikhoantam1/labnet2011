@@ -116,7 +116,7 @@ namespace LabnetClient.Controllers
                 DoctorSearchObject obj = new DoctorSearchObject();
                 obj.Id = doctor.Id;
                 obj.DoctorName = doctor.Name;
-
+                obj.Email = doctor.Email;
                 model.DoctorSearch.ListSearchResult.Add(obj);
             }
 
@@ -135,6 +135,7 @@ namespace LabnetClient.Controllers
                 DoctorSearchObject obj = new DoctorSearchObject();
                 obj.Id = doctor.Id;
                 obj.DoctorName = doctor.Name;
+                obj.Email = doctor.Email;
                 ListSearchResult.Add(obj);
             }
             JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, ListSearchResult, "");

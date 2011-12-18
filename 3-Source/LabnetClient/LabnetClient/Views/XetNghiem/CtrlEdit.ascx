@@ -40,7 +40,7 @@
     });
 </script>
 <%=Html.ValidationSummary() %>
-<% Html.BeginForm("Edit", "Test"); %>
+<% Html.BeginForm("Edit", "XetNghiem"); %>
 <%= Html.HiddenFor(m=>m.Test.Id) %>
 <div class="Module">
     <div class="ModuleTitle">

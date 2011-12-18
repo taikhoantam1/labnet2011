@@ -79,6 +79,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string VMDoctorSearch_Email {
+            get {
+                return ResourceManager.GetString("VMDoctorSearch_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá.
         /// </summary>
         internal static string VMPanel_Cost {

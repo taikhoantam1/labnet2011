@@ -120,6 +120,9 @@
   <data name="VMDoctorSearch_DoctorName" xml:space="preserve">
     <value>Tên Bác Sĩ</value>
   </data>
+  <data name="VMDoctorSearch_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="VMDoctor_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Bác sĩ</value>
   </data>

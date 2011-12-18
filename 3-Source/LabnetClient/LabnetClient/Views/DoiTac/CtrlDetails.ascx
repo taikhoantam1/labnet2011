@@ -65,6 +65,7 @@
             dataObject.TestSectionName = testSection;
             dataObject.Cost = costEnter;
             dataObject.TestId = testId;
+            dataObject.IsEnable = true;
             var array = $("#list").jqGrid().getRowData();
             jQuery("#list").jqGrid('addRowData', array.length, dataObject);
 
@@ -88,11 +89,11 @@
     <%= Html.ValidationSummary() %>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
-<% Html.BeginForm("Create", "Partner");%>
+<% Html.BeginForm("Create", "DoiTac");%>
 <%}
   else
   { %>
-<% Html.BeginForm("Edit", "Partner"); %>
+<% Html.BeginForm("Edit", "DoiTac"); %>
 <%} %>
 <%= Html.HiddenFor(m=>m.Partner.Id) %>
 <div class="Module">

@@ -107,7 +107,7 @@ namespace LabnetClient.Controllers
 
             TestSearctViewModel modelSearch = new TestSearctViewModel();
             modelSearch.TestSearch.TestName = model.Test.Name;
-            return RedirectToAction("Search", "Test");
+            return RedirectToAction("Search", "XetNghiem");
         }
 
         //

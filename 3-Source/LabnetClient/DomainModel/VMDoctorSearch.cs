@@ -21,6 +21,11 @@ namespace DomainModel
         public string DoctorName { get; set; }
 
         /// <summary>
+        /// Sets or gets Email
+        /// </summary>
+        [JQColumnAttribute("VMDoctorSearch_Email", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string Email { get; set; }
+        /// <summary>
         /// Link edit partner use in search doctor
         /// </summary>
         [JQColumnAttribute("", true, false, false, EditTypeEnum.Link, FormatterEnum.EditLink)]

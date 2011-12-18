@@ -11,7 +11,8 @@ namespace LabnetClient.Models
         {
             Partner = partner;
             Autocomplete = new AutocompleteModel("Partner.TestName");
-            JQGrid = new JQGridModel(typeof(VMTestListItem), true, partnerTestList, "/Partner/SavePartnerTest");
+            ParnerTestList = partnerTestList;
+            JQGrid = new JQGridModel(typeof(VMTestListItem), true, partnerTestList, "/DoiTac/SavePartnerTest");
         }
 
         /// <summary>
@@ -30,6 +31,6 @@ namespace LabnetClient.Models
         public JQGridModel JQGrid { get; set; }
 
 
-
+        public List<VMTestListItem> ParnerTestList { get; set; }
     }
 }

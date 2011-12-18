@@ -101,7 +101,7 @@
         $("#btnSubmit").click(function () {
             var data = $("form").serialize();
             $.ajax({
-                url: "/Test/SearchTest",
+                url: "/XetNghiem/SearchTest",
                 data: data,
                 type: "POST",
                 success: function (data) {

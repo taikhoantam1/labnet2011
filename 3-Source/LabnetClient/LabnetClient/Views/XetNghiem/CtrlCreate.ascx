@@ -56,11 +56,11 @@
 <%=Html.ValidationSummary() %>
 <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
   {%>
-<% Html.BeginForm("Create", "Test");%>
+<% Html.BeginForm("Create", "XetNghiem");%>
 <%}
   else
   { %>
-<% Html.BeginForm("Edit", "Test"); %>
+<% Html.BeginForm("Edit", "XetNghiem"); %>
 <%} %>
 <%= Html.HiddenFor(m=>m.Test.Id) %>
 <div class="Module">
