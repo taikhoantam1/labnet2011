@@ -174,6 +174,27 @@
   <data name="VMPartner_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên</value>
   </data>
+  <data name="VMPatientTestResult_Approved" xml:space="preserve">
+    <value>Xác Minh</value>
+  </data>
+  <data name="VMPatientTestResult_Index" xml:space="preserve">
+    <value>STT</value>
+  </data>
+  <data name="VMPatientTestResult_Name" xml:space="preserve">
+    <value>Tên Xét Nghiệm</value>
+  </data>
+  <data name="VMPatientTestResult_Range" xml:space="preserve">
+    <value>CSTB</value>
+  </data>
+  <data name="VMPatientTestResult_Result" xml:space="preserve">
+    <value>Kết Quả</value>
+  </data>
+  <data name="VMPatientTestResult_Status" xml:space="preserve">
+    <value>Tình Trạng</value>
+  </data>
+  <data name="VMPatientTestResult_Unit" xml:space="preserve">
+    <value>Đơn Vị</value>
+  </data>
   <data name="VMPatientTest_Cost" xml:space="preserve">
     <value>Giá</value>
   </data>

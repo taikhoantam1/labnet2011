@@ -1,10 +1,11 @@
 ﻿using DomainModel;
 using System.Collections.Generic;
-using LabnetClient.Constant;
+using DomainModel.Constant;
 using System.Web.Mvc;
 using LibraryFuntion;
 using System.Linq;
 using DataRepository;
+using DomainModel.Constant;
 
 namespace LabnetClient.Models
 {
@@ -18,9 +19,10 @@ namespace LabnetClient.Models
             Repository Repository = new DataRepository.Repository();
             Patient =patient;
             LabExamination = labExamination;
+            if(    LabExamination.OrderNumber==null)
             LabExamination.OrderNumber = Repository.GetLabExaminationOrderNumber();
 
-            JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "SavePatientTest");
+            JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "/BenhNhan/SavePatientTest");
             
             Autocomplete = new AutocompleteModel();
             Autocomplete.JsonData = lstPanel.Select(p => new { Label = p.Name, Value = p.Id}).ToJson();
@@ -28,7 +30,7 @@ namespace LabnetClient.Models
 
             VMPartner partner = new VMPartner();
             partner.Id = -1;
-            partner.Name = "N/A";
+            partner.Name = " ";
             listPartner.Insert(0, partner);
             SelectListPartner = new SelectList(listPartner, "Id", "Name");
         }

@@ -138,7 +138,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Constant\GeneralEnum.cs" />
     <Compile Include="App_GlobalResources\GlobalStrings.en-US.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,7 +148,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PartnerStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Constant\SessionProperties.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BacSiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -201,6 +199,7 @@
     <Compile Include="Models\Panel\PanelViewModel.cs" />
     <Compile Include="Models\Partner\PartnerSearchViewModel.cs" />
     <Compile Include="Models\Partner\PartnerViewModel.cs" />
+    <Compile Include="Models\Patient\PatientTestViewModel.cs" />
     <Compile Include="Models\Patient\PatientViewModel.cs" />
     <Compile Include="Models\Test\TestSearctViewModel.cs" />
     <Compile Include="Models\Test\TestViewModel.cs" />
@@ -769,6 +768,8 @@
     <Content Include="Views\BacSi\Search.aspx" />
     <Content Include="Views\BenhNhan\CtrlSearch.ascx" />
     <Content Include="Views\BenhNhan\Index.aspx" />
+    <Content Include="Views\BenhNhan\PatientTestResult.aspx" />
+    <Content Include="Views\BenhNhan\UpdateTestResult.ascx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Panel\CtrlCreate.ascx" />
     <Content Include="Views\Panel\Create.aspx" />

@@ -7,7 +7,7 @@ using LabnetClient.Models;
 using DataRepository;
 using AutoMapper;
 using DomainModel;
-using LabnetClient.Constant;
+using DomainModel.Constant;
 
 namespace LabnetClient.Controllers
 {

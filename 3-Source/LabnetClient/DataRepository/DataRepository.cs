@@ -6,6 +6,8 @@ using System.Data;
 using LibraryFuntion;
 using System.Data.Objects.SqlClient;
 using DomainModel;
+using System.Data.Objects;
+using DomainModel.Constant;
 namespace DataRepository
 {
     public class Repository : IDataRepository
@@ -509,11 +511,13 @@ namespace DataRepository
             return testSection;
         }
         #endregion
+
         #region Patient
         public string GetPatientNumber()
         {
             return myDb.GeneratePatientNumber(5).FirstOrDefault();
         }
+
         public int PatientInsert(Patient patient)
         {
             myDb.Patients.AddObject(patient);
@@ -539,7 +543,82 @@ namespace DataRepository
             Patient patient = myDb.Patients.Where(p => p.Id == Id).FirstOrDefault();
             return patient;
         }
+
+        public List<VMPatientTest> GetPatientTests(int Id, int labExaminationId)
+        {
+            Patient patient = GetPatient(labExaminationId);
+
+            List<VMPatientTest> listTest = new List<VMPatientTest>();
+            foreach (var patientItem in patient.PatientItems)
+            {
+                foreach (var analysis in patientItem.Analyses)
+                {
+                    VMPatientTest patientTest = new VMPatientTest
+                    {
+                        TestName = analysis.Test.Name,
+                        TestId = analysis.Test.Id,
+                        Section = analysis.Test.TestSection.Name,
+                        IsEnable = analysis.Test.IsActive,
+                        Cost = analysis.Test.Cost,
+                    };
+                    listTest.Add(patientTest);
+                }
+            }
+            return listTest;
+        }
+
+        public Patient GetPatient(int labExaminationId)
+        {
+
+            Patient patient = (from _patient in myDb.Patients
+                               join
+                                   _labExamination in myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
+                               where _labExamination.Id == labExaminationId
+                               select _patient).FirstOrDefault();
+            return patient;
+        }
+
+        public Patient GetPatient(DateTime ReceivedDate, int OrderNumber)
+        {
+            Patient patient = (from _patient in myDb.Patients
+                               join
+                                   _labExamination in myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
+                               where EntityFunctions.TruncateTime(_labExamination.ReceivedDate) == ReceivedDate && _labExamination.OrderNumber == OrderNumber
+                               select _patient).FirstOrDefault();
+            return patient;
+        }
+
+        public void PatientUpdate(int patientId, Patient patient)
+        {
+
+            Patient patientOld = (from _patient in myDb.Patients
+                                  where _patient.Id == patientId
+                                  select _patient).FirstOrDefault();
+            patientOld.Address = patient.Address;
+            patientOld.BirthDate = patient.BirthDate;
+            patientOld.Gender = patient.Gender;
+            patientOld.FirstName = patient.FirstName;
+            patientOld.Age = patient.BirthDate;
+            patientOld.Email = patient.Email;
+            myDb.SaveChanges();
+        }
+
+        public PatientItem PatientItemUpdate(int patientId, PatientItem patientItem)
+        {
+            PatientItem patientItemOld = myDb.PatientItems.Where(p => p.PatientId == patientId).FirstOrDefault();
+            patientItemOld.LastUpdated = patientItem.LastUpdated;
+            myDb.SaveChanges();
+            return patientItemOld;
+        }
+
+        public List<VMPatientTest> GetPatientTests(int Id)
+        {
+            return new List<VMPatientTest>();
+        }
+
+
         #endregion
+
         #region Analysis
         public void AnalysisInsert(Analysis analysis)
         {
@@ -570,8 +649,6 @@ namespace DataRepository
             return myDb.LabExaminations.Where(p => p.ReceivedDate >= today).Max(p => p.OrderNumber) + 1;
 
         }
-        #endregion
-
         public VMLabExamination GetLabExamination(int Id)
         {
             VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.PatientId == Id)
@@ -581,78 +658,123 @@ namespace DataRepository
                                                                     Diagnosis = p.Diagnosis,
                                                                     Id = p.Id,
                                                                     OrderNumber = p.OrderNumber,
-                                                                    PartnerId = p.PatientId,
+                                                                    PartnerId = p.PartnerId,
                                                                     PatientId = p.PatientId,
                                                                     ReceivedDate = p.ReceivedDate,
-                                                                    Status = p.Status
+                                                                    Status = p.Status,
+
                                                                 }).FirstOrDefault();
             return labExamination;
         }
-
-        public List<VMPatientTest> GetPatientTests(int Id, DateTime ReceivedDate, int OrderNumber)
+        public VMLabExamination GetLabExamination(int OrderNumber, DateTime ReceivedDate)
         {
-            Patient patient = GetPatient(Id, ReceivedDate, OrderNumber);
-
-            List<VMPatientTest> listTest = new List<VMPatientTest>();
-            foreach (var patientItem in patient.PatientItems)
-            {
-                foreach (var analysis in patientItem.Analyses)
-                {
-                    VMPatientTest patientTest = new VMPatientTest
-                      {
-                          TestName = analysis.Test.Name,
-                          TestId = analysis.Test.Id,
-                          Section = analysis.Test.TestSection.Name,
-                          IsEnable = analysis.Test.IsActive,
-                          Cost = analysis.Test.Cost,
-                      };
-                    listTest.Add(patientTest);
-                }
-            }
-            return listTest;
-        }
-
-        public Patient GetPatient(int Id, DateTime receivedDate, int orderNumber)
-        {
-            
-            Patient patient = (from _patient in myDb.Patients
-                               join
-                                   _labExamination in myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
-                               where _patient.Id == Id && _labExamination.OrderNumber == orderNumber && _labExamination.ReceivedDate == receivedDate
-                               select _patient).FirstOrDefault();
-            return patient;
+            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.OrderNumber == OrderNumber && EntityFunctions.TruncateTime(p.ReceivedDate) == ReceivedDate)
+                                                               .Select(p => new VMLabExamination
+                                                               {
+                                                                   CreatedBy = p.CreatedBy,
+                                                                   Diagnosis = p.Diagnosis,
+                                                                   Id = p.Id,
+                                                                   OrderNumber = p.OrderNumber,
+                                                                   PartnerId = p.PartnerId,
+                                                                   PatientId = p.PatientId,
+                                                                   ReceivedDate = p.ReceivedDate,
+                                                                   Status = p.Status
+                                                               }).FirstOrDefault();
+            return labExamination;
         }
         public void LabExaminationUpdate(int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination)
         {
-            LabExamination labExamOld = myDb.LabExaminations.Where(p=>p.ReceivedDate==receivedDate && p.OrderNumber==orderNumber && p.PatientId ==patientId).FirstOrDefault();
+            LabExamination labExamOld = myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == receivedDate && p.OrderNumber == orderNumber && p.PatientId == patientId).FirstOrDefault();
             labExamOld.CreatedBy = labExamination.CreatedBy;
             labExamOld.PartnerId = labExamination.PartnerId;
             labExamination.Diagnosis = labExamination.Diagnosis;
             labExamination.Status = labExamination.Status;
             myDb.SaveChanges();
         }
-        public void PatientUpdate(int patientId, Patient patient)
+
+        #endregion
+
+        #region Result
+        public void ResultInsert(int analysisId, string result, int staffId)
         {
-            
-            Patient patientOld = (from _patient in myDb.Patients
-                               where patient.Id == patientId
-                               select _patient).FirstOrDefault();
-            patientOld.Address = patient.Address;
-            patientOld.BirthDate = patient.BirthDate;
-            patientOld.Gender = patient.Gender;
-            patientOld.FirstName = patient.FirstName;
-            patientOld.Age = patient.BirthDate;
-            patientOld.Email = patient.Email;
+            //Add result
+            Result testResult = new Result();
+            testResult.AnalysisId = analysisId;
+            testResult.LastUpdated = DateTime.Now;
+            testResult.LastModifiedStaffId = staffId;
+            testResult.IsReportable = true;
+            testResult.Value = result;
+            myDb.Results.AddObject(testResult);
+
+            // update analysis
+            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            if (analysis != null)
+            {
+                analysis.Status = (int)AnalysisStatusEnum.HaveResult;
+            }
             myDb.SaveChanges();
         }
-        public void PatientItemUpdate(int patientId, PatientItem patientItem)
+
+        public void ResultUpdate(int analysisId,int resultId, string result, int staffId)
         {
+
+            //Add result
+            Result testResult = myDb.Results.Where(p => p.Id == resultId).FirstOrDefault();
+            if (testResult != null)
+            {
+                testResult.LastUpdated = DateTime.Now;
+                testResult.LastModifiedStaffId = staffId;
+                testResult.IsReportable = true;
+                testResult.Value = result;
+            }
+            // update analysis
+            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            if (analysis != null)
+            {
+                if(string.IsNullOrEmpty(result))
+                    analysis.Status = (int)AnalysisStatusEnum.New;
+            }
+            myDb.SaveChanges();
         }
 
-        public List<VMPatientTest> GetPatientTests(int Id)
+        public List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate)
         {
-            return new List<VMPatientTest>();
+            VMLabExamination labExamination = GetLabExamination(orderNumber, receivedDate);
+            List<TestResultsGet_Result> tests = myDb.PatientTestResultsGet(labExamination.Id).ToList();
+            List<VMTestResult> testResults = new List<VMTestResult>();
+            if (tests != null && tests.Count != 0)
+            {
+                foreach (var p in tests)
+                {
+                    string tinhtrang = RepositoryStrings.AnalysisStatus_New;
+                    if (p.Status == (int)AnalysisStatusEnum.HaveResult)
+                    {
+                        tinhtrang = RepositoryStrings.AnalysisStatus_HaveResult;
+                    }
+                    else if (p.Status == (int)AnalysisStatusEnum.Approved)
+                    {
+                        tinhtrang = RepositoryStrings.AnalysisStatus_Approved;
+                    }
+
+                    testResults.Add(new VMTestResult
+                    {
+                        Index = (int)p.STT,
+                        Name = p.Name,
+                        Range = p.Range,
+                        Result = p.Result ?? "",
+                        TestId = p.TestId,
+                        Unit = p.Unit,
+                        StatusString = tinhtrang,
+                        Status = p.Status,
+                        AnalysisId = p.AnalysisId,
+                        ResultId=p.ResultId
+
+                    });
+                }
+            }
+            return testResults;
         }
 
+        #endregion
     }
 }

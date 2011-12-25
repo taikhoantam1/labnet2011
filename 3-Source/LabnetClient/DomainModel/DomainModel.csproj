@@ -41,28 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constant\GeneralEnum.cs" />
+    <Compile Include="Constant\SessionProperties.cs" />
     <Compile Include="JQGrid\JQColumn.cs" />
     <Compile Include="JQGrid\JQColumnAttribute.cs" />
     <Compile Include="JQGrid\JQConstant.cs" />
-    <Compile Include="VMLabExamination.cs" />
-    <Compile Include="VMDoctor.cs" />
-    <Compile Include="VMDoctorSearch.cs" />
-    <Compile Include="VMPanel.cs" />
-    <Compile Include="VMPartnerCost.cs" />
-    <Compile Include="VMPartnerSearch.cs" />
-    <Compile Include="VMPatient.cs" />
-    <Compile Include="VMPatientTest.cs" />
-    <Compile Include="VMTest.cs" />
+    <Compile Include="Patient\VMLabExamination.cs" />
+    <Compile Include="Doctor\VMDoctor.cs" />
+    <Compile Include="Doctor\VMDoctorSearch.cs" />
+    <Compile Include="Panel\VMPanel.cs" />
+    <Compile Include="Partner\VMPartnerCost.cs" />
+    <Compile Include="Partner\VMPartnerSearch.cs" />
+    <Compile Include="Patient\VMPatient.cs" />
+    <Compile Include="Patient\VMPatientTest.cs" />
+    <Compile Include="Patient\VMTestResult.cs" />
+    <Compile Include="Test\VMTest.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="VMPartner.cs" />
+    <Compile Include="Partner\VMPartner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VMTestListItem.cs" />
-    <Compile Include="VMTestSearch.cs" />
-    <Compile Include="VMTestSection.cs" />
+    <Compile Include="Test\VMTestListItem.cs" />
+    <Compile Include="Test\VMTestSearch.cs" />
+    <Compile Include="Test\VMTestSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

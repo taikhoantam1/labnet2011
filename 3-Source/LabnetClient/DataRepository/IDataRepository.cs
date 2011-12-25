@@ -109,11 +109,14 @@ namespace DataRepository
             int PatientInsert(Patient patient);
             int PatientItemInsert(PatientItem patient);
             List<PatientsGets_Result> GetPatients(int? PatientId, string FirstName, string Phone, string Email, string IndentifierNumber, string Address, int? PartnerId, int? OrderNumber, DateTime? ReceivedDate);
-            Patient GetPatient(int Id, DateTime receivedDate,int orderNumber);
+            Patient GetPatient(int labExaminationId);
+            Patient GetPatient(DateTime ReceivedDate, int OrderNumber);
+            //Patient GetPatient(int id);
             Patient GetPatientNumber(int Id);
-            List<VMPatientTest> GetPatientTests(int Id, DateTime receivedDate, int orderNumber);
+            List<VMPatientTest> GetPatientTests(int patientId, int labExaminationId);
             void PatientUpdate(int patientId, Patient patient);
-            void PatientItemUpdate(int patientId, PatientItem patientItem);
+            PatientItem PatientItemUpdate(int patientId, PatientItem patientItem);
+            List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate);
         #endregion
         #region Analysis
             void AnalysisInsert(Analysis analysis);
@@ -123,8 +126,17 @@ namespace DataRepository
             string GetExaminationNumber();
             int LabExaminationInsert(LabExamination labExamination);
             int GetLabExaminationOrderNumber();
-            VMLabExamination GetLabExamination(int Id);
+            VMLabExamination GetLabExamination(int LabExaminationId);
+            VMLabExamination GetLabExamination(int OrderNumber, DateTime ReceivedDate);
             void LabExaminationUpdate(int patientId,DateTime receivedDate, int orderNumber, LabExamination labExamination);
         #endregion
+
+        #region Result
+            void ResultInsert(int analysisId, string result, int staffId);
+
+            void ResultUpdate(int analysisId,int resultId, string result, int staffId);
+
+        #endregion
+
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LabnetClient.Constant
+namespace DomainModel.Constant
 {
     public enum ViewMode
     {
@@ -24,6 +24,7 @@ namespace LabnetClient.Constant
         Approved=3//Đã xác minh
 
     }
+
     public enum LabExaminationStatusEnum
     {
         New=1

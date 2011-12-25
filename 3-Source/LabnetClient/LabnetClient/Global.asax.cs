@@ -30,7 +30,6 @@ namespace LabnetClient
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
             RegisterRoutes(RouteTable.Routes);
             // Code that runs on application startup
             log4net.Config.XmlConfigurator.Configure();

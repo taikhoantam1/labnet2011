@@ -1,4 +1,5 @@
-﻿using LabnetClient.Constant;
+﻿using DomainModel.Constant;
+using DomainModel.Constant;
 
 namespace LabnetClient.Models
 {

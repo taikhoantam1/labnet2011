@@ -67,6 +67,11 @@ namespace LabnetClient.Models
             for(int i=0 ;i < Columns.Count;i++)
             {
                 var column=Columns[i];
+                string EditOption="";
+                if(CustomAttributes[i].EditType == EditTypeEnum.Checkbox)
+                      EditOption=  string.Format(   JQConstant.EditOptions, "value:'True:False',");
+                else
+                      EditOption=  string.Format(   JQConstant.EditOptions, "");  
                 cols.Add(string.Format(JQConstant.columnTemplate,
                     column.ColumnName,
                     column.ColumnName,
@@ -75,18 +80,12 @@ namespace LabnetClient.Models
                     column.ColumnType,
                     column.Visible.ToString().ToLower(),
                     column.Formatter,
-                    CustomAttributes[i].Formatter==FormatterEnum.Checkbox?"{disabled: false}":"{}"
+                    CustomAttributes[i].Formatter==FormatterEnum.Checkbox?"{disabled: false}":"{}",
+                    EditOption
                     ));
 
             }
-            if (CustomAttributes[cols.Count - 1].EditType == EditTypeEnum.Checkbox)
-            {
-                cols[cols.Count - 1] += string.Format(JQConstant.EditOptions, "value:'True:False',");
-            }
-            else
-            {
-                cols[cols.Count - 1] += string.Format(JQConstant.EditOptions, "");
-            }
+        
 
             ColModelScript = string.Join(",", cols.Select(p => "\n{" + p + "}"));
         }
