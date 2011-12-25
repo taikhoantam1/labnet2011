@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LabnetClient.Constant
+namespace DomainModel.Constant
 {
     public class SessionProperties
     {

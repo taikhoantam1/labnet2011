@@ -117,64 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PatientAddress" xml:space="preserve">
-    <value>Địa chỉ</value>
+  <data name="AnalysisStatus_Approved" xml:space="preserve">
+    <value>Đã Xác Minh</value>
   </data>
-  <data name="PatientBirthday" xml:space="preserve">
-    <value>Ngày sinh</value>
+  <data name="AnalysisStatus_HaveResult" xml:space="preserve">
+    <value>Có Kết Quả</value>
   </data>
-  <data name="PatientCreate_Title" xml:space="preserve">
-    <value>Thêm Bệnh Nhân</value>
-  </data>
-  <data name="PatientCreate_TestRequired" xml:space="preserve">
-    <value>Vui lòng chọn xét nghiệm</value>
-  </data>
-  <data name="PatientDiagnosis" xml:space="preserve">
-    <value>Chẩn Đoán</value>
-  </data>
-  <data name="PatientEdit_Title" xml:space="preserve">
-    <value>Cập Nhật Thông Tin Bệnh Nhân</value>
-  </data>
-  <data name="PatientEmail" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="PatientGender" xml:space="preserve">
-    <value>Giới Tính</value>
-  </data>
-  <data name="PatientIDNumber" xml:space="preserve">
-    <value>CMND</value>
-  </data>
-  <data name="PatientInsert_Button_Cancel" xml:space="preserve">
-    <value>Hủy</value>
-  </data>
-  <data name="PatientInsert_Button_Save" xml:space="preserve">
-    <value>Lưu</value>
-  </data>
-  <data name="PatientInsert_Panel" xml:space="preserve">
-    <value>Chọn XN cho BN</value>
-  </data>
-  <data name="PatientInsert_Partner" xml:space="preserve">
-    <value>Nơi gửi mẫu</value>
-  </data>
-  <data name="PatientInsert_ReceivedDate" xml:space="preserve">
-    <value>Ngày Nhận</value>
-  </data>
-  <data name="PatientInsert_Title" xml:space="preserve">
-    <value>Thêm thông tin bệnh nhân</value>
-  </data>
-  <data name="PatientName" xml:space="preserve">
-    <value>Họ tên</value>
-  </data>
-  <data name="PatientPhone" xml:space="preserve">
-    <value>Số điện thoại</value>
-  </data>
-  <data name="PatientSearch_Title" xml:space="preserve">
-    <value>Tìm Kiếm Bệnh Nhân</value>
-  </data>
-  <data name="PatientSTT" xml:space="preserve">
-    <value>Tìm số thứ tự</value>
-  </data>
-  <data name="PatientTestUpdate_Title" xml:space="preserve">
-    <value>Điền Kết Quả XN</value>
+  <data name="AnalysisStatus_New" xml:space="preserve">
+    <value>Mới Tạo</value>
   </data>
 </root>

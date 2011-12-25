@@ -1,10 +1,11 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PatientViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PatientTestViewModel>" %>
+
 
 <%= Html.ValidationSummary() %>
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-             <%=Resources.PatientStrings.PatientSearch_Title%>
+             <%=Resources.PatientStrings.PatientTestUpdate_Title%>
         </h3>
     </div>
     <div class="ModuleContent">
@@ -19,15 +20,6 @@
                     </div>
                     <div class="Column">
                         <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new  {Class="textInput" })%>
-                    </div>
-                </div>
-                <div class="Row">
-                    <div class="Column">
-                        <label class="lbTitle">
-                            <%=Resources.PatientStrings.PatientInsert_Partner %></label>
-                    </div>
-                    <div class="Column">
-                        <%= Html.DropDownListFor(p => p.LabExamination.PartnerId, Model.SelectListPartner) %>
                     </div>
                 </div>
             </div>
@@ -47,7 +39,7 @@
         </div>
         <div class="line">
         </div>
-        <div class="ContentTop">
+        <div class="ContentTop PatientInfo">
             <div class="LeftCol">
                 <div class="Row">
                     <div class="Column">
@@ -58,23 +50,13 @@
                         <%=Html.TextBoxFor(m => m.Patient.FirstName, new  {Class="textInput" })%>
                     </div>
                 </div>
-              
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
-                            <%=Resources.PatientStrings.PatientPhone%></label>
+                            <%=Resources.PatientStrings.PatientInsert_Partner %></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Patient.Phone, new  {Class="textInput" })%>
-                    </div>
-                </div>
-                <div class="Row">
-                    <div class="Column">
-                        <label class="lbTitle">
-                            <%=Resources.PatientStrings.PatientEmail%></label>
-                    </div>
-                    <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Patient.Email, new  {Class="textInput" })%>
+                        <%= Html.DropDownListFor(p => p.LabExamination.PartnerId, Model.SelectListPartner) %>
                     </div>
                 </div>
             </div>
@@ -82,19 +64,19 @@
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
-                            <%=Resources.PatientStrings.PatientIDNumber%></label>
+                            <%=Resources.PatientStrings.PatientBirthday%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Patient.IndentifierNumber, new  {Class="textInput" })%>
+                        <%=Html.TextBoxFor(m => m.Patient.Age, new  {Class="textInput" })%>
                     </div>
                 </div>
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
-                            <%=Resources.PatientStrings.PatientAddress%></label>
+                            <%=Resources.PatientStrings.PatientGender%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Patient.Address, new  {Class="textInput" })%>
+                        <%=Html.TextBox("Patient.Gender", !Model.Patient.Gender?"Nữ":"Nam", new { Class = "textInput" })%>
                     </div>
                 </div>
             </div>
@@ -102,25 +84,40 @@
          <% Html.EndForm(); %>
          
         <div class="Row ResultTable">
-              
+                 <% Html.RenderPartial("DataTable", Model.JQGrid); %>
         </div>
         
     </div>
-    <input type=button id="btnSearchFilter"  value="Tìm"/>
+    <input type=button id="btnSaveTestResult"  value="Lưu"/>
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".date").datepicker();
-        $("#btnSearchFilter").click(function () {
-            var data = $(".ModuleContent form").serialize();
-            alert(data);
-            $.ajax({
-                url: "/BenhNhan/Search",
-                type: "POST",
-                data: data,
-                success: function (data) {
-                    $(".ResultTable").html(data);
-                }
-            });
+        $("input,textarea,select", ".PatientInfo").attr("disabled", "disabled");
+        $("#LabExamination_OrderNumber").keyup(function (event) {
+            if (event.keyCode == 13) {
+                var date = $("#LabExamination_ReceivedDate").val();
+                $.ajax({
+                    url: "/BenhNhan/SearchByOrderNumber",
+                    data: {
+                        OrderNumber: $(this).val(),
+                        ReceivedDate: date
+                    },
+                    type: "POST",
+                    success: function (data) {
+                        if (data.trim().toLowerCase().indexOf("false") != -1)
+                            alert("Số thứ tự bạn tìm kiếm không tồn tại");
+                        else {
+                            window.location = "/BenhNhan/PatientTestResult/" + data + "?OrderNumber=" + $("#LabExamination_OrderNumber").val() + "&ReceivedDate=" + date;
+                        }
+                    }
+
+                });
+            }
         });
+        $("#btnSaveTestResult").click(function () {
+            $("#DataTableSaveButton").click();
+            window.location.reload();
+        });
+
     });
 </script>

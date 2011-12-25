@@ -13,7 +13,7 @@ CREATE PROCEDURE [dbo].[sp_PatientsGet]
 	@Address			nvarchar(100) = null,
 	@PartnerId			int=null			,
 	@OrderNumber		int=null			,
-	@ReceivedDate		datetime			
+	@ReceivedDate		datetime=null			
 AS
 BEGIN
 		Select	

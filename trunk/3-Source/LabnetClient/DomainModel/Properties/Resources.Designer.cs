@@ -340,6 +340,69 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Xác Minh.
+        /// </summary>
+        internal static string VMPatientTestResult_Approved {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Approved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to STT.
+        /// </summary>
+        internal static string VMPatientTestResult_Index {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Xét Nghiệm.
+        /// </summary>
+        internal static string VMPatientTestResult_Name {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSTB.
+        /// </summary>
+        internal static string VMPatientTestResult_Range {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Range", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kết Quả.
+        /// </summary>
+        internal static string VMPatientTestResult_Result {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tình Trạng.
+        /// </summary>
+        internal static string VMPatientTestResult_Status {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đơn Vị.
+        /// </summary>
+        internal static string VMPatientTestResult_Unit {
+            get {
+                return ResourceManager.GetString("VMPatientTestResult_Unit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên XN.
         /// </summary>
         internal static string VMTest_NameRequired {

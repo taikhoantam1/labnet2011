@@ -3,17 +3,20 @@
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-            <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+            <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Create)
               {%>
-            <%=Resources.PatientStrings.PatientInsert_Title %>
+          
+             <%=Resources.PatientStrings.PatientCreate_Title%>
             <%}
               else
               { %>
-            <%=Resources.PatientStrings.PatientEdit_Title %>
+           
+             <%=Resources.PatientStrings.PatientEdit_Title %>
             <%} %>
         </h3>
     </div>
     <%Html.BeginForm(); %>
+    <%= Html.HiddenFor(p=>p.LabExamination.Id) %>
     <div class="ModuleContent">
         <div class="ContentTop">
             <div class="LeftCol">
@@ -23,7 +26,7 @@
                             <%=Resources.PatientStrings.PatientSTT %></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new  {Class="textInput50" })%>
+                        <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new { Class = "textInput50 number readonly" })%>
                     </div>
                 </div>
                 <div class="Row">
@@ -43,7 +46,14 @@
                             <%=Resources.PatientStrings.PatientInsert_ReceivedDate%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBox("LabExamination.ReceivedDate",Model.LabExamination.ReceivedDate.Value.ToString("d"), new {ID="LabExamination_ReceivedDate" ,Class = "textInput100 date" })%>
+                    <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Edit)
+                      { %>
+                        <%=Html.TextBox("LabExamination.ReceivedDate", Model.LabExamination.ReceivedDate.Value.ToString("d"), new { ID = "LabExamination_ReceivedDate", Class = "textInput100 readonly" })%>
+                    <%}
+                      else
+                      {%>
+                        <%=Html.TextBox("LabExamination.ReceivedDate", Model.LabExamination.ReceivedDate.Value.ToString("d"), new { ID = "LabExamination_ReceivedDate", Class = "textInput100 date" })%>
+                    <%} %>
                     </div>
                 </div>
             </div>
@@ -78,7 +88,7 @@
                             <%=Resources.PatientStrings.PatientPhone%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Patient.Phone, new  {Class="textInput" })%>
+                        <%=Html.TextBoxFor(m => m.Patient.Phone, new  {Class="textInput number" })%>
                     </div>
                 </div>
                 <div class="Row">
@@ -114,7 +124,7 @@
                             <%=Resources.PatientStrings.PatientIDNumber%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Patient.IndentifierNumber, new  {Class="textInput" })%>
+                        <%=Html.TextBoxFor(m => m.Patient.IndentifierNumber, new { Class = "textInput number" })%>
                     </div>
                 </div>
                 <div class="Row">
@@ -184,12 +194,38 @@
     }
 
     $(document).ready(function () {
-        $(".date").datepicker();
-        $("#btnSavePatientInfo").click(function(event){
+        $("#LabExamination_OrderNumber").keyup(function (event) {
+            if (event.keyCode == 13) {
+                var date = $("#LabExamination_ReceivedDate").val();
+                $.ajax({
+                    url: "/BenhNhan/SearchByOrderNumber",
+                    data: {
+                        OrderNumber: $(this).val(),
+                        ReceivedDate: date
+                    },
+                    type: "POST",
+                    success: function (data) {
+                        alert(data);
+                        if (data.trim().toLowerCase().indexOf("false") != -1)
+                            alert("Số thứ tự bạn tìm kiếm không tồn tại");
+                        else {
+                            window.location = "/BenhNhan/Edit/" + data + "?OrderNumber=" + $("#LabExamination_OrderNumber").val() + "&ReceivedDate=" + date;
+                        }
+                    }
+
+                });
+            }
+        });
+
+        $("#btnSavePatientInfo").click(function (event) {
             event.preventDefault();
             $("#DataTableSaveButton").click();
             $("form").submit();
         });
+        
+//        <%if(Model.ViewMode == DomainModel.Constant.ViewMode.Edit){ %>
+//            $("#list tr td :checkbox").attr("disabled","disabled");
+//        <%} %>
     });
     
 </script>

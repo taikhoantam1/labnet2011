@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm Bệnh Nhân.
+        /// </summary>
+        internal static string PatientCreate_Title {
+            get {
+                return ResourceManager.GetString("PatientCreate_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chẩn Đoán.
         /// </summary>
         internal static string PatientDiagnosis {
@@ -205,11 +214,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tìm Kiếm Bệnh Nhân.
+        /// </summary>
+        internal static string PatientSearch_Title {
+            get {
+                return ResourceManager.GetString("PatientSearch_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tìm số thứ tự.
         /// </summary>
         internal static string PatientSTT {
             get {
                 return ResourceManager.GetString("PatientSTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Điền Kết Quả XN.
+        /// </summary>
+        internal static string PatientTestUpdate_Title {
+            get {
+                return ResourceManager.GetString("PatientTestUpdate_Title", resourceCulture);
             }
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LabnetClient.Models;
-using LabnetClient.Constant;
+using DomainModel.Constant;
 using DomainModel;
 using DataRepository;
 using AutoMapper;

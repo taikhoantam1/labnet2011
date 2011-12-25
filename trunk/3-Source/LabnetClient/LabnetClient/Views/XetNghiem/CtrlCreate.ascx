@@ -3,9 +3,6 @@
 <script type="text/javascript">
 
     $(function () {
-
-        $('input.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: false, wEmpty: 'empty' });
-
         $("#TestCostView").blur(function () {
             var cost = $("#TestCostView").val();
             cost = cost.replace(",", "");
@@ -54,7 +51,7 @@
     });
 </script>
 <%=Html.ValidationSummary() %>
-<%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+<%if (Model.ViewMode == DomainModel.Constant.ViewMode.Create)
   {%>
 <% Html.BeginForm("Create", "XetNghiem");%>
 <%}
@@ -66,7 +63,7 @@
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-            <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+            <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Create)
               {%>
             <%=Resources.TestStrings.TestCreate_Title %>
             <%}

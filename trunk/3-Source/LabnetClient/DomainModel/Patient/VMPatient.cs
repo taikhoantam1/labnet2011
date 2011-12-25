@@ -54,7 +54,7 @@ namespace DomainModel
         {
             get
             {
-                return string.Format("/BenhNhan/Edit/{0}?ReceivedDate={1}&OrderNumber={2}" , Id,LabExamination.ReceivedDate.Value,LabExamination.OrderNumber);
+                return string.Format("/BenhNhan/Edit/{0}?OrderNumber={1}&ReceivedDate={2}", Id, LabExamination.OrderNumber, LabExamination.ReceivedDate.Value.ToString("d"));
             }
         }
     }

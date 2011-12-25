@@ -45,7 +45,7 @@
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-            <%if (Model.ViewMode == LabnetClient.Constant.ViewMode.Create)
+            <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Create)
               {%>
             <%=Resources.TestStrings.TestCreate_Title %>
             <%}

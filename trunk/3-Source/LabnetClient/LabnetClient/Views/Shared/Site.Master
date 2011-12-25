@@ -17,14 +17,14 @@
 
     <script type="text/javascript" src="../../Content/Lib/jquery/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="../../Content/Lib/jquery/jquery.blockUI.js"></script>
-    <script src="../../Content/Scripts/jqueryExtend.js" type="text/javascript"></script>
     <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery-ui-1.8.16.min.js"></script>
     <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery.ui.autocomplete.selectFirst.js" ></script>
     <script type="text/javascript" src="../../Content/Lib/Ajax/ajax.js"></script>
     <script type="text/javascript" src="../../Content/Lib/Utility/ClientUtil.js"></script>
     <script type="text/javascript" src="../../Content/Lib/FlexiGrid/flexigrid.js"></script>
     <script type="text/javascript" src="../../Content/Lib/AutoNumeric/autoNumeric-1.7.1.js"></script>
-    <script type="text/javascript" src="/Content/Scripts/Script.js" ></script>
+    <script src="../../Content/Scripts/jqueryExtend.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../Content/Scripts/Script.js" ></script>
    
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
