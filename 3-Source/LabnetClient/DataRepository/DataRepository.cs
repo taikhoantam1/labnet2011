@@ -625,6 +625,15 @@ namespace DataRepository
             myDb.Analyses.AddObject(analysis);
             myDb.SaveChanges();
         }
+        public void AnalysisApproved(int analysisId, int staffId)
+        {
+            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            if (analysis != null)
+            {
+                analysis.Status = (int)AnalysisStatusEnum.Approved;
+            }
+            myDb.SaveChanges();
+        }
 
         #endregion
 
@@ -740,7 +749,12 @@ namespace DataRepository
         public List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate)
         {
             VMLabExamination labExamination = GetLabExamination(orderNumber, receivedDate);
-            List<TestResultsGet_Result> tests = myDb.PatientTestResultsGet(labExamination.Id).ToList();
+            return GetPatientTestResults(labExamination.Id);
+        }
+
+        public List<VMTestResult> GetPatientTestResults(int labExaminationId)
+        {
+            List<TestResultsGet_Result> tests = myDb.PatientTestResultsGet(labExaminationId).ToList();
             List<VMTestResult> testResults = new List<VMTestResult>();
             if (tests != null && tests.Count != 0)
             {
@@ -767,14 +781,20 @@ namespace DataRepository
                         StatusString = tinhtrang,
                         Status = p.Status,
                         AnalysisId = p.AnalysisId,
-                        ResultId=p.ResultId
+                        ResultId = p.ResultId
 
                     });
                 }
             }
             return testResults;
         }
-
+        #endregion
+        #region Report
+            public List<Report_PatientResult> ReportData_PatientResult(int labExaminationId)
+            {
+                List<Report_PatientResult> list = myDb.Report_PatientResult(labExaminationId).ToList();
+                return list;
+            }
         #endregion
     }
 }
