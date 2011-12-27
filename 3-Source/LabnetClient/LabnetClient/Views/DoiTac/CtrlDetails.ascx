@@ -8,10 +8,10 @@
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
         $('#btnAddTest').attr('disabled', true);
 
-        $("#autocompleteSelectTest .autoCompleteText").blur(function () {
+        $("#autocompleteSelectTest .autoComplete").blur(function () {
             var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
             $("#txtCost").val(tags[1]);
-            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testName = $("#autocompleteSelectTest .autoComplete").val();
 
             var allInputs = DataTableGetArrayDataSource();
 
@@ -24,12 +24,12 @@
             }
         });
 
-        $("#autocompleteSelectTest .autoCompleteText").keypress(function () {
+        $("#autocompleteSelectTest .autoComplete").keypress(function () {
             $('#btnAddTest').attr('disabled', false);
         });
 
         $("#txtCost").keyup(function () {
-            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testName = $("#autocompleteSelectTest .autoComplete").val();
             var cost = $("#txtCost").val();
             //alert(cost);
             if (testName != "" && cost != "") {
@@ -54,7 +54,7 @@
         $("#btnAddTest").click(function () {
             //alert("add");
             var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
-            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testName = $("#autocompleteSelectTest .autoComplete").val();
             var testSection = tags[0];
             var cost = tags[1];
             var costEnter = $("#txtCost").val();
@@ -69,7 +69,7 @@
             var array = $("#list").jqGrid().getRowData();
             jQuery("#list").jqGrid('addRowData', array.length, dataObject);
 
-            $("#autocompleteSelectTest .autoCompleteText").val("");
+            $("#autocompleteSelectTest .autoComplete").val("");
             $("#autocompleteSelectTest .autoCompleteValue").val(null);
             $("#autocompleteSelectTest .autoCompleteTag").val(null);
             $("#txtCost").val("");
