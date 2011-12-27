@@ -117,9 +117,11 @@ namespace DataRepository
             void PatientUpdate(int patientId, Patient patient);
             PatientItem PatientItemUpdate(int patientId, PatientItem patientItem);
             List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate);
+            List<VMTestResult> GetPatientTestResults(int labExaminationId);
         #endregion
         #region Analysis
-            void AnalysisInsert(Analysis analysis);
+            void AnalysisInsert(Analysis analysis); 
+            void AnalysisApproved(int analysisId, int staffId);
         #endregion
 
         #region LabExamination
@@ -136,6 +138,10 @@ namespace DataRepository
 
             void ResultUpdate(int analysisId,int resultId, string result, int staffId);
 
+        #endregion
+
+        #region Report
+            List<Report_PatientResult> ReportData_PatientResult(int labExaminationId);
         #endregion
 
     }

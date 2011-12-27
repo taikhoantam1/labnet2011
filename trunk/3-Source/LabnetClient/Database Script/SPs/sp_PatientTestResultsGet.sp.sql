@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[sp_PatientTestResultsGet]
 	@LabExaminationId	int
 AS
 BEGIN
-		select 
+	select 
 			   ROW_NUMBER() OVER(ORDER BY t.Id DESC) AS 'STT',
 			   t.Name ,
 			   r.Value 'Result',
@@ -16,7 +16,8 @@ BEGIN
 			   t.Unit,
 			   a.Status,
 			   a.Id 'AnalysisId',
-			   t.Id 'TestId'
+			   t.Id 'TestId',
+			   r.Id 'ResultId'
 			    
 		from	LabExamination l											inner join
 				PatientItem    p on l.Id = p.LabExaminationId				inner join
@@ -24,7 +25,6 @@ BEGIN
 				Test		   t on a.TestId = t.Id							left join
 				Result		   r on a.Id = r.AnalysisId				
 		where l.Id=@LabExaminationId
-
 		
 END
 

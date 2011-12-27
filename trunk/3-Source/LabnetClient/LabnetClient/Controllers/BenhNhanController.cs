@@ -287,5 +287,24 @@ namespace LabnetClient.Controllers
             }
             return "Success";
         }
+        [HttpPost]
+        public string TestResultApproved(int LabExaminationId)
+        {
+
+            using (TransactionScope tran = new TransactionScope())
+            {
+                List<VMTestResult> tests=Repository.GetPatientTestResults(LabExaminationId);
+                foreach (var result in tests)
+                {
+                    if (result.Status == (int)AnalysisStatusEnum.HaveResult)
+                    {
+                        //update analysis status
+                        Repository.AnalysisApproved(result.AnalysisId, AppHelper.GetLoginUserId());
+                    }
+                }
+                tran.Complete();
+            }
+            return "Success";
+        }
     }
 }

@@ -11,6 +11,7 @@
     <div class="ModuleContent">
     
         <%Html.BeginForm(); %>
+        <%=Html.HiddenFor(p => p.LabExamination.Id)%>
         <div class="ContentTop">
             <div class="LeftCol">
                 <div class="Row">
@@ -88,7 +89,9 @@
         </div>
         
     </div>
-    <input type=button id="btnSaveTestResult"  value="Lưu"/>
+    <input type="button" id="btnSaveTestResult"  value="Lưu"/>
+    <input type="button" id="btnTestResultApproved"  value="Xác Minh"/>
+    <input type="button" id="btnCancel"  value="Nhập Lại"/>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -118,6 +121,21 @@
             $("#DataTableSaveButton").click();
             window.location.reload();
         });
-
+        $("#btnTestResultApproved").click(function () {
+            $.ajax({
+                url: "/BenhNhan/TestResultApproved",
+                data: {
+                    LabExaminationId: $("#LabExamination_Id").val()
+                },
+                type: "POST",
+                asyn: false,
+                success: function () {
+                    window.location.reload();
+                }
+            });
+        });
+        $("#btnCancel").click(function () {
+            window.location.reload();
+        });
     });
 </script>
