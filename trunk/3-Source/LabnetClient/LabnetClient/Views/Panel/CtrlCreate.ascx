@@ -11,9 +11,9 @@
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
         $('#btnAddTest').attr('disabled', true);
 
-        $("#autocompleteSelectTest .autoCompleteText").blur(function () {
+        $("#autocompleteSelectTest .autoComplete").blur(function () {
 
-            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testName = $("#autocompleteSelectTest .autoComplete").val();
             var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
             if (testName != "") {
                 $('#btnAddTest').attr('disabled', false);
@@ -37,14 +37,14 @@
             }
         });
 
-        $("#autocompleteSelectTest .autoCompleteText").keypress(function () {
+        $("#autocompleteSelectTest .autoComplete").keypress(function () {
             $('#btnAddTest').attr('disabled', false);
         });
 
-        $("#autocompleteSelectTest .autoCompleteText").keyup(function () {
+        $("#autocompleteSelectTest .autoComplete").keyup(function () {
             if (event.keyCode == '13') {
                 var isExist = false;
-                var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+                var testName = $("#autocompleteSelectTest .autoComplete").val();
                 var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
                 var allInputs = DataTableGetArrayDataSource();
                 for (var i = 0; i < allInputs.length; i++) {
@@ -70,7 +70,7 @@
         $("#btnAddTest").click(function () {
 
             var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
-            var testName = $("#autocompleteSelectTest .autoCompleteText").val();
+            var testName = $("#autocompleteSelectTest .autoComplete").val();
             var testSection = tags[0];
             var cost = tags[1];
             var testId = $("#autocompleteSelectTest .autoCompleteValue").val();
@@ -83,7 +83,7 @@
             var array = $("#list").jqGrid().getRowData();
             jQuery("#list").jqGrid('addRowData', array.length, dataObject);
 
-            $("#autocompleteSelectTest .autoCompleteText").val("");
+            $("#autocompleteSelectTest .autoComplete").val("");
             $("#autocompleteSelectTest .autoCompleteValue").val(null);
             $("#autocompleteSelectTest .autoCompleteTag").val(null);
             $('#btnAddTest').attr('disabled', true);
