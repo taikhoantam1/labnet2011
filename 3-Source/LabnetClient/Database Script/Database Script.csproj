@@ -68,6 +68,7 @@
     <Content Include="SPs\sp_GenerateLabExaminationNumber.sql" />
     <Content Include="SPs\sp_GeneratePatientNumber.sql" />
     <Content Include="SPs\sp_PatientGet.sp.sql" />
+    <Content Include="SPs\sp_Report_PatientResult.sql" />
     <Content Include="SPs\sp_SearchTest.sp.sql" />
     <Content Include="SPs\sp_SearchTestByName.sp.sql" />
     <Content Include="SPs\sp_SearchTestByNameForPanel.sp.sql" />
