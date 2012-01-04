@@ -15,15 +15,23 @@ namespace LabnetClient.Report
         {
             if (!IsPostBack)
             {
-                Report_PatientResult();
+                string reportName = Request["ReportName"];
+                switch (reportName)
+                {
+                    case "report_PatientResult":
+                        Report_PatientResult(reportName);
+                        break;
+                }
             }
         }
 
-        private void Report_PatientResult()
+        private void Report_PatientResult(string ReportName)
         {
             IDataRepository repository = new Repository();
-            List<Report_PatientResult> results= repository.ReportData_PatientResult(9);
-            reportViewer.LocalReport.ReportPath = Server.MapPath("/Report/report_PatientResult.rdlc");
+            int labExamination = int.Parse(Request["LabExaminationId"]);
+            List<Report_PatientResult> results = repository.ReportData_PatientResult(labExamination);
+            string reportFullName = "/Report/"+ReportName + ".rdlc";
+            reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("PatientResult", results));
         }
     }

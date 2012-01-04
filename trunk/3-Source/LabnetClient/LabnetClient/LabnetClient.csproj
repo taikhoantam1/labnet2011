@@ -203,6 +203,7 @@
     <Compile Include="Models\Partner\PartnerViewModel.cs" />
     <Compile Include="Models\Patient\PatientTestViewModel.cs" />
     <Compile Include="Models\Patient\PatientViewModel.cs" />
+    <Compile Include="Models\Report\ReporViewModel.cs" />
     <Compile Include="Models\Test\TestSearctViewModel.cs" />
     <Compile Include="Models\Test\TestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -791,6 +792,7 @@
     <Content Include="Views\DoiTac\Search.aspx" />
     <Content Include="Views\BenhNhan\Create.aspx" />
     <Content Include="Views\BenhNhan\CtrlCreate.ascx" />
+    <Content Include="Views\Report\ReportViewer.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
     <Content Include="Views\XetNghiem\Create.aspx" />

@@ -91,6 +91,7 @@
     </div>
     <input type="button" id="btnSaveTestResult"  value="Lưu"/>
     <input type="button" id="btnTestResultApproved"  value="Xác Minh"/>
+    <input type="button" id="btnPrintPreview" value="In Kết Quả" />
     <input type="button" id="btnCancel"  value="Nhập Lại"/>
 </div>
 <script type="text/javascript">
@@ -134,8 +135,13 @@
                 }
             });
         });
+
         $("#btnCancel").click(function () {
             window.location.reload();
+        });
+
+        $("#btnPrintPreview").click(function () {
+            window.location = "/Report/PatientResult?labExaminationId=" + $("#LabExamination_Id").val();
         });
     });
 </script>
