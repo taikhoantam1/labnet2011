@@ -13,7 +13,7 @@
     <div>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
-        <rsweb:ReportViewer ID="reportViewer" runat="server" Width="9in" 
+        <rsweb:ReportViewer ID="reportViewer" runat="server" Width="8in" 
             Font-Names="Verdana" Font-Size="8pt" InteractiveDeviceInfos="(Collection)" 
             WaitMessageFont-Names="Verdana" WaitMessageFont-Size="14pt" Height="9in">
         </rsweb:ReportViewer>

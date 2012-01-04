@@ -112,7 +112,6 @@
         $(".date").datepicker();
         $("#btnSearchFilter").click(function () {
             var data = $(".ModuleContent form").serialize();
-            alert(data);
             $.ajax({
                 url: "/BenhNhan/Search",
                 type: "POST",
