@@ -10,9 +10,11 @@ namespace LabnetClient.Models
     {
         public string PartnerName { get; set; }
 
+        public AutocompleteModel Autocomplete { get; set; }
+
         public PartnerSearchViewModel()
         {
-            
+            Autocomplete = new AutocompleteModel("Partner.Name");
         }
     }
 }

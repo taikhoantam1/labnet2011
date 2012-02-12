@@ -157,7 +157,7 @@ namespace LabnetClient.Controllers
                     }
                 }
             }
-            return RedirectToAction("Search");
+            return RedirectToAction("Create");
 
         }
 
@@ -165,14 +165,15 @@ namespace LabnetClient.Controllers
         public ActionResult Search()
         {
             PartnerSearchViewModel model = new PartnerSearchViewModel();
+            model.Autocomplete.JsonData = Repository.GetPartnerNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Search", model);
         }
 
 
         [HttpPost]
-        public ActionResult SearchPartner(PartnerSearchViewModel model)
+        public ActionResult SearchPartner(string filterText)
         {
-            List<Partner> lstPartner = Repository.GetPartnerByName(model.PartnerName);
+            List<Partner> lstPartner = Repository.GetPartnerByName(filterText);
             List<VMPartnerSearch> ListSearchResult = new List<VMPartnerSearch>();
             foreach (Partner partner in lstPartner)
             {

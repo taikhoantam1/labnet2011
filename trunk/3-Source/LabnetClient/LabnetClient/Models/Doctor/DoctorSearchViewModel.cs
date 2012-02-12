@@ -10,8 +10,11 @@ namespace LabnetClient.Models
     {
         public VMDoctorSearch DoctorSearch { get; set; }
 
+        public AutocompleteModel Autocomplete { get; set; }
+
         public DoctorSearchViewModel()
         {
+            Autocomplete = new AutocompleteModel("Doctor.Name");
             DoctorSearch = new VMDoctorSearch();
         }
     }

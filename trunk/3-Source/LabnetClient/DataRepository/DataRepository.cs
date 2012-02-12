@@ -99,6 +99,12 @@ namespace DataRepository
             }
             return isValid;
         }
+
+        public object GetPartnerNameByName(string name, string searchType)
+        {
+            List<SearchPartnerByName_Result> lstPartner = myDb.SearchPartnerByName(name, searchType).ToList();
+            return lstPartner.Select(p => new { Label = p.Name, Value = p.Name });
+        }
         #endregion
 
         #region PartnerCost
@@ -323,6 +329,11 @@ namespace DataRepository
             }
             return isValid;
         }
+        public object GetPanelNameByName(string name, string searchType)
+        {
+            List<SearchPanelByName_Result> lstPanel = myDb.SearchPanelByName(name, searchType).ToList();
+            return lstPanel.Select(p => new { Label = p.Name, Value = p.Name});
+        }
         #endregion Panel
 
         #region PanelItem
@@ -490,8 +501,14 @@ namespace DataRepository
 
         public List<Doctor> GetDoctorByName(string name)
         {
-            List<Doctor> lstDoctor = (from _doctor in myDb.Doctors where _doctor.Name.Contains(name) select _doctor).ToList();
+            List<Doctor> lstDoctor = (from _doctor in myDb.Doctors where string.IsNullOrEmpty(name) || _doctor.Name.Contains(name) select _doctor).ToList();
             return lstDoctor;
+        }
+
+        public object GetDoctorNameByName(string name, string searchType)
+        {
+            List<SearchDoctorByName_Result> lstDoctor = myDb.SearchDoctorByName(name, searchType).ToList();
+            return lstDoctor.Select(p => new { Label = p.Name, Value = p.Name });
         }
         #endregion
 
@@ -789,6 +806,7 @@ namespace DataRepository
             return testResults;
         }
         #endregion
+
         #region Report
             public List<Report_PatientResult> ReportData_PatientResult(int labExaminationId)
             {

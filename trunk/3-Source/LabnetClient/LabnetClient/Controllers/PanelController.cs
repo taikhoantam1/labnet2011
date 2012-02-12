@@ -18,6 +18,7 @@ namespace LabnetClient.Controllers
         public ActionResult Index()
         {
             PanelSearchViewModel model = new PanelSearchViewModel(null);
+            model.Autocomplete.JsonData = Repository.GetPanelNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Search", model);
         }
 
@@ -141,7 +142,7 @@ namespace LabnetClient.Controllers
                     }
                 }
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Create");
 
         }
         
