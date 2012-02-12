@@ -17,7 +17,10 @@
                         <%=Resources.PartnerStrings.PartnerSearch_Name%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.PartnerName, new { Class = "textInput" })%> 
+                    <div id="autocompleteSelectPartner">
+                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                    </div>
+                    <!-- <%=Html.TextBoxFor(m => m.PartnerName, new { Class = "textInput" })%> -->
                 </div>
                 <div class="Colum">
                     <input type="button" id="btnSubmit" value="<%=Resources.PartnerStrings.PanelSearch_Search%>" />
@@ -53,11 +56,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSubmit").click(function () {
-            var data = $("form").serialize();
+            //var data = $("form").serialize();
+            var filterText = $("#autocompleteSelectPartner .autoComplete").val();
             $.ajax({
                 url: "/DoiTac/SearchPartner",
-                data: data,
                 type: "POST",
+                data: {
+                    filterText: filterText
+                },
                 success: function (data) {
                     $("#SearchResult").html(data);
                 }

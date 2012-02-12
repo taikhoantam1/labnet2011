@@ -13,7 +13,9 @@
                         <%=Resources.PanelStrings.PanelSearch_Name%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.PanelName, new { Class = "textInput filterText" })%>
+                    <div id="autocompleteSelectPanel">
+                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                    </div>
                 </div>
                 <div class="Colum">
                     <input type="button" value="<%=Resources.PanelStrings.PanelSearch_Search%>" id="btnSearchFilter"/>
@@ -30,7 +32,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSearchFilter").click(function () {
-            var filterText = $(".filterText").val();
+            var filterText = $("#autocompleteSelectPanel .autoComplete").val();
+            //alert(filterText);
             $.ajax({
                 url: "/Panel/Search",
                 type: "POST",

@@ -160,7 +160,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chọn XN cho BN.
+        ///   Looks up a localized string similar to Chọn Panel XN cho BN.
         /// </summary>
         internal static string PatientInsert_Panel {
             get {

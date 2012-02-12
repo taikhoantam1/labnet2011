@@ -17,7 +17,10 @@
                         <%=Resources.DoctorStrings.DoctorSearch_Name%></label>
                 </div>
                 <div class="Column">
-                    <%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%> 
+                    <div id="autocompleteSelectDoctor">
+                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                    </div>
+                    <!--<%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%> -->
                 </div>
                 <div class="Colum">
                     <input type="button" value="<%=Resources.DoctorStrings.DoctorSearch_ButtonSearch%>" id="btnSearchFilter"/>
@@ -29,6 +32,7 @@
     </div>
 </div>
 <% Html.EndForm(); %>
+
 <div id="SearchResult"><%--
     <tr valign="middle">
         <th class="textSearch150" align="center">
@@ -48,15 +52,19 @@
          </tr>   
     <%} %>
 </table>--%>
-</div>
+</div> 
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSearchFilter").click(function () {
-            var data = $("form").serialize();
+            //var data = $("form").serialize();
+            var filterText = $("#autocompleteSelectDoctor .autoComplete").val();
+            //alert(filterText);
             $.ajax({
                 url: "/BacSi/SearchDoctor",
-                data: data,
                 type: "POST",
+                data: {
+                    filterText: filterText
+                },
                 success: function (data) {
                     $("#SearchResult").html(data);
                 }

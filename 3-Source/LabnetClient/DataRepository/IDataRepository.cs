@@ -42,6 +42,8 @@ namespace DataRepository
         bool IsValidPartner(string name);
 
         List<Partner> GetPartners();
+
+        object GetPartnerNameByName(string name, string searchType);
         #endregion
 
         #region PartnerCost
@@ -76,6 +78,7 @@ namespace DataRepository
         bool IsValidPanel(string name);
         List<Panel> GetPanelByName(string name);
         List<Panel> GetPanels();
+        object GetPanelNameByName(string name, string searchType);
         #endregion
 
         #region PanelItem
@@ -97,6 +100,7 @@ namespace DataRepository
         void DoctorDelete(int doctorId);
         bool IsValidDoctor(string name);
         List<Doctor> GetDoctorByName(string name);
+        object GetDoctorNameByName(string name, string searchType);
         #endregion
 
         #region TestSection
@@ -119,6 +123,7 @@ namespace DataRepository
             List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate);
             List<VMTestResult> GetPatientTestResults(int labExaminationId);
         #endregion
+
         #region Analysis
             void AnalysisInsert(Analysis analysis); 
             void AnalysisApproved(int analysisId, int staffId);

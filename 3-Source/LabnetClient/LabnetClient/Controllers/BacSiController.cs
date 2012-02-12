@@ -8,6 +8,7 @@ using DataRepository;
 using AutoMapper;
 using DomainModel;
 using DomainModel.Constant;
+using LibraryFuntion;
 
 namespace LabnetClient.Controllers
 {
@@ -102,6 +103,7 @@ namespace LabnetClient.Controllers
         {
             DoctorSearchViewModel model = new DoctorSearchViewModel();
             model.DoctorSearch.ListSearchResult = new List<DoctorSearchObject>();
+            model.Autocomplete.JsonData = Repository.GetDoctorNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Search", model);
         }
 
@@ -126,9 +128,9 @@ namespace LabnetClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchDoctor(DoctorSearchViewModel model)
+        public ActionResult SearchDoctor(string filterText)
         {
-            List<Doctor> lstDoctor = Repository.GetDoctorByName(model.DoctorSearch.Name);
+            List<Doctor> lstDoctor = Repository.GetDoctorByName(filterText);
             List<DoctorSearchObject> ListSearchResult = new List<DoctorSearchObject>();
             foreach (Doctor doctor in lstDoctor)
             {
@@ -140,6 +142,14 @@ namespace LabnetClient.Controllers
             }
             JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, ListSearchResult, "");
             return View("DataTable", grid);
+        }
+
+        [HttpPost]
+        public ActionResult Search(string filterText)
+        {
+            List<VMDoctor> lstDoctor = Mapper.Map<List<Doctor>, List<VMDoctor>>(Repository.GetDoctorByName(filterText));
+            JQGridModel model = new JQGridModel(typeof(VMPanel), false, lstDoctor, "");
+            return View("DataTable", model);
         }
         //
         // GET: /Doctor/Delete/5

@@ -151,7 +151,7 @@
     <value>Lưu</value>
   </data>
   <data name="PatientInsert_Panel" xml:space="preserve">
-    <value>Chọn XN cho BN</value>
+    <value>Chọn Panel XN cho BN</value>
   </data>
   <data name="PatientInsert_Partner" xml:space="preserve">
     <value>Nơi gửi mẫu</value>
