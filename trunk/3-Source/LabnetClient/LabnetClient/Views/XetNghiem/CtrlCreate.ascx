@@ -3,6 +3,7 @@
 <script type="text/javascript">
 
     $(function () {
+        $('.autoNumeric').autoNumeric({ aSep: ',', aDec: '.', vMin: '0.00', aPad: false, wEmpty: 'empty' });
         $("#TestCostView").blur(function () {
             var cost = $("#TestCostView").val();
             cost = cost.replace(/,/gi, "");
