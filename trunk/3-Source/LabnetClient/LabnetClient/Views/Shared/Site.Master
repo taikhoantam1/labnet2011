@@ -54,7 +54,7 @@
                             <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
                         <li><a class="MenuItem ActionLink" href="/XetNghiem/Search/">
                             <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
-                        <li><a class="MenuItem ActionLink" href="#">
+                        <li><a class="MenuItem ActionLink" href="/BenhNhan/PatientTestResult">
                             <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
                         <li><a class="MenuItem ActionLink" href="/Panel">
                             <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>

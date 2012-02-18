@@ -6,14 +6,17 @@ using LibraryFuntion;
 using System.Linq;
 using DataRepository;
 using DomainModel.Constant;
+using System;
 
 namespace LabnetClient.Models
 {
     public class PatientViewModel : BaseModel
     {
         public PatientViewModel()
-        { 
+        {
+            LabExamination = new VMLabExamination();
         }
+
         public PatientViewModel(VMPatient patient, VMLabExamination labExamination, List<VMPatientTest> patientTest, List<VMPartner> listPartner, List<VMPanel> lstPanel)
         {
             Repository Repository = new DataRepository.Repository();
@@ -21,7 +24,7 @@ namespace LabnetClient.Models
             LabExamination = labExamination;
             if(    LabExamination.OrderNumber==null)
             LabExamination.OrderNumber = Repository.GetLabExaminationOrderNumber();
-
+            
             JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "/BenhNhan/SavePatientTest");
             
             Autocomplete = new AutocompleteModel();

@@ -5,13 +5,11 @@
         <h3 class="Title">
             <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Create)
               {%>
-          
-             <%=Resources.PatientStrings.PatientCreate_Title%>
+            <%=Resources.PatientStrings.PatientCreate_Title%>
             <%}
               else
               { %>
-           
-             <%=Resources.PatientStrings.PatientEdit_Title %>
+            <%=Resources.PatientStrings.PatientEdit_Title %>
             <%} %>
         </h3>
     </div>
@@ -40,20 +38,21 @@
                 </div>
             </div>
             <div class="RightCol">
-               <div class="Row">
+                <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
                             <%=Resources.PatientStrings.PatientInsert_ReceivedDate%></label>
                     </div>
                     <div class="Column">
-                    <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Edit)
-                      { %>
+                        <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Edit)
+                          { %>
                         <%=Html.TextBox("LabExamination.ReceivedDate", Model.LabExamination.ReceivedDate.Value.ToString("d"), new { ID = "LabExamination_ReceivedDate", Class = "textInput100 readonly" })%>
-                    <%}
-                      else
-                      {%>
+                        <%}
+                          else
+                          {%>
                         <%=Html.TextBox("LabExamination.ReceivedDate", Model.LabExamination.ReceivedDate.Value.ToString("d"), new { ID = "LabExamination_ReceivedDate", Class = "textInput100 date" })%>
-                    <%} %>
+                       
+                        <%} %>
                     </div>
                 </div>
             </div>
@@ -108,14 +107,10 @@
                             <%=Resources.PatientStrings.PatientGender%></label>
                     </div>
                     <div class="Column">
-                       <select name="Patient.Gender" id="Patient_Gender">
-                        <option value="true">
-                            Nam
-                        </option>
-                        <option value="false">
-                            Nữ
-                        </option>
-                       </select>
+                        <select name="Patient.Gender" id="Patient_Gender">
+                            <option value="true">Nam </option>
+                            <option value="false">Nữ </option>
+                        </select>
                     </div>
                 </div>
                 <div class="Row">
@@ -146,7 +141,7 @@
                     <%=Html.TextAreaFor(m => m.LabExamination.Diagnosis, new { cols = 75, rows = 3 })%>
                 </div>
             </div>
-         <% Html.EndForm(); %>
+            <% Html.EndForm(); %>
         </div>
         <div class="clear">
         </div>
@@ -176,6 +171,8 @@
 </div>
 <script type="text/javascript">
     function AutocompleSelect(id, label, tag) {
+        var allInputs = DataTableGetArrayDataSource();
+        //alert(allInputs.length);
         $.ajax({
             url: "/BenhNhan/GetPanelTests",
             data: {
@@ -185,10 +182,22 @@
             async: false,
             dataType: "Json",
             success: function (data) {
+
+                //Remove item in data array that already existed in grid
+                for (var t = 0; t < allInputs.length; t++) {
+                    var testId = allInputs[t].TestId;
+                    for (var j = 0; j < data.length; j++) {
+                        var test = data[j].TestId;
+                        if (test == testId) {
+                            data.splice(j, 1);
+                        }
+                    }
+                }
+              
                 for (var i = 0; i < data.length; i++) {
                     var array = $("#list").jqGrid().getRowData();
                     jQuery("#list").jqGrid('addRowData', array.length, data[i]);
-                } 
+                }
             }
         });
     }
@@ -222,10 +231,10 @@
             $("#DataTableSaveButton").click();
             $("form").submit();
         });
-        
-//        <%if(Model.ViewMode == DomainModel.Constant.ViewMode.Edit){ %>
-//            $("#list tr td :checkbox").attr("disabled","disabled");
-//        <%} %>
+
+        //        <%if(Model.ViewMode == DomainModel.Constant.ViewMode.Edit){ %>
+        //            $("#list tr td :checkbox").attr("disabled","disabled");
+        //        <%} %>
     });
     
 </script>

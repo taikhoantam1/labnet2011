@@ -37,6 +37,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Create(PatientViewModel model)
         {
+            model.LabExamination.ReceivedDate = DateTime.Now;
             List<VMPatientTest> patientTests = new List<VMPatientTest>();
             if (Session[SessionProperties.SessionPatientTestList] != null)
             {
@@ -63,7 +64,10 @@ namespace LabnetClient.Controllers
                     patient.FirstName = model.Patient.FirstName;
                     patient.PatientNumber = Repository.GetPatientNumber();
                     patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
-                    patient.Age = patient.BirthDate;
+                    if (patient.BirthDate.Length <= 4)
+                        patient.Age = patient.BirthDate;
+                    else
+                        patient.Age = patient.BirthDate.Substring(6);
                     patient.Email = model.Patient.Email;
                     int patientId = Repository.PatientInsert(patient);
 
@@ -100,7 +104,7 @@ namespace LabnetClient.Controllers
             }
             else
             {
-
+                model.LabExamination.ReceivedDate = DateTime.Now.Date;
                 List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
                 List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
                 PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel);
@@ -115,7 +119,7 @@ namespace LabnetClient.Controllers
         }
 
         [HttpPost]
-        public string GetPanelTests(int Id)
+        public string GetPanelTests(int Id, PatientViewModel Model)
         {
             List<VMPatientTest> tests = Repository.GetPanelTest(Id)
                                                 .Select(p => new VMPatientTest

@@ -669,10 +669,10 @@ namespace DataRepository
         public int GetLabExaminationOrderNumber()
         {
             DateTime today = DateTime.Now.Date;
-            List<LabExamination> listLabExToday = myDb.LabExaminations.Where(p => p.ReceivedDate >= today).ToList();
+            List<LabExamination> listLabExToday = myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == EntityFunctions.TruncateTime(today)).ToList();
             if (listLabExToday.Count == 0)
                 return 1;
-            return myDb.LabExaminations.Where(p => p.ReceivedDate >= today).Max(p => p.OrderNumber) + 1;
+            return myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == EntityFunctions.TruncateTime(today)).Max(p => p.OrderNumber) + 1;
 
         }
         public VMLabExamination GetLabExamination(int Id)
