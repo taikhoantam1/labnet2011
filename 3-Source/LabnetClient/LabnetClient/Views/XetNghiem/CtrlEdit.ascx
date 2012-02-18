@@ -10,19 +10,20 @@
 
         $("#TestCostView").blur(function () {
             var cost = $("#TestCostView").val();
-            cost = cost.replace(",", "");
+            cost = cost.replace(/,/gi, "");
             $("#Test_Cost").val(cost);
+
         });
 
         $("#LowIndexView").blur(function () {
             var cost = $("#LowIndexView").val();
-            cost = cost.replace(",", "");
+            cost = cost.replace(/,/gi, "");
             $("#Test_LowIndex").val(cost);
         });
 
         $("#HighIndexView").blur(function () {
             var cost = $("#HighIndexView").val();
-            cost = cost.replace(",", "");
+            cost = cost.replace(/,/gi, "");
             $("#Test_HighIndex").val(cost);
         });
 
@@ -34,9 +35,6 @@
         highIndex = highIndex.replace(",", ".");
         $("#HighIndexView").val(highIndex);
 
-        var testCost = $("#Test_Cost").val();
-        testCost = testCost.replace(",", ".");
-        $("#TestCostView").val(testCost);
     });
 </script>
 <%=Html.ValidationSummary() %>
@@ -164,7 +162,7 @@
                     </div>
                     <div class="Column">
                         <input type="text" class="textInput autoNumeric" id="TestCostView" />
-                         <%=Html.HiddenFor(m => m.Test.Cost)%>
+                         <%--<%=Html.HiddenFor(m => m.Test.Cost)%>--%>
                     </div>
                     <div class="clear">
                     </div>
