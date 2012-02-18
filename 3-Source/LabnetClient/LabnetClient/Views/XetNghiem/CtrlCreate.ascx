@@ -5,19 +5,20 @@
     $(function () {
         $("#TestCostView").blur(function () {
             var cost = $("#TestCostView").val();
-            cost = cost.replace(",", "");
+            cost = cost.replace(/,/gi, "");
             $("#Test_Cost").val(cost);
+
         });
 
         $("#LowIndexView").blur(function () {
             var cost = $("#LowIndexView").val();
-            cost = cost.replace(",", "");
+            cost = cost.replace(/,/gi, "");
             $("#Test_LowIndex").val(cost);
         });
 
         $("#HighIndexView").blur(function () {
             var cost = $("#HighIndexView").val();
-            cost = cost.replace(",", "");
+            cost = cost.replace(/,/gi, "");
             $("#Test_HighIndex").val(cost);
         });
 
@@ -26,7 +27,7 @@
             var allInputs = $(":input");
             for (var i = 0; i < allInputs.length; i++) {
 
-                if (allInputs[i].id == "Test_IsActive" || allInputs[i].id == "save" 
+                if (allInputs[i].id == "Test_IsActive" || allInputs[i].id == "save"
                     || allInputs[i].id == "reloadPage" || allInputs[i].id == "Test_SortOrder") {
                     //do nothing
                 }
@@ -124,7 +125,7 @@
                     </div>
                     <div class="Column">
                         <input type="text" class="textInput2 autoNumeric" id="HighIndexView" />
-                        <%=Html.HiddenFor(m => m.Test.HighIndex)%>
+                        <%=Html.HiddenFor(m => m.Test.HighIndex)%> 
                     </div>
                     <div class="clear">
                     </div>
@@ -207,19 +208,3 @@
     </div>
 </div>
 <% Html.EndForm(); %>
-
-<script type="text/javascript">
-    $(function () {
-        var lowIndexHidden = $("#Test_LowIndex").val();
-        lowIndexHidden = lowIndexHidden.replace(',', '.');
-        $("#Test_LowIndex").val(lowIndexHidden);
-
-        var highIndexHidden = $("#Test_HighIndex").val();
-        highIndexHidden = highIndexHidden.replace(',', '.');
-        $("#Test_HighIndex").val(highIndexHidden);
-
-        var costHidden = $("#Test_Cost").val();
-        costHidden = costHidden.replace(',', '.');
-        $("#Test_Cost").val(costHidden);
-    });
-</script>
