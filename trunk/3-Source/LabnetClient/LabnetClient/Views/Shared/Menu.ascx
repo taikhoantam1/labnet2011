@@ -20,7 +20,7 @@
     <%= Resources.GlobalStrings.Menu_MenuTitle %></h3>
 <div id="Main_Menu">
     <dl>
-        <dt><a class="iconPatient" href="#">Quản lý Bệnh Nhân</a></dt>
+        <dt><a class="iconPatient" href="#"><%= Resources.GlobalStrings.Menu_GroupTitle_Patient%></a></dt>
         <dd style="display: none">
             <ul>
                 <li><a class="MenuItem ActionLink" href="/BenhNhan/Create">
@@ -31,7 +31,7 @@
                     <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
             </ul>
         </dd>
-        <dt><a class="iconPXN" href="#">Quản lý PXN</a></dt>
+        <dt><a class="iconPXN" href="#"><%= Resources.GlobalStrings.Menu_GroupTitle_PXN%></a></dt>
         <dd style="display: none">
             <ul>
                 <li><a class="MenuItem ActionLink" href="/XetNghiem/Create/">
@@ -44,7 +44,7 @@
                     <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
             </ul>
         </dd>
-        <dt><a class="iconLab" href="#">Quản lý Lab Gửi Mẫu</a></dt>
+        <dt><a class="iconLab" href="#"> <%= Resources.GlobalStrings.Menu_GroupTitle_Lab%></a></dt>
         <dd style="display: none">
             <ul>
                 <li><a class="MenuItem ActionLink" href="/BacSi/Create/">
@@ -57,17 +57,17 @@
                     <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
             </ul>
         </dd>
-        <dt><a class="iconReport" href="#">Thống Kê - Báo Cáo</a></dt>
+        <dt><a class="iconReport" href="#">  <%= Resources.GlobalStrings.Menu_GroupTitle_Report %></a></dt>
         <dd style="display: none">
             <ul>
                 <li><a class="MenuItem ActionLink" href="#">
-                    <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
+                    <%= Resources.GlobalStrings.Menu_ResultBook%></a></li>
                 <li><a class="MenuItem ActionLink" href="#">
-                    <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
+                    <%= Resources.GlobalStrings.Menu_FinancialBook %></a></li>
                 <li><a class="MenuItem ActionLink" href="#">
-                    <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
+                    <%= Resources.GlobalStrings.Menu_MaterialBook%></a></li>
                 <li><a class="MenuItem ActionLink" href="#">
-                    <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
+                    <%= Resources.GlobalStrings.Menu_Management%></a></li>
             </ul>
         </dd>
     </dl>

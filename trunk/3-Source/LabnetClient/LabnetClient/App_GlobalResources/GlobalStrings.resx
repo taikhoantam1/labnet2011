@@ -132,11 +132,35 @@
   <data name="Menu_CreateTestPanel" xml:space="preserve">
     <value>Thêm Panel XN</value>
   </data>
+  <data name="Menu_FinancialBook" xml:space="preserve">
+    <value>Quản Lý Tài Chính</value>
+  </data>
+  <data name="Menu_GroupTitle_Lab" xml:space="preserve">
+    <value>Quản lý Lab Gửi Mẫu</value>
+  </data>
+  <data name="Menu_GroupTitle_Patient" xml:space="preserve">
+    <value>Quản lý Bệnh Nhân</value>
+  </data>
+  <data name="Menu_GroupTitle_PXN" xml:space="preserve">
+    <value>Quản lý PXN</value>
+  </data>
+  <data name="Menu_GroupTitle_Report" xml:space="preserve">
+    <value>Thống Kê - Báo Cáo</value>
+  </data>
+  <data name="Menu_Management" xml:space="preserve">
+    <value>Quản Lý Nhân Sự</value>
+  </data>
+  <data name="Menu_MaterialBook" xml:space="preserve">
+    <value>Thống Kê Hóa Chất</value>
+  </data>
   <data name="Menu_MenuTitle" xml:space="preserve">
     <value>Menu Chính</value>
   </data>
   <data name="Menu_PatientInfo" xml:space="preserve">
     <value>Thông Tin Bệnh Nhân</value>
+  </data>
+  <data name="Menu_ResultBook" xml:space="preserve">
+    <value>Sổ Lưu Kết Quả</value>
   </data>
   <data name="Menu_SearchDoctor" xml:space="preserve">
     <value>Tìm Bác Sĩ</value>

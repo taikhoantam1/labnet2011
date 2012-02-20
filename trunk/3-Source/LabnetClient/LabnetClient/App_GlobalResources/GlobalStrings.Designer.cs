@@ -106,6 +106,69 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quản Lý Tài Chính.
+        /// </summary>
+        internal static string Menu_FinancialBook {
+            get {
+                return ResourceManager.GetString("Menu_FinancialBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quản lý Lab Gửi Mẫu.
+        /// </summary>
+        internal static string Menu_GroupTitle_Lab {
+            get {
+                return ResourceManager.GetString("Menu_GroupTitle_Lab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quản lý Bệnh Nhân.
+        /// </summary>
+        internal static string Menu_GroupTitle_Patient {
+            get {
+                return ResourceManager.GetString("Menu_GroupTitle_Patient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quản lý PXN.
+        /// </summary>
+        internal static string Menu_GroupTitle_PXN {
+            get {
+                return ResourceManager.GetString("Menu_GroupTitle_PXN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thống Kê - Báo Cáo.
+        /// </summary>
+        internal static string Menu_GroupTitle_Report {
+            get {
+                return ResourceManager.GetString("Menu_GroupTitle_Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quản Lý Nhân Sự.
+        /// </summary>
+        internal static string Menu_Management {
+            get {
+                return ResourceManager.GetString("Menu_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thống Kê Hóa Chất.
+        /// </summary>
+        internal static string Menu_MaterialBook {
+            get {
+                return ResourceManager.GetString("Menu_MaterialBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Menu Chính.
         /// </summary>
         internal static string Menu_MenuTitle {
@@ -120,6 +183,15 @@ namespace Resources {
         internal static string Menu_PatientInfo {
             get {
                 return ResourceManager.GetString("Menu_PatientInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sổ Lưu Kết Quả.
+        /// </summary>
+        internal static string Menu_ResultBook {
+            get {
+                return ResourceManager.GetString("Menu_ResultBook", resourceCulture);
             }
         }
         
