@@ -150,7 +150,6 @@ namespace LabnetClient.Controllers
             return View("DataTable", grid);
         }
 
-        [HttpPost]
         public string SearchByOrderNumber(int OrderNumber, DateTime ReceivedDate)
         {
             Patient patinent = Repository.GetPatient(ReceivedDate, OrderNumber);

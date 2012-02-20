@@ -373,7 +373,11 @@
     <Content Include="Content\Style\Icon\iconConfirm.png" />
     <Content Include="Content\Style\Icon\iconDelete.gif" />
     <Content Include="Content\Style\Icon\iconDetails.gif" />
+    <Content Include="Content\Images\iconLab_32.png" />
     <Content Include="Content\Style\Icon\iconNew.gif" />
+    <Content Include="Content\Images\iconPatient_32.png" />
+    <Content Include="Content\Images\iconPXN_32.png" />
+    <Content Include="Content\Images\iconReport_32.png" />
     <Content Include="Content\Style\Icon\Save32.png" />
     <Content Include="Content\Style\Icon\tick.gif" />
     <Content Include="Content\Style\LayoutTemplate.css" />
@@ -795,6 +799,7 @@
     <Content Include="Views\Report\ReportViewer.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
+    <Content Include="Views\Shared\Menu.ascx" />
     <Content Include="Views\XetNghiem\Create.aspx" />
     <Content Include="Views\XetNghiem\CtrlCreate.ascx" />
     <Content Include="Views\XetNghiem\CtrlEdit.ascx" />

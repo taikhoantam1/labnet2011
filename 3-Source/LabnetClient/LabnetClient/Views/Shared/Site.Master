@@ -37,32 +37,7 @@
             </div>
             <div class="Content">
                 <div class="LeftMenu">
-                    <h3 class="MenuTitle">
-                        <%= Resources.GlobalStrings.Menu_MenuTitle %></h3>
-                    <ul>
-                        <li><a class="MenuItem ActionLink" href="/BenhNhan/Create">
-                            <%= Resources.GlobalStrings.Menu_PatientInfo %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/BacSi/Create/">
-                            <%= Resources.GlobalStrings.Menu_CreateDoctor %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/Panel/Create/">
-                            <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
-                        <li><a class="MenuItem ActionLink" href="/DoiTac/Create/">
-                            <%= Resources.GlobalStrings.Menu_CreateLabPartner %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/XetNghiem/Create/">
-                            <%= Resources.GlobalStrings.Menu_CreateTest %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/BenhNhan">
-                            <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/XetNghiem/Search/">
-                            <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/BenhNhan/PatientTestResult">
-                            <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
-                        <li><a class="MenuItem ActionLink" href="/Panel">
-                            <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/DoiTac/Search/">
-                            <%= Resources.GlobalStrings.Menu_SearchPartnerCost %></a></li>
-                        <li><a class="MenuItem ActionLink" href="/BacSi/Search/">
-                            <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
-                    </ul>
+                    <% Html.RenderPartial("Menu"); %>
                 </div>
                 <div id="MainContent">
                     <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
