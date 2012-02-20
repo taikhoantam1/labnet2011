@@ -122,7 +122,15 @@ h5, h6
     border-left: 1px solid #87CEDB;
     border-right: 1px solid #87CEDB;
 }
+#MainContent
+{
+    width: 80%;
+    float: right;
+    margin-top: 90px;
+    margin-bottom: 50px;
+}
 
+/*-----------------Menu-----------------------------*/
 .LeftMenu
 {
     width: 20%;
@@ -130,23 +138,17 @@ h5, h6
     height: 300px;
 }
 
-#MainContent
-{
-    width: 80%;
-    float: right;
-    margin-top: 90px;
-    margin-bottom:50px;
-}
 .LeftMenu ul
 {
     list-style: none;
-    padding-left: 10px;
+    padding-left: 20px;
+    margin:0px;
 }
 
 .LeftMenu .MenuTitle
 {
     color: #636363;
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 400;
     margin-bottom: 0;
     text-align: center;
@@ -158,41 +160,85 @@ h5, h6
     background: url("../Images/iconArrow.png") no-repeat scroll 0 3px transparent;
     text-decoration: none;
     color: #87CEDB;
-    padding-left: 20px;
-    font-size: 14px;
+    padding-left: 5px;
+    font-size: 13px;
     margin-bottom: 5px;
     line-height: 25px;
+    padding-left: 20px;
 }
 
 .LeftMenu a.MenuItem:hover
 {
     color: red;
 }
+
+dd
+{
+    padding-bottom:10px;
+    margin:0px;
+}
+
+dt
+{
+    margin:0px;
+    padding-top:10px;
+    margin-left: 5px;
+}
+dt a
+{
+    text-decoration: none !important;
+    color: #636363 !important;
+    font-size: 15px;
+    padding-left:40px;
+    height: 32px;
+    display: block;
+    padding-top:7px;
+}
+
+.iconReport
+{
+    background: url("../Images/iconReport_32.png") no-repeat  transparent;
+}
+
+.iconPatient
+{
+    background: url("../Images/iconPatient_32.png") no-repeat transparent;
+}
+
+.iconLab
+{
+    background: url("../Images/iconLab_32.png") no-repeat transparent;
+}
+
+.iconPXN
+{
+    background: url("../Images/iconPXN_32.png") no-repeat transparent;
+}
+/*-----------------Menu-----------------------------*/
 /********** Div table ************/
 
 .Row
 {
-    width:100%;
-    margin:10px 0;
-    clear:both;
+    width: 100%;
+    margin: 10px 0;
+    clear: both;
 }
 
 .Column
 {
-    float:left;
-    margin:0 5px;
+    float: left;
+    margin: 0 5px;
 }
 
 .LeftCol
 {
-   float: left;
+    float: left;
     width: 370px;
 }
 
 .RightCol
 {
-    
-   float: left;
+    float: left;
     margin-left: 50px;
     width: 370px;
 }
@@ -200,7 +246,7 @@ h5, h6
 /********** Module Style *************/
 .Module
 {
-    margin-left:10px;
+    margin-left: 10px;
     clear: both;
 }
 .ModuleTitle
@@ -225,16 +271,16 @@ h5, h6
 {
     border: solid 1px #228ef1;
     padding: 5px 8px 5px 8px;
-    text-align:left;
-    vertical-align:middle;
-    background-color:#F1E7D1;
+    text-align: left;
+    vertical-align: middle;
+    background-color: #F1E7D1;
 }
 
 .infoimage
 {
-   padding: 5px 15px 5px 15px;
-    background:#F1E7D1 url(../Images/icons/info-24x24.png) no-repeat;
-    background-position:left center;
+    padding: 5px 15px 5px 15px;
+    background: #F1E7D1 url(../Images/icons/info-24x24.png) no-repeat;
+    background-position: left center;
 }
 
 .errorbox
@@ -267,38 +313,39 @@ h5, h6
     margin: .5em 0px .5em 0px;
     background-color: #ffffdf;
     border: 1px solid #df6b6b;
-    color: #dc3535;      
+    color: #dc3535;
 }
 
- validation-summary-errors ul {
-     margin: 0;
-     padding: 0;
-     margin-left: 80px;
-     list-style: square;
+validation-summary-errors ul
+{
+    margin: 0;
+    padding: 0;
+    margin-left: 80px;
+    list-style: square;
 }
 
 .hide
 {
-    display:none;
+    display: none;
 }
 
 .editLink
 {
     background: url('Icon/Edit.gif') 0px 5px no-repeat;
-    padding:8px;
-    margin:5px;
+    padding: 8px;
+    margin: 5px;
 }
 
 .deleteLink
-{   
+{
     background: url('Icon/iconDelete.gif') 0px 5px no-repeat;
-    margin:5px;
-    padding:8px;
+    margin: 5px;
+    padding: 8px;
 }
 
 .line
 {
-    width:400px;
+    width: 400px;
     margin: 15px auto;
-    border-bottom:1px solid #CCC;
+    border-bottom: 1px solid #CCC;
 }
