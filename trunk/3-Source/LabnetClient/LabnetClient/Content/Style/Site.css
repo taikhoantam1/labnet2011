@@ -134,7 +134,7 @@ h5, h6
     float:left;
     width:1px;
     height:400px;
-    border-left:1px solid #636363;
+    border-left:1px solid #CBCBCB;
     margin: 90px 5px;
 }
 /*-----------------Menu-----------------------------*/
@@ -166,7 +166,7 @@ h5, h6
 {
     background: url("../Images/iconArrow.png") no-repeat scroll 0 3px transparent;
     text-decoration: none;
-    color: #87CEDB;
+    color: #3962A7;
     padding-left: 5px;
     font-size: 13px;
     margin-bottom: 5px;
@@ -262,7 +262,7 @@ dt a
 .Title
 {
     font-size: 24px;
-    color: #87CEDB;
+    color: #3962A7;
 }
 .lbTitle
 {
