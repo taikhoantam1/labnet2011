@@ -39,6 +39,7 @@
                 <div class="LeftMenu">
                     <% Html.RenderPartial("Menu"); %>
                 </div>
+                <div Id="Middle_Line"></div>
                 <div id="MainContent">
                     <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
                 </div>
