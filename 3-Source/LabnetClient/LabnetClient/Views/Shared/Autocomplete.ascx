@@ -106,7 +106,6 @@
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
     <input type="text" class="autoComplete <%= Model.CustomeCss %> textInput" value="<%= Model.SelectedText %>" />
     <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
-
     <input type="hidden" class="autoCompleteTag" id="<%= Model.AutoCompleteId %>_SelectedTag" value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />
     <input type="hidden" class="autoCompleteValue" id="<%= Model.AutoCompleteId %>_SelectedValue" value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
     <input type="hidden" class="autoCompleteText" id="<%= Model.AutoCompleteId %>_SelectedText" value="<%= Model.SelectedText %>" name="Autocomplete.SelectedText" />

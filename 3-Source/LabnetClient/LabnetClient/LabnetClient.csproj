@@ -193,6 +193,8 @@
     </Compile>
     <Compile Include="Models\Control\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Control\ComboBox.cs" />
+    <Compile Include="Models\Control\OptionItem.cs" />
     <Compile Include="Models\Doctor\DoctorSearchViewModel.cs" />
     <Compile Include="Models\Doctor\DoctorViewModel.cs" />
     <Compile Include="Models\Control\JQGridModel\JQGrid.cs" />
@@ -321,6 +323,7 @@
     <Content Include="Content\Lib\jqGrid\plugins\jquery.tablednd.js" />
     <Content Include="Content\Lib\jqGrid\plugins\ui.multiselect.css" />
     <Content Include="Content\Lib\jqGrid\plugins\ui.multiselect.js" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\jquery.ui.combobox.js" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\jquery-ui-1.8.16.min.js" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\jquery.ui.autocomplete.selectFirst.js" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -798,6 +801,7 @@
     <Content Include="Views\BenhNhan\CtrlCreate.ascx" />
     <Content Include="Views\Report\ReportViewer.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
+    <Content Include="Views\Shared\ComboBox.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
     <Content Include="Views\Shared\Menu.ascx" />
     <Content Include="Views\XetNghiem\Create.aspx" />

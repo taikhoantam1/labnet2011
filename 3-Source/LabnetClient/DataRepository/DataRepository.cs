@@ -184,6 +184,13 @@ namespace DataRepository
         #endregion
 
         #region Test
+        public List<Test> GetTests()
+        {
+            List<Test> lstTests = (from _test in myDb.Tests
+                                   where _test.IsActive == true 
+                                   select _test).ToList();
+            return lstTests;
+        }
         public Test GetTest(int testId)
         {
             try

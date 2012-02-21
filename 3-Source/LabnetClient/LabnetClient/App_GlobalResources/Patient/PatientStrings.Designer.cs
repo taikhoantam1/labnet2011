@@ -160,7 +160,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chọn Panel XN cho BN.
+        ///   Looks up a localized string similar to Panel XN .
         /// </summary>
         internal static string PatientInsert_Panel {
             get {
@@ -192,6 +192,15 @@ namespace Resources {
         internal static string PatientInsert_Title {
             get {
                 return ResourceManager.GetString("PatientInsert_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xét Nghiệm.
+        /// </summary>
+        internal static string PatientInsert_XetNghiem {
+            get {
+                return ResourceManager.GetString("PatientInsert_XetNghiem", resourceCulture);
             }
         }
         

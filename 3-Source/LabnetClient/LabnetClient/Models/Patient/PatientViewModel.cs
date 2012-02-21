@@ -1,12 +1,11 @@
-﻿using DomainModel;
-using System.Collections.Generic;
-using DomainModel.Constant;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using LibraryFuntion;
-using System.Linq;
 using DataRepository;
+using DomainModel;
 using DomainModel.Constant;
-using System;
+using System.Collections.Generic;
+using System.Linq;
+using LibraryFuntion;
 
 namespace LabnetClient.Models
 {
@@ -17,7 +16,7 @@ namespace LabnetClient.Models
             LabExamination = new VMLabExamination();
         }
 
-        public PatientViewModel(VMPatient patient, VMLabExamination labExamination, List<VMPatientTest> patientTest, List<VMPartner> listPartner, List<VMPanel> lstPanel)
+        public PatientViewModel(VMPatient patient, VMLabExamination labExamination, List<VMPatientTest> patientTest, List<VMPartner> listPartner, List<VMPanel> lstPanel,List<VMTest> lstTest)
         {
             Repository Repository = new DataRepository.Repository();
             Patient =patient;
@@ -27,9 +26,22 @@ namespace LabnetClient.Models
             
             JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "/BenhNhan/SavePatientTest");
             
-            Autocomplete = new AutocompleteModel();
-            Autocomplete.JsonData = lstPanel.Select(p => new { Label = p.Name, Value = p.Id}).ToJson();
-            Autocomplete.UseAjaxLoading = false;
+            //Create Panel model
+            List<OptionItem> panelData = lstPanel.Select(p => new OptionItem
+                                                        {
+                                                            Value = p.Id.ToString(),
+                                                            Label=p.Name,
+                                                            Tag = ""}).ToList();
+            ComboBoxPanelModel = new ComboBoxModel("", panelData);
+
+            //Create Test model
+            List<OptionItem> testData = lstTest.Select(p => new OptionItem
+            {
+                Value = p.Id.ToString(),
+                Label = p.Name,
+                Tag = ""
+            }).ToList();
+            ComboBoxTestModel = new ComboBoxModel("", testData);
 
             VMPartner partner = new VMPartner();
             partner.Id = -1;
@@ -55,7 +67,9 @@ namespace LabnetClient.Models
 
         public JQGridModel JQGrid { get; set; }
 
-        public AutocompleteModel Autocomplete { get; set; }
+        public ComboBoxModel ComboBoxPanelModel { get; set; }
+
+        public ComboBoxModel ComboBoxTestModel { get; set; }
 
         public ViewMode ViewMode { get; set; }
 

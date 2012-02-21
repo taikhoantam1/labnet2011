@@ -58,6 +58,7 @@ namespace DataRepository
         #endregion
 
         #region Test
+        List<Test> GetTests();
         Test GetTest(int testId);
         void TestInsert(Test test);
         void TestUpdate(int id, Test test);
@@ -149,5 +150,7 @@ namespace DataRepository
             List<Report_PatientResult> ReportData_PatientResult(int labExaminationId);
         #endregion
 
+
+            
     }
 }

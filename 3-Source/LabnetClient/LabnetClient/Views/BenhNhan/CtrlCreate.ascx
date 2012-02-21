@@ -150,11 +150,18 @@
         <div class="ContentBottom">
             <div class="Row">
                 <div class="Column">
-                    <label class="lbTitle Width150 MarginT5">
+                    <label class="lbTitle Width80 MarginT5">
                         <%=Resources.PatientStrings.PatientInsert_Panel %></label>
                 </div>
                 <div class="Column" id="PanelComplete">
-                    <%Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                    <%Html.RenderPartial("ComboBox", Model.ComboBoxPanelModel); %>
+                </div>
+                <div class="Column">
+                    <label class="lbTitle Width100 MarginT5 MarginL100">
+                        <%=Resources.PatientStrings.PatientInsert_XetNghiem %></label>
+                </div>
+                <div class="Column" id="Div1">
+                    <%Html.RenderPartial("ComboBox", Model.ComboBoxTestModel); %>
                 </div>
                 <div class="clear">
                 </div>
@@ -169,8 +176,9 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
-    function AutocompleSelect(id, label, tag) {
+    function <%:Model.ComboBoxPanelModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
         var allInputs = DataTableGetArrayDataSource();
         //alert(allInputs.length);
         $.ajax({
@@ -197,6 +205,35 @@
                 for (var i = 0; i < data.length; i++) {
                     var array = $("#list").jqGrid().getRowData();
                     jQuery("#list").jqGrid('addRowData', array.length, data[i]);
+                }
+            }
+        });
+    }
+    function <%:Model.ComboBoxTestModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
+         $.ajax({
+            url: "/BenhNhan/GetTests",
+            data: {
+                Id: id
+            },
+            type: "POST",
+            async: false,
+            dataType: "Json",
+            success: function (data) {
+                var allInputs = DataTableGetArrayDataSource();
+                //Remove item in data array that already existed in grid
+                var kt=true;
+                for (var t = 0; t < allInputs.length; t++) {
+                    var testId = allInputs[t].TestId;
+                    var test = data.TestId;
+                    if (test == testId.toString()) {
+                      kt=false;
+                      break;
+                    }
+                }
+                if(kt)
+                {
+                var array = $("#list").jqGrid().getRowData();
+                jQuery("#list").jqGrid('addRowData', array.length, data);
                 }
             }
         });

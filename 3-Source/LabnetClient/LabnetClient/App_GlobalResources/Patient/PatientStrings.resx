@@ -151,7 +151,7 @@
     <value>Lưu</value>
   </data>
   <data name="PatientInsert_Panel" xml:space="preserve">
-    <value>Chọn Panel XN cho BN</value>
+    <value>Panel XN </value>
   </data>
   <data name="PatientInsert_Partner" xml:space="preserve">
     <value>Nơi gửi mẫu</value>
@@ -176,5 +176,8 @@
   </data>
   <data name="PatientTestUpdate_Title" xml:space="preserve">
     <value>Điền Kết Quả XN</value>
+  </data>
+  <data name="PatientInsert_XetNghiem" xml:space="preserve">
+    <value>Xét Nghiệm</value>
   </data>
 </root>

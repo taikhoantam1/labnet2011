@@ -20,7 +20,8 @@ namespace LabnetClient.Controllers
 
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-            PatientViewModel Model = new PatientViewModel(new VMPatient(), new VMLabExamination(), null, lstPartner, lstPanel);
+            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
+            PatientViewModel Model = new PatientViewModel(new VMPatient(), new VMLabExamination(), null, lstPartner, lstPanel,lstTest);
             Model.ViewMode = ViewMode.Create;
             return View(Model);
         }
@@ -29,7 +30,8 @@ namespace LabnetClient.Controllers
         {
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-            PatientViewModel Model = new PatientViewModel(new VMPatient(), new VMLabExamination(), null, lstPartner, lstPanel);
+            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
+            PatientViewModel Model = new PatientViewModel(new VMPatient(), new VMLabExamination(), null, lstPartner, lstPanel, lstTest);
             Model.ViewMode = ViewMode.Create;
             return View(Model);
         }
@@ -107,7 +109,8 @@ namespace LabnetClient.Controllers
                 model.LabExamination.ReceivedDate = DateTime.Now.Date;
                 List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
                 List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-                PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel);
+                List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
+                PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel, lstTest);
                 return View(Model);
             }
         }
@@ -132,6 +135,21 @@ namespace LabnetClient.Controllers
                                                 }).ToList();
             return tests.ToJson();
         }
+        [HttpPost]
+        public string GetTests(int Id, PatientViewModel Model)
+        {
+            Test test= Repository.GetTest(Id);
+            VMPatientTest tests = new VMPatientTest
+                                                {
+                                                    IsEnable = true,
+                                                    Cost = test.Cost,
+                                                    TestName = test.Name,
+                                                    Section = test.TestSection.Name,
+                                                    TestId = test.Id
+                                                };
+            return tests.ToJson();
+        }
+        
 
         [HttpPost]
         public ActionResult Search(PatientViewModel model)
@@ -167,7 +185,8 @@ namespace LabnetClient.Controllers
             List<VMPatientTest> tests = Repository.GetPatientTests(Id, labExamination.Id);
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
 
-            PatientViewModel Model = new PatientViewModel(patient, labExamination, tests, lstPartner, lstPanel);
+            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
+            PatientViewModel Model = new PatientViewModel(patient, labExamination, tests, lstPartner, lstPanel,lstTest);
             Model.ViewMode = ViewMode.Edit;
             return View("Create", Model);
         }
@@ -239,7 +258,8 @@ namespace LabnetClient.Controllers
 
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-            PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel);
+            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
+            PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel,lstTest);
             Model.ViewMode = ViewMode.Edit;
             return View("Create", Model);
         }
