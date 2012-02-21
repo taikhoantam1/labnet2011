@@ -10,7 +10,7 @@
             </h3>
         </div>
         <div class="ModuleContent">
-            <iframe id="reportViewer" width="780" height="1000" frameborder="0"  >
+            <iframe id="reportViewer" width="760" height="1000" frameborder="0"  >
 
             </iframe>
         </div>
