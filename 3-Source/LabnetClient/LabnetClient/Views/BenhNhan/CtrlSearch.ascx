@@ -20,6 +20,9 @@
                     <div class="Column">
                         <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new  {Class="textInput" })%>
                     </div>
+                    <div class="Column">
+                        
+                    </div>
                 </div>
                 <div class="Row">
                     <div class="Column">
