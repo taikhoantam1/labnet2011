@@ -17,7 +17,7 @@
                             <%=Resources.PatientStrings.PatientSTT %></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new  {Class="textInput" })%>
+                        <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new { Class = "textInput" , Style="width:125px"})%>
                         <input type="button" id="btnSearchFilter" value="Tìm" />
                     </div>
                 </div>
