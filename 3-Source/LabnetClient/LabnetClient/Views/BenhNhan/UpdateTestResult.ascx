@@ -81,14 +81,17 @@
             </div>
         </div>
         <% Html.EndForm(); %>
-        <div class="Row ResultTable">
+        <div class="Row ResultTable" style="height:auto">
             <% Html.RenderPartial("DataTable", Model.JQGrid); %>
         </div>
     </div>
-    <input type="button" id="btnSaveTestResult" value="Lưu" />
-    <input type="button" id="btnTestResultApproved" value="Xác Minh" />
-    <input type="button" id="btnPrintPreview" value="In Kết Quả" />
-    <input type="button" id="btnCancel" value="Nhập Lại" />
+    <div class="clear"></div>
+    <div  class="Row">
+        <input type="button" id="btnSaveTestResult" value="Lưu" />
+        <input type="button" id="btnTestResultApproved" value="Xác Minh" />
+        <input type="button" id="btnPrintPreview" value="In Kết Quả" />
+        <input type="button" id="btnCancel" value="Nhập Lại" />
+    </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {

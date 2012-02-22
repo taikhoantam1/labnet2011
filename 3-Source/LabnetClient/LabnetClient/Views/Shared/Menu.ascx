@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<dynamic>" %>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        var currentUrl = window.location;
         $('dd').hide();
         $('dt a').click(function () {
             var dd_visble = $('dd:visible');
@@ -14,8 +14,16 @@
             $(this).parent().addClass('active').next().slideDown('slow');
             return false;
         });
+        $("a.ActionLink").each(function () {
+            if (currentUrl.toString().indexOf(this.href) != -1) {
+                $(this).parents("dd").show();
+                $(this).addClass("HightLight");
+            }
+
+        });
     });
 </script>
+
 <h3 class="MenuTitle">
     <%= Resources.GlobalStrings.Menu_MenuTitle %></h3>
 <div id="Main_Menu">
@@ -27,7 +35,7 @@
                     <%= Resources.GlobalStrings.Menu_PatientInfo %></a></li>
                 <li><a class="MenuItem ActionLink" href="/BenhNhan/PatientTestResult">
                     <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
-                <li><a class="MenuItem ActionLink" href="/BenhNhan">
+                <li><a class="MenuItem ActionLink" href="/BenhNhan/Index">
                     <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
             </ul>
         </dd>
@@ -40,7 +48,7 @@
                     <%= Resources.GlobalStrings.Menu_SearchTest %></a></li>
                 <li><a class="MenuItem ActionLink" href="/Panel/Create/">
                     <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
-                <li><a class="MenuItem ActionLink" href="/Panel">
+                <li><a class="MenuItem ActionLink" href="/Panel/Index">
                     <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
             </ul>
         </dd>
