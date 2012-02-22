@@ -104,12 +104,14 @@
         </div>
          <% Html.EndForm(); %>
          
-        <div class="Row ResultTable">
+        <div class="Row ResultTable" style="height:auto">
               
         </div>
         
     </div>
-    <input type=button id="btnSearchFilter"  value="Tìm"/>
+    <div class="Row">
+        <input type=button id="btnSearchFilter"  value="Tìm"/>
+    </div>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".date").datepicker();
