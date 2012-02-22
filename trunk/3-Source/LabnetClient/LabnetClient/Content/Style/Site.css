@@ -60,6 +60,7 @@ h2
 h3
 {
     font-size: 1.2em;
+    margin-bottom:10px;
 }
 h4
 {
@@ -227,14 +228,17 @@ dt a
 .Row
 {
     width: 100%;
-    margin: 10px 0;
+    height:30px;
+    margin: 5px 0px;
     clear: both;
 }
 
 .Column
 {
-    float: left;
     margin: 0 5px;
+    height:100%;
+    display:table-cell !important; 
+    vertical-align:middle!important;
 }
 
 .LeftCol
@@ -257,7 +261,7 @@ dt a
 }
 .ModuleTitle
 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 .Title
 {
@@ -352,6 +356,18 @@ validation-summary-errors ul
 .line
 {
     width: 400px;
-    margin: 15px auto;
+    margin: 0 auto;
+    margin-bottom:15px;
     border-bottom: 1px solid #CCC;
+    height:15px;
+}
+select,textarea
+{
+    margin:5px 0px;
+}
+
+input[type='button']
+{
+    padding:5px 20px;
+    margin:5px;
 }

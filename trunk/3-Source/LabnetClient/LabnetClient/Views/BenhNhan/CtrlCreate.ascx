@@ -150,7 +150,7 @@
         <div class="ContentBottom">
             <div class="Row">
                 <div class="Column">
-                    <label class="lbTitle Width80 MarginT5">
+                    <label class="lbTitle Width110 MarginT5">
                         <%=Resources.PatientStrings.PatientInsert_Panel %></label>
                 </div>
                 <div class="Column" id="PanelComplete">

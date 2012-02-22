@@ -43,7 +43,7 @@
 					        });
 					        $("#<%= Model.ComboBoxId %> .autoCompleteBindingValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedValue").val(ui.item.id);
-					        $("#<%= Model.ComboBoxId %>_SelectedText").val(ui.item.label);
+					        $("#<%= Model.ComboBoxId %>_SelectedText").val(ui.item.value);
 					        $("#<%= Model.ComboBoxId %>_SelectedTag").val(ui.item.tag);
 					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, ui.item.label, ui.item.tag);
 					    },
@@ -120,9 +120,12 @@
         });
 
         $("#<%: Model.ComboBoxId %>").combobox();
-        $("#<%= Model.ComboBoxId %>_text").css("padding","5px").val("");
+        $("#<%= Model.ComboBoxId %>_text").css({'padding':'5px','border-radius': '0px','margin': '0px 3px 0px 0px'}).val("");
     });
 </script>
+<style>
+.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}      
+</style>
 <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
 <input type="hidden" class="autoCompleteTag" id="<%= Model.ComboBoxId %>_SelectedTag" value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />
 <input type="hidden" class="autoCompleteValue" id="<%= Model.ComboBoxId %>_SelectedValue" value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
