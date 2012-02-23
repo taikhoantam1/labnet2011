@@ -123,16 +123,21 @@
     </div>
     <div class="ModuleContent">
         <div class="ContentTop">
-            <div class="LeftCol">
+            <div class="BothCol">
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
                             <%=Resources.PanelStrings.PanelInsert_Name%></label>
                     </div>
-                    <div class="Column">
+                    <div class="Column ">
                         <%=Html.TextBoxFor(m => m.Panel.Name, new  {Class="textInput" })%>
                     </div>
-                    <div class="clear">
+                    <div class="Column" style="padding-left:20px;">
+                        <%=Html.CheckBoxFor(m => m.Panel.IsActive)%>
+                    </div>
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.PanelStrings.PanelInsert_IsActive%></label>
                     </div>
                 </div>
                 <div class="Row">
@@ -145,19 +150,6 @@
                     </div>
                     <div class="clear">
                     </div>
-                </div>
-                <div class="Row">
-                    <div class="Column">
-                        <label class="lbTitle">
-                            <%=Resources.PanelStrings.PanelInsert_IsActive%></label>
-                    </div>
-                    <div class="Column">
-                        <%=Html.CheckBoxFor(m => m.Panel.IsActive)%>
-                    </div>
-                    <div class="clear">
-                    </div>
-                </div>
-                <div class="Row clear">
                 </div>
             </div>
         </div>
@@ -174,7 +166,7 @@
                         <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
                     </div>
                 </div>
-                <div class="Colum">
+                <div class="Column">
                     <input type="button" id="btnAddTest" value=" <%=Resources.PanelStrings.PanelInsert_ButtonAdd%>" />
                 </div>
                 <div class="clear">

@@ -2,12 +2,11 @@
 <link rel="stylesheet" type="text/css" media="screen" href="/Content/Style/redmond/jquery-ui-1.8.16.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="/Content/Style/ui.jqgrid.css" />
 <link href="/Content/Lib/jqGrid/plugins/ui.multiselect.css" rel="stylesheet" type="text/css" />
-<script src="/Content/Lib/jquery-ui-1.8.16/jquery-ui-1.8.16.min.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/i18n/grid.locale-en.js" type="text/javascript"></script>
 <script type="text/javascript">
     jQuery.jgrid.no_legacy_api = false;
 </script>
-<script src="/Content/Lib/jqGrid/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="/Content/Lib/jqGrid/jquery.jqGrid.min.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/jqModal.js" type="text/javascript"></script>
 <script src="/Content/Lib/jqGrid/jqDnR.js" type="text/javascript"></script>
 <script src="/Content/Lib/postify.js" type="text/javascript"></script>

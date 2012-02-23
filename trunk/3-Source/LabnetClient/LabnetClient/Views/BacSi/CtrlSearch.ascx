@@ -22,7 +22,7 @@
                     </div>
                     <!--<%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%> -->
                 </div>
-                <div class="Colum">
+                <div class="Column">
                     <input type="button" value="<%=Resources.DoctorStrings.DoctorSearch_ButtonSearch%>" id="btnSearchFilter"/>
                 </div>
                 <div class="clear">
