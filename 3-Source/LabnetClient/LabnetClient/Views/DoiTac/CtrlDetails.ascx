@@ -215,14 +215,14 @@
                         <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
                     </div>
                 </div>
-                <div class="Column MarginL65">
-                    <label class="lbTitle">
+                <div class="Column PaddingL65 ">
+                    <label class="lbTitle Width80">
                         <%=Resources.PartnerStrings.PartnerInsert_TestPrice%></label>
                 </div>
-                <div class="Column">
+                <div class="Column ">
                     <input type="text" id="txtCost" class="textInput130 number" />
                 </div>
-                <div class="Colum">
+                <div class="Column">
                     <input type="button" id="btnAddTest" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add%>" />
                 </div>
                 <div class="clear">

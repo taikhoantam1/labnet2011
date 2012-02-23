@@ -202,7 +202,7 @@
                 </div>
             </div>
         </div>
-        <div align="center">
+        <div class="Row" align="center">
             <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" id="save" />
             <input type="button" value="<%=Resources.TestStrings.TestCreate_New%>" id="reloadPage" />
         </div>

@@ -47,7 +47,6 @@
 					        $("#<%= Model.ComboBoxId %>_SelectedTag").val(ui.item.tag);
 					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, ui.item.label, ui.item.tag);
 					    },
-					    delay: 0,
 					    selectFirst: true,
 					    change: function (event, ui) {
 					        if (!ui.item) {

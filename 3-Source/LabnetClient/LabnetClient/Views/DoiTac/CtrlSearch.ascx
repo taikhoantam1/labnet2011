@@ -22,7 +22,7 @@
                     </div>
                     <!-- <%=Html.TextBoxFor(m => m.PartnerName, new { Class = "textInput" })%> -->
                 </div>
-                <div class="Colum">
+                <div class="Column">
                     <input type="button" id="btnSubmit" value="<%=Resources.PartnerStrings.PanelSearch_Search%>" />
                 </div>
                 <div class="clear">

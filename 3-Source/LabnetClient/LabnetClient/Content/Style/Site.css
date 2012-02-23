@@ -228,7 +228,7 @@ dt a
 .Row
 {
     width: 100%;
-    height:30px;
+    height:auto;
     margin: 5px 0px;
     clear: both;
 }
@@ -251,6 +251,11 @@ dt a
 {
     float: right;
     width: 48%;
+}
+
+.BothCol
+{
+    width:100%;
 }
 
 /********** Module Style *************/
@@ -366,7 +371,7 @@ select,textarea
     margin:5px 0px;
 }
 
-input[type='button']
+input[type='button'],input[type='submit']
 {
     padding:5px 20px;
     margin:5px;

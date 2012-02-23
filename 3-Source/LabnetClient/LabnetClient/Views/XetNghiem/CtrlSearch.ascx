@@ -46,16 +46,18 @@
                     <div class="clear">
                     </div>
                 </div>
+                <div class="Row">
+                    <div class="Column">
+                        <input type="button" id="btnSubmit" value="<%=Resources.TestStrings.TestSearch_Search%>" />
+                    </div>
+                </div>
             </div>
-            <div align="center" class="Row clear">
-                <input type="button" id="btnSubmit" value="<%=Resources.TestStrings.TestSearch_Search%>" />
-            </div> 
         </div>
     </div>
 </div>
 <% Html.EndForm(); %>
-<div  id="SearchResult">
-<%--<table width="765px">
+<div id="SearchResult">
+    <%--<table width="765px">
     <tr valign="middle">
         <th class="textSearch150" align="center">
             <%=Resources.TestStrings.TestSearch_TestName %>
