@@ -33,6 +33,11 @@
                     <div class="clear">
                     </div>
                 </div>
+                <div class="Row">
+                    <div class="Column">
+                        <input type="button" id="btnSubmit" value="<%=Resources.TestStrings.TestSearch_Search%>" style="margin:0px"/>
+                    </div>
+                </div>
             </div>
             <div class="RightCol">
                 <div class="Row">
@@ -46,57 +51,13 @@
                     <div class="clear">
                     </div>
                 </div>
-                <div class="Row">
-                    <div class="Column">
-                        <input type="button" id="btnSubmit" value="<%=Resources.TestStrings.TestSearch_Search%>" />
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
 <% Html.EndForm(); %>
-<div id="SearchResult">
-    <%--<table width="765px">
-    <tr valign="middle">
-        <th class="textSearch150" align="center">
-            <%=Resources.TestStrings.TestSearch_TestName %>
-        </th>
-        <th class="textSearch125" align="center">
-            <%=Resources.TestStrings.TestSearch_TestSectionName %>
-        </th>
-        <th class="textSearch125" align="center">
-            <%=Resources.TestStrings.TestSearch_PanelName %>
-        </th>
-        <th class="textSearch125" align="center">
-            <%=Resources.TestStrings.TestSearch_TestRange %>
-        </th>
-        <th class="textSearch125" align="center">
-            <%=Resources.TestStrings.TestSearch_TestUnit %>
-        </th>
-        <th class="textSearch125" align="center"></th>
-    </tr>
-    <%foreach (DomainModel.TestSearchObject test in ViewData.Model.TestSearch.ObjSearchResult)
-      { %>
-         <tr valign="middle">
-            <th class="textSearch150" align="center">
-                <%=test.TestName %>
-            </th>
-             <th class="textSearch125" align="center">
-                <%=test.TestSectionName %>
-            </th>
-             <th class="textSearch125" align="center">
-                <%=test.TestRange %>
-            </th>
-             <th class="textSearch125" align="center">
-                <%=test.TestUnit %>
-            </th>
-             <th class="textSearch125" align="center">
-                    <%= Html.ActionLink("Cập nhật", "Edit", "Test", new { Id = test.TestId }, new { Class = "ActionLink" })%>
-            </th>
-         </tr>   
-    <%} %>
-</table>--%>
+<div id="SearchResult" class="Row">
+   
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
