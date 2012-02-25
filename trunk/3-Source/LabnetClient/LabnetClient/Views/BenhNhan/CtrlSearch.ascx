@@ -1,14 +1,12 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PatientViewModel>" %>
-
 <%= Html.ValidationSummary() %>
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-             <%=Resources.PatientStrings.PatientSearch_Title%>
+            <%=Resources.PatientStrings.PatientSearch_Title%>
         </h3>
     </div>
     <div class="ModuleContent">
-    
         <%Html.BeginForm(); %>
         <div class="ContentTop">
             <div class="LeftCol">
@@ -21,7 +19,6 @@
                         <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new  {Class="textInput" })%>
                     </div>
                     <div class="Column">
-                        
                     </div>
                 </div>
                 <div class="Row">
@@ -35,7 +32,7 @@
                 </div>
             </div>
             <div class="RightCol">
-               <div class="Row">
+                <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
                             <%=Resources.PatientStrings.PatientInsert_ReceivedDate%></label>
@@ -61,7 +58,6 @@
                         <%=Html.TextBoxFor(m => m.Patient.FirstName, new  {Class="textInput" })%>
                     </div>
                 </div>
-              
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
@@ -78,6 +74,9 @@
                     </div>
                     <div class="Column">
                         <%=Html.TextBoxFor(m => m.Patient.Email, new  {Class="textInput" })%>
+                    </div>
+                    <div class="Row">
+                        <input type="button" id="btnSearchFilter" value="Tìm" style="margin:0px;"/>
                     </div>
                 </div>
             </div>
@@ -102,29 +101,23 @@
                 </div>
             </div>
         </div>
-         <% Html.EndForm(); %>
-         
-        <div class="Row ResultTable" style="height:auto">
-              
+        <% Html.EndForm(); %>
+        <div class="Row ResultTable" style="height: auto">
         </div>
-        
     </div>
-    <div class="Row">
-        <input type=button id="btnSearchFilter"  value="Tìm"/>
-    </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".date").datepicker();
-        $("#btnSearchFilter").click(function () {
-            var data = $(".ModuleContent form").serialize();
-            $.ajax({
-                url: "/BenhNhan/Search",
-                type: "POST",
-                data: data,
-                success: function (data) {
-                    $(".ResultTable").html(data);
-                }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".date").datepicker();
+            $("#btnSearchFilter").click(function () {
+                var data = $(".ModuleContent form").serialize();
+                $.ajax({
+                    url: "/BenhNhan/Search",
+                    type: "POST",
+                    data: data,
+                    success: function (data) {
+                        $(".ResultTable").html(data);
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>

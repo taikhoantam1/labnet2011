@@ -17,7 +17,7 @@
                         <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
                     </div>
                 </div>
-                <div class="Colum">
+                <div class="Column">
                     <input type="button" value="<%=Resources.PanelStrings.PanelSearch_Search%>" id="btnSearchFilter"/>
                 </div>
                 <div class="clear">
