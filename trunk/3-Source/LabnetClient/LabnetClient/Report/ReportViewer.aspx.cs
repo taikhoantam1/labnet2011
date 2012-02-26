@@ -25,6 +25,12 @@ namespace LabnetClient.Report
             }
         }
 
+        private void Test(string reportName)
+        {
+            string reportFullName = "/Report/" + reportName + ".rdlc";
+            reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
+        }
+
         private void Report_PatientResult(string ReportName)
         {
             IDataRepository repository = new Repository();
