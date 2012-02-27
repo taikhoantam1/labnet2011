@@ -129,7 +129,7 @@
                 type:"POST",
                 async:false,
                 success:function(data){
-                    if(data.trim().toLowerCase.indexOf("success")==-1)
+                    if(data.trim().toLowerCase().indexOf("success")==-1)
                         alert(data);
                 }
             });

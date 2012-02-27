@@ -143,7 +143,6 @@ namespace DataRepository
             void ResultInsert(int analysisId, string result, int staffId);
 
             void ResultUpdate(int analysisId,int resultId, string result, int staffId);
-
         #endregion
 
         #region Report
@@ -151,6 +150,7 @@ namespace DataRepository
         #endregion
 
 
-            
+
+
     }
 }

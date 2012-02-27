@@ -27,8 +27,6 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_PatientItem", "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.PatientItem), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabExamination), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Patient", "Patient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Patient), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Department), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Project", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Project), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Source", "Source", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Source), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
@@ -39,6 +37,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 
 #endregion
 
@@ -365,22 +365,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Result> Results
-        {
-            get
-            {
-                if ((_Results == null))
-                {
-                    _Results = base.CreateObjectSet<Result>("Results");
-                }
-                return _Results;
-            }
-        }
-        private ObjectSet<Result> _Results;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Department> Departments
         {
             get
@@ -457,6 +441,22 @@ namespace DataRepository
             }
         }
         private ObjectSet<Test> _Tests;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Result> Results
+        {
+            get
+            {
+                if ((_Results == null))
+                {
+                    _Results = base.CreateObjectSet<Result>("Results");
+                }
+                return _Results;
+            }
+        }
+        private ObjectSet<Result> _Results;
 
         #endregion
         #region AddTo Methods
@@ -598,14 +598,6 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Results EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToResults(Result result)
-        {
-            base.AddObject("Results", result);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Departments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToDepartments(Department department)
@@ -643,6 +635,14 @@ namespace DataRepository
         public void AddToTests(Test test)
         {
             base.AddObject("Tests", test);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Results EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToResults(Result result)
+        {
+            base.AddObject("Results", result);
         }
 
         #endregion
@@ -1309,28 +1309,6 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Result")]
-        public EntityCollection<Result> Results
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test")]
         public Test Test
         {
@@ -1359,6 +1337,28 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("LabManager_ClientModel.FK_Analysis_Test", "Test", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result", value);
                 }
             }
         }
@@ -5278,16 +5278,14 @@ namespace DataRepository
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="analysisId">Initial value of the AnalysisId property.</param>
-        /// <param name="value">Initial value of the Value property.</param>
         /// <param name="lastModifiedStaffId">Initial value of the LastModifiedStaffId property.</param>
         /// <param name="isReportable">Initial value of the IsReportable property.</param>
         /// <param name="lastUpdated">Initial value of the LastUpdated property.</param>
-        public static Result CreateResult(global::System.Int32 id, global::System.Int32 analysisId, global::System.String value, global::System.Int32 lastModifiedStaffId, global::System.Boolean isReportable, global::System.DateTime lastUpdated)
+        public static Result CreateResult(global::System.Int32 id, global::System.Int32 analysisId, global::System.Int32 lastModifiedStaffId, global::System.Boolean isReportable, global::System.DateTime lastUpdated)
         {
             Result result = new Result();
             result.Id = id;
             result.AnalysisId = analysisId;
-            result.Value = value;
             result.LastModifiedStaffId = lastModifiedStaffId;
             result.IsReportable = isReportable;
             result.LastUpdated = lastUpdated;
@@ -5351,7 +5349,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Value
         {
@@ -5363,7 +5361,7 @@ namespace DataRepository
             {
                 OnValueChanging(value);
                 ReportPropertyChanging("Value");
-                _Value = StructuralObject.SetValidValue(value, false);
+                _Value = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Value");
                 OnValueChanged();
             }
@@ -7666,12 +7664,10 @@ namespace DataRepository
         /// <param name="examinationNumber">Initial value of the ExaminationNumber property.</param>
         /// <param name="receivedDate">Initial value of the ReceivedDate property.</param>
         /// <param name="testName">Initial value of the TestName property.</param>
-        /// <param name="range">Initial value of the Range property.</param>
         /// <param name="testSectionId">Initial value of the TestSectionId property.</param>
         /// <param name="testSectionName">Initial value of the TestSectionName property.</param>
-        /// <param name="value">Initial value of the Value property.</param>
         /// <param name="isBold">Initial value of the IsBold property.</param>
-        public static Report_PatientResult CreateReport_PatientResult(global::System.String firstName, global::System.String gender, global::System.String address, global::System.String age, global::System.String examinationNumber, global::System.DateTime receivedDate, global::System.String testName, global::System.String range, global::System.Int32 testSectionId, global::System.String testSectionName, global::System.String value, global::System.Boolean isBold)
+        public static Report_PatientResult CreateReport_PatientResult(global::System.String firstName, global::System.String gender, global::System.String address, global::System.String age, global::System.String examinationNumber, global::System.DateTime receivedDate, global::System.String testName, global::System.Int32 testSectionId, global::System.String testSectionName, global::System.Boolean isBold)
         {
             Report_PatientResult report_PatientResult = new Report_PatientResult();
             report_PatientResult.FirstName = firstName;
@@ -7681,10 +7677,8 @@ namespace DataRepository
             report_PatientResult.ExaminationNumber = examinationNumber;
             report_PatientResult.ReceivedDate = receivedDate;
             report_PatientResult.TestName = testName;
-            report_PatientResult.Range = range;
             report_PatientResult.TestSectionId = testSectionId;
             report_PatientResult.TestSectionName = testSectionName;
-            report_PatientResult.Value = value;
             report_PatientResult.IsBold = isBold;
             return report_PatientResult;
         }
@@ -7791,30 +7785,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ExaminationNumber
-        {
-            get
-            {
-                return _ExaminationNumber;
-            }
-            set
-            {
-                OnExaminationNumberChanging(value);
-                ReportPropertyChanging("ExaminationNumber");
-                _ExaminationNumber = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ExaminationNumber");
-                OnExaminationNumberChanged();
-            }
-        }
-        private global::System.String _ExaminationNumber;
-        partial void OnExaminationNumberChanging(global::System.String value);
-        partial void OnExaminationNumberChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Phone
@@ -7835,6 +7805,30 @@ namespace DataRepository
         private global::System.String _Phone;
         partial void OnPhoneChanging(global::System.String value);
         partial void OnPhoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ExaminationNumber
+        {
+            get
+            {
+                return _ExaminationNumber;
+            }
+            set
+            {
+                OnExaminationNumberChanging(value);
+                ReportPropertyChanging("ExaminationNumber");
+                _ExaminationNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ExaminationNumber");
+                OnExaminationNumberChanged();
+            }
+        }
+        private global::System.String _ExaminationNumber;
+        partial void OnExaminationNumberChanging(global::System.String value);
+        partial void OnExaminationNumberChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -7911,7 +7905,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Range
         {
@@ -7923,7 +7917,7 @@ namespace DataRepository
             {
                 OnRangeChanging(value);
                 ReportPropertyChanging("Range");
-                _Range = StructuralObject.SetValidValue(value, false);
+                _Range = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Range");
                 OnRangeChanged();
             }
@@ -8007,7 +8001,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Value
         {
@@ -8019,7 +8013,7 @@ namespace DataRepository
             {
                 OnValueChanging(value);
                 ReportPropertyChanging("Value");
-                _Value = StructuralObject.SetValidValue(value, false);
+                _Value = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Value");
                 OnValueChanged();
             }

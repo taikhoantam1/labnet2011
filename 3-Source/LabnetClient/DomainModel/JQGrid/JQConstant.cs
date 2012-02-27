@@ -22,7 +22,7 @@ namespace DomainModel.JQGrid
                         {{
                             setTimeout(""$('#list').editCell("" + selRowIndex + "" + 1,"" +selICol+"", true);"", 100);
                         }}
-
+/*
                         if(key == 9)   // tab
                         {{
                             var nextCol=0;
@@ -38,6 +38,7 @@ namespace DomainModel.JQGrid
                             if(selICol==colModels.length-1)
                                 setTimeout(""$('#list').editCell("" + selRowIndex + "" + 1,"" +nextCol+"", true);"", 100);
                         }}
+*/
                     }}
                 }} ]
         }}";

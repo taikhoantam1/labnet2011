@@ -299,7 +299,7 @@ namespace LabnetClient.Controllers
                         Repository.ResultInsert(result.AnalysisId, result.Result, AppHelper.GetLoginUserId());
 
                     }
-                    else if (result.Status == (int)AnalysisStatusEnum.HaveResult)
+                    else if (result.Status == (int)AnalysisStatusEnum.HaveResult )
                     {
                         //Update result
                         Repository.ResultUpdate(result.AnalysisId, result.ResultId.Value, result.Result, AppHelper.GetLoginUserId());
