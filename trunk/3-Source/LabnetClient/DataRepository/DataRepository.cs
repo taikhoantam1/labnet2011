@@ -730,22 +730,30 @@ namespace DataRepository
         #region Result
         public void ResultInsert(int analysisId, string result, int staffId)
         {
-            //Add result
-            Result testResult = new Result();
-            testResult.AnalysisId = analysisId;
-            testResult.LastUpdated = DateTime.Now;
-            testResult.LastModifiedStaffId = staffId;
-            testResult.IsReportable = true;
-            testResult.Value = result;
-            myDb.Results.AddObject(testResult);
-
-            // update analysis
-            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
-            if (analysis != null)
+            Result testResult = myDb.Results.Where(p => p.AnalysisId == analysisId).FirstOrDefault();
+            if (testResult == null)
             {
-                analysis.Status = (int)AnalysisStatusEnum.HaveResult;
+                //Add result
+                testResult = new Result();
+                testResult.AnalysisId = analysisId;
+                testResult.LastUpdated = DateTime.Now;
+                testResult.LastModifiedStaffId = staffId;
+                testResult.IsReportable = true;
+                testResult.Value = result;
+                myDb.Results.AddObject(testResult);
+
+                // update analysis
+                Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+                if (analysis != null)
+                {
+                    analysis.Status = (int)AnalysisStatusEnum.HaveResult;
+                }
+                myDb.SaveChanges();
             }
-            myDb.SaveChanges();
+            else
+            {
+                ResultUpdate(analysisId, testResult.Id, result, staffId);
+            }
         }
 
         public void ResultUpdate(int analysisId,int resultId, string result, int staffId)
