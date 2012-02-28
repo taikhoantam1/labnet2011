@@ -180,4 +180,13 @@
   <data name="PatientInsert_XetNghiem" xml:space="preserve">
     <value>Xét Nghiệm</value>
   </data>
+  <data name="PatientResultReport_Number" xml:space="preserve">
+    <value>Số thứ tự</value>
+  </data>
+  <data name="PatientResultReport_ReceivedDate" xml:space="preserve">
+    <value>Ngày Nhận</value>
+  </data>
+  <data name="PatientResultReport_Title" xml:space="preserve">
+    <value>In Kết Quả XN</value>
+  </data>
 </root>

@@ -187,6 +187,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In Kết Quả XN.
+        /// </summary>
+        internal static string Menu_PatientResult {
+            get {
+                return ResourceManager.GetString("Menu_PatientResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sổ Lưu Kết Quả.
         /// </summary>
         internal static string Menu_ResultBook {
