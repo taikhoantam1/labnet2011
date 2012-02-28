@@ -180,4 +180,7 @@
   <data name="Menu_UpdateTestResult" xml:space="preserve">
     <value>Điền Kết Quả XN</value>
   </data>
+  <data name="Menu_PatientResult" xml:space="preserve">
+    <value>In Kết Quả XN</value>
+  </data>
 </root>

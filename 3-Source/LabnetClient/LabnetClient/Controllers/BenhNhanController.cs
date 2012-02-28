@@ -222,6 +222,10 @@ namespace LabnetClient.Controllers
                     patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
                     patient.Age = patient.BirthDate;
                     patient.Email = model.Patient.Email;
+                    if (patient.BirthDate.Length <= 4)
+                        patient.Age = patient.BirthDate;
+                    else
+                        patient.Age = patient.BirthDate.Substring(6);
                     Repository.PatientUpdate(Id, patient);
 
                     //Update labmanagerment
@@ -328,6 +332,20 @@ namespace LabnetClient.Controllers
                 tran.Complete();
             }
             return "Success";
+        }
+
+        public ActionResult PatientResultReport(int? OrderNumber, string ReceivedDate)
+        {
+
+            DateTime? receivedDate = null;
+            if (!string.IsNullOrEmpty(ReceivedDate))
+                receivedDate = Convert.ToDateTime(ReceivedDate);
+            VMLabExamination labExamination = new VMLabExamination();
+            VMPatient patient = new VMPatient();
+            List<VMTestResult> tests = new List<VMTestResult>();
+            List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
+            PatientTestViewModel model = new PatientTestViewModel(patient, labExamination, tests, lstPartner);
+            return View(model);
         }
     }
 }

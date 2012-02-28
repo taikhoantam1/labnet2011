@@ -223,6 +223,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Số thứ tự.
+        /// </summary>
+        internal static string PatientResultReport_Number {
+            get {
+                return ResourceManager.GetString("PatientResultReport_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày Nhận.
+        /// </summary>
+        internal static string PatientResultReport_ReceivedDate {
+            get {
+                return ResourceManager.GetString("PatientResultReport_ReceivedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In Kết Quả XN.
+        /// </summary>
+        internal static string PatientResultReport_Title {
+            get {
+                return ResourceManager.GetString("PatientResultReport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tìm Kiếm Bệnh Nhân.
         /// </summary>
         internal static string PatientSearch_Title {

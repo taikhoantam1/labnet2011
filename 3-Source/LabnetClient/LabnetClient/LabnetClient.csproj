@@ -786,6 +786,8 @@
     <Content Include="Views\BacSi\Search.aspx" />
     <Content Include="Views\BenhNhan\CtrlSearch.ascx" />
     <Content Include="Views\BenhNhan\Index.aspx" />
+    <Content Include="Views\BenhNhan\PatientResult.ascx" />
+    <Content Include="Views\BenhNhan\PatientResultReport.aspx" />
     <Content Include="Views\BenhNhan\PatientTestResult.aspx" />
     <Content Include="Views\BenhNhan\UpdateTestResult.ascx" />
     <Content Include="Views\Home\Index.aspx" />
