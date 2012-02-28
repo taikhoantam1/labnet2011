@@ -8828,18 +8828,16 @@ namespace DataRepository
         /// Create a new TestResultsGet_Result object.
         /// </summary>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="range">Initial value of the Range property.</param>
         /// <param name="status">Initial value of the Status property.</param>
-        /// <param name="testId">Initial value of the TestId property.</param>
         /// <param name="analysisId">Initial value of the AnalysisId property.</param>
-        public static TestResultsGet_Result CreateTestResultsGet_Result(global::System.String name, global::System.String range, global::System.Int32 status, global::System.Int32 testId, global::System.Int32 analysisId)
+        /// <param name="testId">Initial value of the TestId property.</param>
+        public static TestResultsGet_Result CreateTestResultsGet_Result(global::System.String name, global::System.Int32 status, global::System.Int32 analysisId, global::System.Int32 testId)
         {
             TestResultsGet_Result testResultsGet_Result = new TestResultsGet_Result();
             testResultsGet_Result.Name = name;
-            testResultsGet_Result.Range = range;
             testResultsGet_Result.Status = status;
-            testResultsGet_Result.TestId = testId;
             testResultsGet_Result.AnalysisId = analysisId;
+            testResultsGet_Result.TestId = testId;
             return testResultsGet_Result;
         }
 
@@ -8897,7 +8895,31 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Result
+        {
+            get
+            {
+                return _Result;
+            }
+            set
+            {
+                OnResultChanging(value);
+                ReportPropertyChanging("Result");
+                _Result = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Result");
+                OnResultChanged();
+            }
+        }
+        private global::System.String _Result;
+        partial void OnResultChanging(global::System.String value);
+        partial void OnResultChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Range
         {
@@ -8909,7 +8931,7 @@ namespace DataRepository
             {
                 OnRangeChanging(value);
                 ReportPropertyChanging("Range");
-                _Range = StructuralObject.SetValidValue(value, false);
+                _Range = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("Range");
                 OnRangeChanged();
             }
@@ -8969,26 +8991,26 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Result
+        public global::System.Int32 AnalysisId
         {
             get
             {
-                return _Result;
+                return _AnalysisId;
             }
             set
             {
-                OnResultChanging(value);
-                ReportPropertyChanging("Result");
-                _Result = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Result");
-                OnResultChanged();
+                OnAnalysisIdChanging(value);
+                ReportPropertyChanging("AnalysisId");
+                _AnalysisId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AnalysisId");
+                OnAnalysisIdChanged();
             }
         }
-        private global::System.String _Result;
-        partial void OnResultChanging(global::System.String value);
-        partial void OnResultChanged();
+        private global::System.Int32 _AnalysisId;
+        partial void OnAnalysisIdChanging(global::System.Int32 value);
+        partial void OnAnalysisIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -9013,30 +9035,6 @@ namespace DataRepository
         private global::System.Int32 _TestId;
         partial void OnTestIdChanging(global::System.Int32 value);
         partial void OnTestIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 AnalysisId
-        {
-            get
-            {
-                return _AnalysisId;
-            }
-            set
-            {
-                OnAnalysisIdChanging(value);
-                ReportPropertyChanging("AnalysisId");
-                _AnalysisId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AnalysisId");
-                OnAnalysisIdChanged();
-            }
-        }
-        private global::System.Int32 _AnalysisId;
-        partial void OnAnalysisIdChanging(global::System.Int32 value);
-        partial void OnAnalysisIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
