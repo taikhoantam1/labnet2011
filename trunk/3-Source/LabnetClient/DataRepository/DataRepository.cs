@@ -622,7 +622,7 @@ namespace DataRepository
             patientOld.BirthDate = patient.BirthDate;
             patientOld.Gender = patient.Gender;
             patientOld.FirstName = patient.FirstName;
-            patientOld.Age = patient.BirthDate;
+            patientOld.Age = patient.Age;
             patientOld.Email = patient.Email;
             myDb.SaveChanges();
         }
