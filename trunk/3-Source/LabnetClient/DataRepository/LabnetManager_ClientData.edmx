@@ -1258,17 +1258,6 @@
           <Property Type="Int32" Name="OrderNumber" Nullable="false" />
           <Property Type="DateTime" Name="ReceivedDate" Nullable="false" Precision="23" />
         </ComplexType>
-        <ComplexType Name="TestResultsGet_Result">
-          <Property Type="Int64" Name="STT" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Range" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="String" Name="Result" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="TestId" Nullable="false" />
-          <Property Type="Int32" Name="AnalysisId" Nullable="false" />
-          <Property Type="Int32" Name="ResultId" Nullable="true" />
-        </ComplexType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="Id" />
@@ -1532,6 +1521,17 @@
           <Property Type="Double" Name="HighIndex" Nullable="true" />
           <Property Type="Boolean" Name="IsBold" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="TestResultsGet_Result">
+          <Property Type="Int64" Name="STT" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Result" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="AnalysisId" Nullable="false" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+          <Property Type="Int32" Name="ResultId" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1794,16 +1794,16 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="PatientTestResultsGet" FunctionName="LabManager_ClientModel.Store.sp_PatientTestResultsGet">
-          <ResultMapping>
+            <ResultMapping>
               <ComplexTypeMapping TypeName="LabManager_ClientModel.TestResultsGet_Result">
                 <ScalarProperty Name="STT" ColumnName="STT" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
                 <ScalarProperty Name="Range" ColumnName="Range" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Result" ColumnName="Result" />
-                <ScalarProperty Name="TestId" ColumnName="TestId" />
                 <ScalarProperty Name="AnalysisId" ColumnName="AnalysisId" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
                 <ScalarProperty Name="ResultId" ColumnName="ResultId" />
               </ComplexTypeMapping>
             </ResultMapping>
