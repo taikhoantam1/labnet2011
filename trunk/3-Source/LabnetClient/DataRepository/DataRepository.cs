@@ -772,8 +772,12 @@ namespace DataRepository
             Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
             if (analysis != null)
             {
-                if(string.IsNullOrEmpty(result))
+                if (string.IsNullOrEmpty(result))
                     analysis.Status = (int)AnalysisStatusEnum.New;
+                else
+                {
+                    analysis.Status = (int)AnalysisStatusEnum.HaveResult;
+                }
             }
             myDb.SaveChanges();
         }
