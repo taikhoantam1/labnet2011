@@ -66,6 +66,7 @@ namespace LabnetClient.Controllers
                     patient.FirstName = model.Patient.FirstName;
                     patient.PatientNumber = Repository.GetPatientNumber();
                     patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
+                    patient.Phone = model.Patient.Phone;
                     if (patient.BirthDate.Length <= 4)
                         patient.Age = patient.BirthDate;
                     else
@@ -222,6 +223,7 @@ namespace LabnetClient.Controllers
                     patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
                     patient.Age = patient.BirthDate;
                     patient.Email = model.Patient.Email;
+                    patient.Phone = model.Patient.Phone;
                     if (patient.BirthDate.Length <= 4)
                         patient.Age = patient.BirthDate;
                     else
