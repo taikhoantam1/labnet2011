@@ -1,0 +1,262 @@
+.Width80
+{
+    width:80px;
+}
+.Width100
+{
+    width:100px;
+}
+.Width110
+{
+    width:110px;
+}
+.Width120
+{
+    width:120px;
+}
+.Width125
+{
+    width:125px;
+}
+.Width130
+{
+    width:130px;
+}
+.Width140
+{
+    width:140px;
+}
+.Width150
+{
+    width:150px;
+}
+.Width200
+{
+    width:200px;
+}
+.Width250
+{
+    width:250px;
+}
+.Width300
+{
+    width:300px;
+}
+.Width350
+{
+    width:350px;
+}
+.Width400
+{
+    width:400px;
+}
+.Width450
+{
+    width:450px;
+}
+.Width500
+{
+    width:500px;
+}
+.Width550
+{
+    width:250px;
+}
+.Width600
+{
+    width:300px;
+}
+.Width650
+{
+    width:350px;
+}
+.Width700
+{
+    width:400px;
+}
+.Width750
+{
+    width:450px;
+}
+.Width800
+{
+    width:500px;
+}
+
+.MarginAuto
+{
+    margin:0 auto;
+}
+.MarginL5
+{
+    margin-left:5px;
+}
+
+.MarginL10
+{
+    margin-left:10px;
+}
+
+.MarginL15
+{
+    margin-left:15px;
+}
+
+.MarginL20
+{
+    margin-left:20px;
+}
+
+.MarginL65
+{
+    margin-left:65px;
+}
+
+.MarginL100
+{
+    margin-left:100px;
+}
+
+.MarginL120
+{
+    margin-left:120px;
+}
+.MarginT5
+{
+    margin-top:5px;
+}
+
+.MarginT10
+{
+    margin-top:10px;
+}
+
+.MarginT15
+{
+    margin-top:15px;
+}
+
+.MarginT20
+{
+    margin-top:20px;
+}
+
+
+.PaddingL5
+{
+    padding-left:5px;
+}
+
+.PaddingL10
+{
+    padding-left:10px;
+}
+
+.PaddingL15
+{
+    padding-left:15px;
+}
+
+.PaddingL20
+{
+    padding-left:20px;
+}
+
+.PaddingL40
+{
+    padding-left:40px;
+}
+.PaddingL65
+{
+    padding-left:65px;
+}
+
+.PaddingL100
+{
+    padding-left:100px;
+}
+
+.PaddingL120
+{
+    padding-left:120px;
+}
+.PaddingT5
+{
+    padding-top:5px;
+}
+
+.PaddingT10
+{
+    padding-top:10px;
+}
+
+.PaddingT15
+{
+    padding-top:15px;
+}
+
+.PaddingT20
+{
+    padding-top:20px;
+}
+
+.textInput
+{
+    width:200px;
+    padding:3px;
+}
+.textInput50
+{
+    width:50px;
+    padding:3px;
+}
+.textInput100
+{
+    width:100px;
+    padding:3px;
+}
+.textInput150
+{
+    width:150px;
+    padding:3px;
+}
+.textInput220
+{
+    width:222px;
+    padding:3px;
+}
+.textInput2
+{
+    width:40px;
+    padding:3px;
+}
+
+.textSearch150
+{
+    width:150px;
+    height:20px;
+    background-color:Silver;
+    vertical-align:middle;
+    font-weight:bold;
+    color:Blue;
+    border:1px;
+    border-style:solid;
+}
+
+.textSearch125
+{
+    width:125px;
+    height:20px;
+    background-color:Silver;
+    vertical-align:middle;
+    font-weight:bold;
+    color:Blue;
+    border:1px;
+    border-style:solid;
+}
+
+.textInput130
+{
+    width:130px;
+    padding:3px;
+}
