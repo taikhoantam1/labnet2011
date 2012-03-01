@@ -72,23 +72,617 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\GlobalStrings.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\GlobalStrings.en-US.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalStrings.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\Funcations.aspx.cs">
+      <DependentUpon>Funcations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\Funcations.aspx.designer.cs">
+      <DependentUpon>Funcations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\player.aspx.cs">
+      <DependentUpon>player.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\player.aspx.designer.cs">
+      <DependentUpon>player.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\Uploader.aspx.cs">
+      <DependentUpon>Uploader.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Content\Lib\FileManager\Uploader.aspx.designer.cs">
+      <DependentUpon>Uploader.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="CustomeAttribute\LocalizedDisplayNameAttribute.cs" />
+    <Compile Include="CustomeAttribute\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="LabnetServer_DB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LabnetServer_DB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\log4net.dll" />
+    <Content Include="Content\Images\Banner.png" />
+    <Content Include="Content\Images\Banner2.png" />
+    <Content Include="Content\Images\ColorPicker.png" />
+    <Content Include="Content\Images\gradient.png" />
+    <Content Include="Content\Images\HeaderBG.png" />
+    <Content Include="Content\Images\iconArrow.png" />
+    <Content Include="Content\Images\iconLab_32.png" />
+    <Content Include="Content\Images\iconPatient_32.png" />
+    <Content Include="Content\Images\iconPXN_32.png" />
+    <Content Include="Content\Images\iconReport_32.png" />
+    <Content Include="Content\Images\iconSearch.png" />
+    <Content Include="Content\Images\icons\accept-16x16.png" />
+    <Content Include="Content\Images\icons\accept-24x24.png" />
+    <Content Include="Content\Images\icons\accept-32x32.png" />
+    <Content Include="Content\Images\icons\accept-48x48.png" />
+    <Content Include="Content\Images\icons\calendar-date-16x16.png" />
+    <Content Include="Content\Images\icons\calendar-date-24x24.png" />
+    <Content Include="Content\Images\icons\calendar-date-32x32.png" />
+    <Content Include="Content\Images\icons\calendar-date-48x48.png" />
+    <Content Include="Content\Images\icons\comment-16x16.png" />
+    <Content Include="Content\Images\icons\comment-24x24.png" />
+    <Content Include="Content\Images\icons\comment-32x32.png" />
+    <Content Include="Content\Images\icons\comment-48x48.png" />
+    <Content Include="Content\Images\icons\Err-16x16.png" />
+    <Content Include="Content\Images\icons\Err-24x24.png" />
+    <Content Include="Content\Images\icons\Err-32x32.png" />
+    <Content Include="Content\Images\icons\Err-48x48.png" />
+    <Content Include="Content\Images\icons\info-16x16.png" />
+    <Content Include="Content\Images\icons\info-24x24.png" />
+    <Content Include="Content\Images\icons\info-32x32.png" />
+    <Content Include="Content\Images\icons\info-48x48.png" />
+    <Content Include="Content\Images\icons\search-16x16.png" />
+    <Content Include="Content\Images\icons\search-24x24.png" />
+    <Content Include="Content\Images\icons\search-32x32.png" />
+    <Content Include="Content\Images\icons\search-48x48.png" />
+    <Content Include="Content\Images\icons\warning-16x16.png" />
+    <Content Include="Content\Images\icons\warning-24x24.png" />
+    <Content Include="Content\Images\icons\warning-32x32.png" />
+    <Content Include="Content\Images\icons\warning-48x48.png" />
+    <Content Include="Content\Images\login.png" />
+    <Content Include="Content\Images\WrapperBG.png" />
+    <Content Include="Content\Lib\Ajax\ajax.js" />
+    <Content Include="Content\Lib\Ajax\ajaxwithcomments.js" />
+    <Content Include="Content\Lib\AutoNumeric\autoNumeric-1.7.1.js" />
+    <Content Include="Content\Lib\DatePicker\css\datepicker.css" />
+    <Content Include="Content\Lib\DatePicker\css\layout.css" />
+    <Content Include="Content\Lib\DatePicker\dark.datetimepicker.css" />
+    <Content Include="Content\Lib\DatePicker\images\custom_b.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_bl.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_br.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_l.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_r.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_t.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_tl.png" />
+    <Content Include="Content\Lib\DatePicker\images\custom_tr.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_b.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_bl.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_br.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_l.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_r.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_t.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_tl.png" />
+    <Content Include="Content\Lib\DatePicker\images\datepicker_tr.png" />
+    <Content Include="Content\Lib\DatePicker\images\field.png" />
+    <Content Include="Content\Lib\DatePicker\js\datepicker.js" />
+    <Content Include="Content\Lib\DatePicker\js\eye.js" />
+    <Content Include="Content\Lib\DatePicker\js\jquery.js" />
+    <Content Include="Content\Lib\DatePicker\js\layout.js" />
+    <Content Include="Content\Lib\DatePicker\js\utils.js" />
+    <Content Include="Content\Lib\DatePicker\ui.datetimepicker.js" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-gloss-cyan-menu-item-hover.gif" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-gloss-menu-item-hover.gif" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-gloss-semitransparent-menu-item-hover.png" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-human-menu-item-hover.gif" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-osx-menu-item-hover.gif" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-vista-bg.gif" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-vista-menu-item-hover.gif" />
+    <Content Include="Content\Lib\FileManager\css\cmenu-xp-bg.gif" />
+    <Content Include="Content\Lib\FileManager\css\jquery.contextmenu.css" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Lib\FileManager\css\ui-lightness\jquery-ui-1.8.4.custom.css" />
+    <Content Include="Content\Lib\FileManager\Default.aspx" />
+    <Content Include="Content\Lib\FileManager\Funcations.aspx" />
+    <Content Include="Content\Lib\FileManager\icons\21-0.gif" />
+    <Content Include="Content\Lib\FileManager\icons\CCopy.png" />
+    <Content Include="Content\Lib\FileManager\icons\CDelete.png" />
+    <Content Include="Content\Lib\FileManager\icons\ceditcut.png" />
+    <Content Include="Content\Lib\FileManager\icons\cfolderpng.png" />
+    <Content Include="Content\Lib\FileManager\icons\Copy-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\cPaste.png" />
+    <Content Include="Content\Lib\FileManager\icons\Cut-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Delete-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\editcut-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\File-copy-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Files-add-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\folder-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\folder-64.png" />
+    <Content Include="Content\Lib\FileManager\icons\Gnome-Dialog-Error-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Gnome-Edit-Paste-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\home-32_1.png" />
+    <Content Include="Content\Lib\FileManager\icons\img-add-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Library-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Paint-32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Paint-64.png" />
+    <Content Include="Content\Lib\FileManager\icons\rar_32.png" />
+    <Content Include="Content\Lib\FileManager\icons\Unknown-icon-64.png" />
+    <Content Include="Content\Lib\FileManager\icons\Unknown-icon.png" />
+    <Content Include="Content\Lib\FileManager\icons\view.png" />
+    <Content Include="Content\Lib\FileManager\icons\Zip-file-32.png" />
+    <Content Include="Content\Lib\FileManager\js\jquery-1.4.2.min.js" />
+    <Content Include="Content\Lib\FileManager\js\jquery-ui-1.8.4.custom.min.js" />
+    <Content Include="Content\Lib\FileManager\js\jquery.contextmenu.js" />
+    <Content Include="Content\Lib\FileManager\js\jquery.jstree.js" />
+    <Content Include="Content\Lib\FileManager\js\themes\apple\bg.jpg" />
+    <Content Include="Content\Lib\FileManager\js\themes\apple\d.png" />
+    <Content Include="Content\Lib\FileManager\js\themes\apple\dot_for_ie.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\apple\style.css" />
+    <Content Include="Content\Lib\FileManager\js\themes\apple\throbber.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\classic\d.png" />
+    <Content Include="Content\Lib\FileManager\js\themes\classic\dot_for_ie.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\classic\style.css" />
+    <Content Include="Content\Lib\FileManager\js\themes\classic\throbber.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\default-rtl\d.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\default-rtl\d.png" />
+    <Content Include="Content\Lib\FileManager\js\themes\default-rtl\dots.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\default-rtl\style.css" />
+    <Content Include="Content\Lib\FileManager\js\themes\default-rtl\throbber.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\default\d.gif" />
+    <Content Include="Content\Lib\FileManager\js\themes\default\d.png" />
+    <Content Include="Content\Lib\FileManager\js\themes\default\style.css" />
+    <Content Include="Content\Lib\FileManager\js\themes\default\throbber.gif" />
+    <Content Include="Content\Lib\FileManager\js\tiny_mce_popup.js" />
+    <Content Include="Content\Lib\FileManager\license.txt" />
+    <Content Include="Content\Lib\FileManager\player.aspx" />
+    <Content Include="Content\Lib\FileManager\Uploader.aspx" />
+    <Content Include="Content\Lib\FlexiGrid\flexigrid.css" />
+    <Content Include="Content\Lib\FlexiGrid\flexigrid.js" />
+    <Content Include="Content\Lib\FlexiGrid\flexigrid.pack.js" />
+    <Content Include="Content\Lib\FlexiGrid\Images\._fhbg.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\._wbg.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\add.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\approve.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\back.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\bg.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\btn-sprite.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\close.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\ddn.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\dn.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\edit.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\fhbg.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\first.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\hl.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\last.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\line.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\load.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\load.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\magnifier.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\next.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\prev.gif" />
+    <Content Include="Content\Lib\FlexiGrid\Images\search.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\up.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\uup.png" />
+    <Content Include="Content\Lib\FlexiGrid\Images\wbg.gif" />
+    <Content Include="Content\Lib\jqGrid\ConfigTemplate.js" />
+    <Content Include="Content\Lib\jqGrid\css\ellipsis-xbl.xml" />
+    <Content Include="Content\Lib\jqGrid\css\ui.jqgrid.css" />
+    <Content Include="Content\Lib\jqGrid\grid.base.js" />
+    <Content Include="Content\Lib\jqGrid\grid.celledit.js" />
+    <Content Include="Content\Lib\jqGrid\grid.common.js" />
+    <Content Include="Content\Lib\jqGrid\grid.custom.js" />
+    <Content Include="Content\Lib\jqGrid\grid.filter.js" />
+    <Content Include="Content\Lib\jqGrid\grid.formedit.js" />
+    <Content Include="Content\Lib\jqGrid\grid.grouping.js" />
+    <Content Include="Content\Lib\jqGrid\grid.import.js" />
+    <Content Include="Content\Lib\jqGrid\grid.inlinedit.js" />
+    <Content Include="Content\Lib\jqGrid\grid.jqueryui.js" />
+    <Content Include="Content\Lib\jqGrid\grid.loader.js" />
+    <Content Include="Content\Lib\jqGrid\grid.subgrid.js" />
+    <Content Include="Content\Lib\jqGrid\grid.tbltogrid.js" />
+    <Content Include="Content\Lib\jqGrid\grid.treegrid.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-ar.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-bg.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-bg1251.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-cat.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-cn.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-cs.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-da.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-de.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-dk.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-el.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-en.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-es.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-fa.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-fi.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-fr.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-gl.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-he.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-hr.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-hr1250.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-hu.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-is.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-it.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-ja.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-lt.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-mne.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-nl.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-no.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-pl.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-pt-br.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-pt.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-ro.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-ru.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-sk.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-sr.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-sv.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-th.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-tr.js" />
+    <Content Include="Content\Lib\jqGrid\i18n\grid.locale-ua.js" />
+    <Content Include="Content\Lib\jqGrid\jqDnR.js" />
+    <Content Include="Content\Lib\jqGrid\jqModal.js" />
+    <Content Include="Content\Lib\jqGrid\jquery-1.5.2.min.js" />
+    <Content Include="Content\Lib\jqGrid\jquery.fmatter.js" />
+    <Content Include="Content\Lib\jqGrid\jquery.jqGrid.min.js" />
+    <Content Include="Content\Lib\jqGrid\jquery.jqGrid.src.js" />
+    <Content Include="Content\Lib\jqGrid\JsonXml.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\grid.addons.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\grid.postext.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\grid.setcolumns.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\jquery.contextmenu.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\jquery.searchFilter.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\jquery.tablednd.js" />
+    <Content Include="Content\Lib\jqGrid\plugins\ui.multiselect.css" />
+    <Content Include="Content\Lib\jqGrid\plugins\ui.multiselect.js" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\jquery-ui-1.8.16.min.js" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\jquery.ui.autocomplete.selectFirst.js" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\jquery.ui.combobox.js" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\Lib\jquery\jquery-1.6.2.min.js" />
+    <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
+    <Content Include="Content\Lib\jquery\jquery.validate.js" />
+    <Content Include="Content\Lib\jquery\jquery.validate.min.js" />
+    <Content Include="Content\Lib\postify.js" />
+    <Content Include="Content\Lib\tiny_mce\jquery.contextmenu.js" />
+    <Content Include="Content\Lib\tiny_mce\langs\en.js" />
+    <Content Include="Content\Lib\tiny_mce\license.txt" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advhr\css\advhr.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advhr\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advhr\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advhr\js\rule.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advhr\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advimage\css\advimage.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advimage\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advimage\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advimage\img\sample.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advimage\js\image.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advimage\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlink\css\advlink.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlink\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlink\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlink\js\advlink.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlink\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlist\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\advlist\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\autoresize\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\autoresize\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\autosave\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\autosave\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\autosave\langs\en.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\bbcode\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\bbcode\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\contextmenu\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\contextmenu\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\directionality\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\directionality\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-cool.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-cry.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-embarassed.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-frown.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-innocent.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-kiss.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-laughing.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-money-mouth.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-sealed.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-smile.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-surprised.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-tongue-out.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-undecided.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-wink.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\img\smiley-yell.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\js\emotions.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\emotions\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\example\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\example\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\example\img\example.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\example\js\dialog.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\example\langs\en.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\example\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullpage\css\fullpage.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullpage\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullpage\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullpage\js\fullpage.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullpage\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullscreen\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\fullscreen\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\iespell\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\iespell\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\inlinepopups\skins\clearlooks2\window.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\insertdatetime\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\insertdatetime\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\layer\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\layer\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\legacyoutput\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\legacyoutput\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\css\content.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\css\media.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\flash.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\flv_player.swf" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\quicktime.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\realmedia.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\shockwave.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\trans.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\img\windowsmedia.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\js\embed.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\js\media.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\media\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\nonbreaking\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\nonbreaking\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\noneditable\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\noneditable\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\pagebreak\css\content.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\pagebreak\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\pagebreak\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\pagebreak\img\pagebreak.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\pagebreak\img\trans.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\paste\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\paste\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\paste\js\pastetext.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\paste\js\pasteword.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\paste\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\preview\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\preview\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\preview\jscripts\embed.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\print\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\print\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\save\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\save\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\searchreplace\css\searchreplace.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\searchreplace\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\searchreplace\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\searchreplace\js\searchreplace.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\searchreplace\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\spellchecker\css\content.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\spellchecker\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\spellchecker\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\spellchecker\img\wline.gif" />
+    <Content Include="Content\Lib\tiny_mce\plugins\style\css\props.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\style\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\style\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\style\js\props.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\style\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\tabfocus\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\tabfocus\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\css\cell.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\css\row.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\css\table.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\js\cell.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\js\merge_cells.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\js\row.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\js\table.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\table\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\template\css\template.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\template\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\template\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\template\js\template.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\template\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\visualchars\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\visualchars\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\wordcount\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\wordcount\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\css\attributes.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\css\popup.css" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\editor_plugin.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\editor_plugin_src.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\abbr.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\acronym.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\attributes.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\cite.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\del.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\element_common.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\js\ins.js" />
+    <Content Include="Content\Lib\tiny_mce\plugins\xhtmlxtras\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\editor_template.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\editor_template_src.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\img\icons.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\about.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\anchor.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\charmap.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\color_picker.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\image.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\link.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\js\source_editor.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\langs\en.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\langs\en_dlg.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\content.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\dialog.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\default\ui.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\content.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\dialog.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\img\button_bg.png" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\img\button_bg_black.png" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\ui.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\ui_black.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\advanced\skins\o2k7\ui_silver.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\editor_template.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\editor_template_src.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\img\icons.gif" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\langs\en.js" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\skins\default\content.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\skins\default\ui.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\skins\o2k7\content.css" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\skins\o2k7\img\button_bg.png" />
+    <Content Include="Content\Lib\tiny_mce\themes\simple\skins\o2k7\ui.css" />
+    <Content Include="Content\Lib\tiny_mce\tiny_mce.js" />
+    <Content Include="Content\Lib\tiny_mce\tiny_mce_popup.js" />
+    <Content Include="Content\Lib\tiny_mce\tiny_mce_src.js" />
+    <Content Include="Content\Lib\tiny_mce\utils\editable_selects.js" />
+    <Content Include="Content\Lib\tiny_mce\utils\form_utils.js" />
+    <Content Include="Content\Lib\tiny_mce\utils\mctabs.js" />
+    <Content Include="Content\Lib\tiny_mce\utils\validate.js" />
+    <Content Include="Content\Lib\Utility\ClientUtil.js" />
+    <Content Include="Content\Lib\Utility\md5.js" />
+    <Content Include="Content\Lib\Utility\PopupWindow.js" />
+    <Content Include="Content\Lib\Utility\Validator.js" />
+    <Content Include="Content\Style\Icon\complete.png" />
+    <Content Include="Content\Style\Icon\Edit.gif" />
+    <Content Include="Content\Style\Icon\iconConfirm.png" />
+    <Content Include="Content\Style\Icon\iconDelete.gif" />
+    <Content Include="Content\Style\Icon\iconDetails.gif" />
+    <Content Include="Content\Style\Icon\iconNew.gif" />
+    <Content Include="Content\Style\Icon\Save32.png" />
+    <Content Include="Content\Style\Icon\tick.gif" />
+    <Content Include="Content\Style\LayoutTemplate.css" />
+    <Content Include="Content\Style\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\Style\redmond\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Content\Style\redmond\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\Style\Site.css" />
+    <Content Include="Content\Style\ui.jqgrid.css" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Shared\Menu.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -96,7 +690,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -124,6 +717,9 @@
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
     <Folder Include="Code\" />
+    <Folder Include="Content\Lib\tiny_mce\plugins\autosave\images\" />
+    <Folder Include="Content\Lib\tiny_mce\plugins\spellchecker\classes\utils\" />
+    <Folder Include="Content\Lib\tiny_mce\plugins\spellchecker\includes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="log4net.config">
@@ -131,10 +727,30 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="LabnetServer_DB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LabnetServer_DB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <None Include="Content\Lib\FileManager\css\Thumbs.db" />
+    <None Include="Content\Lib\FileManager\css\ui-lightness\images\Thumbs.db" />
+    <None Include="Content\Lib\FileManager\icons\Thumbs.db" />
+    <None Include="Content\Lib\FileManager\js\themes\apple\Thumbs.db" />
+    <None Include="Content\Lib\FileManager\js\themes\classic\Thumbs.db" />
+    <None Include="Content\Lib\FileManager\js\themes\default-rtl\Thumbs.db" />
+    <None Include="Content\Lib\FileManager\js\themes\default\Thumbs.db" />
+    <Content Include="Content\Lib\FileManager\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\GlobalStrings.en-US.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GlobalStrings.en-US.designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\GlobalStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>GlobalStrings.designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataRepository\DataRepository.csproj">
+      <Project>{5F90FE62-F272-414A-BC79-9752C755C67E}</Project>
+      <Name>DataRepository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
