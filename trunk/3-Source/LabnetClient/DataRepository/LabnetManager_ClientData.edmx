@@ -710,6 +710,7 @@
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="TestVariableTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="nhmamnnk_LabnetManager" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -805,9 +806,6 @@
           <FunctionImport Name="PatientTestResultsGet" ReturnType="Collection(LabManager_ClientModel.TestResultsGet_Result)">
           <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Report_PatientResult" ReturnType="Collection(LabManager_ClientModel.Report_PatientResult)">
-          <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="Departments" EntityType="LabManager_ClientModel.Department" />
           <EntitySet Name="Projects" EntityType="LabManager_ClientModel.Project" />
           <EntitySet Name="Sources" EntityType="LabManager_ClientModel.Source" />
@@ -874,6 +872,9 @@
             <End Role="Analyte" EntitySet="Analytes" />
             <End Role="Result" EntitySet="Results" />
           </AssociationSet>
+          <FunctionImport Name="Report_PatientResult" ReturnType="Collection(LabManager_ClientModel.Report_PatientResult)">
+            <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -1502,6 +1503,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="TestResultsGet_Result">
+          <Property Type="Int64" Name="STT" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Result" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="AnalysisId" Nullable="false" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+          <Property Type="Int32" Name="ResultId" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="Report_PatientResult">
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Gender" Nullable="false" MaxLength="3" />
@@ -1520,17 +1532,7 @@
           <Property Type="Double" Name="LowIndex" Nullable="true" />
           <Property Type="Double" Name="HighIndex" Nullable="true" />
           <Property Type="Boolean" Name="IsBold" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="TestResultsGet_Result">
-          <Property Type="Int64" Name="STT" Nullable="true" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Result" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="Int32" Name="AnalysisId" Nullable="false" />
-          <Property Type="Int32" Name="TestId" Nullable="false" />
-          <Property Type="Int32" Name="ResultId" Nullable="true" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1808,29 +1810,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Report_PatientResult" FunctionName="LabManager_ClientModel.Store.sp_Report_PatientResult">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LabManager_ClientModel.Report_PatientResult">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
-                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
-                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
-                <ScalarProperty Name="TestName" ColumnName="TestName" />
-                <ScalarProperty Name="Range" ColumnName="Range" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
-                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="LowIndex" ColumnName="LowIndex" />
-                <ScalarProperty Name="HighIndex" ColumnName="HighIndex" />
-                <ScalarProperty Name="IsBold" ColumnName="IsBold" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="LabManager_ClientModel.Department">
               <MappingFragment StoreEntitySet="Department">
@@ -1930,6 +1909,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Report_PatientResult" FunctionName="LabManager_ClientModel.Store.sp_Report_PatientResult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.Report_PatientResult">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
+                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="LowIndex" ColumnName="LowIndex" />
+                <ScalarProperty Name="HighIndex" ColumnName="HighIndex" />
+                <ScalarProperty Name="IsBold" ColumnName="IsBold" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

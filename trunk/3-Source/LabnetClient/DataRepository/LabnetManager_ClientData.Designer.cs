@@ -946,25 +946,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="labExaminationId">No Metadata Documentation available.</param>
-        public ObjectResult<Report_PatientResult> Report_PatientResult(Nullable<global::System.Int32> labExaminationId)
-        {
-            ObjectParameter labExaminationIdParameter;
-            if (labExaminationId.HasValue)
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
-            }
-            else
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="filterText">No Metadata Documentation available.</param>
         /// <param name="searchType">No Metadata Documentation available.</param>
         public ObjectResult<SearchPanelByName_Result> SearchPanelByName(global::System.String filterText, global::System.String searchType)
@@ -1050,6 +1031,25 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<SearchPartnerByName_Result>("SearchPartnerByName", filterTextParameter, searchTypeParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="labExaminationId">No Metadata Documentation available.</param>
+        public ObjectResult<Report_PatientResult> Report_PatientResult(Nullable<global::System.Int32> labExaminationId)
+        {
+            ObjectParameter labExaminationIdParameter;
+            if (labExaminationId.HasValue)
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
+            }
+            else
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
         }
 
         #endregion
@@ -7667,7 +7667,8 @@ namespace DataRepository
         /// <param name="testSectionId">Initial value of the TestSectionId property.</param>
         /// <param name="testSectionName">Initial value of the TestSectionName property.</param>
         /// <param name="isBold">Initial value of the IsBold property.</param>
-        public static Report_PatientResult CreateReport_PatientResult(global::System.String firstName, global::System.String gender, global::System.String address, global::System.String age, global::System.String examinationNumber, global::System.DateTime receivedDate, global::System.String testName, global::System.Int32 testSectionId, global::System.String testSectionName, global::System.Boolean isBold)
+        /// <param name="lastUpdated">Initial value of the LastUpdated property.</param>
+        public static Report_PatientResult CreateReport_PatientResult(global::System.String firstName, global::System.String gender, global::System.String address, global::System.String age, global::System.String examinationNumber, global::System.DateTime receivedDate, global::System.String testName, global::System.Int32 testSectionId, global::System.String testSectionName, global::System.Boolean isBold, global::System.DateTime lastUpdated)
         {
             Report_PatientResult report_PatientResult = new Report_PatientResult();
             report_PatientResult.FirstName = firstName;
@@ -7680,6 +7681,7 @@ namespace DataRepository
             report_PatientResult.TestSectionId = testSectionId;
             report_PatientResult.TestSectionName = testSectionName;
             report_PatientResult.IsBold = isBold;
+            report_PatientResult.LastUpdated = lastUpdated;
             return report_PatientResult;
         }
 
@@ -8093,6 +8095,30 @@ namespace DataRepository
         private global::System.Boolean _IsBold;
         partial void OnIsBoldChanging(global::System.Boolean value);
         partial void OnIsBoldChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime LastUpdated
+        {
+            get
+            {
+                return _LastUpdated;
+            }
+            set
+            {
+                OnLastUpdatedChanging(value);
+                ReportPropertyChanging("LastUpdated");
+                _LastUpdated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastUpdated");
+                OnLastUpdatedChanged();
+            }
+        }
+        private global::System.DateTime _LastUpdated;
+        partial void OnLastUpdatedChanging(global::System.DateTime value);
+        partial void OnLastUpdatedChanged();
 
         #endregion
     }

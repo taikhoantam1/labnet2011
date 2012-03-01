@@ -28,12 +28,12 @@
           <DataField>Age</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="ExaminationNumber">
-          <DataField>ExaminationNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Phone">
           <DataField>Phone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExaminationNumber">
+          <DataField>ExaminationNumber</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ReceivedDate">
@@ -79,6 +79,10 @@
         <Field Name="IsBold">
           <DataField>IsBold</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="LastUpdated">
+          <DataField>LastUpdated</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
       </Fields>
       <Query>
@@ -1112,7 +1116,7 @@
         <Top>1.18698in</Top>
         <Left>1.36804in</Left>
         <Height>0.23264in</Height>
-        <Width>2.50348in</Width>
+        <Width>2.99168in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1206,6 +1210,38 @@
         <Height>0.21875in</Height>
         <Width>0.79861in</Width>
         <ZIndex>17</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="LastUpdated">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Format(Fields!LastUpdated.Value, "dd/MM/yyyy")</Value>
+                <Style>
+                  <Format>d</Format>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>LastUpdated</rd:DefaultName>
+        <Top>3.12014in</Top>
+        <Left>1.57185in</Left>
+        <Height>0.25in</Height>
+        <Width>2.90624in</Width>
+        <ZIndex>18</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
