@@ -624,6 +624,7 @@ namespace DataRepository
             patientOld.FirstName = patient.FirstName;
             patientOld.Age = patient.Age;
             patientOld.Email = patient.Email;
+            patientOld.Phone = patient.Phone;
             myDb.SaveChanges();
         }
 
