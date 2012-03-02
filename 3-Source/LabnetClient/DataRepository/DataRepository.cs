@@ -833,6 +833,41 @@ namespace DataRepository
                 List<Report_PatientResult> list = myDb.Report_PatientResult(labExaminationId).ToList();
                 return list;
             }
+            public List<report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate)
+            {
+                List<report_TestResultNoteBook_Result> list = myDb.report_TestResultNoteBook(startDate, endDate).ToList();
+                Dictionary<string, report_TestResultNoteBook> result = new Dictionary<string, report_TestResultNoteBook>();
+                foreach (var item in list)
+                {
+                    if (!result.Keys.Contains(item.ExaminationNumber))
+                    {
+                        report_TestResultNoteBook testResult = new report_TestResultNoteBook { 
+                            Age = item.Age,
+                            Male = item.Gender,
+                            PartnerName = item.LabName,
+                            PatientName = item.FirstName,
+                            Phone = item.Phone,
+                            ReceiveDate = item.ReceivedDate.ToString("d"),
+                            ReturnDate = item.ReceivedDate.ToString("d"),
+                            Result = string.Format("{0}:{1}",item.Name,item.Value)
+                        };
+                        result.Add(item.ExaminationNumber,testResult);
+                    }
+                    else
+                    {
+                        result[item.ExaminationNumber].Result += string.Format(" , {0}:{1}", item.Name, item.Value);
+                    }
+                }
+                return result.Values.ToList();
+            }
+        #endregion
+
+        #region LabUser
+            public LabUser GetLabUser(string UserName, string Password)
+            {
+                LabUser account = myDb.LabUsers.Where(p => p.UserName == UserName && p.Password == Password).FirstOrDefault();
+                return account;
+            }
         #endregion
     }
 }

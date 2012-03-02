@@ -21,15 +21,29 @@ namespace LabnetClient.Report
                     case "report_PatientResult":
                         Report_PatientResult(reportName);
                         break;
+                    case "report_TestResultNoteBook":
+                        Report_TestResultNoteBook(reportName);
+                        break;
                 }
             }
         }
 
-        private void Test(string reportName)
+        private void Report_TestResultNoteBook(string ReportName)
         {
-            string reportFullName = "/Report/" + reportName + ".rdlc";
+            IDataRepository repository = new Repository();
+            string startDate= Request["StartDate"];
+            string endDate = Request["EndDate"];
+            ReportParameter paramStartDate = new ReportParameter("StartDate", startDate);
+            ReportParameter paramEndDate = new ReportParameter("EndDate", endDate);
+            List<report_TestResultNoteBook> results = repository.ReportData_TestResultNoteBook(DateTime.Parse(startDate),DateTime.Parse(endDate));
+
+            string reportFullName = "/Report/" + ReportName + ".rdlc";
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
+            reportViewer.LocalReport.SetParameters(paramStartDate);
+            reportViewer.LocalReport.SetParameters(paramEndDate);
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("ResultNoteBook", results));
         }
+
 
         private void Report_PatientResult(string ReportName)
         {

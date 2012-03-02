@@ -147,9 +147,12 @@ namespace DataRepository
 
         #region Report
             List<Report_PatientResult> ReportData_PatientResult(int labExaminationId);
+            List<report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate);
         #endregion
 
-
+        #region LabUser
+            LabUser GetLabUser(string UserName, string Password);
+        #endregion
 
 
     }

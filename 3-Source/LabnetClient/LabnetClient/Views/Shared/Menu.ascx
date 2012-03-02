@@ -70,7 +70,7 @@
         <dt><a class="iconReport" href="#">  <%= Resources.GlobalStrings.Menu_GroupTitle_Report %></a></dt>
         <dd style="display: none">
             <ul>
-                <li><a class="MenuItem ActionLink" href="#">
+                <li><a class="MenuItem ActionLink" href="/Report/ResultNoteBook">
                     <%= Resources.GlobalStrings.Menu_ResultBook%></a></li>
                 <li><a class="MenuItem ActionLink" href="#">
                     <%= Resources.GlobalStrings.Menu_FinancialBook %></a></li>

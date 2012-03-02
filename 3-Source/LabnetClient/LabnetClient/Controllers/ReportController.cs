@@ -41,5 +41,27 @@ namespace LabnetClient.Controllers
             model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
             return View("ReportViewer", model);
         }
+        [HttpGet]
+        public ActionResult ResultNoteBook()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ResultNoteBook(string startDate, string endDate)
+        {
+            if (string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
+            {
+                ModelState.AddModelError("Input Error", "Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc");
+                ResultNoteBookViewModel m = new ResultNoteBookViewModel();
+                m.StartDate = startDate;
+                m.EndDate = endDate;
+                return View(m);
+            }
+
+            ReporViewModel model = new ReporViewModel("report_TestResultNoteBook", "SỔ LƯU KẾT QUẢ XÉT NGHIỆM");
+            model.ReportParams.Add("StartDate",startDate);
+            model.ReportParams.Add("EndDate", endDate);
+            return View("ReportViewer", model);
+        }
     }
 }

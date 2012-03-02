@@ -6,7 +6,7 @@
     <div class="Module">
         <div class="ModuleTitle">
             <h3 class="Title">
-                 <%= Model.ReportName%>
+                 <%= Model.ReportTitle%>
             </h3>
         </div>
         <div class="ModuleContent">
