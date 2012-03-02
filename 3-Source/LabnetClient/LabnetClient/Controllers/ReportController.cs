@@ -30,18 +30,40 @@ namespace LabnetClient.Controllers
             return View("ReportViewer", model);
         }
 
+        [HttpGet]
+        public ActionResult PatientResultReport()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult PatientResultReport(int? OrderNumber, string ReceivedDate)
         {
-            ReporViewModel model = new ReporViewModel("report_PatientResult", "Phiếu Kết Quả");
             DateTime? receivedDate = null;
             if (!string.IsNullOrEmpty(ReceivedDate))
                 receivedDate = Convert.ToDateTime(ReceivedDate);
+
+            if (String.IsNullOrEmpty(OrderNumber.ToString()) || String.IsNullOrEmpty(ReceivedDate))
+            {
+                ModelState.AddModelError("Input Error", "Vui lòng nhập số thứ tự và ngày xét nghiệm");
+                VMLabExamination m = new VMLabExamination();
+                m.OrderNumber = OrderNumber;
+                m.ReceivedDate = receivedDate;
+                return View();
+            }
+
+            ReporViewModel model = new ReporViewModel("report_PatientResult", "Phiếu Kết Quả");
             VMLabExamination labExamination = new VMLabExamination();
             labExamination = Repository.GetLabExamination(OrderNumber.Value, receivedDate.Value);
-            if(labExamination == null)
-                model.ReportParams.Add("LabExaminationId", "0");
-            else
-                model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
+            if (labExamination == null)
+            {
+                ModelState.AddModelError("Input Error", "Không tìm thấy dữ liệu nào phù hợp với dữ liệu nhập vào");
+                VMLabExamination m = new VMLabExamination();
+                m.OrderNumber = OrderNumber;
+                m.ReceivedDate = receivedDate;
+                return View();
+            }
+            
+            model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
 
             return View("ReportViewer", model);
         }

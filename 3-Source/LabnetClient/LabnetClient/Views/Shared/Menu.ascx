@@ -37,7 +37,7 @@
                     <%= Resources.GlobalStrings.Menu_UpdateTestResult%></a></li>
                 <li><a class="MenuItem ActionLink" href="/BenhNhan/Index">
                     <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
-                <li><a class="MenuItem ActionLink" href="/BenhNhan/PatientResultReport">
+                <li><a class="MenuItem ActionLink" href="/Report/PatientResultReport">
                     <%= Resources.GlobalStrings.Menu_PatientResult%></a></li>
             </ul>
         </dd>
