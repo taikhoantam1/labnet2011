@@ -212,6 +212,7 @@
     <Compile Include="Models\Partner\PartnerViewModel.cs" />
     <Compile Include="Models\Patient\PatientTestViewModel.cs" />
     <Compile Include="Models\Patient\PatientViewModel.cs" />
+    <Compile Include="Models\Report\PatientReportViewModel.cs" />
     <Compile Include="Models\Report\ReporViewModel.cs" />
     <Compile Include="Models\Report\ResultNoteBookViewModel.cs" />
     <Compile Include="Models\Test\TestSearctViewModel.cs" />
@@ -794,8 +795,6 @@
     <Content Include="Views\BacSi\Search.aspx" />
     <Content Include="Views\BenhNhan\CtrlSearch.ascx" />
     <Content Include="Views\BenhNhan\Index.aspx" />
-    <Content Include="Views\BenhNhan\PatientResult.ascx" />
-    <Content Include="Views\BenhNhan\PatientResultReport.aspx" />
     <Content Include="Views\BenhNhan\PatientTestResult.aspx" />
     <Content Include="Views\BenhNhan\UpdateTestResult.ascx" />
     <Content Include="Views\Home\Index.aspx" />
@@ -809,6 +808,7 @@
     <Content Include="Views\DoiTac\Search.aspx" />
     <Content Include="Views\BenhNhan\Create.aspx" />
     <Content Include="Views\BenhNhan\CtrlCreate.ascx" />
+    <Content Include="Views\Report\PatientResultReport.aspx" />
     <Content Include="Views\Report\ReportViewer.aspx" />
     <Content Include="Views\Report\ResultNoteBook.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
