@@ -63,6 +63,7 @@
     <Content Include="FKs\Test.fk.sql" />
     <Content Include="FKs\TestCommission.fk.sql" />
     <Content Include="FKs\TestResult.fk.sql" />
+    <Content Include="SPs\labnet_TestResultNoteBook.sql" />
     <Content Include="SPs\sp_PatientTestResultsGet.sp.sql" />
     <Content Include="SPs\sp_GenerateLabExaminationNumber.sql" />
     <Content Include="SPs\sp_GeneratePatientNumber.sql" />

@@ -11,6 +11,7 @@
           <EntitySet Name="Department" EntityType="LabManager_ClientModel.Store.Department" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Doctor" EntityType="LabManager_ClientModel.Store.Doctor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabExamination" EntityType="LabManager_ClientModel.Store.LabExamination" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LabUser" EntityType="LabManager_ClientModel.Store.LabUser" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Panel" EntityType="LabManager_ClientModel.Store.Panel" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PanelItem" EntityType="LabManager_ClientModel.Store.PanelItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Partner" EntityType="LabManager_ClientModel.Store.Partner" store:Type="Tables" Schema="dbo" />
@@ -185,6 +186,14 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="OrderNumber" Type="int" Nullable="false" />
           <Property Name="PartnerId" Type="int" />
+        </EntityType>
+        <EntityType Name="LabUser">
+          <Key>
+            <PropertyRef Name="LabUserId" />
+          </Key>
+          <Property Name="LabUserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Panel">
           <Key>
@@ -658,6 +667,10 @@
         <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="strInput" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="labnet_TestResultNoteBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="sp_GenerateLabExaminationNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Length" Type="int" Mode="In" />
         </Function>
@@ -873,8 +886,13 @@
             <End Role="Result" EntitySet="Results" />
           </AssociationSet>
           <FunctionImport Name="Report_PatientResult" ReturnType="Collection(LabManager_ClientModel.Report_PatientResult)">
-            <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
+          <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="report_TestResultNoteBook" ReturnType="Collection(LabManager_ClientModel.report_TestResultNoteBook_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="LabUsers" EntityType="LabManager_ClientModel.LabUser" />
           </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -1534,6 +1552,30 @@
           <Property Type="Boolean" Name="IsBold" Nullable="false" />
           <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
         </ComplexType>
+        <ComplexType Name="report_TestResultNoteBook_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Age" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="String" Name="ExaminationNumber" Nullable="false" MaxLength="7" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" Precision="16" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="PatientItemId" Nullable="false" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LabName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="LabUser">
+          <Key>
+            <PropertyRef Name="LabUserId" />
+          </Key>
+          <Property Type="Int32" Name="LabUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1933,6 +1975,35 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="report_TestResultNoteBook" FunctionName="LabManager_ClientModel.Store.labnet_TestResultNoteBook">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.report_TestResultNoteBook_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PatientItemId" ColumnName="PatientItemId" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="LabName" ColumnName="LabName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="LabUsers">
+            <EntityTypeMapping TypeName="LabManager_ClientModel.LabUser">
+              <MappingFragment StoreEntitySet="LabUser">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LabUserId" ColumnName="LabUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2112,15 +2183,16 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.Result" Width="1.5" PointX="10.5" PointY="9.125" Height="2.7494921875000102" />
         <AssociationConnector Association="LabManager_ClientModel.FK_Result_Analysis" >
-          <ConnectorPoint PointX="6.75" PointY="8.40625" />
-          <ConnectorPoint PointX="11.25" PointY="8.40625" />
-          <ConnectorPoint PointX="11.25" PointY="9.125" />
+          <ConnectorPoint PointX="6.75" PointY="8.4853417968750051" />
+          <ConnectorPoint PointX="11.96875" PointY="8.4853417968750051" />
+          <ConnectorPoint PointX="11.96875" PointY="9.125" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_Result_Analyte" >
           <ConnectorPoint PointX="9.75" PointY="13.740143229166666" />
           <ConnectorPoint PointX="11.25" PointY="13.740143229166666" />
           <ConnectorPoint PointX="11.25" PointY="11.87449218750001" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="LabManager_ClientModel.LabUser" Width="1.5" PointX="10.375" PointY="6.75" Height="1.5956835937500102" />
         </Diagram>
     </Diagrams>
   </Designer>

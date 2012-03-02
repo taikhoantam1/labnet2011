@@ -134,6 +134,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PatientStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Report\ReportStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Test\TestStrings1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +162,7 @@
     <Compile Include="Controllers\BenhNhanController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\ShareController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XetNghiemController.cs" />
     <Compile Include="CustomAttribute\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="CustomAttribute\SetCultureAttribute.cs" />
@@ -199,6 +205,7 @@
     <Compile Include="Models\Doctor\DoctorViewModel.cs" />
     <Compile Include="Models\Control\JQGridModel\JQGrid.cs" />
     <Compile Include="Models\Control\JQGridModel\JQResponseDataModel.cs" />
+    <Compile Include="Models\JsonpResult.cs" />
     <Compile Include="Models\Panel\PanelSearchViewModel.cs" />
     <Compile Include="Models\Panel\PanelViewModel.cs" />
     <Compile Include="Models\Partner\PartnerSearchViewModel.cs" />
@@ -206,6 +213,7 @@
     <Compile Include="Models\Patient\PatientTestViewModel.cs" />
     <Compile Include="Models\Patient\PatientViewModel.cs" />
     <Compile Include="Models\Report\ReporViewModel.cs" />
+    <Compile Include="Models\Report\ResultNoteBookViewModel.cs" />
     <Compile Include="Models\Test\TestSearctViewModel.cs" />
     <Compile Include="Models\Test\TestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -802,6 +810,7 @@
     <Content Include="Views\BenhNhan\Create.aspx" />
     <Content Include="Views\BenhNhan\CtrlCreate.ascx" />
     <Content Include="Views\Report\ReportViewer.aspx" />
+    <Content Include="Views\Report\ResultNoteBook.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\ComboBox.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
@@ -904,6 +913,11 @@
     <Content Include="Report\report_PatientResult.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_GlobalResources\Report\ReportStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ReportStrings.Designer.cs</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="Report\report_TestResultNoteBook.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
