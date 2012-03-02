@@ -8304,8 +8304,7 @@ namespace DataRepository
         /// <param name="patientItemId">Initial value of the PatientItemId property.</param>
         /// <param name="testId">Initial value of the TestId property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="labName">Initial value of the LabName property.</param>
-        public static report_TestResultNoteBook_Result Createreport_TestResultNoteBook_Result(global::System.String firstName, global::System.Boolean gender, global::System.String age, global::System.Int32 patientId, global::System.String examinationNumber, global::System.Int32 id, global::System.DateTime receivedDate, global::System.Int32 createdBy, global::System.Int32 patientItemId, global::System.Int32 testId, global::System.String name, global::System.String labName)
+        public static report_TestResultNoteBook_Result Createreport_TestResultNoteBook_Result(global::System.String firstName, global::System.Boolean gender, global::System.String age, global::System.Int32 patientId, global::System.String examinationNumber, global::System.Int32 id, global::System.DateTime receivedDate, global::System.Int32 createdBy, global::System.Int32 patientItemId, global::System.Int32 testId, global::System.String name)
         {
             report_TestResultNoteBook_Result report_TestResultNoteBook_Result = new report_TestResultNoteBook_Result();
             report_TestResultNoteBook_Result.FirstName = firstName;
@@ -8319,7 +8318,6 @@ namespace DataRepository
             report_TestResultNoteBook_Result.PatientItemId = patientItemId;
             report_TestResultNoteBook_Result.TestId = testId;
             report_TestResultNoteBook_Result.Name = name;
-            report_TestResultNoteBook_Result.LabName = labName;
             return report_TestResultNoteBook_Result;
         }
 
@@ -8641,7 +8639,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String LabName
         {
@@ -8653,7 +8651,7 @@ namespace DataRepository
             {
                 OnLabNameChanging(value);
                 ReportPropertyChanging("LabName");
-                _LabName = StructuralObject.SetValidValue(value, false);
+                _LabName = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("LabName");
                 OnLabNameChanged();
             }

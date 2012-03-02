@@ -105,10 +105,10 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.5625in</Width>
+              <Width>1.49034in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.36458in</Width>
+              <Width>1.22917in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.48101in</Width>
@@ -548,9 +548,9 @@
         </TablixRowHierarchy>
         <DataSetName>ResultNoteBook</DataSetName>
         <Top>1.6425in</Top>
-        <Left>0.10201in</Left>
+        <Left>0.06572in</Left>
         <Height>0.5in</Height>
-        <Width>7.27615in</Width>
+        <Width>7.06857in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -679,7 +679,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>6.5in</Height>
+    <Height>5in</Height>
     <Style />
   </Body>
   <ReportParameters>
@@ -692,7 +692,7 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>7.51357in</Width>
+  <Width>7.2in</Width>
   <Page>
     <PageHeader>
       <Height>1.5in</Height>
@@ -704,7 +704,7 @@
           <Value>Banner2</Value>
           <Sizing>Fit</Sizing>
           <Top>0.08333in</Top>
-          <Left>0.50136in</Left>
+          <Left>0.38211in</Left>
           <Height>1.33333in</Height>
           <Width>6.43578in</Width>
           <Style>
@@ -730,10 +730,9 @@
         </Border>
       </Style>
     </PageFooter>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <PageWidth>8.2in</PageWidth>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.5in</RightMargin>
     <Style />
   </Page>
   <EmbeddedImages>

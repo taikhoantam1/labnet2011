@@ -28,7 +28,7 @@ BEGIN
 		pn.Name 'LabName'
 	FROM	
 					LabExamination lx 
-		INNER JOIN	[Partner] pn		ON lx.PartnerId = pn.Id
+		left JOIN	[Partner] pn		ON lx.PartnerId = pn.Id
 		INNER JOIN  Patient p		ON lx.PatientId = p.Id 
 		INNER JOIN  PatientItem	pai	ON lx.Id = pai.LabExaminationId 
 		INNER JOIN	Analysis a		ON a.PatientItemId = pai.Id 

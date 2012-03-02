@@ -1552,6 +1552,14 @@
           <Property Type="Boolean" Name="IsBold" Nullable="false" />
           <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
         </ComplexType>
+        <EntityType Name="LabUser">
+          <Key>
+            <PropertyRef Name="LabUserId" />
+          </Key>
+          <Property Type="Int32" Name="LabUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
         <ComplexType Name="report_TestResultNoteBook_Result">
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
           <Property Type="Boolean" Name="Gender" Nullable="false" />
@@ -1566,16 +1574,8 @@
           <Property Type="Int32" Name="TestId" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="LabName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LabName" Nullable="true" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="LabUser">
-          <Key>
-            <PropertyRef Name="LabUserId" />
-          </Key>
-          <Property Type="Int32" Name="LabUserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="UserName" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Password" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
