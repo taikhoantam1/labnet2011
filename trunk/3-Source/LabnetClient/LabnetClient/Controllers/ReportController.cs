@@ -38,7 +38,11 @@ namespace LabnetClient.Controllers
                 receivedDate = Convert.ToDateTime(ReceivedDate);
             VMLabExamination labExamination = new VMLabExamination();
             labExamination = Repository.GetLabExamination(OrderNumber.Value, receivedDate.Value);
-            model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
+            if(labExamination == null)
+                model.ReportParams.Add("LabExaminationId", "0");
+            else
+                model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
+
             return View("ReportViewer", model);
         }
         [HttpGet]
