@@ -136,7 +136,7 @@
                             <%=Resources.TestStrings.TestCreate_HighIndex%></label>
                     </div>
                     <div class="Column">
-                        <input type="text" class="textInput2 autoNumeric" id="HighIndexView" />
+                        <input type="text" class="textInputHighIndex autoNumeric" id="HighIndexView" />
                         <%=Html.HiddenFor(m => m.Test.HighIndex)%> 
                     </div>
                     <div class="clear">
