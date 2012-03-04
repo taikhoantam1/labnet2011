@@ -1524,6 +1524,7 @@
           <Property Type="Int32" Name="AnalysisId" Nullable="false" />
           <Property Type="Int32" Name="TestId" Nullable="false" />
           <Property Type="Int32" Name="ResultId" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
         </ComplexType>
         <ComplexType Name="Report_PatientResult">
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
@@ -1839,6 +1840,7 @@
                 <ScalarProperty Name="AnalysisId" ColumnName="AnalysisId" />
                 <ScalarProperty Name="TestId" ColumnName="TestId" />
                 <ScalarProperty Name="ResultId" ColumnName="ResultId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

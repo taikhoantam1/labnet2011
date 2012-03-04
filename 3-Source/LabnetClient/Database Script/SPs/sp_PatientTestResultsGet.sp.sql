@@ -17,8 +17,8 @@ BEGIN
 			   a.Status,
 			   a.Id 'AnalysisId',
 			   t.Id 'TestId',
-			   r.Id 'ResultId'
-			    
+			   r.Id 'ResultId',
+			   t.Description
 		from	LabExamination l											inner join
 				PatientItem    p on l.Id = p.LabExaminationId				inner join
 				Analysis	   a on a.PatientItemId = p.Id					inner join
@@ -29,5 +29,4 @@ BEGIN
 END
 
 GO
-
 

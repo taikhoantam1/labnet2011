@@ -818,7 +818,9 @@ namespace DataRepository
                         StatusString = tinhtrang,
                         Status = p.Status,
                         AnalysisId = p.AnalysisId,
-                        ResultId = p.ResultId
+                        ResultId = p.ResultId,
+                        MoTa = p.Description
+                        
 
                     });
                 }
