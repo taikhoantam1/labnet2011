@@ -11,7 +11,7 @@ CREATE PROCEDURE [dbo].[sp_SearchTest]
 AS
 BEGIN
 	BEGIN
-		SELECT distinct t.Id, t.Name as TestName, ts.Name as TestSectionName, t.Range, t.Unit
+		SELECT distinct t.Id, t.Name as TestName, t.Description as TestDescription, ts.Name as TestSectionName, t.Range, t.Unit
 		FROM Test t
 		INNER JOIN TestSection ts on t.TestSectionId = ts.Id
 		INNER JOIN PanelItem pitem on pitem.TestId = t.Id
