@@ -403,6 +403,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập mô tả XN.
+        /// </summary>
+        internal static string VMTest_DescriptionRequired {
+            get {
+                return ResourceManager.GetString("VMTest_DescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên XN.
         /// </summary>
         internal static string VMTest_NameRequired {
@@ -426,6 +435,15 @@ namespace DomainModel.Properties {
         internal static string VMTestSearch_NameRequired {
             get {
                 return ResourceManager.GetString("VMTestSearch_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mô tả XN.
+        /// </summary>
+        internal static string VMTestSearch_TestDescription {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestDescription", resourceCulture);
             }
         }
         

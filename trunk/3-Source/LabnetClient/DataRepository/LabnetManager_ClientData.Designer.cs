@@ -705,47 +705,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="testName">No Metadata Documentation available.</param>
-        /// <param name="testSectionName">No Metadata Documentation available.</param>
-        /// <param name="panelName">No Metadata Documentation available.</param>
-        public ObjectResult<SearchTest_Result> SearchTest(global::System.String testName, global::System.String testSectionName, global::System.String panelName)
-        {
-            ObjectParameter testNameParameter;
-            if (testName != null)
-            {
-                testNameParameter = new ObjectParameter("TestName", testName);
-            }
-            else
-            {
-                testNameParameter = new ObjectParameter("TestName", typeof(global::System.String));
-            }
-    
-            ObjectParameter testSectionNameParameter;
-            if (testSectionName != null)
-            {
-                testSectionNameParameter = new ObjectParameter("TestSectionName", testSectionName);
-            }
-            else
-            {
-                testSectionNameParameter = new ObjectParameter("TestSectionName", typeof(global::System.String));
-            }
-    
-            ObjectParameter panelNameParameter;
-            if (panelName != null)
-            {
-                panelNameParameter = new ObjectParameter("PanelName", panelName);
-            }
-            else
-            {
-                panelNameParameter = new ObjectParameter("PanelName", typeof(global::System.String));
-            }
-    
-            return base.ExecuteFunction<SearchTest_Result>("SearchTest", testNameParameter, testSectionNameParameter, panelNameParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="filterText">No Metadata Documentation available.</param>
         /// <param name="searchType">No Metadata Documentation available.</param>
         public ObjectResult<SearchTestByName_Result> SearchTestByName(global::System.String filterText, global::System.String searchType)
@@ -1104,6 +1063,47 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<report_TestResultNoteBook_Result>("report_TestResultNoteBook", startDateParameter, endDateParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="testName">No Metadata Documentation available.</param>
+        /// <param name="testSectionName">No Metadata Documentation available.</param>
+        /// <param name="panelName">No Metadata Documentation available.</param>
+        public ObjectResult<SearchTest_Result> SearchTest(global::System.String testName, global::System.String testSectionName, global::System.String panelName)
+        {
+            ObjectParameter testNameParameter;
+            if (testName != null)
+            {
+                testNameParameter = new ObjectParameter("TestName", testName);
+            }
+            else
+            {
+                testNameParameter = new ObjectParameter("TestName", typeof(global::System.String));
+            }
+    
+            ObjectParameter testSectionNameParameter;
+            if (testSectionName != null)
+            {
+                testSectionNameParameter = new ObjectParameter("TestSectionName", testSectionName);
+            }
+            else
+            {
+                testSectionNameParameter = new ObjectParameter("TestSectionName", typeof(global::System.String));
+            }
+    
+            ObjectParameter panelNameParameter;
+            if (panelName != null)
+            {
+                panelNameParameter = new ObjectParameter("PanelName", panelName);
+            }
+            else
+            {
+                panelNameParameter = new ObjectParameter("PanelName", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<SearchTest_Result>("SearchTest", testNameParameter, testSectionNameParameter, panelNameParameter);
         }
 
         #endregion
@@ -8969,6 +8969,30 @@ namespace DataRepository
         private global::System.String _TestName;
         partial void OnTestNameChanging(global::System.String value);
         partial void OnTestNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TestDescription
+        {
+            get
+            {
+                return _TestDescription;
+            }
+            set
+            {
+                OnTestDescriptionChanging(value);
+                ReportPropertyChanging("TestDescription");
+                _TestDescription = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TestDescription");
+                OnTestDescriptionChanged();
+            }
+        }
+        private global::System.String _TestDescription;
+        partial void OnTestDescriptionChanging(global::System.String value);
+        partial void OnTestDescriptionChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

@@ -92,6 +92,17 @@
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
+                            <%=Resources.TestStrings.TestCreate_Description%></label>
+                    </div>
+                    <div class="Column">
+                        <%=Html.TextBoxFor(m => m.Test.Description, new { Class = "textInput220" })%>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
                             <%=Resources.TestStrings.TestCreate_TestSection%></label>
                     </div>
                     <div class="Column">
@@ -106,7 +117,7 @@
                             <%=Resources.TestStrings.TestCreate_Range%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.Test.Range, new { Class = "textInput220" })%>
+                        <%=Html.TextAreaFor(m => m.Test.Range, new { Class = "textInput220" })%>
                     </div>
                     <div class="clear">
                     </div>
@@ -131,6 +142,8 @@
                     <div class="clear">
                     </div>
                 </div>
+            </div>
+            <div class="RightCol">
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
@@ -142,8 +155,6 @@
                     <div class="clear">
                     </div>
                 </div>
-            </div>
-            <div class="RightCol">
                 <div class="Row">
                     <div class="Column">
                         <label class="lbTitle">
@@ -190,18 +201,6 @@
                     </div>
                 </div>
             </div>
-            <div class="Row clear">
-                <div class="Column">
-                    <label class="lbTitle">
-                        <%=Resources.TestStrings.TestCreate_Description%></label>
-                </div>
-                <div class="Column">
-                    <%=Html.TextAreaFor(m => m.Test.Description, new { cols=76, rows=3})%>
-                </div>
-                <div class="clear">
-                </div>
-            </div>
-        </div>
         <div class="Row" align="center">
             <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" id="save" />
             <input type="button" value="<%=Resources.TestStrings.TestCreate_New%>" id="reloadPage" />
@@ -209,3 +208,19 @@
     </div>
 </div>
 <% Html.EndForm(); %>
+
+<script type="text/javascript">
+    $(function () {
+        var lowIndexHidden = $("#Test_LowIndex").val();
+        lowIndexHidden = lowIndexHidden.replace(',', '.');
+        $("#Test_LowIndex").val(lowIndexHidden);
+
+        var highIndexHidden = $("#Test_HighIndex").val();
+        highIndexHidden = highIndexHidden.replace(',', '.');
+        $("#Test_HighIndex").val(highIndexHidden);
+
+        var costHidden = $("#Test_Cost").val();
+        costHidden = costHidden.replace(',', '.');
+        $("#Test_Cost").val(costHidden);
+    });
+</script>

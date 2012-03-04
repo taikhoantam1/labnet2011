@@ -234,6 +234,9 @@
   <data name="VMTestSearch_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên XN</value>
   </data>
+  <data name="VMTestSearch_TestDescription" xml:space="preserve">
+    <value>Mô tả XN</value>
+  </data>
   <data name="VMTestSearch_TestName" xml:space="preserve">
     <value>Tên XN</value>
   </data>
@@ -245,6 +248,9 @@
   </data>
   <data name="VMTestSearch_TestUnit" xml:space="preserve">
     <value>Đơn vị</value>
+  </data>
+  <data name="VMTest_DescriptionRequired" xml:space="preserve">
+    <value>Vui lòng nhập mô tả XN</value>
   </data>
   <data name="VMTest_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên XN</value>
