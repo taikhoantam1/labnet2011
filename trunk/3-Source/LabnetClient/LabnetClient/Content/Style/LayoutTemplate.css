@@ -227,7 +227,13 @@
 }
 .textInput2
 {
-    width:40px;
+    width:50px;
+    padding:3px;
+}
+
+.textInputHighIndex
+{
+    width:50px;
     padding:3px;
 }
 
