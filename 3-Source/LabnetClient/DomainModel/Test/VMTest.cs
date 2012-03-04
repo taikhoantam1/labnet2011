@@ -24,6 +24,8 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets test's description
         /// </summary>
+        /// 
+        [Required(ErrorMessageResourceName = "VMTest_DescriptionRequired", ErrorMessageResourceType = typeof(Resources))]
         public string Description { get; set; }
 
         /// <summary>

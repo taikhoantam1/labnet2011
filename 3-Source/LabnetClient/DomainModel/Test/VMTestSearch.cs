@@ -42,6 +42,12 @@ namespace DomainModel
         public string TestName { get; set; }
 
         /// <summary>
+        /// Sets or gets test description
+        /// </summary>
+        /// 
+        [JQColumnAttribute("VMTestSearch_TestDescription", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string TestDescription { get; set; }
+        /// <summary>
         /// Sets or gets Test range
         /// </summary>
         [JQColumnAttribute("VMTestSearch_TestRange", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]

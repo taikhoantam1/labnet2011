@@ -80,7 +80,6 @@ namespace LabnetClient.Controllers
             model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             model.Autocomplete.SelectedText = testSection.Name;
             model.Autocomplete.SelectedValue = testSection.Id.ToString();
-
             return PartialView("Create", model);
         }
 
@@ -98,7 +97,8 @@ namespace LabnetClient.Controllers
 
             if (!ModelState.IsValid)
             {
-                model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson(); ;
+                model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+                model.ViewMode = ViewMode.Edit;
                 return View("Create", model);
             }
 
@@ -158,6 +158,7 @@ namespace LabnetClient.Controllers
                 TestSearchObject obj = new TestSearchObject();
                 obj.TestId = item.Id;
                 obj.TestName = item.TestName;
+                obj.TestDescription = item.TestDescription;
                 obj.TestSectionName = item.TestSectionName;
                 obj.TestRange = item.Range;
                 obj.TestUnit = item.Unit;

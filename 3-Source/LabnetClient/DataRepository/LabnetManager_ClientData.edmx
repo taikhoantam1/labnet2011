@@ -747,11 +747,6 @@
             <Parameter Name="FilterText" Mode="In" Type="String" />
             <Parameter Name="SearchType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SearchTest" ReturnType="Collection(LabManager_ClientModel.SearchTest_Result)">
-            <Parameter Name="TestName" Mode="In" Type="String" />
-            <Parameter Name="TestSectionName" Mode="In" Type="String" />
-            <Parameter Name="PanelName" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SearchTestByName" ReturnType="Collection(LabManager_ClientModel.SearchTestByName_Result)">
             <Parameter Name="FilterText" Mode="In" Type="String" />
             <Parameter Name="SearchType" Mode="In" Type="String" />
@@ -893,6 +888,11 @@
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="LabUsers" EntityType="LabManager_ClientModel.LabUser" />
+          <FunctionImport Name="SearchTest" ReturnType="Collection(LabManager_ClientModel.SearchTest_Result)">
+            <Parameter Name="TestName" Mode="In" Type="String" />
+            <Parameter Name="TestSectionName" Mode="In" Type="String" />
+            <Parameter Name="PanelName" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -1464,13 +1464,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="SearchTest_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="TestName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="SearchPanelByName_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
@@ -1575,6 +1568,14 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="LabName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SearchTest_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TestName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TestDescription" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1751,17 +1752,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SearchTest" FunctionName="LabManager_ClientModel.Store.sp_SearchTest">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchTest_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TestName" ColumnName="TestName" />
-                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
-                <ScalarProperty Name="Range" ColumnName="Range" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SearchTestByName" FunctionName="LabManager_ClientModel.Store.sp_SearchTestByName">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchTestByName_Result">
@@ -2004,6 +1994,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchTest" FunctionName="LabManager_ClientModel.Store.sp_SearchTest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchTest_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="TestDescription" ColumnName="TestDescription" />
+                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
