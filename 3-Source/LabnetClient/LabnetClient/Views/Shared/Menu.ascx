@@ -52,6 +52,8 @@
                     <%= Resources.GlobalStrings.Menu_CreateTestPanel%></a></li>
                 <li><a class="MenuItem ActionLink" href="/Panel/Index">
                     <%= Resources.GlobalStrings.Menu_SearchTestPanel %></a></li>
+                <li><a class="MenuItem ActionLink" href="/NhomXetNghiem/Create">
+                    <%= Resources.GlobalStrings.Menu_CreateTestSection %></a></li>
             </ul>
         </dd>
         <dt><a class="iconLab" href="#"> <%= Resources.GlobalStrings.Menu_GroupTitle_Lab%></a></dt>

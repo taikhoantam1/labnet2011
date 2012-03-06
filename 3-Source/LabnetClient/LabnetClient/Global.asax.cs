@@ -59,6 +59,9 @@ namespace LabnetClient
             Mapper.CreateMap<Patient, VMPatient>()
             .ForMember("PatientEditLink", p => p.Ignore());
 
+            Mapper.CreateMap<TestSection, VMTestSection>();
+            Mapper.CreateMap<VMTestSection, TestSection>();
+
             Mapper.CreateMap<PatientsGets_Result, VMPatient>()
             .ForMember("PatientEditLink", p => p.Ignore())
             .ForMember("PatientNumber", p => p.Ignore())

@@ -139,6 +139,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\TestSection\TestSectionStrings.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestSectionStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Test\TestStrings1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -157,6 +162,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BacSiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NhomXetNghiemController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\DoiTacController.cs" />
     <Compile Include="Controllers\BenhNhanController.cs" />
@@ -215,6 +221,7 @@
     <Compile Include="Models\Report\PatientReportViewModel.cs" />
     <Compile Include="Models\Report\ReporViewModel.cs" />
     <Compile Include="Models\Report\ResultNoteBookViewModel.cs" />
+    <Compile Include="Models\TestSection\TestSectionViewModel.cs" />
     <Compile Include="Models\Test\TestSearctViewModel.cs" />
     <Compile Include="Models\Test\TestViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -798,6 +805,8 @@
     <Content Include="Views\BenhNhan\PatientTestResult.aspx" />
     <Content Include="Views\BenhNhan\UpdateTestResult.ascx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\NhomXetNghiem\Create.aspx" />
+    <Content Include="Views\NhomXetNghiem\CtrlCreate.ascx" />
     <Content Include="Views\Panel\CtrlCreate.ascx" />
     <Content Include="Views\Panel\Create.aspx" />
     <Content Include="Views\Panel\CtrlSearch.ascx" />
@@ -919,6 +928,10 @@
     </Content>
     <Content Include="Report\report_TestResultNoteBook.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_GlobalResources\TestSection\TestSectionStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>TestSectionStrings.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
