@@ -3,6 +3,8 @@ CREATE TABLE [dbo].[TestSection](
 	[Name] [nvarchar](100) NOT NULL,
 	[Description] [nvarchar](500) NOT NULL,
 	[IsActive] [bit] NOT NULL,
+	[Cost] [decimal](18,0) NULL,
+	[SortOrder] [int] NULL
  CONSTRAINT [PK_TestSection] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
