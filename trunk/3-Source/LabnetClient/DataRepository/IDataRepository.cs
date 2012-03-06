@@ -107,6 +107,11 @@ namespace DataRepository
         #region TestSection
         object GetTestSectionByName(string name, string searchType);
         TestSection GetTestSection(int testSectionId);
+        List<TestSection> GetTestSections();
+        void TestSectionInsert(TestSection ts);
+        void TestSectionUpdate(int id, TestSection ts);
+        void TestSectionDelete(int testSectionId);
+        bool IsValidTestSection(string tsName);
         #endregion
 
         #region Patient
@@ -153,7 +158,5 @@ namespace DataRepository
         #region LabUser
             LabUser GetLabUser(string UserName, string Password);
         #endregion
-
-
     }
 }

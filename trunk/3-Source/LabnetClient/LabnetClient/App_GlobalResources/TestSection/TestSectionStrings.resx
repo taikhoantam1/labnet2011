@@ -117,151 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="VMDoctorSearch_DoctorName" xml:space="preserve">
-    <value>Tên Bác Sĩ</value>
+  <data name="TestSectionCreate_New" xml:space="preserve">
+    <value>Nhập mới</value>
   </data>
-  <data name="VMDoctorSearch_Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="TestSectionCreate_Save" xml:space="preserve">
+    <value>Lưu</value>
   </data>
-  <data name="VMDoctor_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên Bác sĩ</value>
+  <data name="TestSectionCreate_Title" xml:space="preserve">
+    <value>Thêm Nhóm Xét Nghiệm</value>
   </data>
-  <data name="VMPanelSearch_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên Panel</value>
+  <data name="TestSectionEdit_Title" xml:space="preserve">
+    <value>Cập Nhật Nhóm Xét Nghiệm</value>
   </data>
-  <data name="VMPanel_Cost" xml:space="preserve">
+  <data name="TestSection_Cost" xml:space="preserve">
     <value>Giá</value>
   </data>
-  <data name="VMPanel_Description" xml:space="preserve">
-    <value>Mô Tả</value>
+  <data name="TestSection_Description" xml:space="preserve">
+    <value>Mô tả</value>
   </data>
-  <data name="VMPanel_IsDelete" xml:space="preserve">
-    <value>Xóa</value>
-  </data>
-  <data name="VMPanel_IsEnable" xml:space="preserve">
+  <data name="TestSection_IsActive" xml:space="preserve">
     <value>Kích Hoạt</value>
   </data>
-  <data name="VMPanel_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên Panel</value>
+  <data name="TestSection_Name" xml:space="preserve">
+    <value>Tên Nhóm</value>
   </data>
-  <data name="VMPanel_PanelName" xml:space="preserve">
-    <value>Tên Panel</value>
+  <data name="TestSection_NameError" xml:space="preserve">
+    <value>Nhóm XN đã tồn tại</value>
   </data>
-  <data name="VMPanel_Section" xml:space="preserve">
-    <value>Nhóm XN</value>
-  </data>
-  <data name="VMPanel_TestName" xml:space="preserve">
-    <value>Tên Xét Nghiệm</value>
-  </data>
-  <data name="VMPartnerSearch_Address" xml:space="preserve">
-    <value>Địa Chỉ</value>
-  </data>
-  <data name="VMPartnerSearch_Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="VMPartnerSearch_PartnerName" xml:space="preserve">
-    <value>Tên Lab</value>
-  </data>
-  <data name="VMPartnerSearch_Phone" xml:space="preserve">
-    <value>Điện Thoại</value>
-  </data>
-  <data name="VMPartner_AddressRequired" xml:space="preserve">
-    <value>Vui lòng nhập địa chỉ</value>
-  </data>
-  <data name="VMPartner_EmailRequired" xml:space="preserve">
-    <value>Vui lòng nhập email</value>
-  </data>
-  <data name="VMPartner_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên</value>
-  </data>
-  <data name="VMPatientTestResult_Approved" xml:space="preserve">
-    <value>Xác Minh</value>
-  </data>
-  <data name="VMPatientTestResult_Index" xml:space="preserve">
-    <value>STT</value>
-  </data>
-  <data name="VMPatientTestResult_Name" xml:space="preserve">
-    <value>Tên Xét Nghiệm</value>
-  </data>
-  <data name="VMPatientTestResult_Range" xml:space="preserve">
-    <value>CSTB</value>
-  </data>
-  <data name="VMPatientTestResult_Result" xml:space="preserve">
-    <value>Kết Quả</value>
-  </data>
-  <data name="VMPatientTestResult_Status" xml:space="preserve">
-    <value>Tình Trạng</value>
-  </data>
-  <data name="VMPatientTestResult_Unit" xml:space="preserve">
-    <value>Đơn Vị</value>
-  </data>
-  <data name="VMPatientTest_Cost" xml:space="preserve">
-    <value>Giá</value>
-  </data>
-  <data name="VMPatientTest_IsEnable" xml:space="preserve">
-    <value>Kích Hoạt</value>
-  </data>
-  <data name="VMPatientTest_Panel" xml:space="preserve">
-    <value>Panel XN</value>
-  </data>
-  <data name="VMPatientTest_Section" xml:space="preserve">
-    <value>Nhóm XN</value>
-  </data>
-  <data name="VMPatientTest_TestName" xml:space="preserve">
-    <value>Tên XN</value>
-  </data>
-  <data name="VMPatient_Address" xml:space="preserve">
-    <value>Địa Chỉ</value>
-  </data>
-  <data name="VMPatient_Address_RequireMessage" xml:space="preserve">
-    <value>Vui lòng nhập địa chỉ</value>
-  </data>
-  <data name="VMPatient_Age" xml:space="preserve">
-    <value>Tuổi</value>
-  </data>
-  <data name="VMPatient_Birthday_RequireMessage" xml:space="preserve">
-    <value>Vui lòng nhập ngày sinh</value>
-  </data>
-  <data name="VMPatient_Name" xml:space="preserve">
-    <value>Họ Tên</value>
-  </data>
-  <data name="VMPatient_Name_RequireMessage" xml:space="preserve">
-    <value>Vui lòng nhập họ tên</value>
-  </data>
-  <data name="VMPatient_Phone" xml:space="preserve">
-    <value>Số Điện Thoại</value>
-  </data>
-  <data name="VMTestSearch_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên XN</value>
-  </data>
-  <data name="VMTestSearch_TestDescription" xml:space="preserve">
-    <value>Mô tả XN</value>
-  </data>
-  <data name="VMTestSearch_TestName" xml:space="preserve">
-    <value>Tên XN</value>
-  </data>
-  <data name="VMTestSearch_TestRange" xml:space="preserve">
-    <value>CSBT</value>
-  </data>
-  <data name="VMTestSearch_TestSectionName" xml:space="preserve">
-    <value>Nhóm XN</value>
-  </data>
-  <data name="VMTestSearch_TestUnit" xml:space="preserve">
-    <value>Đơn vị</value>
-  </data>
-  <data name="VMTestSection_DescriptionRequired" xml:space="preserve">
-    <value>Vui lòng nhập mô tả nhóm XN</value>
-  </data>
-  <data name="VMTestSection_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên nhóm XN</value>
-  </data>
-  <data name="VMTest_DescriptionRequired" xml:space="preserve">
-    <value>Vui lòng nhập mô tả XN</value>
-  </data>
-  <data name="VMTest_NameRequired" xml:space="preserve">
-    <value>Vui lòng nhập tên XN</value>
-  </data>
-  <data name="VMTest_TestSectionNameRequired" xml:space="preserve">
-    <value>Vui lòng nhập nhóm XN</value>
+  <data name="TestSection_SortOrder" xml:space="preserve">
+    <value>Sắp xếp</value>
   </data>
 </root>

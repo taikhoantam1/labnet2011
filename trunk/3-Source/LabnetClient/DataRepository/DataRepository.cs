@@ -534,6 +534,51 @@ namespace DataRepository
             myDb.SaveChanges();
             return testSection;
         }
+
+        public List<TestSection> GetTestSections()
+        {
+            List<TestSection> lstTestSections = (from _testSection in myDb.TestSections
+                                                 where _testSection.IsActive == true
+                                                 select _testSection).ToList();
+            return lstTestSections;
+        }
+
+        public void TestSectionInsert(TestSection ts)
+        {
+            myDb.TestSections.AddObject(ts);
+            myDb.SaveChanges();
+        }
+
+        public void TestSectionUpdate(int id, TestSection ts)
+        {
+            TestSection currentTestSection = (from _ts in myDb.TestSections where _ts.Id == id select _ts).First();
+            currentTestSection.Name = ts.Name;
+            currentTestSection.Description = ts.Description;
+            currentTestSection.IsActive = ts.IsActive;
+            currentTestSection.Cost = ts.Cost;
+            currentTestSection.SortOder = ts.SortOder;
+
+            myDb.SaveChanges();
+        }
+
+        public void TestSectionDelete(int testSectionId)
+        {
+            TestSection ts = GetTestSection(testSectionId);
+            ts.IsActive = false;
+
+            myDb.SaveChanges();
+        }
+
+        public bool IsValidTestSection(string tsName)
+        {
+            bool isValid = true;
+            TestSection tsWithSameName = myDb.TestSections.SingleOrDefault(u => u.Name == tsName);
+            if (tsWithSameName != null)
+            {
+                isValid = false;
+            }
+            return isValid;
+        }
         #endregion
 
         #region Patient

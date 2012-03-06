@@ -183,4 +183,10 @@
   <data name="Menu_PatientResult" xml:space="preserve">
     <value>In Kết Quả XN</value>
   </data>
+  <data name="Menu_CreateTestSection" xml:space="preserve">
+    <value>Thêm Nhóm Xét Nghiệm</value>
+  </data>
+  <data name="Menu_SearchTestSection" xml:space="preserve">
+    <value>Tìm Nhóm Xét Nghiệm</value>
+  </data>
 </root>

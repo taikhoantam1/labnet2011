@@ -34,11 +34,11 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
 
 #endregion
 
@@ -217,22 +217,6 @@ namespace DataRepository
             }
         }
         private ObjectSet<TestResult> _TestResults;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<TestSection> TestSections
-        {
-            get
-            {
-                if ((_TestSections == null))
-                {
-                    _TestSections = base.CreateObjectSet<TestSection>("TestSections");
-                }
-                return _TestSections;
-            }
-        }
-        private ObjectSet<TestSection> _TestSections;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -473,6 +457,22 @@ namespace DataRepository
             }
         }
         private ObjectSet<LabUser> _LabUsers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<TestSection> TestSections
+        {
+            get
+            {
+                if ((_TestSections == null))
+                {
+                    _TestSections = base.CreateObjectSet<TestSection>("TestSections");
+                }
+                return _TestSections;
+            }
+        }
+        private ObjectSet<TestSection> _TestSections;
 
         #endregion
         #region AddTo Methods
@@ -539,14 +539,6 @@ namespace DataRepository
         public void AddToTestResults(TestResult testResult)
         {
             base.AddObject("TestResults", testResult);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the TestSections EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTestSections(TestSection testSection)
-        {
-            base.AddObject("TestSections", testSection);
         }
     
         /// <summary>
@@ -667,6 +659,14 @@ namespace DataRepository
         public void AddToLabUsers(LabUser labUser)
         {
             base.AddObject("LabUsers", labUser);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the TestSections EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTestSections(TestSection testSection)
+        {
+            base.AddObject("TestSections", testSection);
         }
 
         #endregion
@@ -6774,44 +6774,6 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection")]
-        public TestSection TestSection
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<TestSection> TestSectionReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "TestCommission")]
         public EntityCollection<TestCommission> TestCommissions
         {
@@ -6846,6 +6808,44 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestResult>("LabManager_ClientModel.FK_TestResult_Test", "TestResult", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection")]
+        public TestSection TestSection
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TestSection> TestSectionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestSection>("LabManager_ClientModel.FK_Test_TestSection", "TestSection", value);
                 }
             }
         }
@@ -7431,6 +7431,54 @@ namespace DataRepository
         private global::System.Boolean _IsActive;
         partial void OnIsActiveChanging(global::System.Boolean value);
         partial void OnIsActiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Cost
+        {
+            get
+            {
+                return _Cost;
+            }
+            set
+            {
+                OnCostChanging(value);
+                ReportPropertyChanging("Cost");
+                _Cost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cost");
+                OnCostChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Cost;
+        partial void OnCostChanging(Nullable<global::System.Decimal> value);
+        partial void OnCostChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SortOder
+        {
+            get
+            {
+                return _SortOder;
+            }
+            set
+            {
+                OnSortOderChanging(value);
+                ReportPropertyChanging("SortOder");
+                _SortOder = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SortOder");
+                OnSortOderChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SortOder;
+        partial void OnSortOderChanging(Nullable<global::System.Int32> value);
+        partial void OnSortOderChanged();
 
         #endregion
     

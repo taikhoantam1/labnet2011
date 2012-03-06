@@ -482,5 +482,23 @@ namespace DomainModel.Properties {
                 return ResourceManager.GetString("VMTestSearch_TestUnit", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập mô tả nhóm XN.
+        /// </summary>
+        internal static string VMTestSection_DescriptionRequired {
+            get {
+                return ResourceManager.GetString("VMTestSection_DescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vui lòng nhập tên nhóm XN.
+        /// </summary>
+        internal static string VMTestSection_NameRequired {
+            get {
+                return ResourceManager.GetString("VMTestSection_NameRequired", resourceCulture);
+            }
+        }
     }
 }

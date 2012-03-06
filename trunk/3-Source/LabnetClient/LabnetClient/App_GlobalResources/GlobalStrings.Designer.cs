@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm Nhóm Xét Nghiệm.
+        /// </summary>
+        internal static string Menu_CreateTestSection {
+            get {
+                return ResourceManager.GetString("Menu_CreateTestSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quản Lý Tài Chính.
         /// </summary>
         internal static string Menu_FinancialBook {
@@ -246,6 +255,15 @@ namespace Resources {
         internal static string Menu_SearchTestPanel {
             get {
                 return ResourceManager.GetString("Menu_SearchTestPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm Nhóm Xét Nghiệm.
+        /// </summary>
+        internal static string Menu_SearchTestSection {
+            get {
+                return ResourceManager.GetString("Menu_SearchTestSection", resourceCulture);
             }
         }
         
