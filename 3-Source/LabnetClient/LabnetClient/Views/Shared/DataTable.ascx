@@ -11,28 +11,27 @@
 <script src="/Content/Lib/jqGrid/jqDnR.js" type="text/javascript"></script>
 <script src="/Content/Lib/postify.js" type="text/javascript"></script>
 <script type="text/javascript">
-          
-    function DataTableGetDataSource()
+    function DataTableGetDataSource_<%=Model.TableId %>()
     {
-        var array=$("#list").jqGrid().getRowData();
+        var array=$("#<%=Model.TableId %>").jqGrid().getRowData();
         var obj=new Object();
         obj.Rows=array;
         return $.postify(obj);
     }
 
-    function DataTableGetArrayDataSource()
+    function DataTableGetArrayDataSource_<%=Model.TableId %>()
     {
-        var array=$("#list").jqGrid().getRowData();
+        var array=$("#<%=Model.TableId %>").jqGrid().getRowData();
         return array;
     }
 
     jQuery(document).ready(function () {
-        var selICol; //index Col of selected cell
-        var selRowIndex; //index Row of selected cell
-        var selRowId;//Id of row selected
-        var mydata = <%=Model.JsonDataArray %> 
+        var selICol_<%=Model.TableId %>; //index Col of selected cell
+        var selRowIndex_<%=Model.TableId %>; //index Row of selected cell
+        var selRowId_<%=Model.TableId %>;//Id of row selected
+        var mydata_<%=Model.TableId %> = <%=Model.JsonDataArray %> 
 
-        jQuery("#list").jqGrid({
+        jQuery("#<%=Model.TableId %>").jqGrid({
         <%if(!string.IsNullOrEmpty(Model.RequestUrl)){ %> 
             url: '<%=Model.RequestUrl %>',
             datatype: 'json',
@@ -50,8 +49,8 @@
                 id: "id"
             },  
             autowidth: false,//When set to true, the grid width is recalculated automatically to the width of the parent element. This is done only initially when the grid is created. In order to resize the grid when the parent element changes width you should apply custom code and use a setGridWidth method for this purpose
-            width:700,
-            height:300,//The height of the grid. Can be set as number (in this case we mean pixels) or as percentage (only 100% is acceped) or value of auto is acceptable.
+            width:<%=Model.Width??700 %>,
+            height:<%=Model.Height??300 %>,//The height of the grid. Can be set as number (in this case we mean pixels) or as percentage (only 100% is acceped) or value of auto is acceptable.
             mtype: 'GET',//Defines the type of request to make (“POST” or “GET”)
             colNames:[ <%=string.Join(",",Model.Columns.Select(p=>"'"+p.DisplayName+"'"))%>], //['Inv No', 'Date', 'Amount', 'Tax', 'Total', 'Notes'],
             colModel: [<%=Model.ColModelScript %>],
@@ -64,9 +63,9 @@
             beforeEditCell : function(rowid, cellname, value, iRow, iCol)
             {
                     
-                selICol = iCol;
-                selRowIndex = iRow;
-                selRowId=rowid;
+                selICol_<%=Model.TableId %> = iCol;
+                selRowIndex_<%=Model.TableId %> = iRow;
+                selRowId_<%=Model.TableId %>=rowid;
             },
             afterEditCell : function(rowid, cellname, value, iRow, iCol)
             {
@@ -91,7 +90,7 @@
             sortable:true,
             toolbar:[true,"both"],//This option defines the toolbar of the grid. This is array with two values in which the first value enables the toolbar and the second defines the position relative to body Layer. Possible values “top”,”bottom”, “both”. When we set toolbar: [true,”both”] two toolbars are created – one on the top of table data and one of the bottom of the table data. When we have two toolbars then we create two elements (div). The id of the top bar is constructed like “t_”+id of the grid and the bottom toolbar the id is “tb_”+id of the grid. In case when only one toolbar is created we have the id as “t_” + id of the grid, independent of where this toolbar is created (top or bottom)
                
-        }).navGrid('#pager', { view: true, del: true, add: true, edit: true,  cloneToTop:true},
+        })/*.navGrid('#pager', { view: true, del: true, add: true, edit: true,  cloneToTop:true},
                 {}, // default settings for edit
                 {}, // default settings for add
                 {}, // delete
@@ -101,26 +100,26 @@
                 multipleSearch: true, 
                 closeAfterSearch: true }, // search options
                 {}
-        );
+        );*/
         
-        function editlink( cellvalue, options, rowObject ){
-	        return "<a class='editLink' href='"+cellvalue+"' title='Cập Nhật'></a>";
+        function editlink_<%=Model.TableId %>( cellvalue, options, rowObject ){
+	        return "<a class='editlink_<%=Model.TableId %> editLink' href='"+cellvalue+"' title='Cập Nhật'></a>";
         }
         
-        function deletelink( cellvalue, options, rowObject ){
-	        return "<a class='deleteLink' href='"+cellvalue+"' title='Xóa'></a>";
+        function deletelink_<%=Model.TableId %>( cellvalue, options, rowObject ){
+	        return "<a class='deletelink_<%=Model.TableId %> deleteLink'  href='"+cellvalue+"' title='Xóa'></a>";
         }
 
-        jQuery("#list").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
+        jQuery("#<%=Model.TableId %>").jqGrid('filterToolbar',{stringResult: true,searchOnEnter : false});
         
         <%if(Model.UseLocalData){ %>
-            for(var i=0;i<=mydata.length;i++)
-	            jQuery("#list").jqGrid('addRowData',i+1,mydata[i]);
+            for(var i=0;i<=mydata_<%=Model.TableId %>.length;i++)
+	            jQuery("#<%=Model.TableId %>").jqGrid('addRowData',i+1,mydata_<%=Model.TableId %>[i]);
         <% }%>
 
 
-        $("#DataTableSaveButton").click(function(){
-            var array=$("#list").jqGrid().getRowData();
+        $("#DataTableSaveButton_<%=Model.TableId %>").click(function(){
+            var array=$("#<%=Model.TableId %>").jqGrid().getRowData();
             var obj=new Object();
             obj.Rows=array;
             $.ajax({
@@ -138,8 +137,8 @@
     });  
 
 </script>
-<input type="button" class="hide" id="DataTableSaveButton" />
-<table id="list" class="scroll">
+<input type="button" class="hide" id="DataTableSaveButton_<%=Model.TableId %>" />
+<table id="<%=Model.TableId %>" class="scroll">
 </table>
 <div id="pager" class="scroll" style="text-align: center;">
 </div>

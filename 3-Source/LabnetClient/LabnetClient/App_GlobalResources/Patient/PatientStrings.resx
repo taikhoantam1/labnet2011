@@ -189,4 +189,7 @@
   <data name="PatientResultReport_Title" xml:space="preserve">
     <value>In Kết Quả XN</value>
   </data>
+  <data name="PatientInsert_TestSection" xml:space="preserve">
+    <value>Nhóm XN</value>
+  </data>
 </root>

@@ -205,8 +205,8 @@
     </Compile>
     <Compile Include="Models\Control\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\Control\ComboBox.cs" />
-    <Compile Include="Models\Control\OptionItem.cs" />
+    <Compile Include="Models\Control\AutocompleteComboBox\ComboBox.cs" />
+    <Compile Include="Models\Control\AutocompleteComboBox\OptionItem.cs" />
     <Compile Include="Models\Doctor\DoctorSearchViewModel.cs" />
     <Compile Include="Models\Doctor\DoctorViewModel.cs" />
     <Compile Include="Models\Control\JQGridModel\JQGrid.cs" />

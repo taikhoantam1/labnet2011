@@ -28,6 +28,7 @@ namespace LabnetClient.Models
             Columns = new List<JQGridColumn>();
             PopularGridInfo();
             PopularGridScript();
+            TableId = "DataTable_"+Guid.NewGuid().ToString().Replace('-', '_');
 
         }
 
@@ -44,6 +45,7 @@ namespace LabnetClient.Models
             PostBackUrl = postBackUrl;
             DataSource = dataSource;
             AllowEdit = allowEdit;
+            TableId = "DataTable_" + Guid.NewGuid().ToString().Replace('-', '_');
 
             if (DataSource != null)
             {
@@ -142,11 +144,11 @@ namespace LabnetClient.Models
                     break;
 
                 case FormatterEnum.EditLink:
-                    formatter = "editlink";
+                    formatter = "editlink_" + TableId;
                     break;
 
                 case FormatterEnum.DeleteLink:
-                    formatter = "deletelink";
+                    formatter = "deletelink_" + TableId;
                     break;
             }
             return formatter;
@@ -206,7 +208,8 @@ namespace LabnetClient.Models
 
         public bool AutoWidth { get; set; }
 
-        public int Width { get; set; }
+        public int? Width { get; set; }
+        public int? Height { get; set; }
 
         public string PageSize { get; set; }
 
@@ -223,6 +226,8 @@ namespace LabnetClient.Models
         public string ColModelScript { get; set; }
 
         public bool AllowEdit { get; set; }
+
+        public string TableId { get; set; }
         #endregion
     }
 }

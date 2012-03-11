@@ -1,4 +1,6 @@
-
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[labnet_TestResultNoteBook]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[labnet_TestResultNoteBook]
+GO
 /****** Object:  StoredProcedure [dbo].[labnet_TestResultNoteBook]    Script Date: 03/02/2012 20:15:25 ******/
 SET ANSI_NULLS ON
 GO
@@ -9,11 +11,12 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-alter PROCEDURE [dbo].[labnet_TestResultNoteBook]
+Create PROCEDURE [dbo].[labnet_TestResultNoteBook]
 		@StartDate	datetime
 	,	@EndDate	datetime
 AS
 BEGIN
+	set @EndDate =DATEADD(dd, 1, @EndDate)
 	SELECT	distinct	
 		p.FirstName, p.Gender, p.Age, p.Phone, 
 		lx.PatientId, 
@@ -37,6 +40,6 @@ BEGIN
 	WHERE 
 		lx.ReceivedDate between @StartDate and @EndDate
 		and a.Status > 1
-	order by pn.Name
+	order by pn.Name , lx.ReceivedDate
 END
 GO

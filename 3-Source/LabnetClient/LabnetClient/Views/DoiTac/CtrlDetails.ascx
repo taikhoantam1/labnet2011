@@ -13,7 +13,7 @@
             $("#txtCost").val(tags[1]);
             var testName = $("#autocompleteSelectTest .autoComplete").val();
 
-            var allInputs = DataTableGetArrayDataSource();
+            var allInputs = DataTableGetArrayDataSource_<%:Model.JQGrid.TableId %>();
 
             for (var i = 0; i < allInputs.length; i++) {
                 var testTable = allInputs[i].TestName;
@@ -39,7 +39,7 @@
                 $('#btnAddTest').attr('disabled', true);
             }
 
-            var allInputs = DataTableGetArrayDataSource();
+            var allInputs = DataTableGetArrayDataSource_<%:Model.JQGrid.TableId %>();
 
             for (var i = 0; i < allInputs.length; i++) {
                 var testTable = allInputs[i].TestName;
@@ -66,8 +66,8 @@
             dataObject.Cost = costEnter;
             dataObject.TestId = testId;
             dataObject.IsEnable = true;
-            var array = $("#list").jqGrid().getRowData();
-            jQuery("#list").jqGrid('addRowData', array.length, dataObject);
+            var array = $("#<%:Model.JQGrid.TableId %>").jqGrid().getRowData();
+            jQuery("#<%:Model.JQGrid.TableId %>").jqGrid('addRowData', array.length, dataObject);
 
             $("#autocompleteSelectTest .autoComplete").val("");
             $("#autocompleteSelectTest .autoCompleteValue").val(null);
@@ -79,7 +79,7 @@
         $("#btnSavePanel").click(function (event) {
             event.preventDefault();
             var data = DataTableGetDataSource();
-            $("#DataTableSaveButton").click();
+            $("#DataTableSaveButton_<%:Model.JQGrid.TableId %>").click();
             $("form").submit();
         });
     });

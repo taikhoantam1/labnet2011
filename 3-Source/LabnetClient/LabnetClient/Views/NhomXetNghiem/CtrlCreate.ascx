@@ -95,8 +95,9 @@
                         <label class="lbTitle">
                             <%=Resources.TestSectionStrings.TestSection_Cost%></label>
                     </div>
+                    
                     <div class="Column">
-                        <input type="text" class="textInput autoNumeric" id="TestCostView" />
+                        <input type="text" class="textInput autoNumeric" id="TestCostView" value="<%=Model.TestSection.Cost %>" />
                         <%=Html.HiddenFor(m => m.TestSection.Cost)%>
                     </div>
                     <div class="clear">

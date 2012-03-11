@@ -51,7 +51,6 @@
                           else
                           {%>
                         <%=Html.TextBox("LabExamination.ReceivedDate", Model.LabExamination.ReceivedDate.Value.ToString("d"), new { ID = "LabExamination_ReceivedDate", Class = "textInput100 date" })%>
-                       
                         <%} %>
                     </div>
                 </div>
@@ -153,14 +152,14 @@
                     <label class="lbTitle Width110 MarginT5">
                         <%=Resources.PatientStrings.PatientInsert_Panel %></label>
                 </div>
-                <div class="Column" id="PanelComplete">
+                <div class="Column" id="PanelAutoComplete">
                     <%Html.RenderPartial("ComboBox", Model.ComboBoxPanelModel); %>
                 </div>
                 <div class="Column">
-                    <label class="lbTitle Width100 MarginT5 MarginL100">
+                    <label class="lbTitle Width110 MarginT5 MarginL100">
                         <%=Resources.PatientStrings.PatientInsert_XetNghiem %></label>
                 </div>
-                <div class="Column" id="Div1">
+                <div class="Column" id="TestAutoComplete">
                     <%Html.RenderPartial("ComboBox", Model.ComboBoxTestModel); %>
                 </div>
                 <div class="clear">
@@ -169,18 +168,31 @@
             <div id="PatientTestTable">
                 <%Html.RenderPartial("DataTable", Model.JQGrid); %>
             </div>
-        </div>
-        <div align="center">
-            <input type="button" value="<%=Resources.PatientStrings.PatientInsert_Button_Save%>"
-                id="btnSavePatientInfo" />
+            <div>
+                <div class="Row MarginT20">
+                    <div class="Column">
+                        <label class="lbTitle Width110  ">
+                            <%=Resources.PatientStrings.PatientInsert_TestSection%></label>
+                    </div>
+                    <div class="Column" id="TestSectionAutoComplete">
+                        <%Html.RenderPartial("ComboBox", Model.ComboBoxTestSectionModel); %>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+            <div id="PatientSectionTestTable">
+                <%Html.RenderPartial("DataTable", Model.JQGrid_SectionTest); %>
+            </div>
+            <div align="center">
+                <input type="button" value="<%=Resources.PatientStrings.PatientInsert_Button_Save%>"
+                    id="btnSavePatientInfo" />
+            </div>
         </div>
     </div>
-</div>
-
-<script type="text/javascript">
+    <script type="text/javascript">
     function <%:Model.ComboBoxPanelModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
-        var allInputs = DataTableGetArrayDataSource();
-        //alert(allInputs.length);
+        $.blockUI();
         $.ajax({
             url: "/BenhNhan/GetPanelTests",
             data: {
@@ -190,7 +202,7 @@
             async: false,
             dataType: "Json",
             success: function (data) {
-
+                var allInputs = DataTableGetArrayDataSource_<%: Model.JQGrid.TableId %>();
                 //Remove item in data array that already existed in grid
                 for (var t = 0; t < allInputs.length; t++) {
                     var testId = allInputs[t].TestId;
@@ -203,13 +215,15 @@
                 }
               
                 for (var i = 0; i < data.length; i++) {
-                    var array = $("#list").jqGrid().getRowData();
-                    jQuery("#list").jqGrid('addRowData', array.length, data[i]);
+                    var array = $("#<%: Model.JQGrid.TableId %>").jqGrid().getRowData();
+                    jQuery("#<%: Model.JQGrid.TableId %>").jqGrid('addRowData', array.length, data[i]);
                 }
             }
         });
+        $.unblockUI();
     }
     function <%:Model.ComboBoxTestModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
+        $.blockUI();
          $.ajax({
             url: "/BenhNhan/GetTests",
             data: {
@@ -219,7 +233,7 @@
             async: false,
             dataType: "Json",
             success: function (data) {
-                var allInputs = DataTableGetArrayDataSource();
+                var allInputs = DataTableGetArrayDataSource_<%: Model.JQGrid.TableId %>();
                 //Remove item in data array that already existed in grid
                 var kt=true;
                 for (var t = 0; t < allInputs.length; t++) {
@@ -232,13 +246,45 @@
                 }
                 if(kt)
                 {
-                var array = $("#list").jqGrid().getRowData();
-                jQuery("#list").jqGrid('addRowData', array.length, data);
+                    var array = $("#<%: Model.JQGrid.TableId %>").jqGrid().getRowData();
+                    jQuery("#<%: Model.JQGrid.TableId %>").jqGrid('addRowData', array.length, data);
                 }
             }
         });
+        $.unblockUI();
     }
-
+    
+    function <%:Model.ComboBoxTestSectionModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
+        $.blockUI();
+         $.ajax({
+            url: "/BenhNhan/GetTestsOfTestSection",
+            data: {
+                Id: id
+            },
+            type: "POST",
+            async: false,
+            dataType: "Json",
+            success: function (data) {
+                var allInputs = DataTableGetArrayDataSource_<%: Model.JQGrid_SectionTest.TableId %>();
+                //Remove item in data array that already existed in grid
+                for (var t = 0; t < allInputs.length; t++) {
+                    var testId = allInputs[t].TestId;
+                    for (var j = 0; j < data.length; j++) {
+                        var test = data[j].TestId;
+                        if (test == testId) {
+                            data.splice(j, 1);
+                        }
+                    }
+                }
+              
+                for (var i = 0; i < data.length; i++) {
+                    var array = $("#<%: Model.JQGrid_SectionTest.TableId %>").jqGrid().getRowData();
+                    jQuery("#<%: Model.JQGrid_SectionTest.TableId %>").jqGrid('addRowData', array.length, data[i]);
+                }
+            }
+        });
+        $.unblockUI();
+    }
     $(document).ready(function () {
         $("#LabExamination_OrderNumber").keyup(function (event) {
             if (event.keyCode == 13) {
@@ -265,13 +311,14 @@
 
         $("#btnSavePatientInfo").click(function (event) {
             event.preventDefault();
-            $("#DataTableSaveButton").click();
+            $("#DataTableSaveButton_<%:Model.JQGrid.TableId %>").click();
+            $("#DataTableSaveButton_<%:Model.JQGrid_SectionTest.TableId %>").click();
             $("form").submit();
         });
 
         //        <%if(Model.ViewMode == DomainModel.Constant.ViewMode.Edit){ %>
-        //            $("#list tr td :checkbox").attr("disabled","disabled");
+        //            $("<%: Model.JQGrid.TableId %> tr td :checkbox").attr("disabled","disabled");
         //        <%} %>
     });
     
-</script>
+    </script>

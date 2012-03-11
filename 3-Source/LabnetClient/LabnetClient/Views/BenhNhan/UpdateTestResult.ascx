@@ -140,7 +140,7 @@
             });
         });
         $("#btnSaveTestResult").click(function () {
-            $("#DataTableSaveButton").click();
+            $("#DataTableSaveButton_<%:Model.JQGrid.TableId %>").click();
             window.location.reload();
         });
         $("#btnTestResultApproved").click(function () {

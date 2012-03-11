@@ -13,10 +13,16 @@ namespace LabnetClient.Models
     {
         public PatientViewModel()
         {
-            LabExamination = new VMLabExamination();
         }
 
-        public PatientViewModel(VMPatient patient, VMLabExamination labExamination, List<VMPatientTest> patientTest, List<VMPartner> listPartner, List<VMPanel> lstPanel,List<VMTest> lstTest)
+        public PatientViewModel(VMPatient patient, 
+                                VMLabExamination labExamination, 
+                                List<VMPatientTest> patientTest,
+                                List<VMPatientTest> patientTestOfTestSection, 
+                                List<VMPartner> listPartner, 
+                                List<VMPanel> lstPanel,
+                                List<VMTest> lstTest,
+                                List<VMTestSection> lstTestSection)
         {
             Repository Repository = new DataRepository.Repository();
             Patient =patient;
@@ -25,8 +31,12 @@ namespace LabnetClient.Models
             LabExamination.OrderNumber = Repository.GetLabExaminationOrderNumber();
             
             JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "/BenhNhan/SavePatientTest");
-            
-            //Create Panel model
+            JQGrid.Height = 220;
+
+            JQGrid_SectionTest = new JQGridModel(typeof(VMPatientTest), true, patientTestOfTestSection, "/BenhNhan/SavePatientTestOfTestSection");
+            JQGrid_SectionTest.Height = 220;
+
+            //Create ComboBox Panel 
             List<OptionItem> panelData = lstPanel.Select(p => new OptionItem
                                                         {
                                                             Value = p.Id.ToString(),
@@ -34,7 +44,7 @@ namespace LabnetClient.Models
                                                             Tag = ""}).ToList();
             ComboBoxPanelModel = new ComboBoxModel("", panelData);
 
-            //Create Test model
+            //Create ComboBox Test
             List<OptionItem> testData = lstTest.Select(p => new OptionItem
             {
                 Value = p.Id.ToString(),
@@ -42,6 +52,15 @@ namespace LabnetClient.Models
                 Tag = ""
             }).ToList();
             ComboBoxTestModel = new ComboBoxModel("", testData);
+
+            //Create ComboBox TestSection
+            List<OptionItem> testSectionData = lstTestSection.Select(p => new OptionItem
+            {
+                Value = p.Id.ToString(),
+                Label = p.Name,
+                Tag = ""
+            }).ToList();
+            ComboBoxTestSectionModel = new ComboBoxModel("", testSectionData);
 
             VMPartner partner = new VMPartner();
             partner.Id = -1;
@@ -67,9 +86,13 @@ namespace LabnetClient.Models
 
         public JQGridModel JQGrid { get; set; }
 
+        public JQGridModel JQGrid_SectionTest { get; set; }
+
         public ComboBoxModel ComboBoxPanelModel { get; set; }
 
         public ComboBoxModel ComboBoxTestModel { get; set; }
+
+        public ComboBoxModel ComboBoxTestSectionModel { get; set; }
 
         public ViewMode ViewMode { get; set; }
 
