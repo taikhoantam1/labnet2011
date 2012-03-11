@@ -126,7 +126,6 @@ namespace DataRepository
             //Patient GetPatient(int id);
             Patient GetPatientNumber(int Id);
             List<VMPatientTest> GetPatientTests(int patientId, int labExaminationId);
-            List<VMPatientTest> GetPatientTestsOfTestSection(int patientId, int labExaminationId);
             void PatientUpdate(int patientId, Patient patient);
             PatientItem PatientItemUpdate(int patientId, PatientItem patientItem);
             List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate);
@@ -134,8 +133,9 @@ namespace DataRepository
         #endregion
 
         #region Analysis
-            void AnalysisInsert(Analysis analysis); 
-            void AnalysisApproved(int analysisId, int staffId);
+            void AnalysisInsert(Analysis analysis);
+            void AnalysisApproved(int analysisId, int staffId); 
+            void AnalysisDelete(int analysisId);
         #endregion
 
         #region LabExamination
@@ -163,5 +163,7 @@ namespace DataRepository
         #endregion
 
 
+
+            
     }
 }

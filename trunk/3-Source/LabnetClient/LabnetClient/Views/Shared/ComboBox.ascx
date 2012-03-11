@@ -2,6 +2,9 @@
 <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery.ui.combobox.js"></script>
 
 <script type="text/javascript">
+    function <%= Model.ComboBoxId %>_ComboBoxSelect(id, label, tag)
+    {
+    }
     $(document).ready(function () {
         $.widget("ui.combobox", {
             _create: function () {
@@ -37,15 +40,17 @@
 					        }));
 					    },
 					    select: function (event, ui) {
-					        ui.item.option.selected = true;
-					        self._trigger("selected", event, {
-					            item: ui.item.option
-					        });
+                            $.blockUI();
 					        $("#<%= Model.ComboBoxId %> .autoCompleteBindingValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedText").val(ui.item.value);
 					        $("#<%= Model.ComboBoxId %>_SelectedTag").val(ui.item.tag);
+					        ui.item.option.selected = true;
+					        self._trigger("selected", event, {
+					            item: ui.item.option
+					        });
 					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, ui.item.label, ui.item.tag);
+                            $.unblockUI();
 					    },
 					    selectFirst: true,
 					    change: function (event, ui) {

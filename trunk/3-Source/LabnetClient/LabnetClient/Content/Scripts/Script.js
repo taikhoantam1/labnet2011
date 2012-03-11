@@ -6,11 +6,3 @@ $(document).ready(function () {
 
     $(".readonly").readonly();
 });
-/*
-$(document).ajaxStart(function () {
-    $.blockUI();
-});
-
-$(document).ajaxStop(function () {
-    $.unblockUI();
-}); */

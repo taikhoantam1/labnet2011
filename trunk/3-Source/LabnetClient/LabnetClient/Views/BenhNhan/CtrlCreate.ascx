@@ -165,24 +165,19 @@
                 <div class="clear">
                 </div>
             </div>
-            <div id="PatientTestTable">
-                <%Html.RenderPartial("DataTable", Model.JQGrid); %>
-            </div>
-            <div>
-                <div class="Row MarginT20">
-                    <div class="Column">
-                        <label class="lbTitle Width110  ">
-                            <%=Resources.PatientStrings.PatientInsert_TestSection%></label>
-                    </div>
-                    <div class="Column" id="TestSectionAutoComplete">
-                        <%Html.RenderPartial("ComboBox", Model.ComboBoxTestSectionModel); %>
-                    </div>
-                    <div class="clear">
-                    </div>
+            <div class="Row">
+                <div class="Column">
+                    <label class="lbTitle Width110  ">
+                        <%=Resources.PatientStrings.PatientInsert_TestSection%></label>
+                </div>
+                <div class="Column" id="TestSectionAutoComplete">
+                    <%Html.RenderPartial("ComboBox", Model.ComboBoxTestSectionModel); %>
+                </div>
+                <div class="clear">
                 </div>
             </div>
-            <div id="PatientSectionTestTable">
-                <%Html.RenderPartial("DataTable", Model.JQGrid_SectionTest); %>
+            <div id="PatientTestTable">
+                <%Html.RenderPartial("DataTable", Model.JQGrid); %>
             </div>
             <div align="center">
                 <input type="button" value="<%=Resources.PatientStrings.PatientInsert_Button_Save%>"
@@ -191,15 +186,15 @@
         </div>
     </div>
     <script type="text/javascript">
-    function <%:Model.ComboBoxPanelModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
-        $.blockUI();
+    function GetTestData(url,id)
+    {
         $.ajax({
-            url: "/BenhNhan/GetPanelTests",
+            url: url,
             data: {
                 Id: id
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "Json",
             success: function (data) {
                 var allInputs = DataTableGetArrayDataSource_<%: Model.JQGrid.TableId %>();
@@ -220,70 +215,18 @@
                 }
             }
         });
-        $.unblockUI();
+    }
+    function <%:Model.ComboBoxPanelModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
+        GetTestData("/BenhNhan/GetPanelTests",id);
     }
     function <%:Model.ComboBoxTestModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
-        $.blockUI();
-         $.ajax({
-            url: "/BenhNhan/GetTests",
-            data: {
-                Id: id
-            },
-            type: "POST",
-            async: false,
-            dataType: "Json",
-            success: function (data) {
-                var allInputs = DataTableGetArrayDataSource_<%: Model.JQGrid.TableId %>();
-                //Remove item in data array that already existed in grid
-                var kt=true;
-                for (var t = 0; t < allInputs.length; t++) {
-                    var testId = allInputs[t].TestId;
-                    var test = data.TestId;
-                    if (test == testId.toString()) {
-                      kt=false;
-                      break;
-                    }
-                }
-                if(kt)
-                {
-                    var array = $("#<%: Model.JQGrid.TableId %>").jqGrid().getRowData();
-                    jQuery("#<%: Model.JQGrid.TableId %>").jqGrid('addRowData', array.length, data);
-                }
-            }
-        });
-        $.unblockUI();
+        GetTestData("/BenhNhan/GetTests",id);
     }
     
     function <%:Model.ComboBoxTestSectionModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
-        $.blockUI();
-         $.ajax({
-            url: "/BenhNhan/GetTestsOfTestSection",
-            data: {
-                Id: id
-            },
-            type: "POST",
-            async: false,
-            dataType: "Json",
-            success: function (data) {
-                var allInputs = DataTableGetArrayDataSource_<%: Model.JQGrid_SectionTest.TableId %>();
-                //Remove item in data array that already existed in grid
-                for (var t = 0; t < allInputs.length; t++) {
-                    var testId = allInputs[t].TestId;
-                    for (var j = 0; j < data.length; j++) {
-                        var test = data[j].TestId;
-                        if (test == testId) {
-                            data.splice(j, 1);
-                        }
-                    }
-                }
-              
-                for (var i = 0; i < data.length; i++) {
-                    var array = $("#<%: Model.JQGrid_SectionTest.TableId %>").jqGrid().getRowData();
-                    jQuery("#<%: Model.JQGrid_SectionTest.TableId %>").jqGrid('addRowData', array.length, data[i]);
-                }
-            }
-        });
-        $.unblockUI();
+    
+        GetTestData("/BenhNhan/GetTestsOfTestSection",id);
+      
     }
     $(document).ready(function () {
         $("#LabExamination_OrderNumber").keyup(function (event) {
@@ -312,7 +255,6 @@
         $("#btnSavePatientInfo").click(function (event) {
             event.preventDefault();
             $("#DataTableSaveButton_<%:Model.JQGrid.TableId %>").click();
-            $("#DataTableSaveButton_<%:Model.JQGrid_SectionTest.TableId %>").click();
             $("form").submit();
         });
 
