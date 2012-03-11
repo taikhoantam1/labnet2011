@@ -15,7 +15,7 @@ namespace DomainModel
         public int Index { get; set; }
 
         [JQColumnAttribute("VMPatientTestResult_Name", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
-        public string TenXN { get { return Name+ (string.IsNullOrEmpty(MoTa)? "" :"-" + MoTa); } }
+        public string Name { get; set; }
 
         [JQColumnAttribute("VMPatientTestResult_Result", true, false, true, EditTypeEnum.Text, FormatterEnum.Text)]
         public string  Result { get; set; }
@@ -39,7 +39,5 @@ namespace DomainModel
         public int? ResultId { get; set; }
 
         public string MoTa { get; set; }
-
-        public string Name { get; set; }
     }
 }

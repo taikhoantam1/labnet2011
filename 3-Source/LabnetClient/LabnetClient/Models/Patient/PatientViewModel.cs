@@ -18,7 +18,6 @@ namespace LabnetClient.Models
         public PatientViewModel(VMPatient patient, 
                                 VMLabExamination labExamination, 
                                 List<VMPatientTest> patientTest,
-                                List<VMPatientTest> patientTestOfTestSection, 
                                 List<VMPartner> listPartner, 
                                 List<VMPanel> lstPanel,
                                 List<VMTest> lstTest,
@@ -33,8 +32,6 @@ namespace LabnetClient.Models
             JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "/BenhNhan/SavePatientTest");
             JQGrid.Height = 220;
 
-            JQGrid_SectionTest = new JQGridModel(typeof(VMPatientTest), true, patientTestOfTestSection, "/BenhNhan/SavePatientTestOfTestSection");
-            JQGrid_SectionTest.Height = 220;
 
             //Create ComboBox Panel 
             List<OptionItem> panelData = lstPanel.Select(p => new OptionItem
@@ -85,8 +82,6 @@ namespace LabnetClient.Models
         public List<VMTestListItem> PartnerTestList { get; set; }
 
         public JQGridModel JQGrid { get; set; }
-
-        public JQGridModel JQGrid_SectionTest { get; set; }
 
         public ComboBoxModel ComboBoxPanelModel { get; set; }
 

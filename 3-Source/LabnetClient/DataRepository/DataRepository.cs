@@ -641,34 +641,13 @@ namespace DataRepository
             Patient patient = myDb.Patients.Where(p => p.Id == Id).FirstOrDefault();
             return patient;
         }
-        public List<VMPatientTest> GetPatientTestsOfTestSection(int patientId, int labExaminationId)
-        {
-            Patient patient = GetPatient(labExaminationId);
-            List<VMPatientTest> listTest = new List<VMPatientTest>();
-            foreach (var patientItem in patient.PatientItems)
-            {
-                foreach (var analysis in patientItem.Analyses.Where(p=>p.IsUseTestSectionCost.Value))
-                {
-                    VMPatientTest patientTest = new VMPatientTest
-                    {
-                        TestName = analysis.Test.Name,
-                        TestId = analysis.Test.Id,
-                        Section = analysis.Test.TestSection.Name,
-                        IsEnable = analysis.Test.IsActive,
-                        Cost = analysis.Test.Cost,
-                    };
-                    listTest.Add(patientTest);
-                }
-            }
-            return listTest;
-        }
         public List<VMPatientTest> GetPatientTests(int Id, int labExaminationId)
         {
             Patient patient = GetPatient(labExaminationId);
             List<VMPatientTest> listTest = new List<VMPatientTest>();
             foreach (var patientItem in patient.PatientItems)
             {
-                foreach (var analysis in patientItem.Analyses.Where(p => !p.IsUseTestSectionCost.Value))
+                foreach (var analysis in patientItem.Analyses)
                 {
                     VMPatientTest patientTest = new VMPatientTest
                     {
@@ -677,6 +656,10 @@ namespace DataRepository
                         Section = analysis.Test.TestSection.Name,
                         IsEnable = analysis.Test.IsActive,
                         Cost = analysis.Test.Cost,
+                        IsTestFromTestSection = analysis.IsTestInTestSection,
+                        AnalysisId = analysis.Id
+
+                        
                     };
                     listTest.Add(patientTest);
                 }
@@ -751,6 +734,15 @@ namespace DataRepository
                 analysis.Status = (int)AnalysisStatusEnum.Approved;
             }
             myDb.SaveChanges();
+        }
+        public void AnalysisDelete(int analysisId)
+        {
+            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            if (analysis != null)
+            {
+                myDb.Analyses.DeleteObject(analysis);
+                myDb.SaveChanges();
+            }
         }
 
         #endregion
