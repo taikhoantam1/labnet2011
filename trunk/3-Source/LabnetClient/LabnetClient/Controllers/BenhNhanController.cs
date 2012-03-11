@@ -17,21 +17,14 @@ namespace LabnetClient.Controllers
     {
         public ActionResult Index()
         {
-
-            List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
-            List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
-            PatientViewModel Model = new PatientViewModel(new VMPatient(), new VMLabExamination(), null, lstPartner, lstPanel,lstTest);
+            PatientViewModel Model = RestoreViewState(new VMPatient(), new VMLabExamination(), null, null);
             Model.ViewMode = ViewMode.Create;
             return View(Model);
         }
 
         public ActionResult Create()
         {
-            List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
-            List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
-            PatientViewModel Model = new PatientViewModel(new VMPatient(), new VMLabExamination(), null, lstPartner, lstPanel, lstTest);
+            PatientViewModel Model = RestoreViewState(new VMPatient(), new VMLabExamination(), null, null);
             Model.ViewMode = ViewMode.Create;
             return View(Model);
         }
@@ -41,13 +34,20 @@ namespace LabnetClient.Controllers
         {
             model.LabExamination.ReceivedDate = DateTime.Now;
             List<VMPatientTest> patientTests = new List<VMPatientTest>();
-            if (Session[SessionProperties.SessionPatientTestList] != null)
+            List<VMPatientTest> patientTestsOfTestSection = new List<VMPatientTest>();
+            if (Session[SessionProperties.SessionPatientTestList] != null || Session[SessionProperties.SessionPatientTestOfTestSection] != null)
             {
-                patientTests = (List<VMPatientTest>)Session[SessionProperties.SessionPatientTestList];
-                if (!patientTests.Any(p => p.IsEnable))
+               if(Session[SessionProperties.SessionPatientTestList]!= null)
+                    patientTests = (List<VMPatientTest>)Session[SessionProperties.SessionPatientTestList];
+
+               if (Session[SessionProperties.SessionPatientTestOfTestSection] != null)
+                    patientTestsOfTestSection = (List<VMPatientTest>)Session[SessionProperties.SessionPatientTestOfTestSection];
+
+                if (!patientTests.Any(p => p.IsEnable) && !patientTestsOfTestSection.Any(p => p.IsEnable))
                 {
                     ModelState.AddModelError("TestRequired", Resources.PatientStrings.PatientCreate_TestRequired);
                 }
+
             }
             else
             {
@@ -59,48 +59,13 @@ namespace LabnetClient.Controllers
                 using (TransactionScope tran = new TransactionScope())
                 {
                     //Insert patient
-                    Patient patient = new Patient();
-                    patient.Address = model.Patient.Address;
-                    patient.BirthDate = model.Patient.BirthDate;
-                    patient.Gender = model.Patient.Gender;
-                    patient.FirstName = model.Patient.FirstName;
-                    patient.PatientNumber = Repository.GetPatientNumber();
-                    patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
-                    patient.Phone = model.Patient.Phone;
-                    if (patient.BirthDate.Length <= 4)
-                        patient.Age = patient.BirthDate;
-                    else
-                        patient.Age = patient.BirthDate.Substring(6);
-                    patient.Email = model.Patient.Email;
-                    int patientId = Repository.PatientInsert(patient);
+                    int patientId = InsertPartient(model);
 
                     //Insert labmanagerment
-                    LabExamination labExamination = new LabExamination();
-                    labExamination.CreatedBy = AppHelper.GetLoginUserId();
-                    labExamination.PatientId = patientId;
-                    labExamination.ExaminationNumber = Repository.GetExaminationNumber();
-                    labExamination.OrderNumber = model.LabExamination.OrderNumber.Value;
-                    labExamination.PartnerId = model.LabExamination.PartnerId == -1 ? null : model.LabExamination.PartnerId;
-                    labExamination.ReceivedDate = model.LabExamination.ReceivedDate ?? DateTime.Now;
-                    labExamination.Status = (int)LabExaminationStatusEnum.New;
-                    labExamination.Diagnosis = model.LabExamination.Diagnosis;
-                    int LabExaminationId = Repository.LabExaminationInsert(labExamination);
+                    int LabExaminationId = InsertLabExamination(model, patientId);
 
                     //Insert PatientItem
-                    PatientItem patientItem = new PatientItem();
-                    patientItem.PatientId = patientId;
-                    patientItem.LabExaminationId = LabExaminationId;
-                    patientItem.LastUpdated = DateTime.Now.Date;
-                    int patientItemId = Repository.PatientItemInsert(patientItem);
-                    //Insert Analysis
-                    foreach (var test in patientTests)
-                    {
-                        Analysis analysis = new Analysis();
-                        analysis.PatientItemId = patientItemId;
-                        analysis.TestId = test.TestId;
-                        analysis.Status = (int)AnalysisStatusEnum.New;
-                        Repository.AnalysisInsert(analysis);
-                    }
+                    InsertPatientItems(patientTests, patientTestsOfTestSection, patientId, LabExaminationId);
                     tran.Complete();
                 }
                 return RedirectToAction("Create");
@@ -108,18 +73,100 @@ namespace LabnetClient.Controllers
             else
             {
                 model.LabExamination.ReceivedDate = DateTime.Now.Date;
-                List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
-                List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-                List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
-                PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel, lstTest);
+                PatientViewModel Model = RestoreViewState(model.Patient, model.LabExamination, patientTests, patientTestsOfTestSection);
                 return View(Model);
             }
+        }
+
+        private void InsertPatientItems(List<VMPatientTest> patientTests, List<VMPatientTest> patientTestsOfTestSection, int patientId, int LabExaminationId)
+        {
+            PatientItem patientItem = new PatientItem();
+            patientItem.PatientId = patientId;
+            patientItem.LabExaminationId = LabExaminationId;
+            patientItem.LastUpdated = DateTime.Now.Date;
+            int patientItemId = Repository.PatientItemInsert(patientItem);
+            //Insert Analysis
+            foreach (var test in patientTests)
+            {
+                Analysis analysis = new Analysis();
+                analysis.PatientItemId = patientItemId;
+                analysis.TestId = test.TestId;
+                analysis.Status = (int)AnalysisStatusEnum.New;
+                analysis.IsUseTestSectionCost = false;
+                Repository.AnalysisInsert(analysis);
+            }
+
+            //Insert Analysis of test section
+            foreach (var test in patientTestsOfTestSection)
+            {
+                Analysis analysis = new Analysis();
+                analysis.PatientItemId = patientItemId;
+                analysis.TestId = test.TestId;
+                analysis.Status = (int)AnalysisStatusEnum.New;
+                analysis.IsUseTestSectionCost = true;
+                Repository.AnalysisInsert(analysis);
+            }
+        }
+
+        private int InsertLabExamination(PatientViewModel model, int patientId)
+        {
+            LabExamination labExamination = new LabExamination();
+            labExamination.CreatedBy = AppHelper.GetLoginUserId();
+            labExamination.PatientId = patientId;
+            labExamination.ExaminationNumber = Repository.GetExaminationNumber();
+            labExamination.OrderNumber = model.LabExamination.OrderNumber.Value;
+            labExamination.PartnerId = model.LabExamination.PartnerId == -1 ? null : model.LabExamination.PartnerId;
+            labExamination.ReceivedDate = model.LabExamination.ReceivedDate ?? DateTime.Now;
+            labExamination.Status = (int)LabExaminationStatusEnum.New;
+            labExamination.Diagnosis = model.LabExamination.Diagnosis;
+            int LabExaminationId = Repository.LabExaminationInsert(labExamination);
+            return LabExaminationId;
+        }
+
+        private int InsertPartient(PatientViewModel model)
+        {
+            Patient patient = new Patient();
+            patient.Address = model.Patient.Address;
+            patient.BirthDate = model.Patient.BirthDate;
+            patient.Gender = model.Patient.Gender;
+            patient.FirstName = model.Patient.FirstName;
+            patient.PatientNumber = Repository.GetPatientNumber();
+            patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
+            patient.Phone = model.Patient.Phone;
+            if (patient.BirthDate.Length <= 4)
+                patient.Age = patient.BirthDate;
+            else
+                patient.Age = patient.BirthDate.Substring(6);
+            patient.Email = model.Patient.Email;
+            int patientId = Repository.PatientInsert(patient);
+            return patientId;
         }
 
         public string SavePatientTest(List<VMPatientTest> Rows)
         {
             Session[SessionProperties.SessionPatientTestList] = Rows;
             return "Success";
+        }
+
+        public string SavePatientTestOfTestSection(List<VMPatientTest> Rows)
+        {
+            Session[SessionProperties.SessionPatientTestOfTestSection] = Rows;
+            return "Success";
+        }
+
+        [HttpPost]
+        public string GetTestsOfTestSection(int Id, PatientViewModel Model)
+        {
+            List<VMPatientTest> tests = Repository.GetTestsOfTestSection(Id)
+                                                .Select(p => new VMPatientTest
+                                                {
+                                                    IsEnable = true,
+                                                    Cost = p.Cost,
+                                                    TestName = p.TestName,
+                                                    Section = p.TestSectionName,
+                                                    TestId = p.TestId
+                                                }).ToList();
+            return tests.ToJson();
         }
 
         [HttpPost]
@@ -136,10 +183,11 @@ namespace LabnetClient.Controllers
                                                 }).ToList();
             return tests.ToJson();
         }
+
         [HttpPost]
         public string GetTests(int Id, PatientViewModel Model)
         {
-            Test test= Repository.GetTest(Id);
+            Test test = Repository.GetTest(Id);
             VMPatientTest tests = new VMPatientTest
                                                 {
                                                     IsEnable = true,
@@ -150,7 +198,6 @@ namespace LabnetClient.Controllers
                                                 };
             return tests.ToJson();
         }
-        
 
         [HttpPost]
         public ActionResult Search(PatientViewModel model)
@@ -180,14 +227,11 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int Id, int OrderNumber, string ReceivedDate)
         {
             DateTime receivedDate = Convert.ToDateTime(ReceivedDate);
-            List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
             VMPatient patient = Mapper.Map<Patient, VMPatient>(Repository.GetPatient(receivedDate, OrderNumber));
             VMLabExamination labExamination = Repository.GetLabExamination(OrderNumber, receivedDate);
             List<VMPatientTest> tests = Repository.GetPatientTests(Id, labExamination.Id);
-            List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
-
-            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
-            PatientViewModel Model = new PatientViewModel(patient, labExamination, tests, lstPartner, lstPanel,lstTest);
+            List<VMPatientTest> testsOfTestSection = Repository.GetPatientTestsOfTestSection(Id, labExamination.Id);
+            PatientViewModel Model = RestoreViewState(patient, labExamination, tests, testsOfTestSection);
             Model.ViewMode = ViewMode.Edit;
             return View("Create", Model);
         }
@@ -195,14 +239,22 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Edit(int Id, PatientViewModel model)
         {
+
             List<VMPatientTest> patientTests = new List<VMPatientTest>();
-            if (Session[SessionProperties.SessionPatientTestList] != null)
+            List<VMPatientTest> patientTestsOfTestSection = new List<VMPatientTest>();
+            if (Session[SessionProperties.SessionPatientTestList] != null || Session[SessionProperties.SessionPatientTestOfTestSection] != null)
             {
-                patientTests = (List<VMPatientTest>)Session[SessionProperties.SessionPatientTestList];
-                if (!patientTests.Any(p => p.IsEnable))
+                if (Session[SessionProperties.SessionPatientTestList] != null)
+                    patientTests = (List<VMPatientTest>)Session[SessionProperties.SessionPatientTestList];
+
+                if (Session[SessionProperties.SessionPatientTestOfTestSection] != null)
+                    patientTestsOfTestSection = (List<VMPatientTest>)Session[SessionProperties.SessionPatientTestOfTestSection];
+
+                if (!patientTests.Any(p => p.IsEnable) && !patientTestsOfTestSection.Any(p => p.IsEnable))
                 {
                     ModelState.AddModelError("TestRequired", Resources.PatientStrings.PatientCreate_TestRequired);
                 }
+
             }
             else
             {
@@ -261,13 +313,19 @@ namespace LabnetClient.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            PatientViewModel Model = RestoreViewState(model.Patient, model.LabExamination, patientTests, patientTestsOfTestSection);
+            Model.ViewMode = ViewMode.Edit;
+            return View("Create", Model);
+        }
 
+        private PatientViewModel RestoreViewState(VMPatient patient, VMLabExamination labExam, List<VMPatientTest> patientTests, List<VMPatientTest> patientTestsOfTestSection)
+        {
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
             List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
-            PatientViewModel Model = new PatientViewModel(model.Patient, model.LabExamination, patientTests, lstPartner, lstPanel,lstTest);
-            Model.ViewMode = ViewMode.Edit;
-            return View("Create", Model);
+            List<VMTestSection> lstTestSection = Mapper.Map<List<TestSection>, List<VMTestSection>>(Repository.GetTestSections());
+            PatientViewModel Model = new PatientViewModel(patient, labExam, patientTests, patientTestsOfTestSection, lstPartner, lstPanel, lstTest, lstTestSection);
+            return Model;
         }
 
         public ActionResult PatientTestResult(int? OrderNumber, string ReceivedDate)
@@ -305,7 +363,7 @@ namespace LabnetClient.Controllers
                         Repository.ResultInsert(result.AnalysisId, result.Result, AppHelper.GetLoginUserId());
 
                     }
-                    else if (result.Status == (int)AnalysisStatusEnum.HaveResult )
+                    else if (result.Status == (int)AnalysisStatusEnum.HaveResult)
                     {
                         //Update result
                         Repository.ResultUpdate(result.AnalysisId, result.ResultId.Value, result.Result, AppHelper.GetLoginUserId());
@@ -316,13 +374,14 @@ namespace LabnetClient.Controllers
             }
             return "Success";
         }
+
         [HttpPost]
         public string TestResultApproved(int LabExaminationId)
         {
 
             using (TransactionScope tran = new TransactionScope())
             {
-                List<VMTestResult> tests=Repository.GetPatientTestResults(LabExaminationId);
+                List<VMTestResult> tests = Repository.GetPatientTestResults(LabExaminationId);
                 foreach (var result in tests)
                 {
                     if (result.Status == (int)AnalysisStatusEnum.HaveResult)

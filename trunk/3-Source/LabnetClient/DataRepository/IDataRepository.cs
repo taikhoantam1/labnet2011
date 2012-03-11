@@ -111,7 +111,9 @@ namespace DataRepository
         void TestSectionInsert(TestSection ts);
         void TestSectionUpdate(int id, TestSection ts);
         void TestSectionDelete(int testSectionId);
-        bool IsValidTestSection(string tsName);
+        bool IsValidTestSection(string tsName,int? testSectionId);
+        List<VMTestListItem> GetTestsOfTestSection(int Id);
+        void TestSectionUpdate(TestSection testSection);
         #endregion
 
         #region Patient
@@ -124,6 +126,7 @@ namespace DataRepository
             //Patient GetPatient(int id);
             Patient GetPatientNumber(int Id);
             List<VMPatientTest> GetPatientTests(int patientId, int labExaminationId);
+            List<VMPatientTest> GetPatientTestsOfTestSection(int patientId, int labExaminationId);
             void PatientUpdate(int patientId, Patient patient);
             PatientItem PatientItemUpdate(int patientId, PatientItem patientItem);
             List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate);
@@ -158,5 +161,7 @@ namespace DataRepository
         #region LabUser
             LabUser GetLabUser(string UserName, string Password);
         #endregion
+
+
     }
 }

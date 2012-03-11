@@ -1314,6 +1314,30 @@ namespace DataRepository
         private global::System.String _Note;
         partial void OnNoteChanging(global::System.String value);
         partial void OnNoteChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsUseTestSectionCost
+        {
+            get
+            {
+                return _IsUseTestSectionCost;
+            }
+            set
+            {
+                OnIsUseTestSectionCostChanging(value);
+                ReportPropertyChanging("IsUseTestSectionCost");
+                _IsUseTestSectionCost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsUseTestSectionCost");
+                OnIsUseTestSectionCostChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsUseTestSectionCost;
+        partial void OnIsUseTestSectionCostChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsUseTestSectionCostChanged();
 
         #endregion
     

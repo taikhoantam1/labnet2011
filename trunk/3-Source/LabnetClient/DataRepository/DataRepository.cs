@@ -69,7 +69,7 @@ namespace DataRepository
             Partner partner = GetPartnerById(id);
             List<VMTestListItem> listTest = partner.PartnerCosts.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
-                TestName = p.Test.Name,
+                TestName = p.Test.Name + "-" + p.Test.Description,
                 TestId = p.TestId,
                 Cost = p.Cost,
                 TestSectionName = p.Test.TestSection.Name,
@@ -436,11 +436,12 @@ namespace DataRepository
             Panel panel = GetPanel(id);
             List<VMTestListItem> listTest = panel.PanelItems.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
-                TestName = p.Test.Name,
+                TestName = p.Test.Name+"-"+p.Test.Description,
                 TestId = p.TestId,
                 TestSectionName = p.Test.TestSection.Name,
                 IsEnable = p.IsActive,
                 Cost = p.Test.Cost,
+               
             }).ToList();
             return listTest;
         }
@@ -569,15 +570,43 @@ namespace DataRepository
             myDb.SaveChanges();
         }
 
-        public bool IsValidTestSection(string tsName)
+        public bool IsValidTestSection(string tsName, int? testSectionId)
         {
             bool isValid = true;
             TestSection tsWithSameName = myDb.TestSections.SingleOrDefault(u => u.Name == tsName);
-            if (tsWithSameName != null)
+            if (tsWithSameName != null )
             {
-                isValid = false;
+                if((testSectionId == null) 
+                || (testSectionId!=null && testSectionId != tsWithSameName.Id))
+                    isValid = false;
             }
             return isValid;
+        }
+
+        public List<VMTestListItem> GetTestsOfTestSection(int Id)
+        {
+            TestSection testSection = GetTestSection(Id);
+            List<VMTestListItem> listTest = testSection.Tests.Where(p => p.IsActive == true).Select(p => new VMTestListItem
+            {
+                TestName = p.Name+"-"+p.Description,
+                TestId = p.Id,
+                TestSectionName = p.TestSection.Name,
+                IsEnable = p.IsActive,
+                Cost = p.Cost,
+            }).ToList();
+            return listTest;
+        }
+        public void TestSectionUpdate(TestSection testSectionToUpdate)
+        {
+            TestSection testSection = (from _testSection in myDb.TestSections 
+                                       where _testSection.Id == testSectionToUpdate.Id
+                                       select _testSection).First();
+            testSection.IsActive = testSectionToUpdate.IsActive;
+            testSection.Name = testSectionToUpdate.Name;
+            testSection.SortOder = testSectionToUpdate.SortOder;
+            testSection.Cost = testSectionToUpdate.Cost;
+            testSection.Description = testSection.Description;
+            myDb.SaveChanges();
         }
         #endregion
 
@@ -612,15 +641,34 @@ namespace DataRepository
             Patient patient = myDb.Patients.Where(p => p.Id == Id).FirstOrDefault();
             return patient;
         }
-
-        public List<VMPatientTest> GetPatientTests(int Id, int labExaminationId)
+        public List<VMPatientTest> GetPatientTestsOfTestSection(int patientId, int labExaminationId)
         {
             Patient patient = GetPatient(labExaminationId);
-
             List<VMPatientTest> listTest = new List<VMPatientTest>();
             foreach (var patientItem in patient.PatientItems)
             {
-                foreach (var analysis in patientItem.Analyses)
+                foreach (var analysis in patientItem.Analyses.Where(p=>p.IsUseTestSectionCost.Value))
+                {
+                    VMPatientTest patientTest = new VMPatientTest
+                    {
+                        TestName = analysis.Test.Name,
+                        TestId = analysis.Test.Id,
+                        Section = analysis.Test.TestSection.Name,
+                        IsEnable = analysis.Test.IsActive,
+                        Cost = analysis.Test.Cost,
+                    };
+                    listTest.Add(patientTest);
+                }
+            }
+            return listTest;
+        }
+        public List<VMPatientTest> GetPatientTests(int Id, int labExaminationId)
+        {
+            Patient patient = GetPatient(labExaminationId);
+            List<VMPatientTest> listTest = new List<VMPatientTest>();
+            foreach (var patientItem in patient.PatientItems)
+            {
+                foreach (var analysis in patientItem.Analyses.Where(p => !p.IsUseTestSectionCost.Value))
                 {
                     VMPatientTest patientTest = new VMPatientTest
                     {

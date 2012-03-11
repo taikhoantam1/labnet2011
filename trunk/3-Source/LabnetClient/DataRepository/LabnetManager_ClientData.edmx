@@ -126,6 +126,7 @@
           <Property Name="CompletedDate" Type="datetime" />
           <Property Name="ReleasedDate" Type="datetime" />
           <Property Name="Note" Type="ntext" />
+          <Property Name="IsUseTestSectionCost" Type="bit" />
         </EntityType>
         <EntityType Name="Analyte">
           <Key>
@@ -910,6 +911,7 @@
           <NavigationProperty Name="PatientItem" Relationship="LabManager_ClientModel.FK_Analysis_PatientItem" FromRole="Analysis" ToRole="PatientItem" />
           <NavigationProperty Name="Test" Relationship="LabManager_ClientModel.FK_Analysis_Test" FromRole="Analysis" ToRole="Test" />
           <NavigationProperty Name="Results" Relationship="LabManager_ClientModel.FK_Result_Analysis" FromRole="Analysis" ToRole="Result" />
+          <Property Type="Boolean" Name="IsUseTestSectionCost" />
         </EntityType>
         <EntityType Name="Analyte">
           <Key>
@@ -1589,7 +1591,8 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LabManager_ClientModelStoreContainer" CdmEntityContainer="LabManager_ClientEntities">
           <EntitySetMapping Name="Analyses"><EntityTypeMapping TypeName="LabManager_ClientModel.Analysis"><MappingFragment StoreEntitySet="Analysis">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="IsUseTestSectionCost" ColumnName="IsUseTestSectionCost" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="PatientItemId" ColumnName="PatientItemId" />
             <ScalarProperty Name="TestId" ColumnName="TestId" />
             <ScalarProperty Name="Status" ColumnName="Status" />

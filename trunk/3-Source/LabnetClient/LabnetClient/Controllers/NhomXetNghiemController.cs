@@ -45,7 +45,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Create(TestSectionViewModel model)
         {
-            if (!Repository.IsValidTestSection(model.TestSection.Name))
+            if (!Repository.IsValidTestSection(model.TestSection.Name,null))
             {
                 ModelState.AddModelError("Test section name already exists", Resources.TestSectionStrings.TestSection_NameError);
             }
@@ -66,26 +66,44 @@ namespace LabnetClient.Controllers
  
         public ActionResult Edit(int id)
         {
-            return View();
+            TestSectionViewModel model = new TestSectionViewModel();
+            VMTestSection testSection =Mapper.Map<TestSection,VMTestSection>( Repository.GetTestSection(id));
+            model.ViewMode = ViewMode.Edit;
+            model.TestSection = testSection;
+            return View("Create", model);
         }
 
         //
         // POST: /NhomXetNghiem/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(TestSectionViewModel model)
         {
+            if (!Repository.IsValidTestSection(model.TestSection.Name,model.TestSection.Id))
+            {
+                ModelState.AddModelError("Test section name already exists", Resources.TestSectionStrings.TestSection_NameError);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                model.ViewMode = ViewMode.Edit;
+                return View("Create", model);
+            }
             try
             {
-                // TODO: Add update logic here
- 
-                return RedirectToAction("Index");
+                TestSection ts = Mapper.Map<VMTestSection, TestSection>(model.TestSection);
+                Repository.TestSectionUpdate(ts);
+                return RedirectToAction("Create");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("Test section name already exists", ex.Message);
+                model.ViewMode = ViewMode.Edit;
+                return View("Create", model);
             }
+            
         }
+        
 
         //
         // GET: /NhomXetNghiem/Delete/5

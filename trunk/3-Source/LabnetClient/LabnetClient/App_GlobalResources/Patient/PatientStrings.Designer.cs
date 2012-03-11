@@ -187,6 +187,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhóm XN.
+        /// </summary>
+        internal static string PatientInsert_TestSection {
+            get {
+                return ResourceManager.GetString("PatientInsert_TestSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm thông tin bệnh nhân.
         /// </summary>
         internal static string PatientInsert_Title {
