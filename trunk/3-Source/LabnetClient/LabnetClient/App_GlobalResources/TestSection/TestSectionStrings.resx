@@ -138,6 +138,9 @@
   <data name="TestSection_IsActive" xml:space="preserve">
     <value>Kích Hoạt</value>
   </data>
+  <data name="TestSection_ListTitle" xml:space="preserve">
+    <value>Danh sách nhóm xét nghiệm</value>
+  </data>
   <data name="TestSection_Name" xml:space="preserve">
     <value>Tên Nhóm</value>
   </data>
@@ -146,5 +149,8 @@
   </data>
   <data name="TestSection_SortOrder" xml:space="preserve">
     <value>Sắp xếp</value>
+  </data>
+  <data name="VMTestSection_UseCostForAssociateTest" xml:space="preserve">
+    <value>Sử dụng giá chung cho XN nằm trong nhóm</value>
   </data>
 </root>

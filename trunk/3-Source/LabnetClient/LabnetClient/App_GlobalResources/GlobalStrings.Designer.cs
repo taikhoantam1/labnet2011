@@ -268,6 +268,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhóm Xét Nghiệm.
+        /// </summary>
+        internal static string Menu_TestSectionList {
+            get {
+                return ResourceManager.GetString("Menu_TestSectionList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Điền Kết Quả XN.
         /// </summary>
         internal static string Menu_UpdateTestResult {

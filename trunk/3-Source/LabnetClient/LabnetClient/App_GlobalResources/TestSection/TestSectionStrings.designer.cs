@@ -124,6 +124,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Danh sách nhóm xét nghiệm.
+        /// </summary>
+        internal static string TestSection_ListTitle {
+            get {
+                return ResourceManager.GetString("TestSection_ListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên Nhóm.
         /// </summary>
         internal static string TestSection_Name {
@@ -147,6 +156,15 @@ namespace Resources {
         internal static string TestSection_SortOrder {
             get {
                 return ResourceManager.GetString("TestSection_SortOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sử dụng giá chung cho XN nằm trong nhóm.
+        /// </summary>
+        internal static string VMTestSection_UseCostForAssociateTest {
+            get {
+                return ResourceManager.GetString("VMTestSection_UseCostForAssociateTest", resourceCulture);
             }
         }
     }

@@ -189,4 +189,7 @@
   <data name="Menu_SearchTestSection" xml:space="preserve">
     <value>Tìm Nhóm Xét Nghiệm</value>
   </data>
+  <data name="Menu_TestSectionList" xml:space="preserve">
+    <value>Nhóm Xét Nghiệm</value>
+  </data>
 </root>

@@ -5,7 +5,7 @@
     }
     $(document).ready(function () {
     <%if(Model.UseAjaxLoading){ %>
-        $("#<%= Model.AutoCompleteId %> .autoComplete").autocomplete({
+       var input= $("#<%= Model.AutoCompleteId %> .autoComplete").autocomplete({
             source: function (request, response) {
                 $.ajax({
                     url: "<%=Model.GetDataUrl %>", 
@@ -52,7 +52,9 @@
                 }
                 AutocompleChange(ui.item.id,ui.item.label,ui.item.tag);
             }
-        });
+        })
+		.addClass("ui-widget ui-widget-content ui-corner-left")
+        .css({'padding':'5px','border-radius': '0px','margin': '0px 3px 0px 0px'}).val("");
     <%}%>
     <%else {%>
         var autoCompleteData =<%=Model.JsonData %>;
@@ -100,41 +102,21 @@
                    
             }
         }).focus(function(){  
-            
             $(this).autocomplete( "search", "" );			
         })
 		.addClass("ui-widget ui-widget-content ui-corner-left")
         .css({'padding':'5px','border-radius': '0px','margin': '0px 3px 0px 0px'}).val("");
-        /*
-        $("<button type='button'>&nbsp;</button>")
-					.attr("tabIndex", -1)
-					.attr("title", "Show All Items")
-					.insertAfter(input)
-					.button({
-					    icons: {
-					        primary: "ui-icon-triangle-1-s"
-					    },
-					    text: false
-					})
-					.removeClass("ui-corner-all")
-					.addClass("ui-corner-right ui-button-icon")
-					.click(function () {
-					    // close if already visible
-					    if (input.autocomplete("widget").is(":visible")) {
-					        input.autocomplete("close");
-					        return;
-					    }
 
-					    // work around a bug (likely same cause as #5265)
-					    $(this).blur();
-
-					    // pass empty string as value to search for, displaying all results
-					    input.autocomplete("search", "");
-					    input.focus();
-					});
-        */
     <%} %>
-    
+        input.keyup(function(event){
+            if(input.val()=="")
+            {
+                $("#<%= Model.AutoCompleteId %> .autoCompleteBindingValue").val("");
+                $("#<%= Model.AutoCompleteId %>_SelectedValue").val("");
+                $("#<%= Model.AutoCompleteId %>_SelectedText").val("");
+                $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
+            }
+        });
     });
 </script>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">

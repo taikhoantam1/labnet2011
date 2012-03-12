@@ -23,9 +23,6 @@ namespace DomainModel
         [JQColumnAttribute("VMPatientTest_IsEnable", true, false,true, EditTypeEnum.Checkbox, FormatterEnum.Checkbox)]
         public bool IsEnable { get; set; }
 
-        [JQColumnAttribute("", true, true, true, EditTypeEnum.Checkbox, FormatterEnum.Checkbox)]
-        public bool IsTestFromTestSection { get; set; }
-
         [JQColumnAttribute("", true, true, true, EditTypeEnum.Text, FormatterEnum.Text)]
         public int AnalysisId { get; set; }
 

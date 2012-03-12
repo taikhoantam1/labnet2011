@@ -484,11 +484,47 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích hoạt.
+        /// </summary>
+        internal static string VMTestSection_Active {
+            get {
+                return ResourceManager.GetString("VMTestSection_Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giá.
+        /// </summary>
+        internal static string VMTestSection_Cost {
+            get {
+                return ResourceManager.GetString("VMTestSection_Cost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mô Tả.
+        /// </summary>
+        internal static string VMTestSection_Description {
+            get {
+                return ResourceManager.GetString("VMTestSection_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập mô tả nhóm XN.
         /// </summary>
         internal static string VMTestSection_DescriptionRequired {
             get {
                 return ResourceManager.GetString("VMTestSection_DescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên.
+        /// </summary>
+        internal static string VMTestSection_Name {
+            get {
+                return ResourceManager.GetString("VMTestSection_Name", resourceCulture);
             }
         }
         

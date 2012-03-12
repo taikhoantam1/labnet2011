@@ -87,7 +87,6 @@ namespace LabnetClient.Controllers
                 analysis.PatientItemId = patientItemId;
                 analysis.TestId = test.TestId;
                 analysis.Status = (int)AnalysisStatusEnum.New;
-                analysis.IsTestInTestSection = test.IsTestFromTestSection;
                 Repository.AnalysisInsert(analysis);
             }
 
@@ -143,8 +142,7 @@ namespace LabnetClient.Controllers
                                                     Cost = p.Cost,
                                                     TestName = p.TestName,
                                                     Section = p.TestSectionName,
-                                                    TestId = p.TestId,
-                                                    IsTestFromTestSection = true
+                                                    TestId = p.TestId
                                                 }).ToList();
             return tests.ToJson();
         }
@@ -159,8 +157,7 @@ namespace LabnetClient.Controllers
                                                     Cost = p.Cost,
                                                     TestName = p.TestName,
                                                     Section = p.TestSectionName,
-                                                    TestId = p.TestId , 
-                                                    IsTestFromTestSection =false
+                                                    TestId = p.TestId 
                                                 }).ToList();
             return tests.ToJson();
         }
@@ -175,8 +172,7 @@ namespace LabnetClient.Controllers
                                                     Cost = test.Cost,
                                                     TestName = test.Name,
                                                     Section = test.TestSection.Name,
-                                                    TestId = test.Id,
-                                                    IsTestFromTestSection = false
+                                                    TestId = test.Id
                                                 };
             return tests.ToJson();
         }
@@ -283,7 +279,6 @@ namespace LabnetClient.Controllers
                             analysis.PatientItemId = patientItem.Id;
                             analysis.TestId = test.TestId;
                             analysis.Status = (int)AnalysisStatusEnum.New;
-                            analysis.IsTestInTestSection = test.IsTestFromTestSection;
                             Repository.AnalysisInsert(analysis);
                         }
                         else

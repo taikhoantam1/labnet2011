@@ -550,17 +550,6 @@ namespace DataRepository
             myDb.SaveChanges();
         }
 
-        public void TestSectionUpdate(int id, TestSection ts)
-        {
-            TestSection currentTestSection = (from _ts in myDb.TestSections where _ts.Id == id select _ts).First();
-            currentTestSection.Name = ts.Name;
-            currentTestSection.Description = ts.Description;
-            currentTestSection.IsActive = ts.IsActive;
-            currentTestSection.Cost = ts.Cost;
-            currentTestSection.SortOder = ts.SortOder;
-
-            myDb.SaveChanges();
-        }
 
         public void TestSectionDelete(int testSectionId)
         {
@@ -606,6 +595,7 @@ namespace DataRepository
             testSection.SortOder = testSectionToUpdate.SortOder;
             testSection.Cost = testSectionToUpdate.Cost;
             testSection.Description = testSection.Description;
+            testSection.UseCostForAssociateTest = testSectionToUpdate.UseCostForAssociateTest;
             myDb.SaveChanges();
         }
         #endregion
@@ -656,7 +646,6 @@ namespace DataRepository
                         Section = analysis.Test.TestSection.Name,
                         IsEnable = analysis.Test.IsActive,
                         Cost = analysis.Test.Cost,
-                        IsTestFromTestSection = analysis.IsTestInTestSection,
                         AnalysisId = analysis.Id
 
                         

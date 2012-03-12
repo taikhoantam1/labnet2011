@@ -68,7 +68,7 @@
                 </div>
                 <div class="Row">
                     <div class="Column">
-                        <label class="lbTitle">
+                        <label class="lbTitle" for="TestSection_IsActive">
                             <%=Resources.TestSectionStrings.TestSection_IsActive %></label>
                     </div>
                     <div class="Column">
@@ -99,6 +99,17 @@
                     <div class="Column">
                         <input type="text" class="textInput autoNumeric" id="TestCostView" value="<%=Model.TestSection.Cost %>" />
                         <%=Html.HiddenFor(m => m.TestSection.Cost)%>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="Row">
+                    <div class="Column">
+                        <%=Html.CheckBoxFor(m => m.TestSection.UseCostForAssociateTest)%>
+                    </div>
+                    <div class="Column">
+                        <label class="lbTitle" for="TestSection_UseCostForAssociateTest" style="width: 400px; margin-left: 5px;">
+                            <%=Resources.TestSectionStrings.VMTestSection_UseCostForAssociateTest%></label>
                     </div>
                     <div class="clear">
                     </div>

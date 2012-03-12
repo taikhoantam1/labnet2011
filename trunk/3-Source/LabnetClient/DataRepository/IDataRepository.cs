@@ -109,7 +109,6 @@ namespace DataRepository
         TestSection GetTestSection(int testSectionId);
         List<TestSection> GetTestSections();
         void TestSectionInsert(TestSection ts);
-        void TestSectionUpdate(int id, TestSection ts);
         void TestSectionDelete(int testSectionId);
         bool IsValidTestSection(string tsName,int? testSectionId);
         List<VMTestListItem> GetTestsOfTestSection(int Id);

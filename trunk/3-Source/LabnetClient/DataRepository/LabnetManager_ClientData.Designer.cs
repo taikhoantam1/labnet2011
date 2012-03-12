@@ -37,8 +37,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_PatientItem", "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.PatientItem), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
 
 #endregion
 
@@ -1131,15 +1131,13 @@ namespace DataRepository
         /// <param name="patientItemId">Initial value of the PatientItemId property.</param>
         /// <param name="testId">Initial value of the TestId property.</param>
         /// <param name="status">Initial value of the Status property.</param>
-        /// <param name="isTestInTestSection">Initial value of the IsTestInTestSection property.</param>
-        public static Analysis CreateAnalysis(global::System.Int32 id, global::System.Int32 patientItemId, global::System.Int32 testId, global::System.Int32 status, global::System.Boolean isTestInTestSection)
+        public static Analysis CreateAnalysis(global::System.Int32 id, global::System.Int32 patientItemId, global::System.Int32 testId, global::System.Int32 status)
         {
             Analysis analysis = new Analysis();
             analysis.Id = id;
             analysis.PatientItemId = patientItemId;
             analysis.TestId = testId;
             analysis.Status = status;
-            analysis.IsTestInTestSection = isTestInTestSection;
             return analysis;
         }
 
@@ -1316,30 +1314,6 @@ namespace DataRepository
         private global::System.String _Note;
         partial void OnNoteChanging(global::System.String value);
         partial void OnNoteChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean IsTestInTestSection
-        {
-            get
-            {
-                return _IsTestInTestSection;
-            }
-            set
-            {
-                OnIsTestInTestSectionChanging(value);
-                ReportPropertyChanging("IsTestInTestSection");
-                _IsTestInTestSection = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsTestInTestSection");
-                OnIsTestInTestSectionChanged();
-            }
-        }
-        private global::System.Boolean _IsTestInTestSection;
-        partial void OnIsTestInTestSectionChanging(global::System.Boolean value);
-        partial void OnIsTestInTestSectionChanged();
 
         #endregion
     
@@ -1389,28 +1363,6 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Result")]
-        public EntityCollection<Result> Results
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test")]
         public Test Test
         {
@@ -1439,6 +1391,28 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("LabManager_ClientModel.FK_Analysis_Test", "Test", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("LabManager_ClientModel.FK_Result_Analysis", "Result", value);
                 }
             }
         }
@@ -7346,13 +7320,15 @@ namespace DataRepository
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="description">Initial value of the Description property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
-        public static TestSection CreateTestSection(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Boolean isActive)
+        /// <param name="useCostForAssociateTest">Initial value of the UseCostForAssociateTest property.</param>
+        public static TestSection CreateTestSection(global::System.Int32 id, global::System.String name, global::System.String description, global::System.Boolean isActive, global::System.Boolean useCostForAssociateTest)
         {
             TestSection testSection = new TestSection();
             testSection.Id = id;
             testSection.Name = name;
             testSection.Description = description;
             testSection.IsActive = isActive;
+            testSection.UseCostForAssociateTest = useCostForAssociateTest;
             return testSection;
         }
 
@@ -7505,6 +7481,30 @@ namespace DataRepository
         private Nullable<global::System.Int32> _SortOder;
         partial void OnSortOderChanging(Nullable<global::System.Int32> value);
         partial void OnSortOderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean UseCostForAssociateTest
+        {
+            get
+            {
+                return _UseCostForAssociateTest;
+            }
+            set
+            {
+                OnUseCostForAssociateTestChanging(value);
+                ReportPropertyChanging("UseCostForAssociateTest");
+                _UseCostForAssociateTest = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UseCostForAssociateTest");
+                OnUseCostForAssociateTestChanged();
+            }
+        }
+        private global::System.Boolean _UseCostForAssociateTest;
+        partial void OnUseCostForAssociateTestChanging(global::System.Boolean value);
+        partial void OnUseCostForAssociateTestChanged();
 
         #endregion
     

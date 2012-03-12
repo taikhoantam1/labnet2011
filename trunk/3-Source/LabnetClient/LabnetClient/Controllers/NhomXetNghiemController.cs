@@ -18,7 +18,10 @@ namespace LabnetClient.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            TestSectionListViewModel model = new TestSectionListViewModel();
+            List<VMTestSection> listTestSection =Mapper.Map<List<TestSection>,List<VMTestSection>>(Repository.GetTestSections());
+            model.TestSectionList = new JQGridModel(typeof(VMTestSection), true, listTestSection, "");
+            return View(model);
         }
 
         //
@@ -93,7 +96,7 @@ namespace LabnetClient.Controllers
             {
                 TestSection ts = Mapper.Map<VMTestSection, TestSection>(model.TestSection);
                 Repository.TestSectionUpdate(ts);
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
