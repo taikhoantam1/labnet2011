@@ -40,7 +40,6 @@
 					        }));
 					    },
 					    select: function (event, ui) {
-                            $.blockUI();
 					        $("#<%= Model.ComboBoxId %> .autoCompleteBindingValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedText").val(ui.item.value);
@@ -50,7 +49,6 @@
 					            item: ui.item.option
 					        });
 					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, ui.item.label, ui.item.tag);
-                            $.unblockUI();
 					    },
 					    selectFirst: true,
 					    change: function (event, ui) {

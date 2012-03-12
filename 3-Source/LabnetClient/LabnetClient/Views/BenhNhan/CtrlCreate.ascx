@@ -185,6 +185,7 @@
             </div>
         </div>
     </div>
+</div>
     <script type="text/javascript">
     function GetTestData(url,id)
     {
