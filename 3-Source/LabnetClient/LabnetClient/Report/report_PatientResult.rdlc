@@ -104,13 +104,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.03018in</Width>
+              <Width>1.77779in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.74201in</Width>
+              <Width>1.86215in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.87118in</Width>
+              <Width>1.59723in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.86076in</Width>
@@ -210,7 +210,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -240,14 +240,14 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>Đơn Vị</Value>
                               <Style>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -492,7 +492,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Right</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -524,7 +524,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Left</TextAlign>
+                            <TextAlign>Center</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -662,7 +662,7 @@
         <Top>1.68589in</Top>
         <Left>0.37673in</Left>
         <Height>0.90786in</Height>
-        <Width>5.84718in</Width>
+        <Width>6.44098in</Width>
         <Style>
           <Border>
             <Style>None</Style>
