@@ -73,6 +73,7 @@
     <Content Include="SPs\sp_SearchTestByName.sp.sql" />
     <Content Include="SPs\sp_SearchTestByNameForPanel.sp.sql" />
     <Content Include="SPs\sp_SearchTestSection.sp.sql" />
+    <Content Include="SPs\sp_SearchTestSectionByNameForPanel.sql" />
     <Content Include="Table\Analysis.table.sql" />
     <Content Include="Table\Analyte.table.sql" />
     <Content Include="Table\Department.table.sql" />
@@ -95,6 +96,7 @@
     <Content Include="Table\TestCommission.table.sql" />
     <Content Include="Table\TestResult.table.sql" />
     <Content Include="Table\TestSection.table.sql" />
+    <Content Include="Table\TestSectionCommission.sql" />
     <Content Include="Table\TypeOfSample.table.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
