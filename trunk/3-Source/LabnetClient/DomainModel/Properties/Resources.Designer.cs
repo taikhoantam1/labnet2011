@@ -124,6 +124,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string VMPanel_IsEnableTestSection {
+            get {
+                return ResourceManager.GetString("VMPanel_IsEnableTestSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên Panel.
         /// </summary>
         internal static string VMPanel_NameRequired {
@@ -156,6 +165,24 @@ namespace DomainModel.Properties {
         internal static string VMPanel_TestName {
             get {
                 return ResourceManager.GetString("VMPanel_TestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giá Nhóm.
+        /// </summary>
+        internal static string VMPanel_TestSectionCost {
+            get {
+                return ResourceManager.GetString("VMPanel_TestSectionCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm Xét Nghiệm.
+        /// </summary>
+        internal static string VMPanel_TestSectionName {
+            get {
+                return ResourceManager.GetString("VMPanel_TestSectionName", resourceCulture);
             }
         }
         

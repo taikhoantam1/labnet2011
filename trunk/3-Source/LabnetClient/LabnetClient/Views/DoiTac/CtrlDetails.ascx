@@ -7,6 +7,7 @@
         //2:Chọn test đã tồn tại trong list
         //3: Chọn test mà không điền giá (kiểm tra thêm sử kiện onchange của textbox giá)
         $('#btnAddTest').attr('disabled', true);
+        $('#btnAddTestSection').attr('disabled', true);
 
         $("#autocompleteSelectTest .autoComplete").blur(function () {
             var tags = $("#autocompleteSelectTest .autoCompleteTag").val().split(",");
@@ -24,8 +25,28 @@
             }
         });
 
+        $("#autocompleteSelectTestSection .autoComplete").blur(function () {
+            var tag = $("#autocompleteSelectTestSection .autoCompleteTag").val();
+            $("#txtCostTestSection").val(tag);
+            var testSectionName = $("#autocompleteSelectTestSection .autoComplete").val();
+
+            var allInputs = DataTableGetArrayDataSource_<%:Model.JQGridTestSection.TableId %>();
+
+            for (var i = 0; i < allInputs.length; i++) {
+                var testTable = allInputs[i].TestSectionName;
+                if (testSectionName == testTable) {
+                    $('#btnAddTestSection').attr('disabled', true);
+                    alert("Nhóm Xét nghiệm " + testSectionName + " đã tồn tại");
+                }
+            }
+        });
+
         $("#autocompleteSelectTest .autoComplete").keypress(function () {
             $('#btnAddTest').attr('disabled', false);
+        });
+
+        $("#autocompleteSelectTestSection .autoComplete").keypress(function () {
+            $('#btnAddTestSection').attr('disabled', false);
         });
 
         $("#txtCost").keyup(function () {
@@ -49,6 +70,26 @@
             }
         });
 
+        $("#txtCostTestSection").keyup(function () {
+            var testSectionName = $("#autocompleteSelectTestSection .autoComplete").val();
+            var cost = $("#txtCostTestSection").val();
+            //alert(cost);
+            if (testSectionName != "" && cost != "") {
+                $('#btnAddTestSection').attr('disabled', false);
+            }
+            else {
+                $('#btnAddTestSection').attr('disabled', true);
+            }
+
+            var allInputs = DataTableGetArrayDataSource_<%:Model.JQGridTestSection.TableId %>();
+
+            for (var i = 0; i < allInputs.length; i++) {
+                var testTable = allInputs[i].TestSectionName;
+                if (testSectionName == testTable) {
+                    $('#btnAddTestSection').attr('disabled', true);
+                }
+            }
+        });
 
 
         $("#btnAddTest").click(function () {
@@ -76,10 +117,37 @@
             $('#btnAddTest').attr('disabled', true);
         });
 
+        $("#btnAddTestSection").click(function () {
+            //alert("add");
+            var tag = $("#autocompleteSelectTestSection .autoCompleteTag").val().split(",");
+            //alert(tag);
+            var testSectionName = $("#autocompleteSelectTestSection .autoComplete").val();
+            //alert(testSectionName);
+            var cost = tag;
+            var costEnter = $("#txtCostTestSection").val();
+            var testSectionId = $("#autocompleteSelectTestSection .autoCompleteValue").val();
+
+            var dataObject = new Object();
+            dataObject.TestSectionName = testSectionName;
+            dataObject.TestSectionId = testSectionId;
+            dataObject.TestSectionCost = costEnter;
+            dataObject.IsEnableTestSection = true;
+            var array = $("#<%:Model.JQGridTestSection.TableId %>").jqGrid().getRowData();
+            //alert(array);
+            jQuery("#<%:Model.JQGridTestSection.TableId %>").jqGrid('addRowData', array.length, dataObject);
+
+            $("#autocompleteSelectTestSection .autoComplete").val("");
+            $("#autocompleteSelectTestSection .autoCompleteValue").val(null);
+            $("#autocompleteSelectTestSection .autoCompleteTag").val(null);
+            $("#txtCostTestSection").val("");
+            $('#btnAddTestSection').attr('disabled', true);
+        });
+
         $("#btnSavePanel").click(function (event) {
             event.preventDefault();
-            var data = DataTableGetDataSource();
+            //var data = DataTableGetDataSource();
             $("#DataTableSaveButton_<%:Model.JQGrid.TableId %>").click();
+            $("#DataTableSaveButton_<%:Model.JQGridTestSection.TableId %>").click();
             $("form").submit();
         });
     });
@@ -225,6 +293,27 @@
                 <div class="Column">
                     <input type="button" id="btnAddTest" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add%>" />
                 </div>
+            </div>
+            <div class="Row MarginT20">
+                <div class="Column">
+                    <label class="lbTitle">
+                        <%=Resources.PartnerStrings.PartnerInsert_TestSection %></label>
+                </div>
+                <div class="Column">
+                    <div id="autocompleteSelectTestSection">
+                        <% Html.RenderPartial("Autocomplete", Model.TestSectionAutocomplete); %>
+                    </div>
+                </div>
+                <div class="Column PaddingL65 ">
+                    <label class="lbTitle Width80">
+                        <%=Resources.PartnerStrings.PartnerInsert_TestSectionPrice%></label>
+                </div>
+                <div class="Column ">
+                    <input type="text" id="txtCostTestSection" class="textInput130 number" />
+                </div>
+                <div class="Column">
+                    <input type="button" id="btnAddTestSection" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add_TestSection%>" />
+                </div>
                 <div class="clear">
                 </div>
             </div>
@@ -236,6 +325,11 @@
         </div>
         <div>
             <%Html.RenderPartial("DataTable", Model.JQGrid); %>
+        </div>
+        <div class="clear">
+        </div>
+        <div>
+            <%Html.RenderPartial("DataTable", Model.JQGridTestSection); %>
         </div>
             <%--<table id="tblPartnerCost" width="765px">
                 <tr>

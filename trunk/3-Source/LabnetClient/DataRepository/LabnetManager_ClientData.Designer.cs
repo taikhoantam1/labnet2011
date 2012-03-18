@@ -18,27 +18,29 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_ResultDictionary", "ResultDictionary", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.ResultDictionary), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Partner), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Panel", "Panel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Panel), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Doctor", "Doctor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Doctor), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Partner), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_PatientType", "PatientType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.PatientType), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabExamination), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Patient", "Patient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Patient), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Department), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Project", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Project), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Source", "Source", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Source), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_TypeOfSample", "TypeOfSample", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.TypeOfSample), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
-[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_PatientItem", "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.PatientItem), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Analysis), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Analysis), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Analyte), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Result), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Department", "Department", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Department), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Doctor", "Doctor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Doctor), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Partner), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_PatientType", "PatientType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.PatientType), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Project", "Project", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Project), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabExamination), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Panel", "Panel", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Panel), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PanelItem_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PanelItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PanelItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Partner), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestSectionCommission_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Partner), "TestSectionCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestSectionCommission), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PartnerCost_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "PartnerCost", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PartnerCost), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Patient", "Patient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Patient), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_Source", "Source", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Source), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_TypeOfSample", "TypeOfSample", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.TypeOfSample), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_ResultDictionary", "ResultDictionary", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.ResultDictionary), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_Test_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Test), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestCommission), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestResult), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_TestSectionCommission_TestSection", "TestSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.TestSection), "TestSectionCommission", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.TestSectionCommission), true)]
 
 #endregion
 
@@ -93,6 +95,22 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Analysis> Analyses
+        {
+            get
+            {
+                if ((_Analyses == null))
+                {
+                    _Analyses = base.CreateObjectSet<Analysis>("Analyses");
+                }
+                return _Analyses;
+            }
+        }
+        private ObjectSet<Analysis> _Analyses;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Analyte> Analytes
         {
             get
@@ -109,178 +127,18 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PatientType> PatientTypes
+        public ObjectSet<Department> Departments
         {
             get
             {
-                if ((_PatientTypes == null))
+                if ((_Departments == null))
                 {
-                    _PatientTypes = base.CreateObjectSet<PatientType>("PatientTypes");
+                    _Departments = base.CreateObjectSet<Department>("Departments");
                 }
-                return _PatientTypes;
+                return _Departments;
             }
         }
-        private ObjectSet<PatientType> _PatientTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PaymentType> PaymentTypes
-        {
-            get
-            {
-                if ((_PaymentTypes == null))
-                {
-                    _PaymentTypes = base.CreateObjectSet<PaymentType>("PaymentTypes");
-                }
-                return _PaymentTypes;
-            }
-        }
-        private ObjectSet<PaymentType> _PaymentTypes;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<ResultDictionary> ResultDictionaries
-        {
-            get
-            {
-                if ((_ResultDictionaries == null))
-                {
-                    _ResultDictionaries = base.CreateObjectSet<ResultDictionary>("ResultDictionaries");
-                }
-                return _ResultDictionaries;
-            }
-        }
-        private ObjectSet<ResultDictionary> _ResultDictionaries;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Staff> Staffs
-        {
-            get
-            {
-                if ((_Staffs == null))
-                {
-                    _Staffs = base.CreateObjectSet<Staff>("Staffs");
-                }
-                return _Staffs;
-            }
-        }
-        private ObjectSet<Staff> _Staffs;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<TestCommission> TestCommissions
-        {
-            get
-            {
-                if ((_TestCommissions == null))
-                {
-                    _TestCommissions = base.CreateObjectSet<TestCommission>("TestCommissions");
-                }
-                return _TestCommissions;
-            }
-        }
-        private ObjectSet<TestCommission> _TestCommissions;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<TestResult> TestResults
-        {
-            get
-            {
-                if ((_TestResults == null))
-                {
-                    _TestResults = base.CreateObjectSet<TestResult>("TestResults");
-                }
-                return _TestResults;
-            }
-        }
-        private ObjectSet<TestResult> _TestResults;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Patient> Patients
-        {
-            get
-            {
-                if ((_Patients == null))
-                {
-                    _Patients = base.CreateObjectSet<Patient>("Patients");
-                }
-                return _Patients;
-            }
-        }
-        private ObjectSet<Patient> _Patients;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PartnerCost> PartnerCosts
-        {
-            get
-            {
-                if ((_PartnerCosts == null))
-                {
-                    _PartnerCosts = base.CreateObjectSet<PartnerCost>("PartnerCosts");
-                }
-                return _PartnerCosts;
-            }
-        }
-        private ObjectSet<PartnerCost> _PartnerCosts;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Partner> Partners
-        {
-            get
-            {
-                if ((_Partners == null))
-                {
-                    _Partners = base.CreateObjectSet<Partner>("Partners");
-                }
-                return _Partners;
-            }
-        }
-        private ObjectSet<Partner> _Partners;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PanelItem> PanelItems
-        {
-            get
-            {
-                if ((_PanelItems == null))
-                {
-                    _PanelItems = base.CreateObjectSet<PanelItem>("PanelItems");
-                }
-                return _PanelItems;
-            }
-        }
-        private ObjectSet<PanelItem> _PanelItems;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Panel> Panels
-        {
-            get
-            {
-                if ((_Panels == null))
-                {
-                    _Panels = base.CreateObjectSet<Panel>("Panels");
-                }
-                return _Panels;
-            }
-        }
-        private ObjectSet<Panel> _Panels;
+        private ObjectSet<Department> _Departments;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -317,6 +175,102 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<LabUser> LabUsers
+        {
+            get
+            {
+                if ((_LabUsers == null))
+                {
+                    _LabUsers = base.CreateObjectSet<LabUser>("LabUsers");
+                }
+                return _LabUsers;
+            }
+        }
+        private ObjectSet<LabUser> _LabUsers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Panel> Panels
+        {
+            get
+            {
+                if ((_Panels == null))
+                {
+                    _Panels = base.CreateObjectSet<Panel>("Panels");
+                }
+                return _Panels;
+            }
+        }
+        private ObjectSet<Panel> _Panels;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PanelItem> PanelItems
+        {
+            get
+            {
+                if ((_PanelItems == null))
+                {
+                    _PanelItems = base.CreateObjectSet<PanelItem>("PanelItems");
+                }
+                return _PanelItems;
+            }
+        }
+        private ObjectSet<PanelItem> _PanelItems;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Partner> Partners
+        {
+            get
+            {
+                if ((_Partners == null))
+                {
+                    _Partners = base.CreateObjectSet<Partner>("Partners");
+                }
+                return _Partners;
+            }
+        }
+        private ObjectSet<Partner> _Partners;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PartnerCost> PartnerCosts
+        {
+            get
+            {
+                if ((_PartnerCosts == null))
+                {
+                    _PartnerCosts = base.CreateObjectSet<PartnerCost>("PartnerCosts");
+                }
+                return _PartnerCosts;
+            }
+        }
+        private ObjectSet<PartnerCost> _PartnerCosts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Patient> Patients
+        {
+            get
+            {
+                if ((_Patients == null))
+                {
+                    _Patients = base.CreateObjectSet<Patient>("Patients");
+                }
+                return _Patients;
+            }
+        }
+        private ObjectSet<Patient> _Patients;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<PatientItem> PatientItems
         {
             get
@@ -333,18 +287,34 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Department> Departments
+        public ObjectSet<PatientType> PatientTypes
         {
             get
             {
-                if ((_Departments == null))
+                if ((_PatientTypes == null))
                 {
-                    _Departments = base.CreateObjectSet<Department>("Departments");
+                    _PatientTypes = base.CreateObjectSet<PatientType>("PatientTypes");
                 }
-                return _Departments;
+                return _PatientTypes;
             }
         }
-        private ObjectSet<Department> _Departments;
+        private ObjectSet<PatientType> _PatientTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PaymentType> PaymentTypes
+        {
+            get
+            {
+                if ((_PaymentTypes == null))
+                {
+                    _PaymentTypes = base.CreateObjectSet<PaymentType>("PaymentTypes");
+                }
+                return _PaymentTypes;
+            }
+        }
+        private ObjectSet<PaymentType> _PaymentTypes;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -365,6 +335,38 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Result> Results
+        {
+            get
+            {
+                if ((_Results == null))
+                {
+                    _Results = base.CreateObjectSet<Result>("Results");
+                }
+                return _Results;
+            }
+        }
+        private ObjectSet<Result> _Results;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ResultDictionary> ResultDictionaries
+        {
+            get
+            {
+                if ((_ResultDictionaries == null))
+                {
+                    _ResultDictionaries = base.CreateObjectSet<ResultDictionary>("ResultDictionaries");
+                }
+                return _ResultDictionaries;
+            }
+        }
+        private ObjectSet<ResultDictionary> _ResultDictionaries;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Source> Sources
         {
             get
@@ -381,18 +383,34 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<TypeOfSample> TypeOfSamples
+        public ObjectSet<Staff> Staffs
         {
             get
             {
-                if ((_TypeOfSamples == null))
+                if ((_Staffs == null))
                 {
-                    _TypeOfSamples = base.CreateObjectSet<TypeOfSample>("TypeOfSamples");
+                    _Staffs = base.CreateObjectSet<Staff>("Staffs");
                 }
-                return _TypeOfSamples;
+                return _Staffs;
             }
         }
-        private ObjectSet<TypeOfSample> _TypeOfSamples;
+        private ObjectSet<Staff> _Staffs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -413,34 +431,34 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Result> Results
+        public ObjectSet<TestCommission> TestCommissions
         {
             get
             {
-                if ((_Results == null))
+                if ((_TestCommissions == null))
                 {
-                    _Results = base.CreateObjectSet<Result>("Results");
+                    _TestCommissions = base.CreateObjectSet<TestCommission>("TestCommissions");
                 }
-                return _Results;
+                return _TestCommissions;
             }
         }
-        private ObjectSet<Result> _Results;
+        private ObjectSet<TestCommission> _TestCommissions;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<LabUser> LabUsers
+        public ObjectSet<TestResult> TestResults
         {
             get
             {
-                if ((_LabUsers == null))
+                if ((_TestResults == null))
                 {
-                    _LabUsers = base.CreateObjectSet<LabUser>("LabUsers");
+                    _TestResults = base.CreateObjectSet<TestResult>("TestResults");
                 }
-                return _LabUsers;
+                return _TestResults;
             }
         }
-        private ObjectSet<LabUser> _LabUsers;
+        private ObjectSet<TestResult> _TestResults;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -461,21 +479,45 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Analysis> Analyses
+        public ObjectSet<TestSectionCommission> TestSectionCommissions
         {
             get
             {
-                if ((_Analyses == null))
+                if ((_TestSectionCommissions == null))
                 {
-                    _Analyses = base.CreateObjectSet<Analysis>("Analyses");
+                    _TestSectionCommissions = base.CreateObjectSet<TestSectionCommission>("TestSectionCommissions");
                 }
-                return _Analyses;
+                return _TestSectionCommissions;
             }
         }
-        private ObjectSet<Analysis> _Analyses;
+        private ObjectSet<TestSectionCommission> _TestSectionCommissions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<TypeOfSample> TypeOfSamples
+        {
+            get
+            {
+                if ((_TypeOfSamples == null))
+                {
+                    _TypeOfSamples = base.CreateObjectSet<TypeOfSample>("TypeOfSamples");
+                }
+                return _TypeOfSamples;
+            }
+        }
+        private ObjectSet<TypeOfSample> _TypeOfSamples;
 
         #endregion
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Analyses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAnalyses(Analysis analysis)
+        {
+            base.AddObject("Analyses", analysis);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Analytes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -486,91 +528,11 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the PatientTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Departments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToPatientTypes(PatientType patientType)
+        public void AddToDepartments(Department department)
         {
-            base.AddObject("PatientTypes", patientType);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PaymentTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPaymentTypes(PaymentType paymentType)
-        {
-            base.AddObject("PaymentTypes", paymentType);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the ResultDictionaries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToResultDictionaries(ResultDictionary resultDictionary)
-        {
-            base.AddObject("ResultDictionaries", resultDictionary);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Staffs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStaffs(Staff staff)
-        {
-            base.AddObject("Staffs", staff);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the TestCommissions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTestCommissions(TestCommission testCommission)
-        {
-            base.AddObject("TestCommissions", testCommission);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the TestResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTestResults(TestResult testResult)
-        {
-            base.AddObject("TestResults", testResult);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Patients EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPatients(Patient patient)
-        {
-            base.AddObject("Patients", patient);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PartnerCosts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPartnerCosts(PartnerCost partnerCost)
-        {
-            base.AddObject("PartnerCosts", partnerCost);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Partners EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPartners(Partner partner)
-        {
-            base.AddObject("Partners", partner);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PanelItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPanelItems(PanelItem panelItem)
-        {
-            base.AddObject("PanelItems", panelItem);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Panels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPanels(Panel panel)
-        {
-            base.AddObject("Panels", panel);
+            base.AddObject("Departments", department);
         }
     
         /// <summary>
@@ -590,6 +552,54 @@ namespace DataRepository
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the LabUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLabUsers(LabUser labUser)
+        {
+            base.AddObject("LabUsers", labUser);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Panels EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPanels(Panel panel)
+        {
+            base.AddObject("Panels", panel);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PanelItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPanelItems(PanelItem panelItem)
+        {
+            base.AddObject("PanelItems", panelItem);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Partners EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPartners(Partner partner)
+        {
+            base.AddObject("Partners", partner);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PartnerCosts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPartnerCosts(PartnerCost partnerCost)
+        {
+            base.AddObject("PartnerCosts", partnerCost);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Patients EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPatients(Patient patient)
+        {
+            base.AddObject("Patients", patient);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the PatientItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPatientItems(PatientItem patientItem)
@@ -598,11 +608,19 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Departments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the PatientTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToDepartments(Department department)
+        public void AddToPatientTypes(PatientType patientType)
         {
-            base.AddObject("Departments", department);
+            base.AddObject("PatientTypes", patientType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PaymentTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPaymentTypes(PaymentType paymentType)
+        {
+            base.AddObject("PaymentTypes", paymentType);
         }
     
         /// <summary>
@@ -614,6 +632,22 @@ namespace DataRepository
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Results EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToResults(Result result)
+        {
+            base.AddObject("Results", result);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ResultDictionaries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToResultDictionaries(ResultDictionary resultDictionary)
+        {
+            base.AddObject("ResultDictionaries", resultDictionary);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Sources EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSources(Source source)
@@ -622,11 +656,19 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the TypeOfSamples EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Staffs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToTypeOfSamples(TypeOfSample typeOfSample)
+        public void AddToStaffs(Staff staff)
         {
-            base.AddObject("TypeOfSamples", typeOfSample);
+            base.AddObject("Staffs", staff);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        {
+            base.AddObject("sysdiagrams", sysdiagram);
         }
     
         /// <summary>
@@ -638,19 +680,19 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Results EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the TestCommissions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToResults(Result result)
+        public void AddToTestCommissions(TestCommission testCommission)
         {
-            base.AddObject("Results", result);
+            base.AddObject("TestCommissions", testCommission);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the LabUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the TestResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToLabUsers(LabUser labUser)
+        public void AddToTestResults(TestResult testResult)
         {
-            base.AddObject("LabUsers", labUser);
+            base.AddObject("TestResults", testResult);
         }
     
         /// <summary>
@@ -662,11 +704,19 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Analyses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the TestSectionCommissions EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToAnalyses(Analysis analysis)
+        public void AddToTestSectionCommissions(TestSectionCommission testSectionCommission)
         {
-            base.AddObject("Analyses", analysis);
+            base.AddObject("TestSectionCommissions", testSectionCommission);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the TypeOfSamples EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToTypeOfSamples(TypeOfSample typeOfSample)
+        {
+            base.AddObject("TypeOfSamples", typeOfSample);
         }
 
         #endregion
@@ -730,36 +780,6 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<SearchTestByName_Result>("SearchTestByName", filterTextParameter, searchTypeParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="filterText">No Metadata Documentation available.</param>
-        /// <param name="searchType">No Metadata Documentation available.</param>
-        public ObjectResult<SearchTestByNameForPanel_Result> SearchTestByNameForPanel(global::System.String filterText, global::System.String searchType)
-        {
-            ObjectParameter filterTextParameter;
-            if (filterText != null)
-            {
-                filterTextParameter = new ObjectParameter("FilterText", filterText);
-            }
-            else
-            {
-                filterTextParameter = new ObjectParameter("FilterText", typeof(global::System.String));
-            }
-    
-            ObjectParameter searchTypeParameter;
-            if (searchType != null)
-            {
-                searchTypeParameter = new ObjectParameter("SearchType", searchType);
-            }
-            else
-            {
-                searchTypeParameter = new ObjectParameter("SearchType", typeof(global::System.String));
-            }
-    
-            return base.ExecuteFunction<SearchTestByNameForPanel_Result>("SearchTestByNameForPanel", filterTextParameter, searchTypeParameter);
         }
     
         /// <summary>
@@ -910,25 +930,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="labExaminationId">No Metadata Documentation available.</param>
-        public ObjectResult<TestResultsGet_Result> PatientTestResultsGet(Nullable<global::System.Int32> labExaminationId)
-        {
-            ObjectParameter labExaminationIdParameter;
-            if (labExaminationId.HasValue)
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
-            }
-            else
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<TestResultsGet_Result>("PatientTestResultsGet", labExaminationIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="filterText">No Metadata Documentation available.</param>
         /// <param name="searchType">No Metadata Documentation available.</param>
         public ObjectResult<SearchPanelByName_Result> SearchPanelByName(global::System.String filterText, global::System.String searchType)
@@ -1019,25 +1020,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="labExaminationId">No Metadata Documentation available.</param>
-        public ObjectResult<Report_PatientResult> Report_PatientResult(Nullable<global::System.Int32> labExaminationId)
-        {
-            ObjectParameter labExaminationIdParameter;
-            if (labExaminationId.HasValue)
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
-            }
-            else
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="startDate">No Metadata Documentation available.</param>
         /// <param name="endDate">No Metadata Documentation available.</param>
         public ObjectResult<report_TestResultNoteBook_Result> report_TestResultNoteBook(Nullable<global::System.DateTime> startDate, Nullable<global::System.DateTime> endDate)
@@ -1104,6 +1086,104 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<SearchTest_Result>("SearchTest", testNameParameter, testSectionNameParameter, panelNameParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="filterText">No Metadata Documentation available.</param>
+        /// <param name="searchType">No Metadata Documentation available.</param>
+        public ObjectResult<SearchTestByNameForPanel_Result> SearchTestByNameForPanel(global::System.String filterText, global::System.String searchType)
+        {
+            ObjectParameter filterTextParameter;
+            if (filterText != null)
+            {
+                filterTextParameter = new ObjectParameter("FilterText", filterText);
+            }
+            else
+            {
+                filterTextParameter = new ObjectParameter("FilterText", typeof(global::System.String));
+            }
+    
+            ObjectParameter searchTypeParameter;
+            if (searchType != null)
+            {
+                searchTypeParameter = new ObjectParameter("SearchType", searchType);
+            }
+            else
+            {
+                searchTypeParameter = new ObjectParameter("SearchType", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<SearchTestByNameForPanel_Result>("SearchTestByNameForPanel", filterTextParameter, searchTypeParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="filterText">No Metadata Documentation available.</param>
+        /// <param name="searchType">No Metadata Documentation available.</param>
+        public ObjectResult<SearchTestSectionByNameForPanel_Result> SearchTestSectionByNameForPanel(global::System.String filterText, global::System.String searchType)
+        {
+            ObjectParameter filterTextParameter;
+            if (filterText != null)
+            {
+                filterTextParameter = new ObjectParameter("FilterText", filterText);
+            }
+            else
+            {
+                filterTextParameter = new ObjectParameter("FilterText", typeof(global::System.String));
+            }
+    
+            ObjectParameter searchTypeParameter;
+            if (searchType != null)
+            {
+                searchTypeParameter = new ObjectParameter("SearchType", searchType);
+            }
+            else
+            {
+                searchTypeParameter = new ObjectParameter("SearchType", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<SearchTestSectionByNameForPanel_Result>("SearchTestSectionByNameForPanel", filterTextParameter, searchTypeParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="labExaminationId">No Metadata Documentation available.</param>
+        public ObjectResult<Report_PatientResult> Report_PatientResult(Nullable<global::System.Int32> labExaminationId)
+        {
+            ObjectParameter labExaminationIdParameter;
+            if (labExaminationId.HasValue)
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
+            }
+            else
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="labExaminationId">No Metadata Documentation available.</param>
+        public ObjectResult<TestResultsGet_Result> PatientTestResultsGet(Nullable<global::System.Int32> labExaminationId)
+        {
+            ObjectParameter labExaminationIdParameter;
+            if (labExaminationId.HasValue)
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
+            }
+            else
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<TestResultsGet_Result>("PatientTestResultsGet", labExaminationIdParameter);
         }
 
         #endregion
@@ -2611,6 +2691,44 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Department", "Department")]
+        public Department Department
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Department> DepartmentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "Partner")]
         public Partner Partner
         {
@@ -2687,66 +2805,6 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "PatientItem")]
-        public EntityCollection<PatientItem> PatientItems
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PatientItem>("LabManager_ClientModel.FK_PatientItem_LabExamination", "PatientItem");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PatientItem>("LabManager_ClientModel.FK_PatientItem_LabExamination", "PatientItem", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Department", "Department")]
-        public Department Department
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Department> DepartmentReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Department>("LabManager_ClientModel.FK_LabPatientManagement_Department", "Department", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Project", "Project")]
         public Project Project
         {
@@ -2775,6 +2833,28 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("LabManager_ClientModel.FK_LabPatientManagement_Project", "Project", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "PatientItem")]
+        public EntityCollection<PatientItem> PatientItems
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PatientItem>("LabManager_ClientModel.FK_PatientItem_LabExamination", "PatientItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PatientItem>("LabManager_ClientModel.FK_PatientItem_LabExamination", "PatientItem", value);
                 }
             }
         }
@@ -3688,6 +3768,28 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "LabExamination")]
+        public EntityCollection<LabExamination> LabExaminations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LabExamination>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "LabExamination");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LabExamination>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "LabExamination", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PartnerCost_Partner", "PartnerCost")]
         public EntityCollection<PartnerCost> PartnerCosts
         {
@@ -3710,18 +3812,18 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "LabExamination")]
-        public EntityCollection<LabExamination> LabExaminations
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestSectionCommission_Partner", "TestSectionCommission")]
+        public EntityCollection<TestSectionCommission> TestSectionCommissions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LabExamination>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "LabExamination");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestSectionCommission>("LabManager_ClientModel.FK_TestSectionCommission_Partner", "TestSectionCommission");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LabExamination>("LabManager_ClientModel.FK_LabPatientManagement_Partner", "LabExamination", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestSectionCommission>("LabManager_ClientModel.FK_TestSectionCommission_Partner", "TestSectionCommission", value);
                 }
             }
         }
@@ -4730,6 +4832,28 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_PatientItem", "Analysis")]
+        public EntityCollection<Analysis> Analyses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_PatientItem", "Analysis");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_PatientItem", "Analysis", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "LabExamination")]
         public LabExamination LabExamination
         {
@@ -4872,28 +4996,6 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TypeOfSample>("LabManager_ClientModel.FK_PatientItem_TypeOfSample", "TypeOfSample", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_PatientItem", "Analysis")]
-        public EntityCollection<Analysis> Analyses
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_PatientItem", "Analysis");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_PatientItem", "Analysis", value);
                 }
             }
         }
@@ -5633,44 +5735,6 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte")]
-        public Analyte Analyte
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Analyte> AnalyteReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analysis", "Analysis")]
         public Analysis Analysis
         {
@@ -5699,6 +5763,44 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Analysis>("LabManager_ClientModel.FK_Result_Analysis", "Analysis", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Result_Analyte", "Analyte")]
+        public Analyte Analyte
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Analyte> AnalyteReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Analyte>("LabManager_ClientModel.FK_Result_Analyte", "Analyte", value);
                 }
             }
         }
@@ -6276,6 +6378,161 @@ namespace DataRepository
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LabManager_ClientModel", Name="sysdiagram")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagram : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagram object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="LabManager_ClientModel", Name="Test")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -6708,6 +6965,28 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Analysis")]
+        public EntityCollection<Analysis> Analyses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_Test", "Analysis");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_Test", "Analysis", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_PanelItem_Test", "PanelItem")]
         public EntityCollection<PanelItem> PanelItems
         {
@@ -6742,50 +7021,6 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PartnerCost>("LabManager_ClientModel.FK_PartnerCost_Test", "PartnerCost", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "TestCommission")]
-        public EntityCollection<TestCommission> TestCommissions
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestCommission>("LabManager_ClientModel.FK_TestCommission_Test", "TestCommission");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestCommission>("LabManager_ClientModel.FK_TestCommission_Test", "TestCommission", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestResult_Test", "TestResult")]
-        public EntityCollection<TestResult> TestResults
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestResult>("LabManager_ClientModel.FK_TestResult_Test", "TestResult");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestResult>("LabManager_ClientModel.FK_TestResult_Test", "TestResult", value);
                 }
             }
         }
@@ -6834,18 +7069,40 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_Analysis_Test", "Analysis")]
-        public EntityCollection<Analysis> Analyses
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestCommission_Test", "TestCommission")]
+        public EntityCollection<TestCommission> TestCommissions
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_Test", "Analysis");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestCommission>("LabManager_ClientModel.FK_TestCommission_Test", "TestCommission");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Analysis>("LabManager_ClientModel.FK_Analysis_Test", "Analysis", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestCommission>("LabManager_ClientModel.FK_TestCommission_Test", "TestCommission", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestResult_Test", "TestResult")]
+        public EntityCollection<TestResult> TestResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestResult>("LabManager_ClientModel.FK_TestResult_Test", "TestResult");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestResult>("LabManager_ClientModel.FK_TestResult_Test", "TestResult", value);
                 }
             }
         }
@@ -7531,6 +7788,266 @@ namespace DataRepository
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestSectionCommission_TestSection", "TestSectionCommission")]
+        public EntityCollection<TestSectionCommission> TestSectionCommissions
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestSectionCommission>("LabManager_ClientModel.FK_TestSectionCommission_TestSection", "TestSectionCommission");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestSectionCommission>("LabManager_ClientModel.FK_TestSectionCommission_TestSection", "TestSectionCommission", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LabManager_ClientModel", Name="TestSectionCommission")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TestSectionCommission : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new TestSectionCommission object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="testSectionId">Initial value of the TestSectionId property.</param>
+        /// <param name="partnerId">Initial value of the PartnerId property.</param>
+        /// <param name="cost">Initial value of the Cost property.</param>
+        /// <param name="isActive">Initial value of the IsActive property.</param>
+        public static TestSectionCommission CreateTestSectionCommission(global::System.Int32 id, global::System.Int32 testSectionId, global::System.Int32 partnerId, global::System.Decimal cost, global::System.Boolean isActive)
+        {
+            TestSectionCommission testSectionCommission = new TestSectionCommission();
+            testSectionCommission.Id = id;
+            testSectionCommission.TestSectionId = testSectionId;
+            testSectionCommission.PartnerId = partnerId;
+            testSectionCommission.Cost = cost;
+            testSectionCommission.IsActive = isActive;
+            return testSectionCommission;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TestSectionId
+        {
+            get
+            {
+                return _TestSectionId;
+            }
+            set
+            {
+                OnTestSectionIdChanging(value);
+                ReportPropertyChanging("TestSectionId");
+                _TestSectionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestSectionId");
+                OnTestSectionIdChanged();
+            }
+        }
+        private global::System.Int32 _TestSectionId;
+        partial void OnTestSectionIdChanging(global::System.Int32 value);
+        partial void OnTestSectionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PartnerId
+        {
+            get
+            {
+                return _PartnerId;
+            }
+            set
+            {
+                OnPartnerIdChanging(value);
+                ReportPropertyChanging("PartnerId");
+                _PartnerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PartnerId");
+                OnPartnerIdChanged();
+            }
+        }
+        private global::System.Int32 _PartnerId;
+        partial void OnPartnerIdChanging(global::System.Int32 value);
+        partial void OnPartnerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Cost
+        {
+            get
+            {
+                return _Cost;
+            }
+            set
+            {
+                OnCostChanging(value);
+                ReportPropertyChanging("Cost");
+                _Cost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cost");
+                OnCostChanged();
+            }
+        }
+        private global::System.Decimal _Cost;
+        partial void OnCostChanging(global::System.Decimal value);
+        partial void OnCostChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActive
+        {
+            get
+            {
+                return _IsActive;
+            }
+            set
+            {
+                OnIsActiveChanging(value);
+                ReportPropertyChanging("IsActive");
+                _IsActive = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActive");
+                OnIsActiveChanged();
+            }
+        }
+        private global::System.Boolean _IsActive;
+        partial void OnIsActiveChanging(global::System.Boolean value);
+        partial void OnIsActiveChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestSectionCommission_Partner", "Partner")]
+        public Partner Partner
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partner>("LabManager_ClientModel.FK_TestSectionCommission_Partner", "Partner").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partner>("LabManager_ClientModel.FK_TestSectionCommission_Partner", "Partner").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Partner> PartnerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Partner>("LabManager_ClientModel.FK_TestSectionCommission_Partner", "Partner");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Partner>("LabManager_ClientModel.FK_TestSectionCommission_Partner", "Partner", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_TestSectionCommission_TestSection", "TestSection")]
+        public TestSection TestSection
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_TestSectionCommission_TestSection", "TestSection").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_TestSectionCommission_TestSection", "TestSection").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TestSection> TestSectionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestSection>("LabManager_ClientModel.FK_TestSectionCommission_TestSection", "TestSection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestSection>("LabManager_ClientModel.FK_TestSectionCommission_TestSection", "TestSection", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -7894,12 +8411,11 @@ namespace DataRepository
         /// <param name="age">Initial value of the Age property.</param>
         /// <param name="examinationNumber">Initial value of the ExaminationNumber property.</param>
         /// <param name="receivedDate">Initial value of the ReceivedDate property.</param>
-        /// <param name="testName">Initial value of the TestName property.</param>
         /// <param name="testSectionId">Initial value of the TestSectionId property.</param>
         /// <param name="testSectionName">Initial value of the TestSectionName property.</param>
         /// <param name="isBold">Initial value of the IsBold property.</param>
         /// <param name="lastUpdated">Initial value of the LastUpdated property.</param>
-        public static Report_PatientResult CreateReport_PatientResult(global::System.String firstName, global::System.String gender, global::System.String address, global::System.String age, global::System.String examinationNumber, global::System.DateTime receivedDate, global::System.String testName, global::System.Int32 testSectionId, global::System.String testSectionName, global::System.Boolean isBold, global::System.DateTime lastUpdated)
+        public static Report_PatientResult CreateReport_PatientResult(global::System.String firstName, global::System.String gender, global::System.String address, global::System.String age, global::System.String examinationNumber, global::System.DateTime receivedDate, global::System.Int32 testSectionId, global::System.String testSectionName, global::System.Boolean isBold, global::System.DateTime lastUpdated)
         {
             Report_PatientResult report_PatientResult = new Report_PatientResult();
             report_PatientResult.FirstName = firstName;
@@ -7908,7 +8424,6 @@ namespace DataRepository
             report_PatientResult.Age = age;
             report_PatientResult.ExaminationNumber = examinationNumber;
             report_PatientResult.ReceivedDate = receivedDate;
-            report_PatientResult.TestName = testName;
             report_PatientResult.TestSectionId = testSectionId;
             report_PatientResult.TestSectionName = testSectionName;
             report_PatientResult.IsBold = isBold;
@@ -8114,7 +8629,7 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String TestName
         {
@@ -8126,7 +8641,7 @@ namespace DataRepository
             {
                 OnTestNameChanging(value);
                 ReportPropertyChanging("TestName");
-                _TestName = StructuralObject.SetValidValue(value, false);
+                _TestName = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("TestName");
                 OnTestNameChanged();
             }
@@ -9474,6 +9989,107 @@ namespace DataRepository
         private global::System.Boolean _IsActive;
         partial void OnIsActiveChanging(global::System.Boolean value);
         partial void OnIsActiveChanged();
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="LabManager_ClientModel", Name="SearchTestSectionByNameForPanel_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class SearchTestSectionByNameForPanel_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SearchTestSectionByNameForPanel_Result object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static SearchTestSectionByNameForPanel_Result CreateSearchTestSectionByNameForPanel_Result(global::System.Int32 id, global::System.String name)
+        {
+            SearchTestSectionByNameForPanel_Result searchTestSectionByNameForPanel_Result = new SearchTestSectionByNameForPanel_Result();
+            searchTestSectionByNameForPanel_Result.Id = id;
+            searchTestSectionByNameForPanel_Result.Name = name;
+            return searchTestSectionByNameForPanel_Result;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                OnIdChanging(value);
+                ReportPropertyChanging("Id");
+                _Id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Id");
+                OnIdChanged();
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Cost
+        {
+            get
+            {
+                return _Cost;
+            }
+            set
+            {
+                OnCostChanging(value);
+                ReportPropertyChanging("Cost");
+                _Cost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cost");
+                OnCostChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Cost;
+        partial void OnCostChanging(Nullable<global::System.Decimal> value);
+        partial void OnCostChanged();
 
         #endregion
     }

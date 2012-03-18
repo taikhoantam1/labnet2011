@@ -79,6 +79,20 @@ namespace DataRepository
             return listTest;
         }
 
+        public List<VMTestSectionListItem> GetPartnerTestSection(int id)
+        {
+            Partner partner = GetPartnerById(id);
+            List<VMTestSectionListItem> listTest = partner.TestSectionCommissions.Where(p => p.IsActive == true).Select(p => new VMTestSectionListItem
+            {
+                TestSectionName = p.TestSection.Name,
+                TestSectionId = p.TestSectionId,
+                TestSectionCost = p.Cost,
+                IsEnableTestSection = true,
+            }).ToList();
+
+            return listTest;
+        }
+
         public List<Partner> GetPartnerByName(string name)
         {
             List<Partner> lstPartner = (from _partner in myDb.Partners where _partner.IsActive && (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper())) select _partner).ToList();
@@ -598,6 +612,12 @@ namespace DataRepository
             testSection.UseCostForAssociateTest = testSectionToUpdate.UseCostForAssociateTest;
             myDb.SaveChanges();
         }
+
+        public object GetTestSectionByNameForPanel(string name, string searchType)
+        {
+            List<SearchTestSectionByNameForPanel_Result> lstTestSection = myDb.SearchTestSectionByNameForPanel(name, searchType).ToList();
+            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
+        }
         #endregion
 
         #region Patient
@@ -944,6 +964,46 @@ namespace DataRepository
                 LabUser account = myDb.LabUsers.Where(p => p.UserName == UserName && p.Password == Password).FirstOrDefault();
                 return account;
             }
+        #endregion
+
+        #region TestSectionCommission
+        public TestSectionCommission GetTestSectionCommission(int id)
+        {
+            try
+            {
+                TestSectionCommission test = (from _test in myDb.TestSectionCommissions where _test.Id == id select _test).First();
+                myDb.SaveChanges();
+                return test;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void TestSectionCommissionInsert(TestSectionCommission test)
+        {
+            myDb.TestSectionCommissions.AddObject(test);
+            myDb.SaveChanges();
+        }
+
+        public void TestSectionCommissionUpdate(int id, TestSectionCommission test)
+        {
+            TestSectionCommission currentTest = (from _test in myDb.TestSectionCommissions where _test.Id == id select _test).First();
+            
+            currentTest.IsActive = test.IsActive;
+            currentTest.Cost = test.Cost;
+
+            myDb.SaveChanges();
+        }
+
+        public void TestSectionCommissionDelete(int id)
+        {
+            TestSectionCommission test = GetTestSectionCommission(id);
+            test.IsActive = false;
+
+            myDb.SaveChanges();
+        }
         #endregion
     }
 }

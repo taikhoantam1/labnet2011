@@ -66,6 +66,7 @@
     <Compile Include="Test\VMTestListItem.cs" />
     <Compile Include="Test\VMTestSearch.cs" />
     <Compile Include="Test\VMTestSection.cs" />
+    <Compile Include="Test\VMTestSectionListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
