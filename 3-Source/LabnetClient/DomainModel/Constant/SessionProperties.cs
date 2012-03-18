@@ -12,5 +12,6 @@ namespace DomainModel.Constant
         public const string SessionDoctorList = "Session_Doctor_List";
         public const string SessionPatientTestList = "Session_PatientTest_List";
         public const string SessionReport_Params = "SessionReport_Params";
+        public const string SessionPartnerTestSectionList = "Session_PartnerTestSection_List";
     }
 }

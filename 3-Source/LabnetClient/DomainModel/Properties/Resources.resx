@@ -141,6 +141,9 @@
   <data name="VMPanel_IsEnable" xml:space="preserve">
     <value>Kích Hoạt</value>
   </data>
+  <data name="VMPanel_IsEnableTestSection" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
   <data name="VMPanel_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Panel</value>
   </data>
@@ -152,6 +155,12 @@
   </data>
   <data name="VMPanel_TestName" xml:space="preserve">
     <value>Tên Xét Nghiệm</value>
+  </data>
+  <data name="VMPanel_TestSectionCost" xml:space="preserve">
+    <value>Giá Nhóm</value>
+  </data>
+  <data name="VMPanel_TestSectionName" xml:space="preserve">
+    <value>Nhóm Xét Nghiệm</value>
   </data>
   <data name="VMPartnerSearch_Address" xml:space="preserve">
     <value>Địa Chỉ</value>

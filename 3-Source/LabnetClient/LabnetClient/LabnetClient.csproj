@@ -921,9 +921,6 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>PatientStrings.Designer.cs</LastGenOutput>
     </Content>
-    <Content Include="Report\report_PatientResult.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="App_GlobalResources\Report\ReportStrings.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>ReportStrings.Designer.cs</LastGenOutput>
@@ -935,6 +932,7 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>TestSectionStrings.designer.cs</LastGenOutput>
     </Content>
+    <EmbeddedResource Include="Report\report_PatientResult.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

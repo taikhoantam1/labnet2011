@@ -36,6 +36,7 @@ namespace DataRepository
         /// <returns></returns>
         List<VMTestListItem> GetPartnerTest(int id);
 
+        List<VMTestSectionListItem> GetPartnerTestSection(int id);
 
         List<Partner> GetPartnerByName(string name);
 
@@ -113,6 +114,7 @@ namespace DataRepository
         bool IsValidTestSection(string tsName,int? testSectionId);
         List<VMTestListItem> GetTestsOfTestSection(int Id);
         void TestSectionUpdate(TestSection testSection);
+        object GetTestSectionByNameForPanel(string name, string searchType);
         #endregion
 
         #region Patient
@@ -161,8 +163,13 @@ namespace DataRepository
             LabUser GetLabUser(string UserName, string Password);
         #endregion
 
+        #region TestSectionCommission
+        TestSectionCommission GetTestSectionCommission(int id);
+        void TestSectionCommissionInsert(TestSectionCommission test);
+        void TestSectionCommissionUpdate(int id, TestSectionCommission test);
+        void TestSectionCommissionDelete(int id);
+        #endregion
 
 
-            
     }
 }

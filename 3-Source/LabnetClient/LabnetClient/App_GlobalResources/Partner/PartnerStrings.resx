@@ -132,6 +132,9 @@
   <data name="PartnerInsert_Button_Add" xml:space="preserve">
     <value>Thêm</value>
   </data>
+  <data name="PartnerInsert_Button_Add_TestSection" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
   <data name="PartnerInsert_Button_Cancel" xml:space="preserve">
     <value>Thêm Mới</value>
   </data>
@@ -182,6 +185,12 @@
   </data>
   <data name="PartnerInsert_TestPrice" xml:space="preserve">
     <value>Giá XN</value>
+  </data>
+  <data name="PartnerInsert_TestSection" xml:space="preserve">
+    <value>Nhóm XN</value>
+  </data>
+  <data name="PartnerInsert_TestSectionPrice" xml:space="preserve">
+    <value>Giá Nhóm</value>
   </data>
   <data name="PartnerInsert_Title" xml:space="preserve">
     <value>Thêm Lab Gởi Mẫu</value>

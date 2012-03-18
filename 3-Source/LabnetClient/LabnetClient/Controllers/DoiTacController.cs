@@ -39,9 +39,10 @@ namespace LabnetClient.Controllers
 
         public ActionResult Create()
         {
-            PartnerViewModel model = new PartnerViewModel(new VMPartner(),new List<VMTestListItem>());
+            PartnerViewModel model = new PartnerViewModel(new VMPartner(),new List<VMTestListItem>(), new List<VMTestSectionListItem>());
             model.ViewMode = ViewMode.Create;
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.TestSectionAutocomplete.JsonData = Repository.GetTestSectionByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Details", model);
         }
 
@@ -51,6 +52,8 @@ namespace LabnetClient.Controllers
         public ActionResult Create(PartnerViewModel model)
         {
             List<VMTestListItem> Rows = null;
+            List<VMTestSectionListItem> TestSectionRows = null;
+
             if (Session[SessionProperties.SessionPartnerTestList] != null)
             {
                 Rows = (List<VMTestListItem>)Session[SessionProperties.SessionPartnerTestList];
@@ -60,6 +63,15 @@ namespace LabnetClient.Controllers
                 Rows = new List<VMTestListItem>();
             }
 
+            if (Session[SessionProperties.SessionPartnerTestSectionList] != null)
+            {
+                TestSectionRows = (List<VMTestSectionListItem>)Session[SessionProperties.SessionPartnerTestSectionList];
+            }
+            else
+            {
+                TestSectionRows = new List<VMTestSectionListItem>();
+            }
+
             if (!Repository.IsValidPartner(model.Partner.Name))
             {
                 ModelState.AddModelError("Partner name already exists", Resources.PartnerStrings.PartnerInsert_NameError);
@@ -67,8 +79,11 @@ namespace LabnetClient.Controllers
 
             if (!ModelState.IsValid)
             {
+                model.TestSectionAutocomplete = new AutocompleteModel("Partner.TestSectionName");
                 model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+                model.TestSectionAutocomplete.JsonData = Repository.GetTestSectionByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
                 model.JQGrid = new JQGridModel(typeof(VMTestListItem), true, Rows, "/Partner/SavePartnerTest");
+                model.JQGridTestSection = new JQGridModel(typeof(VMTestSectionListItem), true, TestSectionRows, "/Partner/SavePartnerTestSection");
                 return View("Details", model);
             }
             else
@@ -90,6 +105,24 @@ namespace LabnetClient.Controllers
                         Repository.PartnerCostInsert(cost);
                     }
                 }
+
+                foreach (VMTestSectionListItem item in TestSectionRows)
+                {
+                    if (item.IsEnableTestSection)
+                    {
+                        TestSectionCommission ts = new TestSectionCommission();
+                        
+                        decimal tmpCost;
+                        if (decimal.TryParse(item.TestSectionCost.ToString(), out tmpCost))
+                            ts.Cost = tmpCost;
+
+                        ts.PartnerId = partner.Id;
+                        ts.TestSectionId = item.TestSectionId;
+                        ts.IsActive = true;
+
+                        Repository.TestSectionCommissionInsert(ts);
+                    }
+                }
             }
             return RedirectToAction("Search");
             
@@ -104,6 +137,14 @@ namespace LabnetClient.Controllers
             return "success";
         }
 
+        [HttpPost]
+        public string SavePartnerTestSection(List<VMTestSectionListItem> Rows)
+        {
+            Session[SessionProperties.SessionPartnerTestSectionList] = Rows;
+
+            return "success";
+        }
+
         //
         // GET: /Partner/Edit/5
 
@@ -111,9 +152,11 @@ namespace LabnetClient.Controllers
         {
             VMPartner partner = Mapper.Map<Partner, VMPartner>(Repository.GetPartnerById(id));
             List<VMTestListItem> partnerTestList = Repository.GetPartnerTest(id);
-            PartnerViewModel model = new PartnerViewModel(partner,partnerTestList);
+            List<VMTestSectionListItem> partnerTestSectionList = Repository.GetPartnerTestSection(id);
+            PartnerViewModel model = new PartnerViewModel(partner, partnerTestList, partnerTestSectionList);
             model.ViewMode = ViewMode.Edit;
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.TestSectionAutocomplete.JsonData = Repository.GetTestSectionByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
 
             return View("Details", model);
         }

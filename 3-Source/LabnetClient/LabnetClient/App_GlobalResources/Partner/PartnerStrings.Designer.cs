@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm.
+        /// </summary>
+        internal static string PartnerInsert_Button_Add_TestSection {
+            get {
+                return ResourceManager.GetString("PartnerInsert_Button_Add_TestSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm Mới.
         /// </summary>
         internal static string PartnerInsert_Button_Cancel {
@@ -255,6 +264,24 @@ namespace Resources {
         internal static string PartnerInsert_TestPrice {
             get {
                 return ResourceManager.GetString("PartnerInsert_TestPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm XN.
+        /// </summary>
+        internal static string PartnerInsert_TestSection {
+            get {
+                return ResourceManager.GetString("PartnerInsert_TestSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giá Nhóm.
+        /// </summary>
+        internal static string PartnerInsert_TestSectionPrice {
+            get {
+                return ResourceManager.GetString("PartnerInsert_TestSectionPrice", resourceCulture);
             }
         }
         
