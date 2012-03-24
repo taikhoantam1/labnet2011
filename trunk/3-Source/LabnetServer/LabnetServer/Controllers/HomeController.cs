@@ -12,14 +12,12 @@ namespace LabnetServer.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Login()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]

@@ -1,4 +1,4 @@
-﻿ <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,9 +8,9 @@
             <%= Resources.GlobalStrings.LabnetClientTitle %>
         </asp:ContentPlaceHolder>
     </title>
-    
     <link href="../../Content/Style/Site.css" rel="stylesheet" type="text/css" />
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/redmond/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
     <link href="../../Content/Style/LayoutTemplate.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -18,33 +18,54 @@
         google.load("jqueryui", "1.8.16");
     </script>
     <script type="text/javascript" src="../../Content/Lib/jquery/jquery.blockUI.js"></script>
-    <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery.ui.autocomplete.selectFirst.js" ></script>
+    <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery.ui.autocomplete.selectFirst.js"></script>
     <script type="text/javascript" src="../../Content/Lib/Ajax/ajax.js"></script>
     <script type="text/javascript" src="../../Content/Lib/Utility/ClientUtil.js"></script>
     <script type="text/javascript" src="../../Content/Lib/AutoNumeric/autoNumeric-1.7.1.js"></script>
-    <script src="../../Content/Scripts/jqueryExtend.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../../Content/Scripts/Script.js" ></script>
-   
+    <script src="../../Content/Lib/jquery/MultiModalDialog.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $("#SupportIcon").click(function () {
+                $("#SupportTable").toggle();
+            });
+
+        });
+    </script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
 <body>
     <div class="Warpper">
-        <div class="Page">
-            <div class="Header">
+        <div class="Header">
+            <div class="Logo">
+            </div>
+            <div class="BannerWrapper">
                 <div class="Banner">
                 </div>
+                <div class="TopMenu">
+                    <div class="TopMenuItem">
+                        <a href="/home/login" class="multi_modal_link">
+                            <img src="../../Content/Images/Top_Menu1.png" />
+                        </a>
+                    </div>
+                    <div class="TopMenuItem">
+                        <a href="#">
+                            <img src="../../Content/Images/Top_Menu2.png" />
+                        </a>
+                    </div>
+                    <div class="TopMenuItem">
+                        <a href="#">
+                            <img src="../../Content/Images/Top_Menu3.png" />
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="Content">
-                <div class="LeftMenu">
-                    <% Html.RenderPartial("Menu"); %>
-                </div>
-                <div Id="Middle_Line"></div>
-                <div id="MainContent">
-                    <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server" />
-                </div>
-                <div class="clear">
-                </div>
-            </div>
+        </div>
+        <div class="Content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <div class="clear"></div>
+        <% Html.RenderPartial("SupportIcon"); %>
+        <% Html.RenderPartial("Footer"); %>
         </div>
     </div>
 </body>
