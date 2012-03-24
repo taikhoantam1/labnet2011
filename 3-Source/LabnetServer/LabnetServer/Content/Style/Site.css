@@ -10,13 +10,13 @@ body
     margin: 0;
     padding: 0;
     color: #696969;
-    background: url("../Images/HeaderBG.png") repeat-x;
+    background: url("../Images/Header_bg.png") repeat-x;
 }
 
 a:link
 {
     color: #034af3;
-    text-decoration: underline;
+    text-decoration: none;
 }
 a:visited
 {
@@ -24,7 +24,7 @@ a:visited
 }
 a:hover
 {
-    color: #1d60ff;
+    color: red;
     text-decoration: none;
 }
 a:active
@@ -60,7 +60,7 @@ h2
 h3
 {
     font-size: 1.2em;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 h4
 {
@@ -85,299 +85,178 @@ h5, h6
 {
     float: right;
 }
-
+.line
+{
+    width: 90%;
+}
+.hide
+{
+    display:none;
+}
 .Warpper
 {
     width: 1200px;
-    background: url("../Images/WrapperBG.png") no-repeat;
-    height: 300px;
-    margin: 0 auto;
-}
-
-.Page
-{
-    width: 1000px;
+    height: auto;
     margin: 0 auto;
 }
 
 .Header
 {
     width: 100%;
-    height: 225px;
-    position: relative;
+    height: 400px;
 }
 
+.Logo
+{
+    width: 1000px;
+    margin: 0 auto;
+    height: 90px;
+    background: url("../Images/Logo.png") no-repeat;
+}
+
+.BannerWrapper
+{
+    width: 1000px;
+    height: 310px;
+    margin: 0 auto;
+    background-color: #36799D;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
 .Banner
 {
-    width: 770px;
-    height: 225px;
+    width: 650px;
+    height: 304px;
     background: url("../Images/Banner.png") no-repeat;
-    left: 200px;
-    top: 100px;
-    position: absolute;
+    float: left;
+    margin: 2px 0px 0px 2px;
+}
+.TopMenu
+{
+    width: 344px;
+    height: 305px;
+    float: right;
+    margin: 2px 2px 0px 0px;
+}
+.TopMenuItem
+{
 }
 
 .Content
 {
-    width: 100%;
-    border-left: 1px solid #87CEDB;
-    border-right: 1px solid #87CEDB;
-}
-#MainContent
-{
-    width: 78%;
-    float: right;
-    margin-top: 90px;
-    margin-bottom: 50px;
-}
-#Middle_Line
-{
-    float:left;
-    width:1px;
-    height:400px;
-    border-left:1px solid #CBCBCB;
-    margin: 90px 5px;
-}
-/*-----------------Menu-----------------------------*/
-.LeftMenu
-{
-    width: 20%;
-    float: left;
-    height: 300px;
-}
-
-.LeftMenu ul
-{
-    list-style: none;
-    padding-left: 20px;
-    margin:0px;
-}
-
-.LeftMenu .MenuTitle
-{
-    color: #636363;
-    font-size: 22px;
-    font-weight: 400;
-    margin-bottom: 0;
-    text-align: center;
-    margin-top: 40px;
-}
-
-.LeftMenu a.MenuItem
-{
-    background: url("../Images/iconArrow.png") no-repeat scroll 0 3px transparent;
-    text-decoration: none;
-    color: #3962A7;
-    padding-left: 5px;
-    font-size: 13px;
-    margin-bottom: 5px;
-    line-height: 25px;
-    padding-left: 20px;
-}
-
-.LeftMenu a.MenuItem:hover
-{
-    color: red;
-}
-
-dd
-{
-    padding-bottom:10px;
-    margin:0px;
-}
-
-dt
-{
-    margin:0px;
-    padding-top:10px;
-    margin-left: 5px;
-}
-dt a
-{
-    text-decoration: none !important;
-    color: #636363 !important;
-    font-size: 15px;
-    padding-left:40px;
-    height: 32px;
-    display: block;
-    padding-top:7px;
-}
-
-.iconReport
-{
-    background: url("../Images/iconReport_32.png") no-repeat  transparent;
-}
-
-.iconPatient
-{
-    background: url("../Images/iconPatient_32.png") no-repeat transparent;
-}
-
-.iconLab
-{
-    background: url("../Images/iconLab_32.png") no-repeat transparent;
-}
-
-.iconPXN
-{
-    background: url("../Images/iconPXN_32.png") no-repeat transparent;
-}
-/*-----------------Menu-----------------------------*/
-/********** Div table ************/
-
-.Row
-{
-    width: 100%;
-    height:auto;
-    margin: 5px 0px;
-    clear: both;
-}
-
-.Column
-{
-    margin: 0 5px;
-    height:100%;
-    display:table-cell !important; 
-    vertical-align:middle!important;
-}
-
-.LeftCol
-{
-    float: left;
-    width: 48%;
-}
-
-.RightCol
-{
-    float: right;
-    width: 48%;
-}
-
-.BothCol
-{
-    width:100%;
-}
-
-/********** Module Style *************/
-.Module
-{
-    margin-left: 10px;
-    clear: both;
-}
-.ModuleTitle
-{
-    margin-bottom: 10px;
-}
-.Title
-{
-    font-size: 24px;
-    color: #3962A7;
-}
-.lbTitle
-{
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: left;
-    width: 110px;
-}
-/*********Validation Error**********/
-.infobox
-{
-    border: solid 1px #228ef1;
-    padding: 5px 8px 5px 8px;
-    text-align: left;
-    vertical-align: middle;
-    background-color: #F1E7D1;
-}
-
-.infoimage
-{
-    padding: 5px 15px 5px 15px;
-    background: #F1E7D1 url(../Images/icons/info-24x24.png) no-repeat;
-    background-position: left center;
-}
-
-.errorbox
-{
-    background-color: #F5C2A0;
-    border: 2px solid red;
-    margin: 10px;
-    padding: 5px 20px;
-    text-align: left;
-    vertical-align: middle;
-    width: 90%;
-}
-
-.errorimage
-{
-    background: url("../Images/icons/err-16x16.png") no-repeat scroll left center #F5C2A0;
-    color: red;
-    display: inline-block;
-    height: 100%;
-    padding: 10px 20px;
-    vertical-align: middle;
-}
-
-/*************************************************/
-/* VALIDATION ERROR*/
-
-.validation-summary-errors
-{
-    padding: 1.5em;
-    margin: .5em 0px .5em 0px;
-    background-color: #ffffdf;
-    border: 1px solid #df6b6b;
-    color: #dc3535;
-}
-
-validation-summary-errors ul
-{
-    margin: 0;
-    padding: 0;
-    margin-left: 80px;
-    list-style: square;
-}
-
-.hide
-{
-    display: none;
-}
-
-.editLink
-{
-    background: url('Icon/Edit.gif') 0px 5px no-repeat;
-    padding: 8px;
-    margin: 5px;
-}
-
-.deleteLink
-{
-    background: url('Icon/iconDelete.gif') 0px 5px no-repeat;
-    margin: 5px;
-    padding: 8px;
-}
-
-.line
-{
-    width: 400px;
+    width: 1000px;
+    height: auto;
     margin: 0 auto;
-    margin-bottom:15px;
-    border-bottom: 1px solid #CCC;
-    height:15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: auto;
+    -moz-box-shadow: 0px 0px 2px 2px #7A7A7A;
+    -webkit-box-shadow: 0px 0px 2px 2px #7A7A7A;
+    box-shadow: 0px 0px 2px 2px #7A7A7A;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background:white;
 }
-select,textarea
+.HomeContent
 {
-    margin:5px 0px;
+    width: 100%;
+    height: auto;
+}
+.HomeLeftCol
+{
+    width: 650px;
+    float: left;
 }
 
-input[type='button'],input[type='submit']
+.HomeRightCol
 {
-    padding:5px 20px;
-    margin:5px;
+    width: 350px;
+    float: right;
 }
 
-.HightLight
+.article
 {
-    color:Red !important;
+    width: 90%;
+    margin: 20px auto;
+    padding-bottom:20px;
+    border-bottom: 1px dotted #7FC9FF;
+}
+.articleAvatar
+{
+    float: left;
+    width: 180px;
+    height: 145px;
+}
+
+.aticleSummarize
+{
+    float: left;
+    width: 350px;
+}
+.articleSummarizeText
+{
+    width: 100%;
+}
+.articleTitle
+{
+    color: #25A2CC;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.MenuGroup
+{
+    width: 90%;
+    margin: 10px auto;
+}
+
+.DatePublish
+{
+}
+
+.MenuItemLink
+{
+    margin: 5px 5px 5px 10px;
+    color: #25A2CC !important;
+    width: 100%;
+    display: block;
+    text-decoration: underline !important;
+}
+.MenuItemLink:hover
+{
+    color: Red !important;
+}
+
+#SupportIcon
+{
+    position: fixed;
+    top: 170px;
+    left: -4px;
+    width: 48px;
+    height: 48px;
+    background: url("../Images/questionmark.png");
+    cursor: pointer;
+}
+#SupportTable
+{
+    width: 300px;
+    float: right;
+    padding-right: 30px;
+    display: none;
+    position: fixed;
+    top: 240px;
+    left: 0px;
+    background: black;
+    z-index: 9999;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+}
+
+#Footer
+{
+    clear:both;
+    width: 1000px;
+    padding: 20px ;
 }
