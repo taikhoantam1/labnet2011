@@ -27,5 +27,7 @@ namespace DomainModel
 
         public string Diagnosis { get; set; }
 
+        public string ExaminationNumber { get; set; }
+
     }
 }

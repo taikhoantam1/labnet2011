@@ -10,6 +10,7 @@ using DomainModel.Constant;
 using LabnetClient.App_Code;
 using System;
 using System.Transactions;
+using System.Net;
 
 namespace LabnetClient.Controllers
 {
@@ -26,6 +27,7 @@ namespace LabnetClient.Controllers
         {
             PatientViewModel Model = RestoreViewState(new VMPatient(), new VMLabExamination(), null);
             Model.ViewMode = ViewMode.Create;
+            Model.LabExamination.ExaminationNumber = Repository.GetExaminationNumber();
             return View(Model);
         }
 
@@ -57,10 +59,19 @@ namespace LabnetClient.Controllers
                     int patientId = InsertPartient(model);
 
                     //Insert labmanagerment
-                    int LabExaminationId = InsertLabExamination(model, patientId);
+                    LabExamination labExamination = InsertLabExamination(model, patientId);
 
                     //Insert PatientItem
-                    InsertPatientItems(patientTests,  patientId, LabExaminationId);
+                    InsertPatientItems(patientTests,  patientId, labExamination.Id);
+
+                    //Insert new row of Examination in labnet server
+                    int labId= (int)Session["LabId"];
+
+                    string status = InsertExaminationOnLabServer(labId, labExamination.ExaminationNumber,(int) LabExaminationStatusEnum.New);
+                    if (status != "success")
+                    {
+                        throw new Exception("status"); 
+                    }
                     tran.Complete();
                 }
                 return RedirectToAction("Create");
@@ -71,6 +82,18 @@ namespace LabnetClient.Controllers
                 PatientViewModel Model = RestoreViewState(model.Patient, model.LabExamination, patientTests);
                 return View(Model);
             }
+        }
+
+        private string InsertExaminationOnLabServer(int labId, string examinationNumber, int status)
+        {
+            string URI = "http://labnet.vn/Examination/InsertExamination";
+            //string URI = "http://localhost:2821/Examination/InsertExamination";
+        
+            string myParamters = string.Format("LabId={0}&ExaminationNumber={1}&Status={2}", labId, examinationNumber, status);
+            WebClient wc = new WebClient();
+            wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            string HtmlResult = wc.UploadString(URI, myParamters);
+            return HtmlResult;
         }
 
         private void InsertPatientItems(List<VMPatientTest> patientTests, int patientId, int LabExaminationId)
@@ -92,19 +115,20 @@ namespace LabnetClient.Controllers
 
         }
 
-        private int InsertLabExamination(PatientViewModel model, int patientId)
+        private LabExamination InsertLabExamination(PatientViewModel model, int patientId)
         {
             LabExamination labExamination = new LabExamination();
             labExamination.CreatedBy = AppHelper.GetLoginUserId();
             labExamination.PatientId = patientId;
-            labExamination.ExaminationNumber = Repository.GetExaminationNumber();
+            labExamination.ExaminationNumber = model.LabExamination.ExaminationNumber;
             labExamination.OrderNumber = model.LabExamination.OrderNumber.Value;
             labExamination.PartnerId = model.LabExamination.PartnerId == -1 ? null : model.LabExamination.PartnerId;
             labExamination.ReceivedDate = model.LabExamination.ReceivedDate ?? DateTime.Now;
             labExamination.Status = (int)LabExaminationStatusEnum.New;
             labExamination.Diagnosis = model.LabExamination.Diagnosis;
             int LabExaminationId = Repository.LabExaminationInsert(labExamination);
-            return LabExaminationId;
+            labExamination.Id = LabExaminationId;
+            return labExamination;
         }
 
         private int InsertPartient(PatientViewModel model)

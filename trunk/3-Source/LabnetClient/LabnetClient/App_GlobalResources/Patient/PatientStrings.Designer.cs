@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã Xem KQ.
+        /// </summary>
+        internal static string PatientCode {
+            get {
+                return ResourceManager.GetString("PatientCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng chọn xét nghiệm.
         /// </summary>
         internal static string PatientCreate_TestRequired {
