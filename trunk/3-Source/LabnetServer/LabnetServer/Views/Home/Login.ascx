@@ -5,7 +5,6 @@
     {
         width: 170px;
     }
-    
     #key
     {
         margin: 15px;
@@ -15,61 +14,12 @@
     {
         width: 300px;
     }
-    .button
-    {
-        -webkit-appearance: none;
-        -webkit-box-align: center;
-        -webkit-box-shadow: rgba(0, 0, 0, 0.0976563) 0px 1px 1px 0px;
-        -webkit-rtl-ordering: logical;
-        -webkit-transition-delay: 0s;
-        -webkit-transition-duration: 0s;
-        -webkit-transition-property: all;
-        -webkit-transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-        -webkit-user-select: none;
-        background-attachment: scroll;
-        background-clip: border-box;
-        background-color: #357AE8;
-        background-image: -webkit-linear-gradient(top, #4D90FE, #357AE8);
-        background-origin: padding-box;
-        border-bottom-color: #2F5BB7;
-        border-bottom-left-radius: 2px;
-        border-bottom-right-radius: 2px;
-        border-bottom-style: solid;
-        border-bottom-width: 1px;
-        border-left-color: #2F5BB7;
-        border-left-style: solid;
-        border-left-width: 1px;
-        border-right-color: #2F5BB7;
-        border-right-style: solid;
-        border-right-width: 1px;
-        border-top-color: #2F5BB7;
-        border-top-left-radius: 2px;
-        border-top-right-radius: 2px;
-        border-top-style: solid;
-        border-top-width: 1px;
-        box-shadow: rgba(0, 0, 0, 0.0976563) 0px 1px 1px 0px;
-        box-sizing: border-box;
-        color: white;
-        display: inline-block;
-        font-weight: bold;
-        height: 32px;
-        line-height: 29px;
-        margin-top: 10px;
-        padding: 0px 8px 0px 8px;
-    }
-    
-    .button:hover
-    {
-        cursor:pointer !important;
-        color: #FF5509;
-    }
 </style>
 <script language="javascript" type="text/javascript">
     var redirectUrl = "";
+    var labId = "";
     function CallDomainLogin(UserName, Password, Domain) {
         var url = Domain + "/User/Login";
-
-        var result = "";
         $.ajax({
             url: url,
             data: {
@@ -84,7 +34,7 @@
     }
 
     function localJsonpCallback(json) {
-        window.location = redirectUrl + "?token=" + json.toString();
+        window.location = redirectUrl + "?token=" + json.toString()+"&Id="+labId;
     }
 
     function btnLogin_onclick() {
@@ -98,14 +48,16 @@
                 UserName: TaiKhoan,
                 Password: Pass
             },
+            dataType:"Json",
             success: function (data) {
-                if (data.indexOf("labnet.vn") != -1) {
-                    redirectUrl = data;
-                    CallDomainLogin(TaiKhoan, Pass, data);
+                if (data.Message == "Success") {
+                    redirectUrl = data.Url;
+                    labId =data.LabId;
+                    CallDomainLogin(TaiKhoan, Pass, data.Url );
                 }
                 else {
                     $.unblockUI();
-                    alert(data);
+                    alert(data.Message);
                 }
             }
         });

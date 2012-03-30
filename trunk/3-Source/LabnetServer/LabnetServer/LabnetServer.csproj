@@ -82,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GlobalStrings.en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="Code\JSonHelper.cs" />
     <Compile Include="Content\Lib\FileManager\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -112,13 +113,16 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ExaminationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KetQuaXetNghiemController.cs" />
     <Compile Include="CustomeAttribute\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="CustomeAttribute\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\KQXNModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -643,6 +647,7 @@
     <Content Include="Content\Style\Icon\iconNew.gif" />
     <Content Include="Content\Style\Icon\Save32.png" />
     <Content Include="Content\Style\Icon\tick.gif" />
+    <Content Include="Content\Style\ie-css3.htc" />
     <Content Include="Content\Style\LayoutTemplate.css" />
     <Content Include="Content\Style\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\Style\redmond\images\ui-bg_flat_55_999999_40x100.png" />
@@ -688,6 +693,9 @@
     <Content Include="Global.asax" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Login.ascx" />
+    <Content Include="Views\KetQuaXetNghiem\KQSN.ascx" />
+    <Content Include="Views\KetQuaXetNghiem\KQXN_BacSi.aspx" />
+    <Content Include="Views\KetQuaXetNghiem\KQXN_BenhNhan.aspx" />
     <Content Include="Views\Shared\Footer.ascx" />
     <Content Include="Views\Shared\HomeContent.ascx" />
     <Content Include="Views\Shared\SupportIcon.ascx" />
@@ -723,7 +731,6 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Code\" />
     <Folder Include="Content\Lib\tiny_mce\plugins\autosave\images\" />
     <Folder Include="Content\Lib\tiny_mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="Content\Lib\tiny_mce\plugins\spellchecker\includes\" />
