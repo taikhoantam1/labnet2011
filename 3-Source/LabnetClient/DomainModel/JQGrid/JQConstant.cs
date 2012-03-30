@@ -20,7 +20,7 @@ namespace DomainModel.JQGrid
 
                         if (key == 13)//enter
                         {{
-                            setTimeout(""$('#list').editCell("" + selRowIndex + "" + 1,"" +selICol+"", true);"", 100);
+                            setTimeout(""$('#{1}').editCell("" + selRowIndex_{1} + "" + 1,"" +selICol_{1}+"", true);"", 100);
                         }}
 /*
                         if(key == 9)   // tab
@@ -35,8 +35,8 @@ namespace DomainModel.JQGrid
                                     break;
                                 }}
                             }}
-                            if(selICol==colModels.length-1)
-                                setTimeout(""$('#list').editCell("" + selRowIndex + "" + 1,"" +nextCol+"", true);"", 100);
+                            if(selICol_{1}==colModels.length-1)
+                                setTimeout(""$('#{1}').editCell("" + selRowIndex_{1} + "" + 1,"" +nextCol+"", true);"", 100);
                         }}
 */
                     }}

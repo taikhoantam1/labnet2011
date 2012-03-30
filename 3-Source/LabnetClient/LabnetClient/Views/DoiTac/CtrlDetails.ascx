@@ -294,6 +294,17 @@
                     <input type="button" id="btnAddTest" value=" <%=Resources.PartnerStrings.PartnerInsert_Button_Add%>" />
                 </div>
             </div>
+            <div class="Row MarginAuto MarginT20">
+                <table id="ListTest">
+                </table>
+            </div>
+            <% Html.EndForm(); %>
+        </div>
+        <div>
+            <%Html.RenderPartial("DataTable", Model.JQGrid); %>
+        </div>
+        <div class="clear">
+        </div>
             <div class="Row MarginT20">
                 <div class="Column">
                     <label class="lbTitle">
@@ -317,17 +328,6 @@
                 <div class="clear">
                 </div>
             </div>
-            <div class="Row MarginAuto MarginT20">
-                <table id="ListTest">
-                </table>
-            </div>
-            <% Html.EndForm(); %>
-        </div>
-        <div>
-            <%Html.RenderPartial("DataTable", Model.JQGrid); %>
-        </div>
-        <div class="clear">
-        </div>
         <div>
             <%Html.RenderPartial("DataTable", Model.JQGridTestSection); %>
         </div>

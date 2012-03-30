@@ -16,7 +16,6 @@
         });
     });
 </script>
-
 <%=Html.ValidationSummary() %>
 <%if (Model.ViewMode == DomainModel.Constant.ViewMode.Create)
   {%>

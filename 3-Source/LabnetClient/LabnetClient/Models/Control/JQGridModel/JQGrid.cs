@@ -71,9 +71,9 @@ namespace LabnetClient.Models
                 var column=Columns[i];
                 string EditOption="";
                 if(CustomAttributes[i].EditType == EditTypeEnum.Checkbox)
-                      EditOption=  string.Format(   JQConstant.EditOptions, "value:'True:False',");
+                      EditOption=  string.Format(   JQConstant.EditOptions, "value:'True:False',",TableId);
                 else
-                      EditOption=  string.Format(   JQConstant.EditOptions, "");  
+                    EditOption = string.Format(JQConstant.EditOptions, "", TableId);  
                 cols.Add(string.Format(JQConstant.columnTemplate,
                     column.ColumnName,
                     column.ColumnName,

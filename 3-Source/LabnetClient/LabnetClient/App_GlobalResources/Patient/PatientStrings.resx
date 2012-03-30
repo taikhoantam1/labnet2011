@@ -192,4 +192,7 @@
   <data name="PatientInsert_TestSection" xml:space="preserve">
     <value>Nhóm XN</value>
   </data>
+  <data name="PatientCode" xml:space="preserve">
+    <value>Mã Xem KQ</value>
+  </data>
 </root>

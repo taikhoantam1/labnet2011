@@ -201,7 +201,7 @@ namespace DataRepository
         public List<Test> GetTests()
         {
             List<Test> lstTests = (from _test in myDb.Tests
-                                   where _test.IsActive == true 
+                                   where _test.IsActive == true
                                    select _test).ToList();
             return lstTests;
         }
@@ -353,7 +353,7 @@ namespace DataRepository
         public object GetPanelNameByName(string name, string searchType)
         {
             List<SearchPanelByName_Result> lstPanel = myDb.SearchPanelByName(name, searchType).ToList();
-            return lstPanel.Select(p => new { Label = p.Name, Value = p.Name});
+            return lstPanel.Select(p => new { Label = p.Name, Value = p.Name });
         }
         #endregion Panel
 
@@ -450,12 +450,12 @@ namespace DataRepository
             Panel panel = GetPanel(id);
             List<VMTestListItem> listTest = panel.PanelItems.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
-                TestName = p.Test.Name+"-"+p.Test.Description,
+                TestName = p.Test.Name + "-" + p.Test.Description,
                 TestId = p.TestId,
                 TestSectionName = p.Test.TestSection.Name,
                 IsEnable = p.IsActive,
                 Cost = p.Test.Cost,
-               
+
             }).ToList();
             return listTest;
         }
@@ -577,10 +577,10 @@ namespace DataRepository
         {
             bool isValid = true;
             TestSection tsWithSameName = myDb.TestSections.SingleOrDefault(u => u.Name == tsName);
-            if (tsWithSameName != null )
+            if (tsWithSameName != null)
             {
-                if((testSectionId == null) 
-                || (testSectionId!=null && testSectionId != tsWithSameName.Id))
+                if ((testSectionId == null)
+                || (testSectionId != null && testSectionId != tsWithSameName.Id))
                     isValid = false;
             }
             return isValid;
@@ -591,7 +591,7 @@ namespace DataRepository
             TestSection testSection = GetTestSection(Id);
             List<VMTestListItem> listTest = testSection.Tests.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
-                TestName = p.Name+"-"+p.Description,
+                TestName = p.Name + "-" + p.Description,
                 TestId = p.Id,
                 TestSectionName = p.TestSection.Name,
                 IsEnable = p.IsActive,
@@ -601,12 +601,12 @@ namespace DataRepository
         }
         public void TestSectionUpdate(TestSection testSectionToUpdate)
         {
-            TestSection testSection = (from _testSection in myDb.TestSections 
+            TestSection testSection = (from _testSection in myDb.TestSections
                                        where _testSection.Id == testSectionToUpdate.Id
                                        select _testSection).First();
             testSection.IsActive = testSectionToUpdate.IsActive;
             testSection.Name = testSectionToUpdate.Name;
-            testSection.SortOder = testSectionToUpdate.SortOder;
+            testSection.SortOrder = testSectionToUpdate.SortOrder;
             testSection.Cost = testSectionToUpdate.Cost;
             testSection.Description = testSection.Description;
             testSection.UseCostForAssociateTest = testSectionToUpdate.UseCostForAssociateTest;
@@ -668,7 +668,7 @@ namespace DataRepository
                         Cost = analysis.Test.Cost,
                         AnalysisId = analysis.Id
 
-                        
+
                     };
                     listTest.Add(patientTest);
                 }
@@ -819,7 +819,22 @@ namespace DataRepository
             labExamination.Status = labExamination.Status;
             myDb.SaveChanges();
         }
-
+        public VMLabExamination GetLabExamination(string examinationNumber)
+        {
+            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.ExaminationNumber == examinationNumber)
+                                                                 .Select(p => new VMLabExamination
+                                                                 {
+                                                                     CreatedBy = p.CreatedBy,
+                                                                     Diagnosis = p.Diagnosis,
+                                                                     Id = p.Id,
+                                                                     OrderNumber = p.OrderNumber,
+                                                                     PartnerId = p.PartnerId,
+                                                                     PatientId = p.PatientId,
+                                                                     ReceivedDate = p.ReceivedDate,
+                                                                     Status = p.Status
+                                                                 }).FirstOrDefault();
+            return labExamination;
+        }
         #endregion
 
         #region Result
@@ -851,7 +866,7 @@ namespace DataRepository
             }
         }
 
-        public void ResultUpdate(int analysisId,int resultId, string result, int staffId)
+        public void ResultUpdate(int analysisId, int resultId, string result, int staffId)
         {
 
             //Add result
@@ -914,7 +929,7 @@ namespace DataRepository
                         AnalysisId = p.AnalysisId,
                         ResultId = p.ResultId,
                         MoTa = p.Description
-                        
+
 
                     });
                 }
@@ -924,46 +939,47 @@ namespace DataRepository
         #endregion
 
         #region Report
-            public List<Report_PatientResult> ReportData_PatientResult(int labExaminationId)
+        public List<Report_PatientResult> ReportData_PatientResult(int labExaminationId)
+        {
+            List<Report_PatientResult> list = myDb.Report_PatientResult(labExaminationId).ToList();
+            return list;
+        }
+        public List<report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate)
+        {
+            List<report_TestResultNoteBook_Result> list = myDb.report_TestResultNoteBook(startDate, endDate).ToList();
+            Dictionary<string, report_TestResultNoteBook> result = new Dictionary<string, report_TestResultNoteBook>();
+            foreach (var item in list)
             {
-                List<Report_PatientResult> list = myDb.Report_PatientResult(labExaminationId).ToList();
-                return list;
-            }
-            public List<report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate)
-            {
-                List<report_TestResultNoteBook_Result> list = myDb.report_TestResultNoteBook(startDate, endDate).ToList();
-                Dictionary<string, report_TestResultNoteBook> result = new Dictionary<string, report_TestResultNoteBook>();
-                foreach (var item in list)
+                if (!result.Keys.Contains(item.ExaminationNumber))
                 {
-                    if (!result.Keys.Contains(item.ExaminationNumber))
+                    report_TestResultNoteBook testResult = new report_TestResultNoteBook
                     {
-                        report_TestResultNoteBook testResult = new report_TestResultNoteBook { 
-                            Age = item.Age,
-                            Male = item.Gender,
-                            PartnerName = item.LabName,
-                            PatientName = item.FirstName,
-                            Phone = item.Phone,
-                            ReceiveDate = item.ReceivedDate.ToString("d"),
-                            ReturnDate = item.ReceivedDate.ToString("d"),
-                            Result = string.Format("{0}:{1}",item.Name,item.Value)
-                        };
-                        result.Add(item.ExaminationNumber,testResult);
-                    }
-                    else
-                    {
-                        result[item.ExaminationNumber].Result += string.Format(" , {0}:{1}", item.Name, item.Value);
-                    }
+                        Age = item.Age,
+                        Male = item.Gender,
+                        PartnerName = item.LabName,
+                        PatientName = item.FirstName,
+                        Phone = item.Phone,
+                        ReceiveDate = item.ReceivedDate.ToString("d"),
+                        ReturnDate = item.ReceivedDate.ToString("d"),
+                        Result = string.Format("{0}:{1}", item.Name, item.Value)
+                    };
+                    result.Add(item.ExaminationNumber, testResult);
                 }
-                return result.Values.ToList();
+                else
+                {
+                    result[item.ExaminationNumber].Result += string.Format(" , {0}:{1}", item.Name, item.Value);
+                }
             }
+            return result.Values.ToList();
+        }
         #endregion
 
         #region LabUser
-            public LabUser GetLabUser(string UserName, string Password)
-            {
-                LabUser account = myDb.LabUsers.Where(p => p.UserName == UserName && p.Password == Password).FirstOrDefault();
-                return account;
-            }
+        public LabUser GetLabUser(string UserName, string Password)
+        {
+            LabUser account = myDb.LabUsers.Where(p => p.UserName == UserName && p.Password == Password).FirstOrDefault();
+            return account;
+        }
         #endregion
 
         #region TestSectionCommission
@@ -990,7 +1006,7 @@ namespace DataRepository
         public void TestSectionCommissionUpdate(int id, TestSectionCommission test)
         {
             TestSectionCommission currentTest = (from _test in myDb.TestSectionCommissions where _test.Id == id select _test).First();
-            
+
             currentTest.IsActive = test.IsActive;
             currentTest.Cost = test.Cost;
 

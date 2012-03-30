@@ -27,7 +27,7 @@ namespace DomainModel
         public string PatientNumber { get; set; }
 
 
-        [Required(ErrorMessageResourceName = "VMPatient_Address_RequireMessage", ErrorMessageResourceType = typeof(Resources))]
+        //[Required(ErrorMessageResourceName = "VMPatient_Address_RequireMessage", ErrorMessageResourceType = typeof(Resources))]
         [JQColumnAttribute("VMPatient_Address", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string Address { get; set; }
 

@@ -24,7 +24,8 @@
                             <%=Resources.PatientStrings.PatientSTT %></label>
                     </div>
                     <div class="Column">
-                        <%=Html.TextBoxFor(m => m.LabExamination.OrderNumber, new { Class = "textInput50 number readonly" })%>
+                        <%=Html.TextBox("stt",Model.LabExamination.OrderNumber, new { Class = "textInput50 number readonly", style = "padding-left:10px; color:Red; font-size:18px!important; padding:0px" , Disabled="Disabled"})%>
+                        <%= Html.HiddenFor(p=>p.LabExamination.OrderNumber) %>
                     </div>
                 </div>
                 <div class="Row">
@@ -52,6 +53,16 @@
                           {%>
                         <%=Html.TextBox("LabExamination.ReceivedDate", Model.LabExamination.ReceivedDate.Value.ToString("d"), new { ID = "LabExamination_ReceivedDate", Class = "textInput100 date" })%>
                         <%} %>
+                    </div>
+                </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.PatientStrings.PatientCode %></label>
+                    </div>
+                    <div class="Column">
+                        <b style="color:Red; font-size:18px!important"><%= Model.LabExamination.ExaminationNumber%></b>
+                        <%= Html.HiddenFor(p=>p.LabExamination.ExaminationNumber) %>
                     </div>
                 </div>
             </div>

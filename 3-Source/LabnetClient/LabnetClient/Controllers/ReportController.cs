@@ -30,6 +30,18 @@ namespace LabnetClient.Controllers
             return View("ReportViewer", model);
         }
 
+
+        [HttpGet]
+        public ActionResult PatientResultReport_ForServer(string examinationNumber)
+        {
+            ReporViewModel model = new ReporViewModel("report_PatientResult", "Phiếu Kết Quả");
+            VMLabExamination labExamination = new VMLabExamination();
+            labExamination = Repository.GetLabExamination(examinationNumber);
+            if(labExamination!=null)
+                model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
+            return View("PatientResult_Server", model);
+        }
+
         [HttpGet]
         public ActionResult PatientResultReport()
         {
