@@ -4,10 +4,41 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LabServerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="LabServerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="LabServerModelStoreContainer">
+          <EntitySet Name="Examination" EntityType="LabServerModel.Store.Examination" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LabClient" EntityType="LabServerModel.Store.LabClient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabnetAccount" EntityType="LabServerModel.Store.LabnetAccount" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Examination_LabClient" Association="LabServerModel.Store.FK_Examination_LabClient">
+            <End Role="LabClient" EntitySet="LabClient" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabnetAccount_LabClient" Association="LabServerModel.Store.FK_LabnetAccount_LabClient">
+            <End Role="LabClient" EntitySet="LabClient" />
+            <End Role="LabnetAccount" EntitySet="LabnetAccount" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="ExaminationId" />
+          </Key>
+          <Property Name="ExaminationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExaminationNumber" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="LabId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabClient">
+          <Key>
+            <PropertyRef Name="LabId" />
+          </Key>
+          <Property Name="LabId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Url" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="LabnetAccount">
           <Key>
             <PropertyRef Name="UserId" />
@@ -17,38 +48,150 @@
           <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="LabId" Type="int" />
           <Property Name="Domain" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Role" Type="int" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <Association Name="FK_Examination_LabClient">
+          <End Role="LabClient" Type="LabServerModel.Store.LabClient" Multiplicity="1" />
+          <End Role="Examination" Type="LabServerModel.Store.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabClient">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabnetAccount_LabClient">
+          <End Role="LabClient" Type="LabServerModel.Store.LabClient" Multiplicity="0..1" />
+          <End Role="LabnetAccount" Type="LabServerModel.Store.LabnetAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabClient">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="LabnetAccount">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LabServerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="LabnetServerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Examinations" EntityType="LabServerModel.Examination" />
+          <EntitySet Name="LabClients" EntityType="LabServerModel.LabClient" />
           <EntitySet Name="LabnetAccounts" EntityType="LabServerModel.LabnetAccount" />
+          <AssociationSet Name="FK_Examination_LabClient" Association="LabServerModel.FK_Examination_LabClient">
+            <End Role="LabClient" EntitySet="LabClients" />
+            <End Role="Examination" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabnetAccount_LabClient" Association="LabServerModel.FK_LabnetAccount_LabClient">
+            <End Role="LabClient" EntitySet="LabClients" />
+            <End Role="LabnetAccount" EntitySet="LabnetAccounts" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="ExaminationId" />
+          </Key>
+          <Property Type="Int32" Name="ExaminationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ExaminationNumber" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LabId" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <NavigationProperty Name="LabClient" Relationship="LabServerModel.FK_Examination_LabClient" FromRole="Examination" ToRole="LabClient" />
+        </EntityType>
+        <EntityType Name="LabClient">
+          <Key>
+            <PropertyRef Name="LabId" />
+          </Key>
+          <Property Type="Int32" Name="LabId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Url" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Examinations" Relationship="LabServerModel.FK_Examination_LabClient" FromRole="LabClient" ToRole="Examination" />
+          <NavigationProperty Name="LabnetAccounts" Relationship="LabServerModel.FK_LabnetAccount_LabClient" FromRole="LabClient" ToRole="LabnetAccount" />
+        </EntityType>
         <EntityType Name="LabnetAccount">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="LabId" Type="Int32" />
-          <Property Name="Domain" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="LabId" />
+          <Property Type="String" Name="Domain" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Role" Nullable="false" />
+          <NavigationProperty Name="LabClient" Relationship="LabServerModel.FK_LabnetAccount_LabClient" FromRole="LabnetAccount" ToRole="LabClient" />
         </EntityType>
+        <Association Name="FK_Examination_LabClient">
+          <End Type="LabServerModel.LabClient" Role="LabClient" Multiplicity="1" />
+          <End Type="LabServerModel.Examination" Role="Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabClient">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabnetAccount_LabClient">
+          <End Type="LabServerModel.LabClient" Role="LabClient" Multiplicity="0..1" />
+          <End Type="LabServerModel.LabnetAccount" Role="LabnetAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabClient">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="LabnetAccount">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LabServerModelStoreContainer" CdmEntityContainer="LabnetServerEntities">
-          <EntitySetMapping Name="LabnetAccounts"><EntityTypeMapping TypeName="LabServerModel.LabnetAccount"><MappingFragment StoreEntitySet="LabnetAccount">
-            <ScalarProperty Name="UserId" ColumnName="UserId" />
-            <ScalarProperty Name="UserName" ColumnName="UserName" />
-            <ScalarProperty Name="Password" ColumnName="Password" />
-            <ScalarProperty Name="LabId" ColumnName="LabId" />
-            <ScalarProperty Name="Domain" ColumnName="Domain" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Examinations">
+            <EntityTypeMapping TypeName="LabServerModel.Examination">
+              <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
+                <ScalarProperty Name="ExaminationId" ColumnName="ExaminationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabClients">
+            <EntityTypeMapping TypeName="LabServerModel.LabClient">
+              <MappingFragment StoreEntitySet="LabClient">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabnetAccounts">
+            <EntityTypeMapping TypeName="LabServerModel.LabnetAccount">
+              <MappingFragment StoreEntitySet="LabnetAccount">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Domain" ColumnName="Domain" />
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -70,7 +213,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="LabnetServer">
-        <EntityTypeShape EntityType="LabServerModel.LabnetAccount" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabServerModel.Examination" Width="1.5" PointX="3" PointY="1.125" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="LabServerModel.LabClient" Width="1.5" PointX="0.75" PointY="2.5" Height="2.5571907552083322" />
+        <EntityTypeShape EntityType="LabServerModel.LabnetAccount" Width="1.5" PointX="3" PointY="4" Height="2.3648893229166674" />
+        <AssociationConnector Association="LabServerModel.FK_Examination_LabClient" >
+          <ConnectorPoint PointX="2.25" PointY="2.8987939453125" />
+          <ConnectorPoint PointX="3" PointY="2.8987939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="LabServerModel.FK_LabnetAccount_LabClient" >
+          <ConnectorPoint PointX="2.25" PointY="4.5285953776041659" />
+          <ConnectorPoint PointX="3" PointY="4.5285953776041659" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

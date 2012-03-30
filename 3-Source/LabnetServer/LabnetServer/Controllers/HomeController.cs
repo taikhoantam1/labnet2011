@@ -28,14 +28,14 @@ namespace LabnetServer.Controllers
             {
                 if (account.Password == Password)
                 {
-                    return account.Domain;
+                    return new { Url = account.Domain, LabId = account.LabClient.LabId, Message = "Success" }.ToJson();
                 }
                 else
                 {
-                    return "Sai mật khẩu";
+                    return new {Message = "Sai mật khẩu" }.ToJson(); ;
                 }
             }
-            return "Không tồn tại tài khoản này";
+            return new { Message = "Không tồn tại tài khoản này"}.ToJson(); 
         }
     }
 }

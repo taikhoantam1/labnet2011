@@ -117,70 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="KQXN_MaXetNghiem" xml:space="preserve">
+    <value>Mã xét nghiệm</value>
+  </data>
   <data name="LabnetClientTitle" xml:space="preserve">
-    <value>Hệ Thống Quản Lý Phòng Lab</value>
-  </data>
-  <data name="Menu_CreateDoctor" xml:space="preserve">
-    <value>Thêm Bác Sĩ</value>
-  </data>
-  <data name="Menu_CreateLabPartner" xml:space="preserve">
-    <value>Thêm Lab Gửi Mẫu</value>
-  </data>
-  <data name="Menu_CreateTest" xml:space="preserve">
-    <value>Thêm Xét Nghiệm</value>
-  </data>
-  <data name="Menu_CreateTestPanel" xml:space="preserve">
-    <value>Thêm Panel XN</value>
-  </data>
-  <data name="Menu_FinancialBook" xml:space="preserve">
-    <value>Quản Lý Tài Chính</value>
-  </data>
-  <data name="Menu_GroupTitle_Lab" xml:space="preserve">
-    <value>Quản lý Lab Gửi Mẫu</value>
-  </data>
-  <data name="Menu_GroupTitle_Patient" xml:space="preserve">
-    <value>Quản lý Bệnh Nhân</value>
-  </data>
-  <data name="Menu_GroupTitle_PXN" xml:space="preserve">
-    <value>Quản lý PXN</value>
-  </data>
-  <data name="Menu_GroupTitle_Report" xml:space="preserve">
-    <value>Thống Kê - Báo Cáo</value>
-  </data>
-  <data name="Menu_Management" xml:space="preserve">
-    <value>Quản Lý Nhân Sự</value>
-  </data>
-  <data name="Menu_MaterialBook" xml:space="preserve">
-    <value>Thống Kê Hóa Chất</value>
-  </data>
-  <data name="Menu_MenuTitle" xml:space="preserve">
-    <value>Menu Chính</value>
-  </data>
-  <data name="Menu_PatientInfo" xml:space="preserve">
-    <value>Thông Tin Bệnh Nhân</value>
-  </data>
-  <data name="Menu_ResultBook" xml:space="preserve">
-    <value>Sổ Lưu Kết Quả</value>
-  </data>
-  <data name="Menu_SearchDoctor" xml:space="preserve">
-    <value>Tìm Bác Sĩ</value>
-  </data>
-  <data name="Menu_SearchPartnerCost" xml:space="preserve">
-    <value>Tìm Lab</value>
-  </data>
-  <data name="Menu_SearchPatients" xml:space="preserve">
-    <value>Tìm Kiếm Bệnh Nhân</value>
-  </data>
-  <data name="Menu_SearchTest" xml:space="preserve">
-    <value>Tìm Xét Nghiệm</value>
-  </data>
-  <data name="Menu_SearchTestPanel" xml:space="preserve">
-    <value>Tìm Panel </value>
-  </data>
-  <data name="Menu_UpdateTestResult" xml:space="preserve">
-    <value>Điền Kết Quả XN</value>
-  </data>
-  <data name="Menu_PatientResult" xml:space="preserve">
-    <value>In Kết Quả XN</value>
+    <value>Labnet client</value>
   </data>
 </root>

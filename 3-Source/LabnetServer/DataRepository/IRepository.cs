@@ -7,7 +7,17 @@ namespace DataRepository
 {
     public interface IRepository
     {
-        LabnetAccount GetAccount(string UserName);
+        #region LabAccount
+            LabnetAccount GetAccount(string UserName);
+        #endregion
+        #region Examination
+            void ExaminationInsert(string examinationNumber, int labId, int status);
+            Examination GetExamination(string examinatioNumber);
+        #endregion
+        #region LabClient
+            void UpdateLabAmount(int labId);
+        #endregion
 
+            
     }
 }
