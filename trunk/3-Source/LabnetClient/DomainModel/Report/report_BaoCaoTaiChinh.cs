@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
 
-namespace DataRepository
+namespace DomainModel.Report
 {
-    public class report_TestResultNoteBook
+    public class Report_BaoCaoTaiChinh
     {
+
         public string PartnerName { get; set; }
         public string PatientName { get; set; }
         public string Age { get; set; }
@@ -16,6 +17,7 @@ namespace DataRepository
         public string Result { get; set; }
         public string Note { get; set; }
         public string StaffName { get; set; }
-        public bool Male { get; set; } 
+        public bool Male { get; set; }
+        public decimal Cost { get; set; }
     }
 }

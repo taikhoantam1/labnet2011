@@ -8,6 +8,7 @@ using System.Data.Objects.SqlClient;
 using DomainModel;
 using System.Data.Objects;
 using DomainModel.Constant;
+using DomainModel.Report;
 namespace DataRepository
 {
     public class Repository : IDataRepository
@@ -205,6 +206,19 @@ namespace DataRepository
                                    select _test).ToList();
             return lstTests;
         }
+        /// <summary>
+        /// Những test không thuộc TestSection hoặc thuộc test section nhưng TestSection đó có UseCostForAssociateTest = false
+        /// </summary>
+        /// <returns></returns>
+        public List<Test> GetTestsHaveRealCost()
+        {
+            List<Test> lstTests = (from _test in myDb.Tests
+                                   where _test.IsActive == true && (_test.TestSection == null || !_test.TestSection.UseCostForAssociateTest)
+                                   select _test).ToList();
+            return lstTests;
+        }
+
+
         public Test GetTest(int testId)
         {
             try
@@ -290,6 +304,19 @@ namespace DataRepository
         {
             List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName + "," + p.Cost });
+        }
+
+        public object GetTestHaveCostNotDependenceTestSection()
+        {
+            var lstTest = myDb.Tests.Where(p => (p.TestSection == null || !p.TestSection.UseCostForAssociateTest))
+                                    .ToList()
+                                    .Select(p => new
+                                    {
+                                        Label = p.Name,
+                                        Value = p.Id,
+                                        Tag = (p.TestSection != null ? p.TestSection.Name : "") + "," + p.Cost.ToString()
+                                    });
+            return lstTest;
         }
         #endregion Test
 
@@ -450,7 +477,7 @@ namespace DataRepository
             Panel panel = GetPanel(id);
             List<VMTestListItem> listTest = panel.PanelItems.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
-                TestName = p.Test.Name + "-" + p.Test.Description,
+                TestName = p.Test.Name,
                 TestId = p.TestId,
                 TestSectionName = p.Test.TestSection.Name,
                 IsEnable = p.IsActive,
@@ -540,7 +567,7 @@ namespace DataRepository
         public object GetTestSectionByName(string name, string searchType)
         {
             List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType).ToList();
-            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id });
+            return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.UseCostForAssociateTest });
         }
 
         public TestSection GetTestSection(int testSectionId)
@@ -591,7 +618,7 @@ namespace DataRepository
             TestSection testSection = GetTestSection(Id);
             List<VMTestListItem> listTest = testSection.Tests.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
-                TestName = p.Name + "-" + p.Description,
+                TestName = p.Name,
                 TestId = p.Id,
                 TestSectionName = p.TestSection.Name,
                 IsEnable = p.IsActive,
@@ -790,7 +817,7 @@ namespace DataRepository
                                                                     PatientId = p.PatientId,
                                                                     ReceivedDate = p.ReceivedDate,
                                                                     Status = p.Status,
-
+                                                                    ExaminationNumber = p.ExaminationNumber
                                                                 }).FirstOrDefault();
             return labExamination;
         }
@@ -806,7 +833,8 @@ namespace DataRepository
                                                                    PartnerId = p.PartnerId,
                                                                    PatientId = p.PatientId,
                                                                    ReceivedDate = p.ReceivedDate,
-                                                                   Status = p.Status
+                                                                   Status = p.Status,
+                                                                   ExaminationNumber = p.ExaminationNumber
                                                                }).FirstOrDefault();
             return labExamination;
         }
@@ -831,7 +859,8 @@ namespace DataRepository
                                                                      PartnerId = p.PartnerId,
                                                                      PatientId = p.PatientId,
                                                                      ReceivedDate = p.ReceivedDate,
-                                                                     Status = p.Status
+                                                                     Status = p.Status,
+                                                                     ExaminationNumber = p.ExaminationNumber
                                                                  }).FirstOrDefault();
             return labExamination;
         }
@@ -944,15 +973,15 @@ namespace DataRepository
             List<Report_PatientResult> list = myDb.Report_PatientResult(labExaminationId).ToList();
             return list;
         }
-        public List<report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate)
+        public List<Report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate)
         {
             List<report_TestResultNoteBook_Result> list = myDb.report_TestResultNoteBook(startDate, endDate).ToList();
-            Dictionary<string, report_TestResultNoteBook> result = new Dictionary<string, report_TestResultNoteBook>();
+            Dictionary<string, Report_TestResultNoteBook> result = new Dictionary<string, Report_TestResultNoteBook>();
             foreach (var item in list)
             {
                 if (!result.Keys.Contains(item.ExaminationNumber))
                 {
-                    report_TestResultNoteBook testResult = new report_TestResultNoteBook
+                    Report_TestResultNoteBook testResult = new Report_TestResultNoteBook
                     {
                         Age = item.Age,
                         Male = item.Gender,
@@ -969,6 +998,56 @@ namespace DataRepository
                 {
                     result[item.ExaminationNumber].Result += string.Format(" , {0}:{1}", item.Name, item.Value);
                 }
+            }
+            return result.Values.ToList();
+        }
+        public List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId)
+        {
+            List<report_ThongKeTaiChinh_Result> list = myDb.report_ThongKeTaiChinh(startDate, endDate, partnerId).ToList();
+            Dictionary<string, Report_BaoCaoTaiChinh> result = new Dictionary<string, Report_BaoCaoTaiChinh>();
+            foreach (var item in list)
+            {
+                if (!result.Keys.Contains(item.ExaminationNumber))
+                {
+                    Report_BaoCaoTaiChinh testResult = new Report_BaoCaoTaiChinh
+                    {
+                        Age = item.Age,
+                        Male = item.Gender,
+                        PartnerName = item.LabName,
+                        PatientName = item.FirstName,
+                        Phone = item.Phone,
+                        ReceiveDate = item.ReceivedDate.ToString("d"),
+                        ReturnDate = item.ReceivedDate.ToString("d"),
+                        Result = string.Format("{0}", item.Name),
+                    };
+                    result.Add(item.ExaminationNumber, testResult);
+                }
+                else
+                {
+                    result[item.ExaminationNumber].Result += string.Format(" , {0}", item.Name);
+                }
+            }
+
+            // Tinh giá của xét nghiệm
+            foreach (var item in result.Keys)
+            {
+                List<report_ThongKeTaiChinh_Result> listTestResultOfAPatient = list.Where(p => p.ExaminationNumber == item).ToList();
+                decimal cost = 0;
+                //Tinh giá của các test đơn và những test thuộc test section không sử dụng giá chung UseTestSectionCode=false
+                cost = listTestResultOfAPatient.Where(p => (p.TestSectionId == null || !p.UseTestSectionCode.Value))
+                                                .Select(p => p.Cost.Value).Sum();
+                // Lấy danh sách test section và giá của những test section có sử dụng giá chung UseTestSectionCode=true
+                var TestSectionIds = listTestResultOfAPatient.Where(p => (p.TestSectionId != null && p.UseTestSectionCode.Value)).Select(p => p.TestSectionId).Distinct();
+                foreach (var testSectionId in TestSectionIds)
+                {
+                    var testSection = listTestResultOfAPatient.Where(p=>p.TestSectionId == testSectionId).FirstOrDefault();
+                    if(testSection !=null)
+                    {
+                        cost += testSection.TestSectionCost.Value;
+                    }
+                }
+                result[item].Cost = cost;
+                
             }
             return result.Values.ToList();
         }

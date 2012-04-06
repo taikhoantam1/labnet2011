@@ -76,7 +76,7 @@
             <ul>
                 <li><a class="MenuItem ActionLink" href="/Report/ResultNoteBook">
                     <%= Resources.GlobalStrings.Menu_ResultBook%></a></li>
-                <li><a class="MenuItem ActionLink" href="#">
+                <li><a class="MenuItem ActionLink" href="/Report/QuanLyTaiChinhReport">
                     <%= Resources.GlobalStrings.Menu_FinancialBook %></a></li>
                 <li><a class="MenuItem ActionLink" href="#">
                     <%= Resources.GlobalStrings.Menu_MaterialBook%></a></li>

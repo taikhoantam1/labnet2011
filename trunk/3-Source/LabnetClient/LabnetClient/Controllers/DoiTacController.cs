@@ -41,7 +41,7 @@ namespace LabnetClient.Controllers
         {
             PartnerViewModel model = new PartnerViewModel(new VMPartner(),new List<VMTestListItem>(), new List<VMTestSectionListItem>());
             model.ViewMode = ViewMode.Create;
-            model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.Autocomplete.JsonData = Repository.GetTestHaveCostNotDependenceTestSection().ToJson();
             model.TestSectionAutocomplete.JsonData = Repository.GetTestSectionByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Details", model);
         }
@@ -80,7 +80,7 @@ namespace LabnetClient.Controllers
             if (!ModelState.IsValid)
             {
                 model.TestSectionAutocomplete = new AutocompleteModel("Partner.TestSectionName");
-                model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+                model.Autocomplete.JsonData = Repository.GetTestHaveCostNotDependenceTestSection().ToJson();
                 model.TestSectionAutocomplete.JsonData = Repository.GetTestSectionByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
                 model.JQGrid = new JQGridModel(typeof(VMTestListItem), true, Rows, "/Partner/SavePartnerTest");
                 model.JQGridTestSection = new JQGridModel(typeof(VMTestSectionListItem), true, TestSectionRows, "/Partner/SavePartnerTestSection");
@@ -155,7 +155,7 @@ namespace LabnetClient.Controllers
             List<VMTestSectionListItem> partnerTestSectionList = Repository.GetPartnerTestSection(id);
             PartnerViewModel model = new PartnerViewModel(partner, partnerTestList, partnerTestSectionList);
             model.ViewMode = ViewMode.Edit;
-            model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.Autocomplete.JsonData = Repository.GetTestHaveCostNotDependenceTestSection().ToJson();
             model.TestSectionAutocomplete.JsonData = Repository.GetTestSectionByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
 
             return View("Details", model);

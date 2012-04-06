@@ -1,14 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<LabnetClient.Models.ReporViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.ReporViewModel>" %>
 
 
-
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <div class="Module">
-        <div class="ModuleTitle">
-            <h3 class="Title">
-                 <%= Model.ReportTitle%>
-            </h3>
-        </div>
         <div class="ModuleContent">
             <iframe id="reportViewer" width="760" height="1000" frameborder="0"  >
 
@@ -28,7 +21,6 @@
             var reportName = '<%= Model.ReportName%>';
             var url="/Report/ReportViewer.aspx?r="+Math.random()+"&ReportName="+reportName+params;
             $("#reportViewer").attr("src", url);
-            $("#reportViewer").reload();
+            //$("#reportViewer").reload();
         });
     </script>
-</asp:Content>

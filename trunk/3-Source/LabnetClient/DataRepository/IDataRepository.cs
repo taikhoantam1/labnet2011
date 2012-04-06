@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DomainModel;
+using DomainModel.Report;
 
 namespace DataRepository
 {
@@ -60,6 +61,7 @@ namespace DataRepository
 
         #region Test
         List<Test> GetTests();
+        List<Test> GetTestsHaveRealCost();
         Test GetTest(int testId);
         void TestInsert(Test test);
         void TestUpdate(int id, Test test);
@@ -69,6 +71,7 @@ namespace DataRepository
         List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName);
         object GetTestByName(string name, string searchType);
         object GetTestByNameForPanel(string name, string searchType);
+        object GetTestHaveCostNotDependenceTestSection();
         #endregion
 
         #region Panel
@@ -157,7 +160,8 @@ namespace DataRepository
 
         #region Report
             List<Report_PatientResult> ReportData_PatientResult(int labExaminationId);
-            List<report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate);
+            List<Report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate);
+            List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId);
         #endregion
 
         #region LabUser

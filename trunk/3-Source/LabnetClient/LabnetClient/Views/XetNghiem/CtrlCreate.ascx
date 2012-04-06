@@ -62,6 +62,7 @@
 <% Html.BeginForm("Edit", "XetNghiem"); %>
 <%} %>
 <%= Html.HiddenFor(m=>m.Test.Id) %>
+
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
@@ -210,6 +211,24 @@
 <% Html.EndForm(); %>
 
 <script type="text/javascript">
+    function AutocompleChange_<%= Model.Autocomplete.AutoCompleteId %>(id,label,tag)
+    {
+        if(tag==true)
+        {
+            $("#TestCostView").attr("disabled","disabled");
+        }
+        else
+        {
+            $("#TestCostView").removeAttr("disabled");
+        }
+    }
+   function AutocompleCreated_<%= Model.Autocomplete.AutoCompleteId %>()
+    {
+        if($("#<%= Model.Autocomplete.AutoCompleteId %>_SelectedTag").val()=="True")
+        {
+            $("#TestCostView").attr("disabled","disabled");
+        }
+    }
     $(function () {
         var lowIndexHidden = $("#Test_LowIndex").val();
         lowIndexHidden = lowIndexHidden.replace(',', '.');

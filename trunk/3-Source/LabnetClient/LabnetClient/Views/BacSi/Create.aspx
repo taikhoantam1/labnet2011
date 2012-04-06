@@ -2,7 +2,7 @@
 
 
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
    <% Html.RenderPartial("CtrlCreate", Model); %>
 

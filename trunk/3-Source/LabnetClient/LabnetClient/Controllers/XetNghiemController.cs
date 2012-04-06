@@ -80,7 +80,8 @@ namespace LabnetClient.Controllers
             model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             model.Autocomplete.SelectedText = testSection.Name;
             model.Autocomplete.SelectedValue = testSection.Id.ToString();
-            return PartialView("Create", model);
+            model.Autocomplete.SelectedTag = testSection.UseCostForAssociateTest.ToString();
+            return View("Create", model);
         }
 
         //

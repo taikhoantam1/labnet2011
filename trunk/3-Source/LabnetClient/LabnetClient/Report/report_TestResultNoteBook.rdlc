@@ -546,6 +546,7 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <NoRowsMessage>Không tìm thấy dử liệu phù hợp với yêu cầu</NoRowsMessage>
         <DataSetName>ResultNoteBook</DataSetName>
         <Top>1.6425in</Top>
         <Left>0.06572in</Left>

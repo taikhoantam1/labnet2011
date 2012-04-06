@@ -62,15 +62,15 @@ namespace LabnetClient.Controllers
                     LabExamination labExamination = InsertLabExamination(model, patientId);
 
                     //Insert PatientItem
-                    InsertPatientItems(patientTests,  patientId, labExamination.Id);
+                    InsertPatientItems(patientTests, patientId, labExamination.Id);
 
                     //Insert new row of Examination in labnet server
-                    int labId= (int)Session["LabId"];
+                    int labId = (int)Session["LabId"];
 
-                    string status = InsertExaminationOnLabServer(labId, labExamination.ExaminationNumber,(int) LabExaminationStatusEnum.New);
+                    string status = InsertExaminationOnLabServer(labId, labExamination.ExaminationNumber, (int)LabExaminationStatusEnum.New);
                     if (status != "success")
                     {
-                        throw new Exception("status"); 
+                        throw new Exception("status");
                     }
                     tran.Complete();
                 }
@@ -88,7 +88,7 @@ namespace LabnetClient.Controllers
         {
             string URI = "http://labnet.vn/Examination/InsertExamination";
             //string URI = "http://localhost:2821/Examination/InsertExamination";
-        
+
             string myParamters = string.Format("LabId={0}&ExaminationNumber={1}&Status={2}", labId, examinationNumber, status);
             WebClient wc = new WebClient();
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
@@ -155,7 +155,7 @@ namespace LabnetClient.Controllers
             Session[SessionProperties.SessionPatientTestList] = Rows;
             return "Success";
         }
-        
+
         [HttpPost]
         public string GetTestsOfTestSection(int Id, PatientViewModel Model)
         {
@@ -181,7 +181,7 @@ namespace LabnetClient.Controllers
                                                     Cost = p.Cost,
                                                     TestName = p.TestName,
                                                     Section = p.TestSectionName,
-                                                    TestId = p.TestId 
+                                                    TestId = p.TestId
                                                 }).ToList();
             return tests.ToJson();
         }
@@ -190,14 +190,14 @@ namespace LabnetClient.Controllers
         public string GetTests(int Id, PatientViewModel Model)
         {
             Test test = Repository.GetTest(Id);
-            VMPatientTest tests = new VMPatientTest
+            List<VMPatientTest> tests = new List<VMPatientTest>{new VMPatientTest
                                                 {
                                                     IsEnable = true,
                                                     Cost = test.Cost,
                                                     TestName = test.Name,
                                                     Section = test.TestSection.Name,
                                                     TestId = test.Id
-                                                };
+                                                }};
             return tests.ToJson();
         }
 
@@ -324,7 +324,7 @@ namespace LabnetClient.Controllers
         {
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
-            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTests());
+            List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTestsHaveRealCost());
             List<VMTestSection> lstTestSection = Mapper.Map<List<TestSection>, List<VMTestSection>>(Repository.GetTestSections());
             PatientViewModel Model = new PatientViewModel(patient, labExam, patientTests, lstPartner, lstPanel, lstTest, lstTestSection);
             return Model;
