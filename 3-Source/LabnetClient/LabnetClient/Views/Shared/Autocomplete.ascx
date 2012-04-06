@@ -1,6 +1,12 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.AutocompleteModel>" %>
 <script type="text/javascript">
-    function AutocompleSelect(id,label,tag)
+    function AutocompleSelect_<%= Model.AutoCompleteId %> (id,label,tag)
+    {
+    }
+   function AutocompleChange_<%= Model.AutoCompleteId %>(id,label,tag)
+   {
+   }
+   function AutocompleCreated_<%= Model.AutoCompleteId %>()
     {
     }
     $(document).ready(function () {
@@ -29,6 +35,9 @@
                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
                 $("#<%= Model.AutoCompleteId %>_SelectedTag").val(ui.item.tag);
             },
+            create: function(event, ui) { 
+                AutocompleCreated_<%= Model.AutoCompleteId %>();
+            },
             delay:0,
             selectFirst: true,
             change: function(event, ui) {
@@ -50,7 +59,7 @@
                      $("#<%= Model.AutoCompleteId %> .autoCompleteText").data( "autocomplete" ).term = "";
                     return false;
                 }
-                AutocompleChange(ui.item.id,ui.item.label,ui.item.tag);
+                AutocompleChange_<%= Model.AutoCompleteId %> (ui.item.id,ui.item.label,ui.item.tag);
             }
         })
 		.addClass("ui-widget ui-widget-content ui-corner-left")
@@ -75,7 +84,10 @@
                 $("#<%= Model.AutoCompleteId %>_SelectedValue").val(ui.item.id);
                 $("#<%= Model.AutoCompleteId %>_SelectedText").val(ui.item.label);
                 $("#<%= Model.AutoCompleteId %>_SelectedTag").val(ui.item.tag);
-                AutocompleSelect(ui.item.id,ui.item.label,ui.item.tag);
+                AutocompleSelect_<%= Model.AutoCompleteId %>(ui.item.id,ui.item.label,ui.item.tag);
+            },
+            create: function(event, ui) {  
+                AutocompleCreated_<%= Model.AutoCompleteId %>();
             },
             minLength:0,
             delay:0,
@@ -99,6 +111,7 @@
                      $("#<%= Model.AutoCompleteId %> .autoCompleteText").data( "autocomplete" ).term = "";
                     return false;
                 }
+                AutocompleChange_<%= Model.AutoCompleteId %> (ui.item.id,ui.item.label,ui.item.tag);
                    
             }
         }).focus(function(){  
@@ -117,12 +130,27 @@
                 $("#<%= Model.AutoCompleteId %>_SelectedTag").val("");
             }
         });
+        if($("#<%= Model.AutoCompleteId %>_SelectedText").val()!="")
+        {
+            input.val($("#<%= Model.AutoCompleteId %>_SelectedText").val());
+        }
     });
 </script>
+<style type="text/css">
+    .ui-autocomplete
+    {
+        height: 200px;
+        overflow: auto;
+    }
+</style>
 <div id="<%= Model.AutoCompleteId %>" class="autoCompleteContainer">
     <input type="text" class="autoComplete <%= Model.CustomeCss %> textInput220" value="<%= Model.SelectedText %>" />
-    <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
-    <input type="hidden" class="autoCompleteTag" id="<%= Model.AutoCompleteId %>_SelectedTag" value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />
-    <input type="hidden" class="autoCompleteValue" id="<%= Model.AutoCompleteId %>_SelectedValue" value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
-    <input type="hidden" class="autoCompleteText" id="<%= Model.AutoCompleteId %>_SelectedText" value="<%= Model.SelectedText %>" name="Autocomplete.SelectedText" />
+    <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>"
+        name="<%=Model.BindingName%>" />
+    <input type="hidden" class="autoCompleteTag" id="<%= Model.AutoCompleteId %>_SelectedTag"
+        value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />
+    <input type="hidden" class="autoCompleteValue" id="<%= Model.AutoCompleteId %>_SelectedValue"
+        value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
+    <input type="hidden" class="autoCompleteText" id="<%= Model.AutoCompleteId %>_SelectedText"
+        value="<%= Model.SelectedText %>" name="Autocomplete.SelectedText" />
 </div>

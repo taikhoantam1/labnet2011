@@ -383,22 +383,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Test> Tests
         {
             get
@@ -653,14 +637,6 @@ namespace DataRepository
         public void AddToStaffs(Staff staff)
         {
             base.AddObject("Staffs", staff);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
-        {
-            base.AddObject("sysdiagrams", sysdiagram);
         }
     
         /// <summary>
@@ -1184,6 +1160,47 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<TestResultsGet_Result>("PatientTestResultsGet", labExaminationIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="startDate">No Metadata Documentation available.</param>
+        /// <param name="endDate">No Metadata Documentation available.</param>
+        /// <param name="partnerId">No Metadata Documentation available.</param>
+        public ObjectResult<report_ThongKeTaiChinh_Result> report_ThongKeTaiChinh(Nullable<global::System.DateTime> startDate, Nullable<global::System.DateTime> endDate, Nullable<global::System.Int32> partnerId)
+        {
+            ObjectParameter startDateParameter;
+            if (startDate.HasValue)
+            {
+                startDateParameter = new ObjectParameter("StartDate", startDate);
+            }
+            else
+            {
+                startDateParameter = new ObjectParameter("StartDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter endDateParameter;
+            if (endDate.HasValue)
+            {
+                endDateParameter = new ObjectParameter("EndDate", endDate);
+            }
+            else
+            {
+                endDateParameter = new ObjectParameter("EndDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter partnerIdParameter;
+            if (partnerId.HasValue)
+            {
+                partnerIdParameter = new ObjectParameter("PartnerId", partnerId);
+            }
+            else
+            {
+                partnerIdParameter = new ObjectParameter("PartnerId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<report_ThongKeTaiChinh_Result>("report_ThongKeTaiChinh", startDateParameter, endDateParameter, partnerIdParameter);
         }
 
         #endregion
@@ -6376,161 +6393,6 @@ namespace DataRepository
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="LabManager_ClientModel", Name="sysdiagram")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagram : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagram object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagram sysdiagram = new sysdiagram();
-            sysdiagram.name = name;
-            sysdiagram.principal_id = principal_id;
-            sysdiagram.diagram_id = diagram_id;
-            return sysdiagram;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-    
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="LabManager_ClientModel", Name="Test")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -9593,6 +9455,487 @@ namespace DataRepository
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="LabManager_ClientModel", Name="report_ThongKeTaiChinh_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class report_ThongKeTaiChinh_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new report_ThongKeTaiChinh_Result object.
+        /// </summary>
+        /// <param name="firstName">Initial value of the FirstName property.</param>
+        /// <param name="gender">Initial value of the Gender property.</param>
+        /// <param name="age">Initial value of the Age property.</param>
+        /// <param name="patientId">Initial value of the PatientId property.</param>
+        /// <param name="examinationNumber">Initial value of the ExaminationNumber property.</param>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="receivedDate">Initial value of the ReceivedDate property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="patientItemId">Initial value of the PatientItemId property.</param>
+        /// <param name="testId">Initial value of the TestId property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="labName">Initial value of the LabName property.</param>
+        public static report_ThongKeTaiChinh_Result Createreport_ThongKeTaiChinh_Result(global::System.String firstName, global::System.Boolean gender, global::System.String age, global::System.Int32 patientId, global::System.String examinationNumber, global::System.Int32 id, global::System.DateTime receivedDate, global::System.Int32 createdBy, global::System.Int32 patientItemId, global::System.Int32 testId, global::System.String name, global::System.String labName)
+        {
+            report_ThongKeTaiChinh_Result report_ThongKeTaiChinh_Result = new report_ThongKeTaiChinh_Result();
+            report_ThongKeTaiChinh_Result.FirstName = firstName;
+            report_ThongKeTaiChinh_Result.Gender = gender;
+            report_ThongKeTaiChinh_Result.Age = age;
+            report_ThongKeTaiChinh_Result.PatientId = patientId;
+            report_ThongKeTaiChinh_Result.ExaminationNumber = examinationNumber;
+            report_ThongKeTaiChinh_Result.Id = id;
+            report_ThongKeTaiChinh_Result.ReceivedDate = receivedDate;
+            report_ThongKeTaiChinh_Result.CreatedBy = createdBy;
+            report_ThongKeTaiChinh_Result.PatientItemId = patientItemId;
+            report_ThongKeTaiChinh_Result.TestId = testId;
+            report_ThongKeTaiChinh_Result.Name = name;
+            report_ThongKeTaiChinh_Result.LabName = labName;
+            return report_ThongKeTaiChinh_Result;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Gender
+        {
+            get
+            {
+                return _Gender;
+            }
+            set
+            {
+                OnGenderChanging(value);
+                ReportPropertyChanging("Gender");
+                _Gender = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Gender");
+                OnGenderChanged();
+            }
+        }
+        private global::System.Boolean _Gender;
+        partial void OnGenderChanging(global::System.Boolean value);
+        partial void OnGenderChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Age
+        {
+            get
+            {
+                return _Age;
+            }
+            set
+            {
+                OnAgeChanging(value);
+                ReportPropertyChanging("Age");
+                _Age = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Age");
+                OnAgeChanged();
+            }
+        }
+        private global::System.String _Age;
+        partial void OnAgeChanging(global::System.String value);
+        partial void OnAgeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Phone
+        {
+            get
+            {
+                return _Phone;
+            }
+            set
+            {
+                OnPhoneChanging(value);
+                ReportPropertyChanging("Phone");
+                _Phone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Phone");
+                OnPhoneChanged();
+            }
+        }
+        private global::System.String _Phone;
+        partial void OnPhoneChanging(global::System.String value);
+        partial void OnPhoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PatientId
+        {
+            get
+            {
+                return _PatientId;
+            }
+            set
+            {
+                OnPatientIdChanging(value);
+                ReportPropertyChanging("PatientId");
+                _PatientId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PatientId");
+                OnPatientIdChanged();
+            }
+        }
+        private global::System.Int32 _PatientId;
+        partial void OnPatientIdChanging(global::System.Int32 value);
+        partial void OnPatientIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ExaminationNumber
+        {
+            get
+            {
+                return _ExaminationNumber;
+            }
+            set
+            {
+                OnExaminationNumberChanging(value);
+                ReportPropertyChanging("ExaminationNumber");
+                _ExaminationNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ExaminationNumber");
+                OnExaminationNumberChanged();
+            }
+        }
+        private global::System.String _ExaminationNumber;
+        partial void OnExaminationNumberChanging(global::System.String value);
+        partial void OnExaminationNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                OnIdChanging(value);
+                ReportPropertyChanging("Id");
+                _Id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Id");
+                OnIdChanged();
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ReceivedDate
+        {
+            get
+            {
+                return _ReceivedDate;
+            }
+            set
+            {
+                OnReceivedDateChanging(value);
+                ReportPropertyChanging("ReceivedDate");
+                _ReceivedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ReceivedDate");
+                OnReceivedDateChanged();
+            }
+        }
+        private global::System.DateTime _ReceivedDate;
+        partial void OnReceivedDateChanging(global::System.DateTime value);
+        partial void OnReceivedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PatientItemId
+        {
+            get
+            {
+                return _PatientItemId;
+            }
+            set
+            {
+                OnPatientItemIdChanging(value);
+                ReportPropertyChanging("PatientItemId");
+                _PatientItemId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PatientItemId");
+                OnPatientItemIdChanged();
+            }
+        }
+        private global::System.Int32 _PatientItemId;
+        partial void OnPatientItemIdChanging(global::System.Int32 value);
+        partial void OnPatientItemIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TestId
+        {
+            get
+            {
+                return _TestId;
+            }
+            set
+            {
+                OnTestIdChanging(value);
+                ReportPropertyChanging("TestId");
+                _TestId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestId");
+                OnTestIdChanged();
+            }
+        }
+        private global::System.Int32 _TestId;
+        partial void OnTestIdChanging(global::System.Int32 value);
+        partial void OnTestIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.String _Value;
+        partial void OnValueChanging(global::System.String value);
+        partial void OnValueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LabName
+        {
+            get
+            {
+                return _LabName;
+            }
+            set
+            {
+                OnLabNameChanging(value);
+                ReportPropertyChanging("LabName");
+                _LabName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("LabName");
+                OnLabNameChanged();
+            }
+        }
+        private global::System.String _LabName;
+        partial void OnLabNameChanging(global::System.String value);
+        partial void OnLabNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Cost
+        {
+            get
+            {
+                return _Cost;
+            }
+            set
+            {
+                OnCostChanging(value);
+                ReportPropertyChanging("Cost");
+                _Cost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cost");
+                OnCostChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Cost;
+        partial void OnCostChanging(Nullable<global::System.Decimal> value);
+        partial void OnCostChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TestSectionId
+        {
+            get
+            {
+                return _TestSectionId;
+            }
+            set
+            {
+                OnTestSectionIdChanging(value);
+                ReportPropertyChanging("TestSectionId");
+                _TestSectionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestSectionId");
+                OnTestSectionIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TestSectionId;
+        partial void OnTestSectionIdChanging(Nullable<global::System.Int32> value);
+        partial void OnTestSectionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> UseTestSectionCode
+        {
+            get
+            {
+                return _UseTestSectionCode;
+            }
+            set
+            {
+                OnUseTestSectionCodeChanging(value);
+                ReportPropertyChanging("UseTestSectionCode");
+                _UseTestSectionCode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UseTestSectionCode");
+                OnUseTestSectionCodeChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _UseTestSectionCode;
+        partial void OnUseTestSectionCodeChanging(Nullable<global::System.Boolean> value);
+        partial void OnUseTestSectionCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> TestSectionCost
+        {
+            get
+            {
+                return _TestSectionCost;
+            }
+            set
+            {
+                OnTestSectionCostChanging(value);
+                ReportPropertyChanging("TestSectionCost");
+                _TestSectionCost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestSectionCost");
+                OnTestSectionCostChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _TestSectionCost;
+        partial void OnTestSectionCostChanging(Nullable<global::System.Decimal> value);
+        partial void OnTestSectionCostChanged();
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmComplexTypeAttribute(NamespaceName="LabManager_ClientModel", Name="SearchDoctorByName_Result")]
     [DataContractAttribute(IsReference=true)]
     [Serializable()]
@@ -10244,12 +10587,14 @@ namespace DataRepository
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
-        public static SearchTestSection_Result CreateSearchTestSection_Result(global::System.Int32 id, global::System.String name, global::System.Boolean isActive)
+        /// <param name="useCostForAssociateTest">Initial value of the UseCostForAssociateTest property.</param>
+        public static SearchTestSection_Result CreateSearchTestSection_Result(global::System.Int32 id, global::System.String name, global::System.Boolean isActive, global::System.Boolean useCostForAssociateTest)
         {
             SearchTestSection_Result searchTestSection_Result = new SearchTestSection_Result();
             searchTestSection_Result.Id = id;
             searchTestSection_Result.Name = name;
             searchTestSection_Result.IsActive = isActive;
+            searchTestSection_Result.UseCostForAssociateTest = useCostForAssociateTest;
             return searchTestSection_Result;
         }
 
@@ -10327,6 +10672,30 @@ namespace DataRepository
         private global::System.Boolean _IsActive;
         partial void OnIsActiveChanging(global::System.Boolean value);
         partial void OnIsActiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean UseCostForAssociateTest
+        {
+            get
+            {
+                return _UseCostForAssociateTest;
+            }
+            set
+            {
+                OnUseCostForAssociateTestChanging(value);
+                ReportPropertyChanging("UseCostForAssociateTest");
+                _UseCostForAssociateTest = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UseCostForAssociateTest");
+                OnUseCostForAssociateTestChanged();
+            }
+        }
+        private global::System.Boolean _UseCostForAssociateTest;
+        partial void OnUseCostForAssociateTestChanging(global::System.Boolean value);
+        partial void OnUseCostForAssociateTestChanged();
 
         #endregion
     }

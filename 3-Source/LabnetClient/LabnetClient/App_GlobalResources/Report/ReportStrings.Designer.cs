@@ -63,6 +63,42 @@ namespace Resources {
         /// <summary>
         ///   Looks up a localized string similar to Đến Ngày.
         /// </summary>
+        internal static string QuanLyTaiChinh_EndDate {
+            get {
+                return ResourceManager.GetString("QuanLyTaiChinh_EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lab Gửi Mẫu.
+        /// </summary>
+        internal static string QuanLyTaiChinh_Partner {
+            get {
+                return ResourceManager.GetString("QuanLyTaiChinh_Partner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Từ Ngày.
+        /// </summary>
+        internal static string QuanLyTaiChinh_StartDate {
+            get {
+                return ResourceManager.GetString("QuanLyTaiChinh_StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sổ Quản Lý Tài Chính.
+        /// </summary>
+        internal static string QuanLyTaiChinh_Title {
+            get {
+                return ResourceManager.GetString("QuanLyTaiChinh_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đến Ngày.
+        /// </summary>
         internal static string ResultNoteBook_EndDate {
             get {
                 return ResourceManager.GetString("ResultNoteBook_EndDate", resourceCulture);

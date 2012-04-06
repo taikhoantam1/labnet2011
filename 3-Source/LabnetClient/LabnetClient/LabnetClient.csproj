@@ -219,6 +219,7 @@
     <Compile Include="Models\Patient\PatientTestViewModel.cs" />
     <Compile Include="Models\Patient\PatientViewModel.cs" />
     <Compile Include="Models\Report\PatientReportViewModel.cs" />
+    <Compile Include="Models\Report\QuanLyTaiChinhViewModel.cs" />
     <Compile Include="Models\Report\ReporViewModel.cs" />
     <Compile Include="Models\Report\ResultNoteBookViewModel.cs" />
     <Compile Include="Models\TestSection\TestSectionListViewModel.cs" />
@@ -821,7 +822,9 @@
     <Content Include="Views\BenhNhan\CtrlCreate.ascx" />
     <Content Include="Views\Report\PatientResultReport.aspx" />
     <Content Include="Views\Report\PatientResult_Server.aspx" />
+    <Content Include="Views\Report\QuanLyTaiChinh.aspx" />
     <Content Include="Views\Report\ReportViewer.aspx" />
+    <Content Include="Views\Report\ReportViewerControl.ascx" />
     <Content Include="Views\Report\ResultNoteBook.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\ComboBox.ascx" />
@@ -925,6 +928,7 @@
     <Content Include="App_GlobalResources\Report\ReportStrings.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>ReportStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Report\report_TestResultNoteBook.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -934,6 +938,9 @@
       <LastGenOutput>TestSectionStrings.designer.cs</LastGenOutput>
     </Content>
     <Content Include="Report\report_PatientResult.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\report_SoQuanLyTaiChinh.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

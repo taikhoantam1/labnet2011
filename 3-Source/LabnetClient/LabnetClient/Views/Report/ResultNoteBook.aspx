@@ -4,7 +4,7 @@
 	ResultNoteBook
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <%= Html.ValidationSummary() %>
 
 <div class="Module">
@@ -46,5 +46,10 @@
         <input type="submit" id="btnPrintPreview" value="In Kết Quả" />  
     </div>
 </div>
-
+<%if (Model.ReportModel != null)
+  {%>
+    <div id="ReportContainer">
+        <% Html.RenderPartial("ReportViewerControl", Model.ReportModel); %>
+    </div>
+<%} %>
 </asp:Content>

@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="QuanLyTaiChinh_EndDate" xml:space="preserve">
+    <value>Đến Ngày</value>
+  </data>
+  <data name="QuanLyTaiChinh_Partner" xml:space="preserve">
+    <value>Lab Gửi Mẫu</value>
+  </data>
+  <data name="QuanLyTaiChinh_StartDate" xml:space="preserve">
+    <value>Từ Ngày</value>
+  </data>
+  <data name="QuanLyTaiChinh_Title" xml:space="preserve">
+    <value>Sổ Quản Lý Tài Chính</value>
+  </data>
   <data name="ResultNoteBook_EndDate" xml:space="preserve">
     <value>Đến Ngày</value>
   </data>

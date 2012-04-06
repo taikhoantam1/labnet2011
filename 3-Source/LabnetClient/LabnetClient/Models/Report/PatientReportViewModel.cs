@@ -7,7 +7,8 @@ namespace LabnetClient.Models
 {
     public class PatientReportViewModel
     {
-        public int OrderNumber { get; set; }
+        public int? OrderNumber { get; set; }
         public string ReceivedDate { get; set; }
+        public ReporViewModel ReportModel { get; set; }
     }
 }
