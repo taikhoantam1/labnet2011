@@ -660,7 +660,7 @@
             <Direction>Descending</Direction>
           </SortExpression>
         </SortExpressions>
-        <Top>0.31089in</Top>
+        <Top>1.06089in</Top>
         <Left>0.26671in</Left>
         <Height>0.90786in</Height>
         <Width>6.25049in</Width>
@@ -685,7 +685,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox44</rd:DefaultName>
-        <Top>1.74514in</Top>
+        <Top>2.37014in</Top>
         <Left>0.37393in</Left>
         <Height>0.21875in</Height>
         <Width>1.19792in</Width>
@@ -715,7 +715,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox44</rd:DefaultName>
-        <Top>1.98403in</Top>
+        <Top>2.60903in</Top>
         <Left>0.37393in</Left>
         <Height>0.21875in</Height>
         <Width>1.19792in</Width>
@@ -737,7 +737,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Trưởng Khoa Xét Nghiệm</Value>
+                <Value>Phòng Xét Nghiệm</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -750,7 +750,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox44</rd:DefaultName>
-        <Top>1.98403in</Top>
+        <Top>2.60903in</Top>
         <Left>4.49197in</Left>
         <Height>0.21875in</Height>
         <Width>2.26799in</Width>
@@ -780,7 +780,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox44</rd:DefaultName>
-        <Top>1.74514in</Top>
+        <Top>2.37014in</Top>
         <Left>4.49198in</Left>
         <Height>0.21875in</Height>
         <Width>2.26799in</Width>
@@ -812,11 +812,105 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>LastUpdated</rd:DefaultName>
-        <Top>1.74514in</Top>
+        <Top>2.37014in</Top>
         <Left>1.57185in</Left>
         <Height>0.25in</Height>
         <Width>2.90624in</Width>
         <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox58">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>- Chẩn Đoán:</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox44</rd:DefaultName>
+        <Top>0.06944in</Top>
+        <Left>0.30017in</Left>
+        <Height>0.21875in</Height>
+        <Width>0.91666in</Width>
+        <ZIndex>6</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox59">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>- Bác sỉ chỉ định:</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox44</rd:DefaultName>
+        <Top>0.71354in</Top>
+        <Left>0.30017in</Left>
+        <Height>0.21875in</Height>
+        <Width>1.27168in</Width>
+        <ZIndex>7</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Diagnosis">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!Diagnosis.Value, "PatientResult")</Value>
+                <Style />
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Diagnosis</rd:DefaultName>
+        <Top>0.06944in</Top>
+        <Left>1.24461in</Left>
+        <Height>0.5in</Height>
+        <Width>5.27259in</Width>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -845,18 +939,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Sở Y Tế Tp. HCM</Value>
-                  <Style />
-                </TextRun>
-              </TextRuns>
-              <Style>
-                <TextAlign>Center</TextAlign>
-              </Style>
-            </Paragraph>
-            <Paragraph>
-              <TextRuns>
-                <TextRun>
-                  <Value>Bệnh Viện Nhi Đồng 2</Value>
+                  <Value />
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -901,7 +984,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox32</rd:DefaultName>
-          <Top>0.09913in</Top>
+          <Top>0.34913in</Top>
           <Left>2.11962in</Left>
           <Height>0.54167in</Height>
           <Width>3.20833in</Width>
@@ -956,7 +1039,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>- Họ tên:</Value>
-                  <Style />
+                  <Style>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -986,7 +1071,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>- Địa chỉ:</Value>
-                  <Style />
+                  <Style>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -1016,7 +1103,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>- Giới tính:</Value>
-                  <Style />
+                  <Style>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -1026,7 +1115,7 @@
           <Top>0.9606in</Top>
           <Left>5.28073in</Left>
           <Height>0.21875in</Height>
-          <Width>0.72222in</Width>
+          <Width>0.77778in</Width>
           <ZIndex>5</ZIndex>
           <Style>
             <Border>
@@ -1124,7 +1213,7 @@
           </Paragraphs>
           <rd:DefaultName>Gender</rd:DefaultName>
           <Top>0.9606in</Top>
-          <Left>6.00295in</Left>
+          <Left>6.05851in</Left>
           <Height>0.21875in</Height>
           <Width>0.8941in</Width>
           <ZIndex>8</ZIndex>
@@ -1156,7 +1245,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Address</rd:DefaultName>
-          <Top>1.17935in</Top>
+          <Top>1.16546in</Top>
           <Left>1.01545in</Left>
           <Height>0.23264in</Height>
           <Width>2.39931in</Width>
@@ -1213,7 +1302,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>- Tuổi:</Value>
-                  <Style />
+                  <Style>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />
@@ -1243,7 +1334,9 @@
               <TextRuns>
                 <TextRun>
                   <Value>- SĐT:</Value>
-                  <Style />
+                  <Style>
+                    <FontWeight>Normal</FontWeight>
+                  </Style>
                 </TextRun>
               </TextRuns>
               <Style />

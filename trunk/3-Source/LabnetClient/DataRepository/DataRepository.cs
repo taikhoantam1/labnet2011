@@ -815,9 +815,13 @@ namespace DataRepository
                                                                     OrderNumber = p.OrderNumber,
                                                                     PartnerId = p.PartnerId,
                                                                     PatientId = p.PatientId,
+                                                                    PartnerName = p.Partner.Name,
                                                                     ReceivedDate = p.ReceivedDate,
                                                                     Status = p.Status,
-                                                                    ExaminationNumber = p.ExaminationNumber
+                                                                    ExaminationNumber = p.ExaminationNumber,
+                                                                    DoctorId = p.DoctorId,
+                                                                    DoctorName = p.Doctor.Name
+
                                                                 }).FirstOrDefault();
             return labExamination;
         }
@@ -831,10 +835,13 @@ namespace DataRepository
                                                                    Id = p.Id,
                                                                    OrderNumber = p.OrderNumber,
                                                                    PartnerId = p.PartnerId,
+                                                                   PartnerName = p.Partner.Name,
                                                                    PatientId = p.PatientId,
                                                                    ReceivedDate = p.ReceivedDate,
                                                                    Status = p.Status,
-                                                                   ExaminationNumber = p.ExaminationNumber
+                                                                   ExaminationNumber = p.ExaminationNumber,
+                                                                   DoctorId = p.DoctorId,
+                                                                   DoctorName = p.Doctor.Name
                                                                }).FirstOrDefault();
             return labExamination;
         }
@@ -843,8 +850,9 @@ namespace DataRepository
             LabExamination labExamOld = myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == receivedDate && p.OrderNumber == orderNumber && p.PatientId == patientId).FirstOrDefault();
             labExamOld.CreatedBy = labExamination.CreatedBy;
             labExamOld.PartnerId = labExamination.PartnerId;
-            labExamination.Diagnosis = labExamination.Diagnosis;
-            labExamination.Status = labExamination.Status;
+            labExamOld.Diagnosis = labExamination.Diagnosis;
+            labExamOld.Status = labExamination.Status;
+            labExamOld.DoctorId = labExamination.DoctorId;
             myDb.SaveChanges();
         }
         public VMLabExamination GetLabExamination(string examinationNumber)
@@ -857,10 +865,13 @@ namespace DataRepository
                                                                      Id = p.Id,
                                                                      OrderNumber = p.OrderNumber,
                                                                      PartnerId = p.PartnerId,
+                                                                     PartnerName = p.Partner.Name,
                                                                      PatientId = p.PatientId,
                                                                      ReceivedDate = p.ReceivedDate,
                                                                      Status = p.Status,
-                                                                     ExaminationNumber = p.ExaminationNumber
+                                                                     ExaminationNumber = p.ExaminationNumber,
+                                                                     DoctorId = p.DoctorId,
+                                                                     DoctorName = p.Doctor.Name
                                                                  }).FirstOrDefault();
             return labExamination;
         }
@@ -1037,7 +1048,7 @@ namespace DataRepository
                 cost = listTestResultOfAPatient.Where(p => (p.TestSectionId == null || !p.UseTestSectionCode.Value))
                                                 .Select(p => p.Cost.Value).Sum();
                 // Lấy danh sách test section và giá của những test section có sử dụng giá chung UseTestSectionCode=true
-                var TestSectionUseTestSectionCost =  listTestResultOfAPatient.Where(p => (p.TestSectionId != null && p.UseTestSectionCode.Value)).Select(p => new { TestSectionId = p.TestSectionId , Cost = p.TestSectionCost}).Distinct();
+                var TestSectionUseTestSectionCost = listTestResultOfAPatient.Where(p => (p.TestSectionId != null && p.UseTestSectionCode.Value)).Select(p => new { TestSectionId = p.TestSectionId, Cost = p.TestSectionCost }).Distinct();
                 cost += TestSectionUseTestSectionCost.Select(p => p.Cost.Value).Sum();
                 result[item].Cost = cost;
             }

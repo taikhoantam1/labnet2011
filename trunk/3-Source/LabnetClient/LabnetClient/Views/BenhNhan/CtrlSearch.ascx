@@ -27,7 +27,8 @@
                             <%=Resources.PatientStrings.PatientInsert_Partner %></label>
                     </div>
                     <div class="Column">
-                        <%= Html.DropDownListFor(p => p.LabExamination.PartnerId, Model.SelectListPartner) %>
+                     <%--   <%= Html.DropDownListFor(p => p.LabExamination.PartnerId, Model.SelectListPartner) %>--%>
+                            <%Html.RenderPartial("ComboBox", Model.ComboBoxNoiGuiMauModel); %>
                     </div>
                 </div>
             </div>

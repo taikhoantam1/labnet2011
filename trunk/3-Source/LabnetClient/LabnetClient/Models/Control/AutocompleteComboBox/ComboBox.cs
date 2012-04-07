@@ -15,6 +15,7 @@ namespace LabnetClient.Models
             BindingName = bindingName;
             ComboBoxId = String.Format("comboBox_{0}", Guid.NewGuid().ToString().Replace("-",""));
             ComboBoxData = comboBoxData;
+            IsEnabled = true;
         }
 
 
@@ -54,5 +55,7 @@ namespace LabnetClient.Models
         /// 
         /// </summary>
         public string SelectedTag { get; set; }
+
+        public bool IsEnabled { get; set; }
     }
 }

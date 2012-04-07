@@ -29,4 +29,10 @@ namespace DomainModel.Constant
     {
         New=1
     }
+
+    public enum LoaiNoiGuiMau
+    {
+        BacSi =1,
+        LabGuiMau = 2
+    }
 }

@@ -123,6 +123,7 @@ namespace LabnetClient.Controllers
             labExamination.ExaminationNumber = model.LabExamination.ExaminationNumber;
             labExamination.OrderNumber = model.LabExamination.OrderNumber.Value;
             labExamination.PartnerId = model.LabExamination.PartnerId == -1 ? null : model.LabExamination.PartnerId;
+            labExamination.DoctorId = model.LabExamination.DoctorId == -1 ? null : model.LabExamination.DoctorId;
             labExamination.ReceivedDate = model.LabExamination.ReceivedDate ?? DateTime.Now;
             labExamination.Status = (int)LabExaminationStatusEnum.New;
             labExamination.Diagnosis = model.LabExamination.Diagnosis;
@@ -283,6 +284,7 @@ namespace LabnetClient.Controllers
                     LabExamination labExamination = new LabExamination();
                     labExamination.CreatedBy = AppHelper.GetLoginUserId();
                     labExamination.PartnerId = model.LabExamination.PartnerId == -1 ? null : model.LabExamination.PartnerId;
+                    labExamination.DoctorId = model.LabExamination.DoctorId == -1 ? null : model.LabExamination.DoctorId;
                     labExamination.Status = (int)LabExaminationStatusEnum.New;
                     labExamination.Diagnosis = model.LabExamination.Diagnosis;
                     Repository.LabExaminationUpdate(Id, model.LabExamination.ReceivedDate.Value, model.LabExamination.OrderNumber.Value, labExamination);
@@ -325,8 +327,9 @@ namespace LabnetClient.Controllers
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanels());
             List<VMTest> lstTest = Mapper.Map<List<Test>, List<VMTest>>(Repository.GetTestsHaveRealCost());
+            List<VMDoctor> lstBacSi = Mapper.Map<List<Doctor>,List<VMDoctor>>(Repository.GetDoctorByName(""));
             List<VMTestSection> lstTestSection = Mapper.Map<List<TestSection>, List<VMTestSection>>(Repository.GetTestSections());
-            PatientViewModel Model = new PatientViewModel(patient, labExam, patientTests, lstPartner, lstPanel, lstTest, lstTestSection);
+            PatientViewModel Model = new PatientViewModel(patient, labExam, patientTests,lstPartner,lstBacSi, lstPanel, lstTest, lstTestSection);
             return Model;
         }
 
@@ -349,7 +352,8 @@ namespace LabnetClient.Controllers
             {
             }
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
-            PatientTestViewModel model = new PatientTestViewModel(patient, labExamination, tests, lstPartner);
+            List<VMDoctor> lstBacSi = Mapper.Map<List<Doctor>, List<VMDoctor>>(Repository.GetDoctorByName(""));
+            PatientTestViewModel model = new PatientTestViewModel(patient, labExamination, tests, lstPartner, lstBacSi);
             return View(model);
         }
 
@@ -407,7 +411,8 @@ namespace LabnetClient.Controllers
             VMPatient patient = new VMPatient();
             List<VMTestResult> tests = new List<VMTestResult>();
             List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
-            PatientTestViewModel model = new PatientTestViewModel(patient, labExamination, tests, lstPartner);
+            List<VMDoctor> lstBacSi = Mapper.Map<List<Doctor>, List<VMDoctor>>(Repository.GetDoctorByName(""));
+            PatientTestViewModel model = new PatientTestViewModel(patient, labExamination, tests, lstPartner, lstBacSi);
             return View(model);
         }
     }
