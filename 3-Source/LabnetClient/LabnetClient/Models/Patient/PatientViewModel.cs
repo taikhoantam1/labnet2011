@@ -15,30 +15,33 @@ namespace LabnetClient.Models
         {
         }
 
-        public PatientViewModel(VMPatient patient, 
-                                VMLabExamination labExamination, 
+        public PatientViewModel(VMPatient patient,
+                                VMLabExamination labExamination,
                                 List<VMPatientTest> patientTest,
-                                List<VMPartner> listPartner, 
+                                List<VMPartner> listPartner,
+                                List<VMDoctor> listBacSi,
                                 List<VMPanel> lstPanel,
                                 List<VMTest> lstTest,
                                 List<VMTestSection> lstTestSection)
         {
             Repository Repository = new DataRepository.Repository();
-            Patient =patient;
+            Patient = patient;
             LabExamination = labExamination;
-            if(    LabExamination.OrderNumber==null)
-            LabExamination.OrderNumber = Repository.GetLabExaminationOrderNumber();
-            
+            if (LabExamination.OrderNumber == null)
+                LabExamination.OrderNumber = Repository.GetLabExaminationOrderNumber();
+
             JQGrid = new JQGridModel(typeof(VMPatientTest), true, patientTest, "/BenhNhan/SavePatientTest");
             JQGrid.Height = 220;
 
-
+            //Create ComboBox nơi gửi mẫu
+            ComboBoxNoiGuiMauModel = CreateNoiGuiMauComboBox(labExamination, listPartner, listBacSi);
             //Create ComboBox Panel 
             List<OptionItem> panelData = lstPanel.Select(p => new OptionItem
                                                         {
                                                             Value = p.Id.ToString(),
-                                                            Label=p.Name,
-                                                            Tag = ""}).ToList();
+                                                            Label = p.Name,
+                                                            Tag = ""
+                                                        }).ToList();
             ComboBoxPanelModel = new ComboBoxModel("", panelData);
 
             //Create ComboBox Test
@@ -59,11 +62,45 @@ namespace LabnetClient.Models
             }).ToList();
             ComboBoxTestSectionModel = new ComboBoxModel("", testSectionData);
 
-            VMPartner partner = new VMPartner();
-            partner.Id = -1;
-            partner.Name = " ";
-            listPartner.Insert(0, partner);
-            SelectListPartner = new SelectList(listPartner, "Id", "Name");
+            //VMPartner partner = new VMPartner();
+            //partner.Id = -1;
+            //partner.Name = " ";
+            //listPartner.Insert(0, partner);
+            //SelectListPartner = new SelectList(listPartner, "Id", "Name");
+        }
+
+        private ComboBoxModel CreateNoiGuiMauComboBox(VMLabExamination labExamination, List<VMPartner> listPartner, List<VMDoctor> listBacSi)
+        {
+
+            List<OptionItem> noiGuiMauData = listPartner.Select(p => new OptionItem
+            {
+                Value = p.Id.ToString(),
+                Label = p.Name,
+                Tag = "Lab"
+            }).ToList();
+
+            noiGuiMauData.AddRange(
+                listBacSi.Select(p => new OptionItem
+                {
+                    Value = p.Id.ToString(),
+                    Label = p.Name,
+                    Tag = "BacSi"
+                }).ToList()
+            );
+
+            ComboBoxModel comboBoxNoiGuiMau = new ComboBoxModel("", noiGuiMauData);
+
+            if (labExamination.PartnerId != null)
+            {
+                comboBoxNoiGuiMau.SelectedText = LabExamination.PartnerName;
+                comboBoxNoiGuiMau.SelectedValue = labExamination.PartnerId.ToString();
+            }
+            else if (labExamination.DoctorId != null)
+            {
+                comboBoxNoiGuiMau.SelectedText = LabExamination.DoctorName;
+                comboBoxNoiGuiMau.SelectedValue = labExamination.DoctorId.ToString();
+            }
+            return comboBoxNoiGuiMau;
         }
 
         /// <summary>
@@ -82,6 +119,15 @@ namespace LabnetClient.Models
         public List<VMTestListItem> PartnerTestList { get; set; }
 
         public JQGridModel JQGrid { get; set; }
+
+        public ComboBoxModel ComboBoxNoiGuiMauModel { get; set; }
+
+        /// <summary>
+        /// Nơi gui mau la bas si (1) hay la lab gui mau (2)
+        /// </summary>
+        public int LoaiNoiGuiMau { get; set; }
+
+        public int NoiGioMauId { get; set; }
 
         public ComboBoxModel ComboBoxPanelModel { get; set; }
 

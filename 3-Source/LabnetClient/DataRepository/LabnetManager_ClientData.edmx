@@ -7,9 +7,8 @@
     <Schema Namespace="LabManager_ClientModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="LabManager_ClientModelStoreContainer">
           <EntitySet Name="Analysis" EntityType="LabManager_ClientModel.Store.Analysis" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Analyte" EntityType="LabManager_ClientModel.Store.Analyte" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Department" EntityType="LabManager_ClientModel.Store.Department" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Doctor" EntityType="LabManager_ClientModel.Store.Doctor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Instrument" EntityType="LabManager_ClientModel.Store.Instrument" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabExamination" EntityType="LabManager_ClientModel.Store.LabExamination" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabUser" EntityType="LabManager_ClientModel.Store.LabUser" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Panel" EntityType="LabManager_ClientModel.Store.Panel" store:Type="Tables" Schema="dbo" />
@@ -18,19 +17,14 @@
           <EntitySet Name="PartnerCost" EntityType="LabManager_ClientModel.Store.PartnerCost" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Patient" EntityType="LabManager_ClientModel.Store.Patient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PatientItem" EntityType="LabManager_ClientModel.Store.PatientItem" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PatientType" EntityType="LabManager_ClientModel.Store.PatientType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PaymentType" EntityType="LabManager_ClientModel.Store.PaymentType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Project" EntityType="LabManager_ClientModel.Store.Project" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Result" EntityType="LabManager_ClientModel.Store.Result" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ResultDictionary" EntityType="LabManager_ClientModel.Store.ResultDictionary" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Source" EntityType="LabManager_ClientModel.Store.Source" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Staff" EntityType="LabManager_ClientModel.Store.Staff" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Test" EntityType="LabManager_ClientModel.Store.Test" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestCommission" EntityType="LabManager_ClientModel.Store.TestCommission" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestResult" EntityType="LabManager_ClientModel.Store.TestResult" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestSection" EntityType="LabManager_ClientModel.Store.TestSection" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TestSectionCommission" EntityType="LabManager_ClientModel.Store.TestSectionCommission" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="TypeOfSample" EntityType="LabManager_ClientModel.Store.TypeOfSample" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Analysis_PatientItem" Association="LabManager_ClientModel.Store.FK_Analysis_PatientItem">
             <End Role="PatientItem" EntitySet="PatientItem" />
             <End Role="Analysis" EntitySet="Analysis" />
@@ -39,20 +33,12 @@
             <End Role="Test" EntitySet="Test" />
             <End Role="Analysis" EntitySet="Analysis" />
           </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_Department" Association="LabManager_ClientModel.Store.FK_LabPatientManagement_Department">
-            <End Role="Department" EntitySet="Department" />
+          <AssociationSet Name="FK_LabExamination_Doctor" Association="LabManager_ClientModel.Store.FK_LabExamination_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
             <End Role="LabExamination" EntitySet="LabExamination" />
           </AssociationSet>
           <AssociationSet Name="FK_LabPatientManagement_Partner" Association="LabManager_ClientModel.Store.FK_LabPatientManagement_Partner">
             <End Role="Partner" EntitySet="Partner" />
-            <End Role="LabExamination" EntitySet="LabExamination" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_PatientType" Association="LabManager_ClientModel.Store.FK_LabPatientManagement_PatientType">
-            <End Role="PatientType" EntitySet="PatientType" />
-            <End Role="LabExamination" EntitySet="LabExamination" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_Project" Association="LabManager_ClientModel.Store.FK_LabPatientManagement_Project">
-            <End Role="Project" EntitySet="Project" />
             <End Role="LabExamination" EntitySet="LabExamination" />
           </AssociationSet>
           <AssociationSet Name="FK_PanelItem_Panel" Association="LabManager_ClientModel.Store.FK_PanelItem_Panel">
@@ -79,20 +65,8 @@
             <End Role="Patient" EntitySet="Patient" />
             <End Role="PatientItem" EntitySet="PatientItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_PatientItem_Source" Association="LabManager_ClientModel.Store.FK_PatientItem_Source">
-            <End Role="Source" EntitySet="Source" />
-            <End Role="PatientItem" EntitySet="PatientItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientItem_TypeOfSample" Association="LabManager_ClientModel.Store.FK_PatientItem_TypeOfSample">
-            <End Role="TypeOfSample" EntitySet="TypeOfSample" />
-            <End Role="PatientItem" EntitySet="PatientItem" />
-          </AssociationSet>
           <AssociationSet Name="FK_Result_Analysis" Association="LabManager_ClientModel.Store.FK_Result_Analysis">
             <End Role="Analysis" EntitySet="Analysis" />
-            <End Role="Result" EntitySet="Result" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Result_Analyte" Association="LabManager_ClientModel.Store.FK_Result_Analyte">
-            <End Role="Analyte" EntitySet="Analyte" />
             <End Role="Result" EntitySet="Result" />
           </AssociationSet>
           <AssociationSet Name="FK_Test_TestSection" Association="LabManager_ClientModel.Store.FK_Test_TestSection">
@@ -136,25 +110,6 @@
           <Property Name="ReleasedDate" Type="datetime" />
           <Property Name="Note" Type="ntext" />
         </EntityType>
-        <EntityType Name="Analyte">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="LastUpdated" Type="datetime" />
-        </EntityType>
         <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="Id" />
@@ -177,6 +132,20 @@
           <Property Name="Commission" Type="float" />
           <Property Name="BankAccountNumber" Type="char" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Instrument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="BaudRate" Type="int" Nullable="false" />
+          <Property Name="Databits" Type="int" Nullable="false" />
+          <Property Name="Parity" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Stopbit" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="COMName" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="LabExamination">
           <Key>
             <PropertyRef Name="Id" />
@@ -195,6 +164,7 @@
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="OrderNumber" Type="int" Nullable="false" />
           <Property Name="PartnerId" Type="int" />
+          <Property Name="DoctorId" Type="int" />
         </EntityType>
         <EntityType Name="LabUser">
           <Key>
@@ -290,36 +260,6 @@
           <Property Name="LabExaminationId" Type="int" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="PatientType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PaymentType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="LastUpdated" Type="datetime" />
-        </EntityType>
         <EntityType Name="Result">
           <Key>
             <PropertyRef Name="Id" />
@@ -340,14 +280,6 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Source">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -426,14 +358,6 @@
           <Property Name="Cost" Type="decimal" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="TypeOfSample">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Analysis_PatientItem">
           <End Role="PatientItem" Type="LabManager_ClientModel.Store.PatientItem" Multiplicity="1" />
           <End Role="Analysis" Type="LabManager_ClientModel.Store.Analysis" Multiplicity="*" />
@@ -458,15 +382,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LabPatientManagement_Department">
-          <End Role="Department" Type="LabManager_ClientModel.Store.Department" Multiplicity="0..1" />
+        <Association Name="FK_LabExamination_Doctor">
+          <End Role="Doctor" Type="LabManager_ClientModel.Store.Doctor" Multiplicity="0..1" />
           <End Role="LabExamination" Type="LabManager_ClientModel.Store.LabExamination" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Department">
+            <Principal Role="Doctor">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="LabExamination">
-              <PropertyRef Name="DepartmentId" />
+              <PropertyRef Name="DoctorId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -479,30 +403,6 @@
             </Principal>
             <Dependent Role="LabExamination">
               <PropertyRef Name="PartnerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LabPatientManagement_PatientType">
-          <End Role="PatientType" Type="LabManager_ClientModel.Store.PatientType" Multiplicity="0..1" />
-          <End Role="LabExamination" Type="LabManager_ClientModel.Store.LabExamination" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PatientType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabExamination">
-              <PropertyRef Name="PatientTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LabPatientManagement_Project">
-          <End Role="Project" Type="LabManager_ClientModel.Store.Project" Multiplicity="0..1" />
-          <End Role="LabExamination" Type="LabManager_ClientModel.Store.LabExamination" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabExamination">
-              <PropertyRef Name="ProjectId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -578,30 +478,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PatientItem_Source">
-          <End Role="Source" Type="LabManager_ClientModel.Store.Source" Multiplicity="0..1" />
-          <End Role="PatientItem" Type="LabManager_ClientModel.Store.PatientItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Source">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientItem">
-              <PropertyRef Name="SourceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientItem_TypeOfSample">
-          <End Role="TypeOfSample" Type="LabManager_ClientModel.Store.TypeOfSample" Multiplicity="0..1" />
-          <End Role="PatientItem" Type="LabManager_ClientModel.Store.PatientItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeOfSample">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientItem">
-              <PropertyRef Name="TypeOfSample" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Result_Analysis">
           <End Role="Analysis" Type="LabManager_ClientModel.Store.Analysis" Multiplicity="1" />
           <End Role="Result" Type="LabManager_ClientModel.Store.Result" Multiplicity="*" />
@@ -611,18 +487,6 @@
             </Principal>
             <Dependent Role="Result">
               <PropertyRef Name="AnalysisId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Result_Analyte">
-          <End Role="Analyte" Type="LabManager_ClientModel.Store.Analyte" Multiplicity="0..1" />
-          <End Role="Result" Type="LabManager_ClientModel.Store.Result" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Analyte">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Result">
-              <PropertyRef Name="AnalyteId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -838,28 +702,20 @@
             <Parameter Name="SearchType" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Analyses" EntityType="LabManager_ClientModel.Analysis" />
-          <EntitySet Name="Analytes" EntityType="LabManager_ClientModel.Analyte" />
-          <EntitySet Name="Departments" EntityType="LabManager_ClientModel.Department" />
           <EntitySet Name="Doctors" EntityType="LabManager_ClientModel.Doctor" />
-          <EntitySet Name="LabExaminations" EntityType="LabManager_ClientModel.LabExamination" />
           <EntitySet Name="LabUsers" EntityType="LabManager_ClientModel.LabUser" />
           <EntitySet Name="Panels" EntityType="LabManager_ClientModel.Panel" />
           <EntitySet Name="PanelItems" EntityType="LabManager_ClientModel.PanelItem" />
           <EntitySet Name="Partners" EntityType="LabManager_ClientModel.Partner" />
           <EntitySet Name="PartnerCosts" EntityType="LabManager_ClientModel.PartnerCost" />
           <EntitySet Name="PatientItems" EntityType="LabManager_ClientModel.PatientItem" />
-          <EntitySet Name="PatientTypes" EntityType="LabManager_ClientModel.PatientType" />
-          <EntitySet Name="PaymentTypes" EntityType="LabManager_ClientModel.PaymentType" />
-          <EntitySet Name="Projects" EntityType="LabManager_ClientModel.Project" />
           <EntitySet Name="Results" EntityType="LabManager_ClientModel.Result" />
           <EntitySet Name="ResultDictionaries" EntityType="LabManager_ClientModel.ResultDictionary" />
-          <EntitySet Name="Sources" EntityType="LabManager_ClientModel.Source" />
           <EntitySet Name="Staffs" EntityType="LabManager_ClientModel.Staff" />
           <EntitySet Name="Tests" EntityType="LabManager_ClientModel.Test" />
           <EntitySet Name="TestCommissions" EntityType="LabManager_ClientModel.TestCommission" />
           <EntitySet Name="TestResults" EntityType="LabManager_ClientModel.TestResult" />
           <EntitySet Name="TestSectionCommissions" EntityType="LabManager_ClientModel.TestSectionCommission" />
-          <EntitySet Name="TypeOfSamples" EntityType="LabManager_ClientModel.TypeOfSample" />
           <AssociationSet Name="FK_Analysis_PatientItem" Association="LabManager_ClientModel.FK_Analysis_PatientItem">
             <End Role="PatientItem" EntitySet="PatientItems" />
             <End Role="Analysis" EntitySet="Analyses" />
@@ -872,33 +728,9 @@
             <End Role="Analysis" EntitySet="Analyses" />
             <End Role="Result" EntitySet="Results" />
           </AssociationSet>
-          <AssociationSet Name="FK_Result_Analyte" Association="LabManager_ClientModel.FK_Result_Analyte">
-            <End Role="Analyte" EntitySet="Analytes" />
-            <End Role="Result" EntitySet="Results" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_Department" Association="LabManager_ClientModel.FK_LabPatientManagement_Department">
-            <End Role="Department" EntitySet="Departments" />
-            <End Role="LabExamination" EntitySet="LabExaminations" />
-          </AssociationSet>
           <AssociationSet Name="FK_TestCommission_Doctor" Association="LabManager_ClientModel.FK_TestCommission_Doctor">
             <End Role="Doctor" EntitySet="Doctors" />
             <End Role="TestCommission" EntitySet="TestCommissions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_Partner" Association="LabManager_ClientModel.FK_LabPatientManagement_Partner">
-            <End Role="Partner" EntitySet="Partners" />
-            <End Role="LabExamination" EntitySet="LabExaminations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_PatientType" Association="LabManager_ClientModel.FK_LabPatientManagement_PatientType">
-            <End Role="PatientType" EntitySet="PatientTypes" />
-            <End Role="LabExamination" EntitySet="LabExaminations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LabPatientManagement_Project" Association="LabManager_ClientModel.FK_LabPatientManagement_Project">
-            <End Role="Project" EntitySet="Projects" />
-            <End Role="LabExamination" EntitySet="LabExaminations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientItem_LabExamination" Association="LabManager_ClientModel.FK_PatientItem_LabExamination">
-            <End Role="LabExamination" EntitySet="LabExaminations" />
-            <End Role="PatientItem" EntitySet="PatientItems" />
           </AssociationSet>
           <AssociationSet Name="FK_PanelItem_Panel" Association="LabManager_ClientModel.FK_PanelItem_Panel">
             <End Role="Panel" EntitySet="Panels" />
@@ -919,14 +751,6 @@
           <AssociationSet Name="FK_PartnerCost_Test" Association="LabManager_ClientModel.FK_PartnerCost_Test">
             <End Role="Test" EntitySet="Tests" />
             <End Role="PartnerCost" EntitySet="PartnerCosts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientItem_Source" Association="LabManager_ClientModel.FK_PatientItem_Source">
-            <End Role="Source" EntitySet="Sources" />
-            <End Role="PatientItem" EntitySet="PatientItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PatientItem_TypeOfSample" Association="LabManager_ClientModel.FK_PatientItem_TypeOfSample">
-            <End Role="TypeOfSample" EntitySet="TypeOfSamples" />
-            <End Role="PatientItem" EntitySet="PatientItems" />
           </AssociationSet>
           <AssociationSet Name="FK_TestResult_ResultDictionary" Association="LabManager_ClientModel.FK_TestResult_ResultDictionary">
             <End Role="ResultDictionary" EntitySet="ResultDictionaries" />
@@ -965,6 +789,20 @@
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="PartnerId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Instruments" EntityType="LabManager_ClientModel.Instrument" />
+          <EntitySet Name="LabExaminations" EntityType="LabManager_ClientModel.LabExamination" />
+          <AssociationSet Name="FK_LabExamination_Doctor" Association="LabManager_ClientModel.FK_LabExamination_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="LabExamination" EntitySet="LabExaminations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LabPatientManagement_Partner" Association="LabManager_ClientModel.FK_LabPatientManagement_Partner">
+            <End Role="Partner" EntitySet="Partners" />
+            <End Role="LabExamination" EntitySet="LabExaminations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientItem_LabExamination" Association="LabManager_ClientModel.FK_PatientItem_LabExamination">
+            <End Role="LabExamination" EntitySet="LabExaminations" />
+            <End Role="PatientItem" EntitySet="PatientItems" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1039,27 +877,6 @@
           <NavigationProperty Name="Test" Relationship="LabManager_ClientModel.FK_Analysis_Test" FromRole="Analysis" ToRole="Test" />
           <NavigationProperty Name="Results" Relationship="LabManager_ClientModel.FK_Result_Analysis" FromRole="Analysis" ToRole="Result" />
         </EntityType>
-        <EntityType Name="Analyte">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <NavigationProperty Name="Results" Relationship="LabManager_ClientModel.FK_Result_Analyte" FromRole="Analyte" ToRole="Result" />
-        </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="DateTime" Name="LastUpdated" />
-          <NavigationProperty Name="LabExaminations" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Department" FromRole="Department" ToRole="LabExamination" />
-        </EntityType>
         <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="Id" />
@@ -1082,30 +899,7 @@
           <Property Type="Double" Name="Commission" />
           <Property Type="String" Name="BankAccountNumber" MaxLength="50" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="TestCommissions" Relationship="LabManager_ClientModel.FK_TestCommission_Doctor" FromRole="Doctor" ToRole="TestCommission" />
-        </EntityType>
-        <EntityType Name="LabExamination">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="PatientId" Nullable="false" />
-          <Property Type="String" Name="ExaminationNumber" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Diagnosis" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" />
-          <Property Type="DateTime" Name="EnteredDate" />
-          <Property Type="Int32" Name="PaymentTypeId" />
-          <Property Type="Int32" Name="PatientTypeId" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
-          <Property Type="Int32" Name="ProjectId" />
-          <Property Type="Int32" Name="DepartmentId" />
-          <Property Type="Int32" Name="Status" Nullable="false" />
-          <Property Type="Int32" Name="OrderNumber" Nullable="false" />
-          <Property Type="Int32" Name="PartnerId" />
-          <NavigationProperty Name="Department" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Department" FromRole="LabExamination" ToRole="Department" />
-          <NavigationProperty Name="Partner" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Partner" FromRole="LabExamination" ToRole="Partner" />
-          <NavigationProperty Name="PatientType" Relationship="LabManager_ClientModel.FK_LabPatientManagement_PatientType" FromRole="LabExamination" ToRole="PatientType" />
-          <NavigationProperty Name="Project" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Project" FromRole="LabExamination" ToRole="Project" />
-          <NavigationProperty Name="PatientItems" Relationship="LabManager_ClientModel.FK_PatientItem_LabExamination" FromRole="LabExamination" ToRole="PatientItem" />
+          <NavigationProperty Name="LabExaminations" Relationship="LabManager_ClientModel.FK_LabExamination_Doctor" FromRole="Doctor" ToRole="LabExamination" />
         </EntityType>
         <EntityType Name="LabUser">
           <Key>
@@ -1156,9 +950,9 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="String" Name="Note" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="BankAccountNumber" MaxLength="50" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="LabExaminations" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Partner" FromRole="Partner" ToRole="LabExamination" />
           <NavigationProperty Name="PartnerCosts" Relationship="LabManager_ClientModel.FK_PartnerCost_Partner" FromRole="Partner" ToRole="PartnerCost" />
           <NavigationProperty Name="TestSectionCommissions" Relationship="LabManager_ClientModel.FK_TestSectionCommission_Partner" FromRole="Partner" ToRole="TestSectionCommission" />
+          <NavigationProperty Name="LabExaminations" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Partner" FromRole="Partner" ToRole="LabExamination" />
         </EntityType>
         <EntityType Name="PartnerCost">
           <Key>
@@ -1185,42 +979,8 @@
           <Property Type="Int32" Name="LabExaminationId" Nullable="false" />
           <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
           <NavigationProperty Name="Analyses" Relationship="LabManager_ClientModel.FK_Analysis_PatientItem" FromRole="PatientItem" ToRole="Analysis" />
-          <NavigationProperty Name="LabExamination" Relationship="LabManager_ClientModel.FK_PatientItem_LabExamination" FromRole="PatientItem" ToRole="LabExamination" />
-          <NavigationProperty Name="Source" Relationship="LabManager_ClientModel.FK_PatientItem_Source" FromRole="PatientItem" ToRole="Source" />
-          <NavigationProperty Name="TypeOfSample1" Relationship="LabManager_ClientModel.FK_PatientItem_TypeOfSample" FromRole="PatientItem" ToRole="TypeOfSample" />
           <NavigationProperty Name="Patient" Relationship="LabManager_ClientModel.FK_PatientItem_Patient" FromRole="PatientItem" ToRole="Patient" />
-        </EntityType>
-        <EntityType Name="PatientType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
-          <NavigationProperty Name="LabExaminations" Relationship="LabManager_ClientModel.FK_LabPatientManagement_PatientType" FromRole="PatientType" ToRole="LabExamination" />
-        </EntityType>
-        <EntityType Name="PaymentType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Project">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="DateTime" Name="LastUpdated" />
-          <NavigationProperty Name="LabExaminations" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Project" FromRole="Project" ToRole="LabExamination" />
+          <NavigationProperty Name="LabExamination" Relationship="LabManager_ClientModel.FK_PatientItem_LabExamination" FromRole="PatientItem" ToRole="LabExamination" />
         </EntityType>
         <EntityType Name="Result">
           <Key>
@@ -1234,7 +994,6 @@
           <Property Type="Boolean" Name="IsReportable" Nullable="false" />
           <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
           <NavigationProperty Name="Analysis" Relationship="LabManager_ClientModel.FK_Result_Analysis" FromRole="Result" ToRole="Analysis" />
-          <NavigationProperty Name="Analyte" Relationship="LabManager_ClientModel.FK_Result_Analyte" FromRole="Result" ToRole="Analyte" />
         </EntityType>
         <EntityType Name="ResultDictionary">
           <Key>
@@ -1245,15 +1004,6 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
           <NavigationProperty Name="TestResults" Relationship="LabManager_ClientModel.FK_TestResult_ResultDictionary" FromRole="ResultDictionary" ToRole="TestResult" />
-        </EntityType>
-        <EntityType Name="Source">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <NavigationProperty Name="PatientItems" Relationship="LabManager_ClientModel.FK_PatientItem_Source" FromRole="Source" ToRole="PatientItem" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -1332,15 +1082,6 @@
           <NavigationProperty Name="Partner" Relationship="LabManager_ClientModel.FK_TestSectionCommission_Partner" FromRole="TestSectionCommission" ToRole="Partner" />
           <NavigationProperty Name="TestSection" Relationship="LabManager_ClientModel.FK_TestSectionCommission_TestSection" FromRole="TestSectionCommission" ToRole="TestSection" />
         </EntityType>
-        <EntityType Name="TypeOfSample">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <NavigationProperty Name="PatientItems" Relationship="LabManager_ClientModel.FK_PatientItem_TypeOfSample" FromRole="TypeOfSample" ToRole="PatientItem" />
-        </EntityType>
         <Association Name="FK_Analysis_PatientItem">
           <End Type="LabManager_ClientModel.PatientItem" Role="PatientItem" Multiplicity="1" />
           <End Type="LabManager_ClientModel.Analysis" Role="Analysis" Multiplicity="*" />
@@ -1377,30 +1118,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Result_Analyte">
-          <End Type="LabManager_ClientModel.Analyte" Role="Analyte" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.Result" Role="Result" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Analyte">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Result">
-              <PropertyRef Name="AnalyteId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LabPatientManagement_Department">
-          <End Type="LabManager_ClientModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabExamination">
-              <PropertyRef Name="DepartmentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TestCommission_Doctor">
           <End Type="LabManager_ClientModel.Doctor" Role="Doctor" Multiplicity="1" />
           <End Type="LabManager_ClientModel.TestCommission" Role="TestCommission" Multiplicity="*" />
@@ -1410,54 +1127,6 @@
             </Principal>
             <Dependent Role="TestCommission">
               <PropertyRef Name="DoctorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LabPatientManagement_Partner">
-          <End Type="LabManager_ClientModel.Partner" Role="Partner" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Partner">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabExamination">
-              <PropertyRef Name="PartnerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LabPatientManagement_PatientType">
-          <End Type="LabManager_ClientModel.PatientType" Role="PatientType" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PatientType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabExamination">
-              <PropertyRef Name="PatientTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LabPatientManagement_Project">
-          <End Type="LabManager_ClientModel.Project" Role="Project" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Project">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LabExamination">
-              <PropertyRef Name="ProjectId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientItem_LabExamination">
-          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="1" />
-          <End Type="LabManager_ClientModel.PatientItem" Role="PatientItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LabExamination">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientItem">
-              <PropertyRef Name="LabExaminationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1518,30 +1187,6 @@
             </Principal>
             <Dependent Role="PartnerCost">
               <PropertyRef Name="TestId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientItem_Source">
-          <End Type="LabManager_ClientModel.Source" Role="Source" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.PatientItem" Role="PatientItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Source">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientItem">
-              <PropertyRef Name="SourceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PatientItem_TypeOfSample">
-          <End Type="LabManager_ClientModel.TypeOfSample" Role="TypeOfSample" Multiplicity="0..1" />
-          <End Type="LabManager_ClientModel.PatientItem" Role="PatientItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeOfSample">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PatientItem">
-              <PropertyRef Name="TypeOfSample" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1731,6 +1376,79 @@
           <Property Type="Boolean" Name="UseTestSectionCode" Nullable="true" />
           <Property Type="Decimal" Name="TestSectionCost" Nullable="true" Precision="18" Scale="0" />
         </ComplexType>
+        <EntityType Name="Instrument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BaudRate" Nullable="false" />
+          <Property Type="Int32" Name="Databits" Nullable="false" />
+          <Property Type="String" Name="Parity" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Stopbit" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="COMName" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LabExamination">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="PatientId" Nullable="false" />
+          <Property Type="String" Name="ExaminationNumber" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Diagnosis" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" />
+          <Property Type="DateTime" Name="EnteredDate" />
+          <Property Type="Int32" Name="PaymentTypeId" />
+          <Property Type="Int32" Name="PatientTypeId" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int32" Name="ProjectId" />
+          <Property Type="Int32" Name="DepartmentId" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="Int32" Name="OrderNumber" Nullable="false" />
+          <Property Type="Int32" Name="PartnerId" />
+          <Property Type="Int32" Name="DoctorId" />
+          <NavigationProperty Name="Doctor" Relationship="LabManager_ClientModel.FK_LabExamination_Doctor" FromRole="LabExamination" ToRole="Doctor" />
+          <NavigationProperty Name="Partner" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Partner" FromRole="LabExamination" ToRole="Partner" />
+          <NavigationProperty Name="PatientItems" Relationship="LabManager_ClientModel.FK_PatientItem_LabExamination" FromRole="LabExamination" ToRole="PatientItem" />
+        </EntityType>
+        <Association Name="FK_LabExamination_Doctor">
+          <End Type="LabManager_ClientModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabExamination">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LabPatientManagement_Partner">
+          <End Type="LabManager_ClientModel.Partner" Role="Partner" Multiplicity="0..1" />
+          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LabExamination">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientItem_LabExamination">
+          <End Type="LabManager_ClientModel.LabExamination" Role="LabExamination" Multiplicity="1" />
+          <End Type="LabManager_ClientModel.PatientItem" Role="PatientItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabExamination">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientItem">
+              <PropertyRef Name="LabExaminationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1873,27 +1591,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Analytes">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.Analyte">
-              <MappingFragment StoreEntitySet="Analyte">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="LabManager_ClientModel.Doctor">
               <MappingFragment StoreEntitySet="Doctor">
@@ -1913,26 +1610,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LabExaminations">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.LabExamination">
-              <MappingFragment StoreEntitySet="LabExamination">
-                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="PatientTypeId" ColumnName="PatientTypeId" />
-                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
-                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
-                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
-                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
-                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
-                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2013,39 +1690,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PatientTypes">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.PatientType">
-              <MappingFragment StoreEntitySet="PatientType">
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PaymentTypes">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.PaymentType">
-              <MappingFragment StoreEntitySet="PaymentType">
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Projects">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.Project">
-              <MappingFragment StoreEntitySet="Project">
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Results">
             <EntityTypeMapping TypeName="LabManager_ClientModel.Result">
               <MappingFragment StoreEntitySet="Result">
@@ -2063,15 +1707,6 @@
             <EntityTypeMapping TypeName="LabManager_ClientModel.ResultDictionary">
               <MappingFragment StoreEntitySet="ResultDictionary">
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sources">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.Source">
-              <MappingFragment StoreEntitySet="Source">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -2144,15 +1779,6 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
                 <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TypeOfSamples">
-            <EntityTypeMapping TypeName="LabManager_ClientModel.TypeOfSample">
-              <MappingFragment StoreEntitySet="TypeOfSample">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2259,6 +1885,42 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Instruments">
+            <EntityTypeMapping TypeName="LabManager_ClientModel.Instrument">
+              <MappingFragment StoreEntitySet="Instrument">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="COMName" ColumnName="COMName" />
+                <ScalarProperty Name="Stopbit" ColumnName="Stopbit" />
+                <ScalarProperty Name="Parity" ColumnName="Parity" />
+                <ScalarProperty Name="Databits" ColumnName="Databits" />
+                <ScalarProperty Name="BaudRate" ColumnName="BaudRate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LabExaminations">
+            <EntityTypeMapping TypeName="LabManager_ClientModel.LabExamination">
+              <MappingFragment StoreEntitySet="LabExamination">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PatientTypeId" ColumnName="PatientTypeId" />
+                <ScalarProperty Name="PaymentTypeId" ColumnName="PaymentTypeId" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2282,28 +1944,20 @@
     <Diagrams>
       <Diagram Name="LabnetManager_ClientData" ZoomLevel="82">
         <EntityTypeShape EntityType="LabManager_ClientModel.Analysis" Width="1.5" PointX="5.25" PointY="9.875" Height="2.9417936197916674" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.Analyte" Width="1.5" PointX="8.25" PointY="14.375" Height="1.9802864583333228" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.Department" Width="1.5" PointX="1.5" PointY="27" Height="2.172587890624996" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Doctor" Width="1.5" PointX="3" PointY="15.125" Height="4.480205078124996" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.LabExamination" Width="1.5" PointX="0.75" PointY="16.625" Height="4.6725065104166674" />
         <EntityTypeShape EntityType="LabManager_ClientModel.LabUser" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Panel" Width="1.5" PointX="6" PointY="18.25" Height="2.172587890624996" />
         <EntityTypeShape EntityType="LabManager_ClientModel.PanelItem" Width="1.5" PointX="8.25" PointY="10" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Partner" Width="1.5" PointX="0.75" PointY="4.375" Height="3.9033007812500102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.PartnerCost" Width="1.5" PointX="5.25" PointY="6" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.PatientItem" Width="1.5" PointX="3" PointY="22.75" Height="3.1340950520833388" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.PatientType" Width="1.5" PointX="1.5" PointY="29.875" Height="2.172587890624996" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.PaymentType" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333246" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.Project" Width="1.5" PointX="1.5" PointY="32.875" Height="2.172587890624996" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Result" Width="1.5" PointX="10.5" PointY="10" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.ResultDictionary" Width="1.5" PointX="6" PointY="2.375" Height="1.9802864583333246" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.Source" Width="1.5" PointX="0.75" PointY="24.375" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Staff" Width="1.5" PointX="8.75" PointY="0.75" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Test" Width="1.5" PointX="3" PointY="8.75" Height="5.2494108072916674" />
         <EntityTypeShape EntityType="LabManager_ClientModel.TestCommission" Width="1.5" PointX="5.25" PointY="14" Height="2.5571907552083228" />
         <EntityTypeShape EntityType="LabManager_ClientModel.TestResult" Width="1.5" PointX="8.25" PointY="6.375" Height="1.9802864583333246" />
         <EntityTypeShape EntityType="LabManager_ClientModel.TestSectionCommission" Width="1.5" PointX="3" PointY="5.125" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="LabManager_ClientModel.TypeOfSample" Width="1.5" PointX="0.75" PointY="41.875" Height="1.7879850260416674" />
         <AssociationConnector Association="LabManager_ClientModel.FK_Analysis_PatientItem" >
           <ConnectorPoint PointX="4.5" PointY="22.751152846153843" />
           <ConnectorPoint PointX="4.875" PointY="22.376152846153843" />
@@ -2319,61 +1973,17 @@
           <ConnectorPoint PointX="5.25" PointY="10.633281264648437" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_Result_Analysis" >
-          <ConnectorPoint PointX="6.75" PointY="12.816793619791667" />
-          <ConnectorPoint PointX="7.125" PointY="13.191793619791667" />
-          <ConnectorPoint PointX="7.125" PointY="13.12449218750001" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="13.12449218750001" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="13.12449218750001" />
-          <ConnectorPoint PointX="8.9166666666666661" PointY="13.12449218750001" />
-          <ConnectorPoint PointX="9.0833333333333339" PointY="13.12449218750001" />
-          <ConnectorPoint PointX="10.125" PointY="13.12449218750001" />
-          <ConnectorPoint PointX="10.5" PointY="12.74949218750001" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_Result_Analyte" >
-          <ConnectorPoint PointX="9.75" PointY="15.365143229166662" />
-          <ConnectorPoint PointX="11.2812525" PointY="15.365143229166662" />
-          <ConnectorPoint PointX="11.2812525" PointY="12.74949218750001" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_Department" >
-          <ConnectorPoint PointX="2.5625025" PointY="27" />
-          <ConnectorPoint PointX="2.5625025" PointY="18.930675332131408" />
-          <ConnectorPoint PointX="2.25" PointY="18.930675332131408" />
+          <ConnectorPoint PointX="6.75" PointY="9.8761528461538468" />
+          <ConnectorPoint PointX="7.125" PointY="9.5011528461538468" />
+          <ConnectorPoint PointX="7.125" PointY="9.75" />
+          <ConnectorPoint PointX="10.25" PointY="9.75" />
+          <ConnectorPoint PointX="10.5" PointY="10" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestCommission_Doctor" >
           <ConnectorPoint PointX="4.5" PointY="15.841095377604162" />
           <ConnectorPoint PointX="4.791666666666667" PointY="15.841095377604162" />
           <ConnectorPoint PointX="4.958333333333333" PointY="15.841095377604162" />
           <ConnectorPoint PointX="5.25" PointY="15.841095377604162" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_Partner" >
-          <ConnectorPoint PointX="2.2499999999999996" PointY="8.27830078125001" />
-          <ConnectorPoint PointX="2.625" PointY="8.65330078125001" />
-          <ConnectorPoint PointX="2.625" PointY="16.251152846153843" />
-          <ConnectorPoint PointX="2.25" PointY="16.626152846153843" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_PatientType" >
-          <ConnectorPoint PointX="1.5011528461538464" PointY="29.875" />
-          <ConnectorPoint PointX="1.1261528461538468" PointY="29.5" />
-          <ConnectorPoint PointX="0.58333333333333337" PointY="29.5" />
-          <ConnectorPoint PointX="0.41666666666666669" PointY="29.5" />
-          <ConnectorPoint PointX="0.375" PointY="29.5" />
-          <ConnectorPoint PointX="0.375" PointY="21.6482757411859" />
-          <ConnectorPoint PointX="0.75" PointY="21.2732757411859" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_Project" >
-          <ConnectorPoint PointX="1.5" PointY="32.875" />
-          <ConnectorPoint PointX="1.125" PointY="32.5" />
-          <ConnectorPoint PointX="0.5" PointY="32.5" />
-          <ConnectorPoint PointX="0.5" PointY="21.574043971955128" />
-          <ConnectorPoint PointX="0.77653746153846115" PointY="21.297506510416667" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_LabExamination" >
-          <ConnectorPoint PointX="2.2499999999999996" PointY="21.297506510416667" />
-          <ConnectorPoint PointX="2.5035769349011212" PointY="21.55108344531779" />
-          <ConnectorPoint PointX="2.621428065098879" PointY="21.668934575515546" />
-          <ConnectorPoint PointX="2.625" PointY="21.672506510416667" />
-          <ConnectorPoint PointX="2.625" PointY="23.891698904947916" />
-          <ConnectorPoint PointX="3" PointY="23.891698904947916" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PanelItem_Panel" >
           <ConnectorPoint PointX="7.5" PointY="18.251152846153843" />
@@ -2391,31 +2001,24 @@
           <ConnectorPoint PointX="9" PointY="12.74949218750001" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PartnerCost_Partner" >
-          <ConnectorPoint PointX="2.250005" PointY="7.8191943359375049" />
-          <ConnectorPoint PointX="2.7291666666666665" PointY="7.819194335937504" />
-          <ConnectorPoint PointX="2.8958333333333335" PointY="7.8191943359375049" />
-          <ConnectorPoint PointX="5.250005" PointY="7.8191943359375049" />
+          <ConnectorPoint PointX="2.25" PointY="7.9153450520833335" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.9153450520833326" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.9153450520833335" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="7.9153450520833326" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="7.9153450520833335" />
+          <ConnectorPoint PointX="5.25" PointY="7.9153450520833335" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestSectionCommission_Partner" >
-          <ConnectorPoint PointX="2.25" PointY="6.3074446614583328" />
-          <ConnectorPoint PointX="3" PointY="6.3074446614583328" />
+          <ConnectorPoint PointX="2.25" PointY="5.9649594960937469" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="5.964959496093746" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="5.9649594960937469" />
+          <ConnectorPoint PointX="3" PointY="5.9649594960937469" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PartnerCost_Test" >
           <ConnectorPoint PointX="4.5" PointY="8.7511528461538468" />
           <ConnectorPoint PointX="4.875" PointY="8.3761528461538468" />
           <ConnectorPoint PointX="4.875" PointY="9.125645033653857" />
           <ConnectorPoint PointX="5.2511528461538459" PointY="8.74949218750001" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_Source" >
-          <ConnectorPoint PointX="2.25" PointY="25.129547526041669" />
-          <ConnectorPoint PointX="2.4791691666666664" PointY="25.129547526041669" />
-          <ConnectorPoint PointX="2.6458358333333334" PointY="25.129547526041669" />
-          <ConnectorPoint PointX="3" PointY="25.129547526041669" />
-        </AssociationConnector>
-        <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_TypeOfSample" >
-          <ConnectorPoint PointX="2.25" PointY="42.768992513020834" />
-          <ConnectorPoint PointX="3.78125" PointY="42.768992513020834" />
-          <ConnectorPoint PointX="3.78125" PointY="25.884095052083335" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestResult_ResultDictionary" >
           <ConnectorPoint PointX="7.5" PointY="4.054790039062496" />
@@ -2436,29 +2039,59 @@
           <ConnectorPoint PointX="4.958333333333333" PointY="12.452171074292725" />
           <ConnectorPoint PointX="5" PointY="12.452171074292725" />
           <ConnectorPoint PointX="5" PointY="9.625" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="9.625" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="9.625" />
           <ConnectorPoint PointX="9" PointY="9.625" />
           <ConnectorPoint PointX="9" PointY="8.3552864583333246" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.TestSection" Width="1.5" PointX="0.75" PointY="9.125" Height="2.7494921874999818" />
         <AssociationConnector Association="LabManager_ClientModel.FK_Test_TestSection" >
           <ConnectorPoint PointX="2.25" PointY="10.499746093749991" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="10.499746093749991" />
-          <ConnectorPoint PointX="2.7083333333333335" PointY="10.499746093749991" />
           <ConnectorPoint PointX="3" PointY="10.499746093749991" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestSectionCommission_TestSection" >
-          <ConnectorPoint PointX="2.25" PointY="9.18846053846154" />
-          <ConnectorPoint PointX="2.5660744349011204" PointY="8.8723861035604177" />
-          <ConnectorPoint PointX="2.6839255650988791" PointY="8.7545349733626612" />
-          <ConnectorPoint PointX="2.8125" PointY="8.62596053846154" />
-          <ConnectorPoint PointX="2.8125" PointY="6.9299189921874929" />
-          <ConnectorPoint PointX="3" PointY="6.9299189921874929" />
+          <ConnectorPoint PointX="2.25" PointY="9.1261528461538468" />
+          <ConnectorPoint PointX="2.625" PointY="8.7511528461538468" />
+          <ConnectorPoint PointX="2.625" PointY="6.9299189921874937" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="6.9299189921874929" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="6.9299189921874937" />
+          <ConnectorPoint PointX="3" PointY="6.9299189921874937" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.Patient" Width="1.5" PointX="13.375" PointY="1.125" Height="4.8648079427083246" />
         <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_Patient" >
           <ConnectorPoint PointX="14.125" PointY="5.9898079427083246" />
-          <ConnectorPoint PointX="14.125" PointY="24.348876449118592" />
-          <ConnectorPoint PointX="4.5" PointY="24.348876449118592" />
+          <ConnectorPoint PointX="14.125" PointY="25.564352213541675" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="25.564352213541675" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="25.564352213541675" />
+          <ConnectorPoint PointX="8.6770808333333331" PointY="25.564352213541675" />
+          <ConnectorPoint PointX="8.5104141666666653" PointY="25.564352213541675" />
+          <ConnectorPoint PointX="4.5" PointY="25.564352213541675" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="LabManager_ClientModel.Instrument" Width="1.5" PointX="10.375" PointY="4.75" Height="2.7494921875000102" />
+        <EntityTypeShape EntityType="LabManager_ClientModel.LabExamination" Width="1.5" PointX="8.25" PointY="20.125" Height="5.05710937500001" />
+        <AssociationConnector Association="LabManager_ClientModel.FK_LabExamination_Doctor" >
+          <ConnectorPoint PointX="4.5" PointY="17.461253255208334" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="17.461253255208334" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="17.461253255208334" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="17.461253255208334" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="17.461253255208334" />
+          <ConnectorPoint PointX="9" PointY="17.461253255208334" />
+          <ConnectorPoint PointX="9" PointY="20.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_Partner" >
+          <ConnectorPoint PointX="2.25" PointY="5.1387277480468727" />
+          <ConnectorPoint PointX="2.75" PointY="5.1387277480468727" />
+          <ConnectorPoint PointX="2.75" PointY="7.7398893229166674" />
+          <ConnectorPoint PointX="5" PointY="7.7398893229166674" />
+          <ConnectorPoint PointX="5" PointY="8.99949218750001" />
+          <ConnectorPoint PointX="8" PointY="8.99949218750001" />
+          <ConnectorPoint PointX="8" PointY="19.75" />
+          <ConnectorPoint PointX="8.593748" PointY="19.75" />
+          <ConnectorPoint PointX="8.593748" PointY="20.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_LabExamination" >
+          <ConnectorPoint PointX="8.25" PointY="23.997883610576928" />
+          <ConnectorPoint PointX="4.5" PointY="23.997883610576928" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -1,6 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.ComboBoxModel>" %>
 <script type="text/javascript" src="../../Content/Lib/jquery-ui-1.8.16/jquery.ui.combobox.js"></script>
-
 <script type="text/javascript">
     function <%= Model.ComboBoxId %>_ComboBoxSelect(id, label, tag)
     {
@@ -12,7 +11,7 @@
 					select = this.element.hide(),
 					selected = select.children(":selected"),
 					value = selected.val() ? selected.text() : "";
-                var input = this.input = $("<input id='<%= Model.ComboBoxId %>_text'>")
+                  var  input = this.input = $("<input id='<%= Model.ComboBoxId %>_text'>")
 					.insertAfter(select)
 					.val(value)
 					.autocomplete({
@@ -48,7 +47,7 @@
 					        self._trigger("selected", event, {
 					            item: ui.item.option
 					        });
-					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, ui.item.label, ui.item.tag);
+					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, $(ui.item.option).text(), ui.item.tag);
 					    },
 					    selectFirst: true,
 					    change: function (event, ui) {
@@ -70,22 +69,27 @@
 					                $("#<%= Model.ComboBoxId %>_SelectedValue").val("");
 					                $("#<%= Model.ComboBoxId %>_SelectedText").val("");
 					                $("#<%= Model.ComboBoxId %>_SelectedTag").val("");
-					                $("#<%= Model.ComboBoxId %> .autoCompleteText").data("autocomplete").term = "";
+					                $("#<%= Model.ComboBoxId %>_text").data("autocomplete").term = "";
+					                <%= Model.ComboBoxId %>_ComboBoxSelect("-1", "", "");
 					                return false;
 					            }
 					        }
 					    }
 					})
 					.addClass("ui-widget ui-widget-content ui-corner-left");
-
+                    
+                // This line added to set default value of the combobox
                 input.data("autocomplete")._renderItem = function (ul, item) {
                     return $("<li></li>")
 						.data("item.autocomplete", item)
 						.append("<a>" + item.label + "</a>")
 						.appendTo(ul);
                 };
-
-                this.button = $("<button type='button'>&nbsp;</button>")
+                <%if(Model.IsEnabled){%>
+                    this.button = $("<button type='button'>&nbsp;</button>")
+                <%}else{ %>
+                    this.button = $("<button type='button' disabled='disabled'>&nbsp;</button>")
+                <%} %>
 					.attr("tabIndex", -1)
 					.attr("title", "Show All Items")
 					.insertAfter(input)
@@ -120,20 +124,64 @@
                 $.Widget.prototype.destroy.call(this);
             }
         });
-
+        
         $("#<%: Model.ComboBoxId %>").combobox();
-        $("#<%= Model.ComboBoxId %>_text").css({'padding':'5px','border-radius': '0px','margin': '0px 3px 0px 0px'}).val("");
+        $("#<%= Model.ComboBoxId %>_text").addClass("ComboBox-input-ui");
+        <%if(!Model.IsEnabled){ %>
+           $("#<%: Model.ComboBoxId %>").combobox("option", "disabled", true);
+        <%} %>
     });
 </script>
-<style>
-.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}      
+<style type="text/css">
+    .ComboBox-input-ui
+    {
+        padding: 6px;
+        border-radius: 0px;
+        margin: 0px 3px 0px 0px;
+        text-indent: -30px;
+    }
+    
+    .ui-autocomplete
+    {
+        height: 200px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .ui-menu-item a
+    {
+        height: 18px;
+    }
 </style>
-<input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>" name="<%=Model.BindingName%>" />
-<input type="hidden" class="autoCompleteTag" id="<%= Model.ComboBoxId %>_SelectedTag" value="<%= Model.SelectedTag %>" name="<%=Model.SelectedTag%>" />
-<input type="hidden" class="autoCompleteValue" id="<%= Model.ComboBoxId %>_SelectedValue" value="<%= Model.SelectedValue %>" name="Autocomplete.SelectedValue" />
-<input type="hidden" class="autoCompleteText" id="<%= Model.ComboBoxId %>_SelectedText" value="<%= Model.SelectedText %>" name="Autocomplete.SelectedText" />
+<!--[if IE]>
+<style type="text/css">
+    .ComboBox-input-ui
+    {
+        text-indent: 0px !important;
+        color:Red !important;
+    }
+</style>
+<![endif]-->
+<input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>"
+    name="<%=Model.BindingName%>" />
+<input type="hidden" class="autoCompleteTag" id="<%= Model.ComboBoxId %>_SelectedTag"
+    value="<%= Model.SelectedTag %>" />
+<input type="hidden" class="autoCompleteValue" id="<%= Model.ComboBoxId %>_SelectedValue"
+    value="<%= Model.SelectedValue %>" />
+<input type="hidden" class="autoCompleteText" id="<%= Model.ComboBoxId %>_SelectedText"
+    value="<%= Model.SelectedText %>" />
 <select id="<%: Model.ComboBoxId %>">
-    <% foreach( var item in Model.ComboBoxData){ %>
-        <option value="<%:item.Value%>" tag="<%:item.Tag%>"><%:item.Label%></option>
+    <option value="-1" tag=""></option>
+    <% foreach (var item in Model.ComboBoxData)
+       { %>
+    <%if (item.Value == Model.SelectedValue && (string.IsNullOrEmpty(Model.SelectedText)|| Model.SelectedText == item.Label))
+      { %>
+    <option value="<%:item.Value%>" tag="<%:item.Tag%>" selected="selected">
+        <%:item.Label%></option>
+    <%}
+      else %>
+    <%{ %>
+    <option value="<%:item.Value%>" tag="<%:item.Tag%>">
+        <%:item.Label%></option>
+    <%} %>
     <%} %>
 </select>

@@ -15,6 +15,8 @@
     </div>
     <%Html.BeginForm(); %>
     <%= Html.HiddenFor(p=>p.LabExamination.Id) %>
+    <%= Html.HiddenFor(p=>p.LabExamination.DoctorId) %>
+    <%= Html.HiddenFor(p=>p.LabExamination.PartnerId) %>
     <div class="ModuleContent">
         <div class="ContentTop">
             <div class="LeftCol">
@@ -34,7 +36,8 @@
                             <%=Resources.PatientStrings.PatientInsert_Partner %></label>
                     </div>
                     <div class="Column">
-                        <%= Html.DropDownListFor(p => p.LabExamination.PartnerId, Model.SelectListPartner) %>
+                     <%--   <%= Html.DropDownListFor(p => p.LabExamination.PartnerId, Model.SelectListPartner) %>--%>
+                    <%Html.RenderPartial("ComboBox", Model.ComboBoxNoiGuiMauModel); %>
                     </div>
                 </div>
             </div>
@@ -228,6 +231,25 @@
             }
         });
     }
+
+    function <%:Model.ComboBoxNoiGuiMauModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
+          if(tag=="BacSi")
+          {
+            $("#LabExamination_DoctorId").val(id);
+            $("#LabExamination_PartnerId").val("-1");
+          }
+          else if(tag=="Lab")
+          {
+            $("#LabExamination_DoctorId").val("-1");
+            $("#LabExamination_PartnerId").val(id);
+          }
+          else{
+            $("#LabExamination_DoctorId").val("-1");
+            $("#LabExamination_PartnerId").val("-1");
+          }
+
+    }
+
     function <%:Model.ComboBoxPanelModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
         GetTestData("/BenhNhan/GetPanelTests",id);
     }
