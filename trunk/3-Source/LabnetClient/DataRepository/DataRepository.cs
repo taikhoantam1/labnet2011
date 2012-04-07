@@ -1037,17 +1037,9 @@ namespace DataRepository
                 cost = listTestResultOfAPatient.Where(p => (p.TestSectionId == null || !p.UseTestSectionCode.Value))
                                                 .Select(p => p.Cost.Value).Sum();
                 // Lấy danh sách test section và giá của những test section có sử dụng giá chung UseTestSectionCode=true
-                var TestSectionIds = listTestResultOfAPatient.Where(p => (p.TestSectionId != null && p.UseTestSectionCode.Value)).Select(p => p.TestSectionId).Distinct();
-                foreach (var testSectionId in TestSectionIds)
-                {
-                    var testSection = listTestResultOfAPatient.Where(p=>p.TestSectionId == testSectionId).FirstOrDefault();
-                    if(testSection !=null)
-                    {
-                        cost += testSection.TestSectionCost.Value;
-                    }
-                }
+                var TestSectionUseTestSectionCost =  listTestResultOfAPatient.Where(p => (p.TestSectionId != null && p.UseTestSectionCode.Value)).Select(p => new { TestSectionId = p.TestSectionId , Cost = p.TestSectionCost}).Distinct();
+                cost += TestSectionUseTestSectionCost.Select(p => p.Cost.Value).Sum();
                 result[item].Cost = cost;
-                
             }
             return result.Values.ToList();
         }
