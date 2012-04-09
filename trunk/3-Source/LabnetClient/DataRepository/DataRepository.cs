@@ -737,6 +737,7 @@ namespace DataRepository
             patientOld.Age = patient.Age;
             patientOld.Email = patient.Email;
             patientOld.Phone = patient.Phone;
+            patientOld.IndentifierNumber = patient.IndentifierNumber;
             myDb.SaveChanges();
         }
 
