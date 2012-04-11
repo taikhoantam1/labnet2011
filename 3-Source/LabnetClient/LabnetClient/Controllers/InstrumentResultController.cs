@@ -245,10 +245,30 @@ namespace LabnetClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeSID(string ReceivedDate, string OrderNumber, int InstrumentId)
+        public ActionResult ChangeSID(string ReceivedDate, string OldOrderNumber, string NewOrderNumber, int InstrumentId)
         {
-            
-            return View();
+            DateTime? receivedDate = null;
+            if (!string.IsNullOrEmpty(ReceivedDate))
+                receivedDate = Convert.ToDateTime(ReceivedDate);
+            int oldSID;
+            int newSID;
+            List<VMInstrumentResultList> ObjInstrumentResult = new List<VMInstrumentResultList>();
+            if (int.TryParse(OldOrderNumber, out oldSID) && int.TryParse(NewOrderNumber, out newSID))
+            {
+                if (InstrumentId == -1)
+                {
+                    Repository.UpdateSID(receivedDate, oldSID, newSID, null);
+                }
+                else
+                {
+                    Repository.UpdateSID(receivedDate, oldSID, newSID, InstrumentId);
+                }
+
+                ObjInstrumentResult = GetInstrumentResultListObject(ReceivedDate, NewOrderNumber, InstrumentId);
+            }
+
+            JQGridModel grid = new JQGridModel(typeof(VMInstrumentResultList), false, ObjInstrumentResult, "");
+            return View("DataTable", grid);
         }
 
         public List<VMInstrumentResultList> GetInstrumentResultListObject(string ReceivedDate, string OrderNumber, int InstrumentId)
