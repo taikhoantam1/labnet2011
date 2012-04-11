@@ -39,6 +39,8 @@
                     <%= Resources.GlobalStrings.Menu_SearchPatients %></a></li>
                 <li><a class="MenuItem ActionLink" href="/Report/PatientResultReport">
                     <%= Resources.GlobalStrings.Menu_PatientResult%></a></li>
+                <li><a class="MenuItem ActionLink" href="/InstrumentResult/Details">
+                    <%= Resources.GlobalStrings.Menu_InstrumentResult%></a></li>
             </ul>
         </dd>
         <dt><a class="iconPXN" href="#"><%= Resources.GlobalStrings.Menu_GroupTitle_PXN%></a></dt>

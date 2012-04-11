@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lấy Kết Quả Từ Máy XN.
+        /// </summary>
+        internal static string Menu_InstrumentResult {
+            get {
+                return ResourceManager.GetString("Menu_InstrumentResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quản Lý Nhân Sự.
         /// </summary>
         internal static string Menu_Management {

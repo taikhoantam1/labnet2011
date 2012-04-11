@@ -70,7 +70,10 @@ namespace LabnetClient
             .ForMember("IndentifierNumber", p => p.Ignore())
             .ForMember("Email", p => p.Ignore())
             .ForMember("BirthDate", p => p.Ignore())
-            .ForMember(dest=>dest.LabExamination, p => p.MapFrom(m => new VMLabExamination{ReceivedDate= m.ReceivedDate, OrderNumber=m.OrderNumber})); 
+            .ForMember(dest=>dest.LabExamination, p => p.MapFrom(m => new VMLabExamination{ReceivedDate= m.ReceivedDate, OrderNumber=m.OrderNumber}));
+
+            Mapper.CreateMap<Instrument, VMInstrument>();
+            Mapper.CreateMap<VMInstrument, Instrument>();
         }
     }
 }
