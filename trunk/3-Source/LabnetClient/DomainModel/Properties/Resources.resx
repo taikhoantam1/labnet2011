@@ -126,6 +126,24 @@
   <data name="VMDoctor_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Bác sĩ</value>
   </data>
+  <data name="VMInstrumentResult_InstrumentName" xml:space="preserve">
+    <value>Máy XN</value>
+  </data>
+  <data name="VMInstrumentResult_OrderNumber" xml:space="preserve">
+    <value>SID</value>
+  </data>
+  <data name="VMInstrumentResult_ReceivedDate" xml:space="preserve">
+    <value>Ngày XN</value>
+  </data>
+  <data name="VMInstrumentResult_Result" xml:space="preserve">
+    <value>Kết Quả</value>
+  </data>
+  <data name="VMInstrumentResult_Status" xml:space="preserve">
+    <value>Trạng Thái</value>
+  </data>
+  <data name="VMInstrumentResult_TestName" xml:space="preserve">
+    <value>Tên XN</value>
+  </data>
   <data name="VMPanelSearch_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên Panel</value>
   </data>

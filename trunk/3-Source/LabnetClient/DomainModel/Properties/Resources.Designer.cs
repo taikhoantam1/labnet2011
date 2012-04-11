@@ -88,6 +88,60 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Máy XN.
+        /// </summary>
+        internal static string VMInstrumentResult_InstrumentName {
+            get {
+                return ResourceManager.GetString("VMInstrumentResult_InstrumentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SID.
+        /// </summary>
+        internal static string VMInstrumentResult_OrderNumber {
+            get {
+                return ResourceManager.GetString("VMInstrumentResult_OrderNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày XN.
+        /// </summary>
+        internal static string VMInstrumentResult_ReceivedDate {
+            get {
+                return ResourceManager.GetString("VMInstrumentResult_ReceivedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kết Quả.
+        /// </summary>
+        internal static string VMInstrumentResult_Result {
+            get {
+                return ResourceManager.GetString("VMInstrumentResult_Result", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMInstrumentResult_Status {
+            get {
+                return ResourceManager.GetString("VMInstrumentResult_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên XN.
+        /// </summary>
+        internal static string VMInstrumentResult_TestName {
+            get {
+                return ResourceManager.GetString("VMInstrumentResult_TestName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá.
         /// </summary>
         internal static string VMPanel_Cost {
