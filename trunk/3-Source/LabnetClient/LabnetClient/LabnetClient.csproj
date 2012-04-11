@@ -393,6 +393,7 @@
     <Content Include="Content\Lib\jquery\jquery-1.6.2.min.js" />
     <Content Include="Content\Lib\AutoNumeric\autoNumeric-1.7.1.js" />
     <Content Include="Content\Lib\jquery\jquery-1.7.1.min.js" />
+    <Content Include="Content\Lib\jquery\MultiModalDialog.js" />
     <Content Include="Content\Lib\postify.js" />
     <Content Include="Content\Scripts\jqueryExtend.js" />
     <Content Include="Content\Scripts\Event.js" />

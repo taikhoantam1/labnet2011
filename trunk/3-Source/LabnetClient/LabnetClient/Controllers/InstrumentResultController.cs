@@ -245,30 +245,61 @@ namespace LabnetClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult ChangeSID(string ReceivedDate, string OldOrderNumber, string NewOrderNumber, int InstrumentId)
+        public string ChangeSID(string ReceivedDate, string OldOrderNumber, string NewOrderNumber, int InstrumentId)
         {
+            bool updateSuccess = true;
+            string errorMessage="";
             DateTime? receivedDate = null;
             if (!string.IsNullOrEmpty(ReceivedDate))
                 receivedDate = Convert.ToDateTime(ReceivedDate);
-            int oldSID;
-            int newSID;
-            List<VMInstrumentResultList> ObjInstrumentResult = new List<VMInstrumentResultList>();
-            if (int.TryParse(OldOrderNumber, out oldSID) && int.TryParse(NewOrderNumber, out newSID))
+            else
             {
-                if (InstrumentId == -1)
-                {
-                    Repository.UpdateSID(receivedDate, oldSID, newSID, null);
-                }
-                else
-                {
-                    Repository.UpdateSID(receivedDate, oldSID, newSID, InstrumentId);
-                }
-
-                ObjInstrumentResult = GetInstrumentResultListObject(ReceivedDate, NewOrderNumber, InstrumentId);
+                updateSuccess = false;
+                errorMessage="Vui lòng chọn ngày nhận";
             }
 
-            JQGridModel grid = new JQGridModel(typeof(VMInstrumentResultList), false, ObjInstrumentResult, "");
-            return View("DataTable", grid);
+            int oldSID=0;
+            int newSID=0;
+            try
+            {
+                oldSID = int.Parse(OldOrderNumber);
+                newSID = int.Parse(NewOrderNumber);
+            }
+            catch (Exception ex)
+            {
+                updateSuccess = false;
+                errorMessage = "Nhập SID là số tự nhiên";
+            }
+            List<VMInstrumentResultList> ObjInstrumentResult = new List<VMInstrumentResultList>();
+            if (updateSuccess)
+            {
+                try
+                {
+                    if (InstrumentId == -1)
+                    {
+                        Repository.UpdateSID(receivedDate, oldSID, newSID, null);
+                    }
+                    else
+                    {
+                        Repository.UpdateSID(receivedDate, oldSID, newSID, InstrumentId);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    updateSuccess = false;
+                    errorMessage = ex.Message;
+                }
+
+            
+            }
+
+            // Return "Success" if change SID success
+            // Return message error if update faile
+            if(updateSuccess)
+                return "Success";
+
+            return errorMessage;
         }
 
         public List<VMInstrumentResultList> GetInstrumentResultListObject(string ReceivedDate, string OrderNumber, int InstrumentId)

@@ -50,5 +50,10 @@ namespace DomainModel
         public double? Commission { get; set; }
 
         public string BankAccountNumber { get; set; }
+
+        public string ConnectionCode { get; set; }
+
+        public bool IsConnected { get; set; }
+        
     }
 }
