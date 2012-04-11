@@ -175,6 +175,10 @@ namespace DataRepository
         void TestSectionCommissionDelete(int id);
         #endregion
 
-
+        List<SearchInstrumentResult_Result> InstrumentResultSearch(DateTime? receivedDate, string orderNumber, int? instrumentId);
+        List<InstrumentResult> GetAllValidInstrumentResult();
+        List<InstrumentResult> GetAllValidInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId);
+        List<Instrument> GetInstruments();
+        void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId);
     }
 }

@@ -9,6 +9,7 @@
           <EntitySet Name="Analysis" EntityType="LabManager_ClientModel.Store.Analysis" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Doctor" EntityType="LabManager_ClientModel.Store.Doctor" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Instrument" EntityType="LabManager_ClientModel.Store.Instrument" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InstrumentResult" EntityType="LabManager_ClientModel.Store.InstrumentResult" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabExamination" EntityType="LabManager_ClientModel.Store.LabExamination" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabUser" EntityType="LabManager_ClientModel.Store.LabUser" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Panel" EntityType="LabManager_ClientModel.Store.Panel" store:Type="Tables" Schema="dbo" />
@@ -32,6 +33,14 @@
           <AssociationSet Name="FK_Analysis_Test" Association="LabManager_ClientModel.Store.FK_Analysis_Test">
             <End Role="Test" EntitySet="Test" />
             <End Role="Analysis" EntitySet="Analysis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstrumentResult_Instrument" Association="LabManager_ClientModel.Store.FK_InstrumentResult_Instrument">
+            <End Role="Instrument" EntitySet="Instrument" />
+            <End Role="InstrumentResult" EntitySet="InstrumentResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstrumentResult_Test" Association="LabManager_ClientModel.Store.FK_InstrumentResult_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="InstrumentResult" EntitySet="InstrumentResult" />
           </AssociationSet>
           <AssociationSet Name="FK_LabExamination_Doctor" Association="LabManager_ClientModel.Store.FK_LabExamination_Doctor">
             <End Role="Doctor" EntitySet="Doctor" />
@@ -145,6 +154,19 @@
           <Property Name="Stopbit" Type="nvarchar" Nullable="false" MaxLength="20" />
           <Property Name="COMName" Type="nvarchar" Nullable="false" MaxLength="5" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstrumentResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderNumber" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="ReceivedDate" Type="date" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="Result" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Flag" Type="bit" Nullable="false" />
+          <Property Name="InstrumentPatientId" Type="nvarchar" MaxLength="50" />
+          <Property Name="InstrumentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LabExamination">
           <Key>
@@ -382,6 +404,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_InstrumentResult_Instrument">
+          <End Role="Instrument" Type="LabManager_ClientModel.Store.Instrument" Multiplicity="1" />
+          <End Role="InstrumentResult" Type="LabManager_ClientModel.Store.InstrumentResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstrumentResult">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstrumentResult_Test">
+          <End Role="Test" Type="LabManager_ClientModel.Store.Test" Multiplicity="1" />
+          <End Role="InstrumentResult" Type="LabManager_ClientModel.Store.InstrumentResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstrumentResult">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LabExamination_Doctor">
           <End Role="Doctor" Type="LabManager_ClientModel.Store.Doctor" Multiplicity="0..1" />
           <End Role="LabExamination" Type="LabManager_ClientModel.Store.LabExamination" Multiplicity="*" />
@@ -609,9 +655,21 @@
         <Function Name="sp_Report_PatientResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LabExaminationId" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_Result" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderNumber" Type="int" Mode="In" />
+          <Parameter Name="ReceivedDate" Type="datetime" Mode="In" />
+          <Parameter Name="TestId" Type="int" Mode="In" />
+          <Parameter Name="Value" Type="nvarchar" Mode="In" />
+          <Parameter Name="InstrumentResultId" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_SearchDoctorByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
           <Parameter Name="SearchType" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_SearchInstrumentResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceivedDate" Type="date" Mode="In" />
+          <Parameter Name="OrderNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="InstrumentId" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_SearchPanelByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
@@ -803,6 +861,27 @@
             <End Role="LabExamination" EntitySet="LabExaminations" />
             <End Role="PatientItem" EntitySet="PatientItems" />
           </AssociationSet>
+          <EntitySet Name="InstrumentResults" EntityType="LabManager_ClientModel.InstrumentResult" />
+          <AssociationSet Name="FK_InstrumentResult_Instrument" Association="LabManager_ClientModel.FK_InstrumentResult_Instrument">
+            <End Role="Instrument" EntitySet="Instruments" />
+            <End Role="InstrumentResult" EntitySet="InstrumentResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstrumentResult_Test" Association="LabManager_ClientModel.FK_InstrumentResult_Test">
+            <End Role="Test" EntitySet="Tests" />
+            <End Role="InstrumentResult" EntitySet="InstrumentResults" />
+          </AssociationSet>
+          <FunctionImport Name="SearchInstrumentResult" ReturnType="Collection(LabManager_ClientModel.SearchInstrumentResult_Result)">
+            <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OrderNumber" Mode="In" Type="String" />
+            <Parameter Name="InstrumentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Result">
+            <Parameter Name="OrderNumber" Mode="In" Type="Int32" />
+            <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TestId" Mode="In" Type="Int32" />
+            <Parameter Name="Value" Mode="In" Type="String" />
+            <Parameter Name="InstrumentResultId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1046,6 +1125,7 @@
           <NavigationProperty Name="TestCommissions" Relationship="LabManager_ClientModel.FK_TestCommission_Test" FromRole="Test" ToRole="TestCommission" />
           <NavigationProperty Name="TestResults" Relationship="LabManager_ClientModel.FK_TestResult_Test" FromRole="Test" ToRole="TestResult" />
           <NavigationProperty Name="TestSection" Relationship="LabManager_ClientModel.FK_Test_TestSection" FromRole="Test" ToRole="TestSection" />
+          <NavigationProperty Name="InstrumentResults" Relationship="LabManager_ClientModel.FK_InstrumentResult_Test" FromRole="Test" ToRole="InstrumentResult" />
         </EntityType>
         <EntityType Name="TestCommission">
           <Key>
@@ -1389,6 +1469,7 @@
           <Property Type="String" Name="Stopbit" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="COMName" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <NavigationProperty Name="InstrumentResults" Relationship="LabManager_ClientModel.FK_InstrumentResult_Instrument" FromRole="Instrument" ToRole="InstrumentResult" />
         </EntityType>
         <EntityType Name="LabExamination">
           <Key>
@@ -1449,6 +1530,55 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InstrumentResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="OrderNumber" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+          <Property Type="String" Name="Result" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Flag" Nullable="false" />
+          <Property Type="String" Name="InstrumentPatientId" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="InstrumentId" Nullable="false" />
+          <NavigationProperty Name="Instrument" Relationship="LabManager_ClientModel.FK_InstrumentResult_Instrument" FromRole="InstrumentResult" ToRole="Instrument" />
+          <NavigationProperty Name="Test" Relationship="LabManager_ClientModel.FK_InstrumentResult_Test" FromRole="InstrumentResult" ToRole="Test" />
+        </EntityType>
+        <Association Name="FK_InstrumentResult_Instrument">
+          <End Type="LabManager_ClientModel.Instrument" Role="Instrument" Multiplicity="1" />
+          <End Type="LabManager_ClientModel.InstrumentResult" Role="InstrumentResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instrument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstrumentResult">
+              <PropertyRef Name="InstrumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstrumentResult_Test">
+          <End Type="LabManager_ClientModel.Test" Role="Test" Multiplicity="1" />
+          <End Type="LabManager_ClientModel.InstrumentResult" Role="InstrumentResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InstrumentResult">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SearchInstrumentResult_Result">
+          <Property Type="String" Name="OrderNumber" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="TestId" Nullable="false" />
+          <Property Type="String" Name="TestName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Result" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="InstrumentId" Nullable="false" />
+          <Property Type="String" Name="InstrumentName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Flag" Nullable="false" MaxLength="12" />
+          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1921,6 +2051,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="InstrumentResults">
+            <EntityTypeMapping TypeName="LabManager_ClientModel.InstrumentResult">
+              <MappingFragment StoreEntitySet="InstrumentResult">
+                <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+                <ScalarProperty Name="InstrumentPatientId" ColumnName="InstrumentPatientId" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SearchInstrumentResult" FunctionName="LabManager_ClientModel.Store.sp_SearchInstrumentResult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchInstrumentResult_Result">
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+                <ScalarProperty Name="InstrumentName" ColumnName="InstrumentName" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Result" FunctionName="LabManager_ClientModel.Store.sp_Result" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1967,16 +2126,16 @@
           <ConnectorPoint PointX="5.25" PointY="11.163586037146363" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_Analysis_Test" >
-          <ConnectorPoint PointX="4.5" PointY="10.633281264648437" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="10.633281264648437" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="10.633281264648437" />
-          <ConnectorPoint PointX="5.25" PointY="10.633281264648437" />
+          <ConnectorPoint PointX="4.5" PointY="10.456793018573181" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="10.456793018573181" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="10.456793018573181" />
+          <ConnectorPoint PointX="5.25" PointY="10.456793018573181" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_Result_Analysis" >
           <ConnectorPoint PointX="6.75" PointY="9.8761528461538468" />
           <ConnectorPoint PointX="7.125" PointY="9.5011528461538468" />
-          <ConnectorPoint PointX="7.125" PointY="9.75" />
-          <ConnectorPoint PointX="10.25" PointY="9.75" />
+          <ConnectorPoint PointX="7.125" PointY="9.6328125" />
+          <ConnectorPoint PointX="10.1328125" PointY="9.6328125" />
           <ConnectorPoint PointX="10.5" PointY="10" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestCommission_Doctor" >
@@ -1992,12 +2151,12 @@
           <ConnectorPoint PointX="8.25" PointY="11.374746093750005" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PanelItem_Test" >
-          <ConnectorPoint PointX="4.5" PointY="13.450284619288562" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="13.450284619288562" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="13.450284619288562" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="13.450284619288562" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="13.450284619288562" />
-          <ConnectorPoint PointX="9" PointY="13.450284619288562" />
+          <ConnectorPoint PointX="4.5" PointY="13.408396809895834" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="13.408396809895834" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="13.408396809895834" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="13.408396809895834" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="13.408396809895834" />
+          <ConnectorPoint PointX="9" PointY="13.408396809895834" />
           <ConnectorPoint PointX="9" PointY="12.74949218750001" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PartnerCost_Partner" >
@@ -2026,28 +2185,30 @@
           <ConnectorPoint PointX="8.46875" PointY="6.375" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestCommission_Test" >
-          <ConnectorPoint PointX="4.5" PointY="13.937102114983976" />
-          <ConnectorPoint PointX="4.8160744349011217" PointY="14.253176549885096" />
-          <ConnectorPoint PointX="4.9339255650988791" PointY="14.371027680082854" />
-          <ConnectorPoint PointX="5.0625" PointY="14.499602114983976" />
+          <ConnectorPoint PointX="4.5" PointY="14.12940354727564" />
+          <ConnectorPoint PointX="4.8160744349011217" PointY="14.44547798217676" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="14.563329112374518" />
+          <ConnectorPoint PointX="5.0625" PointY="14.69190354727564" />
           <ConnectorPoint PointX="5.0625" PointY="13.811347153846153" />
           <ConnectorPoint PointX="5.2511528461538459" PointY="14" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestResult_Test" >
-          <ConnectorPoint PointX="4.5" PointY="12.452171074292725" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="12.452171074292725" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="12.452171074292725" />
-          <ConnectorPoint PointX="5" PointY="12.452171074292725" />
-          <ConnectorPoint PointX="5" PointY="9.625" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="9.625" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="9.625" />
-          <ConnectorPoint PointX="9" PointY="9.625" />
+          <ConnectorPoint PointX="4.5" PointY="12.254738923521105" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="12.254738923521105" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="12.254738923521105" />
+          <ConnectorPoint PointX="5" PointY="12.254738923521105" />
+          <ConnectorPoint PointX="5" PointY="9.609375" />
+          <ConnectorPoint PointX="6.9334445128205138" PointY="9.609375" />
+          <ConnectorPoint PointX="7.10011117948718" PointY="9.609375" />
+          <ConnectorPoint PointX="9" PointY="9.609375" />
           <ConnectorPoint PointX="9" PointY="8.3552864583333246" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.TestSection" Width="1.5" PointX="0.75" PointY="9.125" Height="2.7494921874999818" />
         <AssociationConnector Association="LabManager_ClientModel.FK_Test_TestSection" >
-          <ConnectorPoint PointX="2.25" PointY="10.499746093749991" />
-          <ConnectorPoint PointX="3" PointY="10.499746093749991" />
+          <ConnectorPoint PointX="2.25" PointY="10.531575016826908" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="10.531575016826908" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="10.531575016826908" />
+          <ConnectorPoint PointX="3" PointY="10.531575016826908" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_TestSectionCommission_TestSection" >
           <ConnectorPoint PointX="2.25" PointY="9.1261528461538468" />
@@ -2059,13 +2220,9 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.Patient" Width="1.5" PointX="13.375" PointY="1.125" Height="4.8648079427083246" />
         <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_Patient" >
-          <ConnectorPoint PointX="14.125" PointY="5.9898079427083246" />
-          <ConnectorPoint PointX="14.125" PointY="25.564352213541675" />
-          <ConnectorPoint PointX="9.0833333333333339" PointY="25.564352213541675" />
-          <ConnectorPoint PointX="8.9166666666666661" PointY="25.564352213541675" />
-          <ConnectorPoint PointX="8.6770808333333331" PointY="25.564352213541675" />
-          <ConnectorPoint PointX="8.5104141666666653" PointY="25.564352213541675" />
-          <ConnectorPoint PointX="4.5" PointY="25.564352213541675" />
+          <ConnectorPoint PointX="13.46875" PointY="5.9898079427083246" />
+          <ConnectorPoint PointX="13.46875" PointY="25.083598632812503" />
+          <ConnectorPoint PointX="4.5" PointY="25.083598632812503" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LabManager_ClientModel.Instrument" Width="1.5" PointX="10.375" PointY="4.75" Height="2.7494921875000102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.LabExamination" Width="1.5" PointX="8.25" PointY="20.125" Height="5.05710937500001" />
@@ -2079,19 +2236,32 @@
           <ConnectorPoint PointX="9" PointY="20.125" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_LabPatientManagement_Partner" >
-          <ConnectorPoint PointX="2.25" PointY="5.1387277480468727" />
-          <ConnectorPoint PointX="2.75" PointY="5.1387277480468727" />
-          <ConnectorPoint PointX="2.75" PointY="7.7398893229166674" />
-          <ConnectorPoint PointX="5" PointY="7.7398893229166674" />
-          <ConnectorPoint PointX="5" PointY="8.99949218750001" />
-          <ConnectorPoint PointX="8" PointY="8.99949218750001" />
-          <ConnectorPoint PointX="8" PointY="19.75" />
-          <ConnectorPoint PointX="8.593748" PointY="19.75" />
-          <ConnectorPoint PointX="8.593748" PointY="20.125" />
+          <ConnectorPoint PointX="2.2499999999999996" PointY="8.27830078125001" />
+          <ConnectorPoint PointX="2.75" PointY="8.77830078125001" />
+          <ConnectorPoint PointX="2.75" PointY="21.586293945312498" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="21.586293945312498" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="21.586293945312498" />
+          <ConnectorPoint PointX="8.25" PointY="21.586293945312498" />
         </AssociationConnector>
         <AssociationConnector Association="LabManager_ClientModel.FK_PatientItem_LabExamination" >
           <ConnectorPoint PointX="8.25" PointY="23.997883610576928" />
           <ConnectorPoint PointX="4.5" PointY="23.997883610576928" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="LabManager_ClientModel.InstrumentResult" Width="1.5" PointX="13.625" PointY="8" Height="2.9417936197916674" />
+        <AssociationConnector Association="LabManager_ClientModel.FK_InstrumentResult_Instrument" >
+          <ConnectorPoint PointX="11.875" PointY="6.8720507812499951" />
+          <ConnectorPoint PointX="13.385416666666666" PointY="6.8720507812499942" />
+          <ConnectorPoint PointX="13.552083333333334" PointY="6.8720507812499951" />
+          <ConnectorPoint PointX="15.03125" PointY="6.8720507812499951" />
+          <ConnectorPoint PointX="15.03125" PointY="8" />
+        </AssociationConnector>
+        <AssociationConnector Association="LabManager_ClientModel.FK_InstrumentResult_Test" >
+          <ConnectorPoint PointX="4.5" PointY="9.1490164230769171" />
+          <ConnectorPoint PointX="8.9166666666666661" PointY="9.1490164230769171" />
+          <ConnectorPoint PointX="9.0833333333333339" PointY="9.1490164230769171" />
+          <ConnectorPoint PointX="13.385416666666666" PointY="9.1490164230769171" />
+          <ConnectorPoint PointX="13.552083333333334" PointY="9.1490164230769171" />
+          <ConnectorPoint PointX="13.625" PointY="9.1490164230769171" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

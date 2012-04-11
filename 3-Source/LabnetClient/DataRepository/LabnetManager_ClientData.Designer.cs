@@ -36,6 +36,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabExamination_Doctor", "Doctor", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Doctor), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_LabPatientManagement_Partner", "Partner", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Partner), "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabExamination), true)]
 [assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_PatientItem_LabExamination", "LabExamination", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabExamination), "PatientItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.PatientItem), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_InstrumentResult_Instrument", "Instrument", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Instrument), "InstrumentResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.InstrumentResult), true)]
+[assembly: EdmRelationshipAttribute("LabManager_ClientModel", "FK_InstrumentResult_Test", "Test", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.Test), "InstrumentResult", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.InstrumentResult), true)]
 
 #endregion
 
@@ -390,6 +392,22 @@ namespace DataRepository
             }
         }
         private ObjectSet<LabExamination> _LabExaminations;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<InstrumentResult> InstrumentResults
+        {
+            get
+            {
+                if ((_InstrumentResults == null))
+                {
+                    _InstrumentResults = base.CreateObjectSet<InstrumentResult>("InstrumentResults");
+                }
+                return _InstrumentResults;
+            }
+        }
+        private ObjectSet<InstrumentResult> _InstrumentResults;
 
         #endregion
         #region AddTo Methods
@@ -544,6 +562,14 @@ namespace DataRepository
         public void AddToLabExaminations(LabExamination labExamination)
         {
             base.AddObject("LabExaminations", labExamination);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the InstrumentResults EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToInstrumentResults(InstrumentResult instrumentResult)
+        {
+            base.AddObject("InstrumentResults", instrumentResult);
         }
 
         #endregion
@@ -1052,6 +1078,110 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<report_ThongKeTaiChinh_Result>("report_ThongKeTaiChinh", startDateParameter, endDateParameter, partnerIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="receivedDate">No Metadata Documentation available.</param>
+        /// <param name="orderNumber">No Metadata Documentation available.</param>
+        /// <param name="instrumentId">No Metadata Documentation available.</param>
+        public ObjectResult<SearchInstrumentResult_Result> SearchInstrumentResult(Nullable<global::System.DateTime> receivedDate, global::System.String orderNumber, Nullable<global::System.Int32> instrumentId)
+        {
+            ObjectParameter receivedDateParameter;
+            if (receivedDate.HasValue)
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
+            }
+            else
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter orderNumberParameter;
+            if (orderNumber != null)
+            {
+                orderNumberParameter = new ObjectParameter("OrderNumber", orderNumber);
+            }
+            else
+            {
+                orderNumberParameter = new ObjectParameter("OrderNumber", typeof(global::System.String));
+            }
+    
+            ObjectParameter instrumentIdParameter;
+            if (instrumentId.HasValue)
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", instrumentId);
+            }
+            else
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<SearchInstrumentResult_Result>("SearchInstrumentResult", receivedDateParameter, orderNumberParameter, instrumentIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="orderNumber">No Metadata Documentation available.</param>
+        /// <param name="receivedDate">No Metadata Documentation available.</param>
+        /// <param name="testId">No Metadata Documentation available.</param>
+        /// <param name="value">No Metadata Documentation available.</param>
+        /// <param name="instrumentResultId">No Metadata Documentation available.</param>
+        public int Result(Nullable<global::System.Int32> orderNumber, Nullable<global::System.DateTime> receivedDate, Nullable<global::System.Int32> testId, global::System.String value, Nullable<global::System.Int32> instrumentResultId)
+        {
+            ObjectParameter orderNumberParameter;
+            if (orderNumber.HasValue)
+            {
+                orderNumberParameter = new ObjectParameter("OrderNumber", orderNumber);
+            }
+            else
+            {
+                orderNumberParameter = new ObjectParameter("OrderNumber", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter receivedDateParameter;
+            if (receivedDate.HasValue)
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
+            }
+            else
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter testIdParameter;
+            if (testId.HasValue)
+            {
+                testIdParameter = new ObjectParameter("TestId", testId);
+            }
+            else
+            {
+                testIdParameter = new ObjectParameter("TestId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter valueParameter;
+            if (value != null)
+            {
+                valueParameter = new ObjectParameter("Value", value);
+            }
+            else
+            {
+                valueParameter = new ObjectParameter("Value", typeof(global::System.String));
+            }
+    
+            ObjectParameter instrumentResultIdParameter;
+            if (instrumentResultId.HasValue)
+            {
+                instrumentResultIdParameter = new ObjectParameter("InstrumentResultId", instrumentResultId);
+            }
+            else
+            {
+                instrumentResultIdParameter = new ObjectParameter("InstrumentResultId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("Result", orderNumberParameter, receivedDateParameter, testIdParameter, valueParameter, instrumentResultIdParameter);
         }
 
         #endregion
@@ -2119,6 +2249,345 @@ namespace DataRepository
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_InstrumentResult_Instrument", "InstrumentResult")]
+        public EntityCollection<InstrumentResult> InstrumentResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InstrumentResult>("LabManager_ClientModel.FK_InstrumentResult_Instrument", "InstrumentResult");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InstrumentResult>("LabManager_ClientModel.FK_InstrumentResult_Instrument", "InstrumentResult", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LabManager_ClientModel", Name="InstrumentResult")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class InstrumentResult : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new InstrumentResult object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="orderNumber">Initial value of the OrderNumber property.</param>
+        /// <param name="receivedDate">Initial value of the ReceivedDate property.</param>
+        /// <param name="testId">Initial value of the TestId property.</param>
+        /// <param name="result">Initial value of the Result property.</param>
+        /// <param name="flag">Initial value of the Flag property.</param>
+        /// <param name="instrumentId">Initial value of the InstrumentId property.</param>
+        public static InstrumentResult CreateInstrumentResult(global::System.Int32 id, global::System.String orderNumber, global::System.DateTime receivedDate, global::System.Int32 testId, global::System.String result, global::System.Boolean flag, global::System.Int32 instrumentId)
+        {
+            InstrumentResult instrumentResult = new InstrumentResult();
+            instrumentResult.Id = id;
+            instrumentResult.OrderNumber = orderNumber;
+            instrumentResult.ReceivedDate = receivedDate;
+            instrumentResult.TestId = testId;
+            instrumentResult.Result = result;
+            instrumentResult.Flag = flag;
+            instrumentResult.InstrumentId = instrumentId;
+            return instrumentResult;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OrderNumber
+        {
+            get
+            {
+                return _OrderNumber;
+            }
+            set
+            {
+                OnOrderNumberChanging(value);
+                ReportPropertyChanging("OrderNumber");
+                _OrderNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OrderNumber");
+                OnOrderNumberChanged();
+            }
+        }
+        private global::System.String _OrderNumber;
+        partial void OnOrderNumberChanging(global::System.String value);
+        partial void OnOrderNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ReceivedDate
+        {
+            get
+            {
+                return _ReceivedDate;
+            }
+            set
+            {
+                OnReceivedDateChanging(value);
+                ReportPropertyChanging("ReceivedDate");
+                _ReceivedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ReceivedDate");
+                OnReceivedDateChanged();
+            }
+        }
+        private global::System.DateTime _ReceivedDate;
+        partial void OnReceivedDateChanging(global::System.DateTime value);
+        partial void OnReceivedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TestId
+        {
+            get
+            {
+                return _TestId;
+            }
+            set
+            {
+                OnTestIdChanging(value);
+                ReportPropertyChanging("TestId");
+                _TestId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestId");
+                OnTestIdChanged();
+            }
+        }
+        private global::System.Int32 _TestId;
+        partial void OnTestIdChanging(global::System.Int32 value);
+        partial void OnTestIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Result
+        {
+            get
+            {
+                return _Result;
+            }
+            set
+            {
+                OnResultChanging(value);
+                ReportPropertyChanging("Result");
+                _Result = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Result");
+                OnResultChanged();
+            }
+        }
+        private global::System.String _Result;
+        partial void OnResultChanging(global::System.String value);
+        partial void OnResultChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Flag
+        {
+            get
+            {
+                return _Flag;
+            }
+            set
+            {
+                OnFlagChanging(value);
+                ReportPropertyChanging("Flag");
+                _Flag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Flag");
+                OnFlagChanged();
+            }
+        }
+        private global::System.Boolean _Flag;
+        partial void OnFlagChanging(global::System.Boolean value);
+        partial void OnFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String InstrumentPatientId
+        {
+            get
+            {
+                return _InstrumentPatientId;
+            }
+            set
+            {
+                OnInstrumentPatientIdChanging(value);
+                ReportPropertyChanging("InstrumentPatientId");
+                _InstrumentPatientId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("InstrumentPatientId");
+                OnInstrumentPatientIdChanged();
+            }
+        }
+        private global::System.String _InstrumentPatientId;
+        partial void OnInstrumentPatientIdChanging(global::System.String value);
+        partial void OnInstrumentPatientIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstrumentId
+        {
+            get
+            {
+                return _InstrumentId;
+            }
+            set
+            {
+                OnInstrumentIdChanging(value);
+                ReportPropertyChanging("InstrumentId");
+                _InstrumentId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstrumentId");
+                OnInstrumentIdChanged();
+            }
+        }
+        private global::System.Int32 _InstrumentId;
+        partial void OnInstrumentIdChanging(global::System.Int32 value);
+        partial void OnInstrumentIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_InstrumentResult_Instrument", "Instrument")]
+        public Instrument Instrument
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Instrument>("LabManager_ClientModel.FK_InstrumentResult_Instrument", "Instrument").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Instrument>("LabManager_ClientModel.FK_InstrumentResult_Instrument", "Instrument").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Instrument> InstrumentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Instrument>("LabManager_ClientModel.FK_InstrumentResult_Instrument", "Instrument");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Instrument>("LabManager_ClientModel.FK_InstrumentResult_Instrument", "Instrument", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_InstrumentResult_Test", "Test")]
+        public Test Test
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_InstrumentResult_Test", "Test").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_InstrumentResult_Test", "Test").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Test> TestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Test>("LabManager_ClientModel.FK_InstrumentResult_Test", "Test");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Test>("LabManager_ClientModel.FK_InstrumentResult_Test", "Test", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -5947,6 +6416,28 @@ namespace DataRepository
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabManager_ClientModel", "FK_InstrumentResult_Test", "InstrumentResult")]
+        public EntityCollection<InstrumentResult> InstrumentResults
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<InstrumentResult>("LabManager_ClientModel.FK_InstrumentResult_Test", "InstrumentResult");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<InstrumentResult>("LabManager_ClientModel.FK_InstrumentResult_Test", "InstrumentResult", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -8855,6 +9346,239 @@ namespace DataRepository
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="LabManager_ClientModel", Name="SearchInstrumentResult_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class SearchInstrumentResult_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SearchInstrumentResult_Result object.
+        /// </summary>
+        /// <param name="orderNumber">Initial value of the OrderNumber property.</param>
+        /// <param name="testId">Initial value of the TestId property.</param>
+        /// <param name="testName">Initial value of the TestName property.</param>
+        /// <param name="result">Initial value of the Result property.</param>
+        /// <param name="instrumentId">Initial value of the InstrumentId property.</param>
+        /// <param name="instrumentName">Initial value of the InstrumentName property.</param>
+        /// <param name="flag">Initial value of the Flag property.</param>
+        /// <param name="receivedDate">Initial value of the ReceivedDate property.</param>
+        public static SearchInstrumentResult_Result CreateSearchInstrumentResult_Result(global::System.String orderNumber, global::System.Int32 testId, global::System.String testName, global::System.String result, global::System.Int32 instrumentId, global::System.String instrumentName, global::System.String flag, global::System.DateTime receivedDate)
+        {
+            SearchInstrumentResult_Result searchInstrumentResult_Result = new SearchInstrumentResult_Result();
+            searchInstrumentResult_Result.OrderNumber = orderNumber;
+            searchInstrumentResult_Result.TestId = testId;
+            searchInstrumentResult_Result.TestName = testName;
+            searchInstrumentResult_Result.Result = result;
+            searchInstrumentResult_Result.InstrumentId = instrumentId;
+            searchInstrumentResult_Result.InstrumentName = instrumentName;
+            searchInstrumentResult_Result.Flag = flag;
+            searchInstrumentResult_Result.ReceivedDate = receivedDate;
+            return searchInstrumentResult_Result;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OrderNumber
+        {
+            get
+            {
+                return _OrderNumber;
+            }
+            set
+            {
+                OnOrderNumberChanging(value);
+                ReportPropertyChanging("OrderNumber");
+                _OrderNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OrderNumber");
+                OnOrderNumberChanged();
+            }
+        }
+        private global::System.String _OrderNumber;
+        partial void OnOrderNumberChanging(global::System.String value);
+        partial void OnOrderNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TestId
+        {
+            get
+            {
+                return _TestId;
+            }
+            set
+            {
+                OnTestIdChanging(value);
+                ReportPropertyChanging("TestId");
+                _TestId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestId");
+                OnTestIdChanged();
+            }
+        }
+        private global::System.Int32 _TestId;
+        partial void OnTestIdChanging(global::System.Int32 value);
+        partial void OnTestIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String TestName
+        {
+            get
+            {
+                return _TestName;
+            }
+            set
+            {
+                OnTestNameChanging(value);
+                ReportPropertyChanging("TestName");
+                _TestName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("TestName");
+                OnTestNameChanged();
+            }
+        }
+        private global::System.String _TestName;
+        partial void OnTestNameChanging(global::System.String value);
+        partial void OnTestNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Result
+        {
+            get
+            {
+                return _Result;
+            }
+            set
+            {
+                OnResultChanging(value);
+                ReportPropertyChanging("Result");
+                _Result = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Result");
+                OnResultChanged();
+            }
+        }
+        private global::System.String _Result;
+        partial void OnResultChanging(global::System.String value);
+        partial void OnResultChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 InstrumentId
+        {
+            get
+            {
+                return _InstrumentId;
+            }
+            set
+            {
+                OnInstrumentIdChanging(value);
+                ReportPropertyChanging("InstrumentId");
+                _InstrumentId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InstrumentId");
+                OnInstrumentIdChanged();
+            }
+        }
+        private global::System.Int32 _InstrumentId;
+        partial void OnInstrumentIdChanging(global::System.Int32 value);
+        partial void OnInstrumentIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String InstrumentName
+        {
+            get
+            {
+                return _InstrumentName;
+            }
+            set
+            {
+                OnInstrumentNameChanging(value);
+                ReportPropertyChanging("InstrumentName");
+                _InstrumentName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("InstrumentName");
+                OnInstrumentNameChanged();
+            }
+        }
+        private global::System.String _InstrumentName;
+        partial void OnInstrumentNameChanging(global::System.String value);
+        partial void OnInstrumentNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Flag
+        {
+            get
+            {
+                return _Flag;
+            }
+            set
+            {
+                OnFlagChanging(value);
+                ReportPropertyChanging("Flag");
+                _Flag = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Flag");
+                OnFlagChanged();
+            }
+        }
+        private global::System.String _Flag;
+        partial void OnFlagChanging(global::System.String value);
+        partial void OnFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ReceivedDate
+        {
+            get
+            {
+                return _ReceivedDate;
+            }
+            set
+            {
+                OnReceivedDateChanging(value);
+                ReportPropertyChanging("ReceivedDate");
+                _ReceivedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ReceivedDate");
+                OnReceivedDateChanged();
+            }
+        }
+        private global::System.DateTime _ReceivedDate;
+        partial void OnReceivedDateChanging(global::System.DateTime value);
+        partial void OnReceivedDateChanged();
 
         #endregion
     }
