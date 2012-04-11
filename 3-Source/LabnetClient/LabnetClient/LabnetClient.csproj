@@ -124,6 +124,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GlobalStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\InstrumentResult\InstrumentResultStrings.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstrumentResultStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Panel\PanelStrings.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,6 +167,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BacSiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstrumentResultController.cs" />
     <Compile Include="Controllers\NhomXetNghiemController.cs" />
     <Compile Include="Controllers\PanelController.cs" />
     <Compile Include="Controllers\DoiTacController.cs" />
@@ -211,6 +217,7 @@
     <Compile Include="Models\Doctor\DoctorViewModel.cs" />
     <Compile Include="Models\Control\JQGridModel\JQGrid.cs" />
     <Compile Include="Models\Control\JQGridModel\JQResponseDataModel.cs" />
+    <Compile Include="Models\InstrumentResult\InstrumentResultViewModel.cs" />
     <Compile Include="Models\JsonpResult.cs" />
     <Compile Include="Models\Panel\PanelSearchViewModel.cs" />
     <Compile Include="Models\Panel\PanelViewModel.cs" />
@@ -808,6 +815,9 @@
     <Content Include="Views\BenhNhan\PatientTestResult.aspx" />
     <Content Include="Views\BenhNhan\UpdateTestResult.ascx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\InstrumentResult\ChangeSID.aspx" />
+    <Content Include="Views\InstrumentResult\CtrlDetails.ascx" />
+    <Content Include="Views\InstrumentResult\Details.aspx" />
     <Content Include="Views\NhomXetNghiem\Create.aspx" />
     <Content Include="Views\NhomXetNghiem\CtrlCreate.ascx" />
     <Content Include="Views\NhomXetNghiem\Index.aspx" />
@@ -940,6 +950,10 @@
     </Content>
     <Content Include="Report\report_PatientResult.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_GlobalResources\InstrumentResult\InstrumentResultStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>InstrumentResultStrings.designer.cs</LastGenOutput>
     </Content>
     <Content Include="Report\report_SoQuanLyTaiChinh.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
