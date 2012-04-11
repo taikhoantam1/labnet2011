@@ -1183,6 +1183,58 @@ namespace DataRepository
     
             return base.ExecuteFunction("Result", orderNumberParameter, receivedDateParameter, testIdParameter, valueParameter, instrumentResultIdParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="oldOrderNumber">No Metadata Documentation available.</param>
+        /// <param name="newOrderNumber">No Metadata Documentation available.</param>
+        /// <param name="receivedDate">No Metadata Documentation available.</param>
+        /// <param name="instrumentId">No Metadata Documentation available.</param>
+        public int UpdateSID(Nullable<global::System.Int32> oldOrderNumber, Nullable<global::System.Int32> newOrderNumber, Nullable<global::System.DateTime> receivedDate, Nullable<global::System.Int32> instrumentId)
+        {
+            ObjectParameter oldOrderNumberParameter;
+            if (oldOrderNumber.HasValue)
+            {
+                oldOrderNumberParameter = new ObjectParameter("oldOrderNumber", oldOrderNumber);
+            }
+            else
+            {
+                oldOrderNumberParameter = new ObjectParameter("oldOrderNumber", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter newOrderNumberParameter;
+            if (newOrderNumber.HasValue)
+            {
+                newOrderNumberParameter = new ObjectParameter("newOrderNumber", newOrderNumber);
+            }
+            else
+            {
+                newOrderNumberParameter = new ObjectParameter("newOrderNumber", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter receivedDateParameter;
+            if (receivedDate.HasValue)
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
+            }
+            else
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter instrumentIdParameter;
+            if (instrumentId.HasValue)
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", instrumentId);
+            }
+            else
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("UpdateSID", oldOrderNumberParameter, newOrderNumberParameter, receivedDateParameter, instrumentIdParameter);
+        }
 
         #endregion
     }
@@ -1515,13 +1567,15 @@ namespace DataRepository
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
         /// <param name="lastUpdated">Initial value of the LastUpdated property.</param>
-        public static Doctor CreateDoctor(global::System.Int32 id, global::System.String name, global::System.Boolean isActive, global::System.DateTime lastUpdated)
+        /// <param name="isConnected">Initial value of the IsConnected property.</param>
+        public static Doctor CreateDoctor(global::System.Int32 id, global::System.String name, global::System.Boolean isActive, global::System.DateTime lastUpdated, global::System.Boolean isConnected)
         {
             Doctor doctor = new Doctor();
             doctor.Id = id;
             doctor.Name = name;
             doctor.IsActive = isActive;
             doctor.LastUpdated = lastUpdated;
+            doctor.IsConnected = isConnected;
             return doctor;
         }
 
@@ -1938,6 +1992,54 @@ namespace DataRepository
         private global::System.String _BankAccountNumber;
         partial void OnBankAccountNumberChanging(global::System.String value);
         partial void OnBankAccountNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsConnected
+        {
+            get
+            {
+                return _IsConnected;
+            }
+            set
+            {
+                OnIsConnectedChanging(value);
+                ReportPropertyChanging("IsConnected");
+                _IsConnected = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsConnected");
+                OnIsConnectedChanged();
+            }
+        }
+        private global::System.Boolean _IsConnected;
+        partial void OnIsConnectedChanging(global::System.Boolean value);
+        partial void OnIsConnectedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ConnectionCode
+        {
+            get
+            {
+                return _ConnectionCode;
+            }
+            set
+            {
+                OnConnectionCodeChanging(value);
+                ReportPropertyChanging("ConnectionCode");
+                _ConnectionCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ConnectionCode");
+                OnConnectionCodeChanged();
+            }
+        }
+        private global::System.String _ConnectionCode;
+        partial void OnConnectionCodeChanging(global::System.String value);
+        partial void OnConnectionCodeChanged();
 
         #endregion
     

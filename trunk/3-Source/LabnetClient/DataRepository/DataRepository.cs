@@ -1142,5 +1142,10 @@ namespace DataRepository
         {
             myDb.Result(orderNumber, receivedDate, testId, value, instrumentResultId);
         }
+
+        public void UpdateSID(DateTime? receivedDate, int oldOrderNumber, int newOrderNumber, int? instrumentId)
+        {
+            myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
+        }
     }
 }
