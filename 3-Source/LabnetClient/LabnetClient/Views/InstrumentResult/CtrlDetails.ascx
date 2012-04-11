@@ -78,6 +78,7 @@
                     Bạn muốn đổi SID </label><b id="oldSID" style="color: Red"></b> thành :
                 &nbsp;<input type="text" id="txtNewSID" />
                 <input type="button" value="Cập Nhật SID" id="btnUpdateSID"/>
+                <input type="button" class="btnCloseDialog" value="Hũy Bỏ" />
             </div>
         </div>
     </div>
@@ -109,7 +110,9 @@
                         if(data.indexOf("Success")!=-1)
                         {
                             $("#OrderNumber").val(newSID);
-                            $("#btnSearchFilter").click()
+                            $("#btnSearchFilter").click();
+                            $(".btnCloseDialog").click();
+                             $("#txtNewSID").val("");
                             //window.location.reload();
                         }
                         else
