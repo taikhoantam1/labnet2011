@@ -123,6 +123,7 @@
                 });
             }
         });
+
         $("#btnChangeID").click(function () {
             var date = $("#InstrumentResult_ReceivedDate").val();
             var instrumentId = $("#InstrumentId").val();
