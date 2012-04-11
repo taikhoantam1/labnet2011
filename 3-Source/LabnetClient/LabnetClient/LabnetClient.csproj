@@ -816,7 +816,6 @@
     <Content Include="Views\BenhNhan\PatientTestResult.aspx" />
     <Content Include="Views\BenhNhan\UpdateTestResult.ascx" />
     <Content Include="Views\Home\Index.aspx" />
-    <Content Include="Views\InstrumentResult\ChangeSID.aspx" />
     <Content Include="Views\InstrumentResult\CtrlDetails.ascx" />
     <Content Include="Views\InstrumentResult\Details.aspx" />
     <Content Include="Views\NhomXetNghiem\Create.aspx" />
