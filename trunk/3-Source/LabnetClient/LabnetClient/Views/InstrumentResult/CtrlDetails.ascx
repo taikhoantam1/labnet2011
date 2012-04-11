@@ -108,7 +108,9 @@
                     success:function(data){
                         if(data.indexOf("Success")!=-1)
                         {
-                            window.location.reload();
+                            $("#OrderNumber").val(newSID);
+                            $("#btnSearchFilter").click()
+                            //window.location.reload();
                         }
                         else
                         {
