@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Constant\GeneralEnum.cs" />
     <Compile Include="Constant\SessionProperties.cs" />
+    <Compile Include="InstrumentResult\VMInstrument.cs" />
+    <Compile Include="InstrumentResult\VMInstrumentResult.cs" />
+    <Compile Include="InstrumentResult\VMInstrumentResultList.cs" />
     <Compile Include="JQGrid\JQColumn.cs" />
     <Compile Include="JQGrid\JQColumnAttribute.cs" />
     <Compile Include="JQGrid\JQConstant.cs" />
