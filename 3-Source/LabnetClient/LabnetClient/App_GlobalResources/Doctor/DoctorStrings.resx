@@ -135,6 +135,9 @@
   <data name="DoctorInsert_Commission" xml:space="preserve">
     <value>% Hoa hồng</value>
   </data>
+  <data name="DoctorInsert_ConnectionCode" xml:space="preserve">
+    <value>Mã Liên Kết</value>
+  </data>
   <data name="DoctorInsert_Email" xml:space="preserve">
     <value>Email</value>
   </data>

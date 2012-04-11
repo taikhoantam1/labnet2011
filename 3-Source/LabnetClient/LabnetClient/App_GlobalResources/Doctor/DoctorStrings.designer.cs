@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã Liên Kết.
+        /// </summary>
+        internal static string DoctorInsert_ConnectionCode {
+            get {
+                return ResourceManager.GetString("DoctorInsert_ConnectionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string DoctorInsert_Email {

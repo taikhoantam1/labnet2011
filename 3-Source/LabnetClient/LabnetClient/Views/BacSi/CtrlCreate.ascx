@@ -113,6 +113,17 @@
                     <div class="clear">
                     </div>
                 </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.DoctorStrings.DoctorInsert_ConnectionCode%></label>
+                    </div>
+                    <div class="Column">
+                        <input type="checkbox" />
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
             </div>
             <div class="Row clear">
                 <div class="Column">
