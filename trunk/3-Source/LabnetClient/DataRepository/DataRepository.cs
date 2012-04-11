@@ -1104,5 +1104,43 @@ namespace DataRepository
             myDb.SaveChanges();
         }
         #endregion
+
+        public List<SearchInstrumentResult_Result> InstrumentResultSearch(DateTime? receivedDate, string orderNumber, int? instrumentId)
+        {
+            List<SearchInstrumentResult_Result> lstInstrumentResult = myDb.SearchInstrumentResult(receivedDate, orderNumber, instrumentId).ToList();
+            return lstInstrumentResult;
+        }
+
+        public List<Instrument> GetInstruments()
+        {
+            List<Instrument> lstInstruments = (from _instrument in myDb.Instruments
+                                               where _instrument.IsActive == true
+                                               select _instrument).ToList();
+            return lstInstruments;
+        }
+
+        public List<InstrumentResult> GetAllValidInstrumentResult()
+        {
+            List<InstrumentResult> lstInstrumentResults = (from _insResult in myDb.InstrumentResults
+                                                           where _insResult.Flag == false
+                                                           select _insResult).ToList();
+            return lstInstrumentResults;
+        }
+
+        public List<InstrumentResult> GetAllValidInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId)
+        {
+            List<InstrumentResult> lstInstrumentResults = (from _insResult in myDb.InstrumentResults
+                                                           where _insResult.Flag == false
+                                                             && _insResult.ReceivedDate == receivedDate
+                                                             && (orderNumber == null ||_insResult.OrderNumber == orderNumber)
+                                                             && (instrumentId == null || _insResult.InstrumentId == instrumentId)
+                                                           select _insResult).ToList();
+            return lstInstrumentResults;
+        }
+
+        public void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId)
+        {
+            myDb.Result(orderNumber, receivedDate, testId, value, instrumentResultId);
+        }
     }
 }
