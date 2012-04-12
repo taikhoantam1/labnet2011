@@ -878,11 +878,6 @@
             <End Role="Test" EntitySet="Tests" />
             <End Role="InstrumentResult" EntitySet="InstrumentResults" />
           </AssociationSet>
-          <FunctionImport Name="SearchInstrumentResult" ReturnType="Collection(LabManager_ClientModel.SearchInstrumentResult_Result)">
-            <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
-            <Parameter Name="OrderNumber" Mode="In" Type="String" />
-            <Parameter Name="InstrumentId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="Result">
             <Parameter Name="OrderNumber" Mode="In" Type="Int32" />
             <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
@@ -894,6 +889,11 @@
             <Parameter Name="oldOrderNumber" Mode="In" Type="Int32" />
             <Parameter Name="newOrderNumber" Mode="In" Type="Int32" />
             <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="InstrumentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchInstrumentResult" ReturnType="Collection(LabManager_ClientModel.SearchInstrumentResult_Result)">
+            <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="OrderNumber" Mode="In" Type="String" />
             <Parameter Name="InstrumentId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -2083,6 +2083,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Result" FunctionName="LabManager_ClientModel.Store.sp_Result" />
+          <FunctionImportMapping FunctionImportName="UpdateSID" FunctionName="LabManager_ClientModel.Store.sp_UpdateSID" />
           <FunctionImportMapping FunctionImportName="SearchInstrumentResult" FunctionName="LabManager_ClientModel.Store.sp_SearchInstrumentResult">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchInstrumentResult_Result">
@@ -2097,8 +2099,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Result" FunctionName="LabManager_ClientModel.Store.sp_Result" />
-          <FunctionImportMapping FunctionImportName="UpdateSID" FunctionName="LabManager_ClientModel.Store.sp_UpdateSID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

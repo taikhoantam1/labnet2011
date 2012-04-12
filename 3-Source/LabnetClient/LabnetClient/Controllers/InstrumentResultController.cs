@@ -342,6 +342,36 @@ namespace LabnetClient.Controllers
 
             return ObjInstrumentResult;
         }
+
+        public string SearchBySID(string ReceivedDate, string OrderNumber, int InstrumentId)
+        {
+            DateTime? receivedDate = null;
+            if (!string.IsNullOrEmpty(ReceivedDate))
+                receivedDate = Convert.ToDateTime(ReceivedDate);
+
+            List<InstrumentResult> lstInstrumentResult = new List<InstrumentResult>();
+
+            if (string.IsNullOrEmpty(OrderNumber) && InstrumentId == -1)
+            {
+                lstInstrumentResult = Repository.GetAllInstrumentResultByCondition(receivedDate, null, null);
+            }
+            if (!string.IsNullOrEmpty(OrderNumber) && InstrumentId == -1)
+            {
+                lstInstrumentResult = Repository.GetAllInstrumentResultByCondition(receivedDate, OrderNumber, null);
+            }
+            if (string.IsNullOrEmpty(OrderNumber) && InstrumentId != -1)
+            {
+                lstInstrumentResult = Repository.GetAllInstrumentResultByCondition(receivedDate, null, InstrumentId);
+            }
+            if (!string.IsNullOrEmpty(OrderNumber) && InstrumentId != -1)
+            {
+                lstInstrumentResult = Repository.GetAllInstrumentResultByCondition(receivedDate, OrderNumber, InstrumentId);
+            }
+
+            if (lstInstrumentResult.Count > 0)
+                return lstInstrumentResult.Count.ToString();
+            return "false";
+        }
     }
 }
     

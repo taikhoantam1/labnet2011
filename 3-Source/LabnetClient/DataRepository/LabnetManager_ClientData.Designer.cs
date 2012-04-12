@@ -1083,47 +1083,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="receivedDate">No Metadata Documentation available.</param>
-        /// <param name="orderNumber">No Metadata Documentation available.</param>
-        /// <param name="instrumentId">No Metadata Documentation available.</param>
-        public ObjectResult<SearchInstrumentResult_Result> SearchInstrumentResult(Nullable<global::System.DateTime> receivedDate, global::System.String orderNumber, Nullable<global::System.Int32> instrumentId)
-        {
-            ObjectParameter receivedDateParameter;
-            if (receivedDate.HasValue)
-            {
-                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
-            }
-            else
-            {
-                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter orderNumberParameter;
-            if (orderNumber != null)
-            {
-                orderNumberParameter = new ObjectParameter("OrderNumber", orderNumber);
-            }
-            else
-            {
-                orderNumberParameter = new ObjectParameter("OrderNumber", typeof(global::System.String));
-            }
-    
-            ObjectParameter instrumentIdParameter;
-            if (instrumentId.HasValue)
-            {
-                instrumentIdParameter = new ObjectParameter("InstrumentId", instrumentId);
-            }
-            else
-            {
-                instrumentIdParameter = new ObjectParameter("InstrumentId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<SearchInstrumentResult_Result>("SearchInstrumentResult", receivedDateParameter, orderNumberParameter, instrumentIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="orderNumber">No Metadata Documentation available.</param>
         /// <param name="receivedDate">No Metadata Documentation available.</param>
         /// <param name="testId">No Metadata Documentation available.</param>
@@ -1234,6 +1193,47 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction("UpdateSID", oldOrderNumberParameter, newOrderNumberParameter, receivedDateParameter, instrumentIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="receivedDate">No Metadata Documentation available.</param>
+        /// <param name="orderNumber">No Metadata Documentation available.</param>
+        /// <param name="instrumentId">No Metadata Documentation available.</param>
+        public ObjectResult<SearchInstrumentResult_Result> SearchInstrumentResult(Nullable<global::System.DateTime> receivedDate, global::System.String orderNumber, Nullable<global::System.Int32> instrumentId)
+        {
+            ObjectParameter receivedDateParameter;
+            if (receivedDate.HasValue)
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
+            }
+            else
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter orderNumberParameter;
+            if (orderNumber != null)
+            {
+                orderNumberParameter = new ObjectParameter("OrderNumber", orderNumber);
+            }
+            else
+            {
+                orderNumberParameter = new ObjectParameter("OrderNumber", typeof(global::System.String));
+            }
+    
+            ObjectParameter instrumentIdParameter;
+            if (instrumentId.HasValue)
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", instrumentId);
+            }
+            else
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<SearchInstrumentResult_Result>("SearchInstrumentResult", receivedDateParameter, orderNumberParameter, instrumentIdParameter);
         }
 
         #endregion
