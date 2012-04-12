@@ -1138,6 +1138,16 @@ namespace DataRepository
             return lstInstrumentResults;
         }
 
+        public List<InstrumentResult> GetAllInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId)
+        {
+            List<InstrumentResult> lstInstrumentResult = (from _insResult in myDb.InstrumentResults
+                                                           where _insResult.ReceivedDate == receivedDate
+                                                             && (orderNumber == null ||_insResult.OrderNumber == orderNumber)
+                                                             && (instrumentId == null || _insResult.InstrumentId == instrumentId)
+                                                           select _insResult).ToList();
+            return lstInstrumentResult;
+        }
+
         public void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId)
         {
             myDb.Result(orderNumber, receivedDate, testId, value, instrumentResultId);
@@ -1145,7 +1155,7 @@ namespace DataRepository
 
         public void UpdateSID(DateTime? receivedDate, int oldOrderNumber, int newOrderNumber, int? instrumentId)
         {
-            myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
+            int success = myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
         }
     }
 }

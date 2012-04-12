@@ -142,21 +142,42 @@
             var date = $("#InstrumentResult_ReceivedDate").val();
             var instrumentId = $("#InstrumentId").val();
             var orderNumber = $("#OrderNumber").val();
-            //var data = $(".ModuleContent form").serialize();
-            //alert(instrumentId);
-            //alert(data);
-            $.ajax({
-                url: "/InstrumentResult/SearchInstrumentResult",
-                type: "POST",
+            
+            if(date.length != 0){
+                
+                $.ajax({
+                url: "/InstrumentResult/SearchBySID",
                 data: {
-                    ReceivedDate: date,
-                    OrderNumber: orderNumber,
-                    InstrumentId: instrumentId
+                        ReceivedDate: date,
+                        OrderNumber: orderNumber,
+                        InstrumentId: instrumentId
                 },
+                type: "POST",
                 success: function (data) {
-                    $(".ResultTable").html(data);
-                }
-            });
+                    if (data.trim().toLowerCase().indexOf("false") != -1) {
+                        alert("Không tìm thấy dữ liệu với thông tin nhập vào");
+                    }
+                    else{
+                        $.ajax({
+								url: "/InstrumentResult/SearchInstrumentResult",
+								type: "POST",
+								data: {
+									ReceivedDate: date,
+									OrderNumber: orderNumber,
+									InstrumentId: instrumentId
+								},
+								success: function (data) {
+									$(".ResultTable").html(data);
+								}
+							});
+						}
+					}
+				})
+                
+            }
+            else{
+                alert("Vui lòng chọn Ngày Xét Nghiệm");
+            }
         });
 
         $("#btnUpdate").click(function () {
@@ -176,65 +197,30 @@
                 }
             });
         });
-        /*
-        $("#btnChangeID").click(function () {
-        var date = $("#InstrumentResult_ReceivedDate").val();
-        var instrumentId = $("#InstrumentId").val();
-        var orderNumber = $("#OrderNumber").val();
-
-        if (orderNumber == null || orderNumber.trim() == "") {
-        alert("Xin nhập SID trước khi đồi");
+        
+        $("#btnView").click(function () {
+            var date = $("#InstrumentResult_ReceivedDate").val();
+            var instrumentId = $("#InstrumentId").val();
+            var orderNumber = $("#OrderNumber").val();
+            
+            if(date.length != 0){
                 
-        var x = AlertCC('Warning', 'Bạn muốn chuyển SID từ ' + orderNumber + ' sang: ');
-
-        alert(x);
-
-        }
-
-        if (orderNumber != null && orderNumber.trim() != "") {
-        $("#OrderNumber").val("123");
-        $.ajax({
-        url: "/InstrumentResult/SearchBySID",
-        type: "POST",
-        data: {
-        ReceivedDate: date,
-        OrderNumber: orderNumber,
-        InstrumentId: instrumentId
-        },
-        success: function (data) {
-        $(".ResultTable").html(data);
-        }
+                $.ajax({
+                    url: "/InstrumentResult/SearchInstrumentResult",
+                    type: "POST",
+                    data: {
+                        ReceivedDate: date,
+                        OrderNumber: null,
+                        InstrumentId: null
+                    },
+                    success: function (data) {
+                        $(".ResultTable").html(data);
+                    }
+                });
+            }
+            else{
+                alert("Vui lòng chọn Ngày Xét Nghiệm");
+            }
         });
-        }
-        });
-
-        function AlertCC(label, msg) {
-        var head =
-        "<TITLE>Window Title</TITLE>" +
-        "<HEAD>" +
-        "</HEAD>" +
-        "<BODY BGCOLOR='FFFFFF'><FORM><TABLE BORDER=0 VALIGN=TOP WIDTH='100%'>";
-
-        var title = "<FONT COLOR='FF0000'><B>" + msg + "</B></FONT>";
-
-        var content =
-        "<TR>" +
-        "<TD ALIGN=CENTER>" +
-        "<INPUT TYPE='TEXT' id='newSID' SIZE='30' />" +
-        "</TR>" +
-        "<TR><TD ALIGN=CENTER>" +
-        "<INPUT TYPE='BUTTON' id='btnOK' VALUE='OK'" +
-        "onClick='return newSID.value; self.close();'>" +
-        "</TR></TABLE></FORM></BODY>";
-
-        //targetWin = window.open("", "popDialog", 'width=400, height=280' + ', top=' + top + ', left=' + left);
-        //targetWin.document.write(cc1 + cc2 + msg + cc3);
-        //targetWin.document.close();
-        popup = window.open("", "popDialog", "height=100,width=400,top=200,left=250,scrollbars=no");
-        popup.document.write(head + title + content);
-        popup.document.close();
-        //return window.opener.document.getElementById('newSID');
-        }
-        */
     });
 </script>
