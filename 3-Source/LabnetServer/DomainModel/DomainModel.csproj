@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5F90FE62-F272-414A-BC79-9752C755C67E}</ProjectGuid>
+    <ProjectGuid>{A8BD1F26-39A7-4417-91C8-77667D4E6BFB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataRepository</RootNamespace>
-    <AssemblyName>DataRepository</AssemblyName>
+    <RootNamespace>DomainModel</RootNamespace>
+    <AssemblyName>DomainModel</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,9 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,29 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientConnector.cs" />
-    <Compile Include="IClientConnector.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="LabnetServer.Designer.cs">
+    <Compile Include="JQGrid\JQColumn.cs" />
+    <Compile Include="JQGrid\JQColumnAttribute.cs" />
+    <Compile Include="JQGrid\JQConstant.cs" />
+    <Compile Include="ModelStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LabnetServer.edmx</DependentUpon>
+      <DependentUpon>ModelStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="VMDoctor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VMDoctorConnectMapping.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <EntityDeploy Include="LabnetServer.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LabnetServer.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DomainModel\DomainModel.csproj">
-      <Project>{A8BD1F26-39A7-4417-91C8-77667D4E6BFB}</Project>
-      <Name>DomainModel</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="ModelStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ModelStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

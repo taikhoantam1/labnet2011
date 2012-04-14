@@ -20,6 +20,8 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("LabServerModel", "FK_Examination_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabClient), "Examination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Examination), true)]
 [assembly: EdmRelationshipAttribute("LabServerModel", "FK_LabnetAccount_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.LabClient), "LabnetAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabnetAccount), true)]
+[assembly: EdmRelationshipAttribute("LabServerModel", "FK_DoctorConnectMapping_Doctor", "Doctor", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Doctor), "DoctorConnectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.DoctorConnectMapping), true)]
+[assembly: EdmRelationshipAttribute("LabServerModel", "FK_DoctorConnectMapping_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabClient), "DoctorConnectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.DoctorConnectMapping), true)]
 
 #endregion
 
@@ -74,6 +76,22 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Doctor> Doctors
+        {
+            get
+            {
+                if ((_Doctors == null))
+                {
+                    _Doctors = base.CreateObjectSet<Doctor>("Doctors");
+                }
+                return _Doctors;
+            }
+        }
+        private ObjectSet<Doctor> _Doctors;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Examination> Examinations
         {
             get
@@ -118,9 +136,33 @@ namespace DataRepository
             }
         }
         private ObjectSet<LabnetAccount> _LabnetAccounts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DoctorConnectMapping> DoctorConnectMappings
+        {
+            get
+            {
+                if ((_DoctorConnectMappings == null))
+                {
+                    _DoctorConnectMappings = base.CreateObjectSet<DoctorConnectMapping>("DoctorConnectMappings");
+                }
+                return _DoctorConnectMappings;
+            }
+        }
+        private ObjectSet<DoctorConnectMapping> _DoctorConnectMappings;
 
         #endregion
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Doctors EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDoctors(Doctor doctor)
+        {
+            base.AddObject("Doctors", doctor);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Examinations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -145,6 +187,55 @@ namespace DataRepository
         {
             base.AddObject("LabnetAccounts", labnetAccount);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DoctorConnectMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDoctorConnectMappings(DoctorConnectMapping doctorConnectMapping)
+        {
+            base.AddObject("DoctorConnectMappings", doctorConnectMapping);
+        }
+
+        #endregion
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="length">No Metadata Documentation available.</param>
+        public ObjectResult<global::System.String> GenerateConnectionCode(Nullable<global::System.Int32> length)
+        {
+            ObjectParameter lengthParameter;
+            if (length.HasValue)
+            {
+                lengthParameter = new ObjectParameter("Length", length);
+            }
+            else
+            {
+                lengthParameter = new ObjectParameter("Length", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<global::System.String>("GenerateConnectionCode", lengthParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="length">No Metadata Documentation available.</param>
+        public ObjectResult<global::System.String> GenerateExaminationNumber(Nullable<global::System.Int32> length)
+        {
+            ObjectParameter lengthParameter;
+            if (length.HasValue)
+            {
+                lengthParameter = new ObjectParameter("Length", length);
+            }
+            else
+            {
+                lengthParameter = new ObjectParameter("Length", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<global::System.String>("GenerateExaminationNumber", lengthParameter);
+        }
 
         #endregion
     }
@@ -153,6 +244,544 @@ namespace DataRepository
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LabServerModel", Name="Doctor")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Doctor : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Doctor object.
+        /// </summary>
+        /// <param name="doctorId">Initial value of the DoctorId property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        /// <param name="password">Initial value of the Password property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static Doctor CreateDoctor(global::System.Int32 doctorId, global::System.String userName, global::System.String password, global::System.String name)
+        {
+            Doctor doctor = new Doctor();
+            doctor.DoctorId = doctorId;
+            doctor.UserName = userName;
+            doctor.Password = password;
+            doctor.Name = name;
+            return doctor;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DoctorId
+        {
+            get
+            {
+                return _DoctorId;
+            }
+            set
+            {
+                if (_DoctorId != value)
+                {
+                    OnDoctorIdChanging(value);
+                    ReportPropertyChanging("DoctorId");
+                    _DoctorId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("DoctorId");
+                    OnDoctorIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _DoctorId;
+        partial void OnDoctorIdChanging(global::System.Int32 value);
+        partial void OnDoctorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PhoneNumber
+        {
+            get
+            {
+                return _PhoneNumber;
+            }
+            set
+            {
+                OnPhoneNumberChanging(value);
+                ReportPropertyChanging("PhoneNumber");
+                _PhoneNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PhoneNumber");
+                OnPhoneNumberChanged();
+            }
+        }
+        private global::System.String _PhoneNumber;
+        partial void OnPhoneNumberChanging(global::System.String value);
+        partial void OnPhoneNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BirthDay
+        {
+            get
+            {
+                return _BirthDay;
+            }
+            set
+            {
+                OnBirthDayChanging(value);
+                ReportPropertyChanging("BirthDay");
+                _BirthDay = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BirthDay");
+                OnBirthDayChanged();
+            }
+        }
+        private global::System.String _BirthDay;
+        partial void OnBirthDayChanging(global::System.String value);
+        partial void OnBirthDayChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_DoctorConnectMapping_Doctor", "DoctorConnectMapping")]
+        public EntityCollection<DoctorConnectMapping> DoctorConnectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_Doctor", "DoctorConnectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_Doctor", "DoctorConnectMapping", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LabServerModel", Name="DoctorConnectMapping")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DoctorConnectMapping : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DoctorConnectMapping object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="labId">Initial value of the LabId property.</param>
+        /// <param name="clientDoctorId">Initial value of the ClientDoctorId property.</param>
+        /// <param name="connectionCode">Initial value of the ConnectionCode property.</param>
+        public static DoctorConnectMapping CreateDoctorConnectMapping(global::System.Int32 id, global::System.Int32 labId, global::System.Int32 clientDoctorId, global::System.String connectionCode)
+        {
+            DoctorConnectMapping doctorConnectMapping = new DoctorConnectMapping();
+            doctorConnectMapping.Id = id;
+            doctorConnectMapping.LabId = labId;
+            doctorConnectMapping.ClientDoctorId = clientDoctorId;
+            doctorConnectMapping.ConnectionCode = connectionCode;
+            return doctorConnectMapping;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DoctorId
+        {
+            get
+            {
+                return _DoctorId;
+            }
+            set
+            {
+                OnDoctorIdChanging(value);
+                ReportPropertyChanging("DoctorId");
+                _DoctorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DoctorId");
+                OnDoctorIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DoctorId;
+        partial void OnDoctorIdChanging(Nullable<global::System.Int32> value);
+        partial void OnDoctorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LabId
+        {
+            get
+            {
+                return _LabId;
+            }
+            set
+            {
+                OnLabIdChanging(value);
+                ReportPropertyChanging("LabId");
+                _LabId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LabId");
+                OnLabIdChanged();
+            }
+        }
+        private global::System.Int32 _LabId;
+        partial void OnLabIdChanging(global::System.Int32 value);
+        partial void OnLabIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ClientDoctorId
+        {
+            get
+            {
+                return _ClientDoctorId;
+            }
+            set
+            {
+                OnClientDoctorIdChanging(value);
+                ReportPropertyChanging("ClientDoctorId");
+                _ClientDoctorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClientDoctorId");
+                OnClientDoctorIdChanged();
+            }
+        }
+        private global::System.Int32 _ClientDoctorId;
+        partial void OnClientDoctorIdChanging(global::System.Int32 value);
+        partial void OnClientDoctorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ConnectionCode
+        {
+            get
+            {
+                return _ConnectionCode;
+            }
+            set
+            {
+                OnConnectionCodeChanging(value);
+                ReportPropertyChanging("ConnectionCode");
+                _ConnectionCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ConnectionCode");
+                OnConnectionCodeChanged();
+            }
+        }
+        private global::System.String _ConnectionCode;
+        partial void OnConnectionCodeChanging(global::System.String value);
+        partial void OnConnectionCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ConnectionState
+        {
+            get
+            {
+                return _ConnectionState;
+            }
+            set
+            {
+                OnConnectionStateChanging(value);
+                ReportPropertyChanging("ConnectionState");
+                _ConnectionState = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ConnectionState");
+                OnConnectionStateChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ConnectionState;
+        partial void OnConnectionStateChanging(Nullable<global::System.Int32> value);
+        partial void OnConnectionStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateConnected
+        {
+            get
+            {
+                return _DateConnected;
+            }
+            set
+            {
+                OnDateConnectedChanging(value);
+                ReportPropertyChanging("DateConnected");
+                _DateConnected = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateConnected");
+                OnDateConnectedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateConnected;
+        partial void OnDateConnectedChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateConnectedChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_DoctorConnectMapping_Doctor", "Doctor")]
+        public Doctor Doctor
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Doctor>("LabServerModel.FK_DoctorConnectMapping_Doctor", "Doctor").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Doctor>("LabServerModel.FK_DoctorConnectMapping_Doctor", "Doctor").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Doctor> DoctorReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Doctor>("LabServerModel.FK_DoctorConnectMapping_Doctor", "Doctor");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Doctor>("LabServerModel.FK_DoctorConnectMapping_Doctor", "Doctor", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_DoctorConnectMapping_LabClient", "LabClient")]
+        public LabClient LabClient
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_DoctorConnectMapping_LabClient", "LabClient").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_DoctorConnectMapping_LabClient", "LabClient").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LabClient> LabClientReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_DoctorConnectMapping_LabClient", "LabClient");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LabClient>("LabServerModel.FK_DoctorConnectMapping_LabClient", "LabClient", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -308,6 +937,126 @@ namespace DataRepository
         private global::System.Int32 _Status;
         partial void OnStatusChanging(global::System.Int32 value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PatientName
+        {
+            get
+            {
+                return _PatientName;
+            }
+            set
+            {
+                OnPatientNameChanging(value);
+                ReportPropertyChanging("PatientName");
+                _PatientName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PatientName");
+                OnPatientNameChanged();
+            }
+        }
+        private global::System.String _PatientName;
+        partial void OnPatientNameChanging(global::System.String value);
+        partial void OnPatientNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Phone
+        {
+            get
+            {
+                return _Phone;
+            }
+            set
+            {
+                OnPhoneChanging(value);
+                ReportPropertyChanging("Phone");
+                _Phone = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Phone");
+                OnPhoneChanged();
+            }
+        }
+        private global::System.String _Phone;
+        partial void OnPhoneChanging(global::System.String value);
+        partial void OnPhoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BirthDay
+        {
+            get
+            {
+                return _BirthDay;
+            }
+            set
+            {
+                OnBirthDayChanging(value);
+                ReportPropertyChanging("BirthDay");
+                _BirthDay = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BirthDay");
+                OnBirthDayChanged();
+            }
+        }
+        private global::System.String _BirthDay;
+        partial void OnBirthDayChanging(global::System.String value);
+        partial void OnBirthDayChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ClientPartnerId
+        {
+            get
+            {
+                return _ClientPartnerId;
+            }
+            set
+            {
+                OnClientPartnerIdChanging(value);
+                ReportPropertyChanging("ClientPartnerId");
+                _ClientPartnerId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClientPartnerId");
+                OnClientPartnerIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ClientPartnerId;
+        partial void OnClientPartnerIdChanging(Nullable<global::System.Int32> value);
+        partial void OnClientPartnerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ClientDoctorId
+        {
+            get
+            {
+                return _ClientDoctorId;
+            }
+            set
+            {
+                OnClientDoctorIdChanging(value);
+                ReportPropertyChanging("ClientDoctorId");
+                _ClientDoctorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClientDoctorId");
+                OnClientDoctorIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ClientDoctorId;
+        partial void OnClientDoctorIdChanging(Nullable<global::System.Int32> value);
+        partial void OnClientDoctorIdChanged();
 
         #endregion
     
@@ -575,6 +1324,28 @@ namespace DataRepository
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LabnetAccount>("LabServerModel.FK_LabnetAccount_LabClient", "LabnetAccount", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping")]
+        public EntityCollection<DoctorConnectMapping> DoctorConnectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping", value);
                 }
             }
         }
