@@ -6,9 +6,19 @@
     <edmx:StorageModels>
     <Schema Namespace="LabServerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="LabServerModelStoreContainer">
+          <EntitySet Name="Doctor" EntityType="LabServerModel.Store.Doctor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DoctorConnectMapping" EntityType="LabServerModel.Store.DoctorConnectMapping" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Examination" EntityType="LabServerModel.Store.Examination" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabClient" EntityType="LabServerModel.Store.LabClient" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LabnetAccount" EntityType="LabServerModel.Store.LabnetAccount" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_DoctorConnectMapping_Doctor" Association="LabServerModel.Store.FK_DoctorConnectMapping_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorConnectMapping" EntitySet="DoctorConnectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorConnectMapping_LabClient" Association="LabServerModel.Store.FK_DoctorConnectMapping_LabClient">
+            <End Role="LabClient" EntitySet="LabClient" />
+            <End Role="DoctorConnectMapping" EntitySet="DoctorConnectMapping" />
+          </AssociationSet>
           <AssociationSet Name="FK_Examination_LabClient" Association="LabServerModel.Store.FK_Examination_LabClient">
             <End Role="LabClient" EntitySet="LabClient" />
             <End Role="Examination" EntitySet="Examination" />
@@ -18,6 +28,31 @@
             <End Role="LabnetAccount" EntitySet="LabnetAccount" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="BirthDay" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DoctorConnectMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="LabId" Type="int" Nullable="false" />
+          <Property Name="ClientDoctorId" Type="int" Nullable="false" />
+          <Property Name="ConnectionCode" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="ConnectionState" Type="int" />
+          <Property Name="DateConnected" Type="datetime" />
+        </EntityType>
         <EntityType Name="Examination">
           <Key>
             <PropertyRef Name="ExaminationId" />
@@ -27,6 +62,11 @@
           <Property Name="LabId" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDay" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClientPartnerId" Type="int" />
+          <Property Name="ClientDoctorId" Type="int" />
         </EntityType>
         <EntityType Name="LabClient">
           <Key>
@@ -50,6 +90,30 @@
           <Property Name="Domain" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Role" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_DoctorConnectMapping_Doctor">
+          <End Role="Doctor" Type="LabServerModel.Store.Doctor" Multiplicity="0..1" />
+          <End Role="DoctorConnectMapping" Type="LabServerModel.Store.DoctorConnectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="DoctorConnectMapping">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorConnectMapping_LabClient">
+          <End Role="LabClient" Type="LabServerModel.Store.LabClient" Multiplicity="1" />
+          <End Role="DoctorConnectMapping" Type="LabServerModel.Store.DoctorConnectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabClient">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="DoctorConnectMapping">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Examination_LabClient">
           <End Role="LabClient" Type="LabServerModel.Store.LabClient" Multiplicity="1" />
           <End Role="Examination" Type="LabServerModel.Store.Examination" Multiplicity="*" />
@@ -74,11 +138,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="labnet_GenerateConnectionCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Length" Type="int" Mode="In" />
+        </Function>
+        <Function Name="labnet_GenerateExaminationNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Length" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LabServerModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="LabnetServerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Doctors" EntityType="LabServerModel.Doctor" />
           <EntitySet Name="Examinations" EntityType="LabServerModel.Examination" />
           <EntitySet Name="LabClients" EntityType="LabServerModel.LabClient" />
           <EntitySet Name="LabnetAccounts" EntityType="LabServerModel.LabnetAccount" />
@@ -90,7 +161,36 @@
             <End Role="LabClient" EntitySet="LabClients" />
             <End Role="LabnetAccount" EntitySet="LabnetAccounts" />
           </AssociationSet>
+          <FunctionImport Name="GenerateConnectionCode" ReturnType="Collection(String)">
+          <Parameter Name="Length" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateExaminationNumber" ReturnType="Collection(String)">
+          <Parameter Name="Length" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="DoctorConnectMappings" EntityType="LabServerModel.DoctorConnectMapping" />
+          <AssociationSet Name="FK_DoctorConnectMapping_Doctor" Association="LabServerModel.FK_DoctorConnectMapping_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DoctorConnectMapping" EntitySet="DoctorConnectMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorConnectMapping_LabClient" Association="LabServerModel.FK_DoctorConnectMapping_LabClient">
+            <End Role="LabClient" EntitySet="LabClients" />
+            <End Role="DoctorConnectMapping" EntitySet="DoctorConnectMappings" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Type="Int32" Name="DoctorId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PhoneNumber" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BirthDay" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DoctorConnectMappings" Relationship="LabServerModel.FK_DoctorConnectMapping_Doctor" FromRole="Doctor" ToRole="DoctorConnectMapping" />
+        </EntityType>
         <EntityType Name="Examination">
           <Key>
             <PropertyRef Name="ExaminationId" />
@@ -100,6 +200,11 @@
           <Property Type="Int32" Name="LabId" Nullable="false" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" />
           <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="String" Name="PatientName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BirthDay" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ClientPartnerId" />
+          <Property Type="Int32" Name="ClientDoctorId" />
           <NavigationProperty Name="LabClient" Relationship="LabServerModel.FK_Examination_LabClient" FromRole="Examination" ToRole="LabClient" />
         </EntityType>
         <EntityType Name="LabClient">
@@ -114,6 +219,7 @@
           <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="Examinations" Relationship="LabServerModel.FK_Examination_LabClient" FromRole="LabClient" ToRole="Examination" />
           <NavigationProperty Name="LabnetAccounts" Relationship="LabServerModel.FK_LabnetAccount_LabClient" FromRole="LabClient" ToRole="LabnetAccount" />
+          <NavigationProperty Name="DoctorConnectMappings" Relationship="LabServerModel.FK_DoctorConnectMapping_LabClient" FromRole="LabClient" ToRole="DoctorConnectMapping" />
         </EntityType>
         <EntityType Name="LabnetAccount">
           <Key>
@@ -151,15 +257,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="DoctorConnectMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DoctorId" />
+          <Property Type="Int32" Name="LabId" Nullable="false" />
+          <Property Type="Int32" Name="ClientDoctorId" Nullable="false" />
+          <Property Type="String" Name="ConnectionCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ConnectionState" />
+          <NavigationProperty Name="Doctor" Relationship="LabServerModel.FK_DoctorConnectMapping_Doctor" FromRole="DoctorConnectMapping" ToRole="Doctor" />
+          <NavigationProperty Name="LabClient" Relationship="LabServerModel.FK_DoctorConnectMapping_LabClient" FromRole="DoctorConnectMapping" ToRole="LabClient" />
+          <Property Type="DateTime" Name="DateConnected" />
+        </EntityType>
+        <Association Name="FK_DoctorConnectMapping_Doctor">
+          <End Type="LabServerModel.Doctor" Role="Doctor" Multiplicity="0..1" />
+          <End Type="LabServerModel.DoctorConnectMapping" Role="DoctorConnectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="DoctorConnectMapping">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorConnectMapping_LabClient">
+          <End Type="LabServerModel.LabClient" Role="LabClient" Multiplicity="1" />
+          <End Type="LabServerModel.DoctorConnectMapping" Role="DoctorConnectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LabClient">
+              <PropertyRef Name="LabId" />
+            </Principal>
+            <Dependent Role="DoctorConnectMapping">
+              <PropertyRef Name="LabId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LabServerModelStoreContainer" CdmEntityContainer="LabnetServerEntities">
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="LabServerModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Examinations">
             <EntityTypeMapping TypeName="LabServerModel.Examination">
               <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="ClientDoctorId" ColumnName="ClientDoctorId" />
+                <ScalarProperty Name="ClientPartnerId" ColumnName="ClientPartnerId" />
+                <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="LabId" ColumnName="LabId" />
@@ -192,6 +355,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateConnectionCode" FunctionName="LabServerModel.Store.labnet_GenerateConnectionCode" />
+          <FunctionImportMapping FunctionImportName="GenerateExaminationNumber" FunctionName="LabServerModel.Store.labnet_GenerateExaminationNumber" />
+          <EntitySetMapping Name="DoctorConnectMappings">
+            <EntityTypeMapping TypeName="LabServerModel.DoctorConnectMapping">
+              <MappingFragment StoreEntitySet="DoctorConnectMapping">
+                <ScalarProperty Name="DateConnected" ColumnName="DateConnected" />
+                <ScalarProperty Name="ConnectionState" ColumnName="ConnectionState" />
+                <ScalarProperty Name="ConnectionCode" ColumnName="ConnectionCode" />
+                <ScalarProperty Name="ClientDoctorId" ColumnName="ClientDoctorId" />
+                <ScalarProperty Name="LabId" ColumnName="LabId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -213,16 +391,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="LabnetServer">
-        <EntityTypeShape EntityType="LabServerModel.Examination" Width="1.5" PointX="3" PointY="1.125" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="LabServerModel.LabClient" Width="1.5" PointX="0.75" PointY="2.5" Height="2.5571907552083322" />
-        <EntityTypeShape EntityType="LabServerModel.LabnetAccount" Width="1.5" PointX="3" PointY="4" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="LabServerModel.Doctor" Width="1.5" PointX="0.75" PointY="0.75" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="LabServerModel.Examination" Width="1.5" PointX="3" PointY="6.25" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="LabServerModel.LabClient" Width="1.5" PointX="0.75" PointY="4.75" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="LabServerModel.LabnetAccount" Width="1.5" PointX="3" PointY="10.25" Height="2.3648893229166674" />
         <AssociationConnector Association="LabServerModel.FK_Examination_LabClient" >
-          <ConnectorPoint PointX="2.25" PointY="2.8987939453125" />
-          <ConnectorPoint PointX="3" PointY="2.8987939453125" />
+          <ConnectorPoint PointX="2.25" PointY="6.87474609375" />
+          <ConnectorPoint PointX="3" PointY="6.87474609375" />
         </AssociationConnector>
         <AssociationConnector Association="LabServerModel.FK_LabnetAccount_LabClient" >
-          <ConnectorPoint PointX="2.25" PointY="4.5285953776041659" />
-          <ConnectorPoint PointX="3" PointY="4.5285953776041659" />
+          <ConnectorPoint PointX="1.5" PointY="7.4994921875" />
+          <ConnectorPoint PointX="1.5" PointY="11.432444661458334" />
+          <ConnectorPoint PointX="3" PointY="11.432444661458334" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="LabServerModel.DoctorConnectMapping" Width="1.5" PointX="3" PointY="2.875" Height="2.5571907552083322" />
+        <AssociationConnector Association="LabServerModel.FK_DoctorConnectMapping_Doctor" >
+          <ConnectorPoint PointX="2.25" PointY="3.18724609375" />
+          <ConnectorPoint PointX="3" PointY="3.18724609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="LabServerModel.FK_DoctorConnectMapping_LabClient" >
+          <ConnectorPoint PointX="2.25" PointY="5.0910953776041659" />
+          <ConnectorPoint PointX="3" PointY="5.0910953776041659" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

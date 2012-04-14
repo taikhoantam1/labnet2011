@@ -72,6 +72,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\BacSi\BacSiStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BacSiStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\GlobalStrings.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GlobalStrings.en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="Code\GeneralEnum.cs" />
     <Compile Include="Code\JSonHelper.cs" />
     <Compile Include="Content\Lib\FileManager\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -112,17 +118,26 @@
       <DependentUpon>Uploader.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BacSiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ExaminationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaXetNghiemController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="CustomeAttribute\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="CustomeAttribute\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AjaxResultModel.cs" />
+    <Compile Include="Models\Control\AutocompleteComboBox\ComboBox.cs" />
+    <Compile Include="Models\Control\AutocompleteComboBox\OptionItem.cs" />
+    <Compile Include="Models\Control\AutocompleteModel.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQGrid.cs" />
+    <Compile Include="Models\Control\JQGridModel\JQResponseDataModel.cs" />
     <Compile Include="Models\KQXNModel.cs" />
+    <Compile Include="Models\BacSi\KetNoiModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -691,11 +706,15 @@
     <Content Include="Content\Style\Site.css" />
     <Content Include="Content\Style\ui.jqgrid.css" />
     <Content Include="Global.asax" />
+    <Content Include="Views\BacSi\DanhSachLabKetNoi.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Login.ascx" />
     <Content Include="Views\KetQuaXetNghiem\KQSN.ascx" />
     <Content Include="Views\KetQuaXetNghiem\KQXN_BacSi.aspx" />
     <Content Include="Views\KetQuaXetNghiem\KQXN_BenhNhan.aspx" />
+    <Content Include="Views\Shared\Autocomplete.ascx" />
+    <Content Include="Views\Shared\ComboBox.ascx" />
+    <Content Include="Views\Shared\DataTable.ascx" />
     <Content Include="Views\Shared\Footer.ascx" />
     <Content Include="Views\Shared\HomeContent.ascx" />
     <Content Include="Views\Shared\SupportIcon.ascx" />
@@ -755,6 +774,14 @@
       <Project>{5F90FE62-F272-414A-BC79-9752C755C67E}</Project>
       <Name>DataRepository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj">
+      <Project>{A8BD1F26-39A7-4417-91C8-77667D4E6BFB}</Project>
+      <Name>DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryFunction\LibraryFunction.csproj">
+      <Project>{F60FF808-E570-4188-B7CB-B7B1412A4B7D}</Project>
+      <Name>LibraryFunction</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Lib\FileManager\css\Thumbs.db" />
@@ -764,6 +791,12 @@
     <None Include="Content\Lib\FileManager\js\themes\classic\Thumbs.db" />
     <None Include="Content\Lib\FileManager\js\themes\default-rtl\Thumbs.db" />
     <None Include="Content\Lib\FileManager\js\themes\default\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\BacSi\BacSiStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>BacSiStrings.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
