@@ -258,11 +258,11 @@ namespace LabnetClient.Controllers
                 errorMessage="Vui lòng chọn ngày nhận";
             }
 
-            int oldSID=0;
+            //int oldSID=0;
             int newSID=0;
             try
             {
-                oldSID = int.Parse(OldOrderNumber);
+                //oldSID = int.Parse(OldOrderNumber);
                 newSID = int.Parse(NewOrderNumber);
             }
             catch (Exception ex)
@@ -277,11 +277,11 @@ namespace LabnetClient.Controllers
                 {
                     if (InstrumentId == -1)
                     {
-                        Repository.UpdateSID(receivedDate, oldSID, newSID, null);
+                        Repository.UpdateSID(receivedDate, OldOrderNumber, newSID, null);
                     }
                     else
                     {
-                        Repository.UpdateSID(receivedDate, oldSID, newSID, InstrumentId);
+                        Repository.UpdateSID(receivedDate, OldOrderNumber, newSID, InstrumentId);
                     }
                 }
                 catch (Exception ex)

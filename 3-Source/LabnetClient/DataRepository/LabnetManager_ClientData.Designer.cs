@@ -1146,58 +1146,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="oldOrderNumber">No Metadata Documentation available.</param>
-        /// <param name="newOrderNumber">No Metadata Documentation available.</param>
-        /// <param name="receivedDate">No Metadata Documentation available.</param>
-        /// <param name="instrumentId">No Metadata Documentation available.</param>
-        public int UpdateSID(Nullable<global::System.Int32> oldOrderNumber, Nullable<global::System.Int32> newOrderNumber, Nullable<global::System.DateTime> receivedDate, Nullable<global::System.Int32> instrumentId)
-        {
-            ObjectParameter oldOrderNumberParameter;
-            if (oldOrderNumber.HasValue)
-            {
-                oldOrderNumberParameter = new ObjectParameter("oldOrderNumber", oldOrderNumber);
-            }
-            else
-            {
-                oldOrderNumberParameter = new ObjectParameter("oldOrderNumber", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter newOrderNumberParameter;
-            if (newOrderNumber.HasValue)
-            {
-                newOrderNumberParameter = new ObjectParameter("newOrderNumber", newOrderNumber);
-            }
-            else
-            {
-                newOrderNumberParameter = new ObjectParameter("newOrderNumber", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter receivedDateParameter;
-            if (receivedDate.HasValue)
-            {
-                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
-            }
-            else
-            {
-                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
-            }
-    
-            ObjectParameter instrumentIdParameter;
-            if (instrumentId.HasValue)
-            {
-                instrumentIdParameter = new ObjectParameter("InstrumentId", instrumentId);
-            }
-            else
-            {
-                instrumentIdParameter = new ObjectParameter("InstrumentId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction("UpdateSID", oldOrderNumberParameter, newOrderNumberParameter, receivedDateParameter, instrumentIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="receivedDate">No Metadata Documentation available.</param>
         /// <param name="orderNumber">No Metadata Documentation available.</param>
         /// <param name="instrumentId">No Metadata Documentation available.</param>
@@ -1234,6 +1182,58 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<SearchInstrumentResult_Result>("SearchInstrumentResult", receivedDateParameter, orderNumberParameter, instrumentIdParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="oldOrderNumber">No Metadata Documentation available.</param>
+        /// <param name="newOrderNumber">No Metadata Documentation available.</param>
+        /// <param name="receivedDate">No Metadata Documentation available.</param>
+        /// <param name="instrumentId">No Metadata Documentation available.</param>
+        public int UpdateSID(global::System.String oldOrderNumber, Nullable<global::System.Int32> newOrderNumber, Nullable<global::System.DateTime> receivedDate, Nullable<global::System.Int32> instrumentId)
+        {
+            ObjectParameter oldOrderNumberParameter;
+            if (oldOrderNumber != null)
+            {
+                oldOrderNumberParameter = new ObjectParameter("oldOrderNumber", oldOrderNumber);
+            }
+            else
+            {
+                oldOrderNumberParameter = new ObjectParameter("oldOrderNumber", typeof(global::System.String));
+            }
+    
+            ObjectParameter newOrderNumberParameter;
+            if (newOrderNumber.HasValue)
+            {
+                newOrderNumberParameter = new ObjectParameter("newOrderNumber", newOrderNumber);
+            }
+            else
+            {
+                newOrderNumberParameter = new ObjectParameter("newOrderNumber", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter receivedDateParameter;
+            if (receivedDate.HasValue)
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", receivedDate);
+            }
+            else
+            {
+                receivedDateParameter = new ObjectParameter("ReceivedDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter instrumentIdParameter;
+            if (instrumentId.HasValue)
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", instrumentId);
+            }
+            else
+            {
+                instrumentIdParameter = new ObjectParameter("InstrumentId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("UpdateSID", oldOrderNumberParameter, newOrderNumberParameter, receivedDateParameter, instrumentIdParameter);
         }
 
         #endregion
@@ -2040,6 +2040,30 @@ namespace DataRepository
         private global::System.String _ConnectionCode;
         partial void OnConnectionCodeChanging(global::System.String value);
         partial void OnConnectionCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ServerDoctorId
+        {
+            get
+            {
+                return _ServerDoctorId;
+            }
+            set
+            {
+                OnServerDoctorIdChanging(value);
+                ReportPropertyChanging("ServerDoctorId");
+                _ServerDoctorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ServerDoctorId");
+                OnServerDoctorIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ServerDoctorId;
+        partial void OnServerDoctorIdChanging(Nullable<global::System.Int32> value);
+        partial void OnServerDoctorIdChanged();
 
         #endregion
     
