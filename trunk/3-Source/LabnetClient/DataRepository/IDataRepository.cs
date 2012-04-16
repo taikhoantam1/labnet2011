@@ -181,6 +181,6 @@ namespace DataRepository
         List<InstrumentResult> GetAllInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId);
         List<Instrument> GetInstruments();
         void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId);
-        void UpdateSID(DateTime? receivedDate, int oldOrderNumber, int newOrderNumber, int? instrumentId);
+        void UpdateSID(DateTime? receivedDate, string oldOrderNumber, int newOrderNumber, int? instrumentId);
     }
 }
