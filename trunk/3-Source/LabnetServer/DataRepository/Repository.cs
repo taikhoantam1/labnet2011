@@ -104,6 +104,23 @@ namespace DataRepository
             return result;
         }
 
+        public void UpdateMappingForDoctorConnect(int mappingId, int doctorId)
+        {
+            DoctorConnectMapping mapping = myDb.DoctorConnectMappings.Where(p => p.Id == mappingId).FirstOrDefault();
+            mapping.DoctorId = doctorId;
+            mapping.DateConnected = DateTime.Now;
+            myDb.SaveChanges();
+        }
+        public void DoctorConnectMappingInsert(string connectionCode, int labId, int clientDoctoId,int connectionState)
+        {
+            DoctorConnectMapping mapping = new DoctorConnectMapping();
+            mapping.LabId = labId;
+            mapping.ClientDoctorId = clientDoctoId;
+            mapping.ConnectionCode = connectionCode;
+            mapping.ConnectionState = connectionState;
+            myDb.DoctorConnectMappings.AddObject(mapping);
+            myDb.SaveChanges();
+        }
         private int GetPatientInDay(int doctorId,int labId)
         {
 

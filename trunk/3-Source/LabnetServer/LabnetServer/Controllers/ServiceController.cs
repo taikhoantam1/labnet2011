@@ -24,9 +24,20 @@ namespace LabnetServer.Controllers
         }
 
         [HttpPost]
-        public string GetConnectionCode(int length)
+        public string GetConnectionCode(int length,int LabId, int ClientDoctorId)
         {
-            return Repository.GenerateConnectionCode(length);
+            try
+            {
+                string connectionCode = Repository.GenerateConnectionCode(length);
+                Repository.DoctorConnectMappingInsert(connectionCode, LabId, ClientDoctorId, (int)ConnectionStateEnum.Available);
+                return connectionCode;
+            }
+            catch (Exception ex)
+            {
+                return "Error";
+            }
+            
+
         }
 
         [HttpPost]

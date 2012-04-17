@@ -50,7 +50,11 @@
                     },
                     type: "POST",
                     dataType: "json",
-                    success: function (data) { }
+                    success: function (data) {
+                        if (data == "Success") {
+                            window.location.reload();
+                        }
+                    }
 
                 });
             });
