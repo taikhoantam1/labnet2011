@@ -27,7 +27,7 @@ namespace LabnetClient.Controllers
         {
             PatientViewModel Model = RestoreViewState(new VMPatient(), new VMLabExamination(), null);
             Model.ViewMode = ViewMode.Create;
-            Model.LabExamination.ExaminationNumber = Repository.GetExaminationNumber();
+            Model.LabExamination.ExaminationNumber = ServerConnector.GetUniqueExaminationNumber((int)ConstantNumber.ExaminationNumberLength);
             return View(Model);
         }
 
@@ -67,7 +67,7 @@ namespace LabnetClient.Controllers
                     //Insert new row of Examination in labnet server
                     int labId = (int)Session["LabId"];
 
-                    string status = InsertExaminationOnLabServer(labId, labExamination.ExaminationNumber, (int)LabExaminationStatusEnum.New);
+                    string status = ServerConnector.InsertExaminationOnLabServer(labId, labExamination, model.Patient);
                     if (status != "success")
                     {
                         throw new Exception("status");
@@ -82,18 +82,6 @@ namespace LabnetClient.Controllers
                 PatientViewModel Model = RestoreViewState(model.Patient, model.LabExamination, patientTests);
                 return View(Model);
             }
-        }
-
-        private string InsertExaminationOnLabServer(int labId, string examinationNumber, int status)
-        {
-            string URI = "http://labnet.vn/Examination/InsertExamination";
-            //string URI = "http://localhost:2821/Examination/InsertExamination";
-
-            string myParamters = string.Format("LabId={0}&ExaminationNumber={1}&Status={2}", labId, examinationNumber, status);
-            WebClient wc = new WebClient();
-            wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
-            return HtmlResult;
         }
 
         private void InsertPatientItems(List<VMPatientTest> patientTests, int patientId, int LabExaminationId)
@@ -139,7 +127,7 @@ namespace LabnetClient.Controllers
             patient.BirthDate = model.Patient.BirthDate;
             patient.Gender = model.Patient.Gender;
             patient.FirstName = model.Patient.FirstName;
-            patient.PatientNumber = Repository.GetPatientNumber();
+            patient.PatientNumber = ServerConnector.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength);
             patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
             patient.Phone = model.Patient.Phone;
             if (patient.BirthDate.Length <= 4)
@@ -269,7 +257,7 @@ namespace LabnetClient.Controllers
                     patient.BirthDate = model.Patient.BirthDate;
                     patient.Gender = model.Patient.Gender;
                     patient.FirstName = model.Patient.FirstName;
-                    patient.PatientNumber = Repository.GetPatientNumber();
+                    patient.PatientNumber = ServerConnector.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength);
                     patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
                     patient.Age = patient.BirthDate;
                     patient.Email = model.Patient.Email;

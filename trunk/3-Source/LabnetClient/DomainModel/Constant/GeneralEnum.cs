@@ -35,4 +35,11 @@ namespace DomainModel.Constant
         BacSi =1,
         LabGuiMau = 2
     }
+
+    public enum ConstantNumber
+    {
+        PatientNumberLength =7,
+        ExaminationNumberLength =7,
+        ConnetionCodeLength =7
+    }
 }

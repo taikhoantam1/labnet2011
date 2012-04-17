@@ -150,6 +150,9 @@
   <data name="DoctorInsert_IsActive" xml:space="preserve">
     <value>Kích hoạt</value>
   </data>
+  <data name="DoctorInsert_IsConnected" xml:space="preserve">
+    <value>Đã Kết Nối</value>
+  </data>
   <data name="DoctorInsert_Name" xml:space="preserve">
     <value>Tên Bác Sĩ</value>
   </data>

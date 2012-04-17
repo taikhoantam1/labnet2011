@@ -378,7 +378,24 @@ input[type='button'],input[type='submit']
     margin:5px;
 }
 
-.HightLight
+.HightLight,.Red
 {
     color:Red !important;
+}
+.Bold 
+{
+    font-weight:bold;
+}
+.Medium
+{
+    font-size:medium;
+}
+
+.Larger
+{
+    font-size:larger;
+}
+.Large
+{
+    font-size:large;
 }

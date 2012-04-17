@@ -106,6 +106,8 @@ namespace DataRepository
         bool IsValidDoctor(string name);
         List<Doctor> GetDoctorByName(string name);
         object GetDoctorNameByName(string name, string searchType);
+        string CreateConnectionCode(int doctorId,int labId);
+        void RemoveConnection(int doctorId);
         #endregion
 
         #region TestSection
@@ -121,7 +123,6 @@ namespace DataRepository
         #endregion
 
         #region Patient
-            string GetPatientNumber();
             int PatientInsert(Patient patient);
             int PatientItemInsert(PatientItem patient);
             List<PatientsGets_Result> GetPatients(int? PatientId, string FirstName, string Phone, string Email, string IndentifierNumber, string Address, int? PartnerId, int? OrderNumber, DateTime? ReceivedDate);
@@ -143,7 +144,6 @@ namespace DataRepository
         #endregion
 
         #region LabExamination
-            string GetExaminationNumber();
             int LabExaminationInsert(LabExamination labExamination);
             int GetLabExaminationOrderNumber();
             VMLabExamination GetLabExamination(int LabExaminationId);
@@ -175,6 +175,7 @@ namespace DataRepository
         void TestSectionCommissionDelete(int id);
         #endregion
 
+        #region Instrument
         List<SearchInstrumentResult_Result> InstrumentResultSearch(DateTime? receivedDate, string orderNumber, int? instrumentId);
         List<InstrumentResult> GetAllValidInstrumentResult();
         List<InstrumentResult> GetAllValidInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId);
@@ -182,5 +183,10 @@ namespace DataRepository
         List<Instrument> GetInstruments();
         void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId);
         void UpdateSID(DateTime? receivedDate, string oldOrderNumber, int newOrderNumber, int? instrumentId);
+        #endregion
+
+        #region Service
+        string SetupDoctorConnection(string connectionCode, int serverDoctorId,int clientDoctorId);
+        #endregion
     }
 }

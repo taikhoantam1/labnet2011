@@ -9,9 +9,11 @@ namespace LabnetClient.Controllers
     public class BaseController : Controller
     {
         public IDataRepository Repository;
+        public IServerConnector ServerConnector;
         public BaseController()
         {
             Repository = new Repository();
+            ServerConnector = new ServerConnector();
         }
 
         protected override void OnException(ExceptionContext filterContext)
