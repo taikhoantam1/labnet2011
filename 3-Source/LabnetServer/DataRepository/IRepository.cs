@@ -31,6 +31,8 @@ namespace DataRepository
 
             DoctorConnectMapping GetDoctorConnectMapping(string ConnectionCode);
             List<VMDoctorConnectMapping> GetDoctorConnectMappings(int doctorId);
+            void DoctorConnectMappingInsert(string connectionCode, int labId, int clientDoctoId,int connectionState);
+            void UpdateMappingForDoctorConnect(int mappingId, int doctorId);
         #endregion
         
         #region Service
@@ -40,6 +42,8 @@ namespace DataRepository
             void RemoveDoctorConnect(int serverDoctorId,int clientDoctorId, int labId, string connectionCode,int connectionState);
         
         #endregion
+
+
 
 
 

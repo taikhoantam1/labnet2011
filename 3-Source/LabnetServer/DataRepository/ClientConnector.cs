@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Collections.Specialized;
 
 namespace DataRepository
 {
@@ -10,13 +11,14 @@ namespace DataRepository
     {
         public string SetupConnectionWithLab(string connectionCode, int serverDoctorId, int clientDoctorId, string clientUrl)
         {
-
+            //local test url
+            clientUrl = "http://localhost:14587";
             string URI = clientUrl + "/Service/SetupDoctorConnection";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ConnectionCode={0}&ServerDoctorId={1}&ClientDoctorId={2}", connectionCode, serverDoctorId,clientDoctorId);
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
-            return HtmlResult;
+            string HtmlResult = wc.UploadString(URI,  myParamters);
+            return HtmlResult.ToString();
         }
     }
 }

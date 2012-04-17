@@ -14,7 +14,7 @@ namespace LabnetServer.Controllers
     {
         //
         // GET: /BacSi/
-
+        int currentDoctorId = 1;
         public ActionResult Index()
         {
             return View();
@@ -50,9 +50,10 @@ namespace LabnetServer.Controllers
             }
 
             try {
-                string result = ClientConnector.SetupConnectionWithLab(mapping.ConnectionCode, 1, mapping.ClientDoctorId, mapping.LabClient.Url);
+                string result = ClientConnector.SetupConnectionWithLab(mapping.ConnectionCode, currentDoctorId, mapping.ClientDoctorId, mapping.LabClient.Url);
                 if (result == "Success")
                 {
+                    Repository.UpdateMappingForDoctorConnect(mapping.Id, currentDoctorId);
                     model.IsSuccess = true;
                 }
                 else
