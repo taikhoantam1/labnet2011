@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nhmamnnk_LabnetManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="nhmamnnk_LabnetManagerModelStoreContainer">
+    <EntitySet Name="Instrument" EntityType="nhmamnnk_LabnetManagerModel.Store.Instrument" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InstrumentResult" EntityType="nhmamnnk_LabnetManagerModel.Store.InstrumentResult" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InstrumentTest" EntityType="nhmamnnk_LabnetManagerModel.Store.InstrumentTest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Test" EntityType="nhmamnnk_LabnetManagerModel.Store.Test" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_InstrumentResult_Instrument" Association="nhmamnnk_LabnetManagerModel.Store.FK_InstrumentResult_Instrument">
+      <End Role="Instrument" EntitySet="Instrument" />
+      <End Role="InstrumentResult" EntitySet="InstrumentResult" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstrumentResult_Test" Association="nhmamnnk_LabnetManagerModel.Store.FK_InstrumentResult_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="InstrumentResult" EntitySet="InstrumentResult" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstrumentTest_Instrument" Association="nhmamnnk_LabnetManagerModel.Store.FK_InstrumentTest_Instrument">
+      <End Role="Instrument" EntitySet="Instrument" />
+      <End Role="InstrumentTest" EntitySet="InstrumentTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InstrumentTest_Test" Association="nhmamnnk_LabnetManagerModel.Store.FK_InstrumentTest_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="InstrumentTest" EntitySet="InstrumentTest" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Instrument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="BaudRate" Type="int" Nullable="false" />
+    <Property Name="Databits" Type="int" Nullable="false" />
+    <Property Name="Parity" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="Stopbit" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="COMName" Type="nvarchar" Nullable="false" MaxLength="5" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InstrumentResult">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderNumber" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="ReceivedDate" Type="date" Nullable="false" />
+    <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="Result" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Flag" Type="bit" Nullable="false" />
+    <Property Name="InstrumentPatientId" Type="nvarchar" MaxLength="50" />
+    <Property Name="InstrumentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="InstrumentTest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="InstrumentTestCode" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="TestId" Type="int" Nullable="false" />
+    <Property Name="InstrumentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="LowIndex" Type="float" />
+    <Property Name="HighIndex" Type="float" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Range" Type="nvarchar" MaxLength="100" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="TestSectionId" Type="int" Nullable="false" />
+    <Property Name="ResultType" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="LastUpdated" Type="datetime" />
+    <Property Name="Cost" Type="decimal" Nullable="false" />
+    <Property Name="IsBold" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_InstrumentResult_Instrument">
+    <End Role="Instrument" Type="nhmamnnk_LabnetManagerModel.Store.Instrument" Multiplicity="1" />
+    <End Role="InstrumentResult" Type="nhmamnnk_LabnetManagerModel.Store.InstrumentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Instrument">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InstrumentResult">
+        <PropertyRef Name="InstrumentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstrumentResult_Test">
+    <End Role="Test" Type="nhmamnnk_LabnetManagerModel.Store.Test" Multiplicity="1" />
+    <End Role="InstrumentResult" Type="nhmamnnk_LabnetManagerModel.Store.InstrumentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InstrumentResult">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstrumentTest_Instrument">
+    <End Role="Instrument" Type="nhmamnnk_LabnetManagerModel.Store.Instrument" Multiplicity="1" />
+    <End Role="InstrumentTest" Type="nhmamnnk_LabnetManagerModel.Store.InstrumentTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Instrument">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InstrumentTest">
+        <PropertyRef Name="InstrumentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InstrumentTest_Test">
+    <End Role="Test" Type="nhmamnnk_LabnetManagerModel.Store.Test" Multiplicity="1" />
+    <End Role="InstrumentTest" Type="nhmamnnk_LabnetManagerModel.Store.InstrumentTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InstrumentTest">
+        <PropertyRef Name="TestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_GetTestIdByInstrumentAndInstrumentTestCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="InstrumentId" Type="int" Mode="In" />
+    <Parameter Name="InstrumentTestCode" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_InstrumentResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="TestId" Type="int" Mode="In" />
+    <Parameter Name="Value" Type="nvarchar" Mode="In" />
+    <Parameter Name="InstrumentPatientId" Type="nvarchar" Mode="In" />
+    <Parameter Name="InstrumentId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Result" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderNumber" Type="int" Mode="In" />
+    <Parameter Name="ReceivedDate" Type="datetime" Mode="In" />
+    <Parameter Name="TestId" Type="int" Mode="In" />
+    <Parameter Name="Value" Type="nvarchar" Mode="In" />
+    <Parameter Name="InstrumentResultId" Type="int" Mode="In" />
+  </Function>
+</Schema>

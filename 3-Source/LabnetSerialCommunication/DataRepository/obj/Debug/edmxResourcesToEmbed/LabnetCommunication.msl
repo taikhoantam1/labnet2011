@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="nhmamnnk_LabnetManagerModelStoreContainer" CdmEntityContainer="LabnetCommunicationEntities">
+    <EntitySetMapping Name="Instruments">
+      <EntityTypeMapping TypeName="nhmamnnk_LabnetManagerModel.Instrument">
+        <MappingFragment StoreEntitySet="Instrument">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="BaudRate" ColumnName="BaudRate" />
+          <ScalarProperty Name="Databits" ColumnName="Databits" />
+          <ScalarProperty Name="Parity" ColumnName="Parity" />
+          <ScalarProperty Name="Stopbit" ColumnName="Stopbit" />
+          <ScalarProperty Name="COMName" ColumnName="COMName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstrumentResults">
+      <EntityTypeMapping TypeName="nhmamnnk_LabnetManagerModel.InstrumentResult">
+        <MappingFragment StoreEntitySet="InstrumentResult">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
+          <ScalarProperty Name="InstrumentPatientId" ColumnName="InstrumentPatientId" />
+          <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstrumentTests">
+      <EntityTypeMapping TypeName="nhmamnnk_LabnetManagerModel.InstrumentTest">
+        <MappingFragment StoreEntitySet="InstrumentTest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="InstrumentTestCode" ColumnName="InstrumentTestCode" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="InstrumentId" ColumnName="InstrumentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tests">
+      <EntityTypeMapping TypeName="nhmamnnk_LabnetManagerModel.Test">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LowIndex" ColumnName="LowIndex" />
+          <ScalarProperty Name="HighIndex" ColumnName="HighIndex" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Range" ColumnName="Range" />
+          <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
+          <ScalarProperty Name="ResultType" ColumnName="ResultType" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="IsBold" ColumnName="IsBold" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetTestIdByInstrumentAndInstrumentTestCode" FunctionName="nhmamnnk_LabnetManagerModel.Store.sp_GetTestIdByInstrumentAndInstrumentTestCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="nhmamnnk_LabnetManagerModel.GetTestIdByInstrumentAndInstrumentTestCode_Result">
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_InstrumentResult" FunctionName="nhmamnnk_LabnetManagerModel.Store.sp_InstrumentResult" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,6 @@
+E:\LabNetProject\SerialCommunication\LabnetSerialCommunication\DataRepository\bin\Release\DataRepository.dll.config
+E:\LabNetProject\SerialCommunication\LabnetSerialCommunication\DataRepository\bin\Release\DataRepository.dll
+E:\LabNetProject\SerialCommunication\LabnetSerialCommunication\DataRepository\bin\Release\DataRepository.pdb
+E:\LabNetProject\SerialCommunication\LabnetSerialCommunication\DataRepository\obj\Release\ResolveAssemblyReference.cache
+E:\LabNetProject\SerialCommunication\LabnetSerialCommunication\DataRepository\obj\Release\DataRepository.dll
+E:\LabNetProject\SerialCommunication\LabnetSerialCommunication\DataRepository\obj\Release\DataRepository.pdb
