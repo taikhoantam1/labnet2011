@@ -173,6 +173,7 @@
     <Compile Include="Controllers\DoiTacController.cs" />
     <Compile Include="Controllers\BenhNhanController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\ShareController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XetNghiemController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Content\Lib\FileManager\Uploader.aspx.designer.cs">
       <DependentUpon>Uploader.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AjaxResultModel.cs" />
     <Compile Include="Models\Control\AutocompleteModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Control\AutocompleteComboBox\ComboBox.cs" />

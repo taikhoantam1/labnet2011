@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đã Kết Nối.
+        /// </summary>
+        internal static string DoctorInsert_IsConnected {
+            get {
+                return ResourceManager.GetString("DoctorInsert_IsConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên Bác Sĩ.
         /// </summary>
         internal static string DoctorInsert_Name {

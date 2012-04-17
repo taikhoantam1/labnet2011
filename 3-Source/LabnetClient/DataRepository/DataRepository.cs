@@ -14,14 +14,25 @@ namespace DataRepository
     public class Repository : IDataRepository
     {
         private LabManager_ClientEntities myDb;
-        public LabManager_ClientEntities Context { get { return myDb; } }
+        private IServerConnector connector;
 
+        public LabManager_ClientEntities Context
+        {
+            get { return myDb; }
+        }
+
+        public IServerConnector Connector
+        {
+            get { return connector; }
+            set { connector = value; }
+        }
         /// <summary>
         /// 
         /// </summary>
         public Repository()
         {
             myDb = new LabManager_ClientEntities();
+            connector = new ServerConnector();
         }
 
         /// <summary>
@@ -525,10 +536,29 @@ namespace DataRepository
             currentDoctor.Commission = doctor.Commission;
             currentDoctor.BankAccountNumber = doctor.BankAccountNumber;
             currentDoctor.Other = doctor.Other;
-
+            currentDoctor.ConnectionCode = doctor.ConnectionCode;
             myDb.SaveChanges();
         }
 
+        public string CreateConnectionCode(int doctorId,int labId)
+        {
+            string connectionCode = Connector.GetUniqueConnectionCode((int)ConstantNumber.ConnetionCodeLength, labId,doctorId);
+            if (doctorId != 0)
+            {
+                Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
+                currentDoctor.ConnectionCode = connectionCode;
+                myDb.SaveChanges();
+            }
+            return connectionCode;
+        }
+
+        public void RemoveConnection(int doctorId)
+        {
+            Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
+            currentDoctor.IsConnected = false;
+            currentDoctor.ConnectionCode = "";
+            myDb.SaveChanges();
+        }
         public void DoctorDelete(int doctorId)
         {
             Doctor doctor = GetDoctor(doctorId);
@@ -648,10 +678,6 @@ namespace DataRepository
         #endregion
 
         #region Patient
-        public string GetPatientNumber()
-        {
-            return myDb.GeneratePatientNumber(5).FirstOrDefault();
-        }
 
         public int PatientInsert(Patient patient)
         {
@@ -785,10 +811,6 @@ namespace DataRepository
         #endregion
 
         #region LabExamination
-        public string GetExaminationNumber()
-        {
-            return myDb.GenerateLabExaminationNumber(7).FirstOrDefault();
-        }
         public int LabExaminationInsert(LabExamination labExamination)
         {
             myDb.LabExaminations.AddObject(labExamination);
@@ -1104,7 +1126,7 @@ namespace DataRepository
             myDb.SaveChanges();
         }
         #endregion
-
+        #region Instrument
         public List<SearchInstrumentResult_Result> InstrumentResultSearch(DateTime? receivedDate, string orderNumber, int? instrumentId)
         {
             List<SearchInstrumentResult_Result> lstInstrumentResult = myDb.SearchInstrumentResult(receivedDate, orderNumber, instrumentId).ToList();
@@ -1132,7 +1154,7 @@ namespace DataRepository
             List<InstrumentResult> lstInstrumentResults = (from _insResult in myDb.InstrumentResults
                                                            where _insResult.Flag == false
                                                              && _insResult.ReceivedDate == receivedDate
-                                                             && (orderNumber == null ||_insResult.OrderNumber == orderNumber)
+                                                             && (orderNumber == null || _insResult.OrderNumber == orderNumber)
                                                              && (instrumentId == null || _insResult.InstrumentId == instrumentId)
                                                            select _insResult).ToList();
             return lstInstrumentResults;
@@ -1157,5 +1179,30 @@ namespace DataRepository
         {
             int success = myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
         }
+        #endregion
+        #region Service
+        public string SetupDoctorConnection(string connectionCode, int serverDoctorId,int clientDoctorId)
+        {
+            Doctor doctor = myDb.Doctors.Where(p => p.ConnectionCode == connectionCode && p.Id == clientDoctorId && p.IsConnected == false).FirstOrDefault();
+            if (doctor != null)
+            {
+                if (doctor.IsConnected == true)
+                {
+                    return "Mã kết nối đã được dùng cho 1 bác sĩ khác, Vui lòng liên hệ phòng XN để biết thêm chi tiết";
+                }
+                else
+                {
+                    doctor.IsConnected = true;
+                    doctor.ServerDoctorId = serverDoctorId;
+                }
+            }
+            else
+            {
+                return "Mã kết nối không hợp lệ.";
+            }
+            myDb.SaveChanges();
+            return "Success";
+        }
+        #endregion
     }
 }

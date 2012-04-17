@@ -94,8 +94,7 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int id, DoctorViewModel model)
         {
             Repository.DoctorUpdate(id, Mapper.Map<VMDoctor, Doctor>(model.Doctor));
-
-            return RedirectToAction("Create");
+            return View("Create", model);
             
         }
 
@@ -175,6 +174,43 @@ namespace LabnetClient.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public string CreateConnectionCode(int doctorId)
+        {
+            AjaxResultModel result = new AjaxResultModel();
+            try
+            {
+                int labId = (int)Session["LabId"];
+                string connectionCode = Repository.CreateConnectionCode(doctorId, labId);
+                result.IsSuccess = true;
+                result.ResponseData = connectionCode;
+            }
+            catch(Exception ex) 
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result.ToJson();
+        }
+
+        [HttpPost]
+        public string RemoveConnection(int doctorId)
+        {
+
+            AjaxResultModel result = new AjaxResultModel();
+            try
+            {
+                Repository.RemoveConnection(doctorId);
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result.ToJson();
         }
     }
 }
