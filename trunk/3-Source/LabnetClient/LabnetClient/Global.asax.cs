@@ -7,6 +7,7 @@ using System.Web.Routing;
 using AutoMapper;
 using DataRepository;
 using DomainModel;
+using System.Timers;
 
 namespace LabnetClient
 {
@@ -15,6 +16,7 @@ namespace LabnetClient
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private Timer updateToServerTimer = new Timer();
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -33,7 +35,16 @@ namespace LabnetClient
             RegisterRoutes(RouteTable.Routes);
             // Code that runs on application startup
             log4net.Config.XmlConfigurator.Configure();
+            updateToServerTimer.Interval = 300000;
+            updateToServerTimer.Elapsed += new ElapsedEventHandler(updateToServerTimer_Elapsed);
+            updateToServerTimer.Start();
             Configure();
+        }
+
+        void updateToServerTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            IServerConnector connecter = new ServerConnector();
+            connecter.UpdateToServer();
         }
 
         public static void Configure()

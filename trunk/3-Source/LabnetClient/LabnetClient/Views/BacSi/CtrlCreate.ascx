@@ -180,6 +180,9 @@
                         $(".btnCreateConnectionCode").after($("<label class='Red Bold Large'> " + data.ResponseData + "</label>"));
                         $("#Doctor_ConnectionCode").val(data.ResponseData);
                     }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
                 }
             });
         });

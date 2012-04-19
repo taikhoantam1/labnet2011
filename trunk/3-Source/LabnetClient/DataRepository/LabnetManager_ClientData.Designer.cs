@@ -3114,6 +3114,30 @@ namespace DataRepository
         private Nullable<global::System.Int32> _DoctorId;
         partial void OnDoctorIdChanging(Nullable<global::System.Int32> value);
         partial void OnDoctorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> UpdatedOnServer
+        {
+            get
+            {
+                return _UpdatedOnServer;
+            }
+            set
+            {
+                OnUpdatedOnServerChanging(value);
+                ReportPropertyChanging("UpdatedOnServer");
+                _UpdatedOnServer = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UpdatedOnServer");
+                OnUpdatedOnServerChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _UpdatedOnServer;
+        partial void OnUpdatedOnServerChanging(Nullable<global::System.Boolean> value);
+        partial void OnUpdatedOnServerChanged();
 
         #endregion
     
