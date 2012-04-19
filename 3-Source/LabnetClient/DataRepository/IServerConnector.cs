@@ -15,7 +15,7 @@ namespace DataRepository
         /// <param name="examinationNumber"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        string InsertExaminationOnLabServer(int labId, LabExamination labExamination, VMPatient patient);
+        string InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId);
         /// <summary>
         /// Get unique examination number on server
         /// </summary>
@@ -45,5 +45,16 @@ namespace DataRepository
         /// <param name="connectionCode"></param>
         /// <returns></returns>
         bool RemoveDoctorConnect(int serverDoctorId,int clientDoctor, int labId, string connectionCode);
+
+        /// <summary>
+        /// Call when a exmaination created . Client need to submit examination value to server
+        /// and set UpdatedOnServer flag in LabExamination to true
+        /// </summary>
+        void SubmitExaminationToServer(int labId,int labExaminationID,int patientId);
+        
+        /// <summary>
+        /// Periodically update which need to submit to server ex: Exmaination , ConnectionCode ...
+        /// </summary>
+        void UpdateToServer();
     }
 }

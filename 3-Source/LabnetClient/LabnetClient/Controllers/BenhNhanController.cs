@@ -66,12 +66,15 @@ namespace LabnetClient.Controllers
 
                     //Insert new row of Examination in labnet server
                     int labId = (int)Session["LabId"];
-
+                    
+                    /*
                     string status = ServerConnector.InsertExaminationOnLabServer(labId, labExamination, model.Patient);
                     if (status != "success")
                     {
                         throw new Exception("status");
                     }
+                     */
+                    ServerConnector.SubmitExaminationToServer(labId,labExamination.Id,patientId);
                     tran.Complete();
                 }
                 return RedirectToAction("Create");

@@ -190,6 +190,7 @@
           <Property Name="OrderNumber" Type="int" Nullable="false" />
           <Property Name="PartnerId" Type="int" />
           <Property Name="DoctorId" Type="int" />
+          <Property Name="UpdatedOnServer" Type="bit" />
         </EntityType>
         <EntityType Name="LabUser">
           <Key>
@@ -1511,6 +1512,7 @@
           <NavigationProperty Name="Doctor" Relationship="LabManager_ClientModel.FK_LabExamination_Doctor" FromRole="LabExamination" ToRole="Doctor" />
           <NavigationProperty Name="Partner" Relationship="LabManager_ClientModel.FK_LabPatientManagement_Partner" FromRole="LabExamination" ToRole="Partner" />
           <NavigationProperty Name="PatientItems" Relationship="LabManager_ClientModel.FK_PatientItem_LabExamination" FromRole="LabExamination" ToRole="PatientItem" />
+          <Property Type="Boolean" Name="UpdatedOnServer" />
         </EntityType>
         <Association Name="FK_LabExamination_Doctor">
           <End Type="LabManager_ClientModel.Doctor" Role="Doctor" Multiplicity="0..1" />
@@ -2054,6 +2056,7 @@
           <EntitySetMapping Name="LabExaminations">
             <EntityTypeMapping TypeName="LabManager_ClientModel.LabExamination">
               <MappingFragment StoreEntitySet="LabExamination">
+                <ScalarProperty Name="UpdatedOnServer" ColumnName="UpdatedOnServer" />
                 <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
                 <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
                 <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
