@@ -159,6 +159,8 @@
         <div align="center">
             <input type="submit" value="<%=Resources.DoctorStrings.DoctorInsert_ButtonSave%>"
                 id="save" />
+            <input type="button" value="<%=Resources.DoctorStrings.DoctorInsert_Back%>"
+                id="btnBack" />
         </div>
     </div>
 </div>
@@ -209,5 +211,13 @@
                 });
             }
         });
+
+        $("#btnBack").click(function () {
+            window.location = "/BacSi/BackToSearch";
+        });
+
+        //$("#btnBack").click(function () {
+        //    window.location = "/BacSi/Back"
+        //});
     });
 </script>

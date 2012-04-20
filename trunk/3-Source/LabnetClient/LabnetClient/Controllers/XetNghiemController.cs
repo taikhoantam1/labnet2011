@@ -106,9 +106,10 @@ namespace LabnetClient.Controllers
             Test test = Mapper.Map<VMTest, Test>(model.Test);
             Repository.TestUpdate(model.Test.Id, test);
 
-            TestSearctViewModel modelSearch = new TestSearctViewModel();
-            modelSearch.TestSearch.TestName = model.Test.Name;
-            return RedirectToAction("Search", "XetNghiem");
+            //TestSearctViewModel modelSearch = new TestSearctViewModel();
+            //modelSearch.TestSearch.TestName = model.Test.Name;
+            //return RedirectToAction("Search", "XetNghiem");
+            return RedirectToAction("Create", model);
         }
 
         //
@@ -151,7 +152,7 @@ namespace LabnetClient.Controllers
         public ActionResult SearchTest(TestSearctViewModel model)
         {
 
-
+            Session[SessionProperties.SessionSearchTest] = model;
             List<SearchTest_Result> lstResult = Repository.TestSearch(model.TestSearch.TestName, model.TestSearch.TestSectionName, model.TestSearch.PanelName);
             List<TestSearchObject> ObjSearchResult = new List<TestSearchObject>();
             foreach (SearchTest_Result item in lstResult)
@@ -168,6 +169,51 @@ namespace LabnetClient.Controllers
             JQGridModel grid = new JQGridModel(typeof(TestSearchObject), false, ObjSearchResult, "");
             return View("DataTable", grid);
             //return RedirectToAction("Index");
+        }
+
+        public ActionResult BackToSearch()
+        {
+            TestSearctViewModel mol = (TestSearctViewModel)Session[SessionProperties.SessionSearchTest];
+            string testName = null;
+            string tsName = null;
+            string panelName = null;
+
+            if (mol != null)
+            {
+                if (mol.TestSearch.TestName != null)
+                {
+                    testName = mol.TestSearch.TestName;
+                }
+                if (mol.TestSearch.TestSectionName != null)
+                {
+                    tsName = mol.TestSearch.TestSectionName;
+                }
+                if (mol.TestSearch.PanelName != null)
+                {
+                    panelName = mol.TestSearch.PanelName;
+                }
+            }
+
+            List<SearchTest_Result> lstResult = Repository.TestSearch(testName, tsName, panelName);
+            List<TestSearchObject> ObjSearchResult = new List<TestSearchObject>();
+            foreach (SearchTest_Result item in lstResult)
+            {
+                TestSearchObject obj = new TestSearchObject();
+                obj.TestId = item.Id;
+                obj.TestName = item.TestName;
+                obj.TestDescription = item.TestDescription;
+                obj.TestSectionName = item.TestSectionName;
+                obj.TestRange = item.Range;
+                obj.TestUnit = item.Unit;
+                ObjSearchResult.Add(obj);
+            }
+
+            TestSearctViewModel model = new TestSearctViewModel(ObjSearchResult);
+            model.TestSearch.TestName = testName;
+            model.TestSearch.TestSectionName = tsName;
+            model.TestSearch.PanelName = panelName;
+
+            return View("Search", model);
         }
          
     }

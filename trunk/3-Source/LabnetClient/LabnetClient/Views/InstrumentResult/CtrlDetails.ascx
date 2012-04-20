@@ -79,6 +79,7 @@
                 &nbsp;<input type="text" id="txtNewSID" />
                 <input type="button" value="Cập Nhật SID" id="btnUpdateSID"/>
                 <input type="button" class="btnCloseDialog" value="Hũy Bỏ" />
+                <asp:Timer runat="server" id="UpdateTimer" interval="5000" ontick="UpdateTimer_Tick" />
             </div>
         </div>
     </div>

@@ -83,7 +83,7 @@ namespace LabnetClient.Controllers
 
             model.Doctor = Mapper.Map<Doctor, VMDoctor>(Repository.GetDoctor(id));
             model.ViewMode = ViewMode.Edit;
-
+            
             return View("Create", model);
         }
 
@@ -93,6 +93,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Edit(int id, DoctorViewModel model)
         {
+            DoctorSearchViewModel mol = (DoctorSearchViewModel)Session[SessionProperties.SessionDoctorList];
             Repository.DoctorUpdate(id, Mapper.Map<VMDoctor, Doctor>(model.Doctor));
             return View("Create", model);
             
@@ -120,7 +121,7 @@ namespace LabnetClient.Controllers
                 obj.Email = doctor.Email;
                 model.DoctorSearch.ListSearchResult.Add(obj);
             }
-
+            
             JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, model.DoctorSearch.ListSearchResult, "");
             return View("DataTable", grid);
             //return View("Search", model);
@@ -139,6 +140,10 @@ namespace LabnetClient.Controllers
                 obj.Email = doctor.Email;
                 ListSearchResult.Add(obj);
             }
+            DoctorSearchViewModel model = new DoctorSearchViewModel();
+            model.DoctorSearch.ListSearchResult = ListSearchResult;
+            model.DoctorSearch.Name = filterText;
+            Session[SessionProperties.SessionSearchDoctor] = model;
             JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, ListSearchResult, "");
             return View("DataTable", grid);
         }
@@ -211,6 +216,35 @@ namespace LabnetClient.Controllers
                 result.ErrorMessage = ex.Message;
             }
             return result.ToJson();
+        }
+
+        
+        public ActionResult BackToSearch()
+        {
+            DoctorSearchViewModel mol = (DoctorSearchViewModel)Session[SessionProperties.SessionSearchDoctor];
+
+            string filterText = "";
+            if (mol != null)
+            {
+                filterText = mol.DoctorSearch.Name;
+            }
+
+            List<Doctor> lstDoctor = Repository.GetDoctorByName(filterText);
+            List<DoctorSearchObject> ListSearchResult = new List<DoctorSearchObject>();
+            foreach (Doctor doctor in lstDoctor)
+            {
+                DoctorSearchObject obj = new DoctorSearchObject();
+                obj.Id = doctor.Id;
+                obj.DoctorName = doctor.Name;
+                obj.Email = doctor.Email;
+                ListSearchResult.Add(obj);
+            }
+            DoctorSearchViewModel model = new DoctorSearchViewModel(ListSearchResult);
+            model.Autocomplete.JsonData = Repository.GetDoctorNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            model.Autocomplete.SelectedText = mol.DoctorSearch.Name;
+            model.Autocomplete.SelectedValue = mol.Autocomplete.SelectedValue;
+            model.Autocomplete.SelectedTag = mol.Autocomplete.SelectedTag;
+            return View("Search", model);
         }
     }
 }

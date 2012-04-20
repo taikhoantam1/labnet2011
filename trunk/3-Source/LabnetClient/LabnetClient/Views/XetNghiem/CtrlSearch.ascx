@@ -56,8 +56,8 @@
     </div>
 </div>
 <% Html.EndForm(); %>
-<div id="SearchResult" class="Row">
-   
+<div class="Row SearchResult" style="height: auto">
+   <% Html.RenderPartial("DataTable", Model.JQGrid); %>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -68,7 +68,7 @@
                 data: data,
                 type: "POST",
                 success: function (data) {
-                    $("#SearchResult").html(data);
+                    $(".SearchResult").html(data);
                 }
             });
         });

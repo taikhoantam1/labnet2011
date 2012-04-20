@@ -123,6 +123,9 @@
   <data name="DoctorInsert_Address" xml:space="preserve">
     <value>Địa chỉ</value>
   </data>
+  <data name="DoctorInsert_Back" xml:space="preserve">
+    <value>Quay về</value>
+  </data>
   <data name="DoctorInsert_BankAccount" xml:space="preserve">
     <value>Số tài khoản</value>
   </data>
