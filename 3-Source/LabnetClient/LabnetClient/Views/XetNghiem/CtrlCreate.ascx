@@ -205,6 +205,7 @@
         <div class="Row" align="center">
             <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" id="save" />
             <input type="button" value="<%=Resources.TestStrings.TestCreate_New%>" id="reloadPage" />
+            <input type="button" value="<%=Resources.TestStrings.TestCreate_Back%>" id="btnBack" />
         </div>
     </div>
 </div>
@@ -241,5 +242,10 @@
         var costHidden = $("#Test_Cost").val();
         costHidden = costHidden.replace(',', '.');
         $("#Test_Cost").val(costHidden);
+
+        $("#btnBack").click(function () {
+            //alert("I'm here");
+            window.location = "/XetNghiem/BackToSearch";
+        });
     });
 </script>

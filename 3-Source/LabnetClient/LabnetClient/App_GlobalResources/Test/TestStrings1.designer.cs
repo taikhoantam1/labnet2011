@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quay về.
+        /// </summary>
+        internal static string TestCreate_Back {
+            get {
+                return ResourceManager.GetString("TestCreate_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá.
         /// </summary>
         internal static string TestCreate_Cost {

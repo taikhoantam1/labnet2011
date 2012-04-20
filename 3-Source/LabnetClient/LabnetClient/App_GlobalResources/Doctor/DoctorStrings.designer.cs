@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quay về.
+        /// </summary>
+        internal static string DoctorInsert_Back {
+            get {
+                return ResourceManager.GetString("DoctorInsert_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Số tài khoản.
         /// </summary>
         internal static string DoctorInsert_BankAccount {

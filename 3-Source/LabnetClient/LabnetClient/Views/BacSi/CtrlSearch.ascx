@@ -33,7 +33,10 @@
 </div>
 <% Html.EndForm(); %>
 
-<div id="SearchResult"><%--
+<div class="Row SearchResult" style="height: auto">
+    <% Html.RenderPartial("DataTable", Model.JQGrid); %>
+
+<%--
     <tr valign="middle">
         <th class="textSearch150" align="center">
             <%=Resources.DoctorStrings.DoctorSearch_GridDoctorName%>
@@ -66,7 +69,7 @@
                     filterText: filterText
                 },
                 success: function (data) {
-                    $("#SearchResult").html(data);
+                    $(".SearchResult").html(data);
                 }
             });
         });
