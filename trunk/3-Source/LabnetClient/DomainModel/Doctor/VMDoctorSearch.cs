@@ -25,6 +25,16 @@ namespace DomainModel
         /// </summary>
         [JQColumnAttribute("VMDoctorSearch_Email", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string Email { get; set; }
+
+        [JQColumnAttribute("VMDoctorSearch_ConnectionCode", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string ConnectionCode { get; set; }
+
+        [JQColumnAttribute("VMDoctorSearch_IsConnected", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string IsConnected { get; set; }
+
+        [JQColumnAttribute("VMDoctorSearch_ConnectDoctor", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string DoctorConnectName { get; set; }
+
         /// <summary>
         /// Link edit partner use in search doctor
         /// </summary>

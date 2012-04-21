@@ -8,6 +8,7 @@ using AutoMapper;
 using DataRepository;
 using DomainModel;
 using System.Timers;
+using System.Configuration;
 
 namespace LabnetClient
 {
@@ -17,6 +18,7 @@ namespace LabnetClient
     public class MvcApplication : System.Web.HttpApplication
     {
         private Timer updateToServerTimer = new Timer();
+        private int LabId = 0;
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -31,11 +33,13 @@ namespace LabnetClient
 
         protected void Application_Start()
         {
+            LabId = int.Parse(ConfigurationManager.AppSettings["LabId"]);
+            int timerInterval = int.Parse(ConfigurationManager.AppSettings["UpdateServerInterval"]);
             AreaRegistration.RegisterAllAreas();
             RegisterRoutes(RouteTable.Routes);
             // Code that runs on application startup
             log4net.Config.XmlConfigurator.Configure();
-            updateToServerTimer.Interval = 300000;
+            updateToServerTimer.Interval = timerInterval;
             updateToServerTimer.Elapsed += new ElapsedEventHandler(updateToServerTimer_Elapsed);
             updateToServerTimer.Start();
             Configure();
@@ -44,7 +48,7 @@ namespace LabnetClient
         void updateToServerTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             IServerConnector connecter = new ServerConnector();
-            connecter.UpdateToServer();
+            connecter.UpdateToServer(LabId);
         }
 
         public static void Configure()

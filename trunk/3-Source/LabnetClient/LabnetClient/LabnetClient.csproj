@@ -392,9 +392,12 @@
     <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_f9bd01_256x240.png" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_fcd113_256x240.png" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\jquery-ui-1.8.16.custom.css" />
-    <Content Include="Content\Lib\jquery\jquery-1.6.2.min.js" />
     <Content Include="Content\Lib\AutoNumeric\autoNumeric-1.7.1.js" />
+    <Content Include="Content\Lib\jquery\jquery-1.6.2.min.js" />
     <Content Include="Content\Lib\jquery\jquery-1.7.1.min.js" />
+    <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
+    <Content Include="Content\Lib\jquery\jquery.validate.js" />
+    <Content Include="Content\Lib\jquery\jquery.validate.min.js" />
     <Content Include="Content\Lib\jquery\MultiModalDialog.js" />
     <Content Include="Content\Lib\postify.js" />
     <Content Include="Content\Scripts\jqueryExtend.js" />
@@ -588,8 +591,6 @@
     <Content Include="Content\Lib\FlexiGrid\Images\up.png" />
     <Content Include="Content\Lib\FlexiGrid\Images\uup.png" />
     <Content Include="Content\Lib\FlexiGrid\Images\wbg.gif" />
-    <Content Include="Content\Lib\jquery\jquery.validate.js" />
-    <Content Include="Content\Lib\jquery\jquery.validate.min.js" />
     <Content Include="Content\Lib\tiny_mce\jquery.contextmenu.js" />
     <Content Include="Content\Lib\tiny_mce\langs\en.js" />
     <Content Include="Content\Lib\tiny_mce\license.txt" />
@@ -807,7 +808,6 @@
     <Content Include="Content\Lib\Utility\Validator.js" />
     <Content Include="LibDLL\AutoMapper.dll" />
     <Content Include="LibDLL\log4net.dll" />
-    <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
     <Content Include="Report\ReportViewer.aspx" />
     <Content Include="Views\BacSi\Create.aspx" />
     <Content Include="Views\BacSi\CtrlCreate.ascx" />

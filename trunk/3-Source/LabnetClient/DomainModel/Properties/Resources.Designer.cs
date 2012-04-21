@@ -70,6 +70,24 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BS Kết Nối.
+        /// </summary>
+        internal static string VMDoctorSearch_ConnectDoctor {
+            get {
+                return ResourceManager.GetString("VMDoctorSearch_ConnectDoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã Kết Nối.
+        /// </summary>
+        internal static string VMDoctorSearch_ConnectionCode {
+            get {
+                return ResourceManager.GetString("VMDoctorSearch_ConnectionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên Bác Sĩ.
         /// </summary>
         internal static string VMDoctorSearch_DoctorName {
@@ -84,6 +102,15 @@ namespace DomainModel.Properties {
         internal static string VMDoctorSearch_Email {
             get {
                 return ResourceManager.GetString("VMDoctorSearch_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kết Nối.
+        /// </summary>
+        internal static string VMDoctorSearch_IsConnected {
+            get {
+                return ResourceManager.GetString("VMDoctorSearch_IsConnected", resourceCulture);
             }
         }
         

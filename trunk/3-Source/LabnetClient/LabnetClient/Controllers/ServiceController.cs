@@ -9,13 +9,13 @@ namespace LabnetClient.Controllers
 {
     public class ServiceController : BaseController
     {
-        public string SetupDoctorConnection(string ConnectionCode, int ServerDoctorId, int ClientDoctorId)
+        public string SetupDoctorConnection(string ConnectionCode, int ServerDoctorId, int ClientDoctorId, string DoctorConnectName)
         {
             // Create a UTF-8 encoding.
             UTF8Encoding utf8 = new UTF8Encoding();
             try
             {
-                string message = Repository.SetupDoctorConnection(ConnectionCode, ServerDoctorId, ClientDoctorId);
+                string message = Repository.SetupDoctorConnection(ConnectionCode, ServerDoctorId, ClientDoctorId, DoctorConnectName);
                 return message;
             }
             catch (Exception ex)

@@ -119,6 +119,8 @@ namespace LabnetClient.Controllers
                 obj.Id = doctor.Id;
                 obj.DoctorName = doctor.Name;
                 obj.Email = doctor.Email;
+                obj.ConnectionCode = string.IsNullOrEmpty(doctor.ConnectionCode) ? "Chưa Tạo" : doctor.ConnectionCode;
+                obj.DoctorConnectName = string.IsNullOrEmpty(doctor.DoctorConnectName) ? "" : doctor.DoctorConnectName;
                 model.DoctorSearch.ListSearchResult.Add(obj);
             }
             
@@ -138,6 +140,9 @@ namespace LabnetClient.Controllers
                 obj.Id = doctor.Id;
                 obj.DoctorName = doctor.Name;
                 obj.Email = doctor.Email;
+                obj.ConnectionCode = string.IsNullOrEmpty(doctor.ConnectionCode) ? "Chưa Tạo" : doctor.ConnectionCode;
+                obj.IsConnected = doctor.IsConnected ? "Kết Nối" : "Chưa";
+                obj.DoctorConnectName = string.IsNullOrEmpty(doctor.DoctorConnectName) ? "" : doctor.DoctorConnectName;
                 ListSearchResult.Add(obj);
             }
             DoctorSearchViewModel model = new DoctorSearchViewModel();
@@ -207,7 +212,7 @@ namespace LabnetClient.Controllers
             AjaxResultModel result = new AjaxResultModel();
             try
             {
-                Repository.RemoveConnection(doctorId);
+                Repository.RemoveConnection(doctorId,LabId);
                 result.IsSuccess = true;
             }
             catch (Exception ex)
@@ -237,6 +242,9 @@ namespace LabnetClient.Controllers
                 obj.Id = doctor.Id;
                 obj.DoctorName = doctor.Name;
                 obj.Email = doctor.Email;
+                obj.ConnectionCode = string.IsNullOrEmpty(doctor.ConnectionCode) ? "Chưa Tạo" : doctor.ConnectionCode;
+                obj.IsConnected = doctor.IsConnected ? "Kết Nối" : "Chưa";
+                obj.DoctorConnectName = string.IsNullOrEmpty(doctor.DoctorConnectName) ? "" : doctor.DoctorConnectName;
                 ListSearchResult.Add(obj);
             }
             DoctorSearchViewModel model = new DoctorSearchViewModel(ListSearchResult);

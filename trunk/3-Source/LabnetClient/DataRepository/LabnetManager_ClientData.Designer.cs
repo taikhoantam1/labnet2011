@@ -1235,6 +1235,25 @@ namespace DataRepository
     
             return base.ExecuteFunction("UpdateSID", oldOrderNumberParameter, newOrderNumberParameter, receivedDateParameter, instrumentIdParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="length">No Metadata Documentation available.</param>
+        public ObjectResult<global::System.String> GenerateConnectionCode(Nullable<global::System.Int32> length)
+        {
+            ObjectParameter lengthParameter;
+            if (length.HasValue)
+            {
+                lengthParameter = new ObjectParameter("Length", length);
+            }
+            else
+            {
+                lengthParameter = new ObjectParameter("Length", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<global::System.String>("GenerateConnectionCode", lengthParameter);
+        }
 
         #endregion
     }
@@ -2064,6 +2083,54 @@ namespace DataRepository
         private Nullable<global::System.Int32> _ServerDoctorId;
         partial void OnServerDoctorIdChanging(Nullable<global::System.Int32> value);
         partial void OnServerDoctorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> UpdatedToServer
+        {
+            get
+            {
+                return _UpdatedToServer;
+            }
+            set
+            {
+                OnUpdatedToServerChanging(value);
+                ReportPropertyChanging("UpdatedToServer");
+                _UpdatedToServer = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UpdatedToServer");
+                OnUpdatedToServerChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _UpdatedToServer;
+        partial void OnUpdatedToServerChanging(Nullable<global::System.Boolean> value);
+        partial void OnUpdatedToServerChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DoctorConnectName
+        {
+            get
+            {
+                return _DoctorConnectName;
+            }
+            set
+            {
+                OnDoctorConnectNameChanging(value);
+                ReportPropertyChanging("DoctorConnectName");
+                _DoctorConnectName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DoctorConnectName");
+                OnDoctorConnectNameChanged();
+            }
+        }
+        private global::System.String _DoctorConnectName;
+        partial void OnDoctorConnectNameChanging(global::System.String value);
+        partial void OnDoctorConnectNameChanged();
 
         #endregion
     

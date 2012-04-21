@@ -38,8 +38,8 @@ namespace DomainModel.Constant
 
     public enum ConstantNumber
     {
-        PatientNumberLength =7,
-        ExaminationNumberLength =7,
-        ConnetionCodeLength =7
+        PatientNumberLength =5,
+        ExaminationNumberLength =5,
+        ConnetionCodeLength =5
     }
 }
