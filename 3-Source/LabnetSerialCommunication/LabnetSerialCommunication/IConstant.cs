@@ -12,5 +12,6 @@ namespace LabnetSerialCommunication
         public const string OPENED = "Mở";
         public const string CLOSED = "Đóng";
         public const string CELLDYN1700NAME = "CELLDYN1700";
+        public const string PATHTOFILE = "D:\\test.txt";
     }
 }

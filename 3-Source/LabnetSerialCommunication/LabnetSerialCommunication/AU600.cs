@@ -5,11 +5,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using DataRepository;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LabnetSerialCommunication
 {
     public class AU600
     {
+        public bool isConnectAvailable = true;
         public IDataRepository AU600Repository;
         public AU600()
         {
@@ -53,6 +55,7 @@ namespace LabnetSerialCommunication
                     List<string> lstTemp = GetResultFromSplitData(lstStrResult[i]);
                     if (isValidList(lstTemp))
                     {
+                        bool isConnect = true;
                         string[] strTemp = new string[lstTemp.Count];
                         int nextPos = 0;
                         for (int j = 0; j < lstTemp.Count; j++)
@@ -70,13 +73,23 @@ namespace LabnetSerialCommunication
                             if (isTest && nextPos == j)
                             {
                                 int testId = AU600Repository.GetTestIdByInstrumentAndTestCode(IConstant.AU600ID, lstTemp[j].ToString());
+                                if (testId == 0)
+                                {
+                                    WriteToFileToTest(lstStrResult[i]);
+                                    isConnect = false;
+                                    isConnectAvailable = false;
+                                    break;
+                                }
                                 strTemp[j] = testId.ToString();
                                 nextPos = j + 2;
                             }
                         }
-                        strResults.Add(strTemp);
 
-                        InsertToInstrumentResult(strResults[strResults.Count - 1]);
+                        if (isConnect)
+                        {
+                            strResults.Add(strTemp);
+                            InsertToInstrumentResult(strResults[strResults.Count - 1], lstStrResult[i]);
+                        }
                     }
                 }
             }
@@ -169,7 +182,7 @@ namespace LabnetSerialCommunication
             }
         }
 
-        public void InsertToInstrumentResult(string[] strResults)
+        public bool InsertToInstrumentResult(string[] strResults, string lstStrResult)
         {
             int nextPos = 0;
             bool isTest = false;
@@ -186,10 +199,136 @@ namespace LabnetSerialCommunication
                 string orderNumber = patients[1];
                 if (isTest && j == nextPos)
                 {
-                    AU600Repository.InstrumentResult(orderNumber, Int32.Parse(patients[j]), patients[j + 1], patientId, IConstant.AU600ID);
+
+                    if (!AU600Repository.InstrumentResult(orderNumber, Int32.Parse(patients[j]), patients[j + 1], patientId, IConstant.AU600ID))
+                    {
+                        WriteToFileToTest(lstStrResult);
+                        isConnectAvailable = false;
+                        return false; ;
+                    }
                     nextPos = j + 2;
                 }
             }
+
+            return true;
+        }
+
+        private void WriteToFileToTest(string data)
+        {
+            string filePath = IConstant.PATHTOFILE;
+            StringBuilder sb = new StringBuilder();
+
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                sb.Append(sr.ReadToEnd());
+            }    
+            sb.AppendLine(data);
+
+            using (StreamWriter outfile =
+                new StreamWriter(filePath))
+            {
+                outfile.Write(sb.ToString());
+            }
+        }
+
+        public List<int> ReadFile()
+        {
+            List<int> lstPosition = new List<int>();
+            string readStr = "";
+            try
+            {
+
+                using (StreamReader sr = new StreamReader(IConstant.PATHTOFILE))
+                {
+                    String line;
+                    int i = 0;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        readStr += line;
+                        if (GetDataFromOuput(line))
+                        {
+                            lstPosition.Add(i);
+                        }
+                        i += 1;
+                    }
+
+                    sr.Close();
+                }
+            }
+            catch (Exception exp)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(exp.Message);
+            }
+
+            return lstPosition;
+        }
+
+        private bool GetDataFromOuput(string strOutput)
+        {
+            if (isValidData(strOutput))
+            {
+                bool isTest = false;
+                List<string> lstTemp = GetResultFromSplitData(strOutput);
+                if (isValidList(lstTemp))
+                {
+                    bool isConnect = true;
+                    string[] strTemp = new string[lstTemp.Count];
+                    int nextPos = 0;
+                    for (int j = 0; j < lstTemp.Count; j++)
+                    {
+                        if (j > 0)
+                        {
+                            if (lstTemp[j - 1] == IConstant.AU600NAME)
+                            {
+                                isTest = true;
+                                nextPos = j;
+                            }
+                        }
+                        strTemp[j] = lstTemp[j].ToString();
+
+                        if (isTest && nextPos == j)
+                        {
+                            int testId = AU600Repository.GetTestIdByInstrumentAndTestCode(IConstant.AU600ID, lstTemp[j].ToString());
+                            if (testId == 0)
+                            {
+                                WriteToFileToTest(strOutput);
+                                isConnect = false;
+                                isConnectAvailable = false;
+                                break;
+                            }
+                            strTemp[j] = testId.ToString();
+                            nextPos = j + 2;
+                        }
+                    }
+
+                    if (isConnect)
+                    {
+                        if (InsertToInstrumentResult(strTemp, strOutput))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public void RemoveLineInFile(List<int> lstPos)
+        {
+            var file = new List<string>(System.IO.File.ReadAllLines(IConstant.PATHTOFILE));
+            var count = lstPos.Count;
+            for (int i = 0; i < count; i++)
+            {
+                file.RemoveAt(lstPos[i]);
+
+                for (int j = i + 1; j < lstPos.Count; j++)
+                {
+                    lstPos[j] = lstPos[j] - 1;
+                }
+            }
+            File.WriteAllLines(IConstant.PATHTOFILE, file.ToArray());
         }
     }
 }
