@@ -51,8 +51,11 @@
                     type: "POST",
                     dataType: "json",
                     success: function (data) {
-                        if (data == "Success") {
+                        if (data.IsSuccess == true) {
                             window.location.reload();
+                        }
+                        else {
+                            $("#errorMessage").html(data.ErrorMessage);
                         }
                     }
 

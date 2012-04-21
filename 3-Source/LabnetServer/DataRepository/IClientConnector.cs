@@ -7,6 +7,6 @@ namespace DataRepository
 {
     public interface IClientConnector
     {
-        string SetupConnectionWithLab(string connectionCode, int serverDoctorId,int clientDoctorId,string clientUrl); 
+        string SetupConnectionWithLab(string connectionCode, int serverDoctorId,int clientDoctorId,string clientUrl,string doctorName); 
     }
 }

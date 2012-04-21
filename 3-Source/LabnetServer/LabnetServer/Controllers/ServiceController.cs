@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DataRepository;
+using DomainModel;
 
 namespace LabnetServer.Controllers
 {
@@ -11,26 +13,14 @@ namespace LabnetServer.Controllers
         //
         // GET: /Service/
         
-        [HttpPost]
-        public string GetExaminationNumber(int length)
-        {
-            return Repository.GenerateExaminationNumber(length);
-        }
 
         [HttpPost]
-        public string GetPatientNumber(int length)
-        {
-            return Repository.GenerateExaminationNumber(length);
-        }
-
-        [HttpPost]
-        public string GetConnectionCode(int length,int LabId, int ClientDoctorId)
+        public string AddNewDoctorMapping(string ConnectionCode, int LabId, int ClientDoctorId)
         {
             try
             {
-                string connectionCode = Repository.GenerateConnectionCode(length);
-                Repository.DoctorConnectMappingInsert(connectionCode, LabId, ClientDoctorId, (int)ConnectionStateEnum.Available);
-                return connectionCode;
+                Repository.DoctorConnectMappingInsert(ConnectionCode, LabId, ClientDoctorId, (int)ConnectionStateEnum.Available);
+                return "Success";
             }
             catch (Exception ex)
             {
@@ -41,11 +31,11 @@ namespace LabnetServer.Controllers
         }
 
         [HttpPost]
-        public string RemoveConnection(int ServerDoctorId,int ClientDoctorId,int LabId, string ConnectionCode)
+        public string RemoveConnection(int? ServerDoctorId,int ClientDoctorId,int LabId, string ConnectionCode)
         {
             try
             {
-                Repository.RemoveDoctorConnect(ServerDoctorId,ClientDoctorId, LabId, ConnectionCode, (int)ConnectionStateEnum.ConnectionRemoveByLab);
+                Repository.RemoveDoctorConnect(ServerDoctorId,ClientDoctorId, LabId, ConnectionCode);
                 return "Success";
             }
             catch (Exception ex)
@@ -53,5 +43,27 @@ namespace LabnetServer.Controllers
                 return ex.Message;
             }
         }
+        #region Examination
+            [HttpPost]
+            public string InsertExamination(string ExaminationNumber, int LabId, int Status, string PatientName, string Phone, string BirthDay, int? ClientPartnerId, int? ClientDoctorId)
+            {
+                // Kiểm tra xem có dòng nào với ExaminationNumber và LabId tồn tại chưa
+                Examination examination = Repository.GetExamination(ExaminationNumber);
+                if (examination == null)
+                {
+                    //Create new record in Examination
+                    Repository.ExaminationInsert(ExaminationNumber, LabId, Status,PatientName,Phone,BirthDay,ClientPartnerId,ClientDoctorId);
+                    //Update amount of lab
+                    Repository.UpdateLabAmount(LabId);
+                }
+                return "Success";
+            }
+
+            public string UpdateExmaination(string examinationNumber, int labId, int status)
+            {
+                //Update status of Examination
+                return "Success";
+            }
+        #endregion
     }
 }

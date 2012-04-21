@@ -24,14 +24,26 @@ namespace DataRepository
             LabnetAccount account = Context.LabnetAccounts.Where(p => p.UserName == UserName).FirstOrDefault();
             return account;
         }
+        #region Examination
         public Examination GetExamination(string examinatioNumber)
         {
             return myDb.Examinations.Where(p => p.ExaminationNumber == examinatioNumber).FirstOrDefault();
         }
 
-        public void ExaminationInsert(string examinationNumber, int labId, int status)
+        public void ExaminationInsert(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId)
         {
-            Examination ex = new Examination { LabId = labId, ExaminationNumber = examinationNumber, Status = status, CreatedDate = DateTime.Now };
+            Examination ex = new Examination
+            {
+                LabId = labId,
+                ExaminationNumber = examinationNumber,
+                Status = status,
+                PatientName = patientName,
+                Phone = phone,
+                ClientDoctorId = clientDoctorId,
+                ClientPartnerId = clientPartnerId,
+                BirthDay = birthDay,
+                CreatedDate = DateTime.Now
+            };
             myDb.Examinations.AddObject(ex);
             myDb.SaveChanges();
         }
@@ -45,29 +57,19 @@ namespace DataRepository
             }
             myDb.SaveChanges();
         }
-
+        #endregion
 
         #region Service
-        public string GenerateExaminationNumber(int length)
-        {
-            return myDb.GenerateExaminationNumber(length).FirstOrDefault();
-        }
 
-        public string GenerateConnectionCode(int length)
-        {
-            return myDb.GenerateConnectionCode(length).FirstOrDefault();
-        }
-
-        public void RemoveDoctorConnect(int serverDoctorId,int clientDoctorId, int labId, string connectionCode,int connectionState)
+        public void RemoveDoctorConnect(int? serverDoctorId, int clientDoctorId, int labId, string connectionCode)
         {
             DoctorConnectMapping doctorConnectMapping = myDb.DoctorConnectMappings.Where(p => p.ClientDoctorId == clientDoctorId
-                                                                                        && p.DoctorId == serverDoctorId
                                                                                         && p.LabId == labId
-                                                                                        && p.ConnectionCode == connectionCode)
+                                                                                        && p.ConnectionState == (int)ConnectionStateEnum.Connected)
                                                                                         .FirstOrDefault();
             if (doctorConnectMapping != null)
             {
-                doctorConnectMapping.ConnectionState = connectionState;
+                doctorConnectMapping.ConnectionState = (int)ConnectionStateEnum.ConnectionRemoveByLab;
                 myDb.SaveChanges();
             }
             else
@@ -76,6 +78,7 @@ namespace DataRepository
             }
         }
         #endregion
+
         #region DoctorConnectMapping
 
         public DoctorConnectMapping GetDoctorConnectMapping(string ConnectionCode)
@@ -85,14 +88,15 @@ namespace DataRepository
 
         public List<VMDoctorConnectMapping> GetDoctorConnectMappings(int doctorId)
         {
-            var result = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId)
-                                    .Select(p => new VMDoctorConnectMapping { 
-                                    DateConnected = p.DateConnected,
-                                    Address = p.LabClient.Address,
-                                    PhoneNumber = p.LabClient.Phone,
-                                    LabName = p.LabClient.Name,
-                                    MappingId = p.Id,
-                                    LabId = p.LabId
+            var result = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId && p.ConnectionState == (int) ConnectionStateEnum.Connected)
+                                    .Select(p => new VMDoctorConnectMapping
+                                    {
+                                        DateConnected = p.DateConnected,
+                                        Address = p.LabClient.Address,
+                                        PhoneNumber = p.LabClient.Phone,
+                                        LabName = p.LabClient.Name,
+                                        MappingId = p.Id,
+                                        LabId = p.LabId
                                     }).ToList();
             foreach (var item in result)
             {
@@ -109,10 +113,19 @@ namespace DataRepository
             DoctorConnectMapping mapping = myDb.DoctorConnectMappings.Where(p => p.Id == mappingId).FirstOrDefault();
             mapping.DoctorId = doctorId;
             mapping.DateConnected = DateTime.Now;
+            mapping.ConnectionState = (int)ConnectionStateEnum.Connected;
             myDb.SaveChanges();
         }
-        public void DoctorConnectMappingInsert(string connectionCode, int labId, int clientDoctoId,int connectionState)
+
+        public void DoctorConnectMappingInsert(string connectionCode, int labId, int clientDoctoId, int connectionState)
         {
+            //Kiem tra chua ton tai connection code thi moi insert
+            var listOldMapping = myDb.DoctorConnectMappings.Where(p => p.LabId == labId && p.ClientDoctorId == clientDoctoId).ToList();
+            if (listOldMapping != null && listOldMapping.Count!=0)
+            {
+                listOldMapping.ForEach(p=>p.ConnectionState = (int)ConnectionStateEnum.ConnectionRemoveByLab);
+            }
+            //Insert new row
             DoctorConnectMapping mapping = new DoctorConnectMapping();
             mapping.LabId = labId;
             mapping.ClientDoctorId = clientDoctoId;
@@ -121,16 +134,35 @@ namespace DataRepository
             myDb.DoctorConnectMappings.AddObject(mapping);
             myDb.SaveChanges();
         }
-        private int GetPatientInDay(int doctorId,int labId)
-        {
 
-            return myDb.Examinations.Where(p => p.LabId == labId && p.CreatedDate >= DateTime.Today).Count();
+        private int GetPatientInDay(int doctorId, int labId)
+        {
+            DoctorConnectMapping mapping = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId && p.LabId == labId).FirstOrDefault();
+            return myDb.Examinations.Where(p => p.LabId == labId && p.CreatedDate >= DateTime.Today
+                                    && p.ClientDoctorId.HasValue
+                                    && p.ClientDoctorId == mapping.ClientDoctorId).Count();
         }
 
         private int GetPatientInMonth(int doctorId, int labId)
         {
             DateTime firstDateOfMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            return myDb.Examinations.Where(p => p.LabId == labId && p.CreatedDate > firstDateOfMonth).Count();
+            DoctorConnectMapping mapping = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId && p.LabId == labId).FirstOrDefault();
+
+            return myDb.Examinations.Where(p => p.LabId == labId && p.CreatedDate > firstDateOfMonth
+                                    && p.ClientDoctorId.HasValue
+                                    && p.ClientDoctorId == mapping.ClientDoctorId).Count();
+        }
+        #endregion
+
+        #region Doctor
+        public bool IsDoctorConnectWithLab(int currentDoctorId)
+        {
+            return myDb.DoctorConnectMappings.Any(p => p.DoctorId == currentDoctorId && p.ConnectionState == (int)ConnectionStateEnum.Connected);
+        }
+
+        public Doctor GetDoctor(int doctorId)
+        {
+            return myDb.Doctors.Where(p => p.DoctorId == doctorId).FirstOrDefault();
         }
         #endregion
     }
