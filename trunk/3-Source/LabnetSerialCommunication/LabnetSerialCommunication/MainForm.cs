@@ -24,32 +24,7 @@ namespace LabnetSerialCommunication
         string dataAU600 = "";
 
         public MainForm()
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.google.com");
-            request.Timeout = 5000;
-            request.Credentials = CredentialCache.DefaultNetworkCredentials;
-            bool isAvailable = true;
-            try
-            {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            }
-            catch (Exception ex)
-            {
-                isAvailable = false;
-                Timer timer = new Timer();
-                timer.Enabled = true;
-                timer.Interval = 5000;
-                timer.Tick += new EventHandler(timer_Tick);
-                timer.Start();
-            }
-
-            if (isAvailable)
-            {
-                Console.WriteLine("IsSIPServerAvailable: " );
-                //isAvailable = true;
-            }
-
-            
+        {          
             Repository = new Repository();
             port = new PortControl();
             instrumentAU600 = new AU600();
@@ -61,15 +36,12 @@ namespace LabnetSerialCommunication
                 lstValidInstruments.Add(false);
             }
 
+            //Check data in temporatory file
+            List<int> lstPosition = instrumentAU600.ReadFile();
+            instrumentAU600.RemoveLineInFile(lstPosition);
+
             InitializeComponent();
             
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://www.google.com");
-            request.Timeout = 5000;
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -90,8 +62,14 @@ namespace LabnetSerialCommunication
             }
 
             //For test only
+
+            timerConnect = new Timer();
+
+            timerConnect.Interval = (300000) * (1);             // Timer will tick
+            timerConnect.Enabled = true;                       // Enable the timer
+            timerConnect.Tick += new EventHandler(timerConnect_Tick); // Everytime timer ticks, timer_Tick will be called
+            timerConnect.Start();                              // Start the timer
             
-            /*
             try
             {
                 using (StreamReader sr = new StreamReader("E:\\LabNetProject\\SerialCommunication\\LabnetSerialCommunication\\LabnetSerialCommunication\\test.txt"))
@@ -107,11 +85,21 @@ namespace LabnetSerialCommunication
             {
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(exp.Message);
-            }*/
+            }
             //WriteToFileToTest(dataAU600);
             
-            //List<string[]> strArrays = instrumentAU600.SplitOutputData(dataAU600);
+            //5List<string[]> strArrays = instrumentAU600.SplitOutputData(dataAU600);
             //instrumentAU600.InsertToInstrumentResult(strArrays);
+        }
+
+        private void timerConnect_Tick(object sender, EventArgs e)
+        {
+            if (!instrumentAU600.isConnectAvailable)
+            {
+                List<int> lstPosition = instrumentAU600.ReadFile();
+                instrumentAU600.RemoveLineInFile(lstPosition);
+                instrumentAU600.isConnectAvailable = true;
+            }
         }
 
         private void dataGridInstrumentTable_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -218,7 +206,7 @@ namespace LabnetSerialCommunication
 
         private void WriteToFileToTest(string data)
         {
-            string filePath = "D:\\test.txt";
+            string filePath = IConstant.PATHTOFILE;
             StringBuilder sb = new StringBuilder();
 
             using (StreamReader sr = new StreamReader(filePath))

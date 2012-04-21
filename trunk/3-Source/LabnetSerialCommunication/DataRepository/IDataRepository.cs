@@ -11,10 +11,10 @@ namespace DataRepository
 
         int GetTestIdByInstrumentAndTestCode(int instrumentId, string testCode);
 
-        void InstrumentResult(string orderNumber, int testId, string value, string instrumentPatient, int instrumentId);
+        bool InstrumentResult(string orderNumber, int testId, string value, string instrumentPatient, int instrumentId);
 
         List<InstrumentResult> GetAllValidInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId);
 
-        void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId);
+        bool InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId);
     }
 }
