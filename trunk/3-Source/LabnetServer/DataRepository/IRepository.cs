@@ -15,8 +15,8 @@ namespace DataRepository
         #endregion
         
         #region Examination
-        
-            void ExaminationInsert(string examinationNumber, int labId, int status);
+
+            void ExaminationInsert(string ExaminationNumber, int LabId, int Status, string PatientName, string Phone, string BirthDay, int? ClientPartnerId, int? ClientDoctorId);
             Examination GetExamination(string examinatioNumber);
         
         #endregion
@@ -37,15 +37,15 @@ namespace DataRepository
         
         #region Service
         
-            string GenerateExaminationNumber(int length);
-            string GenerateConnectionCode(int length);
-            void RemoveDoctorConnect(int serverDoctorId,int clientDoctorId, int labId, string connectionCode,int connectionState);
+            void RemoveDoctorConnect(int? serverDoctorId,int clientDoctorId, int labId, string connectionCode );
         
         #endregion
 
+        #region Doctor
 
-
-
+            bool IsDoctorConnectWithLab(int currentDoctorId);
+            Doctor GetDoctor(int doctorId);
+        #endregion
 
             
     }

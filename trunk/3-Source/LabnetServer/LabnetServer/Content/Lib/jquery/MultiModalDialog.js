@@ -21,6 +21,8 @@ function OnBeforeClose() {
     }
     numberModalPopup--;
 }
+function OnModalCreate()
+{}
 $(document).ready(function () {
 
     function LoadAjaxContent(new_modal, href) {
@@ -36,6 +38,7 @@ $(document).ready(function () {
 
         new_modal.find(".MultiModal_content").load(href, $("form.selections").serialize(), function (data) {
             var modalTitle = new_modal.find(".MultiModal_title").text();
+            new_modal.find(".MultiModal_title").addClass("hide");
             var yOffset = 150 + numberModalPopup * 60;
             var xOffset = $(window).width() / 2 + (numberModalPopup - 1) * 40 - (new_modal.find(".MultiModal_content").width() + 30) / 2;
             new_modal.dialog("option", "position", [xOffset, yOffset]);
@@ -73,11 +76,12 @@ $(document).ready(function () {
             resizable: false,
             closeText: 'Hide',
             beforeclose: OnBeforeClose,
-            close: OnDialogClosed
+            close: OnDialogClosed,
+            create:OnModalCreate,
         });
         new_modal.dialog("open");
-        var href = $(this).attr("href");
         var modalType = "ajax";
+        var href = $(this).attr("href");
         if (href.indexOf("#") >= 0) {
             modalType = "inline";
             href = href.substr(href.indexOf("#"));
@@ -92,6 +96,7 @@ $(document).ready(function () {
 
                 $(href).appendTo(new_modal.find(".MultiModal_content"));
                 var modalTitle = new_modal.find(".MultiModal_title").text();
+                new_modal.find(".MultiModal_title").addClass("hide");
                 var yOffset = 150 + numberModalPopup * 60
                 var xOffset = $(window).width() / 2 + (numberModalPopup - 1) * 40 - (new_modal.find(".MultiModal_content").width() + 30) / 2; ;
                 new_modal.dialog("option", "position", [xOffset, yOffset]);

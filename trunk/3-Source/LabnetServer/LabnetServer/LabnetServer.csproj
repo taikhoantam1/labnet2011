@@ -87,7 +87,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GlobalStrings.en-US.resx</DependentUpon>
     </Compile>
-    <Compile Include="Code\GeneralEnum.cs" />
     <Compile Include="Code\JSonHelper.cs" />
     <Compile Include="Content\Lib\FileManager\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -434,6 +433,7 @@
     <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\images\ui-icons_fcd113_256x240.png" />
     <Content Include="Content\Lib\jquery-ui-1.8.16\redmond\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\Lib\jquery\jquery-1.6.2.min.js" />
+    <Content Include="Content\Lib\jquery\jquery-1.7.1.min.js" />
     <Content Include="Content\Lib\jquery\jquery.blockUI.js" />
     <Content Include="Content\Lib\jquery\jquery.validate.js" />
     <Content Include="Content\Lib\jquery\jquery.validate.min.js" />
