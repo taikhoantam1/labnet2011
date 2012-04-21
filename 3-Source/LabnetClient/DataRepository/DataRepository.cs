@@ -539,25 +539,61 @@ namespace DataRepository
             currentDoctor.ConnectionCode = doctor.ConnectionCode;
             myDb.SaveChanges();
         }
-
+        public string AddLabIdToUniqueString(string code,int labId)
+        {
+            if (labId > 9)
+            {
+                code = labId.ToString() + code;
+            }
+            else
+            {
+                code = "0" + labId.ToString() + code;
+            }
+            return code;
+        }
         public string CreateConnectionCode(int doctorId,int labId)
         {
-            string connectionCode = Connector.GetUniqueConnectionCode((int)ConstantNumber.ConnetionCodeLength, labId,doctorId);
+            string connectionCode = myDb.GenerateConnectionCode((int)ConstantNumber.ConnetionCodeLength).FirstOrDefault();
+            connectionCode = AddLabIdToUniqueString(connectionCode, labId);
             if (doctorId != 0)
             {
                 Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
                 currentDoctor.ConnectionCode = connectionCode;
+                try
+                {
+                    connector.SubmitConnectionCodeToServer(doctorId, labId, connectionCode);
+                    currentDoctor.UpdatedToServer = true;
+                    
+                }
+                catch (Exception ex)
+                {
+                    currentDoctor.UpdatedToServer = false;
+                }
                 myDb.SaveChanges();
             }
             return connectionCode;
         }
 
-        public void RemoveConnection(int doctorId)
+        public void RemoveConnection(int doctorId,int labId)
         {
             Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
-            currentDoctor.IsConnected = false;
-            currentDoctor.ConnectionCode = "";
-            myDb.SaveChanges();
+            if (currentDoctor.IsConnected == true)
+            {
+                currentDoctor.IsConnected = false;
+                currentDoctor.ConnectionCode = "";
+                currentDoctor.ServerDoctorId = null;
+                currentDoctor.UpdatedToServer = false;
+                try
+                {
+                    bool isSuccess = Connector.RemoveDoctorConnect(currentDoctor.ServerDoctorId.Value, doctorId, labId, currentDoctor.ConnectionCode);
+                    if (isSuccess)
+                        currentDoctor.UpdatedToServer = true;
+                }
+                catch (Exception ex)
+                { 
+                }
+                myDb.SaveChanges();
+            }
         }
         public void DoctorDelete(int doctorId)
         {
@@ -588,6 +624,19 @@ namespace DataRepository
         {
             List<SearchDoctorByName_Result> lstDoctor = myDb.SearchDoctorByName(name, searchType).ToList();
             return lstDoctor.Select(p => new { Label = p.Name, Value = p.Name });
+        }
+
+        public string GetUniqueExaminationNumber(int length,int labId)
+        {
+            string examinationNumber = myDb.GenerateLabExaminationNumber(5).FirstOrDefault();
+            examinationNumber = AddLabIdToUniqueString(examinationNumber, labId);
+            return examinationNumber;
+        }
+        public string GetUniquePatientNumber(int length, int labId)
+        {
+            string examinationNumber = myDb.GenerateLabExaminationNumber(5).FirstOrDefault();
+            examinationNumber = AddLabIdToUniqueString(examinationNumber, labId);
+            return examinationNumber;
         }
         #endregion
 
@@ -1126,6 +1175,7 @@ namespace DataRepository
             myDb.SaveChanges();
         }
         #endregion
+
         #region Instrument
         public List<SearchInstrumentResult_Result> InstrumentResultSearch(DateTime? receivedDate, string orderNumber, int? instrumentId)
         {
@@ -1180,26 +1230,40 @@ namespace DataRepository
             int success = myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
         }
         #endregion
+
         #region Service
-        public string SetupDoctorConnection(string connectionCode, int serverDoctorId,int clientDoctorId)
+        public string SetupDoctorConnection(string connectionCode, int serverDoctorId, int clientDoctorId, string doctorConnectName)
         {
-            Doctor doctor = myDb.Doctors.Where(p => p.ConnectionCode == connectionCode && p.Id == clientDoctorId && p.IsConnected == false).FirstOrDefault();
-            if (doctor != null)
+
+            // Kiem tra connection code có tồn tại?
+            Doctor doctor = myDb.Doctors.Where(p => p.ConnectionCode == connectionCode).FirstOrDefault();
+            if (doctor == null)
             {
-                if (doctor.IsConnected == true)
-                {
-                    return "Mã kết nối đã được dùng cho 1 bác sĩ khác, Vui lòng liên hệ phòng XN để biết thêm chi tiết";
-                }
-                else
-                {
-                    doctor.IsConnected = true;
-                    doctor.ServerDoctorId = serverDoctorId;
-                }
+                //Connection error 1 = Connection code not exist
+                return "Doctor_Connection_Error1";
             }
-            else
+
+            // Kiểm tra connection code đã được dùng chưa
+            if (doctor.IsConnected)
             {
-                return "Mã kết nối không hợp lệ.";
+                // Connection error 2 = Connection code was used
+                return "Doctor_Connection_Error2";
             }
+
+            // Kiểm tra bác sĩ đã liên kết với lab chưa
+            bool isDoctorWasConnectWithLab = myDb.Doctors.Any(p => p.ServerDoctorId.HasValue
+                                                            && p.ServerDoctorId.Value == serverDoctorId
+                                                            && p.ConnectionCode != connectionCode && p.IsConnected);
+            if (isDoctorWasConnectWithLab)
+            {
+                // Connection error 3 = Doctor current has a connectiton with lab
+                return "Doctor_Connection_Error3";
+            }
+
+            // Cập nhật liên kết
+            doctor.ServerDoctorId = serverDoctorId;
+            doctor.DoctorConnectName = doctorConnectName;
+            doctor.IsConnected = true;
             myDb.SaveChanges();
             return "Success";
         }

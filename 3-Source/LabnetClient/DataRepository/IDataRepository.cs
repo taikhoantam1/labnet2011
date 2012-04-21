@@ -107,7 +107,7 @@ namespace DataRepository
         List<Doctor> GetDoctorByName(string name);
         object GetDoctorNameByName(string name, string searchType);
         string CreateConnectionCode(int doctorId,int labId);
-        void RemoveConnection(int doctorId);
+        void RemoveConnection(int doctorId,int labId);
         #endregion
 
         #region TestSection
@@ -149,7 +149,9 @@ namespace DataRepository
             VMLabExamination GetLabExamination(int LabExaminationId);
             VMLabExamination GetLabExamination(int OrderNumber, DateTime ReceivedDate);
             VMLabExamination GetLabExamination(string examinationNumber);
-            void LabExaminationUpdate(int patientId,DateTime receivedDate, int orderNumber, LabExamination labExamination);
+            void LabExaminationUpdate(int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination);
+            string GetUniqueExaminationNumber(int length,int labId);
+            string GetUniquePatientNumber(int length, int labId);
         #endregion
 
         #region Result
@@ -186,7 +188,7 @@ namespace DataRepository
         #endregion
 
         #region Service
-        string SetupDoctorConnection(string connectionCode, int serverDoctorId,int clientDoctorId);
+        string SetupDoctorConnection(string connectionCode, int serverDoctorId, int clientDoctorId, string doctorConnectName);
         #endregion
     }
 }

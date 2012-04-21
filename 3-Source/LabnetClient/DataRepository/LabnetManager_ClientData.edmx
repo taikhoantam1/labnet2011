@@ -143,6 +143,8 @@
           <Property Name="IsConnected" Type="bit" Nullable="false" />
           <Property Name="ConnectionCode" Type="nvarchar" MaxLength="10" />
           <Property Name="ServerDoctorId" Type="int" />
+          <Property Name="UpdatedToServer" Type="bit" />
+          <Property Name="DoctorConnectName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Instrument">
           <Key>
@@ -627,6 +629,9 @@
         <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="strInput" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="labnet_GenerateConnectionCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Length" Type="int" Mode="In" />
+        </Function>
         <Function Name="labnet_TestResultNoteBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
@@ -898,6 +903,9 @@
             <Parameter Name="ReceivedDate" Mode="In" Type="DateTime" />
             <Parameter Name="InstrumentId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GenerateConnectionCode" ReturnType="Collection(String)">
+          <Parameter Name="Length" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -998,6 +1006,8 @@
           <Property Type="Boolean" Name="IsConnected" Nullable="false" />
           <Property Type="String" Name="ConnectionCode" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="ServerDoctorId" />
+          <Property Type="Boolean" Name="UpdatedToServer" />
+          <Property Type="String" Name="DoctorConnectName" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LabUser">
           <Key>
@@ -1744,6 +1754,8 @@
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="LabManager_ClientModel.Doctor">
               <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="DoctorConnectName" ColumnName="DoctorConnectName" />
+                <ScalarProperty Name="UpdatedToServer" ColumnName="UpdatedToServer" />
                 <ScalarProperty Name="ServerDoctorId" ColumnName="ServerDoctorId" />
                 <ScalarProperty Name="ConnectionCode" ColumnName="ConnectionCode" />
                 <ScalarProperty Name="IsConnected" ColumnName="IsConnected" />
@@ -2105,6 +2117,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdateSID" FunctionName="LabManager_ClientModel.Store.sp_UpdateSID" />
+          <FunctionImportMapping FunctionImportName="GenerateConnectionCode" FunctionName="LabManager_ClientModel.Store.labnet_GenerateConnectionCode" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

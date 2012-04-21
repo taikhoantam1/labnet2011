@@ -25,9 +25,10 @@ namespace LabnetClient.Controllers
 
         public ActionResult Create()
         {
+            
             PatientViewModel Model = RestoreViewState(new VMPatient(), new VMLabExamination(), null);
             Model.ViewMode = ViewMode.Create;
-            Model.LabExamination.ExaminationNumber = ServerConnector.GetUniqueExaminationNumber((int)ConstantNumber.ExaminationNumberLength);
+            Model.LabExamination.ExaminationNumber = Repository.GetUniqueExaminationNumber((int)ConstantNumber.ExaminationNumberLength, LabId);
             return View(Model);
         }
 
@@ -130,7 +131,7 @@ namespace LabnetClient.Controllers
             patient.BirthDate = model.Patient.BirthDate;
             patient.Gender = model.Patient.Gender;
             patient.FirstName = model.Patient.FirstName;
-            patient.PatientNumber = ServerConnector.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength);
+            patient.PatientNumber = Repository.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength, LabId);
             patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
             patient.Phone = model.Patient.Phone;
             if (patient.BirthDate.Length <= 4)
@@ -260,7 +261,7 @@ namespace LabnetClient.Controllers
                     patient.BirthDate = model.Patient.BirthDate;
                     patient.Gender = model.Patient.Gender;
                     patient.FirstName = model.Patient.FirstName;
-                    patient.PatientNumber = ServerConnector.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength);
+                    patient.PatientNumber = Repository.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength, LabId);
                     patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
                     patient.Age = patient.BirthDate;
                     patient.Email = model.Patient.Email;
