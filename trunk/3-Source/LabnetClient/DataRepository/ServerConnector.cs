@@ -20,7 +20,7 @@ namespace DataRepository
 
         public string ServerUrl
         {
-            get { return localUrl; }
+            get { return severUrl; }
         }
 
         public string InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)
@@ -118,7 +118,7 @@ namespace DataRepository
 
             myDb.SaveChanges();
             //DoctorMapping
-            var listDoctorNotUpdate = myDb.Doctors.Where(p => !p.UpdatedToServer.Value);
+            var listDoctorNotUpdate = myDb.Doctors.Where(p => !p.UpdatedOnServer.Value);
             foreach (var doctor in listDoctorNotUpdate)
             {
                 if (!string.IsNullOrEmpty(doctor.ConnectionCode))
@@ -127,7 +127,7 @@ namespace DataRepository
 
                     bool result = SubmitConnectionCodeToServer(doctor.Id, labId, doctor.ConnectionCode);
                     if (result)
-                        doctor.UpdatedToServer = true;
+                        doctor.UpdatedOnServer = true;
                 }
                 else
                 {

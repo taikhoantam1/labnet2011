@@ -562,12 +562,12 @@ namespace DataRepository
                 try
                 {
                     connector.SubmitConnectionCodeToServer(doctorId, labId, connectionCode);
-                    currentDoctor.UpdatedToServer = true;
+                    currentDoctor.UpdatedOnServer = true;
                     
                 }
                 catch (Exception ex)
                 {
-                    currentDoctor.UpdatedToServer = false;
+                    currentDoctor.UpdatedOnServer = false;
                 }
                 myDb.SaveChanges();
             }
@@ -582,12 +582,12 @@ namespace DataRepository
                 currentDoctor.IsConnected = false;
                 currentDoctor.ConnectionCode = "";
                 currentDoctor.ServerDoctorId = null;
-                currentDoctor.UpdatedToServer = false;
+                currentDoctor.UpdatedOnServer = false;
                 try
                 {
                     bool isSuccess = Connector.RemoveDoctorConnect(currentDoctor.ServerDoctorId.Value, doctorId, labId, currentDoctor.ConnectionCode);
                     if (isSuccess)
-                        currentDoctor.UpdatedToServer = true;
+                        currentDoctor.UpdatedOnServer = true;
                 }
                 catch (Exception ex)
                 { 
