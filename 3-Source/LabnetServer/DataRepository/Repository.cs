@@ -164,6 +164,35 @@ namespace DataRepository
         {
             return myDb.Doctors.Where(p => p.DoctorId == doctorId).FirstOrDefault();
         }
+
+        public bool CheckDoctorAccount(string UserName)
+        {
+            Doctor lstDoctor = myDb.Doctors.Where(p => p.UserName == UserName).FirstOrDefault();
+            if (null != lstDoctor)
+                return true;
+            return false;
+        }
+
+        public Doctor GetDoctorByUserName(string UserName)
+        {
+            return myDb.Doctors.Where(p => p.UserName == UserName).FirstOrDefault();
+        }
+
+        public void DoctorInsert(string Name, string UserName, string Password, string Address, string PhoneNumber, string Email)
+        {
+            Doctor doctor = new Doctor
+            {
+                Name = Name,
+                UserName = UserName,
+                Password = Password,
+                Address = Address,
+                PhoneNumber = PhoneNumber,
+                Email = Email
+            };
+            myDb.Doctors.AddObject(doctor);
+            myDb.SaveChanges();
+        }
+
         #endregion
     }
 }

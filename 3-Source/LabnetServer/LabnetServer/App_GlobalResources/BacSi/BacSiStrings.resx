@@ -120,6 +120,33 @@
   <data name="BacSi_CreateConnection_Button" xml:space="preserve">
     <value>Tạo Liên Kết</value>
   </data>
+  <data name="BacSi_Create_Address" xml:space="preserve">
+    <value>Địa Chỉ</value>
+  </data>
+  <data name="BacSi_Create_BirthDate" xml:space="preserve">
+    <value>Ngày Sinh</value>
+  </data>
+  <data name="BacSi_Create_ConnectionCode" xml:space="preserve">
+    <value>Mã Liên Kết</value>
+  </data>
+  <data name="BacSi_Create_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="BacSi_Create_Name" xml:space="preserve">
+    <value>Họ Tên</value>
+  </data>
+  <data name="BacSi_Create_Password" xml:space="preserve">
+    <value>Mật Khẩu</value>
+  </data>
+  <data name="BacSi_Create_PasswordVerify" xml:space="preserve">
+    <value>Nhập Lại Mật Khẩu</value>
+  </data>
+  <data name="BacSi_Create_Phone" xml:space="preserve">
+    <value>Số Điện Thoại</value>
+  </data>
+  <data name="BacSi_Create_UserName" xml:space="preserve">
+    <value>Tên Đăng Nhập</value>
+  </data>
   <data name="BacSi_EmptyConnectionCode_Message" xml:space="preserve">
     <value>Vui lòng nhập mã liên kết </value>
   </data>

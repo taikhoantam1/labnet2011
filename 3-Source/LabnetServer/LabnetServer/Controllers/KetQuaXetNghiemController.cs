@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using LabnetServer.Models;
 using DataRepository;
+using DomainModel;
 
 namespace LabnetServer.Controllers
 {
@@ -44,24 +45,37 @@ namespace LabnetServer.Controllers
         [HttpPost]
         public ActionResult BacSi(KQXNModel model)
         {
-            Examination examination = Repository.GetExamination(model.ExaminationNumber);
-            //model.LabUrl = "http://localhost:14587/Report/PatientResultReport_ForServer?ExaminationNumber=" + model.ExaminationNumber;
+            Doctor doctor = (Doctor)Session[SessionProperties.SessionDoctor];
 
-            if (examination != null)
+            if (null != doctor)
             {
-                model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
+                Examination examination = Repository.GetExamination(model.ExaminationNumber);
+                //model.LabUrl = "http://localhost:14587/Report/PatientResultReport_ForServer?ExaminationNumber=" + model.ExaminationNumber;
+
+                if (examination != null)
+                {
+                    model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
+                }
+                else
+                {
+                    ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
+                }
+                return View("KQXN_BenhNhan", model);
             }
-            else
-            {
-                ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
-            }
-            return View("KQXN_BenhNhan", model);
+
+            return Redirect("/Home");
         }
 
         public ActionResult BacSi()
         {
-            KQXNModel model = new KQXNModel();
-            return View("KQXN_BenhNhan", model);
+            Doctor doctor = (Doctor)Session[SessionProperties.SessionDoctor];
+            if (null != doctor)
+            {
+                KQXNModel model = new KQXNModel();
+                return View("KQXN_BenhNhan", model);
+            }
+
+            return Redirect("/Home");
         }
     }
 }

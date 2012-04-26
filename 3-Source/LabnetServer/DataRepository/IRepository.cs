@@ -45,6 +45,9 @@ namespace DataRepository
 
             bool IsDoctorConnectWithLab(int currentDoctorId);
             Doctor GetDoctor(int doctorId);
+            bool CheckDoctorAccount(string UserName);
+            Doctor GetDoctorByUserName(string UserName);
+            void DoctorInsert(string Name, string UserName, string Password, string Address, string PhoneNumber, string Email);
         #endregion
 
             

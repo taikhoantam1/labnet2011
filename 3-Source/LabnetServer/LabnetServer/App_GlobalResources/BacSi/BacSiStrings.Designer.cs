@@ -70,6 +70,87 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Địa Chỉ.
+        /// </summary>
+        internal static string BacSi_Create_Address {
+            get {
+                return ResourceManager.GetString("BacSi_Create_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày Sinh.
+        /// </summary>
+        internal static string BacSi_Create_BirthDate {
+            get {
+                return ResourceManager.GetString("BacSi_Create_BirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã Liên Kết.
+        /// </summary>
+        internal static string BacSi_Create_ConnectionCode {
+            get {
+                return ResourceManager.GetString("BacSi_Create_ConnectionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string BacSi_Create_Email {
+            get {
+                return ResourceManager.GetString("BacSi_Create_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Họ Tên.
+        /// </summary>
+        internal static string BacSi_Create_Name {
+            get {
+                return ResourceManager.GetString("BacSi_Create_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật Khẩu.
+        /// </summary>
+        internal static string BacSi_Create_Password {
+            get {
+                return ResourceManager.GetString("BacSi_Create_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhập Lại Mật Khẩu.
+        /// </summary>
+        internal static string BacSi_Create_PasswordVerify {
+            get {
+                return ResourceManager.GetString("BacSi_Create_PasswordVerify", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số Điện Thoại.
+        /// </summary>
+        internal static string BacSi_Create_Phone {
+            get {
+                return ResourceManager.GetString("BacSi_Create_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Đăng Nhập.
+        /// </summary>
+        internal static string BacSi_Create_UserName {
+            get {
+                return ResourceManager.GetString("BacSi_Create_UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập mã liên kết .
         /// </summary>
         internal static string BacSi_EmptyConnectionCode_Message {
