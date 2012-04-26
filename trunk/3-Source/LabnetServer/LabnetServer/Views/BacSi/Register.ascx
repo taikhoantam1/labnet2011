@@ -28,7 +28,18 @@
   	}
 
   	function CheckPhoneNumber(phone) {
-  	    var arrays = "0123456789";
+  	    var strValidChars = "0123456789";
+  	    var strChar;
+  	    var blnResult = true;
+
+  	    if (phone.length == 0) return true;
+  	    for (var i = 0; i < phone.length && blnResult == true; i++) {
+  	        strChar = phone.charAt(i);
+  	        if (strValidChars.indexOf(strChar) == -1) {
+  	            blnResult = false;
+  	        }
+  	    }
+  	    return blnResult;
   	}
 
     function Register() {
@@ -42,8 +53,9 @@
         var email = $("#Doctor_Email").val();
         var checkUserName = CheckUserName(userName);
         var checkPass = CheckPassword(password, passwordVerify);
+        var checkPhone = CheckPhoneNumber(phoneNumber);
         //$(".MultiModal_box").dialog("close");
-        if (name.length > 0 && userName.length > 0 && checkUserName == true && checkPass == true && password.length > 0 && connectionCode.length == 7) {
+        if (name.length > 0 && userName.length > 0 && checkUserName == true && checkPass == true && password.length > 0 && connectionCode.length == 7 && checkPhone) {
             //$.blockUI();
             $.ajax({
                 url: "/BacSi/Register",
@@ -92,6 +104,11 @@
 
             if (connectionCode.length != 7) {
                 alert("Xin vui lòng nhập mã kết nối. Lưu ý rằng mã kết nối có 7 ký tự");
+                return;
+            }
+
+            if (checkPhone == false) {
+                alert("Xin vui lòng kiểm tra lại số điện thoại. Lưu ý rằng chỉ chấp nhận số");
                 return;
             }
         }
