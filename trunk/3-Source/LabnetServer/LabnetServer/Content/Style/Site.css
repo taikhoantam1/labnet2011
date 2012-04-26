@@ -399,3 +399,12 @@ h5, h6
     color: #dc3535;
     width: 93%;
 }
+
+.lbTitle
+{
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: 110px;
+}

@@ -30,6 +30,59 @@ namespace LabnetServer.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public string Login(string UserName, string Password)
+        {
+            Doctor doctor = Repository.GetDoctorByUserName(UserName);
+            if (doctor != null)
+            {
+                if (doctor.Password == Password)
+                {
+                    Session[SessionProperties.SessionDoctor] = doctor;
+                    return new { DoctorId = doctor.DoctorId, Message = "Success" }.ToJson();
+                }
+                else
+                {
+                    return new { Message = "Sai mật khẩu" }.ToJson(); ;
+                }
+            }
+            return new { Message = "Không tồn tại tài khoản này" }.ToJson();
+        }
+
+        public ActionResult Register()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public string Register(string Name, string UserName, string Password, string PasswordVerify, 
+                                    string ConnectionCode, string Address, string PhoneNumber, string Email)
+        {
+            DoctorConnectMapping doctorConnect = Repository.GetDoctorConnectMapping(ConnectionCode);
+
+            // check user name
+            bool isAccountExisted = Repository.CheckDoctorAccount(UserName);
+            if (isAccountExisted)
+            {
+                return new { Message = "Tên đăng nhập đã được dùng bởi bác sĩ khác. Vui lòng chọn lại tên đăng nhập" }.ToJson(); 
+            }
+
+            if (null != doctorConnect)
+            {
+                Repository.DoctorInsert(Name, UserName, Password, Address, PhoneNumber, Email);
+                Doctor doctor = Repository.GetDoctorByUserName(UserName);
+                Repository.UpdateMappingForDoctorConnect(doctorConnect.Id, doctor.DoctorId);
+                return new { Message = "Success" }.ToJson();
+            }
+
+            return new { Message = "Sai mã kết nối" }.ToJson(); 
+        }
+
         [HttpGet]
         public ActionResult DanhSachLabKetNoi()
         {
