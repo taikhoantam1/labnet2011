@@ -27,9 +27,20 @@ namespace LabnetServer.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            DanhSachBenhNhanModel model = new DanhSachBenhNhanModel(Repository.GetLabClients());
+            return View(model);
         }
-
+        [HttpPost]
+        public ActionResult Index(DanhSachBenhNhanModel model)
+        {
+            List<VMExamination> examinations = Repository.GetExaminations(model.SentDate, model.LabId);
+            int? labIdSelected = model.LabId;
+            model = new DanhSachBenhNhanModel(Repository.GetLabClients());
+            model.DanhSachBenhNhanDataTableModel = new JQGridModel(typeof(VMExamination), false, examinations, "");
+            model.LabComboBox.SelectedValue = labIdSelected.Value.ToString();
+            
+            return View(model);
+        }
         public ActionResult Login()
         {
             return PartialView();

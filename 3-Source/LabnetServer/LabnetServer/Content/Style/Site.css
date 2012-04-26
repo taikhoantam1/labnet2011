@@ -335,13 +335,13 @@ h5, h6
 .LeftCol
 {
     float: left;
-    width: 48%;
+    width: 24%;
 }
 
 .RightCol
 {
     float: right;
-    width: 48%;
+    width: 74%;
 }
 
 .BothCol
@@ -398,6 +398,56 @@ h5, h6
     border: 1px solid #df6b6b;
     color: #dc3535;
     width: 93%;
+}
+
+.lbTitle
+{
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;
+    width: 110px;
+}
+
+.LeftMenu
+{
+    float: left;
+    width: 95%;
+    padding-left: 10px;
+    height: 200px;
+    -moz-box-shadow: 2px 0px 3px 3px #7A7A82;
+    -webkit-box-shadow: 2px 0px 3px 3px #7A7A82;
+    box-shadow: 2px 0px 3px 3px #7A7A82;
+    -webkit-border-radius: 0px 25px 0px 0px;
+    -moz-border-radius: 0px 25px 0px 0px;
+    border-radius: 0px 25px 0px 0px;
+}
+.LeftMenu ul
+{
+    padding-left: 20px;
+    list-style-image: url('../Images/iconArrow.png');
+}
+.LeftMenu ul li
+{
+    padding: 3px;
+}
+.Title
+{
+    text-align:center;
+    padding-top:20px; 
+    font-size:20px;
+}
+.MenuTitle
+{
+    padding-left: 30px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.ColumnLabel
+{
+    display:block;
+    font-weight:bold;
 }
 
 .lbTitle

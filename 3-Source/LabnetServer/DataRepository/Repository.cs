@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DomainModel;
+using System.Data.Objects;
 
 namespace DataRepository
 {
@@ -29,7 +30,22 @@ namespace DataRepository
         {
             return myDb.Examinations.Where(p => p.ExaminationNumber == examinatioNumber).FirstOrDefault();
         }
-
+        public List<VMExamination> GetExaminations(DateTime dateTime, int? labId)
+        {
+            var result = myDb.Examinations.Where(p =>(EntityFunctions.TruncateTime(p.CreatedDate) == dateTime) 
+                                                        && (!labId.HasValue || labId.Value == p.LabId)).ToList();
+            List<VMExamination> vmResult = result.Select(p => new VMExamination { 
+                                                                BirthDay = p.BirthDay,
+                                                                CreatedDate = p.CreatedDate.ToString("d"),
+                                                                ExaminationId = p.LabId,
+                                                                ExaminationNumber = p.ExaminationNumber,
+                                                                LabClient = p.LabClient.Name,
+                                                                PatientName = p.PatientName,
+                                                                Phone = p.Phone,
+                                                                Status= p.Status==1?"Chưa có KQ":"Có KQ"
+                                                            }).ToList();
+            return vmResult;
+        }
         public void ExaminationInsert(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId)
         {
             Examination ex = new Examination
@@ -88,7 +104,7 @@ namespace DataRepository
 
         public List<VMDoctorConnectMapping> GetDoctorConnectMappings(int doctorId)
         {
-            var result = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId && p.ConnectionState == (int) ConnectionStateEnum.Connected)
+            var result = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId && p.ConnectionState == (int)ConnectionStateEnum.Connected)
                                     .Select(p => new VMDoctorConnectMapping
                                     {
                                         DateConnected = p.DateConnected,
@@ -121,9 +137,9 @@ namespace DataRepository
         {
             //Kiem tra chua ton tai connection code thi moi insert
             var listOldMapping = myDb.DoctorConnectMappings.Where(p => p.LabId == labId && p.ClientDoctorId == clientDoctoId).ToList();
-            if (listOldMapping != null && listOldMapping.Count!=0)
+            if (listOldMapping != null && listOldMapping.Count != 0)
             {
-                listOldMapping.ForEach(p=>p.ConnectionState = (int)ConnectionStateEnum.ConnectionRemoveByLab);
+                listOldMapping.ForEach(p => p.ConnectionState = (int)ConnectionStateEnum.ConnectionRemoveByLab);
             }
             //Insert new row
             DoctorConnectMapping mapping = new DoctorConnectMapping();
@@ -191,6 +207,13 @@ namespace DataRepository
             };
             myDb.Doctors.AddObject(doctor);
             myDb.SaveChanges();
+        }
+
+        #endregion
+        #region LabClient
+        public List<LabClient> GetLabClients()
+        {
+            return myDb.LabClients.ToList();
         }
 
         #endregion

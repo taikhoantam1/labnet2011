@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AjaxResultModel.cs" />
+    <Compile Include="Models\BacSi\DanhSachBenhNhanModel.cs" />
     <Compile Include="Models\BacSi\BacSiModel.cs" />
     <Compile Include="Models\Control\AutocompleteComboBox\ComboBox.cs" />
     <Compile Include="Models\Control\AutocompleteComboBox\OptionItem.cs" />
@@ -707,7 +708,9 @@
     <Content Include="Content\Style\Site.css" />
     <Content Include="Content\Style\ui.jqgrid.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Script.js" />
     <Content Include="Views\BacSi\DanhSachLabKetNoi.aspx" />
+    <Content Include="Views\BacSi\Index.aspx" />
     <Content Include="Views\BacSi\Login.ascx" />
     <Content Include="Views\BacSi\Register.ascx" />
     <Content Include="Views\Home\Index.aspx" />
@@ -718,6 +721,7 @@
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\ComboBox.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
+    <Content Include="Views\Shared\DoctorMenu.ascx" />
     <Content Include="Views\Shared\Footer.ascx" />
     <Content Include="Views\Shared\HomeContent.ascx" />
     <Content Include="Views\Shared\SupportIcon.ascx" />

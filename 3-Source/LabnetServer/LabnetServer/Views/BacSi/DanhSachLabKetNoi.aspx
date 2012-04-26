@@ -1,16 +1,21 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<LabnetServer.Models.ThietLapKetNoiModel>" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
+    <h2 class="Title">
         Danh Sách Phòng Xét Nghiệm Kết Nối</h2>
     <%= Html.ValidationSummary() %>
     <%Html.BeginForm(); %>
     <div class="PageContent">
-        <div class="Row">
-            <%Html.RenderPartial("DataTable", Model.DanhSachKetNoiModel); %>
+        <div class="LeftCol">
+            <%Html.RenderPartial("DoctorMenu"); %>
         </div>
-        <div class="Row">
-            <input type="button" class="button multi_modal_link" value="Thêm Kết Nối Mới" href="#AddConnectionForm" />
+        <div class="RightCol">
+            <div class="Row">
+                <%Html.RenderPartial("DataTable", Model.DanhSachKetNoiModel); %>
+            </div>
+            <div class="Row">
+                <input type="button" class="button multi_modal_link" value="Thêm Kết Nối Mới" href="#AddConnectionForm" />
+            </div>
         </div>
     </div>
     <div class="hide">
@@ -21,10 +26,9 @@
             <div class="Row" id="errorMessage">
             </div>
             <div class="Row">
-                   <b>Mã Kết Nối</b> 
+                <b>Mã Kết Nối</b>
             </div>
             <div class="Row">
-                
                 <div class="Column PaddingT10 ">
                     <input type="text" id="txtConnectionCode" /></div>
                 <div class="Column PaddingL10">

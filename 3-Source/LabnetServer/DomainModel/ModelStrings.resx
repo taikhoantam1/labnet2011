@@ -135,4 +135,25 @@
   <data name="VMDoctorConnectMapping_PhoneNumber" xml:space="preserve">
     <value>Điện Thoại</value>
   </data>
+  <data name="VMExmaination_BirthDay" xml:space="preserve">
+    <value>Năm Sinh</value>
+  </data>
+  <data name="VMExmaination_CreatedDate" xml:space="preserve">
+    <value>Ngày Gửi </value>
+  </data>
+  <data name="VMExmaination_ExaminationNumber" xml:space="preserve">
+    <value>Mã XN</value>
+  </data>
+  <data name="VMExmaination_LabClient" xml:space="preserve">
+    <value>Phòng XN </value>
+  </data>
+  <data name="VMExmaination_PatientName" xml:space="preserve">
+    <value>Bệnh Nhân</value>
+  </data>
+  <data name="VMExmaination_Phone" xml:space="preserve">
+    <value>Số Điện Thoại</value>
+  </data>
+  <data name="VMExmaination_Status" xml:space="preserve">
+    <value>Trạng Thái</value>
+  </data>
 </root>

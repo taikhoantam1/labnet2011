@@ -12,7 +12,7 @@ namespace DataRepository
         public string SetupConnectionWithLab(string connectionCode, int serverDoctorId, int clientDoctorId, string clientUrl,string doctorName)
         {
             //local test url
-            clientUrl = "http://localhost:14587";
+            //clientUrl = "http://localhost:14587";
             string URI = clientUrl + "/Service/SetupDoctorConnection";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ConnectionCode={0}&ServerDoctorId={1}&ClientDoctorId={2}&DoctorConnectName={3}", connectionCode, serverDoctorId, clientDoctorId, doctorName);
