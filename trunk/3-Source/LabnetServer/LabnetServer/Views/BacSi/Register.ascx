@@ -76,6 +76,7 @@
                         alert("Bạn đã đăng ký thành công");
                         //$(this).find(".btnCloseDialog").click(CloseDialog_Click);
                         $(".MultiModal_box").dialog("close");
+                        window.location = "/KetQuaXetNghiem/BacSi";
                     }
                     else {
                         //$.unblockUI();
@@ -103,7 +104,7 @@
             }
 
             if (connectionCode.length != 7) {
-                alert("Xin vui lòng nhập mã kết nối. Lưu ý rằng mã kết nối có 7 ký tự");
+                alert("Xin vui lòng kiểm tra lại mã liên kết. Lưu ý rằng mã liên kết có 7 ký tự");
                 return;
             }
 
