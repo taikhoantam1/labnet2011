@@ -18,13 +18,13 @@ namespace DataRepository
 
             void ExaminationInsert(string ExaminationNumber, int LabId, int Status, string PatientName, string Phone, string BirthDay, int? ClientPartnerId, int? ClientDoctorId);
             Examination GetExamination(string examinatioNumber);
-        
+            List<VMExamination> GetExaminations(DateTime dateTime, int? labId);
         #endregion
         
         #region LabClient
         
             void UpdateLabAmount(int labId);
-        
+            List<LabClient> GetLabClients();
         #endregion
         
         #region DoctorConnectMapping
@@ -49,6 +49,10 @@ namespace DataRepository
             Doctor GetDoctorByUserName(string UserName);
             void DoctorInsert(string Name, string UserName, string Password, string Address, string PhoneNumber, string Email);
         #endregion
+
+
+
+
 
             
     }

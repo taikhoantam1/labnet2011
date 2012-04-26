@@ -113,5 +113,68 @@ namespace DomainModel {
                 return ResourceManager.GetString("VMDoctorConnectMapping_PhoneNumber", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Năm Sinh.
+        /// </summary>
+        internal static string VMExmaination_BirthDay {
+            get {
+                return ResourceManager.GetString("VMExmaination_BirthDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày Gửi .
+        /// </summary>
+        internal static string VMExmaination_CreatedDate {
+            get {
+                return ResourceManager.GetString("VMExmaination_CreatedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã XN.
+        /// </summary>
+        internal static string VMExmaination_ExaminationNumber {
+            get {
+                return ResourceManager.GetString("VMExmaination_ExaminationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phòng XN .
+        /// </summary>
+        internal static string VMExmaination_LabClient {
+            get {
+                return ResourceManager.GetString("VMExmaination_LabClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bệnh Nhân.
+        /// </summary>
+        internal static string VMExmaination_PatientName {
+            get {
+                return ResourceManager.GetString("VMExmaination_PatientName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số Điện Thoại.
+        /// </summary>
+        internal static string VMExmaination_Phone {
+            get {
+                return ResourceManager.GetString("VMExmaination_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMExmaination_Status {
+            get {
+                return ResourceManager.GetString("VMExmaination_Status", resourceCulture);
+            }
+        }
     }
 }

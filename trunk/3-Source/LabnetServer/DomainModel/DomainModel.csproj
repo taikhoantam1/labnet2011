@@ -54,6 +54,7 @@
     <Compile Include="VMDoctor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VMDoctorConnectMapping.cs" />
+    <Compile Include="VMExmaination.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ModelStrings.resx">

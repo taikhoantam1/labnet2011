@@ -39,7 +39,7 @@
 					        }));
 					    },
 					    select: function (event, ui) {
-					        $("#<%= Model.ComboBoxId %> .autoCompleteBindingValue").val(ui.item.id);
+					        $("#<%= Model.ComboBoxId %>_autoCompleteBindingValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedValue").val(ui.item.id);
 					        $("#<%= Model.ComboBoxId %>_SelectedText").val(ui.item.value);
 					        $("#<%= Model.ComboBoxId %>_SelectedTag").val(ui.item.tag);
@@ -161,7 +161,7 @@
     }
 </style>
 <![endif]-->
-<input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>"
+<input type="hidden" id="<%= Model.ComboBoxId %>_autoCompleteBindingValue" value="<%= Model.SelectedValue %>"
     name="<%=Model.BindingName%>" />
 <input type="hidden" class="autoCompleteTag" id="<%= Model.ComboBoxId %>_SelectedTag"
     value="<%= Model.SelectedTag %>" />
