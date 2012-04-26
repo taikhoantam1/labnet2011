@@ -74,10 +74,29 @@ namespace LabnetServer.Controllers
 
             if (null != doctorConnect)
             {
+                
                 Repository.DoctorInsert(Name, UserName, Password, Address, PhoneNumber, Email);
                 Doctor doctor = Repository.GetDoctorByUserName(UserName);
-                Repository.UpdateMappingForDoctorConnect(doctorConnect.Id, doctor.DoctorId);
-                return new { Message = "Success" }.ToJson();
+                string result = ClientConnector.SetupConnectionWithLab(ConnectionCode, doctor.DoctorId, doctorConnect.ClientDoctorId, doctorConnect.LabClient.Url, doctor.Name);
+
+                if (result == "Success")
+                {
+                    Repository.UpdateMappingForDoctorConnect(doctorConnect.Id, doctor.DoctorId);
+                    return new { Message = "Success" }.ToJson();
+                }
+                else
+                {
+                    switch (result)
+                    {
+                        case "Doctor_Connection_Error1":
+                            return new { Message = "Kết nối thất bại: Mã kết nối không tồn tại" }.ToJson();
+                        case "Doctor_Connection_Error2":
+                            return new { Message = "Kết nối thất bại: Mã kết nối đã được sử dụng" }.ToJson();
+                        case "Doctor_Connection_Error3":
+                            return new { Message = "Kết nối thất bại: Bạn đã kết nối với lab có mã kết nối này" }.ToJson();
+                    }
+                }
+                
             }
 
             return new { Message = "Sai mã kết nối" }.ToJson(); 
