@@ -93,6 +93,7 @@ namespace LabnetServer.Controllers
                 if (result == "Success")
                 {
                     Repository.UpdateMappingForDoctorConnect(doctorConnect.Id, doctor.DoctorId);
+                    Session[SessionProperties.SessionDoctor] = doctor;
                     return new { Message = "Success" }.ToJson();
                 }
                 else
