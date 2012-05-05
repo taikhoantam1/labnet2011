@@ -1331,7 +1331,7 @@ Year(Today())</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>- Chẩn Đoán:</Value>
+                  <Value>- Chẩn đoán:</Value>
                   <Style>
                     <FontWeight>Normal</FontWeight>
                   </Style>
