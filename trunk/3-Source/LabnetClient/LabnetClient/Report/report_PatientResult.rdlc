@@ -1163,7 +1163,7 @@ Year(Today())</Value>
           <rd:DefaultName>Address</rd:DefaultName>
           <Top>2.50906in</Top>
           <Left>1.4193in</Left>
-          <Height>0.19097in</Height>
+          <Height>0.20433in</Height>
           <Width>2.46875in</Width>
           <ZIndex>9</ZIndex>
           <Style>
@@ -1344,7 +1344,7 @@ Year(Today())</Value>
           <Top>2.72728in</Top>
           <Left>0.28407in</Left>
           <Height>0.21875in</Height>
-          <Width>1.1189in</Width>
+          <Width>1.13523in</Width>
           <ZIndex>15</ZIndex>
           <Style>
             <Border>
@@ -1376,7 +1376,7 @@ Year(Today())</Value>
           <Top>2.94603in</Top>
           <Left>0.28928in</Left>
           <Height>0.21875in</Height>
-          <Width>1.10501in</Width>
+          <Width>1.13001in</Width>
           <ZIndex>16</ZIndex>
           <Style>
             <Border>
@@ -1395,7 +1395,7 @@ Year(Today())</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>=First(Fields!Diagnosis.Value, "PatientResult")</Value>
+                  <Value>=Fields!Diagnosis.Value</Value>
                   <Style />
                 </TextRun>
               </TextRuns>
@@ -1403,9 +1403,9 @@ Year(Today())</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Diagnosis</rd:DefaultName>
-          <Top>2.74117in</Top>
+          <Top>2.71339in</Top>
           <Left>1.4193in</Left>
-          <Height>0.21875in</Height>
+          <Height>0.23264in</Height>
           <Width>5.51721in</Width>
           <ZIndex>17</ZIndex>
           <Style>
