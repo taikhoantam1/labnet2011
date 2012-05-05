@@ -957,6 +957,29 @@ namespace DataRepository
                                                                  }).FirstOrDefault();
             return labExamination;
         }
+
+        public VMLabExamination GetLabExaminationById(int Id)
+        {
+            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.Id == Id)
+                                                                .Select(p => new VMLabExamination
+                                                                {
+                                                                    CreatedBy = p.CreatedBy,
+                                                                    Diagnosis = p.Diagnosis,
+                                                                    Id = p.Id,
+                                                                    OrderNumber = p.OrderNumber,
+                                                                    PartnerId = p.PartnerId,
+                                                                    PatientId = p.PatientId,
+                                                                    PartnerName = p.Partner.Name,
+                                                                    ReceivedDate = p.ReceivedDate,
+                                                                    Status = p.Status,
+                                                                    ExaminationNumber = p.ExaminationNumber,
+                                                                    DoctorId = p.DoctorId,
+                                                                    DoctorName = p.Doctor.Name
+
+                                                                }).FirstOrDefault();
+            return labExamination;
+        }
+
         #endregion
 
         #region Result

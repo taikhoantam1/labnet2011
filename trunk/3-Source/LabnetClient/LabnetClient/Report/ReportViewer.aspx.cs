@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
 using DataRepository;
 using DomainModel.Report;
+using DomainModel;
+using AutoMapper;
 
 namespace LabnetClient.Report
 {
@@ -72,21 +74,35 @@ namespace LabnetClient.Report
 
         private void Report_PatientResult(string ReportName)
         {
+            string defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
             reportViewer.LocalReport.EnableExternalImages = true;
             IDataRepository repository = new Repository();
             int labExamination = int.Parse(Request["LabExaminationId"]);
             Partner partner = repository.GetPartnerByLabExamination(labExamination);
-            //Uri filepath = new Uri("D:/logoKA.jpg");
+            LabExamination lab = Mapper.Map<VMLabExamination, LabExamination>(repository.GetLabExaminationById(labExamination));
             String rootPath = Server.MapPath("~");
-            //rootPath += "Content\\Images\\Sites_Banner\\logoKA.JPG";
+            
             if (partner != null)
             {
-                if (!String.IsNullOrEmpty(partner.Logo))
+                if (!string.IsNullOrEmpty(partner.Logo))
                 {
                     rootPath += partner.Logo;
+                }                
+            }
+
+            if (lab != null)
+            {
+                if (!string.IsNullOrEmpty(lab.DoctorId.ToString()))
+                {
+                    rootPath += defaultLogo;
                 }
             }
-            //ReportParameter path = new ReportParameter("Path", filepath.AbsoluteUri);
+
+            if (partner == null && string.IsNullOrEmpty(lab.DoctorId.ToString()))
+            {
+                rootPath += defaultLogo;
+            }
+            
             Uri fileRootPath = new Uri(rootPath);
             ReportParameter path = new ReportParameter("Path", fileRootPath.AbsoluteUri);
             List<Report_PatientResult> results = repository.ReportData_PatientResult(labExamination);

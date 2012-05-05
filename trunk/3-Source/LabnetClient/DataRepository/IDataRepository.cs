@@ -149,6 +149,7 @@ namespace DataRepository
             int LabExaminationInsert(LabExamination labExamination);
             int GetLabExaminationOrderNumber();
             VMLabExamination GetLabExamination(int LabExaminationId);
+            VMLabExamination GetLabExaminationById(int Id);
             VMLabExamination GetLabExamination(int OrderNumber, DateTime ReceivedDate);
             VMLabExamination GetLabExamination(string examinationNumber);
             void LabExaminationUpdate(int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination);

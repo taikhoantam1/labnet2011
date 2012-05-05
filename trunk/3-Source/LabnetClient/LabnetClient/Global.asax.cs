@@ -89,6 +89,8 @@ namespace LabnetClient
 
             Mapper.CreateMap<Instrument, VMInstrument>();
             Mapper.CreateMap<VMInstrument, Instrument>();
+            Mapper.CreateMap<LabExamination, VMLabExamination>();
+            Mapper.CreateMap<VMLabExamination, LabExamination>();
         }
     }
 }
