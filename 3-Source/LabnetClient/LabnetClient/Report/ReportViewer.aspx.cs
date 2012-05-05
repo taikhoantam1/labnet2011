@@ -72,11 +72,27 @@ namespace LabnetClient.Report
 
         private void Report_PatientResult(string ReportName)
         {
+            reportViewer.LocalReport.EnableExternalImages = true;
             IDataRepository repository = new Repository();
             int labExamination = int.Parse(Request["LabExaminationId"]);
+            Partner partner = repository.GetPartnerByLabExamination(labExamination);
+            //Uri filepath = new Uri("D:/logoKA.jpg");
+            String rootPath = Server.MapPath("~");
+            //rootPath += "Content\\Images\\Sites_Banner\\logoKA.JPG";
+            if (partner != null)
+            {
+                if (!String.IsNullOrEmpty(partner.Logo))
+                {
+                    rootPath += partner.Logo;
+                }
+            }
+            //ReportParameter path = new ReportParameter("Path", filepath.AbsoluteUri);
+            Uri fileRootPath = new Uri(rootPath);
+            ReportParameter path = new ReportParameter("Path", fileRootPath.AbsoluteUri);
             List<Report_PatientResult> results = repository.ReportData_PatientResult(labExamination);
             string reportFullName = "/Report/" + ReportName + ".rdlc";
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
+            reportViewer.LocalReport.SetParameters(path);
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("PatientResult", results));
         }
     }

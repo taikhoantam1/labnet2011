@@ -131,6 +131,16 @@ namespace DataRepository
             List<SearchPartnerByName_Result> lstPartner = myDb.SearchPartnerByName(name, searchType).ToList();
             return lstPartner.Select(p => new { Label = p.Name, Value = p.Name });
         }
+
+        public Partner GetPartnerByLabExamination(int examinationNumber)
+        {
+            Partner partner = (from _partner in myDb.Partners
+                               join
+                                   _labExamination in myDb.LabExaminations on _partner.Id equals _labExamination.PartnerId
+                               where _labExamination.Id == examinationNumber
+                               select _partner).FirstOrDefault();
+            return partner;
+        }
         #endregion
 
         #region PartnerCost

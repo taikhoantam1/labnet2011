@@ -46,6 +46,8 @@ namespace DataRepository
         List<Partner> GetPartners();
 
         object GetPartnerNameByName(string name, string searchType);
+
+        Partner GetPartnerByLabExamination(int examinationNumber);
         #endregion
 
         #region PartnerCost

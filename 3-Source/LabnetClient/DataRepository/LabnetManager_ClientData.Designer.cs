@@ -1005,25 +1005,6 @@ namespace DataRepository
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="labExaminationId">No Metadata Documentation available.</param>
-        public ObjectResult<Report_PatientResult> Report_PatientResult(Nullable<global::System.Int32> labExaminationId)
-        {
-            ObjectParameter labExaminationIdParameter;
-            if (labExaminationId.HasValue)
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
-            }
-            else
-            {
-                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="labExaminationId">No Metadata Documentation available.</param>
         public ObjectResult<TestResultsGet_Result> PatientTestResultsGet(Nullable<global::System.Int32> labExaminationId)
         {
             ObjectParameter labExaminationIdParameter;
@@ -1253,6 +1234,25 @@ namespace DataRepository
             }
     
             return base.ExecuteFunction<global::System.String>("GenerateConnectionCode", lengthParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="labExaminationId">No Metadata Documentation available.</param>
+        public ObjectResult<Report_PatientResult> Report_PatientResult(Nullable<global::System.Int32> labExaminationId)
+        {
+            ObjectParameter labExaminationIdParameter;
+            if (labExaminationId.HasValue)
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", labExaminationId);
+            }
+            else
+            {
+                labExaminationIdParameter = new ObjectParameter("LabExaminationId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
         }
 
         #endregion
@@ -8622,6 +8622,30 @@ namespace DataRepository
         private global::System.DateTime _LastUpdated;
         partial void OnLastUpdatedChanging(global::System.DateTime value);
         partial void OnLastUpdatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Logo
+        {
+            get
+            {
+                return _Logo;
+            }
+            set
+            {
+                OnLogoChanging(value);
+                ReportPropertyChanging("Logo");
+                _Logo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Logo");
+                OnLogoChanged();
+            }
+        }
+        private global::System.String _Logo;
+        partial void OnLogoChanging(global::System.String value);
+        partial void OnLogoChanged();
 
         #endregion
     }
