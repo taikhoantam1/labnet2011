@@ -1363,7 +1363,7 @@ Year(Today())</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>- Bác sỉ chỉ định:</Value>
+                  <Value>- Bác sĩ chỉ định:</Value>
                   <Style>
                     <FontWeight>Normal</FontWeight>
                   </Style>
