@@ -832,9 +832,6 @@
             <End Role="Test" EntitySet="Tests" />
             <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
-          <FunctionImport Name="Report_PatientResult" ReturnType="Collection(LabManager_ClientModel.Report_PatientResult)">
-          <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="PatientTestResultsGet" ReturnType="Collection(LabManager_ClientModel.TestResultsGet_Result)">
           <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -906,6 +903,9 @@
             <End Role="Doctor" EntitySet="Doctors" />
             <End Role="TestCommission" EntitySet="TestCommissions" />
           </AssociationSet>
+          <FunctionImport Name="Report_PatientResult" ReturnType="Collection(LabManager_ClientModel.Report_PatientResult)">
+            <Parameter Name="LabExaminationId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1404,26 +1404,6 @@
           <Property Type="Int32" Name="OrderNumber" Nullable="false" />
           <Property Type="DateTime" Name="ReceivedDate" Nullable="false" Precision="16" />
         </ComplexType>
-        <ComplexType Name="Report_PatientResult">
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="3" />
-          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Age" Nullable="false" MaxLength="4" />
-          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
-          <Property Type="String" Name="ExaminationNumber" Nullable="false" MaxLength="7" />
-          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" Precision="16" />
-          <Property Type="String" Name="Diagnosis" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TestName" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="TestSectionId" Nullable="false" />
-          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
-          <Property Type="Double" Name="LowIndex" Nullable="true" />
-          <Property Type="Double" Name="HighIndex" Nullable="true" />
-          <Property Type="Boolean" Name="IsBold" Nullable="false" />
-          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
-        </ComplexType>
         <ComplexType Name="report_ThongKeTaiChinh_Result">
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
           <Property Type="Boolean" Name="Gender" Nullable="false" />
@@ -1609,6 +1589,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Report_PatientResult">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Age" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ExaminationNumber" Nullable="false" MaxLength="7" />
+          <Property Type="DateTime" Name="ReceivedDate" Nullable="false" Precision="16" />
+          <Property Type="String" Name="Diagnosis" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TestName" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TestSectionId" Nullable="false" />
+          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
+          <Property Type="Double" Name="LowIndex" Nullable="true" />
+          <Property Type="Double" Name="HighIndex" Nullable="true" />
+          <Property Type="Boolean" Name="IsBold" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Logo" Nullable="true" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1920,30 +1921,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Report_PatientResult" FunctionName="LabManager_ClientModel.Store.sp_Report_PatientResult">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LabManager_ClientModel.Report_PatientResult">
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
-                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
-                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
-                <ScalarProperty Name="TestName" ColumnName="TestName" />
-                <ScalarProperty Name="Range" ColumnName="Range" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
-                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="LowIndex" ColumnName="LowIndex" />
-                <ScalarProperty Name="HighIndex" ColumnName="HighIndex" />
-                <ScalarProperty Name="IsBold" ColumnName="IsBold" />
-                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="PatientTestResultsGet" FunctionName="LabManager_ClientModel.Store.sp_PatientTestResultsGet">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LabManager_ClientModel.TestResultsGet_Result">
@@ -2118,6 +2095,31 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Report_PatientResult" FunctionName="LabManager_ClientModel.Store.sp_Report_PatientResult">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.Report_PatientResult">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
+                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="LowIndex" ColumnName="LowIndex" />
+                <ScalarProperty Name="HighIndex" ColumnName="HighIndex" />
+                <ScalarProperty Name="IsBold" ColumnName="IsBold" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2139,7 +2141,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="LabnetManager_ClientData" ZoomLevel="82">
+      <Diagram Name="LabnetManager_ClientData" ZoomLevel="81">
         <EntityTypeShape EntityType="LabManager_ClientModel.Analysis" Width="1.5" PointX="5.25" PointY="9.875" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="LabManager_ClientModel.LabUser" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500102" />
         <EntityTypeShape EntityType="LabManager_ClientModel.Panel" Width="1.5" PointX="6" PointY="18.25" Height="2.172587890624996" />
