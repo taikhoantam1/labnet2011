@@ -6,12 +6,12 @@
             <a href="#">Thông tin tài khoản</a>
         </li>
         <li>
-            <a href="/Doctor/">Danh Sách Bệnh Nhân Gửi Mẩu</a>
+            <a href="/BacSi/">Danh Sách Bệnh Nhân Gửi Mẩu</a>
         </li>
         <li>
             <a href="/KetQuaXetNghiem/BacSi">Xem Kết Quả Xet Nghiệm</a></li>
         <li>
-            <a href="/Doctor/DanhSachLabKetNoi">Danh Sách Lab Kết Nối</a>
+            <a href="/BacSi/DanhSachLabKetNoi">Danh Sách Lab Kết Nối</a>
         </li>
     </ul>
 </div>

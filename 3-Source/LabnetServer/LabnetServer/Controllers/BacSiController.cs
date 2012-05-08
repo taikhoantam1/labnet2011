@@ -18,10 +18,10 @@ namespace LabnetServer.Controllers
         {
             get
             {
-                if( Session["Doctor"] == null)
-                     Session["Doctor"] = Repository.GetDoctor(1);
+                if (Session[SessionProperties.SessionDoctor] == null)
+                    return null;
 
-                return (Doctor)Session["Doctor"];
+                return (Doctor)Session[SessionProperties.SessionDoctor];
             }
         }
 
@@ -30,6 +30,7 @@ namespace LabnetServer.Controllers
             DanhSachBenhNhanModel model = new DanhSachBenhNhanModel(Repository.GetLabClients());
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Index(DanhSachBenhNhanModel model)
         {
@@ -37,10 +38,12 @@ namespace LabnetServer.Controllers
             int? labIdSelected = model.LabId;
             model = new DanhSachBenhNhanModel(Repository.GetLabClients());
             model.DanhSachBenhNhanDataTableModel = new JQGridModel(typeof(VMExamination), false, examinations, "");
+            if(labIdSelected.HasValue)
             model.LabComboBox.SelectedValue = labIdSelected.Value.ToString();
             
             return View(model);
         }
+
         public ActionResult Login()
         {
             return PartialView();
@@ -117,12 +120,13 @@ namespace LabnetServer.Controllers
         [HttpGet]
         public ActionResult DanhSachLabKetNoi()
         {
-            //if (Session["Doctor"] == null)
-            //    return Redirect(Constant.DomainUrl);
+            if (CurrentDoctor == null)
+                return Redirect(Constant.DomainUrl);
+
             ThietLapKetNoiModel model = new ThietLapKetNoiModel();
             List<VMDoctorConnectMapping> list = Repository.GetDoctorConnectMappings(CurrentDoctor.DoctorId);
             model.DanhSachKetNoiModel = new JQGridModel(typeof(VMDoctorConnectMapping), false, list, "");
-            model.Doctor = (Doctor)Session["Doctor"];
+            model.Doctor = CurrentDoctor;
             return View(model);
         }
 

@@ -1,10 +1,8 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetServer.Models.KQXNModel>" %>
 
-<div class="PaddingT15"></div>
 <%=Html.ValidationSummary() %>
 <% Html.BeginForm(); %>
-<div class="PageContent">
-        <h3 class="PaddingT20 PaddingL20">
+        <h3 style="padding-left:8px; font-size: 18px;">
             <%=Resources.GlobalStrings.KQXN_MaXetNghiem%></h3>
         <div class="Row PaddingL20">
             <div class="Column Width200 PaddingT10">

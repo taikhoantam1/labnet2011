@@ -7,7 +7,7 @@ namespace DomainModel
 {
     public static class Constant
     {
-        public static string DomainUrl = "labnet.vn";
+        public static string DomainUrl = "http://labnet.vn";
     }
 
     public enum ConnectionStateEnum

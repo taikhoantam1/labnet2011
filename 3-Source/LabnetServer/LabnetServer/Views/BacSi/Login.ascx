@@ -30,7 +30,7 @@
             dataType: "Json",
             success: function (data) {
                 if (data.Message == "Success") {
-                    window.location = "/KetQuaXetNghiem/BacSi";
+                    window.location = "/BacSi";
                 }
                 else {
                     $.unblockUI();

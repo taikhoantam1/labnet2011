@@ -29,7 +29,6 @@ namespace LabnetServer.Controllers
         public ActionResult BenhNhan(KQXNModel model)
         {
             Examination examination = Repository.GetExamination(model.ExaminationNumber);
-            //model.LabUrl = "http://localhost:14587/Report/PatientResultReport_ForServer?ExaminationNumber=" + model.ExaminationNumber;
             
             if (examination != null)
             {
@@ -60,7 +59,7 @@ namespace LabnetServer.Controllers
                 {
                     ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
                 }
-                return View("KQXN_BenhNhan", model);
+                return View("KQXN_BacSi", model);
             }
 
             return Redirect("/Home");
@@ -72,7 +71,7 @@ namespace LabnetServer.Controllers
             if (null != doctor)
             {
                 KQXNModel model = new KQXNModel();
-                return View("KQXN_BenhNhan", model);
+                return View("KQXN_BacSi", model);
             }
 
             return Redirect("/Home");
