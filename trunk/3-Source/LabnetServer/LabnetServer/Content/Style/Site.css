@@ -400,14 +400,6 @@ h5, h6
     width: 93%;
 }
 
-.lbTitle
-{
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: left;
-    width: 110px;
-}
 
 .LeftMenu
 {
@@ -434,8 +426,10 @@ h5, h6
 .Title
 {
     text-align:center;
-    padding-top:20px; 
-    font-size:20px;
+    padding-top:15px; 
+    font-size:25px;
+    margin-bottom:10px;
+    padding-bottom:0px;
 }
 .MenuTitle
 {

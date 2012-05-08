@@ -119,7 +119,7 @@
     Đăng Ký</div>
 <div id="registerWrapper">
     <div class="ContentTop">
-        <div class="LeftCol">
+        <div class="LeftCol" style="width:48%">
             <div class="Row">
                 <div class="Column">
                      <label class="lbTitle">
@@ -170,7 +170,7 @@
             </div>
         </div>
 
-        <div class="RightCol">
+        <div class="RightCol" style="width:48%">
             <div class="Row">
                 <div class="Column">
                     <label class="lbTitle">

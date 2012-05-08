@@ -1,5 +1,20 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<LabnetServer.Models.KQXNModel>" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<% Html.RenderPartial("HomeContent"); %>
+
+    <h2 class="Title">
+        Xem kết quả xét nghiệm</h2>
+    <%= Html.ValidationSummary() %>
+    <%Html.BeginForm(); %>
+    <div class="PageContent">
+        <div class="LeftCol">
+            <%Html.RenderPartial("DoctorMenu"); %>
+        </div>
+        <div class="RightCol">
+            <div class="Row">
+                <% Html.RenderPartial("KQSN",Model); %>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
 </asp:Content>
