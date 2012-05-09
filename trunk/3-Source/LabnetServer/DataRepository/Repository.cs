@@ -25,6 +25,7 @@ namespace DataRepository
             LabnetAccount account = Context.LabnetAccounts.Where(p => p.UserName == UserName).FirstOrDefault();
             return account;
         }
+
         #region Examination
         public Examination GetExamination(string examinatioNumber)
         {
@@ -32,18 +33,18 @@ namespace DataRepository
         }
         public List<VMExamination> GetExaminations(DateTime dateTime, int? labId)
         {
-            var result = myDb.Examinations.Where(p =>(EntityFunctions.TruncateTime(p.CreatedDate) == dateTime) 
+            var result = myDb.Examinations.Where(p => (EntityFunctions.TruncateTime(p.CreatedDate) == dateTime)
                                                         && (!labId.HasValue || labId.Value == p.LabId)).ToList();
-            List<VMExamination> vmResult = result.Select(p => new VMExamination { 
-                                                                BirthDay = p.BirthDay,
-                                                                CreatedDate = p.CreatedDate.ToString("d"),
-                                                                ExaminationId = p.LabId,
-                                                                ExaminationNumber = p.ExaminationNumber,
-                                                                LabClient = p.LabClient.Name,
-                                                                PatientName = p.PatientName,
-                                                                Phone = p.Phone,
-                                                                Status= p.Status==1?"Chưa có KQ":"Có KQ"
-                                                            }).ToList();
+            List<VMExamination> vmResult = result.Select(p => new VMExamination
+            {
+                BirthDay = p.BirthDay,
+                CreatedDate = p.CreatedDate.ToString("d"),
+                ExaminationId = p.LabId,
+                ExaminationNumber = p.ExaminationNumber,
+                PatientName = p.PatientName,
+                Phone = p.Phone,
+                Status = p.Status == 1 ? "Chưa có KQ" : "Có KQ"
+            }).ToList();
             return vmResult;
         }
         public void ExaminationInsert(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId)
@@ -171,6 +172,22 @@ namespace DataRepository
         #endregion
 
         #region Doctor
+        public Doctor DoctorChangePassword(int doctorId,string newPass)
+        {
+            var doctor = myDb.Doctors.Where(p=>p.DoctorId == doctorId).FirstOrDefault();
+            if(doctor== null)
+                return null;
+            try
+            {
+                doctor.Password = newPass;
+                myDb.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return doctor;
+        }
         public bool IsDoctorConnectWithLab(int currentDoctorId)
         {
             return myDb.DoctorConnectMappings.Any(p => p.DoctorId == currentDoctorId && p.ConnectionState == (int)ConnectionStateEnum.Connected);
@@ -210,12 +227,19 @@ namespace DataRepository
         }
 
         #endregion
+
         #region LabClient
         public List<LabClient> GetLabClients()
         {
             return myDb.LabClients.ToList();
         }
 
+        public List<LabClient> GetConnectedLab(int doctorId)
+        {
+          return  myDb.DoctorConnectMappings
+                .Where(p => p.ConnectionState == (int)ConnectionStateEnum.Connected && p.DoctorId == doctorId)
+                .Select(p => p.LabClient).ToList();
+        }
         #endregion
     }
 }

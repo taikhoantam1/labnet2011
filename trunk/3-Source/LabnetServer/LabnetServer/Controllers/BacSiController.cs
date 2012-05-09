@@ -23,24 +23,29 @@ namespace LabnetServer.Controllers
 
                 return (Doctor)Session[SessionProperties.SessionDoctor];
             }
+            set {
+                Session[SessionProperties.SessionDoctor]= value;
+            }
         }
 
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult Index()
         {
-            DanhSachBenhNhanModel model = new DanhSachBenhNhanModel(Repository.GetLabClients());
+            DanhSachBenhNhanModel model = new DanhSachBenhNhanModel(Repository.GetConnectedLab(CurrentDoctor.DoctorId));
             return View(model);
         }
 
         [HttpPost]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult Index(DanhSachBenhNhanModel model)
         {
             List<VMExamination> examinations = Repository.GetExaminations(model.SentDate, model.LabId);
             int? labIdSelected = model.LabId;
             model = new DanhSachBenhNhanModel(Repository.GetLabClients());
             model.DanhSachBenhNhanDataTableModel = new JQGridModel(typeof(VMExamination), false, examinations, "");
-            if(labIdSelected.HasValue)
-            model.LabComboBox.SelectedValue = labIdSelected.Value.ToString();
-            
+            if (labIdSelected.HasValue)
+                model.LabComboBox.SelectedValue = labIdSelected.Value.ToString();
+
             return View(model);
         }
 
@@ -68,13 +73,35 @@ namespace LabnetServer.Controllers
             return new { Message = "Không tồn tại tài khoản này" }.ToJson();
         }
 
+        [HttpGet]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
+        public string ChangePassword (string oldPass,string newPass)
+        {
+            if (CurrentDoctor!= null && CurrentDoctor.Password == oldPass)
+            {
+                Doctor doctor = Repository.DoctorChangePassword(CurrentDoctor.DoctorId,newPass);
+                Session[SessionProperties.SessionDoctor] = doctor;
+                    return new { Message = "Success" }.ToJson();
+            }
+            else
+            {
+                return new { Message = "Sai mật khẩu" }.ToJson(); ;
+            }
+        }
         public ActionResult Register()
         {
             return PartialView();
         }
 
         [HttpPost]
-        public string Register(string Name, string UserName, string Password, string PasswordVerify, 
+        public string Register(string Name, string UserName, string Password, string PasswordVerify,
                                     string ConnectionCode, string Address, string PhoneNumber, string Email)
         {
             DoctorConnectMapping doctorConnect = Repository.GetDoctorConnectMapping(ConnectionCode);
@@ -83,12 +110,12 @@ namespace LabnetServer.Controllers
             bool isAccountExisted = Repository.CheckDoctorAccount(UserName);
             if (isAccountExisted)
             {
-                return new { Message = "Tên đăng nhập đã được dùng bởi bác sĩ khác. Vui lòng chọn lại tên đăng nhập" }.ToJson(); 
+                return new { Message = "Tên đăng nhập đã được dùng bởi bác sĩ khác. Vui lòng chọn lại tên đăng nhập" }.ToJson();
             }
 
             if (null != doctorConnect)
             {
-                
+
                 Repository.DoctorInsert(Name, UserName, Password, Address, PhoneNumber, Email);
                 Doctor doctor = Repository.GetDoctorByUserName(UserName);
                 string result = ClientConnector.SetupConnectionWithLab(ConnectionCode, doctor.DoctorId, doctorConnect.ClientDoctorId, doctorConnect.LabClient.Url, doctor.Name);
@@ -111,18 +138,16 @@ namespace LabnetServer.Controllers
                             return new { Message = "Kết nối thất bại: Bạn đã kết nối với lab có mã kết nối này" }.ToJson();
                     }
                 }
-                
+
             }
 
-            return new { Message = "Sai mã kết nối" }.ToJson(); 
+            return new { Message = "Sai mã kết nối" }.ToJson();
         }
 
         [HttpGet]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult DanhSachLabKetNoi()
         {
-            if (CurrentDoctor == null)
-                return Redirect(Constant.DomainUrl);
-
             ThietLapKetNoiModel model = new ThietLapKetNoiModel();
             List<VMDoctorConnectMapping> list = Repository.GetDoctorConnectMappings(CurrentDoctor.DoctorId);
             model.DanhSachKetNoiModel = new JQGridModel(typeof(VMDoctorConnectMapping), false, list, "");
@@ -131,6 +156,7 @@ namespace LabnetServer.Controllers
         }
 
         [HttpPost]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public string ConnectWithLab(string ConnectionCode)
         {
             AjaxResultModel model = new AjaxResultModel();
@@ -152,7 +178,7 @@ namespace LabnetServer.Controllers
             }
 
             // Kiem tra basi đã kết nối với lab chưa
-            
+
             bool isDoctorConnectWithLab = Repository.IsDoctorConnectWithLab(CurrentDoctor.DoctorId);
             if (isDoctorConnectWithLab)
             {
@@ -162,7 +188,7 @@ namespace LabnetServer.Controllers
             }
             try
             {
-                string result = ClientConnector.SetupConnectionWithLab(mapping.ConnectionCode, CurrentDoctor.DoctorId, mapping.ClientDoctorId, mapping.LabClient.Url,CurrentDoctor.Name);
+                string result = ClientConnector.SetupConnectionWithLab(mapping.ConnectionCode, CurrentDoctor.DoctorId, mapping.ClientDoctorId, mapping.LabClient.Url, CurrentDoctor.Name);
                 if (result == "Success")
                 {
                     Repository.UpdateMappingForDoctorConnect(mapping.Id, CurrentDoctor.DoctorId);

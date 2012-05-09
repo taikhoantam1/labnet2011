@@ -123,6 +123,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaXetNghiemController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="CustomeAttribute\PermissionsAttribute.cs" />
     <Compile Include="CustomeAttribute\LocalizedDisplayNameAttribute.cs" />
     <Compile Include="CustomeAttribute\SetCultureAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -709,6 +710,7 @@
     <Content Include="Content\Style\ui.jqgrid.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Script.js" />
+    <Content Include="Views\BacSi\ChangePassword.ascx" />
     <Content Include="Views\BacSi\DanhSachLabKetNoi.aspx" />
     <Content Include="Views\BacSi\Index.aspx" />
     <Content Include="Views\BacSi\Login.ascx" />

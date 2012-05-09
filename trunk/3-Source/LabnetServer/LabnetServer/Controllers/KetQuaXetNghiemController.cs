@@ -22,35 +22,49 @@ namespace LabnetServer.Controllers
         public ActionResult BenhNhan()
         {
             KQXNModel model = new KQXNModel();
-            return View("KQXN_BenhNhan",model);
+            return View("KQXN_BenhNhan", model);
         }
 
         [HttpPost]
         public ActionResult BenhNhan(KQXNModel model)
         {
             Examination examination = Repository.GetExamination(model.ExaminationNumber);
-            
+
             if (examination != null)
             {
-                model.LabUrl =string.Format("{0}/{1}={2}",examination.LabClient.Url,"Report/PatientResultReport_ForServer?ExaminationNumber",model.ExaminationNumber);
+                model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
             }
-            else 
+            else
             {
                 ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
             }
-            return View("KQXN_BenhNhan",model);
+            return View("KQXN_BenhNhan", model);
         }
 
         [HttpPost]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult BacSi(KQXNModel model)
         {
-            Doctor doctor = (Doctor)Session[SessionProperties.SessionDoctor];
-
-            if (null != doctor)
+            Examination examination = Repository.GetExamination(model.ExaminationNumber);
+            if (examination != null)
             {
-                Examination examination = Repository.GetExamination(model.ExaminationNumber);
-                //model.LabUrl = "http://localhost:14587/Report/PatientResultReport_ForServer?ExaminationNumber=" + model.ExaminationNumber;
+                model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
+            }
+            else
+            {
+                ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
+            }
+            return View("KQXN_BacSi", model);
+        }
 
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
+        public ActionResult ViewResultFromList(string ExaminationNumber)
+        {
+            Examination examination = Repository.GetExamination(ExaminationNumber);
+            if(examination != null)
+            {
+                KQXNModel model = new KQXNModel();
+                model.ExaminationNumber = ExaminationNumber;
                 if (examination != null)
                 {
                     model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
@@ -61,20 +75,14 @@ namespace LabnetServer.Controllers
                 }
                 return View("KQXN_BacSi", model);
             }
-
-            return Redirect("/Home");
+            return Redirect(Constant.DomainUrl);
         }
 
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult BacSi()
         {
-            Doctor doctor = (Doctor)Session[SessionProperties.SessionDoctor];
-            if (null != doctor)
-            {
-                KQXNModel model = new KQXNModel();
-                return View("KQXN_BacSi", model);
-            }
-
-            return Redirect("/Home");
+            KQXNModel model = new KQXNModel();
+            return View("KQXN_BacSi", model);
         }
     }
 }
