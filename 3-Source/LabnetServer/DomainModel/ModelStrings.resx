@@ -156,4 +156,7 @@
   <data name="VMExmaination_Status" xml:space="preserve">
     <value>Trạng Thái</value>
   </data>
+  <data name="VMExmaination_ViewResult" xml:space="preserve">
+    <value>Xem KQ</value>
+  </data>
 </root>

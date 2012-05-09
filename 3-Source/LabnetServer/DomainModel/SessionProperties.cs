@@ -7,6 +7,6 @@ namespace DomainModel
 {
     public class SessionProperties
     {
-        public const string SessionDoctor = "Session_Doctor";
+        public const string SessionDoctor = "Doctor";
     }
 }

@@ -3,7 +3,10 @@
     <h3 class="MenuTitle">Danh Mục</h3>
     <ul>
         <li>
-            <a href="#">Thông tin tài khoản</a>
+            <a href="#" class="multi_modal_link">Thông tin tài khoản</a>
+        </li>
+        <li>
+            <a href="/BacSi/ChangePassword" class="multi_modal_link">Đổi Mật Khẩu</a>
         </li>
         <li>
             <a href="/BacSi/">Danh Sách Bệnh Nhân Gửi Mẩu</a>

@@ -176,5 +176,14 @@ namespace DomainModel {
                 return ResourceManager.GetString("VMExmaination_Status", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xem KQ.
+        /// </summary>
+        internal static string VMExmaination_ViewResult {
+            get {
+                return ResourceManager.GetString("VMExmaination_ViewResult", resourceCulture);
+            }
+        }
     }
 }
