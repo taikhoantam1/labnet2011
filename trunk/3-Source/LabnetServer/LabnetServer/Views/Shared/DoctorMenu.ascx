@@ -3,7 +3,7 @@
     <h3 class="MenuTitle">Danh Mục</h3>
     <ul>
         <li>
-            <a href="#" class="multi_modal_link">Thông tin tài khoản</a>
+            <a href="/BacSi/AccountInformation" class="multi_modal_link">Thông tin tài khoản</a>
         </li>
         <li>
             <a href="/BacSi/ChangePassword" class="multi_modal_link">Đổi Mật Khẩu</a>

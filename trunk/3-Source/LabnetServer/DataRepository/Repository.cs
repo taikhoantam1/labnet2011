@@ -226,6 +226,17 @@ namespace DataRepository
             myDb.SaveChanges();
         }
 
+        public void DoctorUpdate(int id, Doctor doctor)
+        {
+            Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.DoctorId == id select _doctor).First();
+            currentDoctor.Name = doctor.Name;
+            currentDoctor.Address = doctor.Address;
+            currentDoctor.PhoneNumber = doctor.PhoneNumber;
+            currentDoctor.Email = doctor.Email;
+          
+            myDb.SaveChanges();
+        }
+
         #endregion
 
         #region LabClient

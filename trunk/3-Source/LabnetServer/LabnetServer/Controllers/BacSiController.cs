@@ -95,6 +95,7 @@ namespace LabnetServer.Controllers
                 return new { Message = "Sai mật khẩu" }.ToJson(); ;
             }
         }
+
         public ActionResult Register()
         {
             return PartialView();
@@ -221,5 +222,32 @@ namespace LabnetServer.Controllers
             return model.ToJson();
         }
 
+        public ActionResult AccountInformation()
+        {
+            Doctor doctor = (Doctor) Session[SessionProperties.SessionDoctor];
+            Doctor doctorView = Repository.GetDoctorByUserName(doctor.UserName);
+            BacSiModel model = new BacSiModel();
+            model.Doctor.Name = doctorView.Name;
+            model.Doctor.Address = doctorView.Address;
+            model.Doctor.Email = doctorView.Email;
+            model.Doctor.Phone = doctorView.PhoneNumber;
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [PermissionsAttribute(SessionProperties.SessionDoctor)]
+        public string AccountInformation(string Name, string Address, string PhoneNumber, string Email)
+        {
+            Doctor doctor = (Doctor)Session[SessionProperties.SessionDoctor];
+            doctor.Name = Name;
+            doctor.Address = Address;
+            doctor.PhoneNumber = PhoneNumber;
+            doctor.Email = Email;
+            Repository.DoctorUpdate(doctor.DoctorId, doctor);
+
+            Session[SessionProperties.SessionDoctor] = doctor;
+            return new { Message = "Success" }.ToJson(); ;
+        }
     }
 }

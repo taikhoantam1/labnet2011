@@ -50,6 +50,7 @@ namespace DataRepository
         Doctor GetDoctorByUserName(string UserName);
         void DoctorInsert(string Name, string UserName, string Password, string Address, string PhoneNumber, string Email);
         Doctor DoctorChangePassword(int doctorId, string newPass);
+        void DoctorUpdate(int id, Doctor doctor);
         #endregion
 
 
