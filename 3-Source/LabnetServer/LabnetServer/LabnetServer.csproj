@@ -710,6 +710,7 @@
     <Content Include="Content\Style\ui.jqgrid.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\Script.js" />
+    <Content Include="Views\BacSi\AccountInformation.ascx" />
     <Content Include="Views\BacSi\ChangePassword.ascx" />
     <Content Include="Views\BacSi\DanhSachLabKetNoi.aspx" />
     <Content Include="Views\BacSi\Index.aspx" />
