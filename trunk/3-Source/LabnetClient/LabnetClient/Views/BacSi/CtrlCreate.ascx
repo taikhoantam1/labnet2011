@@ -115,7 +115,7 @@
                             <%=Resources.DoctorStrings.DoctorInsert_ConnectionCode%></label>
                     </div>
                     <div class="Column">
-                        <%if (string.IsNullOrEmpty(Model.Doctor.ConnectionCode))
+                        <%if (string.IsNullOrEmpty(Model.Doctor.ConnectionCode) && Model.ViewMode != DomainModel.Constant.ViewMode.Create)
                           { %>
                             <input type="button" class="btnCreateConnectionCode" value="Tạo Mã Liên Kết"/>
                         <%}
