@@ -196,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bác Sĩ Chỉ Định.
+        /// </summary>
+        internal static string PatientInsert_SpecifiedDoctor {
+            get {
+                return ResourceManager.GetString("PatientInsert_SpecifiedDoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nhóm XN.
         /// </summary>
         internal static string PatientInsert_TestSection {

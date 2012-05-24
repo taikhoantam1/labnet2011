@@ -19,8 +19,8 @@
                     dataType: "json",
                     data: { 
                             searchText: request.term ,
-                            searchType:"word"
-                            //searchType:"contains"
+                            //searchType:"word"
+                            searchType:"contains"
                         },
                     success: function (data) {
                         response($.map(data, function (item) {
@@ -70,8 +70,8 @@
       var input= $("#<%= Model.AutoCompleteId %> .autoComplete").autocomplete({
             source: function (req, responseFn) {
                             var re = $.ui.autocomplete.escapeRegex($.fn.nomalizeString(req.term));
-                           // var matcher = new RegExp( "[*]?" + re, "i" ); // Search contains
-                            var matcher = new RegExp( "^" + re, "i" );//Search by word
+                            var matcher = new RegExp( "[*]?" + re, "i" ); // Search contains
+                            //var matcher = new RegExp( "^" + re, "i" );//Search by word
                             var a = $.map( autoCompleteData, function(item,index){
                                var label=$.fn.nomalizeString(item.Label);
                                 if(matcher.test(label)|| re.toString().length==0)

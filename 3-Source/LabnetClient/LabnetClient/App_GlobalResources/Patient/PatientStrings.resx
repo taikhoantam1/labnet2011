@@ -195,4 +195,7 @@
   <data name="PatientCode" xml:space="preserve">
     <value>Mã Xem KQ</value>
   </data>
+  <data name="PatientInsert_SpecifiedDoctor" xml:space="preserve">
+    <value>Bác Sĩ Chỉ Định</value>
+  </data>
 </root>
