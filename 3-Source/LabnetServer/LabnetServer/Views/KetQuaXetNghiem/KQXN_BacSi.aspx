@@ -4,7 +4,6 @@
 
     <h2 class="Title">
         Xem kết quả xét nghiệm</h2>
-    <%= Html.ValidationSummary() %>
     <%Html.BeginForm(); %>
     <div class="PageContent">
         <div class="LeftCol">

@@ -154,8 +154,9 @@ namespace DataRepository
 
         private int GetPatientInDay(int doctorId, int labId)
         {
+
             DoctorConnectMapping mapping = myDb.DoctorConnectMappings.Where(p => p.DoctorId == doctorId && p.LabId == labId).FirstOrDefault();
-            return myDb.Examinations.Where(p => p.LabId == labId && p.CreatedDate >= DateTime.Today
+            return myDb.Examinations.Where(p => p.LabId == labId && EntityFunctions.TruncateTime( p.CreatedDate) <= DateTime.Now
                                     && p.ClientDoctorId.HasValue
                                     && p.ClientDoctorId == mapping.ClientDoctorId).Count();
         }
