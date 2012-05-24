@@ -8670,6 +8670,30 @@ namespace DataRepository
         private global::System.String _Logo;
         partial void OnLogoChanging(global::System.String value);
         partial void OnLogoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SpecifiedDoctor
+        {
+            get
+            {
+                return _SpecifiedDoctor;
+            }
+            set
+            {
+                OnSpecifiedDoctorChanging(value);
+                ReportPropertyChanging("SpecifiedDoctor");
+                _SpecifiedDoctor = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SpecifiedDoctor");
+                OnSpecifiedDoctorChanged();
+            }
+        }
+        private global::System.String _SpecifiedDoctor;
+        partial void OnSpecifiedDoctorChanging(global::System.String value);
+        partial void OnSpecifiedDoctorChanged();
 
         #endregion
     }

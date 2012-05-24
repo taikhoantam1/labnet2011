@@ -62,7 +62,9 @@ namespace LabnetClient.Controllers
             model = new DoctorViewModel();
             model.Doctor.IsActive = true;
 
-            return RedirectToAction("Create");
+            //return RedirectToAction("Create");
+            model.ViewMode = ViewMode.Edit;
+            return RedirectToAction("Edit", new { id = doctor.Id });
             
         }
 
