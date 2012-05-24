@@ -14,7 +14,7 @@ namespace DomainModel
         {
             LabExamination = new VMLabExamination();
         }
-        [JQColumnAttribute("", true, true,false, EditTypeEnum.Text, FormatterEnum.Text)]
+        [JQColumnAttribute("", true, true, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public int? Id { get; set; }
 
         [Required(ErrorMessageResourceName = "VMPatient_Name_RequireMessage", ErrorMessageResourceType = typeof(Resources))]
@@ -26,9 +26,9 @@ namespace DomainModel
 
         public string PatientNumber { get; set; }
 
-
-        //[Required(ErrorMessageResourceName = "VMPatient_Address_RequireMessage", ErrorMessageResourceType = typeof(Resources))]
         [JQColumnAttribute("VMPatient_Address", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealAddress{ get { return string.IsNullOrWhiteSpace(Address) ? "" : Address; } }
+
         public string Address { get; set; }
 
         public bool Gender { get; set; }
@@ -41,6 +41,8 @@ namespace DomainModel
         public string IndentifierNumber { get; set; }
 
         [JQColumnAttribute("VMPatient_Phone", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealPhone { get { return string.IsNullOrWhiteSpace(Phone) ? "" : Phone; }  }
+
         public string Phone { get; set; }
 
         public string Email { get; set; }

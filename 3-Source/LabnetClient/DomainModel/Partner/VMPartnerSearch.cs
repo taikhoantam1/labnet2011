@@ -15,13 +15,16 @@ namespace DomainModel
 
         [JQColumnAttribute("VMPartnerSearch_Address", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string Address {get;set;}
-
-        [JQColumnAttribute("VMPartnerSearch_Email", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
-        public string Email { get; set; }
-
-        [JQColumnAttribute("VMPartnerSearch_Phone", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
-        public string Phone { get; set; }
         
+        [JQColumnAttribute("VMPartnerSearch_Email", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealEmail { get { return string.IsNullOrWhiteSpace(Email) ? "" : Email; } }
+
+        public string Email { get; set; }
+        
+        [JQColumnAttribute("VMPartnerSearch_Phone", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealPhone { get { return string.IsNullOrWhiteSpace(Phone) ? "" : Phone; } }
+
+        public string Phone { get; set; }
         /// <summary>
         /// Link edit partner use in search panel
         /// </summary>

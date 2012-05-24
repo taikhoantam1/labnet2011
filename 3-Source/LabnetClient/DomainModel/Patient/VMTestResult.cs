@@ -21,6 +21,8 @@ namespace DomainModel
         public string  Result { get; set; }
 
         [JQColumnAttribute("VMPatientTestResult_Range", false, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealRange { get { return string.IsNullOrWhiteSpace(Range) ? "" : Range; } }
+
         public string Range { get; set; }
 
         [JQColumnAttribute("VMPatientTestResult_Unit", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]

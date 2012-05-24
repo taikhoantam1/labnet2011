@@ -15,9 +15,6 @@
     </script>
 </head>
 <body>
-    <h3 class="Title">
-        <%= Model.ReportTitle%>
-    </h3>
     <%if (Model.ReportParams.Count != 0)
       { %>
     <iframe id="reportViewer" width="760" height="1000" frameborder="0" scrolling="no"></iframe>
