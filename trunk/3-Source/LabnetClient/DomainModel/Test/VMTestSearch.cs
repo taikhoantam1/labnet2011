@@ -50,13 +50,17 @@ namespace DomainModel
         /// <summary>
         /// Sets or gets Test range
         /// </summary>
-        [JQColumnAttribute("VMTestSearch_TestRange", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        [JQColumnAttribute("VMTestSearch_TestRange", false, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealTestRange { get { return string.IsNullOrWhiteSpace(TestRange) ? "" : TestRange; } }
+
         public string TestRange { get; set; }
 
         /// <summary>
         /// Sets or gets Test unit
         /// </summary>
-        [JQColumnAttribute("VMTestSearch_TestUnit", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        [JQColumnAttribute("VMTestSearch_TestUnit", false, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealTestUnit { get { return string.IsNullOrWhiteSpace(TestUnit) ? "" : TestUnit; } }
+
         public string TestUnit { get; set; }
 
         [JQColumnAttribute("VMTestSearch_TestSectionName", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]

@@ -20,7 +20,7 @@
 					    source: function (request, response) {
 					        var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
 					        response(select.children("option").map(function () {
-					            var text = $(this).text();
+					            var text = $(this).text().trim();
 					            var value = $(this).val();
 					            var tag = $(this).attr("tag");
 					            if (this.value && (!request.term || matcher.test(text)))
@@ -138,7 +138,6 @@
         padding: 6px;
         border-radius: 0px;
         margin: 0px 3px 0px 0px;
-        text-indent: -30px;
     }
     
     .ui-autocomplete
@@ -152,15 +151,6 @@
         height: 18px;
     }
 </style>
-<!--[if IE]>
-<style type="text/css">
-    .ComboBox-input-ui
-    {
-        text-indent: 0px !important;
-        color:Red !important;
-    }
-</style>
-<![endif]-->
 <input type="hidden" class="autoCompleteBindingValue" value="<%= Model.SelectedValue %>"
     name="<%=Model.BindingName%>" />
 <input type="hidden" class="autoCompleteTag" id="<%= Model.ComboBoxId %>_SelectedTag"

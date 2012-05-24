@@ -20,8 +20,10 @@ namespace DomainModel
         [Required(ErrorMessageResourceName = "VMPanel_NameRequired", ErrorMessageResourceType = typeof(Resources))]
         [JQColumnAttribute("VMPanel_PanelName", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string Name { get; set; }
-
+        
         [JQColumnAttribute("VMPanel_Description", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string RealDescription{ get { return string.IsNullOrWhiteSpace(Description) ? "" : Description; } }
+
         public string Description { get; set; }
 
         public bool IsActive { get; set; }

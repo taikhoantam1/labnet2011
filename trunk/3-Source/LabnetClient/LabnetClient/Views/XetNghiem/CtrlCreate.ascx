@@ -23,22 +23,6 @@
             $("#Test_HighIndex").val(cost);
         });
 
-        $('#reloadPage').click(function () {
-            //alert('Handler for .click() called.');
-            var allInputs = $(":input");
-            for (var i = 0; i < allInputs.length; i++) {
-
-                if (allInputs[i].id == "Test_IsActive" || allInputs[i].id == "save"
-                    || allInputs[i].id == "reloadPage" || allInputs[i].id == "Test_SortOrder") {
-                    //do nothing
-                }
-                else {
-                    //alert(allInputs[i].value);
-                    allInputs[i].value = "";
-                }
-            }
-        });
-
         var lowIndex = $("#Test_LowIndex").val();
         lowIndex = lowIndex.replace(",", ".");
         $("#LowIndexView").val(lowIndex);
@@ -204,7 +188,6 @@
             </div>
         <div class="Row" align="center">
             <input type="submit" value="<%=Resources.TestStrings.TestCreate_Save%>" id="save" />
-            <input type="button" value="<%=Resources.TestStrings.TestCreate_New%>" id="reloadPage" />
             <input type="button" value="<%=Resources.TestStrings.TestCreate_Back%>" id="btnBack" />
         </div>
     </div>

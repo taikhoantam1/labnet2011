@@ -89,8 +89,7 @@ $.blockUI.defaults = {
 		textAlign:	'center',        
 		color:		'#000',
 		border:		'3px solid #aaa',
-		backgroundColor:'#fff',
-		cursor:		'wait'
+		backgroundColor:'#fff'
 	},
 	
 	// minimal style set used when themes are used
@@ -103,8 +102,7 @@ $.blockUI.defaults = {
 	// styles for the overlay
 	overlayCSS:  {
 		backgroundColor: '#000',
-		opacity:	  	 0.1,
-		cursor:		  	 'wait'
+		opacity:	  	 0.1
 	},
 
 	// styles applied when using $.growlUI

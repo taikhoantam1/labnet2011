@@ -26,7 +26,7 @@ $(document).ready(function () {
 });
 
 $(document).ajaxStart(function () {
-    $.blockUI();
+   $.blockUI();
 });
 
 $(document).ajaxStop(function () {

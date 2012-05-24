@@ -60,7 +60,7 @@ h2
 h3
 {
     font-size: 1.2em;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 h4
 {
@@ -132,10 +132,10 @@ h5, h6
 }
 #Middle_Line
 {
-    float:left;
-    width:1px;
-    height:400px;
-    border-left:1px solid #CBCBCB;
+    float: left;
+    width: 1px;
+    height: 400px;
+    border-left: 1px solid #CBCBCB;
     margin: 90px 5px;
 }
 /*-----------------Menu-----------------------------*/
@@ -150,7 +150,7 @@ h5, h6
 {
     list-style: none;
     padding-left: 20px;
-    margin:0px;
+    margin: 0px;
 }
 
 .LeftMenu .MenuTitle
@@ -182,14 +182,14 @@ h5, h6
 
 dd
 {
-    padding-bottom:10px;
-    margin:0px;
+    padding-bottom: 10px;
+    margin: 0px;
 }
 
 dt
 {
-    margin:0px;
-    padding-top:10px;
+    margin: 0px;
+    padding-top: 10px;
     margin-left: 5px;
 }
 dt a
@@ -197,15 +197,15 @@ dt a
     text-decoration: none !important;
     color: #636363 !important;
     font-size: 15px;
-    padding-left:40px;
+    padding-left: 40px;
     height: 32px;
     display: block;
-    padding-top:7px;
+    padding-top: 7px;
 }
 
 .iconReport
 {
-    background: url("../Images/iconReport_32.png") no-repeat  transparent;
+    background: url("../Images/iconReport_32.png") no-repeat transparent;
 }
 
 .iconPatient
@@ -228,7 +228,7 @@ dt a
 .Row
 {
     width: 100%;
-    height:auto;
+    height: auto;
     margin: 5px 0px;
     clear: both;
 }
@@ -236,9 +236,9 @@ dt a
 .Column
 {
     margin: 0 5px;
-    height:100%;
-    display:table-cell !important; 
-    vertical-align:middle!important;
+    height: 100%;
+    display: table-cell !important;
+    vertical-align: middle !important;
 }
 
 .LeftCol
@@ -255,7 +255,7 @@ dt a
 
 .BothCol
 {
-    width:100%;
+    width: 100%;
 }
 
 /********** Module Style *************/
@@ -363,39 +363,39 @@ validation-summary-errors ul
 {
     width: 400px;
     margin: 0 auto;
-    margin-bottom:15px;
+    margin-bottom: 15px;
     border-bottom: 1px solid #CCC;
-    height:15px;
+    height: 15px;
 }
-select,textarea
+select, textarea
 {
-    margin:5px 0px;
-}
-
-input[type='button'],input[type='submit']
-{
-    padding:5px 20px;
-    margin:5px;
+    margin: 5px 0px;
 }
 
-.HightLight,.Red
+input[type='button'], input[type='submit']
 {
-    color:Red !important;
+    padding: 5px 20px;
+    margin: 5px;
 }
-.Bold 
+
+.HightLight, .Red
 {
-    font-weight:bold;
+    color: Red !important;
+}
+.Bold
+{
+    font-weight: bold;
 }
 .Medium
 {
-    font-size:medium;
+    font-size: medium;
 }
 
 .Larger
 {
-    font-size:larger;
+    font-size: larger;
 }
 .Large
 {
-    font-size:large;
+    font-size: large;
 }
