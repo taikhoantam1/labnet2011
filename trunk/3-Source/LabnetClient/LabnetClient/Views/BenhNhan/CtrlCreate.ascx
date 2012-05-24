@@ -144,6 +144,15 @@
                         <%=Html.TextBoxFor(m => m.Patient.Address, new  {Class="textInput" })%>
                     </div>
                 </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.PatientStrings.PatientInsert_SpecifiedDoctor%></label>
+                    </div>
+                    <div class="Column">
+                        <%=Html.TextBoxFor(m => m.LabExamination.SpecifiedDoctor, new  {Class="textInput" })%>
+                    </div>
+                </div>
             </div>
             <div class="Row clear">
                 <div class="Column">

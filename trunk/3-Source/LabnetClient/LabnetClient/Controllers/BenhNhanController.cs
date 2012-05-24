@@ -119,6 +119,7 @@ namespace LabnetClient.Controllers
             labExamination.ReceivedDate = model.LabExamination.ReceivedDate ?? DateTime.Now;
             labExamination.Status = (int)LabExaminationStatusEnum.New;
             labExamination.Diagnosis = model.LabExamination.Diagnosis;
+            labExamination.SpecifiedDoctor = model.LabExamination.SpecifiedDoctor;
             int LabExaminationId = Repository.LabExaminationInsert(labExamination);
             labExamination.Id = LabExaminationId;
             return labExamination;
@@ -279,6 +280,7 @@ namespace LabnetClient.Controllers
                     labExamination.DoctorId = model.LabExamination.DoctorId == -1 ? null : model.LabExamination.DoctorId;
                     labExamination.Status = (int)LabExaminationStatusEnum.New;
                     labExamination.Diagnosis = model.LabExamination.Diagnosis;
+                    labExamination.SpecifiedDoctor = model.LabExamination.SpecifiedDoctor;
                     Repository.LabExaminationUpdate(Id, model.LabExamination.ReceivedDate.Value, model.LabExamination.OrderNumber.Value, labExamination);
 
                     //Insert PatientItem

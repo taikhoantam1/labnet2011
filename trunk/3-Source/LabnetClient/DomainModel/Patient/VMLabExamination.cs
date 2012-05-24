@@ -35,5 +35,7 @@ namespace DomainModel
 
         public string DoctorName{ get; set; }
 
+        public string SpecifiedDoctor { get; set; }
+
     }
 }

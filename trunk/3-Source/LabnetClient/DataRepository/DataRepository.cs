@@ -923,7 +923,8 @@ namespace DataRepository
                                                                    Status = p.Status,
                                                                    ExaminationNumber = p.ExaminationNumber,
                                                                    DoctorId = p.DoctorId,
-                                                                   DoctorName = p.Doctor.Name
+                                                                   DoctorName = p.Doctor.Name,
+                                                                   SpecifiedDoctor = p.SpecifiedDoctor
                                                                }).FirstOrDefault();
             return labExamination;
         }
@@ -935,6 +936,7 @@ namespace DataRepository
             labExamOld.Diagnosis = labExamination.Diagnosis;
             labExamOld.Status = labExamination.Status;
             labExamOld.DoctorId = labExamination.DoctorId;
+            labExamOld.SpecifiedDoctor = labExamination.SpecifiedDoctor;
             myDb.SaveChanges();
         }
         public VMLabExamination GetLabExamination(string examinationNumber)
