@@ -74,7 +74,17 @@ namespace LabnetClient.Report
 
         private void Report_PatientResult(string ReportName)
         {
-            string defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
+            string labName = System.Configuration.ConfigurationManager.AppSettings["LabName"].ToString();
+            string defaultLogo = "";
+            if (string.IsNullOrEmpty(labName))
+            {
+                defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
+            }
+
+            else
+            {
+                defaultLogo = "Content\\Images\\Sites_Banner\\" + labName + "\\" + "defaultLogo.JPG";
+            }
             reportViewer.LocalReport.EnableExternalImages = true;
             IDataRepository repository = new Repository();
             int labExamination = int.Parse(Request["LabExaminationId"]);
@@ -102,11 +112,19 @@ namespace LabnetClient.Report
             {
                 rootPath += defaultLogo;
             }
-            
+
             Uri fileRootPath = new Uri(rootPath);
             ReportParameter path = new ReportParameter("Path", fileRootPath.AbsoluteUri);
             List<Report_PatientResult> results = repository.ReportData_PatientResult(labExamination);
-            string reportFullName = "/Report/" + ReportName + ".rdlc";
+            string reportFullName = "";
+            if (string.IsNullOrEmpty(labName))
+            {
+                reportFullName = "/Report/" + ReportName + ".rdlc";
+            }
+            else
+            {
+                reportFullName = "/Report/" + labName + "/" + ReportName + ".rdlc";
+            }
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
             reportViewer.LocalReport.SetParameters(path);
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("PatientResult", results));

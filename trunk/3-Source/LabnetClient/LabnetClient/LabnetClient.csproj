@@ -279,7 +279,11 @@
     <Content Include="Content\Images\icons\warning-24x24.png" />
     <Content Include="Content\Images\icons\warning-32x32.png" />
     <Content Include="Content\Images\icons\warning-48x48.png" />
+    <Content Include="Content\Images\Sites_Banner\CHAC\CHAC.jpg" />
+    <Content Include="Content\Images\Sites_Banner\CHAC\defaultLogo.jpg" />
     <Content Include="Content\Images\Sites_Banner\defaultLogo.jpg" />
+    <Content Include="Content\Images\Sites_Banner\KhangAn\defaultLogo.jpg" />
+    <Content Include="Content\Images\Sites_Banner\KhangAn\logoKA.jpg" />
     <Content Include="Content\Images\Sites_Banner\logoKA.jpg" />
     <Content Include="Content\Images\WrapperBG.png" />
     <Content Include="Content\Lib\jqGrid\ConfigTemplate.js" />
@@ -960,6 +964,12 @@
       <LastGenOutput>InstrumentResultStrings.designer.cs</LastGenOutput>
     </Content>
     <Content Include="Report\report_SoQuanLyTaiChinh.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\KhangAn\report_PatientResult.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Report\CHAC\report_PatientResult.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
