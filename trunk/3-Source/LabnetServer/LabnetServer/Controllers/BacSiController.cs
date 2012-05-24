@@ -41,7 +41,7 @@ namespace LabnetServer.Controllers
         {
             List<VMExamination> examinations = Repository.GetExaminations(model.SentDate, model.LabId);
             int? labIdSelected = model.LabId;
-            model = new DanhSachBenhNhanModel(Repository.GetLabClients());
+            model = new DanhSachBenhNhanModel(Repository.GetConnectedLab(CurrentDoctor.DoctorId));
             model.DanhSachBenhNhanDataTableModel = new JQGridModel(typeof(VMExamination), false, examinations, "");
             if (labIdSelected.HasValue)
                 model.LabComboBox.SelectedValue = labIdSelected.Value.ToString();

@@ -38,6 +38,13 @@
             });
 
         });
+        $(document).ajaxStart(function () {
+            $.blockUI();
+        });
+
+        $(document).ajaxStop(function () {
+            $.unblockUI();
+        });
     </script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
