@@ -48,6 +48,8 @@ namespace DataRepository
         object GetPartnerNameByName(string name, string searchType);
 
         Partner GetPartnerByLabExamination(int examinationNumber);
+
+        string CreateLabConnectionCode(int clientLabId,int labId);
         #endregion
 
         #region PartnerCost
@@ -192,6 +194,7 @@ namespace DataRepository
 
         #region Service
         string SetupDoctorConnection(string connectionCode, int serverDoctorId, int clientDoctorId, string doctorConnectName);
+        string SetupLabConnection(string connectionCode, int serverLabId, int clientLabId, string labConnectName);
         #endregion
     }
 }

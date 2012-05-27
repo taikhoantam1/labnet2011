@@ -150,6 +150,50 @@
             $("#DataTableSaveButton_<%:Model.JQGridTestSection.TableId %>").click();
             $("form").submit();
         });
+
+        $(".btnCreateConnectionCode").click(function () {
+            var doctorId = $("#Doctor_Id").val();
+            $.ajax({
+                url: "/BacSi/CreateConnectionCode",
+                data: {
+                    doctorId: doctorId
+                },
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    if (data.IsSuccess == true) {
+                        $(".btnCreateConnectionCode").hide();
+                        $(".btnCreateConnectionCode").after($("<label class='Red Bold Large'> " + data.ResponseData + "</label>"));
+                        $("#Doctor_ConnectionCode").val(data.ResponseData);
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        });
+
+        $(".btnCreateConnectionCode").click(function () {
+            var clientLabId = $("#Partner_Id").val();
+            $.ajax({
+                url: "/DoiTac/CreateConnectionCode",
+                data: {
+                    clientLabId: clientLabId
+                },
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    if (data.IsSuccess == true) {
+                        $(".btnCreateConnectionCode").hide();
+                        $(".btnCreateConnectionCode").after($("<label class='Red Bold Large'> " + data.ResponseData + "</label>"));
+                        $("#Partner_ConnectionCode").val(data.ResponseData);
+                    }
+                    else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        });
     });
     
 </script>
@@ -255,6 +299,40 @@
                     </div>
                     <div class="Column">
                         <%=Html.TextBoxFor(m => m.Partner.Fax, new { Class = "textInput number" })%>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.PartnerStrings.PartnerInsert_ConnectionCode%></label>
+                    </div>
+                    <div class="Column">
+                        <%if (string.IsNullOrEmpty(Model.Partner.ConnectionCode) && Model.ViewMode != DomainModel.Constant.ViewMode.Create)
+                          { %>
+                            <input type="button" class="btnCreateConnectionCode" value="Tạo Mã Liên Kết"/>
+                        <%}
+                          else
+                          { %>
+                            <label class="Red Bold Large" id="lbConnectionCode"><%= Model.Partner.ConnectionCode %></label>
+                            <input type="button" value="Tạo Mã Liên Kết" class="hide btnCreateConnectionCode" />
+                        <%} %>
+                        <%= Html.HiddenFor(p=>p.Partner.ConnectionCode) %>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.PartnerStrings.PartnerInsert_IsConnected%></label>
+                    </div>
+                    <div class="Column">
+                        <%= Html.CheckBoxFor(m => m.Partner.IsConnected, new { @class = "disabled" })%>
+                    </div>
+                    <div class="Column">
+                        <input type="button" id="btnRemoveConnection" value="Hũy Kết Nối" <%= Model.Partner.IsConnected && !string.IsNullOrEmpty(Model.Partner.ConnectionCode)? "": "disabled='disabled'" %> />
                     </div>
                     <div class="clear">
                     </div>

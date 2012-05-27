@@ -24,5 +24,19 @@ namespace LabnetClient.Controllers
             }
         }
 
+        public string SetupLabConnection(string ConnectionCode, int ServerLabId, int ClientLabId, string LabConnectName)
+        {
+            // Create a UTF-8 encoding.
+            UTF8Encoding utf8 = new UTF8Encoding();
+            try
+            {
+                string message = Repository.SetupLabConnection(ConnectionCode, ServerLabId, ClientLabId, LabConnectName);
+                return message;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }
