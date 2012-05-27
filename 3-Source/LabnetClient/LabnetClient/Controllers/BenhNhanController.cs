@@ -11,6 +11,7 @@ using LabnetClient.App_Code;
 using System;
 using System.Transactions;
 using System.Net;
+using Resources;
 
 namespace LabnetClient.Controllers
 {
@@ -51,7 +52,13 @@ namespace LabnetClient.Controllers
             {
                 ModelState.AddModelError("TestRequired", Resources.PatientStrings.PatientCreate_TestRequired);
             }
-
+            // Check ordernumber is in use
+            int lastestOrderNumber = Repository.GetLabExaminationOrderNumber();
+            if (model.LabExamination.OrderNumber != lastestOrderNumber)
+            {
+                ModelState.AddModelError("OrderNumberInUse", string.Format(PatientStrings.PatientCreate_OrderNumberInUse,model.LabExamination.OrderNumber,lastestOrderNumber));
+                model.LabExamination.OrderNumber = lastestOrderNumber;
+            }
             if (ModelState.IsValid)
             {
                 using (TransactionScope tran = new TransactionScope())
@@ -87,6 +94,7 @@ namespace LabnetClient.Controllers
                 return View(Model);
             }
         }
+
 
         private void InsertPatientItems(List<VMPatientTest> patientTests, int patientId, int LabExaminationId)
         {

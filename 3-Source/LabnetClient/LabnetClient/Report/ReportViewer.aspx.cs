@@ -40,12 +40,15 @@ namespace LabnetClient.Report
             string startDate = Request["StartDate"];
             string endDate = Request["EndDate"];
             string partnerName = Request["PartnerName"];
+            string partnerType = Request["PartnerType"];
             int partnerId = int.Parse(Request["PartnerId"]);
 
             ReportParameter paramStartDate = new ReportParameter("StartDate", startDate);
             ReportParameter paramEndDate = new ReportParameter("EndDate", endDate);
             ReportParameter paramPartnerName = new ReportParameter("PartnerName", partnerName);
-            List<Report_BaoCaoTaiChinh> results = repository.ReportData_BaoCaoTaiChinh(DateTime.Parse(startDate), DateTime.Parse(endDate), partnerId);
+            List<Report_BaoCaoTaiChinh> results = null;
+            results = repository.ReportData_BaoCaoTaiChinh(DateTime.Parse(startDate), DateTime.Parse(endDate), partnerId, partnerType);
+         
 
             string reportFullName = "/Report/" + ReportName + ".rdlc";
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);

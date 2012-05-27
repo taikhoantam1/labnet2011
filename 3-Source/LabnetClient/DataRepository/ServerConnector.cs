@@ -37,7 +37,17 @@ namespace DataRepository
                                                 doctorId);
             WebClient wc = new WebClient();
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
+            string HtmlResult = string.Empty;
+            try
+            {
+
+                HtmlResult = wc.UploadString(URI, myParamters);
+            }
+            catch (Exception)
+            {
+                // Log exception
+                
+            }
             return HtmlResult;
         }
 
@@ -105,7 +115,7 @@ namespace DataRepository
         public void UpdateToServer(int labId)
         {
             //Examination
-            var listExamNotUpdate = myDb.LabExaminations.Where(p => !p.UpdatedOnServer.Value);
+            var listExamNotUpdate = myDb.LabExaminations.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
             foreach (var exam in listExamNotUpdate)
             {
                 Patient patient = myDb.Patients.Where(p => p.Id == exam.PatientId).FirstOrDefault();
@@ -119,7 +129,7 @@ namespace DataRepository
                                                                 patient.Age,
                                                                 exam.PartnerId,
                                                                 exam.DoctorId);
-                    if (result == "Success")
+                    if (result == "Success") 
                     {
                         exam.UpdatedOnServer = true;
                     }
@@ -129,7 +139,7 @@ namespace DataRepository
 
             myDb.SaveChanges();
             //DoctorMapping
-            var listDoctorNotUpdate = myDb.Doctors.Where(p => !p.UpdatedOnServer.Value);
+            var listDoctorNotUpdate = myDb.Doctors.Where(p =>!p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
             foreach (var doctor in listDoctorNotUpdate)
             {
                 if (!string.IsNullOrEmpty(doctor.ConnectionCode))

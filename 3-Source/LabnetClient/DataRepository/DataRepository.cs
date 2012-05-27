@@ -1142,9 +1142,17 @@ namespace DataRepository
             }
             return result.Values.ToList();
         }
-        public List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId)
+        public List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId,string partnerType)
         {
-            List<report_ThongKeTaiChinh_Result> list = myDb.report_ThongKeTaiChinh(startDate, endDate, partnerId).ToList();
+            List<report_ThongKeTaiChinh_Result> list = null;
+            if (partnerType == "Doctor")
+            {
+                list = myDb.report_ThongKeTaiChinh_Dortor(startDate, endDate, partnerId).ToList();
+            }
+            else
+            {
+                list = myDb.report_ThongKeTaiChinh(startDate, endDate, partnerId).ToList();
+            }
             Dictionary<string, Report_BaoCaoTaiChinh> result = new Dictionary<string, Report_BaoCaoTaiChinh>();
             foreach (var item in list)
             {

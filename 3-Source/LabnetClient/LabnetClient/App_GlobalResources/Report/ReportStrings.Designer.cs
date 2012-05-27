@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lab Gửi Mẫu.
+        ///   Looks up a localized string similar to Nơi Gửi Mẫu.
         /// </summary>
         internal static string QuanLyTaiChinh_Partner {
             get {

@@ -88,6 +88,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to STT {0} đã được sử dụng.  STT đã tự động cập nhật thành {1}. Vui lòng nhấn lưu để xác nhận..
+        /// </summary>
+        internal static string PatientCreate_OrderNumberInUse {
+            get {
+                return ResourceManager.GetString("PatientCreate_OrderNumberInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng chọn xét nghiệm.
         /// </summary>
         internal static string PatientCreate_TestRequired {
