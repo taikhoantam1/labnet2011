@@ -20,7 +20,8 @@ namespace DataRepository
 
         public string ServerUrl
         {
-            get { return localUrl; }
+           // get { return localUrl; }
+            get { return severUrl; }
         }
 
         public string InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)

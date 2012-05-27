@@ -57,6 +57,7 @@ namespace DataRepository
             oldPartner.Owner = updateVaule.Owner;
             oldPartner.Phone = updateVaule.Phone;
             oldPartner.Fax = updateVaule.Fax;
+            oldPartner.Logo = updateVaule.Logo;
             myDb.SaveChanges();
 
         }
