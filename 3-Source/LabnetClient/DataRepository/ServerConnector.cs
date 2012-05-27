@@ -20,7 +20,7 @@ namespace DataRepository
 
         public string ServerUrl
         {
-            get { return severUrl; }
+            get { return localUrl; }
         }
 
         public string InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)
@@ -57,6 +57,17 @@ namespace DataRepository
             string URI = ServerUrl + "/Service/AddNewDoctorMapping";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ClientDoctorId={0}&LabId={1}&ConnectionCode={2}", clientDoctorId, labId, connectionCode);
+            wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            string HtmlResult = wc.UploadString(URI, myParamters);
+            return HtmlResult == "Success" ? true : false;
+        }
+
+        public bool SubmitLabConnectionCodeToServer(int clientLabId, int labId, string connectionCode)
+        {
+
+            string URI = ServerUrl + "/Service/AddNewLabMapping";
+            WebClient wc = new WebClient();
+            string myParamters = string.Format("ClientLabId={0}&LabId={1}&ConnectionCode={2}", clientLabId, labId, connectionCode);
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
             string HtmlResult = wc.UploadString(URI, myParamters);
             return HtmlResult == "Success" ? true : false;

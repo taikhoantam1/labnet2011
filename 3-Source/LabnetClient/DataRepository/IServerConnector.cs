@@ -38,5 +38,6 @@ namespace DataRepository
         /// </summary>
         void UpdateToServer(int labId);
 
+        bool SubmitLabConnectionCodeToServer(int clientLabId, int labId, string connectionCode);
     }
 }

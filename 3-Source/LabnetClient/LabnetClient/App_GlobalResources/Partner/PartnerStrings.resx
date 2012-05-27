@@ -141,6 +141,9 @@
   <data name="PartnerInsert_Button_Save" xml:space="preserve">
     <value>Lưu</value>
   </data>
+  <data name="PartnerInsert_ConnectionCode" xml:space="preserve">
+    <value>Mã Liên Kết</value>
+  </data>
   <data name="PartnerInsert_Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="PartnerInsert_GridColumn_Title" xml:space="preserve">
     <value>Danh sách xét nghiệm của lab gửi mẫu</value>
+  </data>
+  <data name="PartnerInsert_IsConnected" xml:space="preserve">
+    <value>Đã Kết Nối</value>
   </data>
   <data name="PartnerInsert_Name" xml:space="preserve">
     <value>Tên Lab</value>

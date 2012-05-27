@@ -141,6 +141,29 @@ namespace DataRepository
                                select _partner).FirstOrDefault();
             return partner;
         }
+
+        public string CreateLabConnectionCode(int clientLabId, int labId)
+        {
+            string connectionCode = myDb.GenerateConnectionCode((int)ConstantNumber.ConnetionCodeLength).FirstOrDefault();
+            connectionCode = AddLabIdToUniqueString(connectionCode, labId);
+            if (clientLabId != 0)
+            {
+                Partner currentPartner = (from _partner in myDb.Partners where _partner.Id == clientLabId select _partner).First();
+                currentPartner.ConnectionCode = connectionCode;
+                try
+                {
+                    connector.SubmitLabConnectionCodeToServer(clientLabId, labId, connectionCode);
+                    currentPartner.UpdatedOnServer = true;
+
+                }
+                catch (Exception ex)
+                {
+                    currentPartner.UpdatedOnServer = false;
+                }
+                myDb.SaveChanges();
+            }
+            return connectionCode;
+        }
         #endregion
 
         #region PartnerCost
@@ -1299,6 +1322,42 @@ namespace DataRepository
             doctor.ServerDoctorId = serverDoctorId;
             doctor.DoctorConnectName = doctorConnectName;
             doctor.IsConnected = true;
+            myDb.SaveChanges();
+            return "Success";
+        }
+
+        public string SetupLabConnection(string connectionCode, int serverLabId, int clientLabId, string labConnectName)
+        {
+
+            // Kiem tra connection code có tồn tại?
+            Partner partner = myDb.Partners.Where(p => p.ConnectionCode == connectionCode).FirstOrDefault();
+            if (partner == null)
+            {
+                //Connection error 1 = Connection code not exist
+                return "Doctor_Connection_Error1";
+            }
+
+            // Kiểm tra connection code đã được dùng chưa
+            if (partner.IsConnected)
+            {
+                // Connection error 2 = Connection code was used
+                return "Doctor_Connection_Error2";
+            }
+
+            // Kiểm tra lab đã liên kết với lab chưa
+            bool isLabWasConnectWithLab = myDb.Partners.Any(p => p.ServerLabId.HasValue
+                                                            && p.ServerLabId.Value == serverLabId
+                                                            && p.ConnectionCode != connectionCode && p.IsConnected);
+            if (isLabWasConnectWithLab)
+            {
+                // Connection error 3 = Doctor current has a connectiton with lab
+                return "Doctor_Connection_Error3";
+            }
+
+            // Cập nhật liên kết
+            partner.ServerLabId = serverLabId;
+            partner.LabConnectName = labConnectName;
+            partner.IsConnected = true;
             myDb.SaveChanges();
             return "Success";
         }

@@ -256,5 +256,24 @@ namespace LabnetClient.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        public string CreateConnectionCode(int clientLabId)
+        {
+            AjaxResultModel result = new AjaxResultModel();
+            try
+            {
+                int labId = (int)Session["LabId"];
+                string connectionCode = Repository.CreateLabConnectionCode(clientLabId, labId);
+                result.IsSuccess = true;
+                result.ResponseData = connectionCode;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result.ToJson();
+        }
     }
 }

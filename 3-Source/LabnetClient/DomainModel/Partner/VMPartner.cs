@@ -68,6 +68,10 @@ namespace DomainModel
         /// </summary>
         public int Id { get; set; }
 
+        public string ConnectionCode { get; set; }
+
+        public bool IsConnected { get; set; }
+
         //public List<VMPartnerCost> PartnerCostDetails { get; set; }
     }
 }
