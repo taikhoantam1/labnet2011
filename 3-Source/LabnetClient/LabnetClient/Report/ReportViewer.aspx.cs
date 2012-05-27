@@ -48,7 +48,7 @@ namespace LabnetClient.Report
             ReportParameter paramPartnerName = new ReportParameter("PartnerName", partnerName);
             List<Report_BaoCaoTaiChinh> results = null;
             results = repository.ReportData_BaoCaoTaiChinh(DateTime.Parse(startDate), DateTime.Parse(endDate), partnerId, partnerType);
-         
+
 
             string reportFullName = "/Report/" + ReportName + ".rdlc";
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
@@ -78,45 +78,12 @@ namespace LabnetClient.Report
         private void Report_PatientResult(string ReportName)
         {
             string labName = System.Configuration.ConfigurationManager.AppSettings["LabName"].ToString();
-            string defaultLogo = "";
-            if (string.IsNullOrEmpty(labName))
-            {
-                defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
-            }
-
-            else
-            {
-                defaultLogo = "Content\\Images\\Sites_Banner\\" + labName + "\\" + "defaultLogo.JPG";
-            }
             reportViewer.LocalReport.EnableExternalImages = true;
             IDataRepository repository = new Repository();
             int labExamination = int.Parse(Request["LabExaminationId"]);
             Partner partner = repository.GetPartnerByLabExamination(labExamination);
             LabExamination lab = Mapper.Map<VMLabExamination, LabExamination>(repository.GetLabExaminationById(labExamination));
-            String rootPath = Server.MapPath("~");
-            
-            if (partner != null)
-            {
-                if (!string.IsNullOrEmpty(partner.Logo))
-                {
-                    rootPath += partner.Logo;
-                }                
-            }
-
-            if (lab != null)
-            {
-                if (!string.IsNullOrEmpty(lab.DoctorId.ToString()))
-                {
-                    rootPath += defaultLogo;
-                }
-            }
-
-            if (partner == null && string.IsNullOrEmpty(lab.DoctorId.ToString()))
-            {
-                rootPath += defaultLogo;
-            }
-
-            Uri fileRootPath = new Uri(rootPath);
+            var fileRootPath = GetReportLogo(partner);
             ReportParameter path = new ReportParameter("Path", fileRootPath.AbsoluteUri);
             List<Report_PatientResult> results = repository.ReportData_PatientResult(labExamination);
             string reportFullName = "";
@@ -131,6 +98,22 @@ namespace LabnetClient.Report
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
             reportViewer.LocalReport.SetParameters(path);
             reportViewer.LocalReport.DataSources.Add(new ReportDataSource("PatientResult", results));
+        }
+
+        private Uri GetReportLogo(Partner partner)
+        {
+            string defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
+            String rootPath = Server.MapPath("~");
+            if (partner != null && !string.IsNullOrEmpty(partner.Logo))
+            {
+                rootPath += partner.Logo;
+            }
+            else
+            {
+                rootPath += defaultLogo;
+            }
+            Uri fileRootPath = new Uri(rootPath);
+            return fileRootPath;
         }
     }
 }
