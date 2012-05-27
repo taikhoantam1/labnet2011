@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using DataRepository;
 using DomainModel;
 using LabnetClient.Models;
@@ -26,7 +27,7 @@ namespace LabnetClient.Controllers
         }
         public ActionResult PatientResult(int labExaminationId)
         {
-            ReporViewModel model = new ReporViewModel("report_PatientResult","Phiếu Kết Quả");
+            ReporViewModel model = new ReporViewModel("report_PatientResult", "Phiếu Kết Quả");
             model.ReportParams.Add("LabExaminationId", labExaminationId.ToString());
             return View("ReportViewer", model);
         }
@@ -38,7 +39,7 @@ namespace LabnetClient.Controllers
             ReporViewModel model = new ReporViewModel("report_PatientResult", "Phiếu Kết Quả");
             VMLabExamination labExamination = new VMLabExamination();
             labExamination = Repository.GetLabExamination(examinationNumber);
-            if(labExamination!=null)
+            if (labExamination != null)
                 model.ReportParams.Add("LabExaminationId", labExamination.Id.ToString());
             return View("PatientResult_Server", model);
         }
@@ -84,21 +85,44 @@ namespace LabnetClient.Controllers
         [HttpGet]
         public ActionResult QuanLyTaiChinhReport()
         {
-            QuanLyTaiChinhViewModel model = new QuanLyTaiChinhViewModel();
-            List<Partner> partners = Repository.GetPartners();
-            partners.Insert(0, new Partner {Name="" });
-            model.DropDownListPartner = new SelectList(partners, "Id", "Name");
-            return View("QuanLyTaiChinh",model);
+            List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
+            List<VMDoctor> lstBacSi = Mapper.Map<List<Doctor>, List<VMDoctor>>(Repository.GetDoctorByName(""));
+            QuanLyTaiChinhViewModel model = new QuanLyTaiChinhViewModel(lstPartner, lstBacSi);
+            return View("QuanLyTaiChinh", model);
         }
 
         [HttpPost]
         public ActionResult QuanLyTaiChinhReport(QuanLyTaiChinhViewModel model)
         {
-            List<Partner> partners = Repository.GetPartners();
-            partners.Insert(0, new Partner { Name = "" });
-            model.DropDownListPartner = new SelectList(partners, "Id", "Name");
 
-            if (string.IsNullOrEmpty(model.StartDate) || string.IsNullOrEmpty(model.EndDate))
+            List<VMPartner> lstPartner = Mapper.Map<List<Partner>, List<VMPartner>>(Repository.GetPartners());
+            List<VMDoctor> lstBacSi = Mapper.Map<List<Doctor>, List<VMDoctor>>(Repository.GetDoctorByName(""));
+            string startDate = model.StartDate;
+            string endDate = model.EndDate;
+            string partnerName = "";
+            int? partnerId = null;
+            string type = "Lab";
+
+            if (model.PartnerId != 0 && model.PartnerId != -1)
+            {
+                Partner partner = Repository.GetPartnerById(model.PartnerId);
+                partnerName = partner.Name;
+                partnerId = partner.Id;
+            }
+            else if (model.DoctorId != 0 && model.DoctorId != -1)
+            {
+                Doctor partner = Repository.GetDoctor(model.DoctorId);
+                partnerName = partner.Name;
+                partnerId = partner.Id;
+                type = "Doctor";
+
+            }
+
+            model = new QuanLyTaiChinhViewModel(lstPartner, lstBacSi);
+            model.ComboBoxNoiGuiMauModel.SelectedText = partnerName;
+            model.ComboBoxNoiGuiMauModel.SelectedValue = partnerId.ToString();
+
+            if (string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
             {
                 ModelState.AddModelError("Input Error", "Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc");
             }
@@ -109,12 +133,15 @@ namespace LabnetClient.Controllers
             }
 
             ReporViewModel reportModel = new ReporViewModel("report_SoQuanLyTaiChinh", ReportStrings.QuanLyTaiChinh_Title);
-            Partner partner = Repository.GetPartnerById(model.PartnerId);
-            reportModel.ReportParams.Add("StartDate", model.StartDate);
-            reportModel.ReportParams.Add("EndDate", model.EndDate);
-            reportModel.ReportParams.Add("PartnerName", partner.Name);
-            reportModel.ReportParams.Add("PartnerId", model.PartnerId.ToString());
+
+            reportModel.ReportParams.Add("StartDate", startDate);
+            reportModel.ReportParams.Add("EndDate", endDate);
+            reportModel.ReportParams.Add("PartnerName", partnerName);
+            reportModel.ReportParams.Add("PartnerType", type);
+            reportModel.ReportParams.Add("PartnerId", partnerId.ToString());
             model.ReportModel = reportModel;
+            model.EndDate = endDate;
+            model.StartDate = startDate;
             return View("QuanLyTaiChinh", model);
         }
         [HttpGet]
@@ -136,9 +163,9 @@ namespace LabnetClient.Controllers
                 ModelState.AddModelError("Input Error", "Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc");
                 return View(m);
             }
-            
+
             ReporViewModel reportModel = new ReporViewModel("report_TestResultNoteBook", "SỔ LƯU KẾT QUẢ XÉT NGHIỆM");
-            reportModel.ReportParams.Add("StartDate",startDate);
+            reportModel.ReportParams.Add("StartDate", startDate);
             reportModel.ReportParams.Add("EndDate", endDate);
             m.ReportModel = reportModel;
             return View(m);

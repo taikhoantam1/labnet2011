@@ -102,10 +102,6 @@
             <End Role="Partner" EntitySet="Partner" />
             <End Role="TestSectionCommission" EntitySet="TestSectionCommission" />
           </AssociationSet>
-          <AssociationSet Name="FK_TestSectionCommission_TestSection" Association="LabManager_ClientModel.Store.FK_TestSectionCommission_TestSection">
-            <End Role="TestSection" EntitySet="TestSection" />
-            <End Role="TestSectionCommission" EntitySet="TestSectionCommission" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -140,11 +136,11 @@
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
           <Property Name="Commission" Type="float" />
           <Property Name="BankAccountNumber" Type="char" MaxLength="50" />
-          <Property Name="IsConnected" Type="bit" Nullable="false" />
+          <Property Name="IsConnected" Type="bit" />
           <Property Name="ConnectionCode" Type="nvarchar" MaxLength="10" />
           <Property Name="ServerDoctorId" Type="int" />
-          <Property Name="UpdatedOnServer" Type="bit" />
           <Property Name="DoctorConnectName" Type="nvarchar" MaxLength="100" />
+          <Property Name="UpdatedOnServer" Type="bit" />
         </EntityType>
         <EntityType Name="Instrument">
           <Key>
@@ -378,9 +374,9 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="UseCostForAssociateTest" Type="bit" Nullable="false" />
           <Property Name="Cost" Type="decimal" />
           <Property Name="SortOrder" Type="int" />
-          <Property Name="UseCostForAssociateTest" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TestSectionCommission">
           <Key>
@@ -620,18 +616,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TestSectionCommission_TestSection">
-          <End Role="TestSection" Type="LabManager_ClientModel.Store.TestSection" Multiplicity="1" />
-          <End Role="TestSectionCommission" Type="LabManager_ClientModel.Store.TestSectionCommission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TestSection">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TestSectionCommission">
-              <PropertyRef Name="TestSectionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="strInput" Type="nvarchar" Mode="In" />
         </Function>
@@ -643,6 +627,16 @@
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="report_ThongKeTaiChinh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="PartnerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="report_ThongKeTaiChinh_Dortor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="PartnerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="report_ThongKeTaiChinh_Lab" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
           <Parameter Name="PartnerId" Type="int" Mode="In" />
@@ -912,6 +906,11 @@
             <End Role="Partner" EntitySet="Partners" />
             <End Role="TestSectionCommission" EntitySet="TestSectionCommissions" />
           </AssociationSet>
+          <FunctionImport Name="report_ThongKeTaiChinh_Dortor" ReturnType="Collection(LabManager_ClientModel.report_ThongKeTaiChinh_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PartnerId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -2140,6 +2139,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="report_ThongKeTaiChinh_Dortor" FunctionName="LabManager_ClientModel.Store.report_ThongKeTaiChinh_Dortor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.report_ThongKeTaiChinh_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="ExaminationNumber" ColumnName="ExaminationNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PatientItemId" ColumnName="PatientItemId" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="LabName" ColumnName="LabName" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
+                <ScalarProperty Name="UseTestSectionCode" ColumnName="UseTestSectionCode" />
+                <ScalarProperty Name="TestSectionCost" ColumnName="TestSectionCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

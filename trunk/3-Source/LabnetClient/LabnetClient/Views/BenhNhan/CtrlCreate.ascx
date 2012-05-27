@@ -15,6 +15,8 @@
     </div>
     <%Html.BeginForm(); %>
     <%= Html.HiddenFor(p=>p.LabExamination.Id) %>
+    <%= Html.HiddenFor(p=>p.LabExamination.PartnerName) %>
+    <%= Html.HiddenFor(p=>p.LabExamination.DoctorName) %>
     <%= Html.HiddenFor(p=>p.LabExamination.DoctorId) %>
     <%= Html.HiddenFor(p=>p.LabExamination.PartnerId) %>
     <div class="ModuleContent">
@@ -27,7 +29,8 @@
                     </div>
                     <div class="Column">
                         <%=Html.TextBox("stt",Model.LabExamination.OrderNumber, new { Class = "textInput50 number readonly", style = "padding-left:10px; color:Red; font-size:18px!important; padding:0px" , Disabled="Disabled"})%>
-                        <%= Html.HiddenFor(p=>p.LabExamination.OrderNumber) %>
+                        <%--<%= Html.HiddenFor(p=>p.LabExamination.OrderNumber) %>--%>
+                        <input type="hidden" value="<%=Model.LabExamination.OrderNumber %>" name="LabExamination.OrderNumber" id="LabExamination_OrderNumber"/>
                     </div>
                 </div>
                 <div class="Row">
@@ -246,15 +249,21 @@
           {
             $("#LabExamination_DoctorId").val(id);
             $("#LabExamination_PartnerId").val("-1");
+            $("#LabExamination_DoctorName").val(label);
+            $("#LabExamination_PartnerName").val("");  
           }
           else if(tag=="Lab")
           {
             $("#LabExamination_DoctorId").val("-1");
             $("#LabExamination_PartnerId").val(id);
+            $("#LabExamination_DoctorName").val("");
+            $("#LabExamination_PartnerName").val(label);  
           }
           else{
             $("#LabExamination_DoctorId").val("-1");
             $("#LabExamination_PartnerId").val("-1");
+            $("#LabExamination_DoctorName").val("");
+            $("#LabExamination_PartnerName").val("");  
           }
 
     }

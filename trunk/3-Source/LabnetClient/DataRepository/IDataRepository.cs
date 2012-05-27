@@ -168,7 +168,7 @@ namespace DataRepository
         #region Report
             List<Report_PatientResult> ReportData_PatientResult(int labExaminationId);
             List<Report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate);
-            List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId);
+            List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId,string partnerType);
         #endregion
 
         #region LabUser

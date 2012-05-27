@@ -90,12 +90,12 @@ namespace LabnetClient.Models
 
             ComboBoxModel comboBoxNoiGuiMau = new ComboBoxModel("", noiGuiMauData);
 
-            if (labExamination.PartnerId != null)
+            if (labExamination.PartnerId != null && labExamination.PartnerId != -1)
             {
                 comboBoxNoiGuiMau.SelectedText = LabExamination.PartnerName;
                 comboBoxNoiGuiMau.SelectedValue = labExamination.PartnerId.ToString();
             }
-            else if (labExamination.DoctorId != null)
+            else if (labExamination.DoctorId != null && labExamination.DoctorId != -1)
             {
                 comboBoxNoiGuiMau.SelectedText = LabExamination.DoctorName;
                 comboBoxNoiGuiMau.SelectedValue = labExamination.DoctorId.ToString();

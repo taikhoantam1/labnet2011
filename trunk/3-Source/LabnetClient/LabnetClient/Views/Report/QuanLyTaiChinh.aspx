@@ -20,7 +20,9 @@
                             <%=Resources.ReportStrings.QuanLyTaiChinh_Partner%></label>
                     </div>
                     <div class="Column">
-                        <%=Html.DropDownListFor(m => m.PartnerId,Model.DropDownListPartner, new { Style = "width:200px" })%>
+                        <%Html.RenderPartial("ComboBox", Model.ComboBoxNoiGuiMauModel); %>
+                        <%= Html.HiddenFor(p=>p.DoctorId) %>
+                        <%= Html.HiddenFor(p=>p.PartnerId) %>
                     </div>
                 </div>
                 <div class="LeftCol">
@@ -55,8 +57,29 @@
     </div>
     <%if (Model.ReportModel != null)
       {%>
-            <div id="ReportContainer">
-                <% Html.RenderPartial("ReportViewerControl", Model.ReportModel); %>
-            </div>
+    <div id="ReportContainer">
+        <% Html.RenderPartial("ReportViewerControl", Model.ReportModel); %>
+    </div>
     <%} %>
+    <script type="text/javascript">
+        
+
+    function <%:Model.ComboBoxNoiGuiMauModel.ComboBoxId %>_ComboBoxSelect(id, label, tag) {
+          if(tag=="BacSi")
+          {
+            $("#DoctorId").val(id);
+            $("#PartnerId").val("-1");
+          }
+          else if(tag=="Lab")
+          {
+            $("#DoctorId").val("-1");
+            $("#PartnerId").val(id);
+          }
+          else{
+            $("#DoctorId").val("-1");
+            $("#PartnerId").val("-1");
+          }
+
+    }
+    </script>
 </asp:Content>

@@ -198,4 +198,7 @@
   <data name="PatientInsert_SpecifiedDoctor" xml:space="preserve">
     <value>Bác Sĩ Chỉ Định</value>
   </data>
+  <data name="PatientCreate_OrderNumberInUse" xml:space="preserve">
+    <value>STT {0} đã được sử dụng.  STT đã tự động cập nhật thành {1}. Vui lòng nhấn lưu để xác nhận.</value>
+  </data>
 </root>

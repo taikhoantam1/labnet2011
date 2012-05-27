@@ -10,7 +10,8 @@
                 var self = this,
 					select = this.element.hide(),
 					selected = select.children(":selected"),
-					value = selected.val() ? selected.text() : "";
+                    // This line added to set default value of the combobox
+					value = selected.val() ? selected.text().trim() : "";
                   var  input = this.input = $("<input id='<%= Model.ComboBoxId %>_text'>")
 					.insertAfter(select)
 					.val(value)
@@ -47,7 +48,7 @@
 					        self._trigger("selected", event, {
 					            item: ui.item.option
 					        });
-					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id, $(ui.item.option).text(), ui.item.tag);
+					        <%= Model.ComboBoxId %>_ComboBoxSelect(ui.item.id,ui.item.value, ui.item.tag);
 					    },
 					    selectFirst: true,
 					    change: function (event, ui) {
@@ -78,11 +79,10 @@
 					})
 					.addClass("ui-widget ui-widget-content ui-corner-left");
                     
-                // This line added to set default value of the combobox
                 input.data("autocomplete")._renderItem = function (ul, item) {
                     return $("<li></li>")
 						.data("item.autocomplete", item)
-						.append("<a>" + item.label + "</a>")
+						.append("<a>" + item.label.trim() + "</a>")
 						.appendTo(ul);
                 };
                 <%if(Model.IsEnabled){%>
@@ -163,15 +163,15 @@
     <option value="-1" tag=""></option>
     <% foreach (var item in Model.ComboBoxData)
        { %>
-    <%if (item.Value == Model.SelectedValue && (string.IsNullOrEmpty(Model.SelectedText)|| Model.SelectedText == item.Label))
+    <%if (item.Value == Model.SelectedValue && (string.IsNullOrEmpty(Model.SelectedText) || Model.SelectedText == item.Label))
       { %>
     <option value="<%:item.Value%>" tag="<%:item.Tag%>" selected="selected">
-        <%:item.Label%></option>
+        <%:item.Label.Trim()%></option>
     <%}
       else %>
     <%{ %>
     <option value="<%:item.Value%>" tag="<%:item.Tag%>">
-        <%:item.Label%></option>
+        <%:item.Label.Trim()%></option>
     <%} %>
     <%} %>
 </select>

@@ -1254,6 +1254,47 @@ namespace DataRepository
     
             return base.ExecuteFunction<Report_PatientResult>("Report_PatientResult", labExaminationIdParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="startDate">No Metadata Documentation available.</param>
+        /// <param name="endDate">No Metadata Documentation available.</param>
+        /// <param name="partnerId">No Metadata Documentation available.</param>
+        public ObjectResult<report_ThongKeTaiChinh_Result> report_ThongKeTaiChinh_Dortor(Nullable<global::System.DateTime> startDate, Nullable<global::System.DateTime> endDate, Nullable<global::System.Int32> partnerId)
+        {
+            ObjectParameter startDateParameter;
+            if (startDate.HasValue)
+            {
+                startDateParameter = new ObjectParameter("StartDate", startDate);
+            }
+            else
+            {
+                startDateParameter = new ObjectParameter("StartDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter endDateParameter;
+            if (endDate.HasValue)
+            {
+                endDateParameter = new ObjectParameter("EndDate", endDate);
+            }
+            else
+            {
+                endDateParameter = new ObjectParameter("EndDate", typeof(global::System.DateTime));
+            }
+    
+            ObjectParameter partnerIdParameter;
+            if (partnerId.HasValue)
+            {
+                partnerIdParameter = new ObjectParameter("PartnerId", partnerId);
+            }
+            else
+            {
+                partnerIdParameter = new ObjectParameter("PartnerId", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<report_ThongKeTaiChinh_Result>("report_ThongKeTaiChinh_Dortor", startDateParameter, endDateParameter, partnerIdParameter);
+        }
 
         #endregion
     }
