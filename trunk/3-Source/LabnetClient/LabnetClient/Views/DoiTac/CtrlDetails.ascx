@@ -164,27 +164,6 @@ $(document).ready(function () {
         $("form").submit();
     });
 
-    $(".btnCreateConnectionCode").click(function () {
-        var doctorId = $("#Doctor_Id").val();
-        $.ajax({
-            url: "/BacSi/CreateConnectionCode",
-            data: {
-                doctorId: doctorId
-            },
-            type: "POST",
-            dataType: "json",
-            success: function (data) {
-                if (data.IsSuccess == true) {
-                    $(".btnCreateConnectionCode").hide();
-                    $(".btnCreateConnectionCode").after($("<label class='Red Bold Large'> " + data.ResponseData + "</label>"));
-                    $("#Doctor_ConnectionCode").val(data.ResponseData);
-                }
-                else {
-                    alert(data.ErrorMessage);
-                }
-            }
-        });
-    });
 
     $(".btnCreateConnectionCode").click(function () {
         var clientLabId = $("#Partner_Id").val();
@@ -208,7 +187,28 @@ $(document).ready(function () {
         });
     });
            
-    
+    $("#btnRemoveConnection").click(function () {
+        var clientLabId = $("#Partner_Id").val();
+        if (clientLabId != 0) {
+            $.ajax({
+                url: "/DoiTac/RemoveConnection",
+                data: {
+                    clientLabId: clientLabId
+                },
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    if (data.IsSuccess == true) {
+                        $("#btnRemoveConnection").attr("disabled", "disabled");
+                        $("#Partner_IsConnected").attr("checked", false);
+                        $("#lbConnectionCode").remove();
+                        $("#Partner_ConnectionCode").val("");
+                        $(".btnCreateConnectionCode").removeClass("hide");
+                    }
+                }
+            });
+        }
+    });
 });
     
 </script>

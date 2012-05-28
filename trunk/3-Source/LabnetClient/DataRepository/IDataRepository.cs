@@ -50,6 +50,8 @@ namespace DataRepository
         Partner GetPartnerByLabExamination(int examinationNumber);
 
         string CreateLabConnectionCode(int clientLabId,int labId);
+
+        void RemoveLabConnection(int clientLabId, int labId);
         #endregion
 
         #region PartnerCost
