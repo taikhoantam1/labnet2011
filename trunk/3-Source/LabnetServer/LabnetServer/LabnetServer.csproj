@@ -87,6 +87,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GlobalStrings.en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Home\HomeStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Code\JSonHelper.cs" />
     <Compile Include="Content\Lib\FileManager\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -122,6 +127,7 @@
     <Compile Include="Controllers\ExaminationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KetQuaXetNghiemController.cs" />
+    <Compile Include="Controllers\LabController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="CustomeAttribute\PermissionsAttribute.cs" />
     <Compile Include="CustomeAttribute\LocalizedDisplayNameAttribute.cs" />
@@ -140,6 +146,9 @@
     <Compile Include="Models\Control\JQGridModel\JQResponseDataModel.cs" />
     <Compile Include="Models\KQXNModel.cs" />
     <Compile Include="Models\BacSi\KetNoiModel.cs" />
+    <Compile Include="Models\Lab\LabModel.cs" />
+    <Compile Include="Models\Lab\ThietLapLabKetNoiModel.cs" />
+    <Compile Include="Models\Object\ObjectModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -721,12 +730,20 @@
     <Content Include="Views\KetQuaXetNghiem\KQSN.ascx" />
     <Content Include="Views\KetQuaXetNghiem\KQXN_BacSi.aspx" />
     <Content Include="Views\KetQuaXetNghiem\KQXN_BenhNhan.aspx" />
+    <Content Include="Views\KetQuaXetNghiem\KQXN_Lab.aspx" />
+    <Content Include="Views\Lab\AccountInformation.ascx" />
+    <Content Include="Views\Lab\ChangePassword.ascx" />
+    <Content Include="Views\Lab\DanhSachLabKetNoi.aspx" />
+    <Content Include="Views\Lab\Index.aspx" />
     <Content Include="Views\Shared\Autocomplete.ascx" />
     <Content Include="Views\Shared\ComboBox.ascx" />
     <Content Include="Views\Shared\DataTable.ascx" />
     <Content Include="Views\Shared\DoctorMenu.ascx" />
     <Content Include="Views\Shared\Footer.ascx" />
     <Content Include="Views\Shared\HomeContent.ascx" />
+    <Content Include="Views\Shared\LabMenu.ascx" />
+    <Content Include="Views\Shared\ObjectLogin.ascx" />
+    <Content Include="Views\Shared\Register.ascx" />
     <Content Include="Views\Shared\SupportIcon.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -808,6 +825,12 @@
       <LastGenOutput>BacSiStrings.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Home\HomeStrings.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>HomeStrings.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -822,7 +845,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>2821</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>

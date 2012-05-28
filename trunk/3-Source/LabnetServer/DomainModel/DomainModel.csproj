@@ -55,6 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VMDoctorConnectMapping.cs" />
     <Compile Include="VMExmaination.cs" />
+    <Compile Include="VMLabConnectMapping.cs" />
+    <Compile Include="VMLabExamination.cs" />
+    <Compile Include="VMLab.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ModelStrings.resx">

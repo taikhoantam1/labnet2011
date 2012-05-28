@@ -18,10 +18,12 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("LabServerModel", "FK_Examination_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabClient), "Examination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Examination), true)]
-[assembly: EdmRelationshipAttribute("LabServerModel", "FK_LabnetAccount_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.LabClient), "LabnetAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabnetAccount), true)]
 [assembly: EdmRelationshipAttribute("LabServerModel", "FK_DoctorConnectMapping_Doctor", "Doctor", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.Doctor), "DoctorConnectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.DoctorConnectMapping), true)]
 [assembly: EdmRelationshipAttribute("LabServerModel", "FK_DoctorConnectMapping_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabClient), "DoctorConnectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.DoctorConnectMapping), true)]
+[assembly: EdmRelationshipAttribute("LabServerModel", "FK_Examination_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabClient), "Examination", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.Examination), true)]
+[assembly: EdmRelationshipAttribute("LabServerModel", "FK_LabConnectMapping_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataRepository.LabClient), "LabConnectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabConnectMapping), true)]
+[assembly: EdmRelationshipAttribute("LabServerModel", "FK_LabConnectMapping_LabClientConnected", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.LabClient), "LabConnectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabConnectMapping), true)]
+[assembly: EdmRelationshipAttribute("LabServerModel", "FK_LabnetAccount_LabClient", "LabClient", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataRepository.LabClient), "LabnetAccount", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataRepository.LabnetAccount), true)]
 
 #endregion
 
@@ -108,22 +110,6 @@ namespace DataRepository
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<LabClient> LabClients
-        {
-            get
-            {
-                if ((_LabClients == null))
-                {
-                    _LabClients = base.CreateObjectSet<LabClient>("LabClients");
-                }
-                return _LabClients;
-            }
-        }
-        private ObjectSet<LabClient> _LabClients;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<LabnetAccount> LabnetAccounts
         {
             get
@@ -152,6 +138,38 @@ namespace DataRepository
             }
         }
         private ObjectSet<DoctorConnectMapping> _DoctorConnectMappings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LabConnectMapping> LabConnectMappings
+        {
+            get
+            {
+                if ((_LabConnectMappings == null))
+                {
+                    _LabConnectMappings = base.CreateObjectSet<LabConnectMapping>("LabConnectMappings");
+                }
+                return _LabConnectMappings;
+            }
+        }
+        private ObjectSet<LabConnectMapping> _LabConnectMappings;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<LabClient> LabClients
+        {
+            get
+            {
+                if ((_LabClients == null))
+                {
+                    _LabClients = base.CreateObjectSet<LabClient>("LabClients");
+                }
+                return _LabClients;
+            }
+        }
+        private ObjectSet<LabClient> _LabClients;
 
         #endregion
         #region AddTo Methods
@@ -173,14 +191,6 @@ namespace DataRepository
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the LabClients EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToLabClients(LabClient labClient)
-        {
-            base.AddObject("LabClients", labClient);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the LabnetAccounts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToLabnetAccounts(LabnetAccount labnetAccount)
@@ -194,6 +204,22 @@ namespace DataRepository
         public void AddToDoctorConnectMappings(DoctorConnectMapping doctorConnectMapping)
         {
             base.AddObject("DoctorConnectMappings", doctorConnectMapping);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LabConnectMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLabConnectMappings(LabConnectMapping labConnectMapping)
+        {
+            base.AddObject("LabConnectMappings", labConnectMapping);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the LabClients EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToLabClients(LabClient labClient)
+        {
+            base.AddObject("LabClients", labClient);
         }
 
         #endregion
@@ -1279,10 +1305,56 @@ namespace DataRepository
         private global::System.Decimal _Amount;
         partial void OnAmountChanging(global::System.Decimal value);
         partial void OnAmountChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Type;
+        partial void OnTypeChanging(Nullable<global::System.Int32> value);
+        partial void OnTypeChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping")]
+        public EntityCollection<DoctorConnectMapping> DoctorConnectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1312,6 +1384,50 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_LabConnectMapping_LabClient", "LabConnectMapping")]
+        public EntityCollection<LabConnectMapping> LabConnectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LabConnectMapping>("LabServerModel.FK_LabConnectMapping_LabClient", "LabConnectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LabConnectMapping>("LabServerModel.FK_LabConnectMapping_LabClient", "LabConnectMapping", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_LabConnectMapping_LabClientConnected", "LabConnectMapping")]
+        public EntityCollection<LabConnectMapping> LabConnectMappings1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<LabConnectMapping>("LabServerModel.FK_LabConnectMapping_LabClientConnected", "LabConnectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<LabConnectMapping>("LabServerModel.FK_LabConnectMapping_LabClientConnected", "LabConnectMapping", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_LabnetAccount_LabClient", "LabnetAccount")]
         public EntityCollection<LabnetAccount> LabnetAccounts
         {
@@ -1327,6 +1443,216 @@ namespace DataRepository
                 }
             }
         }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="LabServerModel", Name="LabConnectMapping")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class LabConnectMapping : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new LabConnectMapping object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="labId">Initial value of the LabId property.</param>
+        /// <param name="clientLabId">Initial value of the ClientLabId property.</param>
+        /// <param name="connectionCode">Initial value of the ConnectionCode property.</param>
+        /// <param name="connectionState">Initial value of the ConnectionState property.</param>
+        public static LabConnectMapping CreateLabConnectMapping(global::System.Int32 id, global::System.Int32 labId, global::System.Int32 clientLabId, global::System.String connectionCode, global::System.Int32 connectionState)
+        {
+            LabConnectMapping labConnectMapping = new LabConnectMapping();
+            labConnectMapping.Id = id;
+            labConnectMapping.LabId = labId;
+            labConnectMapping.ClientLabId = clientLabId;
+            labConnectMapping.ConnectionCode = connectionCode;
+            labConnectMapping.ConnectionState = connectionState;
+            return labConnectMapping;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LabId
+        {
+            get
+            {
+                return _LabId;
+            }
+            set
+            {
+                OnLabIdChanging(value);
+                ReportPropertyChanging("LabId");
+                _LabId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LabId");
+                OnLabIdChanged();
+            }
+        }
+        private global::System.Int32 _LabId;
+        partial void OnLabIdChanging(global::System.Int32 value);
+        partial void OnLabIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ConnectedLabId
+        {
+            get
+            {
+                return _ConnectedLabId;
+            }
+            set
+            {
+                OnConnectedLabIdChanging(value);
+                ReportPropertyChanging("ConnectedLabId");
+                _ConnectedLabId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ConnectedLabId");
+                OnConnectedLabIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ConnectedLabId;
+        partial void OnConnectedLabIdChanging(Nullable<global::System.Int32> value);
+        partial void OnConnectedLabIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ClientLabId
+        {
+            get
+            {
+                return _ClientLabId;
+            }
+            set
+            {
+                OnClientLabIdChanging(value);
+                ReportPropertyChanging("ClientLabId");
+                _ClientLabId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClientLabId");
+                OnClientLabIdChanged();
+            }
+        }
+        private global::System.Int32 _ClientLabId;
+        partial void OnClientLabIdChanging(global::System.Int32 value);
+        partial void OnClientLabIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ConnectionCode
+        {
+            get
+            {
+                return _ConnectionCode;
+            }
+            set
+            {
+                OnConnectionCodeChanging(value);
+                ReportPropertyChanging("ConnectionCode");
+                _ConnectionCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ConnectionCode");
+                OnConnectionCodeChanged();
+            }
+        }
+        private global::System.String _ConnectionCode;
+        partial void OnConnectionCodeChanging(global::System.String value);
+        partial void OnConnectionCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ConnectionState
+        {
+            get
+            {
+                return _ConnectionState;
+            }
+            set
+            {
+                OnConnectionStateChanging(value);
+                ReportPropertyChanging("ConnectionState");
+                _ConnectionState = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ConnectionState");
+                OnConnectionStateChanged();
+            }
+        }
+        private global::System.Int32 _ConnectionState;
+        partial void OnConnectionStateChanging(global::System.Int32 value);
+        partial void OnConnectionStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateConnected
+        {
+            get
+            {
+                return _DateConnected;
+            }
+            set
+            {
+                OnDateConnectedChanging(value);
+                ReportPropertyChanging("DateConnected");
+                _DateConnected = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateConnected");
+                OnDateConnectedChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateConnected;
+        partial void OnDateConnectedChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateConnectedChanged();
+
+        #endregion
+    
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1334,18 +1660,72 @@ namespace DataRepository
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping")]
-        public EntityCollection<DoctorConnectMapping> DoctorConnectMappings
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_LabConnectMapping_LabClient", "LabClient")]
+        public LabClient LabClient
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClient", "LabClient").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClient", "LabClient").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LabClient> LabClientReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClient", "LabClient");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DoctorConnectMapping>("LabServerModel.FK_DoctorConnectMapping_LabClient", "DoctorConnectMapping", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClient", "LabClient", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("LabServerModel", "FK_LabConnectMapping_LabClientConnected", "LabClient")]
+        public LabClient LabClient1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClientConnected", "LabClient").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClientConnected", "LabClient").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<LabClient> LabClient1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClientConnected", "LabClient");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<LabClient>("LabServerModel.FK_LabConnectMapping_LabClientConnected", "LabClient", value);
                 }
             }
         }

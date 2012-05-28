@@ -8,5 +8,6 @@ namespace DomainModel
     public class SessionProperties
     {
         public const string SessionDoctor = "Doctor";
+        public const string SessionLab = "Lab";
     }
 }
