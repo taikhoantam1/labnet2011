@@ -78,10 +78,54 @@ namespace LabnetServer.Controllers
             return Redirect(Constant.DomainUrl);
         }
 
+        [PermissionsAttribute(SessionProperties.SessionLab)]
+        public ActionResult LabViewResultFromList(string ExaminationNumber)
+        {
+            Examination examination = Repository.GetExamination(ExaminationNumber);
+            if (examination != null)
+            {
+                KQXNModel model = new KQXNModel();
+                model.ExaminationNumber = ExaminationNumber;
+                if (examination != null)
+                {
+                    model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
+                }
+                else
+                {
+                    ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
+                }
+                return View("KQXN_Lab", model);
+            }
+            return Redirect(Constant.DomainUrl);
+        }
+
         [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult BacSi()
         {
             KQXNModel model = new KQXNModel();
+            return View("KQXN_BacSi", model);
+        }
+
+        [PermissionsAttribute(SessionProperties.SessionLab)]
+        public ActionResult Lab()
+        {
+            KQXNModel model = new KQXNModel();
+            return View("KQXN_Lab", model);
+        }
+
+        [HttpPost]
+        [PermissionsAttribute(SessionProperties.SessionLab)]
+        public ActionResult Lab(KQXNModel model)
+        {
+            Examination examination = Repository.GetExamination(model.ExaminationNumber);
+            if (examination != null)
+            {
+                model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
+            }
+            else
+            {
+                ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
+            }
             return View("KQXN_BacSi", model);
         }
     }

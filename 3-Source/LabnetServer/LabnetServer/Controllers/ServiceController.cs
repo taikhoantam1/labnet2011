@@ -43,6 +43,35 @@ namespace LabnetServer.Controllers
                 return ex.Message;
             }
         }
+
+        [HttpPost]
+        public string AddNewLabMapping(string ConnectionCode, int LabId, int ClientLabId)
+        {
+            try
+            {
+                Repository.LabConnectMappingInsert(ConnectionCode, LabId, ClientLabId, (int)ConnectionStateEnum.Available);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return "Error";
+            }
+        }
+
+        [HttpPost]
+        public string RemoveLabConnection(int? ServerLabId, int ClientLabId, int LabId, string ConnectionCode)
+        {
+            try
+            {
+                Repository.RemoveLabConnect(ServerLabId, ClientLabId, LabId, ConnectionCode);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         #region Examination
             [HttpPost]
             public string InsertExamination(string ExaminationNumber, int LabId, int Status, string PatientName, string Phone, string BirthDay, int? ClientPartnerId, int? ClientDoctorId)
