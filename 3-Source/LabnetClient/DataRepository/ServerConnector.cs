@@ -20,8 +20,8 @@ namespace DataRepository
 
         public string ServerUrl
         {
-           // get { return localUrl; }
-            get { return severUrl; }
+            get { return localUrl; }
+           // get { return severUrl; }
         }
 
         public string InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)
@@ -160,6 +160,34 @@ namespace DataRepository
             myDb.SaveChanges();
 
             //LabMapping
+            var listPartnerNotUpdate = myDb.Partners.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
+            foreach (var partner in listPartnerNotUpdate)
+            {
+                if (!string.IsNullOrEmpty(partner.ConnectionCode))
+                {
+                    // Set up new connection but out of update to server
+
+                    bool result = SubmitLabConnectionCodeToServer(partner.Id, labId, partner.ConnectionCode);
+                    if (result)
+                        partner.UpdatedOnServer = true;
+                }
+                else
+                {
+                    //  remove connection but out of update to server
+                    RemoveLabConnect(null, partner.Id, labId, string.Empty);
+                }
+            }
+            myDb.SaveChanges();
+        }
+
+        public bool RemoveLabConnect(int? serverLabId, int clientLabId, int labId, string connectionCode)
+        {
+            string URI = ServerUrl + "/Service/RemoveLabConnection";
+            WebClient wc = new WebClient();
+            string myParamters = string.Format("ServerLabId={0}&LabId={1}&ConnectionCode={2}&ClientLabId={3}", serverLabId, labId, connectionCode, clientLabId);
+            wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            string HtmlResult = wc.UploadString(URI, myParamters);
+            return HtmlResult == "Success" ? true : false;
         }
     }
 }

@@ -275,5 +275,23 @@ namespace LabnetClient.Controllers
             }
             return result.ToJson();
         }
+
+        [HttpPost]
+        public string RemoveConnection(int clientLabId)
+        {
+
+            AjaxResultModel result = new AjaxResultModel();
+            try
+            {
+                Repository.RemoveLabConnection(clientLabId, LabId);
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result.ToJson();
+        }
     }
 }

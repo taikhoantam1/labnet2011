@@ -165,6 +165,31 @@ namespace DataRepository
             }
             return connectionCode;
         }
+
+        public void RemoveLabConnection(int clientLabId, int labId)
+        {
+            Partner currentPartner = (from _partner in myDb.Partners where _partner.Id == clientLabId select _partner).First();
+            if (currentPartner.IsConnected == true)
+            {
+                currentPartner.IsConnected = false;
+                currentPartner.ConnectionCode = "";
+                //currentPartner.ServerLabId = null;
+                currentPartner.UpdatedOnServer = false;
+                try
+                {
+                    bool isSuccess = Connector.RemoveLabConnect(currentPartner.ServerLabId.Value, clientLabId, labId, currentPartner.ConnectionCode);
+                    if (isSuccess)
+                    {
+                        currentPartner.UpdatedOnServer = true;
+                        currentPartner.ServerLabId = null;
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                myDb.SaveChanges();
+            }
+        }
         #endregion
 
         #region PartnerCost
