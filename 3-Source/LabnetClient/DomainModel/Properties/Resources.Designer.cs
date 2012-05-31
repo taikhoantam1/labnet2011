@@ -565,6 +565,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Giá.
+        /// </summary>
+        internal static string VMTestSearch_TestPrice {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CSBT.
         /// </summary>
         internal static string VMTestSearch_TestRange {

@@ -293,5 +293,14 @@ namespace Resources {
                 return ResourceManager.GetString("Test_Create_NameError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giá.
+        /// </summary>
+        internal static string VMTestSearch_TestPrice {
+            get {
+                return ResourceManager.GetString("VMTestSearch_TestPrice", resourceCulture);
+            }
+        }
     }
 }

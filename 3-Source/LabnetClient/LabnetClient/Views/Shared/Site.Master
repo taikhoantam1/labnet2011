@@ -32,8 +32,8 @@
     <script type="text/javascript" src="../../Content/Scripts/Script.js"></script>
     <script type="text/javascript" src="../../Content/Lib/jquery/MultiModalDialog.js"></script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
- <%--   <%Session["LabId"] = 4; %>--%>
-    <%
+    <%Session["LabId"] = 4; %>
+    <%--<%
         string token = Request["token"];
         string Id = Request["Id"];
         if (!string.IsNullOrEmpty(token) && !string.IsNullOrEmpty(Id) && System.Web.HttpContext.Current.Cache[token] != null)
@@ -50,7 +50,7 @@
                 window.location = "http://www.labnet.vn"
             });
             </script>
-        <%}%>
+        <%}%>--%>
 </head>
 <body>
     <div class="Warpper">

@@ -164,6 +164,7 @@ namespace LabnetClient.Controllers
                 obj.TestSectionName = item.TestSectionName;
                 obj.TestRange = item.Range;
                 obj.TestUnit = item.Unit;
+                obj.TestPrice = item.Cost.ToString();
                 ObjSearchResult.Add(obj);
             }
             JQGridModel grid = new JQGridModel(typeof(TestSearchObject), false, ObjSearchResult, "");

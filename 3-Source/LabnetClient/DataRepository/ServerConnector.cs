@@ -167,18 +167,21 @@ namespace DataRepository
             var listPartnerNotUpdate = _myDb.Partners.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
             foreach (var partner in listPartnerNotUpdate)
             {
+                bool result = false;
                 if (!string.IsNullOrEmpty(partner.ConnectionCode))
                 {
                     // Set up new connection but out of update to server
 
-                    bool result = SubmitLabConnectionCodeToServer(partner.Id, labId, partner.ConnectionCode);
+                     result = SubmitLabConnectionCodeToServer(partner.Id, labId, partner.ConnectionCode);
                     if (result)
                         partner.UpdatedOnServer = true;
                 }
                 else
                 {
                     //  remove connection but out of update to server
-                    RemoveLabConnect(null, partner.Id, labId, string.Empty);
+                   result= RemoveLabConnect(null, partner.Id, labId, string.Empty);
+                    if (result)
+                        partner.UpdatedOnServer = true;
                 }
             }
             _myDb.SaveChanges();
