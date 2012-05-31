@@ -39,7 +39,7 @@ namespace LabnetServer.Controllers
         [PermissionsAttribute(SessionProperties.SessionDoctor)]
         public ActionResult Index(DanhSachBenhNhanModel model)
         {
-            List<VMExamination> examinations = Repository.GetExaminations(model.SentDate, model.LabId);
+            List<VMExamination> examinations = Repository.GetExaminations(model.SentDate, model.LabId, CurrentDoctor.DoctorId);
             int? labIdSelected = model.LabId;
             model = new DanhSachBenhNhanModel(Repository.GetConnectedLab(CurrentDoctor.DoctorId));
             model.DanhSachBenhNhanDataTableModel = new JQGridModel(typeof(VMExamination), false, examinations, "");
@@ -180,7 +180,7 @@ namespace LabnetServer.Controllers
 
             // Kiem tra basi đã kết nối với lab chưa
 
-            bool isDoctorConnectWithLab = Repository.IsDoctorConnectWithLab(CurrentDoctor.DoctorId);
+            bool isDoctorConnectWithLab = Repository.IsDoctorConnectWithLab(CurrentDoctor.DoctorId,ConnectionCode);
             if (isDoctorConnectWithLab)
             {
 

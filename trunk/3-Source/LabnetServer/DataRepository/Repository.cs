@@ -51,11 +51,13 @@ namespace DataRepository
         {
             return _myDb.Examinations.FirstOrDefault(p => p.ExaminationNumber == examinatioNumber);
         }
-        public List<VMExamination> GetExaminations(DateTime dateTime, int? labId)
+        public List<VMExamination> GetExaminations(DateTime dateTime, int? labId, int doctorId)
         {
+            List<int> clientDoctorIds = GetClientDoctorId(labId, doctorId);
             var result = _myDb.Examinations.Where(p => (EntityFunctions.TruncateTime(p.CreatedDate) == dateTime)
                                                         && (!labId.HasValue || labId.Value == p.LabId)
-                                                        && p.ClientDoctorId.HasValue).ToList();
+                                                        && p.ClientDoctorId.HasValue
+                                                        && clientDoctorIds.Contains(p.ClientDoctorId.Value)).ToList();
             List<VMExamination> vmResult = result.Select(p => new VMExamination
             {
                 BirthDay = p.BirthDay,
@@ -68,6 +70,15 @@ namespace DataRepository
             }).ToList();
             return vmResult;
         }
+
+        private List<int> GetClientDoctorId(int? labId, int doctorId)
+        {
+            var clientDoctorIds =   _myDb.DoctorConnectMappings.Where(p => (labId == null || p.LabId == labId) 
+                                                        && (p.DoctorId == doctorId)).
+                                            Select(p => p.ClientDoctorId);
+            return clientDoctorIds.ToList();
+        }
+
         public void ExaminationInsert(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId)
         {
             Examination ex = new Examination
@@ -120,10 +131,6 @@ namespace DataRepository
             {
                 labConnectMapping.ConnectionState = (int)ConnectionStateEnum.ConnectionRemoveByLab;
                 _myDb.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("Không tìm thấy dử liệu liên kết hợp lệ");
             }
         }
         #endregion
@@ -191,7 +198,8 @@ namespace DataRepository
         {
 
             DoctorConnectMapping mapping = _myDb.DoctorConnectMappings.FirstOrDefault(p => p.DoctorId == doctorId && p.LabId == labId);
-            return _myDb.Examinations.Count(p => p.LabId == labId && EntityFunctions.TruncateTime( p.CreatedDate) <= DateTime.Now
+            return _myDb.Examinations.Count(p => p.LabId == labId && EntityFunctions.TruncateTime(p.CreatedDate) <= DateTime.Now
+                                                && EntityFunctions.TruncateTime(p.CreatedDate) >= EntityFunctions.TruncateTime(DateTime.Now)
                                                 && p.ClientDoctorId.HasValue
                                                 && p.ClientDoctorId == mapping.ClientDoctorId);
         }
@@ -208,18 +216,20 @@ namespace DataRepository
         #endregion
 
         #region Doctor
-        public Doctor DoctorChangePassword(int doctorId,string newPass)
+        public Doctor DoctorChangePassword(int doctorId, string newPass)
         {
             var doctor = _myDb.Doctors.FirstOrDefault(p => p.DoctorId == doctorId);
-            if(doctor== null)
+            if (doctor == null)
                 return null;
             doctor.Password = newPass;
             _myDb.SaveChanges();
             return doctor;
         }
-        public bool IsDoctorConnectWithLab(int currentDoctorId)
+        public bool IsDoctorConnectWithLab(int currentDoctorId, string connectionCode)
         {
-            return _myDb.DoctorConnectMappings.Any(p => p.DoctorId == currentDoctorId && p.ConnectionState == (int)ConnectionStateEnum.Connected);
+            return _myDb.DoctorConnectMappings.Any(p => p.DoctorId == currentDoctorId
+                                                        && p.ConnectionCode == connectionCode 
+                                                        && p.ConnectionState == (int)ConnectionStateEnum.Connected);
         }
 
         public Doctor GetDoctor(int doctorId)
@@ -262,7 +272,7 @@ namespace DataRepository
             currentDoctor.Address = doctor.Address;
             currentDoctor.PhoneNumber = doctor.PhoneNumber;
             currentDoctor.Email = doctor.Email;
-          
+
             _myDb.SaveChanges();
         }
 
@@ -276,9 +286,9 @@ namespace DataRepository
 
         public List<LabClient> GetConnectedLab(int doctorId)
         {
-          return  _myDb.DoctorConnectMappings
-                .Where(p => p.ConnectionState == (int)ConnectionStateEnum.Connected && p.DoctorId == doctorId)
-                .Select(p => p.LabClient).ToList();
+            return _myDb.DoctorConnectMappings
+                  .Where(p => p.ConnectionState == (int)ConnectionStateEnum.Connected && p.DoctorId == doctorId)
+                  .Select(p => p.LabClient).ToList();
         }
 
         public int LabClientInsert(string name, string url, string address, string phone, int type)
@@ -389,9 +399,11 @@ namespace DataRepository
                                                 && p.ClientPartnerId == mapping.ClientLabId);
         }
 
-        public bool IsLabConnectWithLab(int? currentLabId)
+        public bool IsLabConnectWithLab(int? currentLabId, string connectionCode)
         {
-            return _myDb.LabConnectMappings.Any(p => p.ConnectedLabId == currentLabId && p.ConnectionState == (int)ConnectionStateEnum.Connected);
+            return _myDb.LabConnectMappings.Any(p => p.ConnectedLabId == currentLabId
+                                                && p.ConnectionCode == connectionCode
+                                                && p.ConnectionState == (int)ConnectionStateEnum.Connected);
         }
 
         public List<VMLabExamination> GetLabExaminations(DateTime dateTime, int? labId)
@@ -433,9 +445,9 @@ namespace DataRepository
 
         public void UpdateExaminationStatus(string examinationNumber, int status)
         {
-            var examination = _myDb.Examinations.FirstOrDefault(p => p.ExaminationNumber== examinationNumber);
+            var examination = _myDb.Examinations.FirstOrDefault(p => p.ExaminationNumber == examinationNumber);
             if (examination == null)
-                throw new ObjectNotFoundException(string.Format("Not found any examination match with examination number {0}",examinationNumber));
+                throw new ObjectNotFoundException(string.Format("Not found any examination match with examination number {0}", examinationNumber));
             examination.Status = status;
             _myDb.SaveChanges();
         }
@@ -453,8 +465,8 @@ namespace DataRepository
             examination.Phone = phone;
             examination.Phone = phone;
             examination.BirthDay = birthDay;
-            examination.ClientDoctorId=clientDoctorId;
-            examination.ClientPartnerId= clientPartnerId;
+            examination.ClientDoctorId = clientDoctorId;
+            examination.ClientPartnerId = clientPartnerId;
             _myDb.SaveChanges();
         }
     }
