@@ -47,7 +47,7 @@ namespace LabnetClient.Report
             ReportParameter paramEndDate = new ReportParameter("EndDate", endDate);
             ReportParameter paramPartnerName = new ReportParameter("PartnerName", partnerName);
             List<Report_BaoCaoTaiChinh> results = null;
-            results = repository.ReportData_BaoCaoTaiChinh(DateTime.Parse(startDate), DateTime.Parse(endDate), partnerId, partnerType);
+            results = repository.ReportDataBaoCaoTaiChinh(DateTime.Parse(startDate), DateTime.Parse(endDate), partnerId, partnerType);
 
 
             string reportFullName = "/Report/" + ReportName + ".rdlc";
@@ -65,7 +65,7 @@ namespace LabnetClient.Report
             string endDate = Request["EndDate"];
             ReportParameter paramStartDate = new ReportParameter("StartDate", startDate);
             ReportParameter paramEndDate = new ReportParameter("EndDate", endDate);
-            List<Report_TestResultNoteBook> results = repository.ReportData_TestResultNoteBook(DateTime.Parse(startDate), DateTime.Parse(endDate));
+            List<Report_TestResultNoteBook> results = repository.ReportDataTestResultNoteBook(DateTime.Parse(startDate), DateTime.Parse(endDate));
 
             string reportFullName = "/Report/" + ReportName + ".rdlc";
             reportViewer.LocalReport.ReportPath = Server.MapPath(reportFullName);
@@ -85,7 +85,7 @@ namespace LabnetClient.Report
             LabExamination lab = Mapper.Map<VMLabExamination, LabExamination>(repository.GetLabExaminationById(labExamination));
             var fileRootPath = GetReportLogo(partner);
             ReportParameter path = new ReportParameter("Path", fileRootPath.AbsoluteUri);
-            List<Report_PatientResult> results = repository.ReportData_PatientResult(labExamination);
+            List<Report_PatientResult> results = repository.ReportDataPatientResult(labExamination);
             string reportFullName = "";
             if (string.IsNullOrEmpty(labName))
             {

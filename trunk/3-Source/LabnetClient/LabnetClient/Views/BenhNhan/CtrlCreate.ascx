@@ -29,7 +29,7 @@
                     </div>
                     <div class="Column">
                         <%=Html.TextBox("stt",Model.LabExamination.OrderNumber, new { Class = "textInput50 number readonly", style = "padding-left:10px; color:Red; font-size:18px!important; padding:0px" , Disabled="Disabled"})%>
-                        <%--<%= Html.HiddenFor(p=>p.LabExamination.OrderNumber) %>--%>
+                        <%= Html.HiddenFor(p=>p.LabExamination.OrderNumber) %>
                         <input type="hidden" value="<%=Model.LabExamination.OrderNumber %>" name="LabExamination.OrderNumber" id="LabExamination_OrderNumber"/>
                     </div>
                 </div>

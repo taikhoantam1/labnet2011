@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DomainModel;
 using DomainModel.Report;
 
@@ -123,7 +121,7 @@ namespace DataRepository
         void TestSectionInsert(TestSection ts);
         void TestSectionDelete(int testSectionId);
         bool IsValidTestSection(string tsName,int? testSectionId);
-        List<VMTestListItem> GetTestsOfTestSection(int Id);
+        List<VMTestListItem> GetTestsOfTestSection(int id);
         void TestSectionUpdate(TestSection testSection);
         object GetTestSectionByNameForPanel(string name, string searchType);
         #endregion
@@ -131,16 +129,17 @@ namespace DataRepository
         #region Patient
             int PatientInsert(Patient patient);
             int PatientItemInsert(PatientItem patient);
-            List<PatientsGets_Result> GetPatients(int? PatientId, string FirstName, string Phone, string Email, string IndentifierNumber, string Address, int? PartnerId, int? OrderNumber, DateTime? ReceivedDate);
-            Patient GetPatient(int labExaminationId);
-            Patient GetPatient(DateTime ReceivedDate, int OrderNumber);
-            //Patient GetPatient(int id);
-            Patient GetPatientNumber(int Id);
+            List<PatientsGets_Result> GetPatients(int? patientId, string firstName, string phone, string email, string indentifierNumber, string address, int? partnerId, int? orderNumber, DateTime? receivedDate);
+            Patient GetPatientByLabExaminationId(int labExaminationId);
+            Patient GetPatientByExaminationDateAndOrderNumber(DateTime receivedDate, int orderNumber);
+            //Patient GetPatientByLabExaminationId(int id);
+            Patient GetPatientNumber(int id);
             List<VMPatientTest> GetPatientTests(int patientId, int labExaminationId);
             void PatientUpdate(int patientId, Patient patient);
             PatientItem PatientItemUpdate(int patientId, PatientItem patientItem);
             List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate);
             List<VMTestResult> GetPatientTestResults(int labExaminationId);
+            Patient GetPatientById(int patientId);
         #endregion
 
         #region Analysis
@@ -152,13 +151,14 @@ namespace DataRepository
         #region LabExamination
             int LabExaminationInsert(LabExamination labExamination);
             int GetLabExaminationOrderNumber();
-            VMLabExamination GetLabExamination(int LabExaminationId);
-            VMLabExamination GetLabExaminationById(int Id);
-            VMLabExamination GetLabExamination(int OrderNumber, DateTime ReceivedDate);
+            VMLabExamination GetLabExamination(int labExaminationId);
+            VMLabExamination GetLabExaminationById(int id);
+            VMLabExamination GetLabExamination(int orderNumber, DateTime receivedDate);
             VMLabExamination GetLabExamination(string examinationNumber);
-            void LabExaminationUpdate(int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination);
+            void LabExaminationUpdate(int labId,int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination);
             string GetUniqueExaminationNumber(int length,int labId);
             string GetUniquePatientNumber(int length, int labId);
+            void LabExaminationUpdateStatus(int labExaminationId,int status);
         #endregion
 
         #region Result
@@ -168,13 +168,13 @@ namespace DataRepository
         #endregion
 
         #region Report
-            List<Report_PatientResult> ReportData_PatientResult(int labExaminationId);
-            List<Report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate);
-            List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId,string partnerType);
+            List<Report_PatientResult> ReportDataPatientResult(int labExaminationId);
+            List<Report_TestResultNoteBook> ReportDataTestResultNoteBook(DateTime startDate, DateTime endDate);
+            List<Report_BaoCaoTaiChinh> ReportDataBaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId,string partnerType);
         #endregion
 
         #region LabUser
-            LabUser GetLabUser(string UserName, string Password);
+            LabUser GetLabUser(string userName, string password);
         #endregion
 
         #region TestSectionCommission
@@ -198,5 +198,6 @@ namespace DataRepository
         string SetupDoctorConnection(string connectionCode, int serverDoctorId, int clientDoctorId, string doctorConnectName);
         string SetupLabConnection(string connectionCode, int serverLabId, int clientLabId, string labConnectName);
         #endregion
+
     }
 }
