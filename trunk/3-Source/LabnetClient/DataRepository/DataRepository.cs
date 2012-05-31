@@ -109,7 +109,7 @@ namespace DataRepository
 
         public List<Partner> GetPartnerByName(string name)
         {
-            List<Partner> lstPartner = (from _partner in _myDb.Partners where _partner.IsActive && (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper())) select _partner).ToList();
+            List<Partner> lstPartner = (from _partner in _myDb.Partners where (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper())) select _partner).ToList();
             return lstPartner;
         }
         public List<Partner> GetPartners()
@@ -722,7 +722,7 @@ namespace DataRepository
         public List<TestSection> GetTestSections()
         {
             List<TestSection> lstTestSections = (from _testSection in _myDb.TestSections
-                                                 where _testSection.IsActive == true
+                                                 //where _testSection.IsActive == true
                                                  select _testSection).ToList();
             return lstTestSections;
         }

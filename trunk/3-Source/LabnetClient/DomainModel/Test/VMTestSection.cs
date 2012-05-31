@@ -12,7 +12,7 @@ namespace DomainModel
     {
         public VMTestSection()
         {
-            IsActive = true;
+            //IsActive = true;
         }
         /// <summary>
         /// Sets or gets name of test section
@@ -36,6 +36,8 @@ namespace DomainModel
         [JQColumnAttribute("VMTestSection_Cost", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public decimal Cost { get; set; }
 
+        [JQColumnAttribute("VMTestSection_IsActive", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string Status { get; set; }
         /// <summary>
         /// Sets or gets status of test section
         /// </summary>

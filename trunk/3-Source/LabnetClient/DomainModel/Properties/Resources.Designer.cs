@@ -106,6 +106,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMDoctorSearch_IsActive {
+            get {
+                return ResourceManager.GetString("VMDoctorSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kết Nối.
         /// </summary>
         internal static string VMDoctorSearch_IsConnected {
@@ -183,6 +192,15 @@ namespace DomainModel.Properties {
         internal static string VMPanel_Description {
             get {
                 return ResourceManager.GetString("VMPanel_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMPanel_IsActive {
+            get {
+                return ResourceManager.GetString("VMPanel_IsActive", resourceCulture);
             }
         }
         
@@ -313,11 +331,47 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Lab Kết Nối.
+        /// </summary>
+        internal static string VMPartnerSearch_ConnectedLab {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_ConnectedLab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã Liên Kết.
+        /// </summary>
+        internal static string VMPartnerSearch_ConnectionCode {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_ConnectionCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         internal static string VMPartnerSearch_Email {
             get {
                 return ResourceManager.GetString("VMPartnerSearch_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMPartnerSearch_IsActive {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kết Nối.
+        /// </summary>
+        internal static string VMPartnerSearch_IsConnected {
+            get {
+                return ResourceManager.GetString("VMPartnerSearch_IsConnected", resourceCulture);
             }
         }
         
@@ -538,6 +592,15 @@ namespace DomainModel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMTestSearch_IsActive {
+            get {
+                return ResourceManager.GetString("VMTestSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vui lòng nhập tên XN.
         /// </summary>
         internal static string VMTestSearch_NameRequired {
@@ -633,6 +696,15 @@ namespace DomainModel.Properties {
         internal static string VMTestSection_DescriptionRequired {
             get {
                 return ResourceManager.GetString("VMTestSection_DescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trạng Thái.
+        /// </summary>
+        internal static string VMTestSection_IsActive {
+            get {
+                return ResourceManager.GetString("VMTestSection_IsActive", resourceCulture);
             }
         }
         

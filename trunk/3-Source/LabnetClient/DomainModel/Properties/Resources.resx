@@ -129,6 +129,9 @@
   <data name="VMDoctorSearch_Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="VMDoctorSearch_IsActive" xml:space="preserve">
+    <value>Trạng Thái</value>
+  </data>
   <data name="VMDoctorSearch_IsConnected" xml:space="preserve">
     <value>Kết Nối</value>
   </data>
@@ -162,6 +165,9 @@
   <data name="VMPanel_Description" xml:space="preserve">
     <value>Mô Tả</value>
   </data>
+  <data name="VMPanel_IsActive" xml:space="preserve">
+    <value>Trạng Thái</value>
+  </data>
   <data name="VMPanel_IsDelete" xml:space="preserve">
     <value>Xóa</value>
   </data>
@@ -192,8 +198,20 @@
   <data name="VMPartnerSearch_Address" xml:space="preserve">
     <value>Địa Chỉ</value>
   </data>
+  <data name="VMPartnerSearch_ConnectedLab" xml:space="preserve">
+    <value>Lab Kết Nối</value>
+  </data>
+  <data name="VMPartnerSearch_ConnectionCode" xml:space="preserve">
+    <value>Mã Liên Kết</value>
+  </data>
   <data name="VMPartnerSearch_Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="VMPartnerSearch_IsActive" xml:space="preserve">
+    <value>Trạng Thái</value>
+  </data>
+  <data name="VMPartnerSearch_IsConnected" xml:space="preserve">
+    <value>Kết Nối</value>
   </data>
   <data name="VMPartnerSearch_PartnerName" xml:space="preserve">
     <value>Tên Lab</value>
@@ -267,6 +285,9 @@
   <data name="VMPatient_Phone" xml:space="preserve">
     <value>Số Điện Thoại</value>
   </data>
+  <data name="VMTestSearch_IsActive" xml:space="preserve">
+    <value>Trạng Thái</value>
+  </data>
   <data name="VMTestSearch_NameRequired" xml:space="preserve">
     <value>Vui lòng nhập tên XN</value>
   </data>
@@ -299,6 +320,9 @@
   </data>
   <data name="VMTestSection_DescriptionRequired" xml:space="preserve">
     <value>Vui lòng nhập mô tả nhóm XN</value>
+  </data>
+  <data name="VMTestSection_IsActive" xml:space="preserve">
+    <value>Trạng Thái</value>
   </data>
   <data name="VMTestSection_Name" xml:space="preserve">
     <value>Tên</value>

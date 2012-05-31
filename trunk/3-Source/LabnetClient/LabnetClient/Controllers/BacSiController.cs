@@ -145,6 +145,7 @@ namespace LabnetClient.Controllers
                 obj.ConnectionCode = string.IsNullOrEmpty(doctor.ConnectionCode) ? "Chưa Tạo" : doctor.ConnectionCode;
                 obj.IsConnected = doctor.IsConnected ? "Kết Nối" : "Chưa";
                 obj.DoctorConnectName = string.IsNullOrEmpty(doctor.DoctorConnectName) ? "" : doctor.DoctorConnectName;
+                obj.IsActive = doctor.IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
                 ListSearchResult.Add(obj);
             }
             DoctorSearchViewModel model = new DoctorSearchViewModel();
@@ -247,6 +248,7 @@ namespace LabnetClient.Controllers
                 obj.ConnectionCode = string.IsNullOrEmpty(doctor.ConnectionCode) ? "Chưa Tạo" : doctor.ConnectionCode;
                 obj.IsConnected = doctor.IsConnected ? "Kết Nối" : "Chưa";
                 obj.DoctorConnectName = string.IsNullOrEmpty(doctor.DoctorConnectName) ? "" : doctor.DoctorConnectName;
+                obj.IsActive = doctor.IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
                 ListSearchResult.Add(obj);
             }
             DoctorSearchViewModel model = new DoctorSearchViewModel(ListSearchResult);

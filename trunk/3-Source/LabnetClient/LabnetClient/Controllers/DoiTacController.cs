@@ -225,7 +225,11 @@ namespace LabnetClient.Controllers
                 obj.PartnerName = partner.Name;
                 obj.Phone = partner.Phone;
                 obj.Email = partner.Email;
-                obj.Address = partner.Address;
+                //obj.Address = partner.Address;
+                obj.ConnectionCode = string.IsNullOrEmpty(partner.ConnectionCode) ? "Chưa Tạo" : partner.ConnectionCode;
+                obj.IsConnected = partner.IsConnected ? "Kết Nối" : "Chưa";
+                obj.ConnectedLab = partner.LabConnectName;
+                obj.IsActive = partner.IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
                 ListSearchResult.Add(obj);
             }
             JQGridModel grid = new JQGridModel(typeof(VMPartnerSearch), false, ListSearchResult, "");
