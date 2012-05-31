@@ -17,7 +17,7 @@ namespace DataRepository
 
         void ExaminationInsert(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId);
         Examination GetExamination(string examinatioNumber);
-        List<VMExamination> GetExaminations(DateTime dateTime, int? labId);
+        List<VMExamination> GetExaminations(DateTime dateTime, int? labId,int doctorId);
         #endregion
 
         #region LabClient
@@ -45,7 +45,7 @@ namespace DataRepository
 
         #region Doctor
 
-        bool IsDoctorConnectWithLab(int currentDoctorId);
+        bool IsDoctorConnectWithLab(int currentDoctorId, string connectionCode);
         Doctor GetDoctor(int doctorId);
         bool CheckDoctorAccount(string userName);
         Doctor GetDoctorByUserName(string userName);
@@ -61,7 +61,7 @@ namespace DataRepository
         void UpdateMappingForLabConnect(int mappingId, int labId);
         List<LabClient> GetConnectedLabByLab(int? labId);
         List<VMLabConnectMapping> GetLabConnectMappings(int? labId);
-        bool IsLabConnectWithLab(int? currentLabId);
+        bool IsLabConnectWithLab(int? currentLabId, string connectionCode);
         List<VMLabExamination> GetLabExaminations(DateTime dateTime, int? labId);
         void LabClientUpdate(int id, LabClient lab);
         LabnetAccount LabChangePassword(int labId, string newPass);

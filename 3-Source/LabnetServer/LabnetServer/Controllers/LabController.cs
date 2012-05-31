@@ -169,7 +169,7 @@ namespace LabnetServer.Controllers
 
             // Kiem tra basi đã kết nối với lab chưa
 
-            bool isLabConnectWithLab = Repository.IsLabConnectWithLab(CurrentLab.LabId);
+            bool isLabConnectWithLab = Repository.IsLabConnectWithLab(CurrentLab.LabId,ConnectionCode);
             if (isLabConnectWithLab)
             {
 
