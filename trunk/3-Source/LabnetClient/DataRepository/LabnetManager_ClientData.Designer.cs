@@ -10205,12 +10205,16 @@ namespace DataRepository
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="testName">Initial value of the TestName property.</param>
         /// <param name="testSectionName">Initial value of the TestSectionName property.</param>
-        public static SearchTest_Result CreateSearchTest_Result(global::System.Int32 id, global::System.String testName, global::System.String testSectionName)
+        /// <param name="isActive">Initial value of the IsActive property.</param>
+        /// <param name="cost">Initial value of the Cost property.</param>
+        public static SearchTest_Result CreateSearchTest_Result(global::System.Int32 id, global::System.String testName, global::System.String testSectionName, global::System.Boolean isActive, global::System.Decimal cost)
         {
             SearchTest_Result searchTest_Result = new SearchTest_Result();
             searchTest_Result.Id = id;
             searchTest_Result.TestName = testName;
             searchTest_Result.TestSectionName = testSectionName;
+            searchTest_Result.IsActive = isActive;
+            searchTest_Result.Cost = cost;
             return searchTest_Result;
         }
 
@@ -10360,6 +10364,54 @@ namespace DataRepository
         private global::System.String _Unit;
         partial void OnUnitChanging(global::System.String value);
         partial void OnUnitChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActive
+        {
+            get
+            {
+                return _IsActive;
+            }
+            set
+            {
+                OnIsActiveChanging(value);
+                ReportPropertyChanging("IsActive");
+                _IsActive = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActive");
+                OnIsActiveChanged();
+            }
+        }
+        private global::System.Boolean _IsActive;
+        partial void OnIsActiveChanging(global::System.Boolean value);
+        partial void OnIsActiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Cost
+        {
+            get
+            {
+                return _Cost;
+            }
+            set
+            {
+                OnCostChanging(value);
+                ReportPropertyChanging("Cost");
+                _Cost = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Cost");
+                OnCostChanged();
+            }
+        }
+        private global::System.Decimal _Cost;
+        partial void OnCostChanging(global::System.Decimal value);
+        partial void OnCostChanged();
 
         #endregion
     }

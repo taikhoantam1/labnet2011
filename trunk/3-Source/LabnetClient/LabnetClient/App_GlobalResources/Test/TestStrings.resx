@@ -195,4 +195,7 @@
   <data name="Test_Create_NameError" xml:space="preserve">
     <value>Xét nghiệm này đã tồn tại.</value>
   </data>
+  <data name="VMTestSearch_TestPrice" xml:space="preserve">
+    <value>Giá</value>
+  </data>
 </root>

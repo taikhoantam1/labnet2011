@@ -42,6 +42,7 @@ namespace LabnetClient
             updateToServerTimer.Interval = timerInterval;
             updateToServerTimer.Elapsed += new ElapsedEventHandler(updateToServerTimer_Elapsed);
             updateToServerTimer.Start();
+            updateToServerTimer_Elapsed(null, null);
             Configure();
         }
 

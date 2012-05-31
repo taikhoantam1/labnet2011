@@ -920,6 +920,12 @@ namespace DataRepository
             Analysis analysis = _myDb.Analyses.FirstOrDefault(p => p.Id == analysisId);
             if (analysis != null)
             {
+                // Delete result 
+                var resultOfAnalysis = _myDb.Results.Where(p=>p.AnalysisId == analysisId);
+                foreach (var result in resultOfAnalysis)
+                {
+                    _myDb.Results.DeleteObject(result);
+                }
                 _myDb.Analyses.DeleteObject(analysis);
                 _myDb.SaveChanges();
             }
