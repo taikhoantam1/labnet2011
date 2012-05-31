@@ -24,6 +24,9 @@ namespace DomainModel
         [JQColumnAttribute("VMPanel_Description", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string RealDescription{ get { return string.IsNullOrWhiteSpace(Description) ? "" : Description; } }
 
+        [JQColumnAttribute("VMPanel_IsActive", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string Status { get; set; }
+
         public string Description { get; set; }
 
         public bool IsActive { get; set; }

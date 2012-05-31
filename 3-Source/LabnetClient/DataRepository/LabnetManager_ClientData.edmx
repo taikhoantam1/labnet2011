@@ -102,6 +102,10 @@
             <End Role="Partner" EntitySet="Partner" />
             <End Role="TestSectionCommission" EntitySet="TestSectionCommission" />
           </AssociationSet>
+          <AssociationSet Name="FK_TestSectionCommission_TestSection" Association="LabManager_ClientModel.Store.FK_TestSectionCommission_TestSection">
+            <End Role="TestSection" EntitySet="TestSection" />
+            <End Role="TestSectionCommission" EntitySet="TestSectionCommission" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Analysis">
           <Key>
@@ -136,11 +140,11 @@
           <Property Name="LastUpdated" Type="datetime" Nullable="false" />
           <Property Name="Commission" Type="float" />
           <Property Name="BankAccountNumber" Type="char" MaxLength="50" />
-          <Property Name="IsConnected" Type="bit" />
+          <Property Name="IsConnected" Type="bit" Nullable="false" />
           <Property Name="ConnectionCode" Type="nvarchar" MaxLength="10" />
           <Property Name="ServerDoctorId" Type="int" />
-          <Property Name="DoctorConnectName" Type="nvarchar" MaxLength="100" />
           <Property Name="UpdatedOnServer" Type="bit" />
+          <Property Name="DoctorConnectName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Instrument">
           <Key>
@@ -374,9 +378,9 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="UseCostForAssociateTest" Type="bit" Nullable="false" />
           <Property Name="Cost" Type="decimal" />
           <Property Name="SortOrder" Type="int" />
+          <Property Name="UseCostForAssociateTest" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TestSectionCommission">
           <Key>
@@ -616,6 +620,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TestSectionCommission_TestSection">
+          <End Role="TestSection" Type="LabManager_ClientModel.Store.TestSection" Multiplicity="1" />
+          <End Role="TestSectionCommission" Type="LabManager_ClientModel.Store.TestSectionCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestSection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSectionCommission">
+              <PropertyRef Name="TestSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fuChuyenCoDauThanhKhongDau" ReturnType="nvarchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="strInput" Type="nvarchar" Mode="In" />
         </Function>
@@ -632,11 +648,6 @@
           <Parameter Name="PartnerId" Type="int" Mode="In" />
         </Function>
         <Function Name="report_ThongKeTaiChinh_Dortor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="StartDate" Type="datetime" Mode="In" />
-          <Parameter Name="EndDate" Type="datetime" Mode="In" />
-          <Parameter Name="PartnerId" Type="int" Mode="In" />
-        </Function>
-        <Function Name="report_ThongKeTaiChinh_Lab" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StartDate" Type="datetime" Mode="In" />
           <Parameter Name="EndDate" Type="datetime" Mode="In" />
           <Parameter Name="PartnerId" Type="int" Mode="In" />
@@ -760,11 +771,6 @@
           <FunctionImport Name="report_TestResultNoteBook" ReturnType="Collection(LabManager_ClientModel.report_TestResultNoteBook_Result)">
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="SearchTest" ReturnType="Collection(LabManager_ClientModel.SearchTest_Result)">
-            <Parameter Name="TestName" Mode="In" Type="String" />
-            <Parameter Name="TestSectionName" Mode="In" Type="String" />
-            <Parameter Name="PanelName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SearchTestByNameForPanel" ReturnType="Collection(LabManager_ClientModel.SearchTestByNameForPanel_Result)">
             <Parameter Name="FilterText" Mode="In" Type="String" />
@@ -911,6 +917,11 @@
             <Parameter Name="EndDate" Mode="In" Type="DateTime" />
             <Parameter Name="PartnerId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SearchTest" ReturnType="Collection(LabManager_ClientModel.SearchTest_Result)">
+            <Parameter Name="TestName" Mode="In" Type="String" />
+            <Parameter Name="TestSectionName" Mode="In" Type="String" />
+            <Parameter Name="PanelName" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -950,16 +961,6 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Value" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="LabName" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="SearchTest_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="TestName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="TestDescription" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="0" />
         </ComplexType>
         <ComplexType Name="SearchTestByNameForPanel_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -1624,6 +1625,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SearchTest_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="TestName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TestDescription" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TestSectionName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Range" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1719,20 +1730,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="LabName" ColumnName="LabName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SearchTest" FunctionName="LabManager_ClientModel.Store.sp_SearchTest">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchTest_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TestName" ColumnName="TestName" />
-                <ScalarProperty Name="TestDescription" ColumnName="TestDescription" />
-                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
-                <ScalarProperty Name="Range" ColumnName="Range" />
-                <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2164,6 +2161,20 @@
                 <ScalarProperty Name="TestSectionId" ColumnName="TestSectionId" />
                 <ScalarProperty Name="UseTestSectionCode" ColumnName="UseTestSectionCode" />
                 <ScalarProperty Name="TestSectionCost" ColumnName="TestSectionCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchTest" FunctionName="LabManager_ClientModel.Store.sp_SearchTest">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LabManager_ClientModel.SearchTest_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="TestDescription" ColumnName="TestDescription" />
+                <ScalarProperty Name="TestSectionName" ColumnName="TestSectionName" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

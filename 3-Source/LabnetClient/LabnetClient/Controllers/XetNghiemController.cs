@@ -164,6 +164,7 @@ namespace LabnetClient.Controllers
                 obj.TestSectionName = item.TestSectionName;
                 obj.TestRange = item.Range;
                 obj.TestUnit = item.Unit;
+                obj.IsActive = item.IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
                 obj.TestPrice = item.Cost.ToString();
                 ObjSearchResult.Add(obj);
             }
@@ -206,6 +207,7 @@ namespace LabnetClient.Controllers
                 obj.TestSectionName = item.TestSectionName;
                 obj.TestRange = item.Range;
                 obj.TestUnit = item.Unit;
+                obj.IsActive = item.IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
                 ObjSearchResult.Add(obj);
             }
 

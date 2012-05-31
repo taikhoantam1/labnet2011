@@ -35,6 +35,9 @@ namespace DomainModel
         [JQColumnAttribute("VMDoctorSearch_ConnectDoctor", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string DoctorConnectName { get; set; }
 
+        [JQColumnAttribute("VMDoctorSearch_IsActive", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string IsActive { get; set; }
+
         /// <summary>
         /// Link edit partner use in search doctor
         /// </summary>

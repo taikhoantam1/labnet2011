@@ -184,6 +184,10 @@ namespace LabnetClient.Controllers
         public ActionResult Search(string filterText)
         {
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanelByName(filterText));
+            for (int i = 0; i < lstPanel.Count; i++)
+            {
+                lstPanel[i].Status = lstPanel[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
+            }
             JQGridModel model = new JQGridModel(typeof(VMPanel),false,lstPanel,"");
             return View("DataTable", model);
         }

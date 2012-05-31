@@ -69,6 +69,8 @@ namespace DomainModel
         [JQColumnAttribute("VMTestSearch_TestSectionName", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
         public string TestSectionName { get; set; }
 
+        [JQColumnAttribute("VMTestSearch_IsActive", true, false, false, EditTypeEnum.Text, FormatterEnum.Text)]
+        public string IsActive { get; set; }
         /// <summary>
         /// Link edit panel use in search panel
         /// </summary>
