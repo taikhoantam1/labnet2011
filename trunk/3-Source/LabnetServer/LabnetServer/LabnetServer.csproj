@@ -745,7 +745,9 @@
     <Content Include="Views\Shared\ObjectLogin.ascx" />
     <Content Include="Views\Shared\Register.ascx" />
     <Content Include="Views\Shared\SupportIcon.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
