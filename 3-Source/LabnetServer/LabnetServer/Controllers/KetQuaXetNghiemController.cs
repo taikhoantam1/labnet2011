@@ -61,42 +61,34 @@ namespace LabnetServer.Controllers
         public ActionResult ViewResultFromList(string ExaminationNumber)
         {
             Examination examination = Repository.GetExamination(ExaminationNumber);
-            if(examination != null)
+            KQXNModel model = new KQXNModel();
+            model.ExaminationNumber = ExaminationNumber;
+            if (examination != null)
             {
-                KQXNModel model = new KQXNModel();
-                model.ExaminationNumber = ExaminationNumber;
-                if (examination != null)
-                {
-                    model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
-                }
-                else
-                {
-                    ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
-                }
-                return View("KQXN_BacSi", model);
+                model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
             }
-            return Redirect(Constant.DomainUrl);
+            else
+            {
+                ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
+            }
+            return View("KQXN_BacSi", model);
         }
 
         [PermissionsAttribute(SessionProperties.SessionLab)]
         public ActionResult LabViewResultFromList(string ExaminationNumber)
         {
             Examination examination = Repository.GetExamination(ExaminationNumber);
+            KQXNModel model = new KQXNModel();
+            model.ExaminationNumber = ExaminationNumber;
             if (examination != null)
             {
-                KQXNModel model = new KQXNModel();
-                model.ExaminationNumber = ExaminationNumber;
-                if (examination != null)
-                {
-                    model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
-                }
-                else
-                {
-                    ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
-                }
-                return View("KQXN_Lab", model);
+                model.LabUrl = string.Format("{0}/{1}={2}", examination.LabClient.Url, "Report/PatientResultReport_ForServer?ExaminationNumber", model.ExaminationNumber);
             }
-            return Redirect(Constant.DomainUrl);
+            else
+            {
+                ModelState.AddModelError("Examination not exist", "Mã số không tồn tại");
+            }
+            return View("KQXN_Lab", model);
         }
 
         [PermissionsAttribute(SessionProperties.SessionDoctor)]

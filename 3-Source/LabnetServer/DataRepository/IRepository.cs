@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DomainModel;
 
 namespace DataRepository
@@ -10,14 +8,14 @@ namespace DataRepository
     {
         #region LabAccount
 
-        LabnetAccount GetAccount(string UserName);
-        int LabAccountInsert(string UserName, string Password, int LabId, string DomainUrl);
-        LabnetAccount GetLabAccountByUserName(string UserName);
+        LabnetAccount GetAccount(string userName);
+        int LabAccountInsert(string userName, string password, int labId, string domainUrl);
+        LabnetAccount GetLabAccountByUserName(string userName);
         #endregion
 
         #region Examination
 
-        void ExaminationInsert(string ExaminationNumber, int LabId, int Status, string PatientName, string Phone, string BirthDay, int? ClientPartnerId, int? ClientDoctorId);
+        void ExaminationInsert(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId);
         Examination GetExamination(string examinatioNumber);
         List<VMExamination> GetExaminations(DateTime dateTime, int? labId);
         #endregion
@@ -27,12 +25,12 @@ namespace DataRepository
         void UpdateLabAmount(int labId);
         List<LabClient> GetLabClients();
         List<LabClient> GetConnectedLab(int doctorId);
-        int LabClientInsert(string Name, string Url, string Address, string Phone, int Type);
+        int LabClientInsert(string name, string url, string address, string phone, int type);
         #endregion
 
         #region DoctorConnectMapping
 
-        DoctorConnectMapping GetDoctorConnectMapping(string ConnectionCode);
+        DoctorConnectMapping GetDoctorConnectMapping(string connectionCode);
         List<VMDoctorConnectMapping> GetDoctorConnectMappings(int doctorId);
         void DoctorConnectMappingInsert(string connectionCode, int labId, int clientDoctoId, int connectionState);
         void UpdateMappingForDoctorConnect(int mappingId, int doctorId);
@@ -49,17 +47,17 @@ namespace DataRepository
 
         bool IsDoctorConnectWithLab(int currentDoctorId);
         Doctor GetDoctor(int doctorId);
-        bool CheckDoctorAccount(string UserName);
-        Doctor GetDoctorByUserName(string UserName);
-        void DoctorInsert(string Name, string UserName, string Password, string Address, string PhoneNumber, string Email);
+        bool CheckDoctorAccount(string userName);
+        Doctor GetDoctorByUserName(string userName);
+        void DoctorInsert(string name, string userName, string password, string address, string phoneNumber, string email);
         Doctor DoctorChangePassword(int doctorId, string newPass);
         void DoctorUpdate(int id, Doctor doctor);
         #endregion
 
         void LabConnectMappingInsert(string connectionCode, int labId, int clientLabId, int connectionState);
 
-        LabConnectMapping GetLabConnectMapping(string ConnectionCode);
-        bool CheckLabAccount(string UserName);
+        LabConnectMapping GetLabConnectMapping(string connectionCode);
+        bool CheckLabAccount(string userName);
         void UpdateMappingForLabConnect(int mappingId, int labId);
         List<LabClient> GetConnectedLabByLab(int? labId);
         List<VMLabConnectMapping> GetLabConnectMappings(int? labId);
@@ -67,5 +65,7 @@ namespace DataRepository
         List<VMLabExamination> GetLabExaminations(DateTime dateTime, int? labId);
         void LabClientUpdate(int id, LabClient lab);
         LabnetAccount LabChangePassword(int labId, string newPass);
+        void UpdateExaminationStatus(string examinationNumber, int status);
+        void ExaminationUpdate(string examinationNumber, int labId, int status, string patientName, string phone, string birthDay, int? clientPartnerId, int? clientDoctorId);
     }
 }
