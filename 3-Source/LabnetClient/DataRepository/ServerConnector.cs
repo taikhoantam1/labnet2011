@@ -1,32 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net;
-using DomainModel;
 
 namespace DataRepository
 {
     public class ServerConnector : IServerConnector
     {
-        private LabManager_ClientEntities myDb;
+        private readonly LabManager_ClientEntities _myDb;
         private string severUrl = "http://labnet.vn";
-        private string localUrl = "http://localhost:2821";
+        private const string LocalUrl = "http://localhost:2821";
 
         public ServerConnector()
         {
-            myDb = new LabManager_ClientEntities();
+            _myDb = new LabManager_ClientEntities();
         }
 
         public string ServerUrl
         {
-            get { return localUrl; }
-           // get { return severUrl; }
+            get { return LocalUrl; }
+            // get { return severUrl; }
         }
 
-        public string InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)
+        public bool InsertExaminationOnLabServer(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)
         {
-            string URI = ServerUrl + "/Service/InsertExamination";
+            string uri = ServerUrl + "/Service/InsertExamination";
             string myParamters = string.Format("LabId={0}&ExaminationNumber={1}&Status={2}&PatientName={3}&Phone={4}&BirthDay={5}&ClientPartnerID={6}&ClientDoctorId={7}",
                                                 labId,
                                                 examinationNumber,
@@ -38,50 +35,49 @@ namespace DataRepository
                                                 doctorId);
             WebClient wc = new WebClient();
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = string.Empty;
+            string htmlResult = string.Empty;
             try
             {
-
-                HtmlResult = wc.UploadString(URI, myParamters);
+                htmlResult = wc.UploadString(uri, myParamters);
             }
-            catch (Exception)
+            catch
             {
                 // Log exception
-                
+                return false;
             }
-            return HtmlResult;
+            return htmlResult == "Success";
         }
 
         public bool RemoveDoctorConnect(int? serverDoctorId, int clientDoctorId, int labId, string connectionCode)
         {
-            string URI = ServerUrl + "/Service/RemoveConnection";
+            string uri = ServerUrl + "/Service/RemoveConnection";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ServerDoctorId={0}&LabId={1}&ConnectionCode={2}&ClientDoctorId={3}", serverDoctorId, labId, connectionCode, clientDoctorId);
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
-            return HtmlResult == "Success" ? true : false;
+            string htmlResult = wc.UploadString(uri, myParamters);
+            return htmlResult == "Success";
         }
 
         public bool SubmitConnectionCodeToServer(int clientDoctorId, int labId, string connectionCode)
         {
 
-            string URI = ServerUrl + "/Service/AddNewDoctorMapping";
+            string uri = ServerUrl + "/Service/AddNewDoctorMapping";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ClientDoctorId={0}&LabId={1}&ConnectionCode={2}", clientDoctorId, labId, connectionCode);
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
-            return HtmlResult == "Success" ? true : false;
+            string htmlResult = wc.UploadString(uri, myParamters);
+            return htmlResult == "Success";
         }
 
         public bool SubmitLabConnectionCodeToServer(int clientLabId, int labId, string connectionCode)
         {
 
-            string URI = ServerUrl + "/Service/AddNewLabMapping";
+            string uri = ServerUrl + "/Service/AddNewLabMapping";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ClientLabId={0}&LabId={1}&ConnectionCode={2}", clientLabId, labId, connectionCode);
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
-            return HtmlResult == "Success" ? true : false;
+            string htmlResult = wc.UploadString(uri, myParamters);
+            return htmlResult == "Success";
         }
 
         /// <summary>
@@ -90,11 +86,11 @@ namespace DataRepository
         /// </summary>
         public void SubmitExaminationToServer(int labId, int labExaminationID, int patientId)
         {
-            LabExamination labExamination = myDb.LabExaminations.Where(p => p.Id == labExaminationID).FirstOrDefault();
-            Patient patient = myDb.Patients.Where(p => p.Id == patientId).FirstOrDefault();
+            LabExamination labExamination = _myDb.LabExaminations.FirstOrDefault(p => p.Id == labExaminationID);
+            Patient patient = _myDb.Patients.FirstOrDefault(p => p.Id == patientId);
             if (labExamination != null && patient != null)
             {
-                string result = InsertExaminationOnLabServer(labId,
+                bool result = InsertExaminationOnLabServer(labId,
                                                             labExamination.ExaminationNumber,
                                                             labExamination.Status,
                                                             patient.FirstName,
@@ -102,11 +98,15 @@ namespace DataRepository
                                                             patient.Age,
                                                             labExamination.PartnerId,
                                                             labExamination.DoctorId);
-                if (result == "Success")
+                if (result)
                 {
                     labExamination.UpdatedOnServer = true;
-                    myDb.SaveChanges();
                 }
+                else
+                {
+                    labExamination.UpdatedOnServer = false;
+                }
+                _myDb.SaveChanges();
             }
         }
 
@@ -116,13 +116,13 @@ namespace DataRepository
         public void UpdateToServer(int labId)
         {
             //Examination
-            var listExamNotUpdate = myDb.LabExaminations.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
+            var listExamNotUpdate = _myDb.LabExaminations.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
             foreach (var exam in listExamNotUpdate)
             {
-                Patient patient = myDb.Patients.Where(p => p.Id == exam.PatientId).FirstOrDefault();
+                Patient patient = _myDb.Patients.FirstOrDefault(p => p.Id == exam.PatientId);
                 if (exam != null && patient != null)
                 {
-                    string result = InsertExaminationOnLabServer(labId,
+                    bool result = InsertExaminationOnLabServer(labId,
                                                                 exam.ExaminationNumber,
                                                                 exam.Status,
                                                                 patient.FirstName,
@@ -130,7 +130,7 @@ namespace DataRepository
                                                                 patient.Age,
                                                                 exam.PartnerId,
                                                                 exam.DoctorId);
-                    if (result == "Success") 
+                    if (result)
                     {
                         exam.UpdatedOnServer = true;
                     }
@@ -138,29 +138,33 @@ namespace DataRepository
 
             }
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
+
             //DoctorMapping
-            var listDoctorNotUpdate = myDb.Doctors.Where(p =>!p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
+            var listDoctorNotUpdate = _myDb.Doctors.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
             foreach (var doctor in listDoctorNotUpdate)
             {
+                bool result = false;
                 if (!string.IsNullOrEmpty(doctor.ConnectionCode))
                 {
                     // Set up new connection but out of update to server
 
-                    bool result = SubmitConnectionCodeToServer(doctor.Id, labId, doctor.ConnectionCode);
+                    result = SubmitConnectionCodeToServer(doctor.Id, labId, doctor.ConnectionCode);
                     if (result)
                         doctor.UpdatedOnServer = true;
                 }
                 else
                 {
                     //  remove connection but out of update to server
-                    RemoveDoctorConnect(null, doctor.Id, labId, string.Empty);
+                    result = RemoveDoctorConnect(null, doctor.Id, labId, string.Empty);
+                    if (result)
+                        doctor.UpdatedOnServer = true;
                 }
             }
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
 
             //LabMapping
-            var listPartnerNotUpdate = myDb.Partners.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
+            var listPartnerNotUpdate = _myDb.Partners.Where(p => !p.UpdatedOnServer.HasValue || !p.UpdatedOnServer.Value);
             foreach (var partner in listPartnerNotUpdate)
             {
                 if (!string.IsNullOrEmpty(partner.ConnectionCode))
@@ -177,17 +181,54 @@ namespace DataRepository
                     RemoveLabConnect(null, partner.Id, labId, string.Empty);
                 }
             }
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public bool RemoveLabConnect(int? serverLabId, int clientLabId, int labId, string connectionCode)
         {
-            string URI = ServerUrl + "/Service/RemoveLabConnection";
+            string uri = ServerUrl + "/Service/RemoveLabConnection";
             WebClient wc = new WebClient();
             string myParamters = string.Format("ServerLabId={0}&LabId={1}&ConnectionCode={2}&ClientLabId={3}", serverLabId, labId, connectionCode, clientLabId);
             wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
-            string HtmlResult = wc.UploadString(URI, myParamters);
-            return HtmlResult == "Success" ? true : false;
+            string htmlResult = wc.UploadString(uri, myParamters);
+            return htmlResult == "Success";
+        }
+
+        public bool UpdateExaminationStatus(string examinationNumber, int status)
+        {
+            string uri = ServerUrl + "/Service/UpdateExaminationStatus";
+            WebClient wc = new WebClient();
+            string myParamters = string.Format("ExaminationNumber={0}&Status={1}", examinationNumber, status);
+            wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            string htmlResult = wc.UploadString(uri, myParamters);
+            return htmlResult == "Success";
+        }
+
+        public bool UpdateExamination(int labId, string examinationNumber, int status, string patientName, string phone, string age, int? partnerId, int? doctorId)
+        {
+            string uri = ServerUrl + "/Service/UpdateExamination";
+            string myParamters = string.Format("LabId={0}&ExaminationNumber={1}&Status={2}&PatientName={3}&Phone={4}&BirthDay={5}&ClientPartnerID={6}&ClientDoctorId={7}",
+                                                labId,
+                                                examinationNumber,
+                                                status,
+                                                patientName,
+                                                phone,
+                                                age,
+                                                partnerId,
+                                                doctorId);
+            WebClient wc = new WebClient();
+            wc.Headers["Content-type"] = "application/x-www-form-urlencoded";
+            string htmlResult = string.Empty;
+            try
+            {
+                htmlResult = wc.UploadString(uri, myParamters);
+            }
+            catch
+            {
+                // Log exception
+                return false;
+            }
+            return htmlResult == "Success";
         }
     }
 }

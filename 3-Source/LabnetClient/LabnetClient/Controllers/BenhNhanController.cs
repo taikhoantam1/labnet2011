@@ -141,7 +141,7 @@ namespace LabnetClient.Controllers
             patient.Gender = model.Patient.Gender;
             patient.FirstName = model.Patient.FirstName;
             patient.PatientNumber = Repository.GetUniquePatientNumber((int)ConstantNumber.PatientNumberLength, LabId);
-            patient.IndentifierNumber = model.Patient.IndentifierNumber ?? patient.PatientNumber;
+            patient.IndentifierNumber = model.Patient.IndentifierNumber ?? "";
             patient.Phone = model.Patient.Phone;
             if (patient.BirthDate.Length <= 4)
                 patient.Age = patient.BirthDate;
@@ -222,7 +222,7 @@ namespace LabnetClient.Controllers
 
         public string SearchByOrderNumber(int OrderNumber, DateTime ReceivedDate)
         {
-            Patient patinent = Repository.GetPatient(ReceivedDate, OrderNumber);
+            Patient patinent = Repository.GetPatientByExaminationDateAndOrderNumber(ReceivedDate, OrderNumber);
             if (patinent != null)
                 return patinent.Id.ToString();
             return "false";
@@ -231,7 +231,7 @@ namespace LabnetClient.Controllers
         public ActionResult Edit(int Id, int OrderNumber, string ReceivedDate)
         {
             DateTime receivedDate = Convert.ToDateTime(ReceivedDate);
-            VMPatient patient = Mapper.Map<Patient, VMPatient>(Repository.GetPatient(receivedDate, OrderNumber));
+            VMPatient patient = Mapper.Map<Patient, VMPatient>(Repository.GetPatientByExaminationDateAndOrderNumber(receivedDate, OrderNumber));
             VMLabExamination labExamination = Repository.GetLabExamination(OrderNumber, receivedDate);
             List<VMPatientTest> tests = Repository.GetPatientTests(Id, labExamination.Id);
             PatientViewModel Model = RestoreViewState(patient, labExamination, tests);
@@ -286,10 +286,10 @@ namespace LabnetClient.Controllers
                     labExamination.CreatedBy = AppHelper.GetLoginUserId();
                     labExamination.PartnerId = model.LabExamination.PartnerId == -1 ? null : model.LabExamination.PartnerId;
                     labExamination.DoctorId = model.LabExamination.DoctorId == -1 ? null : model.LabExamination.DoctorId;
-                    labExamination.Status = (int)LabExaminationStatusEnum.New;
                     labExamination.Diagnosis = model.LabExamination.Diagnosis;
                     labExamination.SpecifiedDoctor = model.LabExamination.SpecifiedDoctor;
-                    Repository.LabExaminationUpdate(Id, model.LabExamination.ReceivedDate.Value, model.LabExamination.OrderNumber.Value, labExamination);
+                    labExamination.ExaminationNumber = model.LabExamination.ExaminationNumber;
+                    Repository.LabExaminationUpdate(LabId,Id, model.LabExamination.ReceivedDate.Value, model.LabExamination.OrderNumber.Value, labExamination);
 
                     //Insert PatientItem
                     PatientItem patientItem = new PatientItem();
@@ -346,7 +346,7 @@ namespace LabnetClient.Controllers
             List<VMTestResult> tests = new List<VMTestResult>();
             if ((receivedDate != null && OrderNumber != null))
             {
-                patient = Mapper.Map<Patient, VMPatient>(Repository.GetPatient(receivedDate.Value, OrderNumber.Value));
+                patient = Mapper.Map<Patient, VMPatient>(Repository.GetPatientByExaminationDateAndOrderNumber(receivedDate.Value, OrderNumber.Value));
                 labExamination = Repository.GetLabExamination(OrderNumber.Value, receivedDate.Value);
                 tests = Repository.GetPatientTestResults(OrderNumber.Value, receivedDate.Value);
             }
@@ -398,6 +398,7 @@ namespace LabnetClient.Controllers
                         Repository.AnalysisApproved(result.AnalysisId, AppHelper.GetLoginUserId());
                     }
                 }
+                Repository.LabExaminationUpdateStatus(LabExaminationId,(int)LabExaminationStatusEnum.Approved);
                 tran.Complete();
             }
             return "Success";

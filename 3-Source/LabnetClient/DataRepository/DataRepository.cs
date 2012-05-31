@@ -13,26 +13,26 @@ namespace DataRepository
 {
     public class Repository : IDataRepository
     {
-        private LabManager_ClientEntities myDb;
-        private IServerConnector connector;
+        private readonly LabManager_ClientEntities _myDb;
+        private IServerConnector _connector;
 
         public LabManager_ClientEntities Context
         {
-            get { return myDb; }
+            get { return _myDb; }
         }
 
         public IServerConnector Connector
         {
-            get { return connector; }
-            set { connector = value; }
+            get { return _connector; }
+            set { _connector = value; }
         }
         /// <summary>
         /// 
         /// </summary>
         public Repository()
         {
-            myDb = new LabManager_ClientEntities();
-            connector = new ServerConnector();
+            _myDb = new LabManager_ClientEntities();
+            _connector = new ServerConnector();
         }
 
         /// <summary>
@@ -44,6 +44,7 @@ namespace DataRepository
         {
             return "";
         }
+
         #region Partner
         public void PartnerUpdate(int id, Partner updateVaule)
         {
@@ -58,18 +59,18 @@ namespace DataRepository
             oldPartner.Phone = updateVaule.Phone;
             oldPartner.Fax = updateVaule.Fax;
             oldPartner.Logo = updateVaule.Logo;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
 
         }
 
         public void PartnerInsert(Partner partner)
         {
-            myDb.Partners.AddObject(partner);
-            myDb.SaveChanges();
+            _myDb.Partners.AddObject(partner);
+            _myDb.SaveChanges();
         }
         public Partner GetPartnerById(int id)
         {
-            Partner partner = myDb.Partners.Where(p => p.Id == id).FirstOrDefault();
+            Partner partner = _myDb.Partners.FirstOrDefault(p => p.Id == id);
             return partner;
         }
         /// <summary>
@@ -95,7 +96,7 @@ namespace DataRepository
         public List<VMTestSectionListItem> GetPartnerTestSection(int id)
         {
             Partner partner = GetPartnerById(id);
-            List<VMTestSectionListItem> listTest = partner.TestSectionCommissions.Where(p => p.IsActive == true).Select(p => new VMTestSectionListItem
+            List<VMTestSectionListItem> listTest = partner.TestSectionCommissions.Where(p => p.IsActive).Select(p => new VMTestSectionListItem
             {
                 TestSectionName = p.TestSection.Name,
                 TestSectionId = p.TestSectionId,
@@ -108,18 +109,18 @@ namespace DataRepository
 
         public List<Partner> GetPartnerByName(string name)
         {
-            List<Partner> lstPartner = (from _partner in myDb.Partners where _partner.IsActive && (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper())) select _partner).ToList();
+            List<Partner> lstPartner = (from _partner in _myDb.Partners where _partner.IsActive && (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper())) select _partner).ToList();
             return lstPartner;
         }
         public List<Partner> GetPartners()
         {
-            List<Partner> lstPartner = (from _partner in myDb.Partners where _partner.IsActive select _partner).ToList();
+            List<Partner> lstPartner = (from _partner in _myDb.Partners where _partner.IsActive select _partner).ToList();
             return lstPartner;
         }
         public bool IsValidPartner(string name)
         {
             bool isValid = true;
-            Partner partner = myDb.Partners.SingleOrDefault(u => u.Name == name);
+            Partner partner = _myDb.Partners.SingleOrDefault(u => u.Name == name);
             if (partner != null)
             {
                 isValid = false;
@@ -129,15 +130,15 @@ namespace DataRepository
 
         public object GetPartnerNameByName(string name, string searchType)
         {
-            List<SearchPartnerByName_Result> lstPartner = myDb.SearchPartnerByName(name, searchType).ToList();
+            List<SearchPartnerByName_Result> lstPartner = _myDb.SearchPartnerByName(name, searchType).ToList();
             return lstPartner.Select(p => new { Label = p.Name, Value = p.Name });
         }
 
         public Partner GetPartnerByLabExamination(int examinationNumber)
         {
-            Partner partner = (from _partner in myDb.Partners
+            Partner partner = (from _partner in _myDb.Partners
                                join
-                                   _labExamination in myDb.LabExaminations on _partner.Id equals _labExamination.PartnerId
+                                   _labExamination in _myDb.LabExaminations on _partner.Id equals _labExamination.PartnerId
                                where _labExamination.Id == examinationNumber
                                select _partner).FirstOrDefault();
             return partner;
@@ -145,15 +146,15 @@ namespace DataRepository
 
         public string CreateLabConnectionCode(int clientLabId, int labId)
         {
-            string connectionCode = myDb.GenerateConnectionCode((int)ConstantNumber.ConnetionCodeLength).FirstOrDefault();
+            string connectionCode = _myDb.GenerateConnectionCode((int)ConstantNumber.ConnetionCodeLength).FirstOrDefault();
             connectionCode = AddLabIdToUniqueString(connectionCode, labId);
             if (clientLabId != 0)
             {
-                Partner currentPartner = (from _partner in myDb.Partners where _partner.Id == clientLabId select _partner).First();
+                Partner currentPartner = (from partner in _myDb.Partners where partner.Id == clientLabId select partner).First();
                 currentPartner.ConnectionCode = connectionCode;
                 try
                 {
-                    connector.SubmitLabConnectionCodeToServer(clientLabId, labId, connectionCode);
+                    _connector.SubmitLabConnectionCodeToServer(clientLabId, labId, connectionCode);
                     currentPartner.UpdatedOnServer = true;
 
                 }
@@ -161,14 +162,14 @@ namespace DataRepository
                 {
                     currentPartner.UpdatedOnServer = false;
                 }
-                myDb.SaveChanges();
+                _myDb.SaveChanges();
             }
             return connectionCode;
         }
 
         public void RemoveLabConnection(int clientLabId, int labId)
         {
-            Partner currentPartner = (from _partner in myDb.Partners where _partner.Id == clientLabId select _partner).First();
+            Partner currentPartner = (from _partner in _myDb.Partners where _partner.Id == clientLabId select _partner).First();
             if (currentPartner.IsConnected == true)
             {
                 currentPartner.IsConnected = false;
@@ -187,7 +188,7 @@ namespace DataRepository
                 catch (Exception ex)
                 {
                 }
-                myDb.SaveChanges();
+                _myDb.SaveChanges();
             }
         }
         #endregion
@@ -195,20 +196,20 @@ namespace DataRepository
         #region PartnerCost
         public PartnerCost GetPartnerCost(int partnerCostId)
         {
-            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.Id == partnerCostId select _partnerCost).First();
-            myDb.SaveChanges();
+            PartnerCost partnerCost = _myDb.PartnerCosts.FirstOrDefault(_partnerCost => _partnerCost.Id == partnerCostId);
+            _myDb.SaveChanges();
             return partnerCost;
         }
 
         public void PartnerCostInsert(PartnerCost partnerCost)
         {
-            myDb.PartnerCosts.AddObject(partnerCost);
-            myDb.SaveChanges();
+            _myDb.PartnerCosts.AddObject(partnerCost);
+            _myDb.SaveChanges();
         }
 
         public void PartnerCostUpdate(int id, PartnerCost partnerCost)
         {
-            PartnerCost currentPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.Id == id select _partnerCost).First();
+            PartnerCost currentPartnerCost = (from _partnerCost in _myDb.PartnerCosts where _partnerCost.Id == id select _partnerCost).First();
             currentPartnerCost.TestId = partnerCost.TestId;
             currentPartnerCost.PartnerId = partnerCost.PartnerId;
             currentPartnerCost.Cost = partnerCost.Cost;
@@ -216,7 +217,7 @@ namespace DataRepository
             currentPartnerCost.IsActive = partnerCost.IsActive;
             currentPartnerCost.LastUpdated = partnerCost.LastUpdated;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public void PartnerCostDelete(int id)
@@ -224,29 +225,29 @@ namespace DataRepository
             PartnerCost partnerCost = GetPartnerCost(id);
             partnerCost.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public void PartnerCostDeleteByPartnerId(int id)
         {
-            List<PartnerCost> lstPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.PartnerId == id select _partnerCost).ToList();
+            List<PartnerCost> lstPartnerCost = (from _partnerCost in _myDb.PartnerCosts where _partnerCost.PartnerId == id select _partnerCost).ToList();
             foreach (PartnerCost p in lstPartnerCost)
             {
                 p.IsActive = false;
             }
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public List<PartnerCost> GetPartnerCostByPartnerId(int id)
         {
-            List<PartnerCost> lstPartnerCost = (from _partnerCost in myDb.PartnerCosts where _partnerCost.PartnerId == id select _partnerCost).ToList();
+            List<PartnerCost> lstPartnerCost = (from _partnerCost in _myDb.PartnerCosts where _partnerCost.PartnerId == id select _partnerCost).ToList();
 
             return lstPartnerCost;
         }
 
         public PartnerCost GetPartnerCostByTestId(int testId, int partnerId)
         {
-            PartnerCost partnerCost = (from _partnerCost in myDb.PartnerCosts
+            PartnerCost partnerCost = (from _partnerCost in _myDb.PartnerCosts
                                        where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true
                                        select _partnerCost).First();
             return partnerCost;
@@ -256,7 +257,7 @@ namespace DataRepository
         {
             bool isExist = false;
             PartnerCost partnerCost = new PartnerCost();
-            partnerCost = (from _partnerCost in myDb.PartnerCosts
+            partnerCost = (from _partnerCost in _myDb.PartnerCosts
                            where _partnerCost.TestId == testId && _partnerCost.PartnerId == partnerId && _partnerCost.IsActive == true
                            select _partnerCost).FirstOrDefault();
             if (partnerCost != null)
@@ -271,7 +272,7 @@ namespace DataRepository
         #region Test
         public List<Test> GetTests()
         {
-            List<Test> lstTests = (from _test in myDb.Tests
+            List<Test> lstTests = (from _test in _myDb.Tests
                                    where _test.IsActive == true
                                    select _test).ToList();
             return lstTests;
@@ -282,7 +283,7 @@ namespace DataRepository
         /// <returns></returns>
         public List<Test> GetTestsHaveRealCost()
         {
-            List<Test> lstTests = (from _test in myDb.Tests
+            List<Test> lstTests = (from _test in _myDb.Tests
                                    where _test.IsActive == true && (_test.TestSection == null || !_test.TestSection.UseCostForAssociateTest)
                                    select _test).ToList();
             return lstTests;
@@ -293,8 +294,8 @@ namespace DataRepository
         {
             try
             {
-                Test test = (from _test in myDb.Tests where _test.Id == testId select _test).First();
-                myDb.SaveChanges();
+                Test test = (from _test in _myDb.Tests where _test.Id == testId select _test).First();
+                _myDb.SaveChanges();
                 return test;
             }
             catch (Exception ex)
@@ -305,13 +306,13 @@ namespace DataRepository
 
         public void TestInsert(Test test)
         {
-            myDb.Tests.AddObject(test);
-            myDb.SaveChanges();
+            _myDb.Tests.AddObject(test);
+            _myDb.SaveChanges();
         }
 
         public void TestUpdate(int id, Test test)
         {
-            Test currentTest = (from _test in myDb.Tests where _test.Id == id select _test).First();
+            Test currentTest = (from _test in _myDb.Tests where _test.Id == id select _test).First();
             currentTest.Name = test.Name;
             currentTest.Description = test.Description;
             currentTest.LowIndex = test.LowIndex;
@@ -327,7 +328,7 @@ namespace DataRepository
             currentTest.Cost = test.Cost;
             currentTest.IsBold = test.IsBold;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public void TestDelete(int testId)
@@ -335,12 +336,12 @@ namespace DataRepository
             Test test = GetTest(testId);
             test.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public List<Test> GetTestByTestSectionId(int testSectionId)
         {
-            List<Test> lstTests = (from _test in myDb.Tests
+            List<Test> lstTests = (from _test in _myDb.Tests
                                    where (_test.IsActive == true && _test.TestSectionId == testSectionId)
                                    select _test).ToList();
             return lstTests;
@@ -349,7 +350,7 @@ namespace DataRepository
         public bool IsValidTest(string testName)
         {
             bool isValid = true;
-            Test testWithSameName = myDb.Tests.SingleOrDefault(u => u.Name == testName);
+            Test testWithSameName = _myDb.Tests.SingleOrDefault(u => u.Name == testName);
             if (testWithSameName != null)
             {
                 isValid = false;
@@ -359,26 +360,25 @@ namespace DataRepository
 
         public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName)
         {
-            List<SearchTest_Result> lstTestSearch = new List<SearchTest_Result>();
-            lstTestSearch = myDb.SearchTest(testName, testSectionName, panelName).ToList();
+            List<SearchTest_Result> lstTestSearch = _myDb.SearchTest(testName, testSectionName, panelName).ToList();
             return lstTestSearch;
         }
 
         public object GetTestByName(string name, string searchType)
         {
-            List<SearchTestByName_Result> lstTest = myDb.SearchTestByName(name, searchType).ToList();
+            List<SearchTestByName_Result> lstTest = _myDb.SearchTestByName(name, searchType).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
         }
 
         public object GetTestByNameForPanel(string name, string searchType)
         {
-            List<SearchTestByNameForPanel_Result> lstTest = myDb.SearchTestByNameForPanel(name, searchType).ToList();
+            List<SearchTestByNameForPanel_Result> lstTest = _myDb.SearchTestByNameForPanel(name, searchType).ToList();
             return lstTest.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.TestSectionName + "," + p.Cost });
         }
 
         public object GetTestHaveCostNotDependenceTestSection()
         {
-            var lstTest = myDb.Tests.Where(p => (p.TestSection == null || !p.TestSection.UseCostForAssociateTest))
+            var lstTest = _myDb.Tests.Where(p => (p.TestSection == null || !p.TestSection.UseCostForAssociateTest))
                                     .ToList()
                                     .Select(p => new
                                     {
@@ -395,8 +395,8 @@ namespace DataRepository
         {
             try
             {
-                Panel panel = (from _panel in myDb.Panels where (_panel.Id == panelId) select _panel).First();
-                myDb.SaveChanges();
+                Panel panel = (from _panel in _myDb.Panels where (_panel.Id == panelId) select _panel).First();
+                _myDb.SaveChanges();
                 return panel;
             }
             catch (Exception ex)
@@ -407,20 +407,20 @@ namespace DataRepository
 
         public void PanelInsert(Panel panel)
         {
-            myDb.Panels.AddObject(panel);
-            myDb.SaveChanges();
+            _myDb.Panels.AddObject(panel);
+            _myDb.SaveChanges();
         }
 
         public void PanelUpdate(int id, Panel panel)
         {
-            Panel currentPanel = (from _panel in myDb.Panels where _panel.Id == id select _panel).First();
+            Panel currentPanel = (from _panel in _myDb.Panels where _panel.Id == id select _panel).First();
 
             currentPanel.Name = panel.Name;
             currentPanel.Description = panel.Description;
             currentPanel.IsActive = panel.IsActive;
             currentPanel.LastUpdated = panel.LastUpdated;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public void PanelDelete(int panelId)
@@ -428,19 +428,19 @@ namespace DataRepository
             Panel panel = GetPanel(panelId);
             panel.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public List<Panel> GetAllPanel()
         {
-            List<Panel> lstPanels = (from _panel in myDb.Panels where _panel.IsActive == true select _panel).ToList();
+            List<Panel> lstPanels = (from _panel in _myDb.Panels where _panel.IsActive == true select _panel).ToList();
             return lstPanels;
         }
 
         public bool IsValidPanel(string name)
         {
             bool isValid = true;
-            Panel panel = myDb.Panels.SingleOrDefault(u => u.Name == name);
+            Panel panel = _myDb.Panels.SingleOrDefault(u => u.Name == name);
             if (panel != null)
             {
                 isValid = false;
@@ -449,7 +449,7 @@ namespace DataRepository
         }
         public object GetPanelNameByName(string name, string searchType)
         {
-            List<SearchPanelByName_Result> lstPanel = myDb.SearchPanelByName(name, searchType).ToList();
+            List<SearchPanelByName_Result> lstPanel = _myDb.SearchPanelByName(name, searchType).ToList();
             return lstPanel.Select(p => new { Label = p.Name, Value = p.Name });
         }
         #endregion Panel
@@ -459,8 +459,8 @@ namespace DataRepository
         {
             try
             {
-                PanelItem panelItem = (from _panelItem in myDb.PanelItems where _panelItem.Id == panelItemId select _panelItem).First();
-                myDb.SaveChanges();
+                PanelItem panelItem = (from _panelItem in _myDb.PanelItems where _panelItem.Id == panelItemId select _panelItem).First();
+                _myDb.SaveChanges();
                 return panelItem;
             }
 
@@ -472,13 +472,13 @@ namespace DataRepository
 
         public void PanelItemInsert(PanelItem panelItem)
         {
-            myDb.PanelItems.AddObject(panelItem);
-            myDb.SaveChanges();
+            _myDb.PanelItems.AddObject(panelItem);
+            _myDb.SaveChanges();
         }
 
         public void PanelItemUpdate(int id, PanelItem panelItem)
         {
-            PanelItem currentPanelItem = (from _panelItem in myDb.PanelItems where _panelItem.Id == id select _panelItem).First();
+            PanelItem currentPanelItem = (from _panelItem in _myDb.PanelItems where _panelItem.Id == id select _panelItem).First();
 
             currentPanelItem.PanelId = panelItem.PanelId;
             currentPanelItem.TestId = panelItem.TestId;
@@ -487,7 +487,7 @@ namespace DataRepository
             currentPanelItem.IsActive = panelItem.IsActive;
             currentPanelItem.LastUpdated = panelItem.LastUpdated;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public void PanelItemDelete(int panelItemId)
@@ -495,32 +495,32 @@ namespace DataRepository
             PanelItem panelItem = GetPanelItem(panelItemId);
             panelItem.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public List<PanelItem> GetPanelItemByPanelId(int panelId)
         {
-            List<PanelItem> lstPanelItems = (from _panelItem in myDb.PanelItems where _panelItem.PanelId == panelId select _panelItem).ToList();
+            List<PanelItem> lstPanelItems = (from _panelItem in _myDb.PanelItems where _panelItem.PanelId == panelId select _panelItem).ToList();
 
             return lstPanelItems;
         }
 
         public List<PanelItem> GetPanelItemByTestId(int testId)
         {
-            List<PanelItem> lstPanelItems = (from _panelItem in myDb.PanelItems where _panelItem.TestId == testId select _panelItem).ToList();
+            List<PanelItem> lstPanelItems = (from _panelItem in _myDb.PanelItems where _panelItem.TestId == testId select _panelItem).ToList();
 
             return lstPanelItems;
         }
 
         public List<Panel> GetPanelByName(string name)
         {
-            List<Panel> lstPanel = (from _panel in myDb.Panels where string.IsNullOrEmpty(name) || _panel.Name.Contains(name) select _panel).ToList();
+            List<Panel> lstPanel = (from _panel in _myDb.Panels where string.IsNullOrEmpty(name) || _panel.Name.Contains(name) select _panel).ToList();
             return lstPanel;
         }
 
         public PanelItem GetPanelItemByTestIdAndPanelId(int testId, int panelId)
         {
-            PanelItem panelItem = (from _item in myDb.PanelItems
+            PanelItem panelItem = (from _item in _myDb.PanelItems
                                    where _item.PanelId == panelId && _item.TestId == testId
                                    select _item).FirstOrDefault();
 
@@ -531,7 +531,7 @@ namespace DataRepository
         {
             bool isExist = false;
             PanelItem item = new PanelItem();
-            item = (from _panelItem in myDb.PanelItems
+            item = (from _panelItem in _myDb.PanelItems
                     where _panelItem.TestId == testId && _panelItem.IsActive == true
                     select _panelItem).FirstOrDefault();
             if (item != null)
@@ -558,7 +558,7 @@ namespace DataRepository
         }
         public List<Panel> GetPanels()
         {
-            return (from _panel in myDb.Panels where _panel.IsActive select _panel).ToList();
+            return (from _panel in _myDb.Panels where _panel.IsActive select _panel).ToList();
         }
         #endregion PanelItem
 
@@ -567,8 +567,8 @@ namespace DataRepository
         {
             try
             {
-                Doctor doctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
-                myDb.SaveChanges();
+                Doctor doctor = (from _doctor in _myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
+                _myDb.SaveChanges();
                 return doctor;
             }
 
@@ -580,13 +580,13 @@ namespace DataRepository
 
         public void DoctorInsert(Doctor doctor)
         {
-            myDb.Doctors.AddObject(doctor);
-            myDb.SaveChanges();
+            _myDb.Doctors.AddObject(doctor);
+            _myDb.SaveChanges();
         }
 
         public void DoctorUpdate(int id, Doctor doctor)
         {
-            Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == id select _doctor).First();
+            Doctor currentDoctor = (from _doctor in _myDb.Doctors where _doctor.Id == id select _doctor).First();
             currentDoctor.Name = doctor.Name;
             currentDoctor.Address = doctor.Address;
             currentDoctor.Phone = doctor.Phone;
@@ -596,7 +596,7 @@ namespace DataRepository
             currentDoctor.BankAccountNumber = doctor.BankAccountNumber;
             currentDoctor.Other = doctor.Other;
             currentDoctor.ConnectionCode = doctor.ConnectionCode;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
         public string AddLabIdToUniqueString(string code,int labId)
         {
@@ -612,15 +612,15 @@ namespace DataRepository
         }
         public string CreateConnectionCode(int doctorId,int labId)
         {
-            string connectionCode = myDb.GenerateConnectionCode((int)ConstantNumber.ConnetionCodeLength).FirstOrDefault();
+            string connectionCode = _myDb.GenerateConnectionCode((int)ConstantNumber.ConnetionCodeLength).FirstOrDefault();
             connectionCode = AddLabIdToUniqueString(connectionCode, labId);
             if (doctorId != 0)
             {
-                Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
+                Doctor currentDoctor = (from _doctor in _myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
                 currentDoctor.ConnectionCode = connectionCode;
                 try
                 {
-                    connector.SubmitConnectionCodeToServer(doctorId, labId, connectionCode);
+                    _connector.SubmitConnectionCodeToServer(doctorId, labId, connectionCode);
                     currentDoctor.UpdatedOnServer = true;
                     
                 }
@@ -628,30 +628,32 @@ namespace DataRepository
                 {
                     currentDoctor.UpdatedOnServer = false;
                 }
-                myDb.SaveChanges();
+                _myDb.SaveChanges();
             }
             return connectionCode;
         }
 
         public void RemoveConnection(int doctorId,int labId)
         {
-            Doctor currentDoctor = (from _doctor in myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
+            Doctor currentDoctor = (from _doctor in _myDb.Doctors where _doctor.Id == doctorId select _doctor).First();
             if (currentDoctor.IsConnected == true)
             {
-                currentDoctor.IsConnected = false;
                 currentDoctor.ConnectionCode = "";
-                currentDoctor.ServerDoctorId = null;
+                currentDoctor.IsConnected = false;
                 currentDoctor.UpdatedOnServer = false;
                 try
                 {
                     bool isSuccess = Connector.RemoveDoctorConnect(currentDoctor.ServerDoctorId.Value, doctorId, labId, currentDoctor.ConnectionCode);
                     if (isSuccess)
+                    {
+                        currentDoctor.ServerDoctorId = null;
                         currentDoctor.UpdatedOnServer = true;
+                    }
                 }
                 catch (Exception ex)
                 { 
                 }
-                myDb.SaveChanges();
+                _myDb.SaveChanges();
             }
         }
         public void DoctorDelete(int doctorId)
@@ -659,13 +661,13 @@ namespace DataRepository
             Doctor doctor = GetDoctor(doctorId);
             doctor.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public bool IsValidDoctor(string name)
         {
             bool isValid = true;
-            Doctor doctor = myDb.Doctors.SingleOrDefault(u => u.Name == name);
+            Doctor doctor = _myDb.Doctors.SingleOrDefault(u => u.Name == name);
             if (doctor != null)
             {
                 isValid = false;
@@ -675,28 +677,30 @@ namespace DataRepository
 
         public List<Doctor> GetDoctorByName(string name)
         {
-            List<Doctor> lstDoctor = (from _doctor in myDb.Doctors where string.IsNullOrEmpty(name) || _doctor.Name.Contains(name) select _doctor).ToList();
+            List<Doctor> lstDoctor = (from _doctor in _myDb.Doctors where string.IsNullOrEmpty(name) || _doctor.Name.Contains(name) select _doctor).ToList();
             return lstDoctor;
         }
 
         public object GetDoctorNameByName(string name, string searchType)
         {
-            List<SearchDoctorByName_Result> lstDoctor = myDb.SearchDoctorByName(name, searchType).ToList();
+            List<SearchDoctorByName_Result> lstDoctor = _myDb.SearchDoctorByName(name, searchType).ToList();
             return lstDoctor.Select(p => new { Label = p.Name, Value = p.Name });
         }
 
         public string GetUniqueExaminationNumber(int length,int labId)
         {
-            string examinationNumber = myDb.GenerateLabExaminationNumber(5).FirstOrDefault();
+            string examinationNumber = _myDb.GenerateLabExaminationNumber(5).FirstOrDefault();
             examinationNumber = AddLabIdToUniqueString(examinationNumber, labId);
             return examinationNumber;
         }
         public string GetUniquePatientNumber(int length, int labId)
         {
-            string examinationNumber = myDb.GenerateLabExaminationNumber(5).FirstOrDefault();
+            string examinationNumber = _myDb.GenerateLabExaminationNumber(5).FirstOrDefault();
             examinationNumber = AddLabIdToUniqueString(examinationNumber, labId);
             return examinationNumber;
         }
+
+
         #endregion
 
         #region TestSection
@@ -704,20 +708,20 @@ namespace DataRepository
 
         public object GetTestSectionByName(string name, string searchType)
         {
-            List<SearchTestSection_Result> lstTestSection = myDb.SearchTestSection(name, searchType).ToList();
+            List<SearchTestSection_Result> lstTestSection = _myDb.SearchTestSection(name, searchType).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.UseCostForAssociateTest });
         }
 
         public TestSection GetTestSection(int testSectionId)
         {
-            TestSection testSection = (from _testSection in myDb.TestSections where _testSection.Id == testSectionId select _testSection).First();
-            myDb.SaveChanges();
+            TestSection testSection = (from _testSection in _myDb.TestSections where _testSection.Id == testSectionId select _testSection).First();
+            _myDb.SaveChanges();
             return testSection;
         }
 
         public List<TestSection> GetTestSections()
         {
-            List<TestSection> lstTestSections = (from _testSection in myDb.TestSections
+            List<TestSection> lstTestSections = (from _testSection in _myDb.TestSections
                                                  where _testSection.IsActive == true
                                                  select _testSection).ToList();
             return lstTestSections;
@@ -725,8 +729,8 @@ namespace DataRepository
 
         public void TestSectionInsert(TestSection ts)
         {
-            myDb.TestSections.AddObject(ts);
-            myDb.SaveChanges();
+            _myDb.TestSections.AddObject(ts);
+            _myDb.SaveChanges();
         }
 
 
@@ -735,13 +739,13 @@ namespace DataRepository
             TestSection ts = GetTestSection(testSectionId);
             ts.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public bool IsValidTestSection(string tsName, int? testSectionId)
         {
             bool isValid = true;
-            TestSection tsWithSameName = myDb.TestSections.SingleOrDefault(u => u.Name == tsName);
+            TestSection tsWithSameName = _myDb.TestSections.SingleOrDefault(u => u.Name == tsName);
             if (tsWithSameName != null)
             {
                 if ((testSectionId == null)
@@ -751,9 +755,9 @@ namespace DataRepository
             return isValid;
         }
 
-        public List<VMTestListItem> GetTestsOfTestSection(int Id)
+        public List<VMTestListItem> GetTestsOfTestSection(int id)
         {
-            TestSection testSection = GetTestSection(Id);
+            TestSection testSection = GetTestSection(id);
             List<VMTestListItem> listTest = testSection.Tests.Where(p => p.IsActive == true).Select(p => new VMTestListItem
             {
                 TestName = p.Name,
@@ -766,7 +770,7 @@ namespace DataRepository
         }
         public void TestSectionUpdate(TestSection testSectionToUpdate)
         {
-            TestSection testSection = (from _testSection in myDb.TestSections
+            TestSection testSection = (from _testSection in _myDb.TestSections
                                        where _testSection.Id == testSectionToUpdate.Id
                                        select _testSection).First();
             testSection.IsActive = testSectionToUpdate.IsActive;
@@ -775,12 +779,12 @@ namespace DataRepository
             testSection.Cost = testSectionToUpdate.Cost;
             testSection.Description = testSection.Description;
             testSection.UseCostForAssociateTest = testSectionToUpdate.UseCostForAssociateTest;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public object GetTestSectionByNameForPanel(string name, string searchType)
         {
-            List<SearchTestSectionByNameForPanel_Result> lstTestSection = myDb.SearchTestSectionByNameForPanel(name, searchType).ToList();
+            List<SearchTestSectionByNameForPanel_Result> lstTestSection = _myDb.SearchTestSectionByNameForPanel(name, searchType).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
         }
         #endregion
@@ -789,32 +793,33 @@ namespace DataRepository
 
         public int PatientInsert(Patient patient)
         {
-            myDb.Patients.AddObject(patient);
-            myDb.SaveChanges();
+            _myDb.Patients.AddObject(patient);
+            _myDb.SaveChanges();
             return patient.Id;
         }
 
         public int PatientItemInsert(PatientItem patientItem)
         {
-            myDb.PatientItems.AddObject(patientItem);
-            myDb.SaveChanges();
+            _myDb.PatientItems.AddObject(patientItem);
+            _myDb.SaveChanges();
             return patientItem.Id;
         }
 
-        public List<PatientsGets_Result> GetPatients(int? PatientId, string FirstName, string Phone, string Email, string IndentifierNumber, string Address, int? PartnerId, int? OrderNumber, DateTime? ReceivedDate)
+        public List<PatientsGets_Result> GetPatients(int? patientId, string firstName, string phone, string email, string indentifierNumber, string address, int? partnerId, int? orderNumber, DateTime? receivedDate)
         {
-            List<PatientsGets_Result> listPatient = myDb.PatientsGets(PatientId, FirstName, Phone, Email, IndentifierNumber, Address, PartnerId, OrderNumber, ReceivedDate).ToList();
+            List<PatientsGets_Result> listPatient = _myDb.PatientsGets(patientId, firstName, phone, email, indentifierNumber, address, partnerId, orderNumber, receivedDate).ToList();
             return listPatient;
         }
 
-        public Patient GetPatientNumber(int Id)
+        public Patient GetPatientNumber(int id)
         {
-            Patient patient = myDb.Patients.Where(p => p.Id == Id).FirstOrDefault();
+            Patient patient = _myDb.Patients.FirstOrDefault(p => p.Id == id);
             return patient;
         }
+
         public List<VMPatientTest> GetPatientTests(int Id, int labExaminationId)
         {
-            Patient patient = GetPatient(labExaminationId);
+            Patient patient = GetPatientByLabExaminationId(labExaminationId);
             List<VMPatientTest> listTest = new List<VMPatientTest>();
             foreach (var patientItem in patient.PatientItems)
             {
@@ -837,23 +842,23 @@ namespace DataRepository
             return listTest;
         }
 
-        public Patient GetPatient(int labExaminationId)
+        public Patient GetPatientByLabExaminationId(int labExaminationId)
         {
 
-            Patient patient = (from _patient in myDb.Patients
+            Patient patient = (from _patient in _myDb.Patients
                                join
-                                   _labExamination in myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
+                                   _labExamination in _myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
                                where _labExamination.Id == labExaminationId
                                select _patient).FirstOrDefault();
             return patient;
         }
 
-        public Patient GetPatient(DateTime ReceivedDate, int OrderNumber)
+        public Patient GetPatientByExaminationDateAndOrderNumber(DateTime receivedDate, int orderNumber)
         {
-            Patient patient = (from _patient in myDb.Patients
+            Patient patient = (from _patient in _myDb.Patients
                                join
-                                   _labExamination in myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
-                               where EntityFunctions.TruncateTime(_labExamination.ReceivedDate) == ReceivedDate && _labExamination.OrderNumber == OrderNumber
+                                   _labExamination in _myDb.LabExaminations on _patient.Id equals _labExamination.PatientId
+                               where EntityFunctions.TruncateTime(_labExamination.ReceivedDate) == receivedDate && _labExamination.OrderNumber == orderNumber
                                select _patient).FirstOrDefault();
             return patient;
         }
@@ -861,7 +866,7 @@ namespace DataRepository
         public void PatientUpdate(int patientId, Patient patient)
         {
 
-            Patient patientOld = (from _patient in myDb.Patients
+            Patient patientOld = (from _patient in _myDb.Patients
                                   where _patient.Id == patientId
                                   select _patient).FirstOrDefault();
             patientOld.Address = patient.Address;
@@ -872,14 +877,14 @@ namespace DataRepository
             patientOld.Email = patient.Email;
             patientOld.Phone = patient.Phone;
             patientOld.IndentifierNumber = patient.IndentifierNumber;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public PatientItem PatientItemUpdate(int patientId, PatientItem patientItem)
         {
-            PatientItem patientItemOld = myDb.PatientItems.Where(p => p.PatientId == patientId).FirstOrDefault();
+            PatientItem patientItemOld = _myDb.PatientItems.FirstOrDefault(p => p.PatientId == patientId);
             patientItemOld.LastUpdated = patientItem.LastUpdated;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
             return patientItemOld;
         }
 
@@ -888,31 +893,35 @@ namespace DataRepository
             return new List<VMPatientTest>();
         }
 
+        public Patient GetPatientById(int patientId)
+        {
+            return _myDb.Patients.FirstOrDefault(p => p.Id == patientId);
+        }
 
         #endregion
 
         #region Analysis
         public void AnalysisInsert(Analysis analysis)
         {
-            myDb.Analyses.AddObject(analysis);
-            myDb.SaveChanges();
+            _myDb.Analyses.AddObject(analysis);
+            _myDb.SaveChanges();
         }
         public void AnalysisApproved(int analysisId, int staffId)
         {
-            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            Analysis analysis = _myDb.Analyses.FirstOrDefault(p => p.Id == analysisId);
             if (analysis != null)
             {
                 analysis.Status = (int)AnalysisStatusEnum.Approved;
             }
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
         public void AnalysisDelete(int analysisId)
         {
-            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            Analysis analysis = _myDb.Analyses.FirstOrDefault(p => p.Id == analysisId);
             if (analysis != null)
             {
-                myDb.Analyses.DeleteObject(analysis);
-                myDb.SaveChanges();
+                _myDb.Analyses.DeleteObject(analysis);
+                _myDb.SaveChanges();
             }
         }
 
@@ -921,23 +930,23 @@ namespace DataRepository
         #region LabExamination
         public int LabExaminationInsert(LabExamination labExamination)
         {
-            myDb.LabExaminations.AddObject(labExamination);
-            myDb.SaveChanges();
+            _myDb.LabExaminations.AddObject(labExamination);
+            _myDb.SaveChanges();
             return labExamination.Id;
 
         }
         public int GetLabExaminationOrderNumber()
         {
             DateTime today = DateTime.Now.Date;
-            List<LabExamination> listLabExToday = myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == EntityFunctions.TruncateTime(today)).ToList();
+            List<LabExamination> listLabExToday = _myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == EntityFunctions.TruncateTime(today)).ToList();
             if (listLabExToday.Count == 0)
                 return 1;
-            return myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == EntityFunctions.TruncateTime(today)).Max(p => p.OrderNumber) + 1;
+            return _myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == EntityFunctions.TruncateTime(today)).Max(p => p.OrderNumber) + 1;
 
         }
-        public VMLabExamination GetLabExamination(int Id)
+        public VMLabExamination GetLabExamination(int labExaminationId)
         {
-            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.PatientId == Id)
+            VMLabExamination labExamination = _myDb.LabExaminations.Where(p => p.PatientId == labExaminationId)
                                                                 .Select(p => new VMLabExamination
                                                                 {
                                                                     CreatedBy = p.CreatedBy,
@@ -956,9 +965,9 @@ namespace DataRepository
                                                                 }).FirstOrDefault();
             return labExamination;
         }
-        public VMLabExamination GetLabExamination(int OrderNumber, DateTime ReceivedDate)
+        public VMLabExamination GetLabExamination(int orderNumber, DateTime receivedDate)
         {
-            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.OrderNumber == OrderNumber && EntityFunctions.TruncateTime(p.ReceivedDate) == ReceivedDate)
+            VMLabExamination labExamination = _myDb.LabExaminations.Where(p => p.OrderNumber == orderNumber && EntityFunctions.TruncateTime(p.ReceivedDate) == receivedDate)
                                                                .Select(p => new VMLabExamination
                                                                {
                                                                    CreatedBy = p.CreatedBy,
@@ -977,20 +986,44 @@ namespace DataRepository
                                                                }).FirstOrDefault();
             return labExamination;
         }
-        public void LabExaminationUpdate(int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination)
+        public void LabExaminationUpdate(int labId,int patientId, DateTime receivedDate, int orderNumber, LabExamination labExamination)
         {
-            LabExamination labExamOld = myDb.LabExaminations.Where(p => EntityFunctions.TruncateTime(p.ReceivedDate) == receivedDate && p.OrderNumber == orderNumber && p.PatientId == patientId).FirstOrDefault();
-            labExamOld.CreatedBy = labExamination.CreatedBy;
-            labExamOld.PartnerId = labExamination.PartnerId;
-            labExamOld.Diagnosis = labExamination.Diagnosis;
-            labExamOld.Status = labExamination.Status;
-            labExamOld.DoctorId = labExamination.DoctorId;
-            labExamOld.SpecifiedDoctor = labExamination.SpecifiedDoctor;
-            myDb.SaveChanges();
+            LabExamination labExamOld = _myDb.LabExaminations.FirstOrDefault(p => EntityFunctions.TruncateTime(p.ReceivedDate) == receivedDate && p.OrderNumber == orderNumber && p.PatientId == patientId);
+            if (labExamOld != null)
+            {
+                labExamOld.CreatedBy = labExamination.CreatedBy;
+                labExamOld.PartnerId = labExamination.PartnerId;
+                labExamOld.Diagnosis = labExamination.Diagnosis;
+                labExamOld.Status = labExamination.Status;
+                labExamOld.DoctorId = labExamination.DoctorId;
+                labExamOld.SpecifiedDoctor = labExamination.SpecifiedDoctor;
+                //Update to server
+                var patient = GetPatientById(patientId);
+                
+                try
+                {
+                    Connector.UpdateExamination(labId,
+                                                labExamination.ExaminationNumber,
+                                                labExamination.Status,
+                                                patient.FirstName,
+                                                patient.Phone,
+                                                patient.Age,
+                                                labExamination.PartnerId,
+                                                labExamination.DoctorId);
+                    labExamOld.UpdatedOnServer = true;
+                }
+                catch (Exception)
+                {
+                    labExamOld.UpdatedOnServer = false;
+                }
+                
+            }
+            _myDb.SaveChanges();
         }
+
         public VMLabExamination GetLabExamination(string examinationNumber)
         {
-            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.ExaminationNumber == examinationNumber)
+            VMLabExamination labExamination = _myDb.LabExaminations.Where(p => p.ExaminationNumber == examinationNumber)
                                                                  .Select(p => new VMLabExamination
                                                                  {
                                                                      CreatedBy = p.CreatedBy,
@@ -1008,10 +1041,9 @@ namespace DataRepository
                                                                  }).FirstOrDefault();
             return labExamination;
         }
-
-        public VMLabExamination GetLabExaminationById(int Id)
+        public VMLabExamination GetLabExaminationById(int id)
         {
-            VMLabExamination labExamination = myDb.LabExaminations.Where(p => p.Id == Id)
+            VMLabExamination labExamination = _myDb.LabExaminations.Where(p => p.Id == id)
                                                                 .Select(p => new VMLabExamination
                                                                 {
                                                                     CreatedBy = p.CreatedBy,
@@ -1030,13 +1062,31 @@ namespace DataRepository
                                                                 }).FirstOrDefault();
             return labExamination;
         }
+        public void LabExaminationUpdateStatus(int labExaminationId, int status)
+        {
+            LabExamination labExamination = _myDb.LabExaminations.FirstOrDefault(p => p.Id == labExaminationId);
+            if (labExamination!= null)
+            {
+                labExamination.Status = status;
+                try
+                {
+                    Connector.UpdateExaminationStatus(labExamination.ExaminationNumber, status);
+                    labExamination.UpdatedOnServer = true;
+                }
+                catch (Exception)
+                {
+                    labExamination.UpdatedOnServer = false;
+                }
+                _myDb.SaveChanges();
+            }
+        }
 
         #endregion
 
         #region Result
         public void ResultInsert(int analysisId, string result, int staffId)
         {
-            Result testResult = myDb.Results.Where(p => p.AnalysisId == analysisId).FirstOrDefault();
+            Result testResult = _myDb.Results.FirstOrDefault(p => p.AnalysisId == analysisId);
             if (testResult == null)
             {
                 //Add result
@@ -1046,15 +1096,15 @@ namespace DataRepository
                 testResult.LastModifiedStaffId = staffId;
                 testResult.IsReportable = true;
                 testResult.Value = result;
-                myDb.Results.AddObject(testResult);
+                _myDb.Results.AddObject(testResult);
 
                 // update analysis
-                Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+                Analysis analysis = _myDb.Analyses.FirstOrDefault(p => p.Id == analysisId);
                 if (analysis != null)
                 {
                     analysis.Status = (int)AnalysisStatusEnum.HaveResult;
                 }
-                myDb.SaveChanges();
+                _myDb.SaveChanges();
             }
             else
             {
@@ -1066,7 +1116,7 @@ namespace DataRepository
         {
 
             //Add result
-            Result testResult = myDb.Results.Where(p => p.Id == resultId).FirstOrDefault();
+            Result testResult = _myDb.Results.FirstOrDefault(p => p.Id == resultId);
             if (testResult != null)
             {
                 testResult.LastUpdated = DateTime.Now;
@@ -1075,7 +1125,7 @@ namespace DataRepository
                 testResult.Value = result;
             }
             // update analysis
-            Analysis analysis = myDb.Analyses.Where(p => p.Id == analysisId).FirstOrDefault();
+            Analysis analysis = _myDb.Analyses.FirstOrDefault(p => p.Id == analysisId);
             if (analysis != null)
             {
                 if (string.IsNullOrEmpty(result))
@@ -1085,7 +1135,7 @@ namespace DataRepository
                     analysis.Status = (int)AnalysisStatusEnum.HaveResult;
                 }
             }
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public List<VMTestResult> GetPatientTestResults(int orderNumber, DateTime receivedDate)
@@ -1096,7 +1146,7 @@ namespace DataRepository
 
         public List<VMTestResult> GetPatientTestResults(int labExaminationId)
         {
-            List<TestResultsGet_Result> tests = myDb.PatientTestResultsGet(labExaminationId).ToList();
+            List<TestResultsGet_Result> tests = _myDb.PatientTestResultsGet(labExaminationId).ToList();
             List<VMTestResult> testResults = new List<VMTestResult>();
             if (tests != null && tests.Count != 0)
             {
@@ -1135,14 +1185,14 @@ namespace DataRepository
         #endregion
 
         #region Report
-        public List<Report_PatientResult> ReportData_PatientResult(int labExaminationId)
+        public List<Report_PatientResult> ReportDataPatientResult(int labExaminationId)
         {
-            List<Report_PatientResult> list = myDb.Report_PatientResult(labExaminationId).ToList();
+            List<Report_PatientResult> list = _myDb.Report_PatientResult(labExaminationId).ToList();
             return list;
         }
-        public List<Report_TestResultNoteBook> ReportData_TestResultNoteBook(DateTime startDate, DateTime endDate)
+        public List<Report_TestResultNoteBook> ReportDataTestResultNoteBook(DateTime startDate, DateTime endDate)
         {
-            List<report_TestResultNoteBook_Result> list = myDb.report_TestResultNoteBook(startDate, endDate).ToList();
+            List<report_TestResultNoteBook_Result> list = _myDb.report_TestResultNoteBook(startDate, endDate).ToList();
             Dictionary<string, Report_TestResultNoteBook> result = new Dictionary<string, Report_TestResultNoteBook>();
             foreach (var item in list)
             {
@@ -1168,16 +1218,16 @@ namespace DataRepository
             }
             return result.Values.ToList();
         }
-        public List<Report_BaoCaoTaiChinh> ReportData_BaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId,string partnerType)
+        public List<Report_BaoCaoTaiChinh> ReportDataBaoCaoTaiChinh(DateTime startDate, DateTime endDate, int partnerId,string partnerType)
         {
             List<report_ThongKeTaiChinh_Result> list = null;
             if (partnerType == "Doctor")
             {
-                list = myDb.report_ThongKeTaiChinh_Dortor(startDate, endDate, partnerId).ToList();
+                list = _myDb.report_ThongKeTaiChinh_Dortor(startDate, endDate, partnerId).ToList();
             }
             else
             {
-                list = myDb.report_ThongKeTaiChinh(startDate, endDate, partnerId).ToList();
+                list = _myDb.report_ThongKeTaiChinh(startDate, endDate, partnerId).ToList();
             }
             Dictionary<string, Report_BaoCaoTaiChinh> result = new Dictionary<string, Report_BaoCaoTaiChinh>();
             foreach (var item in list)
@@ -1221,9 +1271,9 @@ namespace DataRepository
         #endregion
 
         #region LabUser
-        public LabUser GetLabUser(string UserName, string Password)
+        public LabUser GetLabUser(string userName, string password)
         {
-            LabUser account = myDb.LabUsers.Where(p => p.UserName == UserName && p.Password == Password).FirstOrDefault();
+            LabUser account = _myDb.LabUsers.FirstOrDefault(p => p.UserName == userName && p.Password == password);
             return account;
         }
         #endregion
@@ -1233,8 +1283,8 @@ namespace DataRepository
         {
             try
             {
-                TestSectionCommission test = (from _test in myDb.TestSectionCommissions where _test.Id == id select _test).First();
-                myDb.SaveChanges();
+                TestSectionCommission test = (from _test in _myDb.TestSectionCommissions where _test.Id == id select _test).First();
+                _myDb.SaveChanges();
                 return test;
             }
             catch (Exception ex)
@@ -1245,18 +1295,18 @@ namespace DataRepository
 
         public void TestSectionCommissionInsert(TestSectionCommission test)
         {
-            myDb.TestSectionCommissions.AddObject(test);
-            myDb.SaveChanges();
+            _myDb.TestSectionCommissions.AddObject(test);
+            _myDb.SaveChanges();
         }
 
         public void TestSectionCommissionUpdate(int id, TestSectionCommission test)
         {
-            TestSectionCommission currentTest = (from _test in myDb.TestSectionCommissions where _test.Id == id select _test).First();
+            TestSectionCommission currentTest = (from _test in _myDb.TestSectionCommissions where _test.Id == id select _test).First();
 
             currentTest.IsActive = test.IsActive;
             currentTest.Cost = test.Cost;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
 
         public void TestSectionCommissionDelete(int id)
@@ -1264,20 +1314,20 @@ namespace DataRepository
             TestSectionCommission test = GetTestSectionCommission(id);
             test.IsActive = false;
 
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
         }
         #endregion
 
         #region Instrument
         public List<SearchInstrumentResult_Result> InstrumentResultSearch(DateTime? receivedDate, string orderNumber, int? instrumentId)
         {
-            List<SearchInstrumentResult_Result> lstInstrumentResult = myDb.SearchInstrumentResult(receivedDate, orderNumber, instrumentId).ToList();
+            List<SearchInstrumentResult_Result> lstInstrumentResult = _myDb.SearchInstrumentResult(receivedDate, orderNumber, instrumentId).ToList();
             return lstInstrumentResult;
         }
 
         public List<Instrument> GetInstruments()
         {
-            List<Instrument> lstInstruments = (from _instrument in myDb.Instruments
+            List<Instrument> lstInstruments = (from _instrument in _myDb.Instruments
                                                where _instrument.IsActive == true
                                                select _instrument).ToList();
             return lstInstruments;
@@ -1285,7 +1335,7 @@ namespace DataRepository
 
         public List<InstrumentResult> GetAllValidInstrumentResult()
         {
-            List<InstrumentResult> lstInstrumentResults = (from _insResult in myDb.InstrumentResults
+            List<InstrumentResult> lstInstrumentResults = (from _insResult in _myDb.InstrumentResults
                                                            where _insResult.Flag == false
                                                            select _insResult).ToList();
             return lstInstrumentResults;
@@ -1293,7 +1343,7 @@ namespace DataRepository
 
         public List<InstrumentResult> GetAllValidInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId)
         {
-            List<InstrumentResult> lstInstrumentResults = (from _insResult in myDb.InstrumentResults
+            List<InstrumentResult> lstInstrumentResults = (from _insResult in _myDb.InstrumentResults
                                                            where _insResult.Flag == false
                                                              && _insResult.ReceivedDate == receivedDate
                                                              && (orderNumber == null || _insResult.OrderNumber == orderNumber)
@@ -1304,7 +1354,7 @@ namespace DataRepository
 
         public List<InstrumentResult> GetAllInstrumentResultByCondition(DateTime? receivedDate, string orderNumber, int? instrumentId)
         {
-            List<InstrumentResult> lstInstrumentResult = (from _insResult in myDb.InstrumentResults
+            List<InstrumentResult> lstInstrumentResult = (from _insResult in _myDb.InstrumentResults
                                                            where _insResult.ReceivedDate == receivedDate
                                                              && (orderNumber == null ||_insResult.OrderNumber == orderNumber)
                                                              && (instrumentId == null || _insResult.InstrumentId == instrumentId)
@@ -1314,12 +1364,12 @@ namespace DataRepository
 
         public void InsertToResult(int? orderNumber, DateTime? receivedDate, int? testId, string value, int? instrumentResultId)
         {
-            myDb.Result(orderNumber, receivedDate, testId, value, instrumentResultId);
+            _myDb.Result(orderNumber, receivedDate, testId, value, instrumentResultId);
         }
 
         public void UpdateSID(DateTime? receivedDate, string oldOrderNumber, int newOrderNumber, int? instrumentId)
         {
-            int success = myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
+            int success = _myDb.UpdateSID(oldOrderNumber, newOrderNumber, receivedDate, instrumentId);
         }
         #endregion
 
@@ -1328,7 +1378,7 @@ namespace DataRepository
         {
 
             // Kiem tra connection code có tồn tại?
-            Doctor doctor = myDb.Doctors.Where(p => p.ConnectionCode == connectionCode).FirstOrDefault();
+            Doctor doctor = _myDb.Doctors.FirstOrDefault(p => p.ConnectionCode == connectionCode);
             if (doctor == null)
             {
                 //Connection error 1 = Connection code not exist
@@ -1343,7 +1393,7 @@ namespace DataRepository
             }
 
             // Kiểm tra bác sĩ đã liên kết với lab chưa
-            bool isDoctorWasConnectWithLab = myDb.Doctors.Any(p => p.ServerDoctorId.HasValue
+            bool isDoctorWasConnectWithLab = _myDb.Doctors.Any(p => p.ServerDoctorId.HasValue
                                                             && p.ServerDoctorId.Value == serverDoctorId
                                                             && p.ConnectionCode != connectionCode && p.IsConnected);
             if (isDoctorWasConnectWithLab)
@@ -1356,7 +1406,7 @@ namespace DataRepository
             doctor.ServerDoctorId = serverDoctorId;
             doctor.DoctorConnectName = doctorConnectName;
             doctor.IsConnected = true;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
             return "Success";
         }
 
@@ -1364,7 +1414,7 @@ namespace DataRepository
         {
 
             // Kiem tra connection code có tồn tại?
-            Partner partner = myDb.Partners.Where(p => p.ConnectionCode == connectionCode).FirstOrDefault();
+            Partner partner = _myDb.Partners.FirstOrDefault(p => p.ConnectionCode == connectionCode);
             if (partner == null)
             {
                 //Connection error 1 = Connection code not exist
@@ -1379,7 +1429,7 @@ namespace DataRepository
             }
 
             // Kiểm tra lab đã liên kết với lab chưa
-            bool isLabWasConnectWithLab = myDb.Partners.Any(p => p.ServerLabId.HasValue
+            bool isLabWasConnectWithLab = _myDb.Partners.Any(p => p.ServerLabId.HasValue
                                                             && p.ServerLabId.Value == serverLabId
                                                             && p.ConnectionCode != connectionCode && p.IsConnected);
             if (isLabWasConnectWithLab)
@@ -1392,7 +1442,7 @@ namespace DataRepository
             partner.ServerLabId = serverLabId;
             partner.LabConnectName = labConnectName;
             partner.IsConnected = true;
-            myDb.SaveChanges();
+            _myDb.SaveChanges();
             return "Success";
         }
         #endregion
