@@ -378,7 +378,7 @@ namespace DataRepository
 
         public object GetTestHaveCostNotDependenceTestSection()
         {
-            var lstTest = _myDb.Tests.Where(p => (p.TestSection == null || !p.TestSection.UseCostForAssociateTest))
+            var lstTest = _myDb.Tests.Where(p => (p.TestSection == null || !p.TestSection.UseCostForAssociateTest) && p.IsActive)
                                     .ToList()
                                     .Select(p => new
                                     {
