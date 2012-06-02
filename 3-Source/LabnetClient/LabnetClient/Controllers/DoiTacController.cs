@@ -51,6 +51,7 @@ namespace LabnetClient.Controllers
         [HttpPost]
         public ActionResult Create(PartnerViewModel model)
         {
+            int partnerId = 0;
             List<VMTestListItem> Rows = null;
             List<VMTestSectionListItem> TestSectionRows = null;
 
@@ -91,6 +92,7 @@ namespace LabnetClient.Controllers
                 
                 Partner partner = Mapper.Map<VMPartner, Partner>(model.Partner);
                 Repository.PartnerInsert(partner);
+                partnerId = partner.Id;
 
                 foreach (VMTestListItem item in Rows)
                 {
@@ -124,7 +126,7 @@ namespace LabnetClient.Controllers
                     }
                 }
             }
-            return RedirectToAction("Search");
+            return RedirectToAction("Edit", new { id = partnerId });
             
         }
         
