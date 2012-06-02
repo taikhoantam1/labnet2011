@@ -19,7 +19,7 @@ namespace LabnetClient.Controllers
         public ActionResult Index()
         {
             TestSectionListViewModel model = new TestSectionListViewModel();
-            List<VMTestSection> listTestSection =Mapper.Map<List<TestSection>,List<VMTestSection>>(Repository.GetTestSections());
+            List<VMTestSection> listTestSection =Mapper.Map<List<TestSection>,List<VMTestSection>>(Repository.GetAllTestSections());
             for(int i = 0; i < listTestSection.Count; i++)
             {
                 listTestSection[i].Status = listTestSection[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";

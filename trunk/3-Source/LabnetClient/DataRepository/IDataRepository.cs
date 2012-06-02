@@ -118,6 +118,7 @@ namespace DataRepository
         object GetTestSectionByName(string name, string searchType);
         TestSection GetTestSection(int testSectionId);
         List<TestSection> GetTestSections();
+        List<TestSection> GetAllTestSections();
         void TestSectionInsert(TestSection ts);
         void TestSectionDelete(int testSectionId);
         bool IsValidTestSection(string tsName,int? testSectionId);

@@ -677,7 +677,7 @@ namespace DataRepository
 
         public List<Doctor> GetDoctorByName(string name)
         {
-            List<Doctor> lstDoctor = (from _doctor in _myDb.Doctors where string.IsNullOrEmpty(name) || _doctor.Name.Contains(name) select _doctor).ToList();
+            List<Doctor> lstDoctor = (from _doctor in _myDb.Doctors where _doctor.IsActive && (string.IsNullOrEmpty(name) || _doctor.Name.Contains(name)) select _doctor).ToList();
             return lstDoctor;
         }
 
@@ -722,7 +722,14 @@ namespace DataRepository
         public List<TestSection> GetTestSections()
         {
             List<TestSection> lstTestSections = (from _testSection in _myDb.TestSections
-                                                 //where _testSection.IsActive == true
+                                                 where _testSection.IsActive == true
+                                                 select _testSection).ToList();
+            return lstTestSections;
+        }
+
+        public List<TestSection> GetAllTestSections()
+        {
+            List<TestSection> lstTestSections = (from _testSection in _myDb.TestSections
                                                  select _testSection).ToList();
             return lstTestSections;
         }
