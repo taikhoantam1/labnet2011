@@ -97,7 +97,7 @@ namespace LabnetClient.Controllers
         {
             DoctorSearchViewModel mol = (DoctorSearchViewModel)Session[SessionProperties.SessionDoctorList];
             Repository.DoctorUpdate(id, Mapper.Map<VMDoctor, Doctor>(model.Doctor));
-            return View("Create", model);
+            return RedirectToAction("Edit", id);
             
         }
 

@@ -142,7 +142,7 @@ namespace LabnetClient.Controllers
                     }
                 }
             }
-            return RedirectToAction("Create");
+            return RedirectToAction("Edit", id);
 
         }
         
