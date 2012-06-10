@@ -132,9 +132,9 @@ namespace LabnetClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult SearchDoctor(string filterText)
+        public ActionResult SearchDoctor(string filterText, bool isActive)
         {
-            List<Doctor> lstDoctor = Repository.GetDoctorByName(filterText);
+            List<Doctor> lstDoctor = Repository.GetDoctorByNameForSearch(filterText, isActive);
             List<DoctorSearchObject> ListSearchResult = new List<DoctorSearchObject>();
             foreach (Doctor doctor in lstDoctor)
             {
@@ -151,6 +151,7 @@ namespace LabnetClient.Controllers
             DoctorSearchViewModel model = new DoctorSearchViewModel();
             model.DoctorSearch.ListSearchResult = ListSearchResult;
             model.DoctorSearch.Name = filterText;
+            model.IsActive = isActive;
             Session[SessionProperties.SessionSearchDoctor] = model;
             JQGridModel grid = new JQGridModel(typeof(DoctorSearchObject), false, ListSearchResult, "");
             return View("DataTable", grid);
@@ -230,14 +231,15 @@ namespace LabnetClient.Controllers
         public ActionResult BackToSearch()
         {
             DoctorSearchViewModel mol = (DoctorSearchViewModel)Session[SessionProperties.SessionSearchDoctor];
-
+            bool isActive = true;
             string filterText = "";
             if (mol != null)
             {
                 filterText = mol.DoctorSearch.Name;
+                isActive = mol.IsActive;
             }
 
-            List<Doctor> lstDoctor = Repository.GetDoctorByName(filterText);
+            List<Doctor> lstDoctor = Repository.GetDoctorByNameForSearch(filterText, isActive);
             List<DoctorSearchObject> ListSearchResult = new List<DoctorSearchObject>();
             foreach (Doctor doctor in lstDoctor)
             {
@@ -256,6 +258,7 @@ namespace LabnetClient.Controllers
             model.Autocomplete.SelectedText = mol.DoctorSearch.Name;
             model.Autocomplete.SelectedValue = mol.Autocomplete.SelectedValue;
             model.Autocomplete.SelectedTag = mol.Autocomplete.SelectedTag;
+            model.IsActive = isActive;
             return View("Search", model);
         }
     }

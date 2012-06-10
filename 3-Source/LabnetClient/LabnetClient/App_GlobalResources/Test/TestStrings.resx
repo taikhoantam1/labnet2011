@@ -171,6 +171,9 @@
   <data name="TestSearch_Edit" xml:space="preserve">
     <value>Cập nhật</value>
   </data>
+  <data name="TestSearch_IsActive" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
   <data name="TestSearch_PanelName" xml:space="preserve">
     <value>Panel</value>
   </data>

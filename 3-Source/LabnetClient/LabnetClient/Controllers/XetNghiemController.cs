@@ -153,7 +153,7 @@ namespace LabnetClient.Controllers
         {
 
             Session[SessionProperties.SessionSearchTest] = model;
-            List<SearchTest_Result> lstResult = Repository.TestSearch(model.TestSearch.TestName, model.TestSearch.TestSectionName, model.TestSearch.PanelName);
+            List<SearchTest_Result> lstResult = Repository.TestSearch(model.TestSearch.TestName, model.TestSearch.TestSectionName, model.TestSearch.PanelName, model.TestSearch.IsActive);
             List<TestSearchObject> ObjSearchResult = new List<TestSearchObject>();
             foreach (SearchTest_Result item in lstResult)
             {
@@ -179,7 +179,7 @@ namespace LabnetClient.Controllers
             string testName = null;
             string tsName = null;
             string panelName = null;
-
+            bool isActive = true;
             if (mol != null)
             {
                 if (mol.TestSearch.TestName != null)
@@ -194,9 +194,11 @@ namespace LabnetClient.Controllers
                 {
                     panelName = mol.TestSearch.PanelName;
                 }
+                
+                isActive = mol.TestSearch.IsActive;
             }
 
-            List<SearchTest_Result> lstResult = Repository.TestSearch(testName, tsName, panelName);
+            List<SearchTest_Result> lstResult = Repository.TestSearch(testName, tsName, panelName, isActive);
             List<TestSearchObject> ObjSearchResult = new List<TestSearchObject>();
             foreach (SearchTest_Result item in lstResult)
             {
@@ -215,6 +217,7 @@ namespace LabnetClient.Controllers
             model.TestSearch.TestName = testName;
             model.TestSearch.TestSectionName = tsName;
             model.TestSearch.PanelName = panelName;
+            model.TestSearch.IsActive = isActive;
 
             return View("Search", model);
         }

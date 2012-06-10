@@ -10,6 +10,10 @@ namespace DomainModel
 {
     public class VMTestSearch
     {
+        public VMTestSearch()
+        {
+            IsActive = true;
+        }
         /// <summary>
         /// Sets or gets test name
         /// </summary>
@@ -24,6 +28,12 @@ namespace DomainModel
         /// Sets or gets Panel name
         /// </summary>
         public string PanelName { get; set; }
+
+        /// <summary>
+        /// Sets or gets status of test
+        /// </summary>
+        public bool IsActive { get; set; }
+
 
         public List<TestSearchObject> ObjSearchResult { get; set; }
     }

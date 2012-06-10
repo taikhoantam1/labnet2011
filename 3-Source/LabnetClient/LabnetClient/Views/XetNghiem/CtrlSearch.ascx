@@ -51,6 +51,17 @@
                     <div class="clear">
                     </div>
                 </div>
+                <div class="Row">
+                    <div class="Column">
+                        <label class="lbTitle">
+                            <%=Resources.TestStrings.TestSearch_IsActive%></label>
+                    </div>
+                    <div class="Column">
+                        <%=Html.CheckBoxFor(m => m.TestSearch.IsActive)%>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

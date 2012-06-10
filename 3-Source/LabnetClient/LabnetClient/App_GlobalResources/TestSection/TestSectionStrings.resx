@@ -129,6 +129,15 @@
   <data name="TestSectionEdit_Title" xml:space="preserve">
     <value>Cập Nhật Nhóm Xét Nghiệm</value>
   </data>
+  <data name="TestSectionSearch_IsActive" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
+  <data name="TestSectionSearch_Name" xml:space="preserve">
+    <value>Tên Nhóm</value>
+  </data>
+  <data name="TestSectionSearch_Title" xml:space="preserve">
+    <value>Tìm Nhóm Xét Nghiệm</value>
+  </data>
   <data name="TestSection_Cost" xml:space="preserve">
     <value>Giá</value>
   </data>

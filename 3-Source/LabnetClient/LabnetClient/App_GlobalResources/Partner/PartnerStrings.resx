@@ -204,6 +204,9 @@
   <data name="PartnerSearch_GridPartnerName" xml:space="preserve">
     <value>Tên Lab</value>
   </data>
+  <data name="PartnerSearch_IsActive" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
   <data name="PartnerSearch_Name" xml:space="preserve">
     <value>Tên Lab</value>
   </data>

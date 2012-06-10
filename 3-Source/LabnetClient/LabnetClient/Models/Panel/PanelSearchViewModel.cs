@@ -10,6 +10,7 @@ namespace LabnetClient.Models
     {
         public PanelSearchViewModel()
         {
+            //IsActive = true;
         }
 
         public string PanelName { get; set; }
@@ -18,10 +19,13 @@ namespace LabnetClient.Models
 
         public AutocompleteModel Autocomplete { get; set; }
 
+        public bool IsActive { get; set; }
+
         public PanelSearchViewModel(List<VMPanel> panels)
         {
             Autocomplete = new AutocompleteModel("Panel.Name");
             JQGrid = new JQGridModel(typeof(VMPanel), false, panels, "");
+            IsActive = true;
         }
     }
 }

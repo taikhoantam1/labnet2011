@@ -181,9 +181,9 @@ namespace LabnetClient.Controllers
 
 
         [HttpPost]
-        public ActionResult Search(string filterText)
+        public ActionResult Search(string filterText, bool isActive)
         {
-            List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanelByName(filterText));
+            List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanelByName(filterText, isActive));
             for (int i = 0; i < lstPanel.Count; i++)
             {
                 lstPanel[i].Status = lstPanel[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
