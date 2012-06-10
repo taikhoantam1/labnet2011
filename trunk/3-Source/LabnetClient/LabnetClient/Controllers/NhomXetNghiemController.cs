@@ -8,6 +8,7 @@ using DomainModel.Constant;
 using DataRepository;
 using DomainModel;
 using AutoMapper;
+using LibraryFuntion;
 
 namespace LabnetClient.Controllers
 {
@@ -18,15 +19,9 @@ namespace LabnetClient.Controllers
 
         public ActionResult Index()
         {
-            TestSectionListViewModel model = new TestSectionListViewModel();
-            List<VMTestSection> listTestSection =Mapper.Map<List<TestSection>,List<VMTestSection>>(Repository.GetAllTestSections());
-            for(int i = 0; i < listTestSection.Count; i++)
-            {
-                listTestSection[i].Status = listTestSection[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
-            }
-            model.TestSectionList = new JQGridModel(typeof(VMTestSection), true, listTestSection, "");
-            
-            return View(model);
+            TestSectionSearchModel model = new TestSectionSearchModel(null);
+            model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
+            return View("Index", model);
         }
 
         //
@@ -137,6 +132,18 @@ namespace LabnetClient.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult Search(string filterText, bool isActive)
+        {
+            List<VMTestSection> lstTestSection = Mapper.Map<List<TestSection>, List<VMTestSection>>(Repository.GetTestSectionByNameAndStatus(filterText, isActive));
+            for (int i = 0; i < lstTestSection.Count; i++)
+            {
+                lstTestSection[i].Status = lstTestSection[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
+            }
+            JQGridModel model = new JQGridModel(typeof(VMTestSection), false, lstTestSection, "");
+            return View("DataTable", model);
         }
     }
 }

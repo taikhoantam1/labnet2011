@@ -322,6 +322,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string PartnerSearch_IsActive {
+            get {
+                return ResourceManager.GetString("PartnerSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên Lab.
         /// </summary>
         internal static string PartnerSearch_Name {

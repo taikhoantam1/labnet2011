@@ -216,9 +216,9 @@ namespace LabnetClient.Controllers
 
 
         [HttpPost]
-        public ActionResult SearchPartner(string filterText)
+        public ActionResult SearchPartner(string filterText, bool isActive)
         {
-            List<Partner> lstPartner = Repository.GetPartnerByName(filterText);
+            List<Partner> lstPartner = Repository.GetPartnerByName(filterText, isActive);
             List<VMPartnerSearch> ListSearchResult = new List<VMPartnerSearch>();
             foreach (Partner partner in lstPartner)
             {

@@ -12,6 +12,8 @@ namespace LabnetClient.Models
 
         public AutocompleteModel Autocomplete { get; set; }
 
+        public bool IsActive { get; set; }
+
         public JQGridModel JQGrid { get; set; }
 
         public DoctorSearchViewModel()
@@ -19,6 +21,7 @@ namespace LabnetClient.Models
             Autocomplete = new AutocompleteModel("Doctor.Name");
             DoctorSearch = new VMDoctorSearch();
             JQGrid = new JQGridModel(typeof(DoctorSearchObject), true, new List<DoctorSearchObject>(), "");
+            IsActive = true;
         }
 
         public DoctorSearchViewModel(List<DoctorSearchObject> ListSearchResult)
@@ -26,6 +29,7 @@ namespace LabnetClient.Models
             Autocomplete = new AutocompleteModel("Doctor.Name");
             DoctorSearch = new VMDoctorSearch();
             JQGrid = new JQGridModel(typeof(DoctorSearchObject), true, ListSearchResult, "");
+            IsActive = true;
         }
     }
 }

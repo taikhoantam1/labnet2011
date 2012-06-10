@@ -97,6 +97,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string TestSectionSearch_IsActive {
+            get {
+                return ResourceManager.GetString("TestSectionSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên Nhóm.
+        /// </summary>
+        internal static string TestSectionSearch_Name {
+            get {
+                return ResourceManager.GetString("TestSectionSearch_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tìm Nhóm Xét Nghiệm.
+        /// </summary>
+        internal static string TestSectionSearch_Title {
+            get {
+                return ResourceManager.GetString("TestSectionSearch_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá.
         /// </summary>
         internal static string TestSection_Cost {

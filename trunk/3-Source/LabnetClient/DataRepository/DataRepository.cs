@@ -107,9 +107,11 @@ namespace DataRepository
             return listTest;
         }
 
-        public List<Partner> GetPartnerByName(string name)
+        public List<Partner> GetPartnerByName(string name, bool isActive)
         {
-            List<Partner> lstPartner = (from _partner in _myDb.Partners where (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper())) select _partner).ToList();
+            List<Partner> lstPartner = (from _partner in _myDb.Partners where (string.IsNullOrEmpty(name) || _partner.Name.ToUpper().Contains(name.ToUpper()))
+                                        && _partner.IsActive == isActive
+                                        select _partner).ToList();
             return lstPartner;
         }
         public List<Partner> GetPartners()
@@ -358,9 +360,9 @@ namespace DataRepository
             return isValid;
         }
 
-        public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName)
+        public List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName, bool isActive)
         {
-            List<SearchTest_Result> lstTestSearch = _myDb.SearchTest(testName, testSectionName, panelName).ToList();
+            List<SearchTest_Result> lstTestSearch = _myDb.SearchTest(testName, testSectionName, panelName, isActive).ToList();
             return lstTestSearch;
         }
 
@@ -512,9 +514,10 @@ namespace DataRepository
             return lstPanelItems;
         }
 
-        public List<Panel> GetPanelByName(string name)
+        public List<Panel> GetPanelByName(string name, bool isActive)
         {
-            List<Panel> lstPanel = (from _panel in _myDb.Panels where string.IsNullOrEmpty(name) || _panel.Name.Contains(name) select _panel).ToList();
+            List<Panel> lstPanel = (from _panel in _myDb.Panels where (string.IsNullOrEmpty(name) || _panel.Name.Contains(name)) && _panel.IsActive == isActive 
+                                    select _panel).ToList();
             return lstPanel;
         }
 
@@ -677,7 +680,17 @@ namespace DataRepository
 
         public List<Doctor> GetDoctorByName(string name)
         {
-            List<Doctor> lstDoctor = (from _doctor in _myDb.Doctors where _doctor.IsActive && (string.IsNullOrEmpty(name) || _doctor.Name.Contains(name)) select _doctor).ToList();
+            List<Doctor> lstDoctor = (from _doctor in _myDb.Doctors where _doctor.IsActive && (string.IsNullOrEmpty(name) || _doctor.Name.Contains(name))
+                                      select _doctor).ToList();
+            return lstDoctor;
+        }
+
+        public List<Doctor> GetDoctorByNameForSearch(string name, bool IsActive)
+        {
+            List<Doctor> lstDoctor = (from _doctor in _myDb.Doctors
+                                      where (string.IsNullOrEmpty(name) || _doctor.Name.Contains(name))
+                                        && _doctor.IsActive == IsActive
+                                      select _doctor).ToList();
             return lstDoctor;
         }
 
@@ -793,6 +806,14 @@ namespace DataRepository
         {
             List<SearchTestSectionByNameForPanel_Result> lstTestSection = _myDb.SearchTestSectionByNameForPanel(name, searchType).ToList();
             return lstTestSection.Select(p => new { Label = p.Name, Value = p.Id, Tag = p.Cost });
+        }
+
+        public List<TestSection> GetTestSectionByNameAndStatus(string name, bool isActive)
+        {
+            List<TestSection> lstTestSection = (from _testSection in _myDb.TestSections
+                                                where (string.IsNullOrEmpty(name) || _testSection.Name.Contains(name)) && _testSection.IsActive == isActive
+                                                select _testSection).ToList();
+            return lstTestSection;
         }
         #endregion
 

@@ -232,6 +232,7 @@
     <Compile Include="Models\Report\ReporViewModel.cs" />
     <Compile Include="Models\Report\ResultNoteBookViewModel.cs" />
     <Compile Include="Models\TestSection\TestSectionListViewModel.cs" />
+    <Compile Include="Models\TestSection\TestSectionSearchModel.cs" />
     <Compile Include="Models\TestSection\TestSectionViewModel.cs" />
     <Compile Include="Models\Test\TestSearctViewModel.cs" />
     <Compile Include="Models\Test\TestViewModel.cs" />
@@ -828,6 +829,7 @@
     <Content Include="Views\InstrumentResult\Details.aspx" />
     <Content Include="Views\NhomXetNghiem\Create.aspx" />
     <Content Include="Views\NhomXetNghiem\CtrlCreate.ascx" />
+    <Content Include="Views\NhomXetNghiem\CtrlIndex.ascx" />
     <Content Include="Views\NhomXetNghiem\Index.aspx" />
     <Content Include="Views\Panel\CtrlCreate.ascx" />
     <Content Include="Views\Panel\Create.aspx" />

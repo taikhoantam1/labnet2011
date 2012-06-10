@@ -703,6 +703,7 @@
           <Parameter Name="TestName" Type="nvarchar" Mode="In" />
           <Parameter Name="TestSectionName" Type="nvarchar" Mode="In" />
           <Parameter Name="PanelName" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
         </Function>
         <Function Name="sp_SearchTestByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FilterText" Type="nvarchar" Mode="In" />
@@ -921,6 +922,7 @@
             <Parameter Name="TestName" Mode="In" Type="String" />
             <Parameter Name="TestSectionName" Mode="In" Type="String" />
             <Parameter Name="PanelName" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="SearchTestSection_Result">

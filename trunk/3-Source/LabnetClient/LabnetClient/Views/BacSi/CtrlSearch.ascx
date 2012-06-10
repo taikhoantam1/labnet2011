@@ -14,6 +14,17 @@
             <div class="Row clear">
                 <div class="Column">
                     <label class="lbTitle">
+                        <%=Resources.DoctorStrings.DoctorSearch_IsActive%></label>
+                </div>
+                <div class="Column">
+                        <%=Html.CheckBoxFor(m => m.IsActive)%>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="Row clear">
+                <div class="Column">
+                    <label class="lbTitle">
                         <%=Resources.DoctorStrings.DoctorSearch_Name%></label>
                 </div>
                 <div class="Column">
@@ -61,12 +72,14 @@
         $("#btnSearchFilter").click(function () {
             //var data = $("form").serialize();
             var filterText = $("#autocompleteSelectDoctor .autoComplete").val();
+            var isActive = $("#IsActive").is(":checked");
             //alert(filterText);
             $.ajax({
                 url: "/BacSi/SearchDoctor",
                 type: "POST",
                 data: {
-                    filterText: filterText
+                    filterText: filterText,
+                    isActive: isActive
                 },
                 success: function (data) {
                     $(".SearchResult").html(data);

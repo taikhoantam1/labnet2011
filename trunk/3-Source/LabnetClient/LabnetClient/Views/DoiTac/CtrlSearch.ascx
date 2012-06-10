@@ -14,6 +14,17 @@
             <div class="Row clear">
                 <div class="Column">
                     <label class="lbTitle">
+                        <%=Resources.PartnerStrings.PartnerSearch_IsActive%></label>
+                </div>
+                <div class="Column">
+                        <%=Html.CheckBoxFor(m => m.IsActive)%>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="Row clear">
+                <div class="Column">
+                    <label class="lbTitle">
                         <%=Resources.PartnerStrings.PartnerSearch_Name%></label>
                 </div>
                 <div class="Column">
@@ -58,11 +69,13 @@
         $("#btnSubmit").click(function () {
             //var data = $("form").serialize();
             var filterText = $("#autocompleteSelectPartner .autoComplete").val();
+            var isActive = $("#IsActive").is(":checked");
             $.ajax({
                 url: "/DoiTac/SearchPartner",
                 type: "POST",
                 data: {
-                    filterText: filterText
+                    filterText: filterText,
+                    isActive: isActive
                 },
                 success: function (data) {
                     $("#SearchResult").html(data);

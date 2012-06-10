@@ -196,6 +196,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string PanelSearch_IsActive {
+            get {
+                return ResourceManager.GetString("PanelSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên Panel.
         /// </summary>
         internal static string PanelSearch_Name {

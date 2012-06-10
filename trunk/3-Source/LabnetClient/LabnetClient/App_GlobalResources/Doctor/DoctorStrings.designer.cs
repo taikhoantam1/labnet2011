@@ -232,6 +232,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string DoctorSearch_IsActive {
+            get {
+                return ResourceManager.GetString("DoctorSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên Bác Sĩ.
         /// </summary>
         internal static string DoctorSearch_Name {

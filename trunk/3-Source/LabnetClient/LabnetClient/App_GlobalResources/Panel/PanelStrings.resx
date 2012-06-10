@@ -162,6 +162,9 @@
   <data name="PanelSearch_GridUpdateLink" xml:space="preserve">
     <value>Cập nhật</value>
   </data>
+  <data name="PanelSearch_IsActive" xml:space="preserve">
+    <value>Kích Hoạt</value>
+  </data>
   <data name="PanelSearch_Name" xml:space="preserve">
     <value>Tên Panel</value>
   </data>

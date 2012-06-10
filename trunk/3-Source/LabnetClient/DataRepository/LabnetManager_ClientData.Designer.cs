@@ -1261,7 +1261,8 @@ namespace DataRepository
         /// <param name="testName">No Metadata Documentation available.</param>
         /// <param name="testSectionName">No Metadata Documentation available.</param>
         /// <param name="panelName">No Metadata Documentation available.</param>
-        public ObjectResult<SearchTest_Result> SearchTest(global::System.String testName, global::System.String testSectionName, global::System.String panelName)
+        /// <param name="isActive">No Metadata Documentation available.</param>
+        public ObjectResult<SearchTest_Result> SearchTest(global::System.String testName, global::System.String testSectionName, global::System.String panelName, Nullable<global::System.Boolean> isActive)
         {
             ObjectParameter testNameParameter;
             if (testName != null)
@@ -1293,7 +1294,17 @@ namespace DataRepository
                 panelNameParameter = new ObjectParameter("PanelName", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction<SearchTest_Result>("SearchTest", testNameParameter, testSectionNameParameter, panelNameParameter);
+            ObjectParameter isActiveParameter;
+            if (isActive.HasValue)
+            {
+                isActiveParameter = new ObjectParameter("IsActive", isActive);
+            }
+            else
+            {
+                isActiveParameter = new ObjectParameter("IsActive", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction<SearchTest_Result>("SearchTest", testNameParameter, testSectionNameParameter, panelNameParameter, isActiveParameter);
         }
 
         #endregion

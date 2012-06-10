@@ -223,6 +223,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kích Hoạt.
+        /// </summary>
+        internal static string TestSearch_IsActive {
+            get {
+                return ResourceManager.GetString("TestSearch_IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Panel.
         /// </summary>
         internal static string TestSearch_PanelName {

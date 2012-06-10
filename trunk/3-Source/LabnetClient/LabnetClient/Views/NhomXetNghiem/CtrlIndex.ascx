@@ -1,8 +1,8 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.PanelSearchViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<LabnetClient.Models.TestSectionSearchModel>" %>
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
-            <%=Resources.PanelStrings.PanelSearch_Title%>
+            <%=Resources.TestSectionStrings.TestSectionSearch_Title%>
         </h3>
     </div>
     <div class="ModuleContent">
@@ -10,7 +10,7 @@
             <div class="Row clear">
                 <div class="Column">
                     <label class="lbTitle">
-                        <%=Resources.PanelStrings.PanelSearch_IsActive%></label>
+                        <%=Resources.TestSectionStrings.TestSectionSearch_IsActive%></label>
                 </div>
                 <div class="Column">
                         <%=Html.CheckBoxFor(m => m.IsActive)%>
@@ -21,7 +21,7 @@
             <div class="Row clear">
                 <div class="Column">
                     <label class="lbTitle">
-                        <%=Resources.PanelStrings.PanelSearch_Name%></label>
+                        <%=Resources.TestSectionStrings.TestSectionSearch_Name%></label>
                 </div>
                 <div class="Column">
                     <div id="autocompleteSelectPanel">
@@ -46,7 +46,7 @@
             var filterText = $("#autocompleteSelectPanel .autoComplete").val();
             var isActive = $("#IsActive").is(":checked");
             $.ajax({
-                url: "/Panel/Search",
+                url: "/NhomXetNghiem/Search",
                 type: "POST",
                 data: {
                     filterText: filterText,

@@ -37,7 +37,7 @@ namespace DataRepository
 
         List<VMTestSectionListItem> GetPartnerTestSection(int id);
 
-        List<Partner> GetPartnerByName(string name);
+        List<Partner> GetPartnerByName(string name, bool isActive);
 
         bool IsValidPartner(string name);
 
@@ -72,7 +72,7 @@ namespace DataRepository
         void TestDelete(int testId);
         List<Test> GetTestByTestSectionId(int testSectionId);
         bool IsValidTest(string testName);
-        List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName);
+        List<SearchTest_Result> TestSearch(string testName, string testSectionName, string panelName, bool isActive);
         object GetTestByName(string name, string searchType);
         object GetTestByNameForPanel(string name, string searchType);
         object GetTestHaveCostNotDependenceTestSection();
@@ -85,7 +85,7 @@ namespace DataRepository
         void PanelDelete(int panelId);
         List<Panel> GetAllPanel();
         bool IsValidPanel(string name);
-        List<Panel> GetPanelByName(string name);
+        List<Panel> GetPanelByName(string name, bool isActive);
         List<Panel> GetPanels();
         object GetPanelNameByName(string name, string searchType);
         #endregion
@@ -109,6 +109,7 @@ namespace DataRepository
         void DoctorDelete(int doctorId);
         bool IsValidDoctor(string name);
         List<Doctor> GetDoctorByName(string name);
+        List<Doctor> GetDoctorByNameForSearch(string name, bool IsActive);
         object GetDoctorNameByName(string name, string searchType);
         string CreateConnectionCode(int doctorId,int labId);
         void RemoveConnection(int doctorId,int labId);
@@ -125,6 +126,7 @@ namespace DataRepository
         List<VMTestListItem> GetTestsOfTestSection(int id);
         void TestSectionUpdate(TestSection testSection);
         object GetTestSectionByNameForPanel(string name, string searchType);
+        List<TestSection> GetTestSectionByNameAndStatus(string name, bool isActive);
         #endregion
 
         #region Patient
