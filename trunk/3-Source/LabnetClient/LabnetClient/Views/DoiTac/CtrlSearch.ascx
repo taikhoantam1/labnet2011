@@ -29,9 +29,8 @@
                 </div>
                 <div class="Column">
                     <div id="autocompleteSelectPartner">
-                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                      <%=Html.TextBoxFor(m => m.PartnerName, new { Class = "textInput" })%>
                     </div>
-                    <!-- <%=Html.TextBoxFor(m => m.PartnerName, new { Class = "textInput" })%> -->
                 </div>
                 <div class="Column">
                     <input type="button" id="btnSubmit" value="<%=Resources.PartnerStrings.PanelSearch_Search%>" />
@@ -43,44 +42,29 @@
     </div>
 </div>
 <% Html.EndForm(); %>
-<div id="SearchResult"><%--
-<table width="765px">
-    <tr valign="middle">
-        <th class="textSearch150" align="center">
-            <%=Resources.PartnerStrings.PartnerSearch_GridPartnerName%>
-        </th>
-        <th class="textSearch125" align="center"></th>
-    </tr>
-    <%foreach (DomainModel.PartnerSearchObject partner in ViewData.Model.PartnerSearch.ListSearchResult)
-      { %>
-         <tr valign="middle">
-            <th class="textSearch150" align="center">
-                <%=partner.PartnerName%>
-            </th>             
-             <th class="textSearch125" align="center">
-                    <%= Html.ActionLink("Cập nhật", "Edit", "Partner", new { Id = partner.Id }, new { Class = "ActionLink" })%>
-            </th>
-         </tr>   
-    <%} %>
-</table>--%>
+<div id="SearchResult">
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        
         $("#btnSubmit").click(function () {
             //var data = $("form").serialize();
-            var filterText = $("#autocompleteSelectPartner .autoComplete").val();
+            var filterText = $("#PartnerName").val();
             var isActive = $("#IsActive").is(":checked");
             $.ajax({
                 url: "/DoiTac/SearchPartner",
                 type: "POST",
                 data: {
-                    filterText: filterText,
-                    isActive: isActive
+                    PartnerName: filterText,
+                    IsActive: isActive
                 },
                 success: function (data) {
                     $("#SearchResult").html(data);
                 }
             });
         });
+        <%if(!string.IsNullOrWhiteSpace(Model.PartnerName)) {%>
+            $("#btnSubmit").click();
+        <%}%>
     });
 </script>

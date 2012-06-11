@@ -105,7 +105,6 @@ namespace LabnetClient.Controllers
         {
             DoctorSearchViewModel model = new DoctorSearchViewModel();
             model.DoctorSearch.ListSearchResult = new List<DoctorSearchObject>();
-            model.Autocomplete.JsonData = Repository.GetDoctorNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Search", model);
         }
 
@@ -164,31 +163,7 @@ namespace LabnetClient.Controllers
             JQGridModel model = new JQGridModel(typeof(VMPanel), false, lstDoctor, "");
             return View("DataTable", model);
         }
-        //
-        // GET: /Doctor/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Doctor/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         [HttpPost]
         public string CreateConnectionCode(int doctorId)
@@ -254,11 +229,8 @@ namespace LabnetClient.Controllers
                 ListSearchResult.Add(obj);
             }
             DoctorSearchViewModel model = new DoctorSearchViewModel(ListSearchResult);
-            model.Autocomplete.JsonData = Repository.GetDoctorNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
-            model.Autocomplete.SelectedText = mol.DoctorSearch.Name;
-            model.Autocomplete.SelectedValue = mol.Autocomplete.SelectedValue;
-            model.Autocomplete.SelectedTag = mol.Autocomplete.SelectedTag;
             model.IsActive = isActive;
+            model.DoctorSearch.Name = filterText;
             return View("Search", model);
         }
     }

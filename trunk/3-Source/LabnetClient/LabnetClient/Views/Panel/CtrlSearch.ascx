@@ -57,5 +57,8 @@
                 }
             });
         });
+        <%if(!string.IsNullOrWhiteSpace(Model.Autocomplete.SelectedText)) {%>
+            $("#btnSearchFilter").click();
+        <%}%>
     });
 </script>

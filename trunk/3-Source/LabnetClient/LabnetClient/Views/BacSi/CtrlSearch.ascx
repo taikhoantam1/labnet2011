@@ -29,9 +29,8 @@
                 </div>
                 <div class="Column">
                     <div id="autocompleteSelectDoctor">
-                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                       <%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%>
                     </div>
-                    <!--<%=Html.TextBoxFor(m => m.DoctorSearch.Name, new { Class = "textInput" })%> -->
                 </div>
                 <div class="Column">
                     <input type="button" value="<%=Resources.DoctorStrings.DoctorSearch_ButtonSearch%>" id="btnSearchFilter"/>
@@ -71,7 +70,7 @@
     $(document).ready(function () {
         $("#btnSearchFilter").click(function () {
             //var data = $("form").serialize();
-            var filterText = $("#autocompleteSelectDoctor .autoComplete").val();
+            var filterText = $("#DoctorSearch_Name").val();
             var isActive = $("#IsActive").is(":checked");
             //alert(filterText);
             $.ajax({

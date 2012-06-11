@@ -15,13 +15,6 @@ namespace LabnetClient.Controllers
 {
     public class DoiTacController : BaseController
     {
-        //
-        // GET: /Partner/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         /// <summary>
         /// 
@@ -207,18 +200,26 @@ namespace LabnetClient.Controllers
         }
 
 
+        public ActionResult BackToSearch()
+        {
+            PartnerSearchViewModel model=new PartnerSearchViewModel();
+            if (Session[SessionProperties.SessionSearchPartner] != null)
+                model = (PartnerSearchViewModel)Session[SessionProperties.SessionSearchPartner];
+            return View("Search", model);
+        }
+
         public ActionResult Search()
         {
             PartnerSearchViewModel model = new PartnerSearchViewModel();
-            model.Autocomplete.JsonData = Repository.GetPartnerNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Search", model);
         }
 
 
         [HttpPost]
-        public ActionResult SearchPartner(string filterText, bool isActive)
+        public ActionResult SearchPartner(PartnerSearchViewModel model)
         {
-            List<Partner> lstPartner = Repository.GetPartnerByName(filterText, isActive);
+            Session[SessionProperties.SessionSearchPartner] = model;
+            List<Partner> lstPartner = Repository.GetPartnerByName(model.PartnerName, model.IsActive);
             List<VMPartnerSearch> ListSearchResult = new List<VMPartnerSearch>();
             foreach (Partner partner in lstPartner)
             {
@@ -237,31 +238,7 @@ namespace LabnetClient.Controllers
             JQGridModel grid = new JQGridModel(typeof(VMPartnerSearch), false, ListSearchResult, "");
             return View("DataTable", grid);
         }
-        //
-        // GET: /Partner/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Partner/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
 
         [HttpPost]
         public string CreateConnectionCode(int clientLabId)
