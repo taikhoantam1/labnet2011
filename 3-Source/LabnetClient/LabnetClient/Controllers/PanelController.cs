@@ -21,25 +21,16 @@ namespace LabnetClient.Controllers
             model.Autocomplete.JsonData = Repository.GetPanelNameByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Search", model);
         }
-
-        //
-        // GET: /Panel/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         //
         // GET: /Panel/Create
 
         public ActionResult Create()
         {
-            PanelViewModel model = new PanelViewModel(new VMPanel(),null);
+            PanelViewModel model = new PanelViewModel(new VMPanel(), null);
             model.ViewMode = ViewMode.Create;
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Create", model);
-        } 
+        }
 
         //
         // POST: /Panel/Create
@@ -71,7 +62,7 @@ namespace LabnetClient.Controllers
                 foreach (VMTestListItem item in Rows)
                 {
                     PanelItem panelItem = Repository.GetPanelItemByTestIdAndPanelId(item.TestId, panel.Id);
-                    if (item.IsEnable )
+                    if (item.IsEnable)
                     {
                         panelItem = new PanelItem();
                         panelItem.TestId = item.TestId;
@@ -85,20 +76,20 @@ namespace LabnetClient.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+
         //
         // GET: /Panel/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
             Session[SessionProperties.SessionPanelTestList] = id;
-            List<VMTestListItem> testList= Repository.GetPanelTest(id);
-            VMPanel panel= Mapper.Map<Panel, VMPanel>(Repository.GetPanel(id));
-            PanelViewModel model = new PanelViewModel(panel,testList);
+            List<VMTestListItem> testList = Repository.GetPanelTest(id);
+            VMPanel panel = Mapper.Map<Panel, VMPanel>(Repository.GetPanel(id));
+            PanelViewModel model = new PanelViewModel(panel, testList);
             model.Autocomplete.JsonData = Repository.GetTestByNameForPanel("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             model.ViewMode = ViewMode.Edit;
 
-            return View("Create",model);
+            return View("Create", model);
         }
 
         //
@@ -145,7 +136,7 @@ namespace LabnetClient.Controllers
             return RedirectToAction("Edit", id);
 
         }
-        
+
         [HttpPost]
         public string SavePanelTest(List<VMTestListItem> Rows)
         {
@@ -153,42 +144,26 @@ namespace LabnetClient.Controllers
             return "success";
         }
 
-        //
-        // GET: /Panel/Delete/5
- 
-        public ActionResult Delete(int id)
+        public ActionResult BackToSearch()
         {
-            return View();
+            string filterText = string.Empty;
+            if (Session[SessionProperties.SessionSearchPanel] != null)
+                filterText = (string)Session[SessionProperties.SessionSearchPanel];
+            PanelSearchViewModel model = new PanelSearchViewModel(null);
+            model.Autocomplete.SelectedText = filterText;
+            return View("Search", model);
         }
-
-        //
-        // POST: /Panel/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
 
         [HttpPost]
         public ActionResult Search(string filterText, bool isActive)
         {
+            Session[SessionProperties.SessionSearchPanel] = filterText;
             List<VMPanel> lstPanel = Mapper.Map<List<Panel>, List<VMPanel>>(Repository.GetPanelByName(filterText, isActive));
             for (int i = 0; i < lstPanel.Count; i++)
             {
                 lstPanel[i].Status = lstPanel[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";
             }
-            JQGridModel model = new JQGridModel(typeof(VMPanel),false,lstPanel,"");
+            JQGridModel model = new JQGridModel(typeof(VMPanel), false, lstPanel, "");
             return View("DataTable", model);
         }
     }

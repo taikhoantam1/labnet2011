@@ -209,6 +209,9 @@ $(document).ready(function () {
             });
         }
     });
+    $("#btnBack").click(function () {
+        window.location = "/DoiTac/BackToSearch";
+    });
 });
     
 </script>
@@ -465,6 +468,9 @@ $(document).ready(function () {
         <div align="center">
             <input type="button" value="<%=Resources.PartnerStrings.PartnerInsert_Button_Save%>"
                 id="btnSavePanel" />
+                
+            <input type="button" value="<%=Resources.DoctorStrings.DoctorInsert_Back%>"
+                id="btnBack" />
         </div>
     </div>
 </div>

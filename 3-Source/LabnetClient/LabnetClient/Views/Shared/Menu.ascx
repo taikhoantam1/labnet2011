@@ -65,12 +65,12 @@
             <ul>
                 <li><a class="MenuItem ActionLink" href="/BacSi/Create/">
                     <%= Resources.GlobalStrings.Menu_CreateDoctor %></a></li>
+                <li><a class="MenuItem ActionLink" href="/BacSi/Search/">
+                    <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
                 <li><a class="MenuItem ActionLink" href="/DoiTac/Create/">
                     <%= Resources.GlobalStrings.Menu_CreateLabPartner %></a></li>
                 <li><a class="MenuItem ActionLink" href="/DoiTac/Search/">
                     <%= Resources.GlobalStrings.Menu_SearchPartnerCost %></a></li>
-                <li><a class="MenuItem ActionLink" href="/BacSi/Search/">
-                    <%= Resources.GlobalStrings.Menu_SearchDoctor %></a></li>
             </ul>
         </dd>
         <dt><a class="iconReport" href="#">  <%= Resources.GlobalStrings.Menu_GroupTitle_Report %></a></dt>

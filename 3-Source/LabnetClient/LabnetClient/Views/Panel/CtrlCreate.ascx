@@ -93,6 +93,10 @@
             event.preventDefault();
             $("#DataTableSaveButton_<%:Model.JQGrid.TableId %>").click();
             $("form").submit();
+        });   
+        $("#btnBack").click(function () {
+            //alert("I'm here");
+            window.location = "/Panel/BackToSearch";
         });
 
     });
@@ -179,7 +183,8 @@
         <div align="center">
 
             <input type="button" value="<%=Resources.PanelStrings.PanelInsert_ButtonSave%>" id="btnSavePanel"/>
-            <input type="button" value="<%=Resources.PanelStrings.PanelInsert_ButtonCanel%>" id="btnCanvel" />
+         
+            <input type="button" value="<%=Resources.TestStrings.TestCreate_Back%>" id="btnBack" />
         </div>
     </div>
 </div>
