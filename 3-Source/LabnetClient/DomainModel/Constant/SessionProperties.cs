@@ -7,6 +7,7 @@ namespace DomainModel.Constant
 {
     public class SessionProperties
     {
+        public const string SessionSearchTestSection = "Session_Search_TestSection";
         public const string SessionSearchPartner = "Session_Search_Partner";
         public const string SessionPanelTestList = "Session_PanelTest_List";
         public const string SessionPartnerTestList = "Session_PartnerTest_List";

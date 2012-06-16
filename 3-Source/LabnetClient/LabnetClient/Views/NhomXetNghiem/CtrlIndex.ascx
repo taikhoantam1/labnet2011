@@ -25,7 +25,7 @@
                 </div>
                 <div class="Column">
                     <div id="autocompleteSelectPanel">
-                        <% Html.RenderPartial("Autocomplete", Model.Autocomplete); %>
+                        <%= Html.TextBoxFor(p=>p.TestSectionName) %>
                     </div>
                 </div>
                 <div class="Column">
@@ -43,19 +43,20 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btnSearchFilter").click(function () {
-            var filterText = $("#autocompleteSelectPanel .autoComplete").val();
+            var filterText = $("#TestSectionName").val();
             var isActive = $("#IsActive").is(":checked");
             $.ajax({
                 url: "/NhomXetNghiem/Search",
                 type: "POST",
                 data: {
-                    filterText: filterText,
-                    isActive: isActive
+                    TestSectionName: filterText,
+                    IsActive: isActive
                 },
                 success: function (data) {
                     $(".ResultTable").html(data);
                 }
             });
         });
+        $("#btnSearchFilter").click();
     });
 </script>

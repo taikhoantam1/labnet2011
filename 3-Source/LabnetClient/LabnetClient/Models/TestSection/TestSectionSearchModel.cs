@@ -12,13 +12,14 @@ namespace LabnetClient.Models
 
         public JQGridModel JQGrid { get; set; }
 
-        public AutocompleteModel Autocomplete { get; set; }
-
         public bool IsActive { get; set; }
+
+        public TestSectionSearchModel()
+        {
+        }
 
         public TestSectionSearchModel(List<VMTestSection> testSections)
         {
-            Autocomplete = new AutocompleteModel("TestSection.Name");
             JQGrid = new JQGridModel(typeof(VMPanel), false, testSections, "");
             IsActive = true;
         }

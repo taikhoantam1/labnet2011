@@ -16,39 +16,27 @@ namespace LabnetClient.Controllers
     {
         //
         // GET: /NhomXetNghiem/
-
         public ActionResult Index()
         {
             TestSectionSearchModel model = new TestSectionSearchModel(null);
-            model.Autocomplete.JsonData = Repository.GetTestSectionByName("", SearchTypeEnum.Contains.ToString().ToUpper()).ToJson();
             return View("Index", model);
         }
 
         //
-        // GET: /NhomXetNghiem/Details/5
-
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
         // GET: /NhomXetNghiem/Create
-
         public ActionResult Create()
         {
             TestSectionViewModel model = new TestSectionViewModel();
             model.ViewMode = ViewMode.Create;
             return View("Create", model);
-        } 
+        }
 
         //
         // POST: /NhomXetNghiem/Create
-
         [HttpPost]
         public ActionResult Create(TestSectionViewModel model)
         {
-            if (!Repository.IsValidTestSection(model.TestSection.Name,null))
+            if (!Repository.IsValidTestSection(model.TestSection.Name, null))
             {
                 ModelState.AddModelError("Test section name already exists", Resources.TestSectionStrings.TestSection_NameError);
             }
@@ -63,14 +51,13 @@ namespace LabnetClient.Controllers
 
             return RedirectToAction("Create");
         }
-        
+
         //
         // GET: /NhomXetNghiem/Edit/5
- 
         public ActionResult Edit(int id)
         {
             TestSectionViewModel model = new TestSectionViewModel();
-            VMTestSection testSection =Mapper.Map<TestSection,VMTestSection>( Repository.GetTestSection(id));
+            VMTestSection testSection = Mapper.Map<TestSection, VMTestSection>(Repository.GetTestSection(id));
             model.ViewMode = ViewMode.Edit;
             model.TestSection = testSection;
             return View("Create", model);
@@ -78,11 +65,10 @@ namespace LabnetClient.Controllers
 
         //
         // POST: /NhomXetNghiem/Edit/5
-
         [HttpPost]
         public ActionResult Edit(TestSectionViewModel model)
         {
-            if (!Repository.IsValidTestSection(model.TestSection.Name,model.TestSection.Id))
+            if (!Repository.IsValidTestSection(model.TestSection.Name, model.TestSection.Id))
             {
                 ModelState.AddModelError("Test section name already exists", Resources.TestSectionStrings.TestSection_NameError);
             }
@@ -104,40 +90,22 @@ namespace LabnetClient.Controllers
                 model.ViewMode = ViewMode.Edit;
                 return View("Create", model);
             }
-            
-        }
-        
 
-        //
-        // GET: /NhomXetNghiem/Delete/5
- 
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
-        //
-        // POST: /NhomXetNghiem/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult BackToSearch()
         {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            TestSectionSearchModel model = new TestSectionSearchModel(null);
+            if (Session[SessionProperties.SessionSearchTestSection] != null)
+                model = (TestSectionSearchModel)Session[SessionProperties.SessionSearchTestSection];
+            return View("Index", model);
         }
 
         [HttpPost]
-        public ActionResult Search(string filterText, bool isActive)
+        public ActionResult Search(TestSectionSearchModel filter)
         {
-            List<VMTestSection> lstTestSection = Mapper.Map<List<TestSection>, List<VMTestSection>>(Repository.GetTestSectionByNameAndStatus(filterText, isActive));
+            Session[SessionProperties.SessionSearchTestSection] = filter;
+            List<VMTestSection> lstTestSection = Mapper.Map<List<TestSection>, List<VMTestSection>>(Repository.GetTestSectionByNameAndStatus(filter.TestSectionName, filter.IsActive));
             for (int i = 0; i < lstTestSection.Count; i++)
             {
                 lstTestSection[i].Status = lstTestSection[i].IsActive ? "Kích Hoạt" : "Chưa Kích Hoạt";

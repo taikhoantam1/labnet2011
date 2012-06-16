@@ -14,6 +14,9 @@
             $("#TestSection_Cost").val(cost);
             //alert(cost)
         });
+        $("#btnBack").click(function () {
+            window.location = "/NhomXetNghiem/BackToSearch";
+        });
     });
 </script>
 <%=Html.ValidationSummary() %>
@@ -26,7 +29,6 @@
 <% Html.BeginForm("Edit", "NhomXetNghiem"); %>
 <%} %>
 <%= Html.HiddenFor(m => m.TestSection.Id) %>
-
 <div class="Module">
     <div class="ModuleTitle">
         <h3 class="Title">
@@ -94,7 +96,6 @@
                         <label class="lbTitle">
                             <%=Resources.TestSectionStrings.TestSection_Cost%></label>
                     </div>
-                    
                     <div class="Column">
                         <input type="text" class="textInput autoNumeric" id="TestCostView" value="<%=Model.TestSection.Cost %>" />
                         <%=Html.HiddenFor(m => m.TestSection.Cost)%>
@@ -107,17 +108,19 @@
                         <%=Html.CheckBoxFor(m => m.TestSection.UseCostForAssociateTest)%>
                     </div>
                     <div class="Column">
-                        <label class="lbTitle" for="TestSection_UseCostForAssociateTest" style="width: 400px; margin-left: 5px;">
+                        <label class="lbTitle" for="TestSection_UseCostForAssociateTest" style="width: 400px;
+                            margin-left: 5px;">
                             <%=Resources.TestSectionStrings.VMTestSection_UseCostForAssociateTest%></label>
                     </div>
                     <div class="clear">
                     </div>
                 </div>
             </div>
-        <div class="Row" align="center">
-            <input type="submit" value="<%=Resources.TestSectionStrings.TestSectionCreate_Save%>" id="save" />
-            <input type="button" value="<%=Resources.TestSectionStrings.TestSectionCreate_New%>" id="reloadPage" />
+            <div class="Row" align="center">
+                <input type="submit" value="<%=Resources.TestSectionStrings.TestSectionCreate_Save%>"
+                    id="save" />
+                <input type="button" value="<%=Resources.DoctorStrings.DoctorInsert_Back%>" id="btnBack" />
+            </div>
         </div>
     </div>
-</div>
-<% Html.EndForm(); %>
+    <% Html.EndForm(); %>

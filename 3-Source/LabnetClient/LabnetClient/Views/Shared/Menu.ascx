@@ -80,10 +80,10 @@
                     <%= Resources.GlobalStrings.Menu_ResultBook%></a></li>
                 <li><a class="MenuItem ActionLink" href="/Report/QuanLyTaiChinhReport">
                     <%= Resources.GlobalStrings.Menu_FinancialBook %></a></li>
-                <li><a class="MenuItem ActionLink" href="#">
+              <%--  <li><a class="MenuItem ActionLink" href="#">
                     <%= Resources.GlobalStrings.Menu_MaterialBook%></a></li>
                 <li><a class="MenuItem ActionLink" href="#">
-                    <%= Resources.GlobalStrings.Menu_Management%></a></li>
+                    <%= Resources.GlobalStrings.Menu_Management%></a></li>--%>
             </ul>
         </dd>
     </dl>
