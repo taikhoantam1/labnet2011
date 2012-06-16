@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -102,15 +103,23 @@ namespace LabnetClient.Report
 
         private Uri GetReportLogo(Partner partner)
         {
-            string defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
             String rootPath = Server.MapPath("~");
-            if (partner != null && !string.IsNullOrEmpty(partner.Logo))
+            if (ConfigurationManager.AppSettings["IsUseDefaultBanner"]!=null && ConfigurationManager.AppSettings["IsUseDefaultBanner"] == "1")
             {
-                rootPath += partner.Logo;
+                string defaultLogo = "Content\\Images\\Sites_Banner\\" + ConfigurationManager.AppSettings["LabName"] + "\\defaultLogo.JPG";
+                rootPath += defaultLogo;
             }
             else
             {
-                rootPath += defaultLogo;
+                string defaultLogo = "Content\\Images\\Sites_Banner\\defaultLogo.JPG";
+                if (partner != null && !string.IsNullOrEmpty(partner.Logo))
+                {
+                    rootPath += partner.Logo;
+                }
+                else
+                {
+                    rootPath += defaultLogo;
+                }
             }
             Uri fileRootPath = new Uri(rootPath);
             return fileRootPath;
