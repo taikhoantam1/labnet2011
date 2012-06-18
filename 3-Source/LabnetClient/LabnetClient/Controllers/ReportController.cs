@@ -60,18 +60,21 @@ namespace LabnetClient.Controllers
             if (!string.IsNullOrEmpty(ReceivedDate))
                 receivedDate = Convert.ToDateTime(ReceivedDate);
             VMLabExamination labExamination = new VMLabExamination();
-            labExamination = Repository.GetLabExamination(OrderNumber.Value, receivedDate.Value);
-
+            
             if (String.IsNullOrEmpty(OrderNumber.ToString()) || String.IsNullOrEmpty(ReceivedDate))
             {
                 ModelState.AddModelError("Input Error", "Vui lòng nhập số thứ tự và ngày xét nghiệm");
-
             }
-            if (labExamination == null)
+
+            if (!String.IsNullOrEmpty(OrderNumber.ToString()) && !String.IsNullOrEmpty(ReceivedDate))
             {
-                ModelState.AddModelError("Input Error", "Không tìm thấy dữ liệu nào phù hợp với dữ liệu nhập vào");
-
+                labExamination = Repository.GetLabExamination(OrderNumber.Value, receivedDate.Value);
+                if (labExamination == null)
+                {
+                    ModelState.AddModelError("Input Error", "Không tìm thấy dữ liệu nào phù hợp với dữ liệu nhập vào");
+                }
             }
+
             if (!ModelState.IsValid)
             {
                 return View(m);
