@@ -52,6 +52,11 @@ namespace LabnetClient.Controllers
             {
                 ModelState.AddModelError("TestRequired", Resources.PatientStrings.PatientCreate_TestRequired);
             }
+
+            if (String.IsNullOrEmpty(model.LabExamination.PartnerName))
+            {
+                ModelState.AddModelError("Input Error", "Vui lòng chọn nơi gửi mẫu");
+            }
             // Check ordernumber is in use
             int lastestOrderNumber = Repository.GetLabExaminationOrderNumber();
             if (model.LabExamination.OrderNumber != lastestOrderNumber)
@@ -258,6 +263,11 @@ namespace LabnetClient.Controllers
             else
             {
                 ModelState.AddModelError("TestRequired", Resources.PatientStrings.PatientCreate_TestRequired);
+            }
+
+            if (String.IsNullOrEmpty(model.LabExamination.PartnerName))
+            {
+                ModelState.AddModelError("Input Error", "Vui lòng chọn nơi gửi mẫu");
             }
 
             if (ModelState.IsValid)
