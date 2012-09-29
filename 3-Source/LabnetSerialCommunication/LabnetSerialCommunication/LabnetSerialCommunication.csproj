@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AU600.cs" />
+    <Compile Include="CellDyn3200.cs" />
     <Compile Include="IConstant.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

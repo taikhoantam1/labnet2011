@@ -196,7 +196,7 @@ namespace LabnetSerialCommunication
                 }
 
                 string patientId = patients[0];
-                string orderNumber = patients[1];
+                string orderNumber = patients[2];
                 if (isTest && j == nextPos)
                 {
 

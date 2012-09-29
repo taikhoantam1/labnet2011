@@ -72,6 +72,7 @@ namespace LabnetSerialCommunication
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerPeriod = new System.Windows.Forms.Timer(this.components);
             this.timerConnect = new System.Windows.Forms.Timer(this.components);
+            this.serialPort_CellDyn3200 = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridInstrumentTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -272,6 +273,11 @@ namespace LabnetSerialCommunication
             // 
             this.timerPeriod.Interval = 10000;
             // 
+            // serialPort_CellDyn3200
+            // 
+            this.serialPort_CellDyn3200.PortName = "COM3";
+            this.serialPort_CellDyn3200.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort_CellDyn3200_DataReceived);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -313,6 +319,7 @@ namespace LabnetSerialCommunication
         private PictureBox pictureBox1;
         private Timer timerPeriod;
         private Timer timerConnect;
+        private System.IO.Ports.SerialPort serialPort_CellDyn3200;
     }
 }
 
