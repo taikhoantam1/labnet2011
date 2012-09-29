@@ -23,7 +23,9 @@ namespace LabnetSerialCommunication
         AU600 instrumentAU600;
         string dataAU600 = "";
         string dataCellDyn3200 = "";
+        string clinitek = "";
         CellDyn3200 instrumentCD3200;
+        CLINITEK instrumentClinitek;
 
         public MainForm()
         {          
@@ -31,6 +33,7 @@ namespace LabnetSerialCommunication
             port = new PortControl();
             instrumentAU600 = new AU600();
             instrumentCD3200 = new CellDyn3200();
+            instrumentClinitek = new CLINITEK();
 
             lstInstruments = Repository.GetInstruments();
             lstValidInstruments = new List<bool>(lstInstruments.Count);
@@ -64,24 +67,23 @@ namespace LabnetSerialCommunication
                 dataGridInstrumentTable.Rows.Add(newRow);
             }
 
-            //For test only
-
+            
             timerConnect = new Timer();
 
             timerConnect.Interval = (300000) * (1);             // Timer will tick
             timerConnect.Enabled = true;                       // Enable the timer
             timerConnect.Tick += new EventHandler(timerConnect_Tick); // Everytime timer ticks, timer_Tick will be called
             timerConnect.Start();                              // Start the timer
-            
-            
-            try
+
+            //For test only
+            /*try
             {
-                using (StreamReader sr = new StreamReader("E:\\LabNetProject\\SVN\\3-Source\\LabnetSerialCommunication\\LabnetSerialCommunication\\CD3200.txt"))
+                using (StreamReader sr = new StreamReader("E:\\LabNetProject\\Phase 1.0\\Source\\LabnetSerialCommunication\\LabnetSerialCommunication\\CLINITEK.txt"))
                 {
                     String line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        dataCellDyn3200 += line;
+                        clinitek += line;
                     }
                 }
             }
@@ -89,10 +91,12 @@ namespace LabnetSerialCommunication
             {
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(exp.Message);
-            }
+            }*/
+            //isValidDataForClinitek(clinitek);
+            //instrumentClinitek.SplitOutputData(clinitek);
             //WriteToFileToTest(dataAU600);
             
-            List<string[]> strArrays = instrumentCD3200.SplitOutputData(dataCellDyn3200);
+            //List<string[]> strArrays = instrumentCD3200.SplitOutputData(dataCellDyn3200);
             //instrumentAU600.InsertToInstrumentResult(strArrays);
         }
 
@@ -145,7 +149,12 @@ namespace LabnetSerialCommunication
 
                     if (name.ToUpper() == IConstant.CELLDYN3200NAME)
                     {
-                        port.OpenCellDyn1700Port(serialPort_CellDyn3200, dataGridInstrumentTable, lstValidInstruments, i);
+                        port.OpenCellDyn3200Port(serialPort_CellDyn3200, dataGridInstrumentTable, lstValidInstruments, i);
+                    }
+
+                    if (name.ToUpper() == IConstant.CLINITEKNAME)
+                    {
+                        port.OpenClinitekPort(serialPort_CLINITEK, dataGridInstrumentTable, lstValidInstruments, i);
                     }
                 }
             }
@@ -171,6 +180,11 @@ namespace LabnetSerialCommunication
                     if (name.ToUpper() == IConstant.CELLDYN3200NAME)
                     {
                         serialPort_CellDyn3200.Close();
+                    }
+
+                    if (name.ToUpper() == IConstant.CLINITEKNAME)
+                    {
+                        serialPort_CLINITEK.Close();
                     }
 
                     dataGridInstrumentTable.Rows[i].Cells[4].Value = IConstant.CLOSED;
@@ -341,40 +355,34 @@ namespace LabnetSerialCommunication
         private void serialPort_CellDyn3200_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
 
+            dataCellDyn3200 += serialPort_CellDyn3200.ReadExisting();
+            //string data = serialPort_AU600.ReadExisting();
+            if (isValidData(dataCellDyn3200))
+            {
+                WriteToFileToTest(dataCellDyn3200);
+                List<string[]> strArrays = instrumentCD3200.SplitOutputData(dataCellDyn3200);
+                dataCellDyn3200 = "";
+            }
         }
 
-        /*public void OpenAU600Port(int row)
+        private void serialPort_CLINITEK_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
-            try
+            clinitek += serialPort_CLINITEK.ReadExisting();
+            if (isValidDataForClinitek(clinitek))
             {
-                if (!serialPort_AU600.IsOpen)
-                {
-                    serialPort_AU600.Open();
-                    dataGridInstrumentTable.Rows[row].Cells[4].Value = IConstant.OPENED;
-                    lstValidInstruments[row] = true;
-                }
+                instrumentClinitek.SplitOutputData(clinitek);
+                clinitek = "";
             }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }*/
+        }
 
-        /*public void OpenCellDyn1700Port(int row)
+        private bool isValidDataForClinitek(string data)
         {
-            try
-            {
-                if (!serialPort_CellDyn1700.IsOpen)
-                {
-                    serialPort_CellDyn1700.Open();
-                    dataGridInstrumentTable.Rows[row].Cells[4].Value = IConstant.OPENED;
-                    lstValidInstruments[row] = true;
-                }
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }*/
+            string[] lstResult = data.Split(',');
+            int length = lstResult.Length;
+            if (lstResult[length - 1] == "" && lstResult[length - 3] == "LEU")
+                return true;
+
+            return false;
+        }
     }
 }
