@@ -22,12 +22,15 @@ namespace LabnetSerialCommunication
         PortControl port;
         AU600 instrumentAU600;
         string dataAU600 = "";
+        string dataCellDyn3200 = "";
+        CellDyn3200 instrumentCD3200;
 
         public MainForm()
         {          
             Repository = new Repository();
             port = new PortControl();
             instrumentAU600 = new AU600();
+            instrumentCD3200 = new CellDyn3200();
 
             lstInstruments = Repository.GetInstruments();
             lstValidInstruments = new List<bool>(lstInstruments.Count);
@@ -70,14 +73,15 @@ namespace LabnetSerialCommunication
             timerConnect.Tick += new EventHandler(timerConnect_Tick); // Everytime timer ticks, timer_Tick will be called
             timerConnect.Start();                              // Start the timer
             
+            
             try
             {
-                using (StreamReader sr = new StreamReader("E:\\LabNetProject\\SerialCommunication\\LabnetSerialCommunication\\LabnetSerialCommunication\\test.txt"))
+                using (StreamReader sr = new StreamReader("E:\\LabNetProject\\SVN\\3-Source\\LabnetSerialCommunication\\LabnetSerialCommunication\\CD3200.txt"))
                 {
                     String line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        dataAU600 += line;
+                        dataCellDyn3200 += line;
                     }
                 }
             }
@@ -88,7 +92,7 @@ namespace LabnetSerialCommunication
             }
             //WriteToFileToTest(dataAU600);
             
-            //5List<string[]> strArrays = instrumentAU600.SplitOutputData(dataAU600);
+            List<string[]> strArrays = instrumentCD3200.SplitOutputData(dataCellDyn3200);
             //instrumentAU600.InsertToInstrumentResult(strArrays);
         }
 
@@ -138,6 +142,11 @@ namespace LabnetSerialCommunication
                     {
                         port.OpenCellDyn1700Port(serialPort_CellDyn1700, dataGridInstrumentTable, lstValidInstruments, i);
                     }
+
+                    if (name.ToUpper() == IConstant.CELLDYN3200NAME)
+                    {
+                        port.OpenCellDyn1700Port(serialPort_CellDyn3200, dataGridInstrumentTable, lstValidInstruments, i);
+                    }
                 }
             }
         }
@@ -157,6 +166,11 @@ namespace LabnetSerialCommunication
                     if (name.ToUpper() == IConstant.CELLDYN1700NAME)
                     {
                         serialPort_CellDyn1700.Close();
+                    }
+
+                    if (name.ToUpper() == IConstant.CELLDYN3200NAME)
+                    {
+                        serialPort_CellDyn3200.Close();
                     }
 
                     dataGridInstrumentTable.Rows[i].Cells[4].Value = IConstant.CLOSED;
@@ -322,6 +336,11 @@ namespace LabnetSerialCommunication
                     }
                 }
             }
+        }
+
+        private void serialPort_CellDyn3200_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+
         }
 
         /*public void OpenAU600Port(int row)
