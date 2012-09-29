@@ -46,5 +46,39 @@ namespace LabnetSerialCommunication
                 MessageBox.Show(ex.Message);
             }
         }
+
+        public void OpenCellDyn3200Port(SerialPort portCellDyn3200, DataGridView dataGridInstrumentTable, List<bool> lstValidInstruments, int row)
+        {
+            try
+            {
+                if (!portCellDyn3200.IsOpen)
+                {
+                    portCellDyn3200.Open();
+                    dataGridInstrumentTable.Rows[row].Cells[4].Value = IConstant.OPENED;
+                    lstValidInstruments[row] = true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void OpenClinitekPort(SerialPort portClinitek, DataGridView dataGridInstrumentTable, List<bool> lstValidInstruments, int row)
+        {
+            try
+            {
+                if (!portClinitek.IsOpen)
+                {
+                    portClinitek.Open();
+                    dataGridInstrumentTable.Rows[row].Cells[4].Value = IConstant.OPENED;
+                    lstValidInstruments[row] = true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
